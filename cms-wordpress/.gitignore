@@ -1,0 +1,18 @@
+# Ignorados específicos de la instalación WordPress (esta carpeta)
+# El .gitignore de la raíz no cubre estas rutas: sus patrones con "/"
+# intermedio (p.ej. "wp-content/uploads/") solo se aplican al nivel raíz,
+# no a esta subcarpeta. Ver .gitignore raíz para reglas globales
+# (wp-config.php, *.sql, *.log, etc., que sí aplican aquí por no llevar "/").
+
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/ai1wm-backups/
+wp-content/advanced-cache.php
+wp-content/object-cache.php
+wp-content/debug.log
+wp-content/backups/
+
+# Configuración local (redundante con la raíz, explícito por claridad)
+wp-config.php
+wp-config-local.php
