@@ -9,9 +9,9 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 - **Colaboración interna con Microsoft Teams, Planner, Power Automate y PowerApps**
 
 ## 2) Cliente / empresa real
-- **Nombre de la empresa:** `[PENDIENTE_DEFINIR]`
-- **Sector:** `[PENDIENTE_DEFINIR]`
-- **Persona de contacto (rol):** `[PENDIENTE_DEFINIR]`
+- **Nombre de la empresa:** `CADUS`
+- **Sector:** `Educación Superior y Representación Estudiantil `
+- **Persona de contacto (rol):** `Delegado/a General del CADUS`
 
 > [!IMPORTANT]
 > No publicar en este repositorio información confidencial del cliente (credenciales, datos personales, contratos, documentación sensible o dumps reales de producción).
