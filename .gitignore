@@ -121,5 +121,14 @@ mysql/logs/
 *.7z
 *.rar
 
+# Ignorar archivo de configuración local
+wp-config.php
+
+# Ignorar archivos subidos por medios (imágenes pesadas opcionales)
+wp-content/uploads/
+wp-content/cache/
+
+# Ignorar logs locales
+*.log
 # Permitir subir ejemplos comprimidos ligeros y sanitizados si se necesitan
 #!docs/ejemplos/*.zip
