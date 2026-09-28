@@ -9,9 +9,10 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 - **Colaboración interna con Microsoft Teams, Planner, Power Automate y PowerApps**
 
 ## 2) Cliente / empresa real
-- **Nombre de la empresa:** `CADUS`
-- **Sector:** `Educación Superior y Representación Estudiantil `
-- **Persona de contacto (rol):** `Delegado/a General del CADUS`
+- **Organización:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
+- **Sector:** Educación Superior / Representación Estudiantil
+- **Persona de contacto (rol):** Delegación General del CADUS (`cadus@us.es`)
+- **Ubicación física:** Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla
 
 > [!IMPORTANT]
 > No publicar en este repositorio información confidencial del cliente (credenciales, datos personales, contratos, documentación sensible o dumps reales de producción).
@@ -34,15 +35,16 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 3. **Colaboración (Microsoft 365):** Teams, Planner, Power Automate, PowerApps.
 4. **Gestión de requisitos y SCRUM:** REM/REMUS, mockups, backlog, sprint backlog y burndown.
 
-## 5) Equipo (4 integrantes)
+## 5) Equipo (5 integrantes)
 > Completar y mantener actualizada esta tabla.
 
-| Integrante | Usuario GitHub | Rol en el equipo |
-|---|---|---|
-| `[Nombre Apellido 1]` | `@usuario1` | `[Scrum Master / Dev / Analista ...]` |
-| `[Nombre Apellido 2]` | `@usuario2` | `[Product Owner / Dev / QA ...]` |
-| `[Nombre Apellido 3]` | `@usuario3` | `[Dev / Analista / Documentación ...]` |
-| `[Nombre Apellido 4]` | `@usuario4` | `[DevOps / Dev / QA ...]` |
+| Integrante | Nombre real | Usuario GitHub | Rol SCRUM / Área funcional |
+|---|---|---|---|
+| Miembro 1 | `[Nombre Apellido 1]` | `@usuario1` | Scrum Master & Dev Infraestructura (Configuración base, Tema, Git y BD) |
+| Miembro 2 | `[Nombre Apellido 2]` | `@usuario2` | Product Owner & Dev Portada (Home, Comunicados y Banner) |
+| Miembro 3 | `[Nombre Apellido 3]` | `@usuario3` | Dev — Sección Institucional y Normativa (Qué es CADUS, Gobierno, Estatutos y Actas) |
+| Miembro 4 | `[Nombre Apellido 4]` | `@usuario4` | Dev — Directorio de Delegaciones de Alumnos (Facultades, Escuelas y Fichas) |
+| Miembro 5 | `[Nombre Apellido 5]` | `@usuario5` | Dev — Atención al Estudiante y Buzón de Consultas (Formularios, Reclamaciones y FAQ) |
 
 ## 6) Arquitectura de directorios
 
@@ -172,12 +174,14 @@ Ejemplo: `docs(scrum): actualizar sprint backlog sprint-02`
 - Limitar permisos por rol en SharePoint/Teams/WordPress según principio de mínimo privilegio.
 
 ## 14) Estado del proyecto y enlaces rápidos
-- **Estado actual:** `Estructura base creada / pendiente de completar por el equipo`
+- **Estado actual:** `Cierre de entrega del Sprint 1 (despliegue base, identidad institucional y portal CADUS V1)`
 - **Backlog de producto:** [`docs/scrum/backlog/product-backlog.md`](docs/scrum/backlog/product-backlog.md)
-- **Sprints:** [`docs/scrum/sprints/README.md`](docs/scrum/sprints/README.md)
+- **Sprint 1:** [`docs/scrum/sprints/sprint-01.md`](docs/scrum/sprints/sprint-01.md)
 - **Burndown:** [`docs/scrum/burndown/README.md`](docs/scrum/burndown/README.md)
-- **Requisitos REM/REMUS:** [`docs/requisitos/rem-remus/README.md`](docs/requisitos/rem-remus/README.md)
+- **Requisitos REM/REMUS:** [`docs/requisitos/rem-remus/REM-CADUS.md`](docs/requisitos/rem-remus/REM-CADUS.md)
+- **Arquitectura / diagrama conceptual:** [`docs/arquitectura/diagrama-conceptual.md`](docs/arquitectura/diagrama-conceptual.md)
 - **Maquetas:** [`docs/maquetas/README.md`](docs/maquetas/README.md)
+- **Gestión de BD (`bd_cadus`):** [`cms-wordpress/backup-db/README.md`](cms-wordpress/backup-db/README.md)
 
 ---
 
