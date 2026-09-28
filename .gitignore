@@ -113,7 +113,10 @@ mysql/logs/
 !**/*-template.sql
 !**/*-example.sql
 !**/docs/**/*.sql.md
-
+# Excepción: volcados de bd_cadus SÍ se versionan para que todo el equipo
+# trabaje sobre la misma base de datos.
+# Revisar antes de cada commit que no contengan datos personales reales.
+!cms-wordpress/backup-db/*.sql
 # ===== Binarios y pesados no deseados =====
 *.zip
 *.tar
