@@ -12,7 +12,7 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 
 > Historias de usuario tomadas del [Product Backlog](../backlog/product-backlog.md); trazabilidad completa con los requisitos en [REM-CADUS.md](../../requisitos/rem-remus/REM-CADUS.md).
 
-### Miembro 1 — Scrum Master & Dev Infraestructura
+### Miembro 1 — Product Owner & Dev Infraestructura
 *Configuración base, tema, Git y BD*
 
 | ID | Tarea concreta | SP |
@@ -23,7 +23,7 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 | HU-18 | Instalar/adaptar el tema base con la identidad visual del CADUS (colores, logotipo, tipografía). | 5 |
 | **Subtotal** | | **20** |
 
-### Miembro 2 — Product Owner & Dev Portada
+### Miembro 2 — Scrum Master & Dev Portada
 *Home, comunicados y banner*
 
 | ID | Tarea concreta | SP |

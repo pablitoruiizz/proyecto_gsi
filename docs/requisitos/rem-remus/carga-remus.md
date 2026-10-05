@@ -1,16 +1,16 @@
 # Hoja de carga para REMUS — Proyecto CADUS
 
-Contenido de [`REM-CADUS.md`](REM-CADUS.md) organizado en el orden y con los campos que pide **REMUS** (REquirements Manager, Universidad de Sevilla), para pasarlo al archivo `.rem` copiando y pegando.
+Contenido de [`REM-CADUS.md`](REM-CADUS.md) organizado en el orden y con los campos que pide **REMUS** (REquirements Manager, Universidad de Sevilla). Es la fuente de la que se genera el proyecto [`CADUS.rem`](CADUS.rem).
 
 > [!NOTE]
-> Un `.rem` es una base de datos de Microsoft Access (formato Jet), no un texto: solo se puede crear y editar desde el propio REMUS. Por eso este documento es la **fuente de la que se carga el `.rem`**, y se actualiza cuando cambien los requisitos. Versión de partida: **0.1**, 05/10/2026.
+> Un `.rem` es una base de datos de Microsoft Access (formato Jet), no un texto. `CADUS.rem` se ha generado con el script [`scripts/remus/build_rem.ps1`](../../../scripts/remus/README.md) a partir de este documento. Versión de partida: **0.1**, 05/10/2026.
 
-## Cómo crear el `.rem`
+## Cómo abrir y mantener `CADUS.rem`
 
 1. Clonar o descargar [REMUS](https://github.com/amador-duran-toro/remus) y ejecutar `bin/remus.exe` (Windows).
-2. Descargar la plantilla vacía en español: [`base/remus_base_empty_spanish.rem`](https://raw.githubusercontent.com/amador-duran-toro/remus/master/base/remus_base_empty_spanish.rem) (guardar como `CADUS.rem` y no editar la original).
-3. Abrir `CADUS.rem` en REMUS e introducir las secciones de este documento en el orden indicado (apartados 1 a 8).
-4. Guardar en `docs/requisitos/rem-remus/CADUS.rem` y exportar el HTML si la entrega lo pide.
+2. Abrir `docs/requisitos/rem-remus/CADUS.rem` y comprobar que los requisitos aparecen en sus secciones. El archivo se generó sin poder abrirlo en REMUS, así que si algo no se ve bien, avisad.
+3. Mientras los requisitos se mantengan en Markdown, se puede regenerar el `.rem` con el script. **Cuando alguien empiece a editar dentro de REMUS, hay que dejar de regenerarlo**, porque se perderían esos cambios.
+4. Exportar el HTML desde REMUS si la entrega lo pide.
 
 > [!WARNING]
 > `CADUS.rem` es un archivo binario: Git no puede fusionar cambios de dos personas. **Una sola persona (el Product Owner) edita el `.rem`**; el resto propone cambios en este documento o en `REM-CADUS.md`. Antes de subirlo, `git pull`, y no pisar la versión de otra persona.
@@ -42,11 +42,11 @@ Contenido de [`REM-CADUS.md`](REM-CADUS.md) organizado en el orden y con los cam
 | Nombre | Rol | Desarrollador | Cliente | Usuario |
 |---|---|---|---|---|
 | Delegación General del CADUS | Cliente / usuario de la Ejecutiva | No | Sí | Sí |
-| `[Nombre Apellido 1]` | Scrum Master & Dev Infraestructura | Sí | No | No |
-| `[Nombre Apellido 2]` | Product Owner & Dev Portada | Sí | No | No |
-| `[Nombre Apellido 3]` | Dev Sección Institucional y Normativa | Sí | No | No |
-| `[Nombre Apellido 4]` | Dev Directorio de Delegaciones | Sí | No | No |
-| `[Nombre Apellido 5]` | Dev Atención al Estudiante y Buzón | Sí | No | No |
+| Pablo Ruiz Vidal | Product Owner & Dev Infraestructura | Sí | No | No |
+| Joaquin Luna Canela | Scrum Master & Dev Portada | Sí | No | No |
+| Miguel Angel Camacho Martin | Dev Sección Institucional y Normativa | Sí | No | No |
+| Alvaro Martinez Ocaña | Dev Directorio de Delegaciones | Sí | No | No |
+| Marcos-Paban Delgado Rodriguez | Dev Atención al Estudiante y Buzón | Sí | No | No |
 
 ## 3. Actores
 

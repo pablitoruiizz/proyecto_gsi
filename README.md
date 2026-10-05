@@ -40,11 +40,11 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 
 | Integrante | Nombre real | Usuario GitHub | Rol SCRUM / Área funcional |
 |---|---|---|---|
-| Miembro 1 | `[Nombre Apellido 1]` | `@usuario1` | Scrum Master & Dev Infraestructura (Configuración base, Tema, Git y BD) |
-| Miembro 2 | `[Nombre Apellido 2]` | `@usuario2` | Product Owner & Dev Portada (Home, Comunicados y Banner) |
-| Miembro 3 | `[Nombre Apellido 3]` | `@usuario3` | Dev — Sección Institucional y Normativa (Qué es CADUS, Gobierno, Estatutos y Actas) |
-| Miembro 4 | `[Nombre Apellido 4]` | `@usuario4` | Dev — Directorio de Delegaciones de Alumnos (Facultades, Escuelas y Fichas) |
-| Miembro 5 | `[Nombre Apellido 5]` | `@usuario5` | Dev — Atención al Estudiante y Buzón de Consultas (Formularios, Reclamaciones y FAQ) |
+| Miembro 1 | Pablo Ruiz Vidal | `@usuario1` | Product Owner & Dev Infraestructura (Configuración base, Tema, Git y BD) |
+| Miembro 2 | Joaquin Luna Canela | `@usuario2` | Scrum Master & Dev Portada (Home, Comunicados y Banner) |
+| Miembro 3 | Miguel Angel Camacho Martin | `@usuario3` | Dev — Sección Institucional y Normativa (Qué es CADUS, Gobierno, Estatutos y Actas) |
+| Miembro 4 | Alvaro Martinez Ocaña | `@usuario4` | Dev — Directorio de Delegaciones de Alumnos (Facultades, Escuelas y Fichas) |
+| Miembro 5 | Marcos-Paban Delgado Rodriguez | `@usuario5` | Dev — Atención al Estudiante y Buzón de Consultas (Formularios, Reclamaciones y FAQ) |
 
 ## 6) Arquitectura de directorios
 

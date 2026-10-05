@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-05",
+  "cName": "Especificación de Requisitos del Portal CADUS",
+  "dName": "Documento de Análisis del Portal CADUS",
+  "organizations": [
+    { "oid": 132, "name": "CADUS - Consejo de Alumnos de la Universidad de Sevilla", "address": "Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla", "telephone": "", "fax": "" },
+    { "oid": 133, "name": "Equipo de proyecto GSI", "address": "Universidad de Sevilla - Gestión de Sistemas de Información (GSI)", "telephone": "", "fax": "" }
+  ],
+  "stakeholders": [
+    { "oid": 134, "name": "Delegación General del CADUS", "role": "Cliente y usuario (Ejecutiva del CADUS)", "customer": true, "developer": false, "user": true, "org": 132 },
+    { "oid": 135, "name": "Pablo Ruiz Vidal", "role": "Product Owner y Dev Infraestructura", "customer": false, "developer": true, "user": false, "org": 133 },
+    { "oid": 0, "name": "Joaquin Luna Canela", "role": "Scrum Master y Dev Portada", "customer": false, "developer": true, "user": false, "org": 133 },
+    { "oid": 0, "name": "Miguel Angel Camacho Martin", "role": "Dev Sección Institucional y Normativa", "customer": false, "developer": true, "user": false, "org": 133 },
+    { "oid": 0, "name": "Alvaro Martinez Ocaña", "role": "Dev Directorio de Delegaciones", "customer": false, "developer": true, "user": false, "org": 133 },
+    { "oid": 0, "name": "Marcos-Paban Delgado Rodriguez", "role": "Dev Atención al Estudiante y Buzón", "customer": false, "developer": true, "user": false, "org": 133 }
+  ],
+  "rnfSection": { "RNF-01": 44, "RNF-02": 43, "RNF-03": 43, "RNF-04": 47, "RNF-05": 46, "RNF-06": 42, "RNF-07": 45, "RNF-08": 47 }
+}
