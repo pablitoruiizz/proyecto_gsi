@@ -102,8 +102,13 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 - Acceso Microsoft 365 para SharePoint/Teams/Planner/Power Platform
 - Editor Markdown (VS Code recomendado)
 
-## 8) Despliegue local del CMS (XAMPP + WordPress)
-1. Instalar XAMPP e iniciar **Apache** y **MySQL**.
+## 8) Despliegue del CMS (WordPress + servidor local)
+
+### Entorno compartido del equipo
+El equipo trabaja sobre **un único servidor** (WampServer en el equipo de un integrante) con WordPress y la base de datos `bd_cadus`. El resto de integrantes accede mediante **Tailscale** (VPN privada) y trabaja a la vez sobre la misma instancia. El resto de archivos (tema, plugins, documentación, SCRUM, REM) se gestionan con **GitHub**. Detalle y pasos de conexión en [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md).
+
+### Instalación local desde cero (solo para montar un servidor nuevo)
+1. Instalar XAMPP o WampServer e iniciar **Apache** y **MySQL**.
 2. Crear una base de datos local (por ejemplo: `gsi_cms_local`) desde phpMyAdmin.
 3. Copiar WordPress en el directorio web local (`htdocs`).
 4. Configurar `wp-config.php` con:
@@ -181,6 +186,7 @@ Ejemplo: `docs(scrum): actualizar sprint backlog sprint-02`
 - **Requisitos REM/REMUS:** [`docs/requisitos/rem-remus/REM-CADUS.md`](docs/requisitos/rem-remus/REM-CADUS.md)
 - **Arquitectura / diagrama conceptual:** [`docs/arquitectura/diagrama-conceptual.md`](docs/arquitectura/diagrama-conceptual.md)
 - **Maquetas:** [`docs/maquetas/README.md`](docs/maquetas/README.md)
+- **Entorno de trabajo (Tailscale + GitHub):** [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md)
 - **Gestión de BD (`bd_cadus`):** [`cms-wordpress/backup-db/README.md`](cms-wordpress/backup-db/README.md)
 
 ---

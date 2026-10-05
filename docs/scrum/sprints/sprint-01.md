@@ -17,10 +17,11 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 
 | ID | Tarea concreta | SP |
 |---|---|---:|
-| PB-002 | Instalar/configurar XAMPP, crear la BD `bd_cadus`, clonar el repositorio en `htdocs` y preparar `wp-config.php` local. | 5 |
+| PB-002 | Instalar/configurar WampServer, crear la BD `bd_cadus`, clonar el repositorio en `www` y preparar `wp-config.php` local. | 5 |
+| PB-005 | Compartir el servidor con el equipo mediante Tailscale (WordPress + BD únicos) y documentar el uso de GitHub para el resto de archivos. | 5 |
 | HU-13 | Definir y configurar los roles del sitio (Administrador, Ejecutiva, Delegado, Estudiante, Anónimo) y sus capacidades. | 5 |
 | HU-18 | Instalar/adaptar el tema base con la identidad visual del CADUS (colores, logotipo, tipografía). | 5 |
-| **Subtotal** | | **15** |
+| **Subtotal** | | **20** |
 
 ### Miembro 2 — Product Owner & Dev Portada
 *Home, comunicados y banner*
@@ -58,7 +59,7 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 | HU-08 | Página de seguimiento del ticket por código, con estado e historial de respuestas. | 5 |
 | **Subtotal** | | **13** |
 
-**Capacidad total comprometida del Sprint:** 52 SP
+**Capacidad total comprometida del Sprint:** 57 SP
 
 ## Definición de Hecho (DoD) — Sprint 1
 
@@ -78,8 +79,8 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 
 Procedimiento resumido (guía completa en [`cms-wordpress/backup-db/README.md`](../../../cms-wordpress/backup-db/README.md)):
 
-1. Antes de empezar a trabajar: `git pull` e importar el último volcado disponible en `cms-wordpress/backup-db/`.
-2. Durante el sprint: cada integrante trabaja sobre su copia local de `bd_cadus`.
-3. Al cerrar una tarea con impacto en BD: exportar un volcado nuevo desde phpMyAdmin y nombrarlo siguiendo la convención `bd_cadus_v<version>_sprint<NN>.sql` (p. ej. `bd_cadus_v1_sprint1.sql`).
-4. Commitear el volcado únicamente si el equipo ha decidido versionarlo explícitamente (por defecto `*.sql` está en `.gitignore`); en otro caso, compartirlo por el canal acordado del equipo (Teams).
-5. Avisar al equipo en el canal correspondiente para que reimporten el volcado más reciente antes de continuar.
+1. **Base de datos única y compartida:** `bd_cadus` vive en el servidor WampServer del equipo anfitrión y todo el equipo accede a ella mediante **Tailscale**; no hace falta que cada integrante importe un volcado.
+2. Durante el sprint: cada integrante edita WordPress directamente desde su navegador, sobre la misma instancia.
+3. Antes de un cambio grande o al cerrar una tarea con impacto en BD: exportar un volcado desde phpMyAdmin con la convención `bd_cadus_v<version>_sprint<NN>.sql` (p. ej. `bd_cadus_v1_sprint1.sql`).
+4. Subir el volcado a `cms-wordpress/backup-db/` en **GitHub** (copia de seguridad y entrega); hacer `git pull` antes para no coincidir con otro volcado.
+5. Los archivos (tema, plugins, documentación) se versionan en GitHub. Ver [entorno de trabajo](../../arquitectura/entorno-de-trabajo.md).

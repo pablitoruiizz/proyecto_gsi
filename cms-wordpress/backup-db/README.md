@@ -1,59 +1,53 @@
 # Gestión de la base de datos — `backup-db/`
 
-Esta carpeta contiene los volcados (`.sql`) de la base de datos `bd_cadus` usados para sincronizar el entorno local de WordPress entre los 5 integrantes del equipo.
+El portal usa **una única base de datos `bd_cadus`**, alojada en el servidor compartido (WampServer en el equipo anfitrión) y accesible para todo el equipo mediante Tailscale. Ver [entorno de trabajo](../../docs/arquitectura/entorno-de-trabajo.md).
+
+Por eso **no hace falta que cada integrante importe un volcado para trabajar**: todos editan la misma base de datos desde el panel de WordPress. Los archivos `.sql` de esta carpeta sirven como:
+
+- **Copia de seguridad** antes de cambios grandes o de instalar plugins.
+- **Punto de entrega** de cada sprint.
+- **Recuperación** si el servidor falla o hay que montar uno nuevo.
 
 > [!WARNING]
-> Los archivos `.sql` están excluidos por `.gitignore` (regla `*.sql` en la raíz). Esto es intencionado: los volcados pueden pesar varios MB y no deben acumularse en el historial de Git. Compartir los volcados por el canal acordado del equipo (Teams) y dejar en el repositorio solo esta guía y, si se acuerda explícitamente, plantillas de ejemplo (`*-template.sql`, `*-example.sql`).
+> Los volcados de esta carpeta se versionan en Git (excepción `!cms-wordpress/backup-db/*.sql` del `.gitignore`). Cada volcado queda para siempre en el historial: subir solo los necesarios y revisar antes que no contengan datos personales reales de estudiantes.
 
 ## 1. Exportar la base de datos desde phpMyAdmin
 
-1. Abrir XAMPP e iniciar **Apache** y **MySQL**.
-2. Ir a `http://localhost/phpmyadmin`.
-3. Seleccionar la base de datos `bd_cadus` en el panel izquierdo.
-4. Ir a la pestaña **Exportar**.
-5. Método: **Rápido** (o **Personalizado** si se necesita excluir tablas de caché/transients).
-6. Formato: **SQL**.
-7. Pulsar **Continuar** y guardar el archivo descargado en esta carpeta (`cms-wordpress/backup-db/`).
+Se hace en el equipo anfitrión (o por quien tenga acceso a su phpMyAdmin):
+
+1. Con Wamp en marcha, abrir `http://localhost/phpmyadmin`.
+2. Seleccionar la base de datos `bd_cadus` en el panel izquierdo.
+3. Pestaña **Exportar** → método **Rápido**, formato **SQL** → **Continuar**.
+4. Guardar el archivo descargado en esta carpeta (`cms-wordpress/backup-db/`).
 
 ## 2. Nombrar el volcado con control de versiones
-
-Usar la convención:
 
 ```
 bd_cadus_v<version>_sprint<NN>.sql
 ```
 
-Ejemplos:
-- `bd_cadus_v1_sprint1.sql` — primer volcado estable del Sprint 1.
-- `bd_cadus_v2_sprint1.sql` — segunda versión dentro del mismo sprint (tras corregir contenido).
-- `bd_cadus_v1_sprint2.sql` — primer volcado del Sprint 2.
+Ejemplos: `bd_cadus_v1_sprint1.sql`, `bd_cadus_v2_sprint1.sql`, `bd_cadus_v1_sprint2.sql`.
 
-Reglas:
-- Incrementar `<version>` cada vez que se comparta un nuevo volcado dentro del mismo sprint.
-- No sobrescribir volcados anteriores: mantenerlos hasta el cierre del sprint por si hay que revertir.
-- Indicar en el canal del equipo (Teams) qué volcado es el vigente ("volcado activo") para evitar trabajar sobre versiones desactualizadas.
+- Incrementar `<version>` en cada nuevo volcado del mismo sprint.
+- No sobrescribir volcados anteriores hasta cerrar el sprint.
+- Subir solo los volcados que se quieran conservar (backup relevante o entrega), no uno por cada cambio.
 
-## 3. Importar la base de datos localmente tras `git pull`
+## 3. Subir un volcado a GitHub
 
-Para evitar conflictos, cada integrante mantiene **su propia instancia local** de MySQL; la base de datos nunca se fusiona vía Git, solo se reemplaza por el volcado más reciente:
+```bash
+git pull
+git add cms-wordpress/backup-db/bd_cadus_v1_sprint1.sql
+git commit -m "chore(cms): backup de bd_cadus v1 sprint1"
+git push
+```
 
-1. Ejecutar `git pull` (los archivos `.md` de esta carpeta se actualizan; los `.sql` se comparten aparte, según el punto 1).
-2. Con Apache y MySQL iniciados, abrir phpMyAdmin.
-3. Si es la primera vez, crear la base de datos `bd_cadus` con cotejamiento `utf8mb4_unicode_ci`. Si ya existe, **vaciarla** antes de importar (pestaña *Operaciones* → *Eliminar la base de datos* → volver a crearla, o usar *Vaciar*) para evitar mezclar datos de versiones distintas.
-4. Importar el volcado vigente:
-   - **Desde phpMyAdmin:** seleccionar `bd_cadus` → pestaña *Importar* → elegir el archivo `.sql` más reciente → *Continuar*.
-   - **Desde línea de comandos** (con `C:\xampp\mysql\bin` en el `PATH`):
-     ```bash
-     mysql -u root -p bd_cadus < cms-wordpress/backup-db/bd_cadus_v1_sprint1.sql
-     ```
-5. Verificar que `wp-config.php` local (no versionado) apunta a `bd_cadus` con el usuario/contraseña locales.
-6. Acceder a `http://localhost/<carpeta-wordpress>/wp-admin` y comprobar que el contenido importado es correcto.
+Hacer `git pull` antes evita que dos personas suban volcados a la vez.
 
-## 4. Antes de subir cambios propios
+## 4. Restaurar un volcado (recuperación o servidor nuevo)
 
-1. Exportar un volcado nuevo siguiendo la convención de nombres del punto 2.
-2. Revisar que no contenga datos personales reales de estudiantes (usar siempre datos de prueba/anonimizados).
-3. Compartirlo por el canal del equipo indicando qué volcado sustituye.
-4. Avisar para que el resto reimporte antes de seguir trabajando sobre contenido de BD.
+1. Con Wamp en marcha, abrir phpMyAdmin.
+2. Crear la base de datos `bd_cadus` con cotejamiento `utf8mb4_unicode_ci` (o vaciarla si ya existe).
+3. Pestaña **Importar** → elegir el `.sql` → **Continuar**.
+4. Comprobar que `wp-config.php` apunta a `bd_cadus` y que la web carga.
 
-Para el procedimiento general de instalación del entorno (XAMPP + WordPress), ver [`cms-wordpress/README.md`](../README.md).
+Para el procedimiento general del entorno, ver [`cms-wordpress/README.md`](../README.md).

@@ -14,7 +14,11 @@ Cada requisito debe enlazarse con:
 - sprint(s) donde se implementa,
 - evidencia de validación (prueba, demo, acta).
 
+## Archivos de esta carpeta
+- [`REM-CADUS.md`](REM-CADUS.md): especificación de requisitos (actores, RF, RI, RN, RNF y restricciones RC).
+- [`carga-remus.md`](carga-remus.md): la misma información ordenada y con los campos de REMUS, para cargar el `.rem`.
+- `CADUS.rem` (pendiente de crear): proyecto de REMUS. Es binario: lo edita una sola persona (Product Owner).
+
 ## Estructura recomendada
-- `catalogo-requisitos.md`
-- `matriz-trazabilidad.md`
+- `matriz-trazabilidad.md` (la trazabilidad inicial está en `carga-remus.md`, apartado 9)
 - anexos por sprint o módulo

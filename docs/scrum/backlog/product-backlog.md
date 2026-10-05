@@ -9,9 +9,10 @@
 | ID | Ítem | Sistema | Prioridad | SP | Estado | Sprint | Dependencias | Responsable |
 |---|---|---|---|---:|---|---|---|---|
 | PB-001 | Definir estructura base del repositorio | Requisitos/SCRUM | Alta | 3 | Hecho | Sprint-00 | Ninguna | `[Nombre]` |
-| PB-002 | Configurar CMS local WordPress en XAMPP | CMS | Alta | 5 | Pendiente | Sprint-01 | PB-001 | `[Nombre]` |
+| PB-002 | Configurar CMS local WordPress en servidor local (WampServer) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-001 | `[Nombre]` |
 | PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Pendiente | Sprint-01 | PB-001 | `[Nombre]` |
 | PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Pendiente | Sprint-01 | PB-001 | `[Nombre]` |
+| PB-005 | Montar entorno compartido: WordPress + MySQL en WampServer accesible por Tailscale, y GitHub para el resto de archivos (RC-01, RC-02) | CMS/Entorno | Alta | 5 | Hecho | Sprint-01 | PB-002 | `[Nombre]` |
 
 ## Historias de usuario
 
@@ -43,7 +44,7 @@
 > El equipo (5 integrantes) concentró en el **Sprint 1** todo el alcance de base + gestión de contenidos + directorio + buzón de atención (ver detalle de reparto por integrante en [sprint-01.md](../sprints/sprint-01.md)). Los sprints siguientes se han renumerado en consecuencia.
 
 ### V1 — Despliegue base, identidad institucional y portal CADUS
-- **Sprint-01** (estructura base, tema, roles, contenidos, directorio y buzón): PB-002, PB-003, PB-004, HU-01, HU-02, HU-03, HU-04, HU-05, HU-06, HU-07, HU-08, HU-13, HU-18
+- **Sprint-01** (estructura base, tema, roles, contenidos, directorio y buzón): PB-002, PB-003, PB-004, PB-005, HU-01, HU-02, HU-03, HU-04, HU-05, HU-06, HU-07, HU-08, HU-13, HU-18
 
 ### V2 — Participación, optimización, seguridad y entrega
 - **Sprint-02** (gestión avanzada de contenidos y participación estudiantil): HU-09, HU-10, HU-11, HU-12, HU-19

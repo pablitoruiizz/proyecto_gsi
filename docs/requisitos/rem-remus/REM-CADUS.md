@@ -78,13 +78,24 @@ Modelo conceptual de datos mínimo que debe soportar el CMS:
 | RNF-02 | **Usabilidad móvil:** diseño responsive, funcional en dispositivos móviles y tablets. |
 | RNF-03 | **Accesibilidad:** cumplimiento de WCAG 2.1 nivel AA. |
 | RNF-04 | **Seguridad en formularios:** validación y sanitización de entradas, protección frente a spam e inyección. |
-| RNF-05 | **Compatibilidad técnica:** PHP 8.x y MySQL 8.x sobre entorno XAMPP. |
+| RNF-05 | **Compatibilidad técnica:** PHP 8.x y MySQL 8.x sobre servidor Apache local (WampServer; compatible con XAMPP). |
 | RNF-06 | **Disponibilidad:** estabilidad del entorno durante periodos críticos (matrícula, asambleas, votaciones). |
 | RNF-07 | **Mantenibilidad:** configuración y código documentados para facilitar el relevo entre cursos académicos del CADUS. |
 | RNF-08 | **Privacidad:** tratamiento de datos de consultas/reclamaciones conforme a RGPD. |
 
 ---
 
-## 6. Trazabilidad
+## 6. Restricciones del proyecto (RC-01 a RC-02)
+
+Restricciones sobre el entorno de desarrollo y la gestión de la configuración (en REMUS, requisitos de restricción).
+
+| ID | Restricción |
+|---|---|
+| RC-01 | **Entorno de desarrollo compartido con Tailscale:** WordPress y su base de datos MySQL (`bd_cadus`) se alojan en un único servidor local (WampServer) en el equipo de un integrante. El resto del equipo accede a él mediante **Tailscale** (VPN privada), de modo que los 5 integrantes trabajan a la vez sobre la misma instancia de WordPress y la misma base de datos. El acceso web se limita a la red de Tailscale, cada integrante usa su propia cuenta de WordPress (rol Administrador) y el puerto de la base de datos no se expone. El servidor solo está disponible mientras el equipo anfitrión esté encendido. |
+| RC-02 | **Gestión de configuración con GitHub:** todo el contenido en forma de archivo (código del tema y plugins, documentación, artefactos SCRUM, REM/REMUS, maquetas) se versiona en el repositorio GitHub del proyecto. No se versionan `wp-config.php`, `wp-content/uploads/` ni credenciales. Los volcados de la base de datos (`cms-wordpress/backup-db/`) se mantienen como copia de seguridad y para la entrega, no como mecanismo de sincronización entre integrantes. |
+
+---
+
+## 7. Trazabilidad
 
 La trazabilidad HU (historia de usuario) ↔ RF/RN/RNF ↔ Sprint se mantiene en el [Product Backlog](../../scrum/backlog/product-backlog.md). Cada historia de usuario debe referenciar el/los requisito(s) que implementa.

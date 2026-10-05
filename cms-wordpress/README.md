@@ -11,8 +11,8 @@ Esta carpeta agrupa artefactos del CMS:
 - No subir `wp-config.php` real ni credenciales.
 - Versionar solo ejemplos sanitizados y documentación técnica.
 
-## Restaurar la base de datos tras `git pull`
+## Base de datos y entorno compartido
 
-Cada miembro del equipo trabaja con MySQL local (XAMPP) sobre la base de datos `bd_cadus`, que **no se versiona en Git** (regla `*.sql` del `.gitignore` raíz).
+El equipo trabaja sobre **un único servidor** (WordPress + MySQL `bd_cadus` en WampServer) accesible por Tailscale, así que no hace falta importar la BD en cada equipo. Ver [entorno de trabajo](../docs/arquitectura/entorno-de-trabajo.md).
 
-Guía completa de exportación, convención de nombres (`bd_cadus_v<version>_sprint<NN>.sql`) e importación sin conflictos: [`backup-db/README.md`](backup-db/README.md).
+Los volcados `.sql` de `backup-db/` son copias de seguridad y de entrega. Guía de exportación, nombres (`bd_cadus_v<version>_sprint<NN>.sql`) y restauración: [`backup-db/README.md`](backup-db/README.md).
