@@ -16,3 +16,22 @@ wp-content/backups/
 # Configuración local (redundante con la raíz, explícito por claridad)
 wp-config.php
 wp-config-local.php
+
+# Plugins de terceros: viven en el servidor compartido y se documentan en
+# docs/entrega (lista y versiones). No se versionan sus miles de archivos.
+# Los plugins propios del equipo se pueden añadir con una excepción (!wp-content/plugins/mi-plugin/).
+wp-content/plugins/*
+!wp-content/plugins/index.php
+!wp-content/plugins/cadus-portal/
+
+# Archivos de ejecución de plugins (registros y bloqueos)
+wp-content/wflogs/
+.htaccess.wpfc.lock
+
+# Archivos del núcleo de WordPress que el .gitignore de la raíz excluye por su
+# nombre (dist/, build/, *.crt) y sin los cuales el editor de bloques y las
+# descargas HTTPS no funcionan en un clon nuevo.
+!wp-includes/js/dist/
+!wp-includes/css/dist/
+!wp-includes/build/
+!wp-includes/certificates/ca-bundle.crt
