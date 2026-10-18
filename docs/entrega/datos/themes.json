@@ -1,0 +1,128 @@
+[
+ {
+  "slug": "astra",
+  "nombre": "Astra",
+  "version": "4.14.1",
+  "rating": 98,
+  "votos": 6542,
+  "instal": 1000000,
+  "descargas": 27045250,
+  "actualizado": "2026-10-15",
+  "php": "5.3",
+  "tags": [
+   "Blog",
+   "Custom colors",
+   "Custom logo",
+   "Custom menu",
+   "E-commerce",
+   "Editor style",
+   "Entertainment",
+   "Featured images"
+  ]
+ },
+ {
+  "slug": "kadence",
+  "nombre": "Kadence",
+  "version": "1.5.2",
+  "rating": 98,
+  "votos": 455,
+  "instal": 500000,
+  "descargas": 6059740,
+  "actualizado": "2026-07-24",
+  "php": "7.4",
+  "tags": [
+   "Accessibility ready",
+   "Blog",
+   "Custom background",
+   "Custom colors",
+   "Custom logo",
+   "Custom menu",
+   "E-commerce",
+   "Editor style"
+  ]
+ },
+ {
+  "slug": "generatepress",
+  "nombre": "GeneratePress",
+  "version": "3.6.1",
+  "rating": 98,
+  "votos": 1427,
+  "instal": 500000,
+  "descargas": 7274045,
+  "actualizado": "2025-12-01",
+  "php": "7.4",
+  "tags": [
+   "Blog",
+   "BuddyPress",
+   "Custom background",
+   "Custom colors",
+   "Custom header",
+   "Custom menu",
+   "E-commerce",
+   "Featured images"
+  ]
+ },
+ {
+  "slug": "blocksy",
+  "nombre": "Blocksy",
+  "version": "2.1.60",
+  "rating": 100,
+  "votos": 873,
+  "instal": 300000,
+  "descargas": 8000977,
+  "actualizado": "2026-10-15",
+  "php": "7.0",
+  "tags": [
+   "Accessibility ready",
+   "Block editor patterns",
+   "Block editor styles",
+   "Blog",
+   "Custom colors",
+   "Custom logo",
+   "Custom menu",
+   "E-commerce"
+  ]
+ },
+ {
+  "slug": "neve",
+  "nombre": "Neve",
+  "version": "4.2.16",
+  "rating": 94,
+  "votos": 1283,
+  "instal": 200000,
+  "descargas": 6706253,
+  "actualizado": "2026-10-07",
+  "php": "7.0",
+  "tags": [
+   "Accessibility ready",
+   "Block editor patterns",
+   "Block editor styles",
+   "Blog",
+   "Custom background",
+   "Custom colors",
+   "Custom logo",
+   "Custom menu"
+  ]
+ },
+ {
+  "slug": "twentytwentyfive",
+  "nombre": "Twenty Twenty-Five",
+  "version": "1.5",
+  "rating": 80,
+  "votos": 14,
+  "instal": 1000000,
+  "descargas": 10923215,
+  "actualizado": "2026-05-20",
+  "php": "7.2",
+  "tags": [
+   "Accessibility ready",
+   "Block editor patterns",
+   "Block editor styles",
+   "Blog",
+   "Custom colors",
+   "Custom logo",
+   "Custom menu",
+   "Editor style"
+  ]
+ }
+]
