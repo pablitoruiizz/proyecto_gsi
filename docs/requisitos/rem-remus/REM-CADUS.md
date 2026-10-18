@@ -85,7 +85,7 @@ Modelo conceptual de datos mínimo que debe soportar el CMS:
 
 ---
 
-## 6. Restricciones del proyecto (RC-01 a RC-02)
+## 6. Restricciones del proyecto (RC-01 a RC-03)
 
 Restricciones sobre el entorno de desarrollo y la gestión de la configuración (en REMUS, requisitos de restricción).
 
@@ -93,6 +93,7 @@ Restricciones sobre el entorno de desarrollo y la gestión de la configuración 
 |---|---|
 | RC-01 | **Entorno de desarrollo compartido con Tailscale:** WordPress y su base de datos MySQL (`bd_cadus`) se alojan en un único servidor local (WampServer) en el equipo de un integrante. El resto del equipo accede a él mediante **Tailscale** (VPN privada), de modo que los 5 integrantes trabajan a la vez sobre la misma instancia de WordPress y la misma base de datos. El acceso web se limita a la red de Tailscale, cada integrante usa su propia cuenta de WordPress (rol Administrador) y el puerto de la base de datos no se expone. El servidor solo está disponible mientras el equipo anfitrión esté encendido. |
 | RC-02 | **Gestión de configuración con GitHub:** todo el contenido en forma de archivo (código del tema y plugins, documentación, artefactos SCRUM, REM/REMUS, maquetas) se versiona en el repositorio GitHub del proyecto. No se versionan `wp-config.php`, `wp-content/uploads/` ni credenciales. Los volcados de la base de datos (`cms-wordpress/backup-db/`) se mantienen como copia de seguridad y para la entrega, no como mecanismo de sincronización entre integrantes. |
+| RC-03 | **Coordinación del equipo con Discord:** el equipo se coordina en un servidor de Discord (*GSI - CADUS*) organizado en categorías: INFO (anuncios, entorno y recursos), SCRUM (daily, sprint-review y retrospectiva), DESARROLLO (un canal por área: infra-y-bd, portada, institucional-y-normativa, delegaciones y buzon-y-faq, además de github y avisos-servidor) y VOZ (Sala de trabajo y Daily) para las reuniones y el trabajo a distancia. |
 
 ---
 

@@ -1,30 +1,16 @@
-param($src, $dst, $md, $meta)
+﻿param($src, $dst, $data, $md)
 $ErrorActionPreference = 'Stop'
 Copy-Item $src $dst -Force
 $utf8 = New-Object Text.UTF8Encoding($false)
-$mdLines = [IO.File]::ReadAllLines($md, $utf8)
-$m = [IO.File]::ReadAllText($meta, $utf8) | ConvertFrom-Json
-$date = [datetime]::ParseExact($m.date, 'yyyy-MM-dd', $null)
-
-function Parse-Table($prefix) {
-    $rows = @(); $on = $false
-    foreach ($l in $mdLines) {
-        if ($l -match '^## ') { $on = $l.StartsWith($prefix); continue }
-        if ($on -and $l.StartsWith('|')) {
-            $cells = @($l.Trim().Trim('|').Split('|') | ForEach-Object { $_.Trim() })
-            if ($cells[0] -match '^:?-+' -or $cells[0] -eq 'ID' -or $cells[0] -eq 'Origen') { continue }
-            $rows += , $cells
-        }
-    }
-    return , $rows
-}
-function Imp($t) { if ($t -like 'Vital*') { 2 } elseif ($t -like 'Importante*') { 3 } else { 4 } }
-function Urg($t) { if ($t -like 'Inmed*') { 2 } elseif ($t -like 'Hay*') { 3 } else { 4 } }
+$d = [IO.File]::ReadAllText($data, $utf8) | ConvertFrom-Json
+$date = [datetime]::ParseExact($d.date, 'yyyy-MM-dd', $null)
+$vMaj = [int]$d.version[0]; $vMin = [int]$d.version[1]
 
 $conn = New-Object System.Data.OleDb.OleDbConnection ("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=$dst")
 $conn.Open()
 $tx = $conn.BeginTransaction()
 
+function Txt($s) { if ($null -eq $s) { return $null }; return ([string]$s) -replace "`r?`n", "`r`n" }
 function Exec($sql, $vals) {
     $cmd = New-Object System.Data.OleDb.OleDbCommand $sql, $conn, $tx
     foreach ($v in $vals) {
@@ -38,7 +24,7 @@ function Exec($sql, $vals) {
         $p.Value = $v
         [void]$cmd.Parameters.Add($p)
     }
-    [void]$cmd.ExecuteNonQuery()
+    try { [void]$cmd.ExecuteNonQuery() } catch { throw ("SQL fallido: " + $sql + " | valores: " + (($vals | ForEach-Object { [string]$_ }) -join " ; ") + " | " + $_.Exception.Message) }
 }
 function Scalar($sql) { $cmd = New-Object System.Data.OleDb.OleDbCommand $sql, $conn, $tx; return $cmd.ExecuteScalar() }
 function Ins($table, $cols, $vals) {
@@ -46,31 +32,21 @@ function Ins($table, $cols, $vals) {
     Exec $sql $vals
 }
 
-# --- 1. limpiar contenido de ejemplo de Madeja en el documento C ---
-$delOids = @()
-foreach ($t in 'Paragraph', 'GraphicFile') {
-    $cmd = New-Object System.Data.OleDb.OleDbCommand "SELECT oid FROM [$t] WHERE document=1", $conn, $tx
-    $r = $cmd.ExecuteReader(); while ($r.Read()) { $delOids += [int]$r[0] }; $r.Close()
-}
-Exec "DELETE FROM [Paragraph] WHERE document=1" @()
-Exec "DELETE FROM [GraphicFile] WHERE document=1" @()
-foreach ($o in $delOids) { Exec "DELETE FROM [Change] WHERE subject=?" @([int]$o) }
-Exec "DELETE FROM [IsAuthorOf]" @()
-Exec "DELETE FROM [IsSourceOf]" @()
-"borrados paragraphs/graficos de ejemplo: " + $delOids.Count
+# --- 1. limpiar el contenido de ejemplo (orden respetando las claves ajenas) ---
+foreach ($t in 'IsAuthorOf', 'IsSourceOf', 'Trace', 'Step', 'Action', 'UseCase', 'SpecificData', 'InformationRequirement', 'FunctionalRequirement', 'NonFunctionalRequirement', 'ConstraintRequirement', 'Objective', 'Actor', 'Paragraph', 'Stakeholder', 'Change') { Exec "DELETE FROM [$t]" @() }
 
-# --- 2. datos del proyecto ---
-Exec "UPDATE [C_RequirementsSpecification] SET [name]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=?" @($m.cName, 0, 1, $date)
-Exec "UPDATE [D_RequirementsSpecification] SET [name]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=?" @($m.dName, 0, 1, $date)
-foreach ($o in $m.organizations) {
-    $tel = if ($o.telephone) { $o.telephone } else { 'PD' }; $fax = if ($o.fax) { $o.fax } else { 'PD' }
-    Exec "UPDATE [Organization] SET [name]=?, [address]=?, [telephone]=?, [fax]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=? WHERE oid=?" @($o.name, $o.address, $tel, $fax, 0, 1, $date, [int]$o.oid)
+# --- 2. proyecto, secciones y organizaciones ---
+Exec "UPDATE [C_RequirementsSpecification] SET [name]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=?" @($d.cName, $vMaj, $vMin, $date)
+Exec "UPDATE [D_RequirementsSpecification] SET [name]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=?" @($d.dName, $vMaj, $vMin, $date)
+Exec "UPDATE [Section] SET [versionMajor]=?, [versionMinor]=?, [versionDate]=?" @($vMaj, $vMin, $date)
+Exec "UPDATE [Section] SET [name]=? WHERE oid=47" @('Requisitos No Funcionales')
+foreach ($o in $d.organizations) {
+    Exec "UPDATE [Organization] SET [name]=?, [address]=?, [telephone]=?, [fax]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=? WHERE oid=?" @($o.name, $o.address, $o.telephone, $o.fax, $vMaj, $vMin, $date, [int]$o.oid)
 }
 
-# --- contadores ---
 $script:next = 1000
 function NewOid { $script:next++; return $script:next }
-$ordTables = 'Section', 'Paragraph', 'GraphicFile', 'Organization', 'Stakeholder', 'Actor', 'Objective', 'InformationRequirement', 'FunctionalRequirement', 'NonFunctionalRequirement', 'ConstraintRequirement', 'UseCase'
+$ordTables = 'Section', 'Paragraph', 'Organization', 'Stakeholder', 'Actor', 'Objective', 'InformationRequirement', 'FunctionalRequirement', 'NonFunctionalRequirement', 'ConstraintRequirement', 'UseCase'
 $ordCache = @{}
 function NextOrder($parent) {
     if (-not $ordCache.ContainsKey($parent)) {
@@ -82,83 +58,143 @@ function NextOrder($parent) {
     return $ordCache[$parent]
 }
 $numCache = @{}
-function NextNum($table) { if (-not $numCache.ContainsKey($table)) { $numCache[$table] = 0 }; $numCache[$table]++; return $numCache[$table] }
-$ids = @{}      # codigo -> oid
-$kind = @{}     # codigo -> 'actor','obj',...
+function NextNum($k) { if (-not $numCache.ContainsKey($k)) { $numCache[$k] = 0 }; $numCache[$k]++; return $numCache[$k] }
 $common = 'oid', 'name', 'versionMajor', 'versionMinor', 'versionDate', 'comments', 'number', 'document', 'parent', 'order'
-function CommonVals($oid, $name, $comments, $num, $parent) { return @($oid, $name, 0, 1, $date, $comments, $num, 1, $parent, (NextOrder $parent)) }
+function CommonVals($oid, $name, $comments, $num, $parent) { return @($oid, $name, $vMaj, $vMin, $date, $(if ($comments) { $comments } else { 'Ninguno' }), $num, 1, $parent, (NextOrder $parent)) }
+$req = 'importance', 'urgency', 'status', 'stability'
+$ids = @{}; $src2 = @{}   # codigo -> oid ; codigo -> 'client'|'team' (fuente)
 
-# --- 3. stakeholders (los dos existentes se actualizan, el resto se inserta) ---
-$sNum = 2
-$stk = @()
-foreach ($s in $m.stakeholders) {
-    if ($s.oid -gt 0) {
-        Exec "UPDATE [Stakeholder] SET [name]=?, [role]=?, [isCustomer]=?, [isDeveloper]=?, [isUser]=?, [organization]=?, [versionMajor]=?, [versionMinor]=?, [versionDate]=? WHERE oid=?" @($s.name, $s.role, [bool]$s.customer, [bool]$s.developer, [bool]$s.user, [int]$s.org, 0, 1, $date, [int]$s.oid)
-        $stk += [int]$s.oid
-    } else {
-        $o = NewOid; $sNum++
-        Ins 'Stakeholder' ($common + 'role', 'isCustomer', 'isDeveloper', 'isUser', 'organization') ((CommonVals $o $s.name 'Ninguno' $sNum 123) + @($s.role, [bool]$s.customer, [bool]$s.developer, [bool]$s.user, [int]$s.org))
-        $stk += $o
+# nueva seccion "Entorno de Trabajo del Equipo" antes del glosario (numero 16, orden 6)
+$secEnv = NewOid
+Exec "UPDATE [Section] SET [order]=7 WHERE oid=55" @()
+Ins 'Section' ($common + 'isOrderedByName', 'isAppendix') @($secEnv, 'Entorno de Trabajo del Equipo', $vMaj, $vMin, $date, 'Ninguno', 16, 1, $null, 6, $false, $false)
+
+# --- 3. stakeholders ---
+$sNum = 0; $stkByName = @{}
+foreach ($s in $d.stakeholders) {
+    $o = NewOid; $sNum++; $stkByName[$s.name] = $o
+    Ins 'Stakeholder' ($common + 'role', 'isCustomer', 'isDeveloper', 'isUser', 'organization') ((CommonVals $o $s.name 'Ninguno' $sNum 12) + @($s.role, [bool]$s.customer, [bool]$s.developer, [bool]$s.user, [int]$s.org))
+}
+$owner = $stkByName[$d.owner]; $client = $stkByName[$d.client]
+
+# --- 4. parrafos ---
+function Para($name, $text, $parent, $gloss) { $o = NewOid; Ins 'Paragraph' ($common + 'text', 'isGlossaryItem') ((CommonVals $o $name 'Ninguno' (NextNum 'Paragraph') $parent) + @((Txt $text), [bool]$gloss)) }
+Para 'Introducción' $d.paragraphs.intro 7 $false
+Para 'Sistema Actual' $d.paragraphs.current 22 $false
+Para 'Entorno de trabajo' $d.paragraphs.environment $secEnv $false
+foreach ($g in $d.paragraphs.glossary) { Para $g.name $g.text 55 $true }
+
+# --- 5. actores (35) ---
+foreach ($a in $d.actors) {
+    $o = NewOid; $ids[$a.id] = $o
+    Ins 'Actor' ($common + 'role') ((CommonVals $o $a.name 'Ninguno' (NextNum 'Actor') 35) + @($a.role))
+}
+# --- 6. objetivos (24) ---
+foreach ($r in $d.objectives) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'Objective' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) 'Ninguno' (NextNum 'Objective') 24) + @([int]$r.importance, 2, 2, 3, $r.description))
+}
+# --- 7. requisitos de informacion (28) ---
+foreach ($r in $d.information) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'InformationRequirement' ($common + $req + 'relevantConcept', 'avgLifeTimeValue', 'avgLifeTimeTime', 'maxLifeTimeValue', 'maxLifeTimeTime', 'avgOcurrences', 'maxOcurrences') ((CommonVals $o ($r.id + ' - ' + $r.name) 'Ninguno' (NextNum 'InformationRequirement') 28) + @([int]$r.importance, 2, 2, 3, $r.concept, [single]0, 1, [single]0, 1, [single]0, [single]0))
+    $i = 0
+    foreach ($x in $r.data) { $i++; Ins 'SpecificData' @('oid', 'owner', 'order', 'description', 'comments') @((NewOid), $o, $i, $x, 'Ninguno') }
+}
+# --- 8. requisitos de interfaz de usuario (36) y funcionales (37) ---
+foreach ($r in $d.ui) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'FunctionalRequirement' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) $r.comments (NextNum 'FunctionalRequirement') 36) + @([int]$r.importance, [int]$r.urgency, 2, 3, (Txt $r.description)))
+}
+foreach ($r in $d.functional) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'FunctionalRequirement' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) $r.comments (NextNum 'FunctionalRequirement') 37) + @([int]$r.importance, [int]$r.urgency, 2, 3, (Txt $r.description)))
+}
+# --- 9. casos de uso (37) con acciones y pasos ---
+$aN = 0
+foreach ($u in $d.usecases) {
+    $o = NewOid; $ids[$u.id] = $o; $src2[$u.id] = 'client'
+    Ins 'UseCase' ($common + $req + 'isAbstract', 'triggeringEvent', 'precondition', 'postcondition', 'frequencyValue', 'frequencyTime') ((CommonVals $o ($u.id + ' - ' + $u.name) 'Ninguno' (NextNum 'UseCase') 37) + @(2, 2, 2, 3, $false, $u.trigger, $u.pre, $u.post, [single]0, 1))
+    $k = 0
+    foreach ($st in $u.steps) {
+        $aN++; $k++
+        if ($st.who -eq 'actor') { Ins 'Action' @('oid', 'isUseCaseAction', 'useCase', 'isSystemAction', 'description', 'performanceValue', 'performanceTime', 'isActorAction', 'actor') @($aN, $false, $null, $false, $st.text, [single]0, 1, $true, [int]$ids[$st.actor]) }
+        else { Ins 'Action' @('oid', 'isUseCaseAction', 'useCase', 'isSystemAction', 'description', 'performanceValue', 'performanceTime', 'isActorAction', 'actor') @($aN, $false, $null, $true, $st.text, [single]0, 1, $false, $null) }
+        Ins 'Step' @('oid', 'owner', 'order', 'isConditional', 'condition', 'action') @((NewOid), $o, $k, $false, 'PD', $aN)
     }
 }
-$client = 134; $po = $stk[0]; $scrum = $stk[0]; for ($i = 0; $i -lt $m.stakeholders.Count; $i++) { if ($m.stakeholders[$i].role -like "Product Owner*") { $po = $stk[$i] }; if ($m.stakeholders[$i].role -like "Scrum Master*") { $scrum = $stk[$i] } }
-
-# --- 4. actores (seccion 24) ---
-foreach ($r in (Parse-Table '## 3. Actores')) {
-    $o = NewOid; $ids[$r[0]] = $o; $kind[$r[0]] = 'actor'
-    Ins 'Actor' ($common + 'role') ((CommonVals $o $r[1] 'Ninguno' (NextNum 'Actor') 24) + @($r[2]))
+# --- 10. no funcionales (47), reglas de negocio (51) y entorno de trabajo ---
+foreach ($r in $d.nonfunctional) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'NonFunctionalRequirement' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) 'Ninguno' (NextNum 'NonFunctionalRequirement') ([int]$r.section)) + @([int]$r.importance, 3, 2, 3, $r.description))
 }
-# --- 5. objetivos (seccion 18) ---
-$req = 'importance', 'urgency', 'status', 'stability'
-foreach ($r in (Parse-Table '## 4. Objetivos')) {
-    $o = NewOid; $ids[$r[0]] = $o; $kind[$r[0]] = 'src'
-    Ins 'Objective' ($common + $req + 'description') ((CommonVals $o ($r[0] + ' - ' + $r[1]) 'Ninguno' (NextNum 'Objective') 18) + @((Imp $r[3]), 2, 2, 3, $r[2]))
+foreach ($r in $d.rules) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'client'
+    Ins 'ConstraintRequirement' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) 'Ninguno' (NextNum 'ConstraintRequirement') 51) + @(2, 2, 2, 3, $r.description))
 }
-# --- 6. requisitos de informacion (seccion 27) ---
-foreach ($r in (Parse-Table '## 5. Requisitos de informaci')) {
-    $o = NewOid; $ids[$r[0]] = $o; $kind[$r[0]] = 'src'
-    Ins 'InformationRequirement' ($common + $req + 'relevantConcept', 'avgLifeTimeValue', 'avgLifeTimeTime', 'maxLifeTimeValue', 'maxLifeTimeTime', 'avgOcurrences', 'maxOcurrences') ((CommonVals $o ($r[0] + ' - ' + $r[1]) 'Tiempos de vida y ocurrencias por estimar (PD).' (NextNum 'InformationRequirement') 27) + @((Imp $r[4]), 2, 2, 3, $r[2], [single]0, 1, [single]0, 1, [single]0, [single]0))
-    $i = 0
-    foreach ($d in ($r[3] -split ',\s*')) { $i++; Ins 'SpecificData' @('oid', 'owner', 'order', 'description', 'comments') @((NewOid), $o, $i, $d, 'Ninguno') }
-}
-# --- 7. requisitos funcionales (seccion 29) ---
-foreach ($r in (Parse-Table '## 6. Requisitos funcionales')) {
-    $o = NewOid; $ids[$r[0]] = $o; $kind[$r[0]] = 'src'
-    Ins 'FunctionalRequirement' ($common + $req + 'description') ((CommonVals $o ($r[0] + ' - ' + $r[1]) ('Historias de usuario: ' + $r[3]) (NextNum 'FunctionalRequirement') 29) + @((Imp $r[4]), (Urg $r[5]), 2, 3, $r[2]))
-}
-# --- 8. requisitos no funcionales (secciones 42-47) ---
-foreach ($r in (Parse-Table '## 7. Requisitos no funcionales')) {
-    $o = NewOid; $ids[$r[0]] = $o; $kind[$r[0]] = 'src'
-    $sec = [int]$m.rnfSection.($r[0])
-    Ins 'NonFunctionalRequirement' ($common + $req + 'description') ((CommonVals $o ($r[0] + ' - ' + $r[1]) 'Ninguno' (NextNum 'NonFunctionalRequirement') $sec) + @((Imp $r[3]), 3, 2, 3, $r[2]))
-}
-# --- 9. restricciones: RN (seccion 28) y RC (seccion 33) ---
-foreach ($r in (Parse-Table '## 8. Restricciones')) {
-    $o = NewOid; $ids[$r[0]] = $o
-    $sec = if ($r[0] -like 'RC-*') { 33 } else { 28 }
-    $kind[$r[0]] = if ($r[0] -like 'RC-*') { 'team' } else { 'src' }
-    Ins 'ConstraintRequirement' ($common + $req + 'description') ((CommonVals $o ($r[0] + ' - ' + $r[1]) 'Ninguno' (NextNum 'ConstraintRequirement') $sec) + @(2, 2, 2, 3, $r[2]))
+foreach ($r in $d.environment) {
+    $o = NewOid; $ids[$r.id] = $o; $src2[$r.id] = 'team'
+    Ins 'ConstraintRequirement' ($common + $req + 'description') ((CommonVals $o ($r.id + ' - ' + $r.name) 'Ninguno' (NextNum 'ConstraintRequirement') $secEnv) + @(2, 2, 2, 3, $r.description))
 }
 
-# --- 10. autoria y fuentes ---
-$aN = 0; $sN = 0
-foreach ($c in $ids.Keys) {
-    if ($kind[$c] -eq 'actor') { continue }
-    $aN++; Ins 'IsAuthorOf' @('oid', 'stakeholder', 'specificationObject') @($aN, $po, $ids[$c])
-    $sN++; $src = if ($kind[$c] -eq 'team') { $scrum } else { $client }
-    Ins 'IsSourceOf' @('oid', 'stakeholder', 'specificationObject') @($sN, $src, $ids[$c])
+# --- 11. autoria, fuentes y trazabilidad ---
+$aI = 0; $sI = 0
+foreach ($c in $src2.Keys) {
+    $aI++; Ins 'IsAuthorOf' @('oid', 'stakeholder', 'specificationObject') @($aI, $owner, $ids[$c])
+    $sI++; $who = if ($src2[$c] -eq 'team') { $owner } else { $client }
+    Ins 'IsSourceOf' @('oid', 'stakeholder', 'specificationObject') @($sI, $who, $ids[$c])
 }
-
-# --- 11. trazabilidad ---
-Exec "DELETE FROM [Trace]" @()
 $tN = 0; $missing = @()
-foreach ($r in (Parse-Table '## 9. Trazabilidad')) {
-    $from = $r[0] -split ',\s*'
-    $to = $r[1] -split ',\s*'
-    foreach ($f in $from) { foreach ($t in $to) {
-        if ($ids.ContainsKey($f) -and $ids.ContainsKey($t)) { $tN++; Ins 'Trace' @('oid', 'isChecked', 'source', 'target') @($tN, $false, $ids[$f], $ids[$t]) } else { $missing += "$f->$t" }
-    } }
+foreach ($t in $d.traces) {
+    foreach ($to in $t[1]) {
+        if ($ids.ContainsKey($t[0]) -and $ids.ContainsKey($to)) { $tN++; Ins 'Trace' @('oid', 'isChecked', 'source', 'target') @($tN, $false, $ids[$t[0]], $ids[$to]) } else { $missing += "$($t[0])->$to" }
+    }
 }
+# --- 12. historial de cambios minimo ---
+$cN = 0
+foreach ($subj in 1, 2, 3, 4) { $cN++; Ins 'Change' @('oid', 'date', 'type', 'subject', 'subjectType', 'description') @($cN, $date, 'C', $subj, 'D', 'Documento creado'); $cN++; Ins 'Change' @('oid', 'date', 'type', 'subject', 'subjectType', 'description') @($cN, $date, 'S', $subj, 'D', 'Documento guardado') }
+
 $tx.Commit(); $conn.Close()
-"objetos creados: " + $ids.Count + " | trazas: $tN | autores: $aN | fuentes: $sN"
+"objetos creados: " + $ids.Count + " | trazas: $tN | autores: $aI | fuentes: $sI"
 if ($missing.Count) { "trazas sin resolver: " + ($missing -join ', ') }
+
+# --- 13. espejo legible en Markdown (carga-remus.md) ---
+if ($md) {
+    $L = New-Object System.Collections.Generic.List[string]
+    function Cell($s) { return (([string]$s) -replace "`r?`n", ' ' -replace '\|', '/') }
+    function Imp($n) { switch ([int]$n) { 2 { 'Vital' } 3 { 'Importante' } default { 'Quedaría bien' } } }
+    $L.Add('# Hoja de carga para REMUS — Proyecto CADUS'); $L.Add('')
+    $L.Add('> Archivo **generado** por [`scripts/remus/build_rem.ps1`](../../../scripts/remus/README.md) a partir de `scripts/remus/cadus_data.json`. No editar a mano: modificar el JSON y regenerar.'); $L.Add('')
+    $L.Add("Contenido del proyecto [`CADUS.rem`](CADUS.rem) (REMUS), versión $vMaj.$vMin, $($d.date). Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación."); $L.Add('')
+    $L.Add('## 1. Organizaciones'); $L.Add(''); $L.Add('| Nombre | Dirección |'); $L.Add('|---|---|')
+    foreach ($o in $d.organizations) { $L.Add("| $(Cell $o.name) | $(Cell $o.address) |") }; $L.Add('')
+    $L.Add('## 2. Personas'); $L.Add(''); $L.Add('| Nombre | Rol |'); $L.Add('|---|---|')
+    foreach ($s in $d.stakeholders) { $L.Add("| $(Cell $s.name) | $(Cell $s.role) |") }; $L.Add('')
+    $L.Add('## 3. Objetivos del sistema'); $L.Add(''); $L.Add('| Código | Nombre | El sistema deberá | Importancia |'); $L.Add('|---|---|---|---|')
+    foreach ($r in $d.objectives) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) | $(Imp $r.importance) |") }; $L.Add('')
+    $L.Add('## 4. Requisitos de información'); $L.Add(''); $L.Add('| Código | Nombre | Se almacenará información correspondiente a… | Datos específicos |'); $L.Add('|---|---|---|---|')
+    foreach ($r in $d.information) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.concept) | $(Cell ($r.data -join '; ')) |") }; $L.Add('')
+    $L.Add('## 5. Actores'); $L.Add(''); $L.Add('| Código | Nombre | Representa… |'); $L.Add('|---|---|---|')
+    foreach ($r in $d.actors) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.role) |") }; $L.Add('')
+    $L.Add('## 6. Requisitos de interfaz de usuario'); $L.Add(''); $L.Add('| Código | Nombre | El sistema deberá | Historias |'); $L.Add('|---|---|---|---|')
+    foreach ($r in $d.ui) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) | $(Cell $r.comments) |") }; $L.Add('')
+    $L.Add('## 7. Requisitos funcionales'); $L.Add(''); $L.Add('| Código | Nombre | El sistema deberá | Historias | Importancia |'); $L.Add('|---|---|---|---|---|')
+    foreach ($r in $d.functional) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) | $(Cell $r.comments) | $(Imp $r.importance) |") }; $L.Add('')
+    $L.Add('## 8. Casos de uso'); $L.Add('')
+    foreach ($u in $d.usecases) {
+        $L.Add("### $($u.id) - $($u.name)"); $L.Add('')
+        $L.Add("- **Evento disparador:** $($u.trigger)"); $L.Add("- **Precondición:** $($u.pre)"); $L.Add("- **Postcondición:** $($u.post)"); $L.Add('- **Pasos:**')
+        $i = 0; foreach ($st in $u.steps) { $i++; $who = if ($st.who -eq 'actor') { ($d.actors | Where-Object { $_.id -eq $st.actor }).name } else { 'El sistema' }; $L.Add("  $i. $who $($st.text)") }
+        $L.Add('')
+    }
+    $L.Add('## 9. Requisitos no funcionales'); $L.Add(''); $L.Add('| Código | Nombre | El sistema deberá | Importancia |'); $L.Add('|---|---|---|---|')
+    foreach ($r in $d.nonfunctional) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) | $(Imp $r.importance) |") }; $L.Add('')
+    $L.Add('## 10. Reglas de negocio'); $L.Add(''); $L.Add('| Código | Nombre | Regla |'); $L.Add('|---|---|---|')
+    foreach ($r in $d.rules) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) |") }; $L.Add('')
+    $L.Add('## 11. Entorno de trabajo del equipo (restricciones)'); $L.Add(''); $L.Add('| Código | Nombre | Descripción |'); $L.Add('|---|---|---|')
+    foreach ($r in $d.environment) { $L.Add("| $($r.id) | $(Cell $r.name) | $(Cell $r.description) |") }; $L.Add('')
+    $L.Add('## 12. Trazabilidad entre requisitos'); $L.Add(''); $L.Add('| Origen | Destinos |'); $L.Add('|---|---|')
+    foreach ($t in $d.traces) { $L.Add("| $($t[0]) | $($t[1] -join ', ') |") }; $L.Add('')
+    [IO.File]::WriteAllText($md, ($L -join "`n"), $utf8)
+    "markdown generado: $md"
+}

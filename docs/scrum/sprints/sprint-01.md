@@ -2,7 +2,8 @@
 
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
-**Estado:** En curso / cierre de entrega
+**Periodo:** 28/09/2026 – 18/10/2026 (entrega CMS V1)
+**Estado:** Cerrado. Alcance completado (70 de 70 SP) el 18/10/2026; el Sprint 2 se dedica a las historias de participación (HU-09 a HU-12, HU-19)
 
 ## Objetivo del Sprint
 
@@ -19,9 +20,12 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 |---|---|---:|
 | PB-002 | Instalar/configurar WampServer, crear la BD `bd_cadus`, clonar el repositorio en `www` y preparar `wp-config.php` local. | 5 |
 | PB-005 | Compartir el servidor con el equipo mediante Tailscale (WordPress + BD únicos) y documentar el uso de GitHub para el resto de archivos. | 5 |
+| PB-006 | Crear el servidor de Discord del equipo (categorías INFO, SCRUM, DESARROLLO y VOZ) y documentarlo en el entorno de trabajo. | 3 |
+| PB-007 | Seleccionar, instalar y configurar los plugins obligatorios (seguridad, caché, analítica, SEO) y de apoyo (formularios, campos, roles). | 5 |
+| PB-008 | Elaborar el documento REM en REMUS (`CADUS.rem`) con trazabilidad entre requisitos. | 5 |
 | HU-13 | Definir y configurar los roles del sitio (Administrador, Ejecutiva, Delegado, Estudiante, Anónimo) y sus capacidades. | 5 |
 | HU-18 | Instalar/adaptar el tema base con la identidad visual del CADUS (colores, logotipo, tipografía). | 5 |
-| **Subtotal** | | **20** |
+| **Subtotal** | | **33** |
 
 ### Miembro 2 — Scrum Master & Dev Portada
 *Home, comunicados y banner*
@@ -59,7 +63,7 @@ Desplegar la plataforma base en WordPress, definir la identidad visual corporati
 | HU-08 | Página de seguimiento del ticket por código, con estado e historial de respuestas. | 5 |
 | **Subtotal** | | **13** |
 
-**Capacidad total comprometida del Sprint:** 57 SP
+**Capacidad total comprometida del Sprint:** 70 SP
 
 ## Definición de Hecho (DoD) — Sprint 1
 
@@ -84,3 +88,9 @@ Procedimiento resumido (guía completa en [`cms-wordpress/backup-db/README.md`](
 3. Antes de un cambio grande o al cerrar una tarea con impacto en BD: exportar un volcado desde phpMyAdmin con la convención `bd_cadus_v<version>_sprint<NN>.sql` (p. ej. `bd_cadus_v1_sprint1.sql`).
 4. Subir el volcado a `cms-wordpress/backup-db/` en **GitHub** (copia de seguridad y entrega); hacer `git pull` antes para no coincidir con otro volcado.
 5. Los archivos (tema, plugins, documentación) se versionan en GitHub. Ver [entorno de trabajo](../../arquitectura/entorno-de-trabajo.md).
+
+## Resultado del Sprint 1
+
+- **Completado:** 70 de 70 SP. Las tareas técnicas (PB-002, PB-005, PB-006, PB-007, PB-008) se cerraron el 28/09, el 05/10 y el 18/10; las diez historias de usuario de contenido (HU-01 a HU-08, HU-13 y HU-18) se implementaron y probaron el 18/10.
+- **Lección para la retrospectiva:** el burndown muestra una caída muy concentrada en el último día. El trabajo de contenido se dejó para el final del sprint; en el Sprint 2 hay que repartir las historias a lo largo de las dos semanas y actualizar el burndown cada día.
+- **Calidad:** el código del plugin propio `cadus-portal` se revisó de forma cruzada (ver `cms-wordpress/wp-content/plugins/cadus-portal/README.md`) y se probó en el servidor compartido: validación de dominio del buzón, privacidad del seguimiento, permisos por rol y idempotencia de la configuración.

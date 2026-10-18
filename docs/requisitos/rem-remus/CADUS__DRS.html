@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="iso-8859-1" />
+<meta name="generatedBy" content="REMUS" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/stylesheets/remus.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/stylesheets/madeja.css" />
+<title>Proyecto CADUS</title>
+<script>
+            // array for user warnings
+            var warnings = new Array();
+        </script>
+</head>
+<body>
+<div id="warning_container" class="ui-widget">
+<span id="warning_title">Avisos</span>
+<div id="warning_messages"></div>
+</div>
+<div id="document_cover">
+<div id="browser_info">
+<script>
+                document.write( navigator.userAgent );
+            </script>
+</div>
+<div id="project_name">Proyecto CADUS</div>
+<div id="document_logo">
+<img alt="Universidad de Sevilla" src="https://cdn.jsdelivr.net/gh/amador-duran-toro/rem/assets/images/logo_us.gif" />
+</div>
+<div id="document_name">Documento de Análisis del Portal CADUS</div>
+<div id="document_version">Versión 0.1</div>
+<div id="document_date">Fecha 05/10/2026</div>
+<div id="document_prepared_for">Preparado para:<p>
+<a href="#ORG-0001">CADUS - Consejo de Alumnos de la Universidad de Sevilla</a>
+</p>
+</div>
+<div id="document_prepared_by">Preparado por:<p>
+<a href="#ORG-0002">Equipo de proyecto GSI</a>
+</p>
+</div>
+</div>
+<div class="pagebreak"></div>
+<nav id="toc" role="navigation">
+<h1>Índice</h1>
+<ul class="toc_list toc_list_level_1">
+<li>1 <a href="#SEC-0088">Introducción</a></li>
+<ul class="toc_list">
+<li>1.1 <a href="#SEC-0089">Alcance del proyecto</a></li>
+<li>1.2 <a href="#SEC-0090">Participantes en el proyecto</a></li>
+<ul class="toc_list">
+<li>1.2.1 <a href="#SEC-0091">Organizaciones participantes</a></li>
+<li>1.2.2 <a href="#SEC-0092">Personas participantes</a></li>
+</ul>
+<li>1.3 <a href="#SEC-0093">Objetivos del proyecto</a></li>
+</ul>
+<li>2 <a href="#SEC-0064">Arquitectura lógica del sistema</a></li>
+<ul class="toc_list">
+<li>2.1 <a href="#SEC-0070">Diagramas de la arquitectura del sistema</a></li>
+<li>2.2 <a href="#SEC-0071">Descripción de la arquitectura del sistema</a></li>
+</ul>
+<li>3 <a href="#SEC-0065">Modelo de clases del sistema</a></li>
+<ul class="toc_list">
+<li>3.1 <a href="#SEC-0072">Diagramas de clases del sistema</a></li>
+<li>3.2 <a href="#SEC-0073">Descripción de las clases del sistema</a></li>
+<li>3.3 <a href="#SEC-0082">Diagramas de estado de las clases del sistema</a></li>
+</ul>
+<li>4 <a href="#SEC-0066">Modelo de casos de uso del sistema</a></li>
+<ul class="toc_list">
+<li>4.1 <a href="#SEC-0074">Diagramas de secuencia del sistema</a></li>
+<li>4.2 <a href="#SEC-0075">Descripción de los diagramas de secuencia del sistema</a></li>
+</ul>
+<li>5 <a href="#SEC-0067">Interfaz de usuario del sistema</a></li>
+<ul class="toc_list">
+<li>5.1 <a href="#SEC-0076">Diagramas de navegación del sistema</a></li>
+<li>5.2 <a href="#SEC-0077">Esquemas de la interfaz de usuario del sistema</a></li>
+<li>5.3 <a href="#SEC-0078">Descripción de la interfaz de usuario del sistema</a></li>
+</ul>
+<li>6 <a href="#SEC-0068">Interfaz de servicios del sistema</a></li>
+<ul class="toc_list">
+<li>6.1 <a href="#SEC-0079">Diagramas de la interfaz de servicios del sistema</a></li>
+<li>6.2 <a href="#SEC-0080">Descripción de la interfaz de servicios del sistema</a></li>
+<li>6.3 <a href="#SEC-0084">Servicios consumidos por el sistema</a></li>
+</ul>
+<li>7 <a href="#SEC-0069">Información sobre trazabilidad</a></li>
+</ul>
+</nav>
+<div class="pagebreak"></div>
+<h1 id="SEC-0088" class="section">1 Introducción</h1>
+<h2 id="SEC-0089" class="section">1.1 Alcance del proyecto</h2>
+<a id="PRG-0020"></a>
+<h2 id="SEC-0090" class="section">1.2 Participantes en el proyecto</h2>
+<h3 id="SEC-0091" class="section">1.2.1 Organizaciones participantes</h3>
+<a id="PRG-0021"></a>
+<div id="ORG-0001">
+<table class="organization remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/organization.png" /> Organización</th>
+<th class="name_column" colspan="1">CADUS - Consejo de Alumnos de la Universidad de Sevilla</th>
+</tr>
+</thead>
+<tr>
+<th>Dirección</th>
+<td colspan="1">
+<div id="ORG-0001-address-html" class=""><p>Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="ORG-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<a id="PRG-0022"></a>
+<div id="ORG-0002">
+<table class="organization remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/organization.png" /> Organización</th>
+<th class="name_column" colspan="1">Equipo de proyecto GSI</th>
+</tr>
+</thead>
+<tr>
+<th>Dirección</th>
+<td colspan="1">
+<div id="ORG-0002-address-html" class=""><p>Universidad de Sevilla - Gestión de Sistemas de Información (GSI)</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="ORG-0002-comments-html" class="remus_comments"><p>Grupo de desarrollo.</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="SEC-0092" class="section">1.2.2 Personas participantes</h3>
+<a id="PRG-0023"></a>
+<div id="STK-0001">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Delegación General del CADUS</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0001">CADUS - Consejo de Alumnos de la Universidad de Sevilla</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0001-stakeholderRole-html" class="">Cliente y usuario (Ejecutiva del CADUS)                        (es cliente, es usuario)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<a id="PRG-0024"></a>
+<div id="STK-0002">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Pablo Ruiz Vidal</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0002">Equipo de proyecto GSI</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0002-stakeholderRole-html" class="">Product Owner y Dev Infraestructura                        (es desarrollador)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0093" class="section">1.3 Objetivos del proyecto</h2>
+<a id="PRG-0025"></a>
+<h1 id="SEC-0064" class="section">2 Arquitectura lógica del sistema</h1>
+<h2 id="SEC-0070" class="section">2.1 Diagramas de la arquitectura del sistema</h2>
+<h2 id="SEC-0071" class="section">2.2 Descripción de la arquitectura del sistema</h2>
+<h1 id="SEC-0065" class="section">3 Modelo de clases del sistema</h1>
+<h2 id="SEC-0072" class="section">3.1 Diagramas de clases del sistema</h2>
+<h2 id="SEC-0073" class="section">3.2 Descripción de las clases del sistema</h2>
+<h2 id="SEC-0082" class="section">3.3 Diagramas de estado de las clases del sistema</h2>
+<h1 id="SEC-0066" class="section">4 Modelo de casos de uso del sistema</h1>
+<h2 id="SEC-0074" class="section">4.1 Diagramas de secuencia del sistema</h2>
+<h2 id="SEC-0075" class="section">4.2 Descripción de los diagramas de secuencia del sistema</h2>
+<h1 id="SEC-0067" class="section">5 Interfaz de usuario del sistema</h1>
+<h2 id="SEC-0076" class="section">5.1 Diagramas de navegación del sistema</h2>
+<h2 id="SEC-0077" class="section">5.2 Esquemas de la interfaz de usuario del sistema</h2>
+<h2 id="SEC-0078" class="section">5.3 Descripción de la interfaz de usuario del sistema</h2>
+<h1 id="SEC-0068" class="section">6 Interfaz de servicios del sistema</h1>
+<h2 id="SEC-0079" class="section">6.1 Diagramas de la interfaz de servicios del sistema</h2>
+<h2 id="SEC-0080" class="section">6.2 Descripción de la interfaz de servicios del sistema</h2>
+<h2 id="SEC-0084" class="section">6.3 Servicios consumidos por el sistema</h2>
+<h1 id="SEC-0069" class="section">7 Información sobre trazabilidad</h1>
+<h1 id="SEC-0081" class="appendix">A Glosario de acrónimos y abreviaturas</h1>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+            // set tooltips of rem:ref references to glossary items or class supertypes
+            $( ".rem_ref" ).each( function () {
+                var sharp_position = this.href.lastIndexOf("#");
+                var id_glossary_item = this.href.substring( sharp_position + 1 ) + "-text-html";
+                var id_supertype = this.href.substring( sharp_position + 1 ) + "-description-html";
+
+                // some rem:refs to use cases do not have -text-html elements
+                if ( document.getElementById( id_glossary_item ) )
+                    this.title = document.getElementById( id_glossary_item ).innerText;
+
+                else if ( document.getElementById( id_supertype ) )
+                    this.title = document.getElementById( id_supertype ).innerText;
+            });
+
+            // set tooltips of rem:tbd elements
+            $( ".tbd" ).each( function () {
+                this.title = 'Por determinar';
+            });
+
+            // show warnings (if any)
+            if ( warnings.length ) {
+                var warning_list = $("<ul></ul>");
+                for ( var i = 0; i < warnings.length; i++ ) {
+                    var warning = warnings[ i ];
+                    var warning_link = $('<a href="#' + warning.oid + '">' + warning.oid + '</a>' );
+                    var warning_message = ": " + warning.message;
+                    var warning_item = $("<li></li>").append(warning_link, warning_message);
+
+                    warning_list.append( warning_item );
+                }
+                $("#warning_messages").append( warning_list );
+                $("#warning_container").show();
+            }
+
+            // manage traceability matrices buttons
+            function update_font_size( parent_table, size )
+            {
+                var matrix_columns = parent_table.find( "th.matrix_column" );
+                var font_size = parseInt( matrix_columns.eq(0).css( "font-size" ), 10 );
+
+                matrix_columns.css( "font-size", font_size + size );
+            }
+
+            $( "button.reduce_font" ).click( function() {
+                var parent_table = $(this).parents( "table.traceability_matrix" );
+                update_font_size( parent_table, -1 );
+            });
+
+            $( "button.increase_font" ).click( function() {
+                var parent_table = $(this).parents( "table.traceability_matrix" );
+                update_font_size( parent_table, 1 );
+            });
+        </script>
+<script src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/javascripts/ie7-shim-min-width.js"></script>
+<script>
+            fixMinWidthForIE();
+        </script>
+</body>
+</html>

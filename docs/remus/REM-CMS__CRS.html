@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="iso-8859-1" />
+<meta name="generatedBy" content="REMUS" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/stylesheets/remus.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/stylesheets/madeja.css" />
+<title>Proyecto REM-CMS</title>
+<script>
+            // array for user warnings
+            var warnings = new Array();
+        </script>
+</head>
+<body>
+<div id="warning_container" class="ui-widget">
+<span id="warning_title">Avisos</span>
+<div id="warning_messages"></div>
+</div>
+<div id="document_cover">
+<div id="browser_info">
+<script>
+                document.write( navigator.userAgent );
+            </script>
+</div>
+<div id="project_name">Proyecto REM-CMS</div>
+<div id="document_logo">
+<img alt="Universidad de Sevilla" src="https://cdn.jsdelivr.net/gh/amador-duran-toro/rem/assets/images/logo_us.gif" />
+</div>
+<div id="document_name">Documento de Requisitos del Sistema</div>
+<div id="document_version">Versión 1.0</div>
+<div id="document_date">Fecha 03/10/2018</div>
+<div id="document_prepared_for">Preparado para:<p>
+<a href="#ORG-0001">Asignatura GSI</a>
+</p>
+</div>
+<div id="document_prepared_by">Preparado por:<p>
+<a href="#ORG-0002">Grupo WebTron</a>
+</p>
+</div>
+</div>
+<div class="pagebreak"></div>
+<nav id="toc" role="navigation">
+<h1>Índice</h1>
+<ul class="toc_list toc_list_level_1">
+<li>1 <a href="#SEC-0001">Introducción</a></li>
+<li>2 <a href="#SEC-0002">Participantes en el Proyecto</a></li>
+<ul class="toc_list">
+<li>2.1 <a href="#SEC-0003">Organizaciones</a></li>
+<li>2.2 <a href="#SEC-0004">Personas</a></li>
+</ul>
+<li>3 <a href="#SEC-0005">Descripción del Sistema Actual</a></li>
+<li>4 <a href="#SEC-0006">Objetivos del Sistema</a></li>
+<li>5 <a href="#SEC-0007">Catálogo de Requisitos del Sistema</a></li>
+<ul class="toc_list">
+<li>5.1 <a href="#SEC-0008">Requisitos de Información</a></li>
+<li>5.2 <a href="#SEC-0009">Requisitos de Interfaz de Usuario y Funcionales</a></li>
+<ul class="toc_list">
+<li>5.2.1 <a href="#SEC-0010">Actores</a></li>
+<li>5.2.2 <a href="#SEC-0011">Requisitos de Interfaz de Usuario</a></li>
+<li>5.2.3 <a href="#SEC-0012">Requisitos Funcionales</a></li>
+</ul>
+<li>5.3 <a href="#SEC-0013">Requistos No Funcionales</a></li>
+<li>5.4 <a href="#SEC-0014">Reglas de Negocio</a></li>
+</ul>
+<li>6 <a href="#SEC-0015">Glosario de términos</a></li>
+</ul>
+</nav>
+<div class="pagebreak"></div>
+<h1 id="SEC-0001" class="section">1 Introducción</h1>
+<div id="PRG-0001">
+<div id="PRG-0001-text-html" class=""><p>Este documento presenta la elicitación de requisitos para un <a href='#GLO-0003' class="rem_ref">proyecto</a> de visibilidad de la asignatura Gestión de Sistemas de Información, del Grado en Tecnologías Informáticas de la Universidad de Sevilla. El <a href='#GLO-0003' class="rem_ref">proyecto</a> se centra en la construcción de un sitio web para dar mayor visibilidad a la asignatura y a los contenidos relacionados con la misma</p></div>
+</div>
+<h1 id="SEC-0002" class="section">2 Participantes en el Proyecto</h1>
+<h2 id="SEC-0003" class="section">2.1 Organizaciones</h2>
+<div id="ORG-0001">
+<table class="organization remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/organization.png" /> Organización</th>
+<th class="name_column" colspan="1">Asignatura GSI</th>
+</tr>
+</thead>
+<tr>
+<th>Dirección</th>
+<td colspan="1">
+<div id="ORG-0001-address-html" class=""><p>Avda Reina Mercedes</p></div>
+</td>
+</tr>
+<tr>
+<th>Teléfono</th>
+<td colspan="1">954623619</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="ORG-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="ORG-0002">
+<table class="organization remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/organization.png" /> Organización</th>
+<th class="name_column" colspan="1">Grupo WebTron</th>
+</tr>
+</thead>
+<tr>
+<th>Dirección</th>
+<td colspan="1">
+<div id="ORG-0002-address-html" class=""><p>Calle Luis Montoto 23</p></div>
+</td>
+</tr>
+<tr>
+<th>Teléfono</th>
+<td colspan="1">954449876</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="ORG-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0004" class="section">2.2 Personas</h2>
+<div id="STK-0001">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Joaquín Peña</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0001">Asignatura GSI</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0001-stakeholderRole-html" class=""><span class="tbd" title='Por determinar'>PD</span>                        (es cliente, es usuario)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="STK-0002">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Javier Troya</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0001">Asignatura GSI</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0002-stakeholderRole-html" class=""><span class="tbd" title='Por determinar'>PD</span>                        (es cliente, es usuario)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="STK-0003">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Álvaro Fernández</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0002">Grupo WebTron</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0003-stakeholderRole-html" class=""><span class="tbd" title='Por determinar'>PD</span>                        (es desarrollador)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="STK-0004">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Agustín Romero</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0002">Grupo WebTron</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0004-stakeholderRole-html" class=""><span class="tbd" title='Por determinar'>PD</span>                        (es desarrollador)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="STK-0005">
+<table class="stakeholder remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/stakeholder.png" /> Participante</th>
+<th class="name_column" colspan="1">Sandra Sánchez</th>
+</tr>
+</thead>
+<tr>
+<th>Organización</th>
+<td>
+<a href="#ORG-0002">Grupo WebTron</a>
+</td>
+</tr>
+<tr>
+<th>Rol</th>
+<td colspan="1">
+<span id="STK-0005-stakeholderRole-html" class=""><span class="tbd" title='Por determinar'>PD</span>                        (es desarrollador)                    </span>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="STK-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h1 id="SEC-0005" class="section">3 Descripción del Sistema Actual</h1>
+<div id="PRG-0002">
+<div id="PRG-0002-text-html" class=""><p>El sistema actual es cerrado, en el sentido que solo los alumnos del curso actual y los profesores pueden acceder. Carece por tanto de mucha de la funcionalidad deseada, como poder exponer los contenidos de la asignatura a alumnos de otros grados o publicar eventos para que cualquier persona se pueda apuntar</p></div>
+</div>
+<h1 id="SEC-0006" class="section">4 Objetivos del Sistema</h1>
+<div id="OBJ-0001">
+<table class="objective remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0001</th>
+<th class="name_column" colspan="1">Aumento de matriculados</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="OBJ-0001-description-html" class=""><p>El sistema deberá aumentar el número de matriculados en la asignatura gracias a la difusión de contenidos de la misma.</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="OBJ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="OBJ-0002">
+<table class="objective remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0002</th>
+<th class="name_column" colspan="1">Presitgio titulados</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="OBJ-0002-description-html" class=""><p>El sistema deberá mejorar el prestigio de los titulados en TI de la US gracias a la difusión en la industria del software de los conocimientos que los alumnos adquieren en la asignatura.</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="OBJ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h1 id="SEC-0007" class="section">5 Catálogo de Requisitos del Sistema</h1>
+<h2 id="SEC-0008" class="section">5.1 Requisitos de Información</h2>
+<div id="IRQ-0001">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0001</th>
+<th class="name_column" colspan="2">Página Principal</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Joaquín Peña</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0001-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a La página principal deberá contenter estos elementos (5,6). En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-0001">
+<span id="DAT-0001-description-html" class="">Slider con imágenes</span>
+</li>
+<li id="DAT-0002">
+<span id="DAT-0002-description-html" class="">4 elementos destacados enlazados a los contenidos principales de la asignatura: CMS, DMS, RSI, RSE</span>
+</li>
+<li id="DAT-0003">
+<span id="DAT-0003-description-html" class="">Noticias de la asignatura: titular y resumen</span>
+</li>
+<li id="DAT-0004">
+<span id="DAT-0004-description-html" class="">Eventos fuera del horario organizados en la asignatura: lugar, hora y titular</span>
+</li>
+<li id="DAT-0005">
+<span id="DAT-0005-description-html" class="">Entradas de blog de la asignatura: título y resumen</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0002">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0002</th>
+<th class="name_column" colspan="2">Menús</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0005">Sandra Sánchez</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Javier Troya</a>
+</li>
+<li>
+<a href="#STK-0001">Joaquín Peña</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0002-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Los menús del portal serán (8):. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-0006">
+<span id="DAT-0006-description-html" class="">Página principal</span>
+</li>
+<li id="DAT-0007">
+<span id="DAT-0007-description-html" class="">Programa de la asignatura</span>
+</li>
+<li id="DAT-0008">
+<span id="DAT-0008-description-html" class="">Contenidos de GSI</span>
+</li>
+<li id="DAT-0009">
+<span id="DAT-0009-description-html" class="">Proyectos (los proyectos deben contar con un submenú que los ordene por año y una sección especial para proyectos destacados)</span>
+</li>
+<li id="DAT-0010">
+<span id="DAT-0010-description-html" class="">Noticias</span>
+</li>
+<li id="DAT-0011">
+<span id="DAT-0011-description-html" class="">Blogs</span>
+</li>
+<li id="DAT-0012">
+<span id="DAT-0012-description-html" class="">Eventos: contará con un submenú para calendario y otro para seminarios organizados fuera del horario de clase</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0003">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0003</th>
+<th class="name_column" colspan="2">Estructura de la información</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0003-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Los contenidos de la asignatura se organizarán en teoría y laboratorio, y cada uno de ellos también podra corresponder a un tema  o tipo de sistema (CMS, DMS, RSI, RSE) (3):. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-0013">
+<span id="DAT-0013-description-html" class="">Noticias de interés</span>
+</li>
+<li id="DAT-0014">
+<span id="DAT-0014-description-html" class="">Eventos</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0004">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0004</th>
+<th class="name_column" colspan="2">Proyectos</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0004-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a los proyectos de los alumnos de la asignatura, más específicamente (3,4):. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-0015">
+<span id="DAT-0015-description-html" class="">Título</span>
+</li>
+<li id="DAT-0016">
+<span id="DAT-0016-description-html" class="">Descripción</span>
+</li>
+<li id="DAT-0017">
+<span id="DAT-0017-description-html" class="">Logotipo</span>
+</li>
+<li id="DAT-0018">
+<span id="DAT-0018-description-html" class="">Participantes en el <a href='#GLO-0003' class="rem_ref">proyecto</a> enlazado a su perfil donde encontraremos una foto</span>
+</li>
+<li id="DAT-0019">
+<span id="DAT-0019-description-html" class="">Enlace al <a href='#GLO-0003' class="rem_ref">proyecto</a> online</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0009" class="section">5.2 Requisitos de Interfaz de Usuario y Funcionales</h2>
+<h3 id="SEC-0010" class="section">5.2.1 Actores</h3>
+<div id="ACT-0001">
+<table class="actor remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/actor.png" /> ACT-0001</th>
+<th class="name_column" colspan="1">profesor/alumno</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="ACT-0001-actorRole-html" class=""><p>Este actor representa a los profesores y alumnos de GSI.</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="ACT-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="SEC-0011" class="section">5.2.2 Requisitos de Interfaz de Usuario</h3>
+<div id="FRQ-0001">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0001</th>
+<th class="name_column" colspan="1">Fotos sliders</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0001-description-html" class=""><p>El sistema deberá poder cambiar fácilmente las imágenes del slider sin necesidad de programación (6).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0002">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0002</th>
+<th class="name_column" colspan="1">Diseño gráfico</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0002-description-html" class=""><p>El sistema deberá basarse en el esquema de colores de la US. De todos los esquemas de colores posibles, los clientes se decantan por el más claro (10).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0003">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0003</th>
+<th class="name_column" colspan="1">Página Principal</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0003-description-html" class=""><p>El sistema deberá contar con una página principal donde se puedan colocar las siguientes secciones con esta estructura (6, 5):</p>
+<ul>
+<li><p>Slider con imágenes destacadas de la asignatura</p></li>
+<li><p>Bajo el slider deberán colocarse los 4 tipos de sistemas a cubrir enlazando a sus contenidos. Debajo, en dos columnas, se mostrarán:<br />
+-- Últimos proyectos de alumnos<br />
+-- Noticias de la asignatura<br />
+-- Últimas entradas de blog de información interesante   <br />
+.</p></li>
+</ul></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0004">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0004</th>
+<th class="name_column" colspan="1">Integración con Redes Sociales</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0004-description-html" class=""><p>El sistema deberá permitir la integración con Twitter y Facebook (7).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="SEC-0012" class="section">5.2.3 Requisitos Funcionales</h3>
+<div id="FRQ-0005">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0005</th>
+<th class="name_column" colspan="1">Eventos fuera de clases</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0005-description-html" class=""><p>El sistema deberá permitir la publicación de eventos gestionando los asistentes para asegurar que tiene suficiente audiencia. Para ello se deberá poder publicar una descripción y horario de celebración (5).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0006">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0006</th>
+<th class="name_column" colspan="1">Calendario de eventos de la asignatura</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0006-description-html" class=""><p>El sistema deberá permitir la publicación de un calendario donde los profesores puedan indicar las fechas relevantes de la asignatura, como pueden ser: entregas de prácticas, fechas de exámenes, planificación de trabajos, etc. (se deduce de varios).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0006-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0007">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0007</th>
+<th class="name_column" colspan="1">Gestión de noticias</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0007-description-html" class=""><p>El sistema deberá permitir añadir un tipo de artículo clasificado como noticias. A la hora de publicar noticias será necesario indicar el periodo de tiempo que la noticia estará activa (3).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0007-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="UC-0001">
+<table class="use_case remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/useCase.png" /> UC-0001</th>
+<th class="name_column" colspan="2">Portfolio de proyetctos </th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0004">Agustín Romero</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Javier Troya</a>
+</li>
+<li>
+<a href="#STK-0001">Joaquín Peña</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2"><div id="UC-0001--html" class=""><p>El sistema deberá comportarse tal como se describe en el siguiente caso de uso cuando all finalizar la asignatura. </p></div>
+</td>
+</tr>
+<tr>
+<th>Precondición</th>
+<td colspan="2">
+<div id="UC-0001-precondition-html" class=""><p>Se cuenta con todos los datos de los proyectos y se ha seleccionado los mejores y el usuario que introduce los datos (profesor o alumno) posee permisos para publicar proyectos</p></div>
+</td>
+</tr>
+<tr>
+<th rowspan="6">Secuencia normal</th>
+<th class="step_number_column">Paso</th>
+<th class="step_action_column">Acción</th>
+</tr>
+<tr id="STP-0020">
+<th class="step_number">1</th>
+<td colspan="1">
+<div id="STP-0020--html" class=""><p>El sistema solicita los datos del <a href='#GLO-0003' class="rem_ref">proyecto</a></p></div>
+</td>
+</tr>
+<tr id="STP-0021">
+<th class="step_number">2</th>
+<td colspan="1">
+<div id="STP-0021--html" class=""><p>El actor     <a href="#ACT-0001">profesor/alumno (ACT-0001)</a>     indica los datos del <a href='#GLO-0003' class="rem_ref">proyecto</a></p></div>
+</td>
+</tr>
+<tr id="STP-0022">
+<th class="step_number">3</th>
+<td colspan="1">
+<div id="STP-0022--html" class=""><p>El sistema solicita un enlace para cada parte del <a href='#GLO-0003' class="rem_ref">proyecto</a> o a una web principal y el logotipo del mismo</p></div>
+</td>
+</tr>
+<tr id="STP-0023">
+<th class="step_number">4</th>
+<td colspan="1">
+<div id="STP-0023--html" class=""><p>El actor     <a href="#ACT-0001">profesor/alumno (ACT-0001)</a>     proporciona los datos</p></div>
+</td>
+</tr>
+<tr id="STP-0024">
+<th class="step_number">5</th>
+<td colspan="1">
+<div id="STP-0024--html" class=""><p>El sistema publica un portfolio de proyectos listados estos en una vista resumen usando el logotipo del mismo</p></div>
+</td>
+</tr>
+<tr>
+<th>Postcondición</th>
+<td colspan="2">
+<div id="UC-0001-postcondition-html" class=""><p><span class="tbd" title='Por determinar'>PD</span></p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="UC-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0008">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0008</th>
+<th class="name_column" colspan="1">Integración con redes sociales</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0003">Álvaro Fernández</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Javier Troya</a>
+</li>
+<li>
+<a href="#STK-0001">Joaquín Peña</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0008-description-html" class=""><p>El sistema deberá permitir la integración con Twitter y Facebook. Se podrá hacer me gusta (de Facebook) sobre cualquier contenido de la asignatura, así como compartir los mismo vía la cuenta de Twitter del usuario. Además deberá mostrar los hilos sociales de las cuentas de la asignatura (7)..</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0008-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0013" class="section">5.3 Requistos No Funcionales</h2>
+<div id="NFR-0001">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0001</th>
+<th class="name_column" colspan="1">Sevidores</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0001-description-html" class=""><p>El sistema deberá correr sobre PHP 3.0 o superior (11).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="NFR-0002">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0002</th>
+<th class="name_column" colspan="1">Edición sencilla</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0002-description-html" class=""><p>El sistema deberá permitir la edición de documentos online con la mayor riqueza a la hora de editar, poner tablas, cambiar colores, etc. (se deduce y el cliente confirma).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="NFR-0003">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0003</th>
+<th class="name_column" colspan="1">Claridad</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0003-description-html" class=""><p>El sistema deberá contar con páginas con el mínimo de información posible (se deduce y el cliente confirma).</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0014" class="section">5.4 Reglas de Negocio</h2>
+<div id="CRQ-0001">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0001</th>
+<th class="name_column" colspan="1">Publicación eventos</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0001-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Solamente el coordinador de la asignatura puede publicar eventos.</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="CRQ-0002">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0002</th>
+<th class="name_column" colspan="1">Noticias</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">1.0 (03/10/2018)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0005">Sandra Sánchez</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Joaquín Peña</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0002-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Las noticias a las que no se ha accedido en el último año, pasarán a un listado de noticias antiguas.</p></div>
+</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h1 id="SEC-0015" class="section">6 Glosario de términos</h1>
+<div id="GLO-0003" class="glo">
+<div id="GLO-0003-text-html" class=""><p><strong>Proyecto</strong>: Un <a href='#GLO-0003' class="rem_ref">proyecto</a> consiste en el resultado del trabajo que tienen que realizar un grupo de alumnos en la parte práctica de la asignatura. Los proyectos suelen estar disponibles online, incluso en uso por un cliente real.</p></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+            // set tooltips of rem:ref references to glossary items or class supertypes
+            $( ".rem_ref" ).each( function () {
+                var sharp_position = this.href.lastIndexOf("#");
+                var id_glossary_item = this.href.substring( sharp_position + 1 ) + "-text-html";
+                var id_supertype = this.href.substring( sharp_position + 1 ) + "-description-html";
+
+                // some rem:refs to use cases do not have -text-html elements
+                if ( document.getElementById( id_glossary_item ) )
+                    this.title = document.getElementById( id_glossary_item ).innerText;
+
+                else if ( document.getElementById( id_supertype ) )
+                    this.title = document.getElementById( id_supertype ).innerText;
+            });
+
+            // set tooltips of rem:tbd elements
+            $( ".tbd" ).each( function () {
+                this.title = 'Por determinar';
+            });
+
+            // show warnings (if any)
+            if ( warnings.length ) {
+                var warning_list = $("<ul></ul>");
+                for ( var i = 0; i < warnings.length; i++ ) {
+                    var warning = warnings[ i ];
+                    var warning_link = $('<a href="#' + warning.oid + '">' + warning.oid + '</a>' );
+                    var warning_message = ": " + warning.message;
+                    var warning_item = $("<li></li>").append(warning_link, warning_message);
+
+                    warning_list.append( warning_item );
+                }
+                $("#warning_messages").append( warning_list );
+                $("#warning_container").show();
+            }
+
+            // manage traceability matrices buttons
+            function update_font_size( parent_table, size )
+            {
+                var matrix_columns = parent_table.find( "th.matrix_column" );
+                var font_size = parseInt( matrix_columns.eq(0).css( "font-size" ), 10 );
+
+                matrix_columns.css( "font-size", font_size + size );
+            }
+
+            $( "button.reduce_font" ).click( function() {
+                var parent_table = $(this).parents( "table.traceability_matrix" );
+                update_font_size( parent_table, -1 );
+            });
+
+            $( "button.increase_font" ).click( function() {
+                var parent_table = $(this).parents( "table.traceability_matrix" );
+                update_font_size( parent_table, 1 );
+            });
+        </script>
+<script src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/javascripts/ie7-shim-min-width.js"></script>
+<script>
+            fixMinWidthForIE();
+        </script>
+</body>
+</html>

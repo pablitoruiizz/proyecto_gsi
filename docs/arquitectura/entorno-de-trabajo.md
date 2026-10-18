@@ -1,6 +1,6 @@
 # Entorno de trabajo del equipo
 
-Este documento describe cómo trabajamos los 5 integrantes sobre el portal CADUS. Recoge las restricciones [RC-01 y RC-02](../requisitos/rem-remus/REM-CADUS.md#6-restricciones-del-proyecto-rc-01-a-rc-02) de la especificación REM/REMUS.
+Este documento describe cómo trabajamos los 5 integrantes sobre el portal CADUS. Recoge las restricciones [RC-01, RC-02 y RC-03](../requisitos/rem-remus/REM-CADUS.md#6-restricciones-del-proyecto-rc-01-a-rc-03) de la especificación REM/REMUS: **Tailscale** (servidor compartido), **GitHub** (archivos) y **Discord** (comunicación).
 
 ## Visión general
 
@@ -19,7 +19,21 @@ flowchart LR
     T --> A
     F <-->|git pull / push| G[(GitHub<br/>repositorio)]
     DOC[Documentación, SCRUM, REM] <-->|git pull / push| G
+    DC[Discord<br/>servidor GSI - CADUS]
+    G -.->|webhook de commits| DC
+    M1 & M2 & M3 & M4 -.->|chat y voz| DC
 ```
+
+## Discord: servidor del equipo
+
+Canal de comunicación diaria y de trabajo a distancia (restricción RC-03). Estructura:
+
+| Categoría | Canales | Uso |
+|---|---|---|
+| **INFO** | `#anuncios`, `#entorno`, `#recursos` | Avisos de entregas, guía de Tailscale y enlaces del repositorio |
+| **SCRUM** | `#daily`, `#sprint-review`, `#retrospectiva` | Seguimiento diario, acuerdos y mejoras de cada sprint |
+| **DESARROLLO** | `#infra-y-bd`, `#portada`, `#institucional-y-normativa`, `#delegaciones`, `#buzon-y-faq`, `#github`, `#avisos-servidor` | Un canal por área del reparto, commits de GitHub y avisos de encendido o apagado del servidor |
+| **VOZ** | `Sala de trabajo`, `Daily` | Reuniones y trabajo a distancia con pantalla compartida |
 
 ## Qué va a cada sitio
 
@@ -46,6 +60,7 @@ flowchart LR
 - **Cambios en archivos del tema o de plugins:** se hacen en la carpeta del equipo anfitrión y los sube a GitHub su propietario, o bien se trabaja en una copia local y se hace `push` para que el anfitrión haga `git pull`.
 - **Antes de un cambio grande:** exportar un volcado de `bd_cadus` (ver [guía de la BD](../../cms-wordpress/backup-db/README.md)).
 - **Commits:** mensajes con la convención del README (`feat:`, `fix:`, `docs:`, `chore:`). Hacer `git pull` antes de empezar a trabajar.
+- **Comunicación:** el anfitrión avisa en `#avisos-servidor` cuando enciende o apaga el servidor; cada integrante escribe en `#daily` su avance y bloqueos, y en el canal de su área lo que afecte a su parte.
 - **Seguridad:** no abrir el puerto de MySQL, no usar la opción "Poner en línea" de Wamp, usar contraseñas fuertes y no compartir `wp-config.php`.
 
 ## Limitaciones conocidas

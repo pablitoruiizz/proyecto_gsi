@@ -105,7 +105,7 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 ## 8) Despliegue del CMS (WordPress + servidor local)
 
 ### Entorno compartido del equipo
-El equipo trabaja sobre **un único servidor** (WampServer en el equipo de un integrante) con WordPress y la base de datos `bd_cadus`. El resto de integrantes accede mediante **Tailscale** (VPN privada) y trabaja a la vez sobre la misma instancia. El resto de archivos (tema, plugins, documentación, SCRUM, REM) se gestionan con **GitHub**. Detalle y pasos de conexión en [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md).
+El equipo trabaja sobre **un único servidor** (WampServer en el equipo de un integrante) con WordPress y la base de datos `bd_cadus`. El resto de integrantes accede mediante **Tailscale** (VPN privada) y trabaja a la vez sobre la misma instancia. El resto de archivos (tema, plugins, documentación, SCRUM, REM) se gestionan con **GitHub**, y la comunicación del equipo se hace en un servidor de **Discord**. Detalle y pasos de conexión en [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md).
 
 ### Instalación local desde cero (solo para montar un servidor nuevo)
 1. Instalar XAMPP o WampServer e iniciar **Apache** y **MySQL**.
@@ -186,7 +186,7 @@ Ejemplo: `docs(scrum): actualizar sprint backlog sprint-02`
 - **Requisitos REM/REMUS:** [`docs/requisitos/rem-remus/REM-CADUS.md`](docs/requisitos/rem-remus/REM-CADUS.md)
 - **Arquitectura / diagrama conceptual:** [`docs/arquitectura/diagrama-conceptual.md`](docs/arquitectura/diagrama-conceptual.md)
 - **Maquetas:** [`docs/maquetas/README.md`](docs/maquetas/README.md)
-- **Entorno de trabajo (Tailscale + GitHub):** [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md)
+- **Entorno de trabajo (Tailscale + GitHub + Discord):** [`docs/arquitectura/entorno-de-trabajo.md`](docs/arquitectura/entorno-de-trabajo.md)
 - **Gestión de BD (`bd_cadus`):** [`cms-wordpress/backup-db/README.md`](cms-wordpress/backup-db/README.md)
 
 ---
