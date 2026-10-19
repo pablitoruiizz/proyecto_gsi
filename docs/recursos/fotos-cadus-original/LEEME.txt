@@ -1,0 +1,5 @@
+Fotos descargadas de https://www.cadus.us.es/ el 19/10/2026 (152 archivos, unos 216 MB).
+Carpetas incluidas: Web, Entradas, Eventos, FingerRules y la mediateca (uploads).
+No se descargaron los retratos de personas con nombre (Historico, EquipoRectoral) ni los logotipos de otras entidades (MIC).
+Esta carpeta NO se sube a Git (.gitignore); las fotos usadas en el portal estan optimizadas en cms-wordpress/wp-content/plugins/cadus-portal/assets/fotos/.
+Las fotos pertenecen al CADUS: confirmar con el cliente su uso y la autorizacion de las personas que aparecen (RGPD).

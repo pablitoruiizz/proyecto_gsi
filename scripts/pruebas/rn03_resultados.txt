@@ -1,0 +1,253 @@
+OK Fluent Forms: envío real conserva contenido en ticket
+OK Código nuevo con 128 bits aleatorios
+OK Confirmación muestra código nuevo
+OK Sin INSERT sensible en tablas FF
+OK fluentform_submissions: sin copia del envío
+OK fluentform_entry_details: sin copia del envío
+OK fluentform_submission_meta: sin copia del envío
+OK Sin wp_mail
+OK Feeds/notificaciones FF bloqueados aunque se configuren
+OK Otros formularios conservan sus feeds
+OK Sin revisiones
+OK Sin exportación
+OK Listado minimizado
+OK Sin edición masiva
+OK Yoast excluye tipo
+OK administrator: read_post
+OK administrator: edit_post
+OK administrator: delete_post
+OK administrator: concesión accidental no evita lista cerrada
+OK cadus_ejecutiva: read_post
+OK cadus_ejecutiva: edit_post
+OK cadus_ejecutiva: delete_post
+OK cadus_ejecutiva: concesión accidental no evita lista cerrada
+OK cadus_delegado: read_post
+OK cadus_delegado: edit_post
+OK cadus_delegado: delete_post
+OK cadus_delegado: concesión accidental no evita lista cerrada
+OK cadus_estudiante: read_post
+OK cadus_estudiante: edit_post
+OK cadus_estudiante: delete_post
+OK cadus_estudiante: concesión accidental no evita lista cerrada
+OK subscriber: read_post
+OK subscriber: edit_post
+OK subscriber: delete_post
+OK subscriber: concesión accidental no evita lista cerrada
+OK editor: read_post
+OK editor: edit_post
+OK editor: delete_post
+OK editor: concesión accidental no evita lista cerrada
+OK Seguimiento acepta nuevo código + correo normalizado
+OK Error idéntico código inexistente / correo incorrecto
+OK Compatible con código antiguo
+OK Límite 10/15 min (4 consultas + 6 permitidas y una denegada)
+OK anonimo /?p=62 — HTTP 404
+OK anonimo /?post_type=cadus_ticket&p=62 — HTTP 404
+OK anonimo /?p=62&preview=true — HTTP 404
+OK anonimo /?attachment_id=62 — HTTP 404
+OK anonimo /?attachment_id=64 — HTTP 404
+OK anonimo /?p=62&feed=rss2 — HTTP 404
+OK anonimo /?p=62&tb=1 — HTTP 404
+OK anonimo /?page_id=62 — HTTP 404
+OK anonimo /?post_type=cadus_ticket — HTTP 404
+OK anonimo /?cadus_ticket=no-existe — HTTP 404
+OK anonimo /?s=RN03-CODEX — HTTP 200
+OK anonimo /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK anonimo /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK anonimo /feed/ — HTTP 200
+OK anonimo /comments/feed/ — HTTP 200
+OK anonimo /?author=1 — HTTP 404
+OK anonimo /?year=2026&monthnum=10 — HTTP 200
+OK anonimo /sitemap_index.xml — HTTP 200
+OK anonimo /cadus_ticket-sitemap.xml — HTTP 404
+OK anonimo /wp-sitemap.xml — HTTP 404
+OK anonimo /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK anonimo /wp-json/wp/v2/types — HTTP 200
+OK anonimo /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK anonimo /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK anonimo /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK anonimo /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK anonimo /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK anonimo /wp-json/wp/v2/media/64 — HTTP 404
+OK anonimo /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 401
+OK anonimo /wp-json/fluentform/v1/report/form-stats — HTTP 401
+OK anonimo /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 401
+OK administrator /?p=62 — HTTP 404
+OK administrator /?post_type=cadus_ticket&p=62 — HTTP 404
+OK administrator /?p=62&preview=true — HTTP 404
+OK administrator /?attachment_id=62 — HTTP 404
+OK administrator /?attachment_id=64 — HTTP 404
+OK administrator /?p=62&feed=rss2 — HTTP 404
+OK administrator /?p=62&tb=1 — HTTP 404
+OK administrator /?page_id=62 — HTTP 404
+OK administrator /?post_type=cadus_ticket — HTTP 404
+OK administrator /?cadus_ticket=no-existe — HTTP 404
+OK administrator /?s=RN03-CODEX — HTTP 200
+OK administrator /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK administrator /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK administrator /feed/ — HTTP 200
+OK administrator /comments/feed/ — HTTP 200
+OK administrator /?author=1 — HTTP 404
+OK administrator /?year=2026&monthnum=10 — HTTP 200
+OK administrator /sitemap_index.xml — HTTP 200
+OK administrator /cadus_ticket-sitemap.xml — HTTP 404
+OK administrator /wp-sitemap.xml — HTTP 404
+OK administrator /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK administrator /wp-json/wp/v2/types — HTTP 200
+OK administrator /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK administrator /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK administrator /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK administrator /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK administrator /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK administrator /wp-json/wp/v2/media/64 — HTTP 404
+OK administrator /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 200
+OK administrator /wp-json/fluentform/v1/report/form-stats — HTTP 200
+OK administrator /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 200
+FALLO administrator /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK administrator /wp-admin/post.php?post=62&action=edit — HTTP 200
+OK administrator /wp-admin/index.php — HTTP 200
+OK cadus_ejecutiva /?p=62 — HTTP 404
+OK cadus_ejecutiva /?post_type=cadus_ticket&p=62 — HTTP 404
+OK cadus_ejecutiva /?p=62&preview=true — HTTP 404
+OK cadus_ejecutiva /?attachment_id=62 — HTTP 404
+OK cadus_ejecutiva /?attachment_id=64 — HTTP 404
+OK cadus_ejecutiva /?p=62&feed=rss2 — HTTP 404
+OK cadus_ejecutiva /?p=62&tb=1 — HTTP 404
+OK cadus_ejecutiva /?page_id=62 — HTTP 404
+OK cadus_ejecutiva /?post_type=cadus_ticket — HTTP 404
+OK cadus_ejecutiva /?cadus_ticket=no-existe — HTTP 404
+OK cadus_ejecutiva /?s=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK cadus_ejecutiva /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK cadus_ejecutiva /feed/ — HTTP 200
+OK cadus_ejecutiva /comments/feed/ — HTTP 200
+OK cadus_ejecutiva /?author=1 — HTTP 404
+OK cadus_ejecutiva /?year=2026&monthnum=10 — HTTP 200
+OK cadus_ejecutiva /sitemap_index.xml — HTTP 200
+OK cadus_ejecutiva /cadus_ticket-sitemap.xml — HTTP 404
+OK cadus_ejecutiva /wp-sitemap.xml — HTTP 404
+OK cadus_ejecutiva /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK cadus_ejecutiva /wp-json/wp/v2/types — HTTP 200
+OK cadus_ejecutiva /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK cadus_ejecutiva /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK cadus_ejecutiva /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK cadus_ejecutiva /wp-json/wp/v2/media/64 — HTTP 404
+OK cadus_ejecutiva /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 403
+OK cadus_ejecutiva /wp-json/fluentform/v1/report/form-stats — HTTP 403
+OK cadus_ejecutiva /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 403
+FALLO cadus_ejecutiva /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK cadus_ejecutiva /wp-admin/post.php?post=62&action=edit — HTTP 200
+OK cadus_ejecutiva /wp-admin/index.php — HTTP 200
+OK cadus_ejecutiva_otra /?p=62 — HTTP 404
+OK cadus_ejecutiva_otra /?post_type=cadus_ticket&p=62 — HTTP 404
+OK cadus_ejecutiva_otra /?p=62&preview=true — HTTP 404
+OK cadus_ejecutiva_otra /?attachment_id=62 — HTTP 404
+OK cadus_ejecutiva_otra /?attachment_id=64 — HTTP 404
+OK cadus_ejecutiva_otra /?p=62&feed=rss2 — HTTP 404
+OK cadus_ejecutiva_otra /?p=62&tb=1 — HTTP 404
+OK cadus_ejecutiva_otra /?page_id=62 — HTTP 404
+OK cadus_ejecutiva_otra /?post_type=cadus_ticket — HTTP 404
+OK cadus_ejecutiva_otra /?cadus_ticket=no-existe — HTTP 404
+OK cadus_ejecutiva_otra /?s=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva_otra /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK cadus_ejecutiva_otra /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK cadus_ejecutiva_otra /feed/ — HTTP 200
+OK cadus_ejecutiva_otra /comments/feed/ — HTTP 200
+OK cadus_ejecutiva_otra /?author=1 — HTTP 404
+OK cadus_ejecutiva_otra /?year=2026&monthnum=10 — HTTP 200
+OK cadus_ejecutiva_otra /sitemap_index.xml — HTTP 200
+OK cadus_ejecutiva_otra /cadus_ticket-sitemap.xml — HTTP 404
+OK cadus_ejecutiva_otra /wp-sitemap.xml — HTTP 404
+OK cadus_ejecutiva_otra /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK cadus_ejecutiva_otra /wp-json/wp/v2/types — HTTP 200
+OK cadus_ejecutiva_otra /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva_otra /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK cadus_ejecutiva_otra /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK cadus_ejecutiva_otra /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK cadus_ejecutiva_otra /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK cadus_ejecutiva_otra /wp-json/wp/v2/media/64 — HTTP 404
+OK cadus_ejecutiva_otra /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 403
+OK cadus_ejecutiva_otra /wp-json/fluentform/v1/report/form-stats — HTTP 403
+OK cadus_ejecutiva_otra /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 403
+FALLO cadus_ejecutiva_otra /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK cadus_ejecutiva_otra /wp-admin/post.php?post=62&action=edit — HTTP 200
+OK cadus_ejecutiva_otra /wp-admin/index.php — HTTP 200
+OK cadus_delegado /?p=62 — HTTP 404
+OK cadus_delegado /?post_type=cadus_ticket&p=62 — HTTP 404
+OK cadus_delegado /?p=62&preview=true — HTTP 404
+OK cadus_delegado /?attachment_id=62 — HTTP 404
+OK cadus_delegado /?attachment_id=64 — HTTP 404
+OK cadus_delegado /?p=62&feed=rss2 — HTTP 404
+OK cadus_delegado /?p=62&tb=1 — HTTP 404
+OK cadus_delegado /?page_id=62 — HTTP 404
+OK cadus_delegado /?post_type=cadus_ticket — HTTP 404
+OK cadus_delegado /?cadus_ticket=no-existe — HTTP 404
+OK cadus_delegado /?s=RN03-CODEX — HTTP 200
+OK cadus_delegado /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK cadus_delegado /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK cadus_delegado /feed/ — HTTP 200
+OK cadus_delegado /comments/feed/ — HTTP 200
+OK cadus_delegado /?author=1 — HTTP 404
+OK cadus_delegado /?year=2026&monthnum=10 — HTTP 200
+OK cadus_delegado /sitemap_index.xml — HTTP 200
+OK cadus_delegado /cadus_ticket-sitemap.xml — HTTP 404
+OK cadus_delegado /wp-sitemap.xml — HTTP 404
+OK cadus_delegado /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK cadus_delegado /wp-json/wp/v2/types — HTTP 200
+OK cadus_delegado /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK cadus_delegado /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK cadus_delegado /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK cadus_delegado /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK cadus_delegado /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK cadus_delegado /wp-json/wp/v2/media/64 — HTTP 404
+OK cadus_delegado /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 403
+OK cadus_delegado /wp-json/fluentform/v1/report/form-stats — HTTP 403
+OK cadus_delegado /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 403
+OK cadus_delegado /wp-admin/edit.php?post_type=cadus_ticket — HTTP 403
+OK cadus_delegado /wp-admin/post.php?post=62&action=edit — HTTP 403
+OK cadus_delegado /wp-admin/index.php — HTTP 200
+OK cadus_estudiante /?p=62 — HTTP 404
+OK cadus_estudiante /?post_type=cadus_ticket&p=62 — HTTP 404
+OK cadus_estudiante /?p=62&preview=true — HTTP 404
+OK cadus_estudiante /?attachment_id=62 — HTTP 404
+OK cadus_estudiante /?attachment_id=64 — HTTP 404
+OK cadus_estudiante /?p=62&feed=rss2 — HTTP 404
+OK cadus_estudiante /?p=62&tb=1 — HTTP 404
+OK cadus_estudiante /?page_id=62 — HTTP 404
+OK cadus_estudiante /?post_type=cadus_ticket — HTTP 404
+OK cadus_estudiante /?cadus_ticket=no-existe — HTTP 404
+OK cadus_estudiante /?s=RN03-CODEX — HTTP 200
+OK cadus_estudiante /?s=RN03-CODEX&post_type=cadus_ticket — HTTP 404
+OK cadus_estudiante /?s=RN03-CODEX&post_type[]=cadus_ticket — HTTP 404
+OK cadus_estudiante /feed/ — HTTP 200
+OK cadus_estudiante /comments/feed/ — HTTP 200
+OK cadus_estudiante /?author=1 — HTTP 404
+OK cadus_estudiante /?year=2026&monthnum=10 — HTTP 200
+OK cadus_estudiante /sitemap_index.xml — HTTP 200
+OK cadus_estudiante /cadus_ticket-sitemap.xml — HTTP 404
+OK cadus_estudiante /wp-sitemap.xml — HTTP 404
+OK cadus_estudiante /wp-sitemap-posts-cadus_ticket-1.xml — HTTP 404
+OK cadus_estudiante /wp-json/wp/v2/types — HTTP 200
+OK cadus_estudiante /wp-json/wp/v2/search?search=RN03-CODEX — HTTP 200
+OK cadus_estudiante /wp-json/wp/v2/search?subtype=cadus_ticket — HTTP 400
+OK cadus_estudiante /wp-json/wp/v2/posts?search=RN03-CODEX — HTTP 200
+OK cadus_estudiante /wp-json/wp/v2/cadus_ticket — HTTP 404
+OK cadus_estudiante /wp-json/wp/v2/media?parent=62 — HTTP 200
+OK cadus_estudiante /wp-json/wp/v2/media/64 — HTTP 404
+OK cadus_estudiante /wp-json/fluentform/v1/submissions?form_id=3 — HTTP 403
+OK cadus_estudiante /wp-json/fluentform/v1/report/form-stats — HTTP 403
+OK cadus_estudiante /wp-json/fluentform/v1/global-search?search=RN03-CODEX — HTTP 403
+OK cadus_estudiante /wp-admin/edit.php?post_type=cadus_ticket — HTTP 403
+OK cadus_estudiante /wp-admin/post.php?post=62&action=edit — HTTP 403
+OK cadus_estudiante /wp-admin/index.php — HTTP 200
+OK GET seguimiento no-store
+OK POST seguimiento nuevo código funciona
+OK POST seguimiento no expone correo ni texto original
+OK POST seguimiento no-store
+OK GET posterior sin resultado privado ni caché
+OK WP Fastest Cache no genera HTML de seguimiento
+INFO /wp/v2/users HTTP 401 listado=False
+OK Limpieza: cero tickets y entradas FF — {"tickets": 0, "propios": 0, "ff_entries": 0}
+FALLOS: 3

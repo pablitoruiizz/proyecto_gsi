@@ -1,0 +1,67 @@
+OK Fluent Forms: envío real conserva contenido en ticket
+OK Código nuevo con 128 bits aleatorios
+OK Confirmación muestra código nuevo
+OK Sin INSERT sensible en tablas FF
+OK fluentform_submissions: sin copia del envío
+OK fluentform_entry_details: sin copia del envío
+OK fluentform_submission_meta: sin copia del envío
+OK Sin wp_mail
+OK Feeds/notificaciones FF bloqueados aunque se configuren
+OK Otros formularios conservan sus feeds
+OK Sin revisiones
+OK Sin exportación
+OK Listado minimizado
+OK Sin edición masiva
+OK Yoast excluye tipo
+OK administrator: read_post
+OK administrator: edit_post
+OK administrator: delete_post
+OK administrator: concesión accidental no evita lista cerrada
+OK cadus_ejecutiva: read_post
+OK cadus_ejecutiva: edit_post
+OK cadus_ejecutiva: delete_post
+OK cadus_ejecutiva: concesión accidental no evita lista cerrada
+OK cadus_delegado: read_post
+OK cadus_delegado: edit_post
+OK cadus_delegado: delete_post
+OK cadus_delegado: concesión accidental no evita lista cerrada
+OK cadus_estudiante: read_post
+OK cadus_estudiante: edit_post
+OK cadus_estudiante: delete_post
+OK cadus_estudiante: concesión accidental no evita lista cerrada
+OK subscriber: read_post
+OK subscriber: edit_post
+OK subscriber: delete_post
+OK subscriber: concesión accidental no evita lista cerrada
+OK editor: read_post
+OK editor: edit_post
+OK editor: delete_post
+OK editor: concesión accidental no evita lista cerrada
+OK Seguimiento acepta nuevo código + correo normalizado
+OK Error idéntico código inexistente / correo incorrecto
+OK Compatible con código antiguo
+OK Límite 10/15 min (4 consultas + 6 permitidas y una denegada)
+OK administrator /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK administrator /wp-admin/post.php?post=69&action=edit — HTTP 200
+OK administrator /wp-admin/index.php — HTTP 200
+OK cadus_ejecutiva /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK cadus_ejecutiva /wp-admin/post.php?post=69&action=edit — HTTP 200
+OK cadus_ejecutiva /wp-admin/index.php — HTTP 200
+OK cadus_ejecutiva_otra /wp-admin/edit.php?post_type=cadus_ticket — HTTP 200
+OK cadus_ejecutiva_otra /wp-admin/post.php?post=69&action=edit — HTTP 200
+OK cadus_ejecutiva_otra /wp-admin/index.php — HTTP 200
+OK cadus_delegado /wp-admin/edit.php?post_type=cadus_ticket — HTTP 403
+OK cadus_delegado /wp-admin/post.php?post=69&action=edit — HTTP 403
+OK cadus_delegado /wp-admin/index.php — HTTP 200
+OK cadus_estudiante /wp-admin/edit.php?post_type=cadus_ticket — HTTP 403
+OK cadus_estudiante /wp-admin/post.php?post=69&action=edit — HTTP 403
+OK cadus_estudiante /wp-admin/index.php — HTTP 200
+OK GET seguimiento no-store
+OK POST seguimiento nuevo código funciona
+OK POST seguimiento no expone correo ni texto original
+OK POST seguimiento no-store
+OK GET posterior sin resultado privado ni caché
+OK WP Fastest Cache no genera HTML de seguimiento
+INFO /wp/v2/users HTTP 401 listado=False
+OK Limpieza: cero tickets y entradas FF — {"tickets": 0, "propios": 0, "ff_entries": 0}
+FALLOS: 0

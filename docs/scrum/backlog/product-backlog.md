@@ -1,5 +1,6 @@
 # Product Backlog
 
+> **Herramienta SCRUM del equipo:** [GitHub Project «CADUS · Scrum»](https://github.com/users/pablitoruiizz/projects/1) (una issue por ítem, campos SP, Sprint, Responsable y Cierre). Este archivo es la copia de referencia para la documentación; el script `scripts/scrum/crear_proyecto_github.py` lo vuelca al proyecto.
 > Mantener este backlog priorizado y refinado en cada Sprint Planning.
 > Nomenclatura: `PB-XXX` para tareas técnicas/infraestructura, `HU-XXX` para historias de usuario (ver [convenciones REM/REMUS](../../requisitos/rem-remus/README.md)). Estimación en Puntos de Historia, escala Fibonacci (1, 2, 3, 5, 8).
 > Trazabilidad de cada historia con su requisito funcional en [REM-CADUS.md](../../requisitos/rem-remus/REM-CADUS.md).
