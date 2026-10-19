@@ -13,17 +13,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CADUS_ROLES_VERSION', '2');
-add_action('init', 'cadus_actualizar_roles', 5);
-
-/** Aplica las migraciones de roles una sola vez por versión, sin reactivar el plugin. */
-function cadus_actualizar_roles(): void
-{
-    if (get_option('cadus_roles_version') !== CADUS_ROLES_VERSION) {
-        cadus_registrar_roles();
-    }
-}
-
 /** Capacidades primitivas de un tipo de contenido con capability_type [singular, plural]. */
 function cadus_caps_cpt(string $singular, string $plural): array
 {
@@ -36,43 +25,35 @@ function cadus_caps_cpt(string $singular, string $plural): array
     ];
 }
 
-/** Actualiza nombre y capacidades; solo retira las indicadas, conservando las personalizadas. */
-function cadus_asegurar_rol(string $slug, string $nombre, array $caps, array $retirar = []): void
+/** Crea el rol si no existe o le añade las capacidades que falten, sin borrar las que el equipo haya personalizado. */
+function cadus_asegurar_rol(string $slug, string $nombre, array $caps): void
 {
     $rol = get_role($slug);
     if (!$rol) {
-        $rol = add_role($slug, $nombre, $caps);
+        add_role($slug, $nombre, $caps);
+        return;
     }
     foreach ($caps as $cap => $permitida) {
         $rol->add_cap($cap, (bool) $permitida);
-    }
-    foreach ($retirar as $cap) {
-        $rol->remove_cap($cap);
-    }
-
-    $roles = wp_roles();
-    if ($roles->roles[$slug]['name'] !== $nombre) {
-        $roles->roles[$slug]['name'] = $nombre;
-        $roles->role_names[$slug] = $nombre;
-        update_option($roles->role_key, $roles->roles);
     }
 }
 
 /** Crea o actualiza los roles. Idempotente: se puede llamar en cada activación. */
 function cadus_registrar_roles(): void
 {
-    $tipos = [['cadus_acta', 'cadus_actas'], ['cadus_delegacion', 'cadus_delegacions'], ['cadus_ticket', 'cadus_tickets']];
+    $tipos = [['cadus_acta', 'cadus_actas'], ['cadus_delegacion', 'cadus_delegacions'], ['cadus_ticket', 'cadus_tickets'], ['cadus_mediacion', 'cadus_mediaciones']];
 
-    // Ejecutivo: gestiona contenidos, aprueba y publica actas (RN-01) y atiende el buzón (RN-03).
+    // Ejecutiva: gestiona contenidos, aprueba y publica actas (RN-01) y atiende el buzón (RN-03).
     $ejecutiva = ['read' => true, 'upload_files' => true, 'edit_posts' => true, 'edit_others_posts' => true,
         'edit_published_posts' => true, 'publish_posts' => true, 'delete_posts' => true, 'delete_published_posts' => true,
-        'edit_pages' => true, 'edit_published_pages' => true, 'publish_pages' => true, 'manage_categories' => true];
+        'edit_pages' => true, 'edit_published_pages' => true, 'publish_pages' => true, 'manage_categories' => true,
+        'moderate_comments' => true];
     foreach ($tipos as [$s, $p]) {
         foreach (cadus_caps_cpt($s, $p) as $cap) {
             $ejecutiva[$cap] = true;
         }
     }
-    cadus_asegurar_rol('cadus_ejecutiva', 'Ejecutivo del CADUS', $ejecutiva, ['moderate_comments']);
+    cadus_asegurar_rol('cadus_ejecutiva', 'Ejecutiva del CADUS', $ejecutiva);
 
     // Delegado: solo edita su propia delegación (RN-04); no publica actas ni ve tickets.
     cadus_asegurar_rol('cadus_delegado', 'Delegado de centro', [
@@ -92,7 +73,4 @@ function cadus_registrar_roles(): void
             }
         }
     }
-
-    // La activación también deja registrada la versión para no repetir la migración en init.
-    update_option('cadus_roles_version', CADUS_ROLES_VERSION);
 }
