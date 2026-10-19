@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once __DIR__ . '/privacidad.php';
+
 /** Lee un campo escalar sin aceptar matrices inesperadas. */
 function cadus_buzon_input(array $data, string $key, bool $multiline = false): string
 {
@@ -311,6 +313,7 @@ function cadus_buzon_ticket_por_entrada(int $entry_id): int
 /** Un bloqueo por envío evita duplicados si Fluent Forms repite su acción. */
 function cadus_buzon_crear_ticket($insert_id, $form_data, $form): void
 {
+    $form_data = cadus_privacidad_datos_originales($form_data, $form);
     if (!cadus_buzon_es_formulario($form) || (int) $insert_id < 1 || !is_array($form_data)) {
         return;
     }
@@ -337,9 +340,8 @@ function cadus_buzon_crear_ticket($insert_id, $form_data, $form): void
         if (is_wp_error($post_id) || !$post_id) {
             return;
         }
-        // AUTO_INCREMENT garantiza unicidad concurrente. Cinco dígitos como mínimo;
-        // nunca se trunca ni se reinicia el ID al cambiar de año o superar 99999.
-        $code = sprintf('CAD-%s-%05d', substr($date, 0, 4), $post_id);
+        // El ID mantiene la unicidad; 128 bits aleatorios impiden adivinar nuevos códigos.
+        $code = sprintf('CAD-%s-%05d-%s', substr($date, 0, 4), $post_id, strtoupper(bin2hex(random_bytes(16))));
         $meta = [
             '_cadus_codigo' => $code, '_cadus_email' => cadus_buzon_email(wp_unslash($form_data['email'])),
             '_cadus_tipo' => $type, '_cadus_estado' => 'abierto',
@@ -379,13 +381,14 @@ function cadus_buzon_mensaje_confirmacion($message, $insert_id, $form_data, $for
     if (!cadus_buzon_es_formulario($form)) {
         return $message;
     }
+    $form_data = cadus_privacidad_datos_originales($form_data, $form);
     $post_id = cadus_buzon_ticket_por_entrada((int) $insert_id);
     $code = $post_id ? (string) get_post_meta($post_id, '_cadus_codigo', true) : '';
     $email = is_array($form_data) && is_string($form_data['email'] ?? null)
         ? cadus_buzon_email($form_data['email']) : '';
     if ($code === '' || $email === '' || get_post_status($post_id) !== 'private'
-        || $email !== get_post_meta($post_id, '_cadus_email', true)) {
-        // La entrada de Fluent Forms se conserva para su recuperación administrativa.
+        || !hash_equals(hash('sha256', (string) get_post_meta($post_id, '_cadus_email', true)), hash('sha256', $email))) {
+        // No se conserva una copia sensible en Fluent Forms, tampoco si falla el ticket.
         // Su controlador espera «errors» en la raíz, sin el envoltorio de wp_send_json_error.
         wp_send_json(['errors' => ['buzon' => [
             'No hemos podido generar tu ticket. Contacta con el CADUS e indica que no recibiste un código de seguimiento.',
@@ -499,9 +502,8 @@ function cadus_buzon_guardar_ticket($post_id, $post, $update): void
 
 function cadus_buzon_columnas(array $columns): array
 {
-    return array_merge($columns, [
-        'cadus_codigo' => 'Código', 'cadus_email' => 'Correo', 'cadus_tipo' => 'Tipo', 'cadus_estado' => 'Estado',
-    ]);
+    return ['cb' => $columns['cb'] ?? '<input type="checkbox">', 'cadus_codigo' => 'Código',
+        'cadus_estado' => 'Estado', 'date' => 'Fecha'];
 }
 
 function cadus_buzon_columna(string $column, int $post_id): void
@@ -512,6 +514,11 @@ function cadus_buzon_columna(string $column, int $post_id): void
     $keys = ['cadus_codigo' => '_cadus_codigo', 'cadus_email' => '_cadus_email', 'cadus_tipo' => '_cadus_tipo', 'cadus_estado' => '_cadus_estado'];
     if (isset($keys[$column])) {
         $value = (string) get_post_meta($post_id, $keys[$column], true);
+        if ($column === 'cadus_codigo') {
+            echo '<a href="' . esc_url(admin_url('post.php?post=' . $post_id . '&action=edit')) . '">'
+                . esc_html($value ?: 'Ticket') . '</a>';
+            return;
+        }
         echo esc_html($column === 'cadus_estado' ? (cadus_buzon_estados()[$value] ?? 'Desconocido') : $value);
     }
 }
@@ -553,8 +560,13 @@ function cadus_buzon_no_cache(): void
     if (!defined('DONOTCACHEPAGE')) {
         define('DONOTCACHEPAGE', true);
     }
+    // WP Fastest Cache solo respeta la constante en algunos casos (p. ej. Divi).
+    do_action('wpfc_exclude_current_page');
     if (!headers_sent()) {
         nocache_headers();
+        header('Cache-Control: no-store, no-cache, must-revalidate, private, max-age=0');
+        header('Referrer-Policy: no-referrer');
+        header('X-Robots-Tag: noindex, nofollow, noarchive');
     }
 }
 
@@ -581,17 +593,19 @@ function cadus_buzon_resultado_seguimiento(): string
     $raw_email = isset($_POST['cadus_correo']) && is_string($_POST['cadus_correo']) ? wp_unslash($_POST['cadus_correo']) : '';
     $email = cadus_buzon_email($raw_email);
     $ticket = null;
-    if (preg_match('/\ACAD-[0-9]{4}-[0-9]{5,20}\z/', $code) && $email !== '') {
+    if (preg_match('/\ACAD-[0-9]{4}-[0-9]{5,20}(?:-[A-F0-9]{32})?\z/', $code) && $email !== '') {
         $ticket = $wpdb->get_row($wpdb->prepare(
-            "SELECT p.ID, p.post_title, p.post_date FROM {$wpdb->posts} p
+            "SELECT p.ID, p.post_title, p.post_date, e.meta_value AS correo FROM {$wpdb->posts} p
              INNER JOIN {$wpdb->postmeta} c ON c.post_id = p.ID AND c.meta_key = %s
              INNER JOIN {$wpdb->postmeta} e ON e.post_id = p.ID AND e.meta_key = %s
              WHERE p.post_type = %s AND p.post_status = %s AND BINARY c.meta_value = BINARY %s
-             AND BINARY LOWER(e.meta_value) = BINARY %s LIMIT 1",
-            '_cadus_codigo', '_cadus_email', 'cadus_ticket', 'private', $code, $email
+             LIMIT 1",
+            '_cadus_codigo', '_cadus_email', 'cadus_ticket', 'private', $code
         ));
     }
-    if (!$ticket) {
+    // Hashes de longitud fija: también se compara si el código no existe.
+    $email_ok = hash_equals(hash('sha256', strtolower((string) ($ticket->correo ?? ''))), hash('sha256', $email));
+    if (!$ticket || $email === '' || !$email_ok) {
         return '<p role="status">' . esc_html('No hemos encontrado ningún ticket con esos datos') . '</p>';
     }
     $subject = $ticket->post_title;
@@ -629,7 +643,7 @@ function cadus_buzon_seguimiento_shortcode(): string
         . wp_nonce_field('cadus_seguimiento', 'cadus_seguimiento_nonce', false, false)
         . '<input type="hidden" name="cadus_seguimiento_enviar" value="1">'
         . '<p><label for="' . esc_attr($id . '_codigo') . '">' . esc_html('Código de seguimiento') . '</label> '
-        . '<input id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="29" placeholder="CAD-2026-00001" required></p>'
+        . '<input id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="62" placeholder="Código recibido al enviar" required></p>'
         . '<p><label for="' . esc_attr($id . '_correo') . '">' . esc_html('Correo universitario') . '</label> '
         . '<input id="' . esc_attr($id . '_correo') . '" name="cadus_correo" type="email" maxlength="254" required></p>'
         . '<button type="submit">' . esc_html('Consultar seguimiento') . '</button></form>';

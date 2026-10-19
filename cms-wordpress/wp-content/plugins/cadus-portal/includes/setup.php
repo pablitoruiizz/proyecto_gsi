@@ -13,24 +13,69 @@ if (!defined('ABSPATH')) {
 
 add_shortcode('cadus_ultimas_noticias', 'cadus_shortcode_ultimas');
 add_shortcode('cadus_noticias', 'cadus_shortcode_noticias');
-add_action('wp_head', 'cadus_estilos');
+add_action('wp_head', 'cadus_estilos', 5);
 
 /* ----------------------------------------------------------------- estilos y shortcodes */
 
 function cadus_estilos(): void
 {
     echo '<style id="cadus-portal">'
-        . '.cadus-banner{background:#1f3a5f;color:#fff;padding:56px 24px;border-radius:10px;text-align:center;margin-bottom:32px}'
+        . '.cadus-banner{background:#8d0739;color:#fff;padding:56px 24px;border-radius:10px;text-align:center;margin-bottom:32px}'
         . '.cadus-banner h1{color:#fff;margin:0 0 12px}.cadus-banner p{margin:0 0 20px;font-size:1.1em}'
-        . '.cadus-boton{display:inline-block;background:#f2b705;color:#1f3a5f!important;padding:10px 22px;border-radius:6px;font-weight:700;text-decoration:none;margin:4px}'
+        . '.cadus-boton{display:inline-block;background:#faba09;color:#5c0426!important;padding:10px 22px;border-radius:6px;font-weight:700;text-decoration:none;margin:4px}'
         . '.cadus-tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin:24px 0}'
-        . '.cadus-tarjeta{border:1px solid #d6dde6;border-radius:8px;padding:18px;background:#fff}'
-        . '.cadus-tarjeta h3{margin-top:0}.cadus-meta{color:#5a6a7e;font-size:.9em}'
-        . '.cadus-tabla{width:100%;border-collapse:collapse}.cadus-tabla th,.cadus-tabla td{border-bottom:1px solid #d6dde6;padding:8px;text-align:left}'
-        . '.cadus-tabla th{background:#f2f5f7}.cadus-ficha{list-style:none;padding-left:0}'
+        . '.cadus-tarjeta{border:1px solid #dbdbdb;border-radius:8px;padding:18px;background:#fff}'
+        . '.cadus-tarjeta h3{margin-top:0}.cadus-meta{color:#666;font-size:.9em}'
+        . '.cadus-tabla{width:100%;border-collapse:collapse}.cadus-tabla th,.cadus-tabla td{border-bottom:1px solid #dbdbdb;padding:8px;text-align:left}'
+        . '.cadus-tabla th{background:#f1f1f1}.cadus-ficha{list-style:none;padding-left:0}'
         . '.cadus-filtros{display:flex;flex-wrap:wrap;gap:8px;align-items:end;margin-bottom:20px}'
-        . '.cadus-aviso{background:#fff8e1;border-left:4px solid #f2b705;padding:10px 14px;margin:16px 0}'
+        . '.cadus-aviso{background:#fff8e1;border-left:4px solid #faba09;padding:10px 14px;margin:16px 0}'
         . '</style>';
+}
+
+/**
+ * Identidad visual (HU-18): granate y dorado, como el portal oficial del CADUS (cadus.us.es).
+ * Se aplica una sola vez por versión del diseño, solo desde el panel (no en visitas públicas), con Blocksy activo
+ * y sin pisar lo que el equipo haya cambiado: la paleta y el logotipo solo se sustituyen si siguen siendo los de una versión anterior del plugin.
+ */
+define('CADUS_DISENO_VERSION', '3');
+add_action('init', function () {
+    if (is_admin() && get_option('cadus_diseno_version') !== CADUS_DISENO_VERSION && get_option('cadus_portal_version')
+        && get_option('stylesheet') === 'blocksy') {
+        cadus_aplicar_diseno();
+    }
+}, 20);
+
+function cadus_aplicar_diseno(): void
+{
+    // Valores que puso el plugin en versiones anteriores: si siguen así, el equipo no los ha personalizado.
+    $paleta_actual = get_theme_mod('colorPalette');
+    $color1 = is_array($paleta_actual) ? ($paleta_actual['color1']['color'] ?? '') : '';
+    $paleta_propia = $color1 === '' || in_array(strtolower($color1), ['#1f3a5f', '#8d0739'], true);
+
+    $logo_actual = (int) get_theme_mod('custom_logo');
+    $titulo_logo = $logo_actual ? (string) get_the_title($logo_actual) : '';
+    $logo_propio = $logo_actual === 0 || strpos($titulo_logo, 'Logotipo CADUS') === 0;
+
+    $logo = $logo_propio ? cadus_adjuntar('assets/logo-cadus.png', 'Logotipo CADUS (oficial)') : -1;
+    if ($logo === 0) {
+        error_log('CADUS: no se pudo adjuntar el logotipo; el diseño se reintentará desde el panel.');
+        return; // sin registrar la versión: se reintenta en la siguiente visita al panel
+    }
+    if ($logo > 0) {
+        set_theme_mod('custom_logo', $logo);
+    }
+    if ($paleta_propia) {
+        set_theme_mod('colorPalette', [
+            'color1' => ['color' => '#8d0739'], 'color2' => ['color' => '#6b052b'], 'color3' => ['color' => '#666666'], 'color4' => ['color' => '#212529'],
+            'color5' => ['color' => '#dbdbdb'], 'color6' => ['color' => '#f1f1f1'], 'color7' => ['color' => '#f8f8f8'], 'color8' => ['color' => '#ffffff'],
+        ]);
+    }
+    // Blocksy guarda el CSS generado en caché; sin esto la paleta nueva no se ve hasta guardar el personalizador.
+    do_action('blocksy:dynamic-css:refresh-caches');
+    // WP Fastest Cache guarda HTML con la versión antigua de los archivos; se vacía al desplegar un diseño nuevo.
+    do_action('wpfc_clear_all_cache');
+    update_option('cadus_diseno_version', CADUS_DISENO_VERSION);
 }
 
 function cadus_tarjeta_noticia(WP_Post $p): string
@@ -228,17 +273,8 @@ function cadus_portal_configurar(): void
         switch_theme('blocksy');
     }
     if ($primera) {
-        $logo = cadus_adjuntar('assets/logo-cadus.png', 'Logotipo CADUS (provisional)');
-        if ($logo) {
-            set_theme_mod('custom_logo', $logo);
-        }
         update_option('blogdescription', 'Consejo de Alumnos de la Universidad de Sevilla');
-    }
-    if ($primera) {
-    set_theme_mod('colorPalette', [
-        'color1' => ['color' => '#1f3a5f'], 'color2' => ['color' => '#14284a'], 'color3' => ['color' => '#3a4f66'], 'color4' => ['color' => '#12213b'],
-        'color5' => ['color' => '#d6dde6'], 'color6' => ['color' => '#f2f5f7'], 'color7' => ['color' => '#fafbfc'], 'color8' => ['color' => '#ffffff'],
-    ]);
+        cadus_aplicar_diseno();
     }
 
     // Páginas (HU-01, HU-03..HU-08)

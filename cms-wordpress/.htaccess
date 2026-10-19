@@ -8,7 +8,7 @@ RewriteRule ^(.*)$ http\:\/\/localhost\/proyecto_gsi\/cms\-wordpress\/$1 [R=301,
 # Start WPFC Exclude
 # End WPFC Exclude
 # Start_WPFC_Exclude_Admin_Cookie
-RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=alvaro|joaquin|marcos|root
+RewriteCond %{HTTP:Cookie} !wordpress_logged_in_[^\=]+\=alvaro|joaquin|marcos|Miguel|root
 # End_WPFC_Exclude_Admin_Cookie
 RewriteCond %{HTTP_HOST} ^localhost
 RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit|WP_FASTEST_CACHE_CSS_VALIDATOR|Twitterbot|LinkedInBot|WhatsApp|Mediatoolkitbot)
