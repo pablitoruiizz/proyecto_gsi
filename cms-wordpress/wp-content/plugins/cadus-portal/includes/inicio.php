@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CADUS_INICIO_VERSION', '1');
+define('CADUS_INICIO_VERSION', '2');
 add_action('init', 'cadus_actualizar_inicio', 20);
 add_action('transition_post_status', 'cadus_inicio_cambio_estado', 10, 3);
 add_action('deleted_post', 'cadus_inicio_borrado', 10, 2);
@@ -167,11 +167,45 @@ function cadus_inicio_seccion(string $titulo, string $shortcode, string $variant
 function cadus_inicio_contenido(): string
 {
     return cadus_b_sc('[cadus_hero]')
+        . cadus_b_sc('[cadus_intro]')
         . cadus_inicio_seccion('Todo lo que necesitas', '[cadus_accesos]', 'cadus-seccion--accesos')
+        . cadus_b_sc('[cadus_novedades]')
+        . cadus_b_sc('[cadus_eventos]')
+        . cadus_b_sc('[cadus_trabajo]')
         . cadus_inicio_seccion('Así se vive el CADUS', '[cadus_galeria]', 'cadus-seccion--galeria')
         . cadus_inicio_seccion('Encuentra rápido lo que buscas', '[cadus_buscador]', 'cadus-seccion--buscador')
-        . cadus_inicio_seccion('Comunicados recientes', '[cadus_ultimas_noticias n="3"]', 'cadus-seccion--noticias')
-        . cadus_b_sc('[cadus_pasos]');
+        . cadus_b_sc('[cadus_pasos]')
+        . cadus_b_sc('[cadus_contacto]');
+}
+
+/** Reconoce únicamente las plantillas anteriores completas, sin bloques ni textos añadidos. */
+function cadus_inicio_es_plantilla_anterior(string $contenido): bool
+{
+    foreach (['cadus_intro', 'cadus_novedades', 'cadus_eventos', 'cadus_trabajo', 'cadus_contacto'] as $shortcode) {
+        if (has_shortcode($contenido, $shortcode)) {
+            return false;
+        }
+    }
+    if (has_shortcode($contenido, 'cadus_hero') && has_shortcode($contenido, 'cadus_pasos')) {
+        $anterior = cadus_b_sc('[cadus_hero]')
+            . cadus_inicio_seccion('Todo lo que necesitas', '[cadus_accesos]', 'cadus-seccion--accesos')
+            . cadus_inicio_seccion('Así se vive el CADUS', '[cadus_galeria]', 'cadus-seccion--galeria')
+            . cadus_inicio_seccion('Encuentra rápido lo que buscas', '[cadus_buscador]', 'cadus-seccion--buscador')
+            . cadus_inicio_seccion('Comunicados recientes', '[cadus_ultimas_noticias n="3"]', 'cadus-seccion--noticias')
+            . cadus_b_sc('[cadus_pasos]');
+    } else {
+        // Siembra original de setup.php: permite instalar desde cero sin aceptar cualquier cadus-banner.
+        $anterior = cadus_b_html('<div class="cadus-banner"><h1>CADUS</h1><p>Consejo de Alumnos de la Universidad de Sevilla</p>'
+                . '<a class="cadus-boton" href="' . esc_url(home_url('/delegaciones/')) . '">Delegaciones de alumnos</a>'
+                . '<a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/buzon-de-consultas/')) . '">Buzón de consultas</a></div>')
+            . cadus_b_h('Comunicados recientes')
+            . cadus_b_sc('[cadus_ultimas_noticias n="3"]')
+            . cadus_b_h('Participación estudiantil')
+            . cadus_b_p('El calendario de asambleas, eventos y votaciones se publicará en la próxima versión del portal.');
+    }
+    // Gutenberg puede serializar -- como \u002d\u002d en el JSON. Se comparan todos los bloques,
+    // atributos y HTML, admitiendo solo esa representación equivalente, no ediciones del equipo.
+    return parse_blocks($contenido) === parse_blocks($anterior);
 }
 
 /** Migra también instalaciones nuevas en el primer init posterior a la siembra. */
@@ -180,11 +214,15 @@ function cadus_actualizar_inicio(): void
     if (get_option('cadus_inicio_version') === CADUS_INICIO_VERSION) {
         return;
     }
-    $pagina = get_page_by_path('inicio');
+    $pagina = cadus_buscar_semilla('pagina:inicio', 'page') ?? get_page_by_path('inicio');
     if (!$pagina) {
         return;
     }
-    if (trim($pagina->post_content) !== '' && strpos($pagina->post_content, 'cadus-banner') === false) {
+    $hash = get_option('cadus_inicio_contenido_hash', '');
+    $es_generado = is_string($hash) && $hash !== ''
+        ? hash_equals($hash, hash('sha256', $pagina->post_content))
+        : cadus_inicio_es_plantilla_anterior($pagina->post_content);
+    if (!$es_generado) {
         error_log('CADUS: portada conservada porque el equipo ya ha editado su contenido.');
         update_option('cadus_inicio_version', CADUS_INICIO_VERSION);
         return;
@@ -195,5 +233,7 @@ function cadus_actualizar_inicio(): void
         error_log('CADUS: no se pudo actualizar la portada; se reintentará en la siguiente petición.');
         return;
     }
+    // Se guarda lo realmente persistido, tras los filtros de WordPress al escribir.
+    update_option('cadus_inicio_contenido_hash', hash('sha256', (string) get_post_field('post_content', $pagina->ID, 'raw')));
     update_option('cadus_inicio_version', CADUS_INICIO_VERSION);
 }

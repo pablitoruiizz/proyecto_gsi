@@ -122,3 +122,17 @@ Evidencia y revisión independiente: `scripts/pruebas/RN03_AUDITORIA.md`, `rn03_
 Decisiones pendientes del equipo: plazo de retención de tickets y backups; eventual sustitución de códigos antiguos; verificación de la propiedad del correo (conocer código y correo permite consultar); y almacenamiento privado de ficheros si se incorporan adjuntos. Actualmente el formulario no admite ficheros: bloquear una URL de WordPress no protege por sí solo un fichero estático en `uploads`.
 
 Referencias técnicas: [registro de tipos de WordPress](https://developer.wordpress.org/reference/functions/register_post_type/) y [ciclo de envío de Fluent Forms](https://developers.fluentforms.com/submission-lifecycle/), contrastados con el código instalado.
+
+## Secciones de la portada tomadas de cadus.us.es
+
+La portada reproduce lo principal de la web oficial, con el estilo propio del portal:
+
+| Shortcode | Sección | Datos |
+|---|---|---|
+| `[cadus_intro]` | «Más de 40 años dando voz al alumnado» (texto de la web oficial) | fijo |
+| `[cadus_novedades]` | «¡Últimas noticias!»: filtros por categoría y carrusel | entradas publicadas y categorías reales (caché de 5 min) |
+| `[cadus_eventos]` | «¡Últimos eventos!» | entradas de la categoría Eventos; `cadus_eventos_origen()` es el único punto a cambiar cuando llegue el calendario (HU-10) |
+| `[cadus_trabajo]` | «Nuestro trabajo»: cuatro listas de objetivos | texto de la web oficial (de 2024): revisar con el CADUS |
+| `[cadus_contacto]` | Cierre: dirección, teléfono, correo, Instagram y enlaces | fijo; enlaces a la web oficial marcados como tales |
+
+Marcado y datos: Codex (`includes/portada_extra.php`). Estilo y JS: Claude (`assets/cadus.css`, `assets/cadus.js`). La portada se reescribe sola (migración v2 en `inicio.php`) si no la ha editado el equipo. El JS añade el filtrado (con un aviso `role="status"` del número de noticias) y los botones del carrusel; sin JS la lista se desplaza en horizontal y se ve completa. Contrastes comprobados: todos los textos cumplen WCAG AA (mínimo 5,4:1). La revisión cruzada de Codex sobre el CSS y el JS quedó pendiente por límite de uso de Codex.

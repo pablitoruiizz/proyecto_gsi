@@ -29,6 +29,8 @@ html, html body.cadus-portada { overflow-x: clip; }
 .cadus-portada .entry-header { display: none; }
 .cadus-portada [data-vertical-spacing] { --theme-content-vertical-spacing: 0px; padding-block: 0; }
 .cadus-portada .site-main { margin-bottom: 0; }
+/* El cierre de la portada ya lleva contacto y copyright: se oculta el pie de crédito del tema */
+.cadus-portada .ct-footer { display: none; }
 .site-branding .site-title-container { display: none; }
 .site-logo-container { --logo-max-height: 64px; }
 .site-logo-container img { width: auto; max-height: 64px; }
@@ -337,3 +339,168 @@ html, html body.cadus-portada { overflow-x: clip; }
   .cadus-tarjeta, .cadus-tarjeta:hover { transform: none; transition: none; }
 }
 @keyframes cadus-fundido { from { opacity: 0; } to { opacity: 1; } }
+
+/* ================================================================== secciones de la portada original (intro, noticias, eventos, trabajo, contacto)
+   Ritmo de color: hero granate · intro oro · accesos blanco · noticias gris · eventos tinta · trabajo blanco · galería gris · buscador oro · pasos tinta · contacto granate */
+.cadus-seccion--galeria { background: var(--gris); }
+
+/* ------------------------------------------------------------------ intro: el 40 aniversario como cifra gigante */
+.cadus-seccion--intro { background: var(--oro); color: var(--granate-os); overflow: hidden; }
+.cadus-intro { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: clamp(24px, 6vw, 96px); }
+.cadus-intro__numero { margin: 0; font: 900 clamp(9rem, 30vw, 26rem)/0.78 var(--fuente); letter-spacing: -0.09em; color: var(--granate); }
+.cadus-intro__texto .cadus-seccion__titulo { color: var(--granate-os); max-width: 14ch; }
+.cadus-intro__parrafo { max-width: 52ch; margin: 0 0 28px; font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.5; }
+.cadus-seccion--intro .cadus-boton { background: var(--granate); color: var(--papel) !important; }
+
+/* ------------------------------------------------------------------ noticias: filtros y carrusel */
+.cadus-seccion--novedades { background: var(--gris); }
+.cadus-filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; }
+.cadus-filtros[hidden], .cadus-carrusel__mandos[hidden], .cadus-noticia[hidden] { display: none; }
+.cadus-chip {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--radio);
+  background: var(--papel);
+  color: var(--granate);
+  font: 800 1rem/1 var(--fuente);
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out);
+}
+.cadus-chip:active { transform: scale(0.97); }
+.cadus-chip[aria-pressed="true"] { background: var(--granate); color: var(--papel); }
+.cadus-chip:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+
+.cadus-carrusel__pista {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0 0 14px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--granate) transparent;
+}
+.cadus-carrusel__pista:focus-visible { outline: 3px solid var(--tinta); outline-offset: 4px; }
+.cadus-noticia { flex: 0 0 min(340px, 82vw); scroll-snap-align: start; display: flex; }
+.cadus-noticia article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  min-height: 300px;
+  padding: 24px;
+  border-radius: var(--radio);
+  background: var(--papel);
+  transition: transform 200ms var(--ease-out);
+}
+.cadus-noticia__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 0.95rem; font-weight: 700; color: #4b5157; }
+.cadus-noticia__cat { padding: 3px 10px; border-radius: var(--radio); background: var(--oro); color: var(--granate-os); font-weight: 800; }
+.cadus-noticia__titulo { margin: 0; font: 900 1.45rem/1.1 var(--fuente); letter-spacing: -0.02em; }
+.cadus-noticia__titulo a, .cadus-noticia__titulo a:hover { color: var(--granate); text-decoration: none; }
+.cadus-noticia__texto { margin: 0; font-size: 1.02rem; line-height: 1.45; color: #4b5157; }
+.cadus-noticia__enlace, .cadus-noticia__enlace:hover { margin-top: auto; font-weight: 800; color: var(--granate); text-decoration: none; }
+.cadus-noticia__enlace:focus-visible, .cadus-noticia__titulo a:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+.cadus-carrusel__mandos { display: flex; gap: 8px; margin: 14px 0 28px; }
+.cadus-carrusel__ant, .cadus-carrusel__sig {
+  width: 56px;
+  height: 56px;
+  border: 0;
+  border-radius: var(--radio);
+  background: var(--granate);
+  color: var(--papel);
+  font: 800 1.5rem/1 var(--fuente);
+  cursor: pointer;
+  transition: transform 160ms var(--ease-out);
+}
+.cadus-carrusel__ant:active, .cadus-carrusel__sig:active { transform: scale(0.97); }
+.cadus-carrusel__ant:disabled, .cadus-carrusel__sig:disabled { background: #c9c9c9; color: #5b6168; cursor: default; }
+.cadus-carrusel__ant:focus-visible, .cadus-carrusel__sig:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+.cadus-seccion--novedades > .cadus-boton { margin-top: 8px; }
+
+/* ------------------------------------------------------------------ eventos: fecha como cartel */
+.cadus-seccion--eventos { background: var(--tinta); color: var(--papel); }
+.cadus-seccion--eventos .cadus-seccion__titulo { color: var(--oro); }
+.cadus-eventos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cadus-evento { display: flex; border-radius: var(--radio); overflow: hidden; background: var(--granate); color: var(--papel); }
+.cadus-evento:nth-child(2) { background: var(--oro); color: var(--granate-os); }
+.cadus-evento:nth-child(3) { background: var(--gris); color: var(--tinta); }
+.cadus-evento:nth-child(4) { background: var(--granate-os); }
+.cadus-evento__enlace, .cadus-evento__enlace:hover {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-height: 280px;
+  padding: 24px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 200ms var(--ease-out);
+}
+.cadus-evento__enlace:focus-visible { outline: 3px solid currentColor; outline-offset: -8px; }
+.cadus-evento__fecha { display: flex; flex-direction: column; line-height: 0.85; }
+.cadus-evento__dia { font: 900 clamp(4rem, 8vw, 6.5rem)/0.85 var(--fuente); letter-spacing: -0.06em; font-variant-numeric: tabular-nums; }
+.cadus-evento__mes { margin-top: 6px; font: 900 1.4rem/1 var(--fuente); text-transform: uppercase; }
+.cadus-evento__titulo { font: 900 1.4rem/1.1 var(--fuente); letter-spacing: -0.02em; }
+.cadus-evento__ver { margin-top: auto; font-weight: 800; }
+.cadus-evento__vacio { margin: 0; font-size: 1.2rem; }
+
+/* ------------------------------------------------------------------ nuestro trabajo: listas en baldosas */
+.cadus-seccion--trabajo { background: var(--papel); }
+.cadus-trabajo { display: grid; grid-template-columns: repeat(12, 1fr); gap: 8px; }
+.cadus-lista { display: flex; flex-direction: column; gap: 12px; padding: clamp(22px, 3vw, 36px); border-radius: var(--radio); background: var(--gris); color: var(--tinta); }
+.cadus-lista:nth-child(1) { grid-column: span 8; background: var(--granate); color: var(--papel); }
+.cadus-lista:nth-child(2) { grid-column: span 4; background: var(--oro); color: var(--granate-os); }
+.cadus-lista:nth-child(3) { grid-column: span 4; background: var(--tinta); color: var(--papel); }
+.cadus-lista:nth-child(4) { grid-column: span 8; background: var(--gris); color: var(--granate-os); }
+.cadus-lista__titulo { margin: 0; font: 900 clamp(1.6rem, 3vw, 2.6rem)/1 var(--fuente); letter-spacing: -0.02em; color: inherit; }
+.cadus-lista__items { display: grid; gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
+.cadus-lista__items li { display: flex; gap: 12px; align-items: baseline; font-size: 1.1rem; line-height: 1.35; }
+.cadus-lista__items li::before { content: ""; flex: none; width: 0.62em; height: 0.62em; border-radius: 3px; background: currentColor; transform: translateY(-0.04em); }
+.cadus-lista .cadus-boton { align-self: flex-start; margin-top: auto; }
+.cadus-lista:nth-child(2) .cadus-boton, .cadus-lista:nth-child(4) .cadus-boton { background: var(--granate); color: var(--papel) !important; }
+
+/* ------------------------------------------------------------------ contacto: el nombre enorme y los datos */
+.cadus-seccion--contacto { background: var(--granate); color: var(--papel); padding-bottom: clamp(28px, 4vw, 48px); overflow: hidden; }
+.cadus-contacto__marca { margin: 0 0 clamp(-24px, -2vw, -8px); font: 900 clamp(6rem, 25vw, 23rem)/0.8 var(--fuente); letter-spacing: -0.07em; color: var(--granate-os); white-space: nowrap; }
+.cadus-seccion--contacto .cadus-seccion__titulo { color: var(--papel); max-width: 20ch; }
+.cadus-contacto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 80px); margin-bottom: clamp(32px, 5vw, 64px); }
+.cadus-contacto__datos { display: grid; gap: 10px; font-style: normal; font-size: 1.2rem; line-height: 1.4; }
+.cadus-contacto a, .cadus-contacto a:hover, .cadus-contacto a:visited { color: var(--papel); text-decoration: underline; text-underline-offset: 0.2em; }
+.cadus-contacto__enlaces { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin: 0; padding: 0; list-style: none; font-size: 1.1rem; font-weight: 700; }
+.cadus-contacto a:focus-visible, .cadus-contacto__subir:focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
+.cadus-contacto__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; max-width: 1240px; margin: 0 auto; font-size: 1rem; }
+.cadus-contacto__subir, .cadus-contacto__subir:hover, .cadus-contacto__subir:visited { color: var(--oro); font-weight: 800; text-decoration: none; }
+
+/* ------------------------------------------------------------------ hover con puntero fino (secciones nuevas) */
+@media (hover: hover) and (pointer: fine) {
+  .cadus-chip:hover { transform: translateY(-2px); }
+  .cadus-chip:hover:active { transform: scale(0.97); }
+  .cadus-noticia article:hover { transform: translateY(-3px); }
+  .cadus-evento__enlace:hover { transform: translateY(-3px); }
+  .cadus-carrusel__ant:hover:not(:disabled), .cadus-carrusel__sig:hover:not(:disabled) { transform: translateY(-2px); }
+}
+
+/* ------------------------------------------------------------------ pantallas medias y móvil (secciones nuevas) */
+@media (max-width: 1000px) {
+  .cadus-eventos { grid-template-columns: repeat(2, 1fr); }
+  .cadus-intro { grid-template-columns: 1fr; row-gap: 8px; }
+  .cadus-intro__numero { font-size: clamp(8rem, 42vw, 15rem); }
+}
+@media (max-width: 760px) {
+  .cadus-eventos { grid-template-columns: 1fr; }
+  .cadus-evento__enlace { min-height: 200px; }
+  .cadus-trabajo { grid-template-columns: 1fr; }
+  .cadus-lista:nth-child(n) { grid-column: auto; }
+  .cadus-contacto { grid-template-columns: 1fr; }
+  .cadus-carrusel__mandos { display: none; }
+}
+
+/* ------------------------------------------------------------------ movimiento reducido (secciones nuevas) */
+@media (prefers-reduced-motion: reduce) {
+  .cadus-chip, .cadus-chip:hover, .cadus-chip:active, .cadus-noticia article, .cadus-noticia article:hover,
+  .cadus-evento__enlace, .cadus-evento__enlace:hover,
+  .cadus-carrusel__ant, .cadus-carrusel__sig, .cadus-carrusel__ant:hover, .cadus-carrusel__sig:hover { transform: none; transition: none; }
+  .cadus-carrusel__pista { scroll-behavior: auto; }
+}
