@@ -13,7 +13,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('CADUS_ROLES_VERSION', '2');
+define('CADUS_ROLES_VERSION', '3'); // 3: capacidades de las solicitudes de mediación (HU-12)
 add_action('init', 'cadus_actualizar_roles', 5);
 
 /** Aplica las migraciones de roles una sola vez por versión, sin reactivar el plugin. */
@@ -61,7 +61,7 @@ function cadus_asegurar_rol(string $slug, string $nombre, array $caps, array $re
 /** Crea o actualiza los roles. Idempotente: se puede llamar en cada activación. */
 function cadus_registrar_roles(): void
 {
-    $tipos = [['cadus_acta', 'cadus_actas'], ['cadus_delegacion', 'cadus_delegacions'], ['cadus_ticket', 'cadus_tickets']];
+    $tipos = [['cadus_acta', 'cadus_actas'], ['cadus_delegacion', 'cadus_delegacions'], ['cadus_ticket', 'cadus_tickets'], ['cadus_mediacion', 'cadus_mediaciones']];
 
     // Ejecutivo: gestiona contenidos, aprueba y publica actas (RN-01) y atiende el buzón (RN-03).
     $ejecutiva = ['read' => true, 'upload_files' => true, 'edit_posts' => true, 'edit_others_posts' => true,

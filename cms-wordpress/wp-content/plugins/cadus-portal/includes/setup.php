@@ -304,6 +304,7 @@ function cadus_portal_configurar(): void
         . cadus_b_html('<div class="cadus-tarjetas">'
             . '<div class="cadus-tarjeta"><h3>Buzón de consultas</h3><p>Envía tu consulta o reclamación.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/buzon-de-consultas/')) . '">Ir al buzón</a></div>'
             . '<div class="cadus-tarjeta"><h3>Seguimiento de ticket</h3><p>Consulta el estado con tu código.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/seguimiento-de-ticket/')) . '">Seguir mi ticket</a></div>'
+            . '<div class="cadus-tarjeta"><h3>Mediación estudiantil</h3><p>Solicita la mediación del CADUS en un conflicto.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/mediacion-estudiantil/')) . '">Solicitar mediación</a></div>'
             . '<div class="cadus-tarjeta"><h3>Preguntas frecuentes</h3><p>Dudas habituales sobre el buzón.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/preguntas-frecuentes/')) . '">Ver preguntas</a></div></div>'));
     cadus_pagina('buzon-de-consultas', 'Buzón de consultas y reclamaciones', cadus_b_sc('[cadus_buzon]'), $atencion);
     cadus_pagina('seguimiento-de-ticket', 'Seguimiento de ticket', cadus_b_sc('[cadus_seguimiento]'), $atencion);
@@ -395,6 +396,10 @@ function cadus_portal_configurar(): void
     if (function_exists('cadus_buzon_setup')) {
         cadus_buzon_setup();
     }
+    // Mediación estudiantil (HU-12): lo implementa includes/mediacion.php
+    if (function_exists('cadus_mediacion_setup')) {
+        cadus_mediacion_setup();
+    }
 
     // Menú principal y portada estática (HU-01, UI-02)
     $nombre_menu = 'Menú principal CADUS';
@@ -423,6 +428,9 @@ function cadus_portal_configurar(): void
         }
     } else {
         $menu_id = (int) $menu->term_id;
+    }
+    if (function_exists('cadus_mediacion_asegurar_menu')) {
+        cadus_mediacion_asegurar_menu((int) $menu_id);
     }
     if ($primera) {
         set_theme_mod('nav_menu_locations', ['menu_1' => $menu_id, 'menu_mobile' => $menu_id]);
