@@ -1,10 +1,27 @@
 <?php
-/** Privacidad del buzón (RN-03): defensas independientes de la configuración del sitio. */
+/** Privacidad del buzón y mediación (RN-03): independiente de la configuración del sitio. */
 if (!defined('ABSPATH')) {
     exit;
 }
 
-/** Lista cerrada, incluso si otro rol recibe accidentalmente capacidades de tickets. */
+function cadus_privacidad_tipos(): array
+{
+    return ['cadus_ticket', 'cadus_mediacion'];
+}
+
+function cadus_privacidad_tipo($type): bool
+{
+    return in_array($type, cadus_privacidad_tipos(), true);
+}
+
+function cadus_privacidad_formulario($id): bool
+{
+    return (int) $id > 0 && in_array((int) $id, [
+        (int) get_option('cadus_buzon_form_id', 0), (int) get_option('cadus_mediacion_form_id', 0),
+    ], true);
+}
+
+/** Lista cerrada, incluso si otro rol recibe accidentalmente capacidades privadas. */
 function cadus_privacidad_equipo($user): bool
 {
     return $user instanceof WP_User && (bool) array_intersect(['administrator', 'cadus_ejecutiva'], $user->roles);
@@ -13,7 +30,8 @@ function cadus_privacidad_equipo($user): bool
 add_filter('user_has_cap', function (array $caps, array $required, array $args, WP_User $user): array {
     if (!cadus_privacidad_equipo($user)) {
         foreach (array_unique(array_merge(array_keys($caps), $required)) as $cap) {
-            if (str_contains($cap, 'cadus_ticket')) {
+            // El prefijo singular cubre también cadus_tickets y cadus_mediaciones.
+            if (str_contains($cap, 'cadus_ticket') || str_contains($cap, 'cadus_mediacion')) {
                 $caps[$cap] = false;
             }
         }
@@ -38,8 +56,10 @@ add_action('pre_get_posts', function (WP_Query $query): void {
 add_filter('posts_where', function (string $where): string {
     global $wpdb;
     if (!cadus_privacidad_consulta_interna()) {
-        $where .= " AND {$wpdb->posts}.post_type <> 'cadus_ticket'"
-            . " AND NOT EXISTS (SELECT 1 FROM {$wpdb->posts} cadus_parent WHERE cadus_parent.ID = {$wpdb->posts}.post_parent AND cadus_parent.post_type = 'cadus_ticket')";
+        $types = implode(',', array_fill(0, count(cadus_privacidad_tipos()), '%s'));
+        $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_type NOT IN ($types)"
+            . " AND NOT EXISTS (SELECT 1 FROM {$wpdb->posts} cadus_parent WHERE cadus_parent.ID = {$wpdb->posts}.post_parent AND cadus_parent.post_type IN ($types))",
+            array_merge(cadus_privacidad_tipos(), cadus_privacidad_tipos()));
     }
     return $where;
 }, PHP_INT_MAX);
@@ -47,7 +67,8 @@ add_filter('posts_where', function (string $where): string {
 /** WordPress puede ignorar post_type no consultables y devolver la portada (200). */
 add_action('template_redirect', function (): void {
     $types = isset($_GET['post_type']) ? (array) $_GET['post_type'] : [];
-    if (in_array('cadus_ticket', $types, true) || isset($_GET['cadus_ticket'])) {
+    if (array_intersect(cadus_privacidad_tipos(), array_filter($types, 'is_string'))
+        || array_intersect(cadus_privacidad_tipos(), array_keys($_GET))) {
         global $wp_query;
         $wp_query->set_404();
         $wp_query->posts = [];
@@ -59,27 +80,31 @@ add_action('template_redirect', function (): void {
 }, -1);
 
 add_filter('wp_sitemaps_post_types', function (array $types): array {
-    unset($types['cadus_ticket']);
+    foreach (cadus_privacidad_tipos() as $type) {
+        unset($types[$type]);
+    }
     return $types;
 });
 add_filter('wpseo_sitemap_exclude_post_type', function ($excluded, $type) {
-    return $type === 'cadus_ticket' ? true : $excluded;
+    return cadus_privacidad_tipo($type) ? true : $excluded;
 }, 10, 2);
 add_filter('wp_revisions_to_keep', function ($number, $post) {
-    return $post->post_type === 'cadus_ticket' ? 0 : $number;
+    return cadus_privacidad_tipo($post->post_type) ? 0 : $number;
 }, 10, 2);
-add_filter('bulk_actions-edit-cadus_ticket', function (array $actions): array {
-    unset($actions['edit']); // Evita publicar, modificar autor o estado en lote.
-    return $actions;
-});
+foreach (cadus_privacidad_tipos() as $type) {
+    add_filter('bulk_actions-edit-' . $type, function (array $actions): array {
+        unset($actions['edit']); // Evita publicar, modificar autor o estado en lote.
+        return $actions;
+    });
+}
 add_filter('quick_edit_enabled_for_post_type', function ($enabled, $type) {
-    return $type === 'cadus_ticket' ? false : $enabled;
+    return cadus_privacidad_tipo($type) ? false : $enabled;
 }, 10, 2);
 add_filter('the_title', function ($title, $id) {
     global $pagenow;
     // Las etiquetas accesibles y acciones de fila también incluyen el título.
-    if (is_admin() && $pagenow === 'edit.php' && get_post_type($id) === 'cadus_ticket') {
-        return (string) get_post_meta($id, '_cadus_codigo', true) ?: 'Ticket';
+    if (is_admin() && $pagenow === 'edit.php' && cadus_privacidad_tipo(get_post_type($id))) {
+        return (string) get_post_meta($id, '_cadus_codigo', true) ?: 'Referencia';
     }
     return $title;
 }, 10, 2);
@@ -87,10 +112,10 @@ add_filter('the_posts', function (array $posts): array {
     global $pagenow;
     if (is_admin() && $pagenow === 'edit.php') {
         foreach ($posts as $index => $post) {
-            if ($post instanceof WP_Post && $post->post_type === 'cadus_ticket') {
+            if ($post instanceof WP_Post && cadus_privacidad_tipo($post->post_type)) {
                 // WP 7.1 lee post_title directamente para aria-label. Solo la copia de presentación.
                 $posts[$index] = clone $post;
-                $posts[$index]->post_title = (string) get_post_meta($post->ID, '_cadus_codigo', true) ?: 'Ticket';
+                $posts[$index]->post_title = (string) get_post_meta($post->ID, '_cadus_codigo', true) ?: 'Referencia';
                 $posts[$index]->post_content = '';
                 $posts[$index]->post_excerpt = '';
             }
@@ -103,7 +128,7 @@ add_filter('the_posts', function (array $posts): array {
 add_filter('rest_pre_dispatch', function ($result, $server, WP_REST_Request $request) {
     if (preg_match('#^/wp/v2/media/([0-9]+)(?:/|$)#', $request->get_route(), $match)) {
         $post = get_post((int) $match[1]);
-        if ($post && get_post_type($post->post_parent) === 'cadus_ticket') {
+        if ($post && cadus_privacidad_tipo(get_post_type($post->post_parent))) {
             return new WP_Error('rest_no_route', 'No se ha encontrado ninguna ruta que coincida.', ['status' => 404]);
         }
     }
@@ -113,8 +138,9 @@ add_filter('rest_pre_dispatch', function ($result, $server, WP_REST_Request $req
 /** Guarda los datos solo en memoria, antes de cualquier INSERT de Fluent Forms. */
 function cadus_privacidad_capturar_ff($data, $form_id)
 {
-    if ((int) $form_id === (int) get_option('cadus_buzon_form_id', 0) && (int) $form_id > 0) {
-        $GLOBALS['cadus_privacidad_ff_original'] = $data;
+    if (cadus_privacidad_formulario($form_id)) {
+        cadus_buzon_no_cache();
+        $GLOBALS['cadus_privacidad_ff_original'][(int) $form_id] = $data;
         return [];
     }
     return $data;
@@ -122,13 +148,14 @@ function cadus_privacidad_capturar_ff($data, $form_id)
 
 function cadus_privacidad_datos_originales($data, $form)
 {
-    return cadus_buzon_es_formulario($form) && isset($GLOBALS['cadus_privacidad_ff_original'])
-        ? $GLOBALS['cadus_privacidad_ff_original'] : $data;
+    $id = is_object($form) ? (int) ($form->id ?? 0) : 0;
+    return cadus_privacidad_formulario($id) && isset($GLOBALS['cadus_privacidad_ff_original'][$id])
+        ? $GLOBALS['cadus_privacidad_ff_original'][$id] : $data;
 }
 
 add_filter('fluentform/insert_response_data', 'cadus_privacidad_capturar_ff', PHP_INT_MAX, 2);
 add_filter('fluentform/filter_insert_data', function ($data) {
-    if ((int) ($data['form_id'] ?? 0) === (int) get_option('cadus_buzon_form_id', 0)) {
+    if (cadus_privacidad_formulario($data['form_id'] ?? 0)) {
         $data['response'] = '{}';
         foreach (['ip', 'source_url', 'browser', 'device', 'country'] as $key) {
             $data[$key] = '';
@@ -140,13 +167,13 @@ add_filter('fluentform/filter_insert_data', function ($data) {
 
 // No correos, integraciones, colas ni logs con el contenido de este formulario.
 add_filter('fluentform/global_notification_active_types', function ($types, $form_id) {
-    return (int) $form_id === (int) get_option('cadus_buzon_form_id', 0) ? [] : $types;
+    return cadus_privacidad_formulario($form_id) ? [] : $types;
 }, PHP_INT_MAX, 2);
 
-/** El ticket ya existe; su vínculo de idempotencia no depende de conservar la entrada. */
+/** El vínculo de idempotencia no depende de conservar la entrada. También purga si falla. */
 function cadus_privacidad_purgar_ff($entry_id, $data, $form): void
 {
-    if (!cadus_buzon_es_formulario($form)) {
+    if (!is_object($form) || !cadus_privacidad_formulario($form->id ?? 0)) {
         return;
     }
     global $wpdb;
@@ -162,6 +189,79 @@ add_filter('fluentform/submission_message_parse', function ($message, $id, $data
     cadus_privacidad_purgar_ff($id, $data, $form);
     return $message;
 }, 98, 4);
+
+/** El nonce existe en el HTML de FF, pero su comprobación está desactivada por defecto. */
+foreach (['fluentform/nonce_verify', 'fluentform/honeypot_status'] as $hook) {
+    add_filter($hook, function ($enabled, $form_id) {
+        return (int) $form_id > 0 && (int) $form_id === (int) get_option('cadus_mediacion_form_id', 0)
+            ? true : $enabled;
+    }, PHP_INT_MAX, 2);
+}
+
+/** Límite independiente del seguimiento; sin guardar correo ni IP en claro. */
+function cadus_privacidad_permitir_mediacion(): bool
+{
+    $ip = cadus_buzon_input($_SERVER, 'REMOTE_ADDR');
+    $ip = filter_var($ip, FILTER_VALIDATE_IP) ? $ip : 'sin_ip';
+    $key = 'cadus_med_' . hash_hmac('sha256', $ip, wp_salt('nonce'));
+    $lock = cadus_buzon_lock($key);
+    if ($lock === '') {
+        return false;
+    }
+    try {
+        if (!wp_using_ext_object_cache()) {
+            wp_cache_delete('_transient_' . $key, 'options');
+            wp_cache_delete('_transient_timeout_' . $key, 'options');
+        }
+        $window = get_transient($key);
+        $now = time();
+        if (!is_array($window) || (int) ($window['fin'] ?? 0) <= $now) {
+            $window = ['intentos' => 0, 'fin' => $now + 15 * MINUTE_IN_SECONDS];
+        }
+        if ((int) $window['intentos'] >= 10) {
+            return false;
+        }
+        ++$window['intentos'];
+        return set_transient($key, $window, max(1, (int) $window['fin'] - $now));
+    } finally {
+        cadus_buzon_unlock($lock);
+    }
+}
+add_filter('fluentform/validation_errors', function ($errors, $data, $form) {
+    if (cadus_mediacion_es_formulario($form) && !$errors && !cadus_privacidad_permitir_mediacion()) {
+        $errors['mediacion'][] = 'Has alcanzado el límite de envíos. Espera quince minutos antes de volver a intentarlo.';
+    }
+    return $errors;
+}, PHP_INT_MAX, 3);
+
+/** Antes de validar, incluso los errores de nonce y antispam deben ser no-store. */
+add_filter('fluentform/nonce_verify', function ($enabled, $form_id) {
+    if (cadus_privacidad_formulario($form_id)) {
+        cadus_buzon_no_cache();
+    }
+    return $enabled;
+}, PHP_INT_MAX, 2);
+add_action('template_redirect', function (): void {
+    $post = get_queried_object();
+    if ($post instanceof WP_Post && (has_shortcode($post->post_content, 'cadus_mediacion')
+        || has_shortcode($post->post_content, 'cadus_buzon'))) {
+        cadus_buzon_no_cache();
+    }
+}, 0);
+// También funciona si se inserta directamente [fluentform id="..."] o desde una plantilla.
+add_action('fluentform/before_form_render', function ($form): void {
+    if (cadus_privacidad_formulario($form->id ?? 0)) {
+        cadus_buzon_no_cache();
+    }
+}, 0);
+add_action('admin_init', function (): void {
+    $id = absint($_GET['post'] ?? $_POST['post_ID'] ?? 0);
+    $post = $id ? get_post($id) : null;
+    if (cadus_privacidad_tipo($_GET['post_type'] ?? '')
+        || ($post && (cadus_privacidad_tipo($post->post_type) || cadus_privacidad_tipo(get_post_type($post->post_parent))))) {
+        cadus_buzon_no_cache();
+    }
+});
 
 // Defensa adicional en el punto donde WP Fastest Cache decide escribir el HTML.
 add_filter('wpfc_buffer_callback_filter', function ($buffer) {

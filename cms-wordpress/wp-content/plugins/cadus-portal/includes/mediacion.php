@@ -294,6 +294,7 @@ function cadus_mediacion_por_entrada(int $entry_id): int
 /** Un bloqueo por envío evita duplicados si Fluent Forms repite su acción. */
 function cadus_mediacion_crear(int|string $insert_id, $form_data, $form): void
 {
+    $form_data = cadus_privacidad_datos_originales($form_data, $form);
     if (!cadus_mediacion_es_formulario($form) || (int) $insert_id < 1 || !is_array($form_data)) {
         return;
     }
@@ -320,8 +321,8 @@ function cadus_mediacion_crear(int|string $insert_id, $form_data, $form): void
         if (is_wp_error($post_id) || !$post_id) {
             return;
         }
-        // AUTO_INCREMENT garantiza unicidad concurrente; el código es solo una referencia.
-        $code = sprintf('MED-%s-%05d', substr($date, 0, 4), $post_id);
+        // El ID mantiene la unicidad; 128 bits aleatorios impiden adivinar referencias nuevas.
+        $code = sprintf('MED-%s-%05d-%s', substr($date, 0, 4), $post_id, strtoupper(bin2hex(random_bytes(16))));
         $meta = [
             '_cadus_codigo' => $code, '_cadus_email' => cadus_buzon_email(wp_unslash($form_data['email'])),
             '_cadus_solicitante' => cadus_buzon_input($form_data, 'solicitante'),
@@ -361,10 +362,14 @@ function cadus_mediacion_mensaje_confirmacion($message, $insert_id, $form_data, 
     if (!cadus_mediacion_es_formulario($form)) {
         return $message;
     }
+    $form_data = cadus_privacidad_datos_originales($form_data, $form);
     $post_id = cadus_mediacion_por_entrada((int) $insert_id);
     $code = $post_id ? (string) get_post_meta($post_id, '_cadus_codigo', true) : '';
-    if ($code === '' || get_post_status($post_id) !== 'private') {
-        // La entrada de Fluent Forms se conserva para su recuperación administrativa.
+    $email = is_array($form_data) && is_string($form_data['email'] ?? null)
+        ? cadus_buzon_email($form_data['email']) : '';
+    if ($code === '' || $email === '' || get_post_status($post_id) !== 'private'
+        || !hash_equals(hash('sha256', (string) get_post_meta($post_id, '_cadus_email', true)), hash('sha256', $email))) {
+        // No se conserva una copia sensible en Fluent Forms, tampoco si falla la creación.
         wp_send_json(['errors' => ['mediacion' => [
             'No hemos podido registrar tu solicitud. Contacta con el CADUS e indica que no recibiste una referencia.',
         ]]], 500);
@@ -442,10 +447,8 @@ function cadus_mediacion_guardar($post_id, $post, $update): void
 
 function cadus_mediacion_columnas(array $columns): array
 {
-    return array_merge($columns, [
-        'cadus_codigo' => 'Referencia', 'cadus_solicitante' => 'Solicitante',
-        'cadus_centro' => 'Facultad o Escuela', 'cadus_estado' => 'Estado',
-    ]);
+    return ['cb' => $columns['cb'] ?? '<input type="checkbox">', 'cadus_codigo' => 'Referencia',
+        'cadus_estado' => 'Estado', 'date' => 'Fecha'];
 }
 
 function cadus_mediacion_columna(string $column, int $post_id): void
@@ -457,6 +460,11 @@ function cadus_mediacion_columna(string $column, int $post_id): void
         'cadus_centro' => '_cadus_centro', 'cadus_estado' => '_cadus_estado'];
     if (isset($keys[$column])) {
         $value = (string) get_post_meta($post_id, $keys[$column], true);
+        if ($column === 'cadus_codigo') {
+            echo '<a href="' . esc_url(admin_url('post.php?post=' . $post_id . '&action=edit')) . '">'
+                . esc_html($value ?: 'Solicitud') . '</a>';
+            return;
+        }
         echo esc_html($column === 'cadus_estado' ? (cadus_mediacion_estados()[$value] ?? 'Desconocido') : $value);
     }
 }
