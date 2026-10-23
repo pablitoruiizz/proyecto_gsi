@@ -59,13 +59,17 @@ function cadus_portada_cambio_recuento($tt_id, string $taxonomia): void
     }
 }
 
-/** Único adaptador que sustituir al incorporar el calendario (HU-10, Sprint 2).
- * La fecha mostrada es, por ahora, la de publicación de la entrada de Eventos.
- * Devuelve datos de presentación para que el marcado no dependa del futuro tipo de calendario.
+/** Origen de los eventos de la portada (HU-10).
+ * Con The Events Calendar activo se muestran los próximos eventos del calendario (calendario.php).
+ * Sin él, se usan las entradas de la categoría Eventos con su fecha de publicación, como en el Sprint 1.
+ * Devuelve datos de presentación para que el marcado no dependa del tipo de calendario.
  * @return array<int, array{titulo: string, url: string, fecha: string}>
  */
 function cadus_eventos_origen(): array
 {
+    if (function_exists('cadus_calendario_activo') && cadus_calendario_activo()) {
+        return cadus_calendario_eventos(4);
+    }
     $categoria = get_term_by('slug', 'eventos', 'category') ?: get_term_by('name', 'Eventos', 'category');
     if (!$categoria) {
         return [];

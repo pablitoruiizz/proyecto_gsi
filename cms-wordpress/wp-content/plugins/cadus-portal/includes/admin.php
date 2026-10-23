@@ -44,7 +44,8 @@ function cadus_menus_admin(string $rol): array
         $menus['edit.php?post_type=cadus_delegacion'][] = 'edit-tags.php?taxonomy=cadus_centro&post_type=cadus_delegacion';
         $menus['edit.php?post_type=cadus_ticket'] = ['edit.php?post_type=cadus_ticket', 'post-new.php?post_type=cadus_ticket'];
     }
-    return $menus;
+    // Los módulos nuevos (p. ej. el calendario, HU-10) añaden aquí sus menús sin tocar esta lista.
+    return apply_filters('cadus_menus_admin', $menus, $rol);
 }
 
 function cadus_filtrar_menus_admin(): void
@@ -89,6 +90,7 @@ function cadus_filtrar_barra_admin(WP_Admin_Bar $barra): void
         if ($rol === 'cadus_ejecutiva') {
             $nuevos = array_merge($nuevos, ['new-post', 'new-page', 'new-cadus_acta', 'new-cadus_ticket']);
         }
+        $nuevos = apply_filters('cadus_barra_nuevos', $nuevos, $rol);
     }
     $permitidos = array_merge($permitidos, $nuevos);
     $destino_nuevo = '';
@@ -133,7 +135,8 @@ function cadus_bloquear_edicion_comentarios(array $caps, string $cap, int $usuar
 /** Respeta el destino solicitado y solo cambia el inicio predeterminado de ejecutivo y delegado. */
 function cadus_redirigir_login(string $destino, string $solicitado, $usuario): string
 {
-    if ($solicitado !== '') {
+    // El formulario de wp-login.php envía siempre «wp-admin/» como destino: eso equivale a no pedir ninguno.
+    if ($solicitado !== '' && !in_array(untrailingslashit($solicitado), [untrailingslashit(admin_url()), 'wp-admin'], true)) {
         return $destino;
     }
     $rol = cadus_rol_admin($usuario);
