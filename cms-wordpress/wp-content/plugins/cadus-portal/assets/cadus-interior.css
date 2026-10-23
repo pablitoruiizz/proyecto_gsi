@@ -1,0 +1,231 @@
+/*
+ * CADUS Portal: diseño de las páginas interiores (todo lo que no es la portada).
+ * Misma identidad que la portada (cadus.css): cartel plano, granate y dorado, tipografía pesada y arcos.
+ * Se aplica con body.cadus-interior; los tokens (--granate, --oro, --radio…) vienen de cadus.css.
+ */
+
+/* ------------------------------------------------------------------ cabecera del sitio */
+.cadus-interior .ct-header .ct-menu-link { font-weight: 800; letter-spacing: 0.01em; }
+.cadus-interior .ct-header .current-menu-item > .ct-menu-link,
+.cadus-interior .ct-header .current-menu-ancestor > .ct-menu-link { color: var(--granate); }
+
+/* ------------------------------------------------------------------ banda del título */
+.cadus-interior .hero-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: clamp(48px, 8vw, 112px) var(--margen) clamp(40px, 6vw, 88px) !important;
+  background: var(--granate);
+  color: var(--papel);
+  box-sizing: border-box;
+}
+.cadus-interior .hero-section .entry-header { max-width: 1240px; margin-inline: auto; padding-right: clamp(0px, 36vw, 500px); }
+.cadus-interior .hero-section .page-title,
+.cadus-interior .hero-section h1 {
+  margin: 0;
+  font: 900 clamp(2.2rem, 6vw, 5.4rem)/0.92 var(--fuente);
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--papel);
+  overflow-wrap: anywhere;
+}
+.cadus-interior .hero-section .ct-breadcrumbs,
+.cadus-interior .hero-section .ct-breadcrumbs a { color: var(--oro); font-weight: 700; }
+.cadus-interior .hero-section .page-description,
+.cadus-interior .hero-section .entry-meta { margin-top: 16px; color: var(--papel); font-size: 1.1rem; --theme-link-initial-color: var(--papel); --theme-link-hover-color: var(--oro); }
+.cadus-interior .hero-section .entry-meta a { color: var(--papel); }
+.cadus-interior .hero-section .entry-meta a:hover { color: var(--oro); }
+.cadus-interior .hero-section a:focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
+
+/* arcos decorativos: el blanco con el logotipo y uno dorado detrás (como en la portada) */
+.cadus-interior .hero-section::before,
+.cadus-interior .hero-section::after { content: ""; position: absolute; bottom: 0; z-index: -1; border-radius: 999px 999px 0 0; pointer-events: none; }
+.cadus-interior .hero-section::before {
+  right: clamp(12px, 8vw, 130px);
+  width: clamp(110px, 17vw, 250px);
+  aspect-ratio: 3 / 4;
+  background: var(--papel) var(--cadus-logo) center 54% / 84% auto no-repeat;
+  animation: cadus-arco 700ms var(--ease-out) 120ms both;
+}
+.cadus-interior .hero-section::after {
+  right: clamp(110px, 21vw, 360px);
+  width: clamp(70px, 10vw, 150px);
+  aspect-ratio: 3 / 5;
+  background: var(--oro);
+  animation: cadus-arco 700ms var(--ease-out) 180ms both;
+}
+
+/* ------------------------------------------------------------------ contenido */
+.cadus-interior .entry-content { --theme-block-max-width: 1240px; padding: clamp(40px, 6vw, 88px) var(--margen); box-sizing: border-box; }
+.cadus-interior .entry-content > * { max-width: 1240px; margin-inline: auto; }
+.cadus-interior .entry-content > .cadus-aviso, .cadus-interior .entry-content > .cadus-tarjetas { margin-left: max(0px, calc(50% - 620px)) !important; margin-right: auto !important; }
+.cadus-interior .entry-content > p,
+.cadus-interior .entry-content > ul,
+.cadus-interior .entry-content > ol { max-width: 70ch; margin-left: max(0px, calc(50% - 620px)) !important; margin-right: auto !important; font-size: 1.12rem; line-height: 1.65; }
+.cadus-interior .entry-content h2 { margin: 1.6em 0 0.6em; font: 900 clamp(1.7rem, 3.4vw, 2.6rem)/1 var(--fuente); letter-spacing: -0.02em; color: var(--granate); }
+.cadus-interior .entry-content h3 { font: 800 1.4rem/1.15 var(--fuente); color: var(--granate-os); }
+.cadus-interior .entry-content :where(a:not(.cadus-boton):not(.cadus-chip):not(.cadus-delegacion-card__enlace):not(.cadus-descarga)) { color: var(--granate); text-underline-offset: 0.18em; }
+.cadus-interior .entry-content a:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+
+.cadus-aviso { max-width: 70ch; padding: 20px 24px; border: 0; border-radius: var(--radio); background: #fff1c2; color: var(--tinta); font-weight: 600; }
+
+/* ------------------------------------------------------------------ tarjetas (atención al estudiante, noticias) */
+.cadus-interior .cadus-tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 8px; margin: 28px 0; max-width: 1240px; }
+.cadus-interior .cadus-tarjeta { display: flex; flex-direction: column; gap: 10px; padding: 28px; border: 0; border-radius: var(--radio); background: var(--gris); color: var(--tinta); }
+.cadus-interior .cadus-tarjeta:nth-child(4n+1) { background: var(--granate); color: var(--papel); }
+.cadus-interior .cadus-tarjeta:nth-child(4n+2) { background: var(--oro); color: var(--granate-os); }
+.cadus-interior .cadus-tarjeta:nth-child(4n+3) { background: var(--tinta); color: var(--papel); }
+.cadus-interior .cadus-tarjeta h3 { margin: 0; font: 900 clamp(1.4rem, 2.4vw, 1.9rem)/1.05 var(--fuente); letter-spacing: -0.02em; color: inherit; }
+.cadus-interior .cadus-tarjeta h3 a, .cadus-interior .cadus-tarjeta h3 a:hover, .cadus-interior .cadus-tarjeta h3 a:visited { color: inherit; text-decoration: none; }
+.cadus-interior .cadus-tarjeta p { margin: 0; color: inherit; }
+.cadus-interior .cadus-tarjeta .cadus-boton { align-self: flex-start; margin: auto 0 0; }
+.cadus-interior .cadus-tarjeta:nth-child(4n+2) .cadus-boton { background: var(--granate); color: var(--papel) !important; }
+.cadus-interior .cadus-meta { color: inherit; opacity: 0.85; font-weight: 700; font-size: 0.95rem; }
+
+/* ------------------------------------------------------------------ chips, campos y filtros */
+.cadus-interior a.cadus-chip, .cadus-interior a.cadus-chip:hover, .cadus-interior a.cadus-chip:visited, .cadus-interior span.cadus-chip { display: inline-flex; align-items: center; text-decoration: none; color: var(--granate); }
+.cadus-interior .cadus-filtros-tipo, .cadus-interior .cadus-paginacion { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 24px; max-width: 1240px; }
+.cadus-interior .cadus-chip { background: var(--gris); }
+.cadus-interior .cadus-chip[aria-current="true"], .cadus-interior .cadus-chip[aria-current="page"],
+.cadus-interior a.cadus-chip[aria-current="true"]:hover { background: var(--granate); color: var(--papel); }
+.cadus-interior button.cadus-boton, .cadus-interior button.cadus-boton:hover, .cadus-interior button.cadus-boton:focus { background: var(--oro); color: var(--granate-os) !important; }
+.cadus-interior .cadus-filtros-form .cadus-boton, .cadus-interior .cadus-filtros-form .cadus-boton:hover, .cadus-interior .cadus-filtros-form .cadus-boton:focus { background: var(--granate); color: var(--papel) !important; min-height: 52px; }
+.cadus-filtros-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 0 0 32px; max-width: 1240px; }
+.cadus-filtros-form label { display: grid; gap: 6px; font-weight: 800; color: var(--granate-os); }
+.cadus-campo,
+.cadus-interior .entry-content input[type="text"],
+.cadus-interior .entry-content input[type="email"],
+.cadus-interior .entry-content input[type="search"],
+.cadus-interior .entry-content select,
+.cadus-interior .entry-content textarea {
+  min-height: 52px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radio);
+  background: var(--gris);
+  color: var(--tinta);
+  font: 600 1.05rem var(--fuente);
+  box-sizing: border-box;
+}
+.cadus-interior .entry-content textarea { padding: 14px 18px; min-height: 140px; }
+.cadus-campo:focus-visible, .cadus-interior .entry-content input:focus-visible, .cadus-interior .entry-content select:focus-visible,
+.cadus-interior .entry-content textarea:focus-visible { outline: 3px solid var(--granate); outline-offset: 2px; }
+.cadus-vacio { padding: 28px; border-radius: var(--radio); background: var(--gris); font-size: 1.15rem; font-weight: 700; }
+
+/* ------------------------------------------------------------------ directorio de delegaciones */
+.cadus-centros { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; max-width: 1240px; margin: 0; }
+.cadus-centro { display: flex; flex-direction: column; gap: 16px; padding: clamp(22px, 3vw, 36px); border-radius: var(--radio); background: var(--gris); color: var(--tinta); }
+.cadus-centro:nth-child(6n+1) { background: var(--granate); color: var(--papel); }
+.cadus-centro:nth-child(6n+2) { background: var(--oro); color: var(--granate-os); }
+.cadus-centro:nth-child(6n+3) { background: var(--tinta); color: var(--papel); }
+.cadus-centro:nth-child(6n+4) { background: var(--granate-os); color: var(--papel); }
+.cadus-centro:nth-child(6n+6) { background: var(--oro); color: var(--granate-os); }
+.cadus-interior .entry-content .cadus-centro__titulo { margin: 0; font: 900 clamp(1.5rem, 2.8vw, 2.3rem)/1 var(--fuente); letter-spacing: -0.02em; color: inherit; }
+.cadus-delegaciones { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cadus-delegacion-card { margin: 0; }
+.cadus-delegacion-card__enlace, .cadus-delegacion-card__enlace:hover, .cadus-delegacion-card__enlace:visited {
+  display: flex; flex-direction: column; gap: 4px; padding: 18px 20px; border-radius: var(--radio);
+  background: var(--papel); color: var(--granate-os); text-decoration: none; transition: transform 200ms var(--ease-out);
+}
+.cadus-delegacion-card__enlace:focus-visible { outline: 3px solid var(--tinta); outline-offset: -6px; }
+.cadus-interior .cadus-tarjeta :focus-visible, .cadus-interior .cadus-resultado :focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
+.cadus-interior .cadus-tarjeta:nth-child(4n+2) :focus-visible { outline-color: var(--tinta); }
+.cadus-delegacion-card__enlace, .cadus-delegacion-card__nombre, .cadus-delegacion-card__meta { min-width: 0; overflow-wrap: anywhere; }
+.cadus-delegacion-card__nombre { font-weight: 900; font-size: 1.15rem; line-height: 1.15; }
+.cadus-delegacion-card__meta { font-size: 0.98rem; color: #4b5157; }
+.cadus-delegacion-card__ver { margin-top: 4px; font-weight: 800; color: var(--granate); }
+
+/* ------------------------------------------------------------------ actas y normativa (tabla) */
+.cadus-interior .cadus-tabla { width: 100%; max-width: 1240px; border-collapse: separate; border-spacing: 0 6px; font-size: 1.05rem; }
+.cadus-interior .cadus-tabla th { padding: 14px 18px; border: 0; background: var(--granate); color: var(--papel); font-weight: 800; text-align: left; }
+.cadus-interior .cadus-tabla th:first-child { border-radius: var(--radio) 0 0 var(--radio); }
+.cadus-interior .cadus-tabla th:last-child { border-radius: 0 var(--radio) var(--radio) 0; }
+.cadus-interior .cadus-tabla td { padding: 16px 18px; border: 0; background: var(--gris); }
+.cadus-interior .cadus-tabla td:first-child { border-radius: var(--radio) 0 0 var(--radio); font-variant-numeric: tabular-nums; font-weight: 700; }
+.cadus-interior .cadus-tabla td:last-child { border-radius: 0 var(--radio) var(--radio) 0; }
+.cadus-descarga, .cadus-descarga:hover, .cadus-descarga:visited { display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 8px 14px; border-radius: var(--radio); background: var(--oro); color: var(--granate-os); font-weight: 800; text-decoration: none; transition: transform 160ms var(--ease-out); }
+.cadus-descarga:active { transform: scale(0.97); }
+.cadus-descarga:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
+
+/* ------------------------------------------------------------------ fichas (acta, delegación) y resultados */
+.cadus-interior .entry-content > .cadus-ficha, .cadus-interior .entry-content > .cadus-resultado { max-width: 760px; }
+.cadus-ficha { display: grid; gap: 8px; max-width: 760px; margin: 0 0 28px; padding: 0; }
+.cadus-ficha__fila { display: grid; grid-template-columns: minmax(130px, 220px) 1fr; gap: 16px; padding: 16px 20px; border-radius: var(--radio); background: var(--gris); }
+.cadus-ficha dt { font-weight: 900; color: var(--granate); }
+.cadus-ficha dd { margin: 0; font-size: 1.1rem; overflow-wrap: anywhere; }
+.cadus-resultado { max-width: 760px; padding: 24px 28px; border-radius: var(--radio); background: var(--granate); color: var(--papel); }
+.cadus-resultado { overflow-wrap: anywhere; }
+.cadus-interior .entry-content .cadus-resultado :is(h3, h4) { color: var(--oro); overflow-wrap: anywhere; }
+
+/* ------------------------------------------------------------------ Fluent Forms (buzón, mediación) */
+.cadus-interior .fluentform { --fluentform-danger: #a4111f; max-width: 760px; padding: clamp(22px, 3vw, 36px); border-radius: var(--radio); background: var(--gris); }
+.cadus-interior .fluentform .ff-el-input--label label { font-weight: 800; color: var(--granate-os); }
+.cadus-interior .entry-content .fluentform .ff-el-form-control { transition: none; min-height: 52px; padding: 0 18px; border: 0; border-radius: var(--radio); background: var(--papel); color: var(--tinta); font: 600 1.05rem var(--fuente); box-shadow: none; }
+.cadus-interior .entry-content .fluentform textarea.ff-el-form-control { padding: 14px 18px; }
+.cadus-interior .fluentform .ff-el-form-control::placeholder { color: #4b5157; opacity: 1; }
+.cadus-interior .fluentform .ff-el-form-control:focus { outline: 3px solid var(--granate); outline-offset: 2px; box-shadow: none; }
+.cadus-interior .fluentform .ff-btn-submit { min-height: 54px; padding: 0 32px; border: 0; border-radius: var(--radio); background: var(--granate) !important; color: var(--papel) !important; font: 800 1.05rem var(--fuente); cursor: pointer; transition: transform 160ms var(--ease-out); }
+.cadus-interior .fluentform .ff-btn-submit:active { transform: scale(0.97); }
+.cadus-interior .fluentform .ff-btn-submit:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+.cadus-interior .fluentform .text-danger, .cadus-interior .fluentform .error { color: #a4111f; font-weight: 700; }
+.cadus-interior .ff-message-success { box-shadow: none; padding: 24px 28px; border: 0; border-radius: var(--radio); background: var(--granate); color: var(--papel); font-weight: 700; }
+
+/* ------------------------------------------------------------------ entradas, archivos, búsqueda y 404 */
+.cadus-interior.single .entry-content { font-size: 1.12rem; line-height: 1.65; }
+.cadus-interior.single .hero-section .page-title { font-size: clamp(2rem, 4.6vw, 4rem); }
+.cadus-interior .entries { gap: 8px; }
+.cadus-interior .entry-card, .cadus-interior article.entry-card { padding: 24px; border-radius: var(--radio); background: var(--gris); }
+.cadus-interior .entry-card .entry-title a { color: var(--granate); font-weight: 900; text-decoration: none; }
+
+/* ------------------------------------------------------------------ pie global (contacto) */
+.cadus-interior .ct-footer { display: none; }
+.cadus-interior .cadus-seccion--contacto { width: 100%; max-width: none; margin: 0; padding-inline: var(--margen); box-sizing: border-box; }
+
+/* ------------------------------------------------------------------ calendario (The Events Calendar) */
+.cadus-interior .tribe-common, .cadus-interior .tribe-events {
+  --tec-color-accent-primary: #8d0739;
+  --tec-color-accent-primary-hover: #6b052b;
+  --tec-color-accent-primary-active: #6b052b;
+  --tec-color-link-accent: #8d0739;
+  --tec-color-link-accent-hover: #6b052b;
+  --tec-font-family-sans-serif: var(--fuente);
+}
+.cadus-interior .tribe-events-header__title, .cadus-interior .tribe-events-calendar-list__event-title { font-family: var(--fuente); font-weight: 900; letter-spacing: -0.02em; }
+.cadus-interior .tribe-events { padding-inline: var(--margen); padding-block: 40px; box-sizing: border-box; }
+
+/* ------------------------------------------------------------------ movimiento y pantallas */
+@media (hover: hover) and (pointer: fine) {
+  .cadus-delegacion-card__enlace:hover { transform: translateY(-2px); }
+  .cadus-descarga:hover { transform: translateY(-1px); }
+}
+.cadus-delegacion-card__enlace:active { transform: scale(0.98); }
+.cadus-descarga:hover:active { transform: scale(0.97); }
+@media (max-width: 1000px) {
+  .cadus-centros { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .cadus-interior .hero-section .entry-header { padding-right: 0; }
+  .cadus-interior .hero-section::before, .cadus-interior .hero-section::after { display: none; }
+}
+@media (max-width: 760px) {
+  .cadus-interior .entry-content > p, .cadus-interior .entry-content > ul, .cadus-interior .entry-content > ol,
+  .cadus-interior .entry-content > .cadus-aviso, .cadus-interior .entry-content > .cadus-tarjetas { margin-left: 0 !important; }
+  .cadus-ficha__fila { grid-template-columns: 1fr; gap: 4px; }
+  /* tabla de actas apilada: cada celda lleva su etiqueta (data-label) */
+  .cadus-interior .cadus-tabla thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .cadus-interior .cadus-tabla, .cadus-interior .cadus-tabla tbody, .cadus-interior .cadus-tabla tr, .cadus-interior .cadus-tabla td { display: block; width: 100%; }
+  .cadus-interior .cadus-tabla tr { margin-bottom: 8px; border-radius: var(--radio); background: var(--gris); overflow: hidden; }
+  .cadus-interior .cadus-tabla td, .cadus-interior .cadus-tabla td:first-child, .cadus-interior .cadus-tabla td:last-child { display: flex; justify-content: space-between; gap: 16px; border-radius: 0; background: transparent; }
+  .cadus-interior .cadus-tabla td::before { content: attr(data-label); font-weight: 800; color: var(--granate); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cadus-interior .hero-section::before, .cadus-interior .hero-section::after { animation: cadus-fundido 200ms ease both; }
+  .cadus-delegacion-card__enlace, .cadus-delegacion-card__enlace:active, .cadus-descarga:hover:active, .cadus-delegacion-card__enlace:hover, .cadus-descarga, .cadus-descarga:hover, .cadus-descarga:active,
+  .cadus-interior .fluentform .ff-btn-submit, .cadus-interior .fluentform .ff-btn-submit:active { transform: none; transition: none; }
+}
+
+/* el autor de la publicación no se muestra: firma el CADUS (ver includes/estilo.php) */
+.cadus-interior .entry-meta .meta-author { display: none; }

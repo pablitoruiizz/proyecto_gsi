@@ -584,10 +584,10 @@ function cadus_buzon_resultado_seguimiento(): string
 {
     global $wpdb;
     if (!wp_verify_nonce(cadus_buzon_input($_POST, 'cadus_seguimiento_nonce'), 'cadus_seguimiento')) {
-        return '<p role="alert">' . esc_html('La sesión del formulario ha caducado. Recarga la página e inténtalo de nuevo.') . '</p>';
+        return '<p class="cadus-aviso" role="alert">' . esc_html('La sesión del formulario ha caducado. Recarga la página e inténtalo de nuevo.') . '</p>';
     }
     if (!cadus_buzon_permitir_intento()) {
-        return '<p role="alert">' . esc_html('Has alcanzado el límite de consultas. Espera 15 minutos antes de volver a intentarlo.') . '</p>';
+        return '<p class="cadus-aviso" role="alert">' . esc_html('Has alcanzado el límite de consultas. Espera 15 minutos antes de volver a intentarlo.') . '</p>';
     }
     $code = strtoupper(cadus_buzon_input($_POST, 'cadus_codigo'));
     $raw_email = isset($_POST['cadus_correo']) && is_string($_POST['cadus_correo']) ? wp_unslash($_POST['cadus_correo']) : '';
@@ -606,7 +606,7 @@ function cadus_buzon_resultado_seguimiento(): string
     // Hashes de longitud fija: también se compara si el código no existe.
     $email_ok = hash_equals(hash('sha256', strtolower((string) ($ticket->correo ?? ''))), hash('sha256', $email));
     if (!$ticket || $email === '' || !$email_ok) {
-        return '<p role="status">' . esc_html('No hemos encontrado ningún ticket con esos datos') . '</p>';
+        return '<p class="cadus-aviso" role="status">' . esc_html('No hemos encontrado ningún ticket con esos datos') . '</p>';
     }
     $subject = $ticket->post_title;
     $prefix = '[' . $code . '] ';
@@ -618,7 +618,7 @@ function cadus_buzon_resultado_seguimiento(): string
         'Tipo' => (string) get_post_meta($ticket->ID, '_cadus_tipo', true), 'Asunto' => $subject,
         'Estado' => cadus_buzon_estados()[$state] ?? 'Desconocido', 'Fecha' => $ticket->post_date,
     ];
-    $html = '<section aria-label="' . esc_attr('Resultado del seguimiento') . '"><h3>' . esc_html($code) . '</h3><dl>';
+    $html = '<section class="cadus-resultado" aria-label="' . esc_attr('Resultado del seguimiento') . '"><h3>' . esc_html($code) . '</h3><dl>';
     foreach ($details as $label => $value) {
         $html .= '<dt>' . esc_html($label) . '</dt><dd>' . esc_html($value) . '</dd>';
     }
@@ -643,9 +643,9 @@ function cadus_buzon_seguimiento_shortcode(): string
         . wp_nonce_field('cadus_seguimiento', 'cadus_seguimiento_nonce', false, false)
         . '<input type="hidden" name="cadus_seguimiento_enviar" value="1">'
         . '<p><label for="' . esc_attr($id . '_codigo') . '">' . esc_html('Código de seguimiento') . '</label> '
-        . '<input id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="62" placeholder="Código recibido al enviar" required></p>'
+        . '<input class="cadus-campo" id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="62" placeholder="Código recibido al enviar" required></p>'
         . '<p><label for="' . esc_attr($id . '_correo') . '">' . esc_html('Correo universitario') . '</label> '
-        . '<input id="' . esc_attr($id . '_correo') . '" name="cadus_correo" type="email" maxlength="254" required></p>'
+        . '<input class="cadus-campo" id="' . esc_attr($id . '_correo') . '" name="cadus_correo" type="email" maxlength="254" required></p>'
         . '<button type="submit">' . esc_html('Consultar seguimiento') . '</button></form>';
     return $html;
 }

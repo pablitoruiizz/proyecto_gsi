@@ -1,0 +1,690 @@
+[
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/mediacion-estudiantil/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Mediación estudiantil"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\00.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-facultad-de-psicologia/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Facultad de Psicología"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\01.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-facultad-de-matematicas/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Facultad de Matemáticas"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\02.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/acta/acta-del-pleno-ordinario-ejemplo/",
+    "tipo": "cadus_acta",
+    "status": 200,
+    "h1": [
+      "Acta del pleno ordinario (ejemplo)"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\03.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/acta/reglamento-interno-ejemplo/",
+    "tipo": "cadus_acta",
+    "status": 200,
+    "h1": [
+      "Reglamento interno (ejemplo)"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\04.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-escuela-tecnica-superior-de-ingenieria-informatica/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Escuela Técnica Superior de Ingeniería Informática"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\05.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-facultad-de-derecho/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Facultad de Derecho"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\06.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-facultad-de-ciencias-de-la-educacion/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Facultad de Ciencias de la Educación"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\07.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegacion/delegacion-de-facultad-de-filologia/",
+    "tipo": "cadus_delegacion",
+    "status": 200,
+    "h1": [
+      "Delegación de Facultad de Filología"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\08.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/seguimiento-de-ticket/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Seguimiento de ticket"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\09.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/preguntas-frecuentes/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Preguntas frecuentes"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\10.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/contacto/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Contacto"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\11.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/que-es-el-cadus/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Qué es el CADUS"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\12.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/que-es-el-cadus/gobierno-y-estatutos/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Gobierno y estatutos"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\13.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/noticias/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Noticias y comunicados"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\14.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/actas-y-normativa/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Actas y normativa"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\15.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegaciones/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Delegaciones de alumnos"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\16.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Atención al estudiante"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\17.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/buzon-de-consultas/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Buzón de consultas y reclamaciones"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\18.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/",
+    "tipo": "page",
+    "status": 200,
+    "h1": [
+      "Inicio",
+      "La voz del alumnado de la Universidad de Sevilla"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\19.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/comunicado-de-ejemplo-sobre-becas/",
+    "tipo": "post",
+    "status": 200,
+    "h1": [
+      "Comunicado de ejemplo sobre becas"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\20.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/comunicado-de-ejemplo-sobre-movilidad/",
+    "tipo": "post",
+    "status": 200,
+    "h1": [
+      "Comunicado de ejemplo sobre movilidad"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\21.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/comunicado-de-ejemplo-sobre-normativa/",
+    "tipo": "post",
+    "status": 200,
+    "h1": [
+      "Comunicado de ejemplo sobre normativa"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\22.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/comunicado-de-ejemplo-sobre-eventos/",
+    "tipo": "post",
+    "status": 200,
+    "h1": [
+      "Comunicado de ejemplo sobre eventos"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\23.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/actas/",
+    "tipo": "archivo",
+    "status": 200,
+    "h1": [
+      "Archivos Actas y normativas"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\24.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/delegaciones-centro/",
+    "tipo": "archivo",
+    "status": 200,
+    "h1": [
+      "Archivos Delegaciones"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\25.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/?s=CADUS",
+    "tipo": "busqueda",
+    "status": 200,
+    "h1": [
+      "Search Results for CADUS"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\26.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/codex-interior-no-existe-404/",
+    "tipo": "404",
+    "status": 404,
+    "h1": [
+      "Oops! That page can’t be found."
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\27.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/events/",
+    "tipo": "eventos",
+    "status": 200,
+    "h1": [
+      "Calendario de asambleas y eventos",
+      "Eventos"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\28.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/noticias/?q=codex-sin-resultados-908127",
+    "tipo": "vacio",
+    "status": 200,
+    "h1": [
+      "Noticias y comunicados"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\29.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/actas-y-normativa/?tipo=normativa",
+    "tipo": "filtro",
+    "status": 200,
+    "h1": [
+      "Actas y normativa"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\30.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/actas-y-normativa/?tipo%5B%5D=acta",
+    "tipo": "entrada-array",
+    "status": 200,
+    "h1": [
+      "Actas y normativa"
+    ],
+    "main": 1,
+    "pie": 1,
+    "pie_en_datos": null,
+    "hero": 1,
+    "migas": 0,
+    "salto": [
+      "#main"
+    ],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\31.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/wp-admin/",
+    "tipo": "admin",
+    "status": 200,
+    "h1": [
+      "Acceder",
+      "Funciona con WordPress"
+    ],
+    "main": 0,
+    "pie": 0,
+    "pie_en_datos": false,
+    "hero": 0,
+    "migas": 0,
+    "salto": [],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\32.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/feed/",
+    "tipo": "feed",
+    "status": 200,
+    "h1": [],
+    "main": 0,
+    "pie": 0,
+    "pie_en_datos": false,
+    "hero": 0,
+    "migas": 0,
+    "salto": [],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\33.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/?feed=rss2&post_type=page",
+    "tipo": "feed",
+    "status": 200,
+    "h1": [],
+    "main": 0,
+    "pie": 0,
+    "pie_en_datos": false,
+    "hero": 0,
+    "migas": 0,
+    "salto": [],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\34.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/wp-json/wp/v2/pages?per_page=100",
+    "tipo": "rest",
+    "status": 200,
+    "h1": [],
+    "main": 0,
+    "pie": 0,
+    "pie_en_datos": false,
+    "hero": 0,
+    "migas": 0,
+    "salto": [],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\35.html"
+  },
+  {
+    "url": "http://localhost/proyecto_gsi/cms-wordpress/wp-json/wp/v2/posts",
+    "tipo": "rest",
+    "status": 200,
+    "h1": [],
+    "main": 0,
+    "pie": 0,
+    "pie_en_datos": false,
+    "hero": 0,
+    "migas": 0,
+    "salto": [],
+    "ids_duplicados": [],
+    "titulos_vacios": 0,
+    "archivo": "C:\\Users\\ruizv\\AppData\\Local\\Temp\\cadus-interiores-9bkfql7p\\36.html"
+  }
+]

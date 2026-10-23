@@ -125,13 +125,13 @@ function cadus_shortcode_noticias(): string
     for ($a = (int) gmdate('Y'); $a >= (int) gmdate('Y') - 5; $a--) {
         $anios .= '<option value="' . $a . '"' . selected($anio, $a, false) . '>' . $a . '</option>';
     }
-    $html = '<form class="cadus-filtros" method="get" action="' . esc_url($base) . '" role="search" aria-label="Filtrar noticias">'
-        . '<label>Palabra clave<br><input type="search" name="q" value="' . esc_attr($q) . '"></label>'
-        . '<label>Categoría<br><select name="cat">' . $opciones . '</select></label>'
-        . '<label>Año<br><select name="anio">' . $anios . '</select></label>'
+    $html = '<form class="cadus-filtros-form" method="get" action="' . esc_url($base) . '" role="search" aria-label="Filtrar noticias">'
+        . '<label>Palabra clave<input class="cadus-campo" type="search" name="q" value="' . esc_attr($q) . '"></label>'
+        . '<label>Categoría<select class="cadus-campo" name="cat">' . $opciones . '</select></label>'
+        . '<label>Año<select class="cadus-campo" name="anio">' . $anios . '</select></label>'
         . '<button type="submit" class="cadus-boton">Filtrar</button></form>';
     if (!$consulta->have_posts()) {
-        return $html . '<p>No hay comunicados que coincidan con el filtro.</p>';
+        return $html . '<p class="cadus-vacio">No hay comunicados que coincidan con el filtro.</p>';
     }
     $html .= '<div class="cadus-tarjetas">';
     foreach ($consulta->posts as $p) {
@@ -142,7 +142,7 @@ function cadus_shortcode_noticias(): string
         'base' => esc_url_raw(add_query_arg('pag', '%#%', $base)), 'format' => '', 'current' => $pag, 'total' => max(1, (int) $consulta->max_num_pages),
         'add_args' => array_filter(['q' => $q, 'cat' => $cat ?: null, 'anio' => $anio ?: null]),
     ]);
-    return $html . ($paginas ? '<nav class="cadus-paginacion">' . $paginas . '</nav>' : '');
+    return $html . cadus_paginacion($paginas);
 }
 
 /* ----------------------------------------------------------------- utilidades de contenido */

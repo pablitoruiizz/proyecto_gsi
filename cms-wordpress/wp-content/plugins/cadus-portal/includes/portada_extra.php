@@ -10,6 +10,8 @@ add_shortcode('cadus_novedades', 'cadus_shortcode_novedades');
 add_shortcode('cadus_eventos', 'cadus_shortcode_eventos');
 add_shortcode('cadus_trabajo', 'cadus_shortcode_trabajo');
 add_shortcode('cadus_contacto', 'cadus_shortcode_contacto');
+add_action('blocksy:footer:before', 'cadus_pie_global');
+add_action('wp_footer', 'cadus_pie_global', 5);
 add_action('transition_post_status', 'cadus_portada_cambio_estado', 10, 3);
 add_action('deleted_post', 'cadus_portada_post_borrado', 10, 2);
 add_action('set_object_terms', 'cadus_portada_cambio_relaciones', 10, 4);
@@ -215,8 +217,28 @@ function cadus_shortcode_trabajo(): string
     return $html . '</div></section>';
 }
 
+/** Pie fuera del main de Blocksy; wp_footer sirve de alternativa en otras plantillas. */
+function cadus_pie_global(): void
+{
+    if (is_admin() || is_feed() || is_embed() || wp_doing_ajax()
+        || (defined('REST_REQUEST') && REST_REQUEST) || !empty($GLOBALS['cadus_contacto_mostrado'])) {
+        return;
+    }
+    $pagina = is_singular() ? get_queried_object() : null;
+    if ($pagina instanceof WP_Post && has_shortcode($pagina->post_content, 'cadus_hero')) {
+        return;
+    }
+    echo '<footer class="cadus-pie-global" aria-label="Contacto del CADUS">'
+        . do_shortcode('[cadus_contacto]') . '</footer>';
+}
+
 function cadus_shortcode_contacto(): string
 {
+    // No insertar el cierre visual del sitio en canales de datos ni en administración.
+    if (is_admin() || is_feed() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) {
+        return '';
+    }
+    $GLOBALS['cadus_contacto_mostrado'] = true;
     $enlaces = [
         ['CADUS', cadus_inicio_url('que-es-el-cadus'), false],
         ['MIC', 'https://www.cadus.us.es/manual-basico-de-identidad-visual-corporativa/', true],
