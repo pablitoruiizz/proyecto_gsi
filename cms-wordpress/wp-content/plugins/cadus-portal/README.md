@@ -12,6 +12,8 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/contenidos.php` | Actas y normativas, delegaciones, campos ACF, directorio y listado de actas | HU-03 a HU-06 · RF-03 a RF-07 · IR-04, IR-05 · UI-03, UI-05 |
 | `includes/buzon.php` | Formulario del buzón, tickets privados, código de seguimiento y consulta de estado (**escrito por Codex**) | HU-07, HU-08 · RF-08, RF-09 · RN-02, RN-03 · UI-04 |
 | `includes/setup.php` | Páginas, menú, noticias de ejemplo, tema Blocksy, paleta y logotipo provisional | HU-01, HU-02, HU-18 · RF-01, RF-02 · UI-01, UI-02 |
+| `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo y su menú de administración | HU-10 · RF-11 · UI-02 |
+| `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)

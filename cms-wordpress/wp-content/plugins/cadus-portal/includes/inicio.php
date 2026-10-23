@@ -115,14 +115,19 @@ function cadus_shortcode_accesos(): string
             sprintf(_n('%s delegación', '%s delegaciones', $datos['cadus_delegacion'], 'cadus-portal'), $datos['cadus_delegacion'])],
         ['buzon', 'atencion-al-estudiante/buzon-de-consultas', 'Buzón de consultas', 'Envía tus dudas o reclamaciones académicas.', 'Con tu correo @alum.us.es'],
         ['seguimiento', 'atencion-al-estudiante/seguimiento-de-ticket', 'Seguimiento de ticket', 'Consulta el estado y las respuestas a tu solicitud.', 'Con tu código y correo'],
-        ['calendario', '', 'Calendario y votaciones', 'Asambleas, eventos y participación estudiantil.', 'En preparación'],
+        // HU-10: con The Events Calendar activo enlaza con el calendario; si no, sigue como «Próximamente».
+        ['calendario', function_exists('cadus_calendario_url') ? cadus_calendario_url() : '', 'Calendario y votaciones',
+            'Asambleas, eventos y participación estudiantil.',
+            function_exists('cadus_calendario_url') && cadus_calendario_url() !== '' ? 'Próximas asambleas y eventos' : 'En preparación'],
     ];
     $html = '<ul class="cadus-accesos">';
     foreach ($accesos as $i => [$icono, $ruta, $titulo, $texto, $meta]) {
         $html .= '<li class="cadus-acceso' . ($ruta === '' ? ' cadus-acceso--pronto' : '') . '"'
             . ($ruta === '' ? ' aria-disabled="true"' : '') . ' data-reveal style="--i:' . esc_attr((string) $i) . '">';
         if ($ruta !== '') {
-            $html .= '<a class="cadus-acceso__enlace" href="' . esc_url(cadus_inicio_url($ruta)) . '">';
+            // Una URL completa (el calendario) se usa tal cual; el resto son rutas de páginas del portal.
+            $url = preg_match('#^https?://#', $ruta) ? $ruta : cadus_inicio_url($ruta);
+            $html .= '<a class="cadus-acceso__enlace" href="' . esc_url($url) . '">';
         } else {
             $html .= '<span class="cadus-acceso__etiqueta">' . esc_html('Próximamente') . '</span>';
         }

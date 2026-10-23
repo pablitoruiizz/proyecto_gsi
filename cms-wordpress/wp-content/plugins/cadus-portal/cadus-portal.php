@@ -25,5 +25,7 @@ require_once CADUS_PORTAL_DIR . 'includes/inicio.php';        // portada inmersi
 require_once CADUS_PORTAL_DIR . 'includes/portada_extra.php'; // presentación, novedades, eventos, trabajo y contacto
 require_once CADUS_PORTAL_DIR . 'includes/galeria.php';       // galería de fotos del CADUS
 require_once CADUS_PORTAL_DIR . 'includes/estilo.php';        // estilos y movimiento
+require_once CADUS_PORTAL_DIR . 'includes/calendario.php';    // calendario de asambleas y eventos (HU-10)
+require_once CADUS_PORTAL_DIR . 'includes/escritorio.php';    // panel de inicio con accesos directos (HU-19b)
 
 register_activation_hook(__FILE__, 'cadus_portal_activar');
