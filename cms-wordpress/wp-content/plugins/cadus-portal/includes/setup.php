@@ -317,7 +317,7 @@ function cadus_portal_configurar(): void
     cadus_pagina('contacto', 'Contacto',
         cadus_b_p('<strong>CADUS – Consejo de Alumnos de la Universidad de Sevilla</strong>')
         . cadus_b_p('Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla')
-        . cadus_b_p('Correo: <a href="mailto:cadus@us.es">cadus@us.es</a>'));
+        . cadus_b_p('Correo: <a href="mailto:dcadus@us.es">dcadus@us.es</a>'));
 
     // Noticias de ejemplo (HU-01): se marcan como ejemplo para sustituirlas por comunicados reales
     $ejemplos = [

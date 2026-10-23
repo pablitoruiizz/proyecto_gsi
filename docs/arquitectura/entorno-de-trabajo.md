@@ -63,6 +63,10 @@ Canal de comunicación diaria y de trabajo a distancia (restricción RC-03). Est
 - **Comunicación:** el anfitrión avisa en `#avisos-servidor` cuando enciende o apaga el servidor; cada integrante escribe en `#daily` su avance y bloqueos, y en el canal de su área lo que afecte a su parte.
 - **Seguridad:** no abrir el puerto de MySQL, no usar la opción "Poner en línea" de Wamp, usar contraseñas fuertes y no compartir `wp-config.php`.
 
+## Dirección del sitio (localhost y Tailscale)
+
+WordPress guarda una sola dirección del sitio (`http://localhost/proyecto_gsi/cms-wordpress`). Quien entra por Tailscale recibiría la página sin estilos, porque los CSS y JS apuntarían a `localhost`, es decir, a su propio ordenador. El mu-plugin [`cms-wordpress/wp-content/mu-plugins/cadus-entorno-tailscale.php`](../../cms-wordpress/wp-content/mu-plugins/cadus-entorno-tailscale.php) lo resuelve: si se entra por `localhost`, por una IP de Tailscale (`100.64.0.0/10`) o por un nombre `*.ts.net`, usa esa misma dirección para estilos, scripts, enlaces e imágenes. No cambia nada en la base de datos ni actúa con un dominio real. Se carga solo (no hay que activarlo) y llega al servidor con `git pull`. Tras instalarlo, vaciar la caché de WP Fastest Cache.
+
 ## Limitaciones conocidas
 
 - El servidor solo está disponible mientras el equipo anfitrión esté encendido, con Wamp en marcha y sin suspender.

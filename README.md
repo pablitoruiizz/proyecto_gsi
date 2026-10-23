@@ -11,7 +11,7 @@ El objetivo es implantar de forma incremental, siguiendo **SCRUM**, tres sistema
 ## 2) Cliente / empresa real
 - **Organización:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
 - **Sector:** Educación Superior / Representación Estudiantil
-- **Persona de contacto (rol):** Delegación General del CADUS (`cadus@us.es`)
+- **Persona de contacto (rol):** Delegación General del CADUS (`dcadus@us.es`)
 - **Ubicación física:** Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla
 
 > [!IMPORTANT]
