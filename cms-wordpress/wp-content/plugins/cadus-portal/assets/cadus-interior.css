@@ -131,8 +131,11 @@
   background: var(--papel); color: var(--granate-os); text-decoration: none; transition: transform 200ms var(--ease-out);
 }
 .cadus-delegacion-card__enlace:focus-visible { outline: 3px solid var(--tinta); outline-offset: -6px; }
-.cadus-interior .cadus-tarjeta :focus-visible, .cadus-interior .cadus-resultado :focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
-.cadus-interior .cadus-tarjeta:nth-child(4n+2) :focus-visible { outline-color: var(--tinta); }
+/* Más específico que «.entry-content a:focus-visible»: blanco sobre granate/tinta, tinta sobre oro/gris. */
+.cadus-interior .entry-content .cadus-resultado :focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
+.cadus-interior .entry-content .cadus-tarjeta :focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+.cadus-interior .entry-content .cadus-tarjeta:nth-child(4n+1) :focus-visible,
+.cadus-interior .entry-content .cadus-tarjeta:nth-child(4n+3) :focus-visible { outline-color: var(--papel); }
 .cadus-delegacion-card__enlace, .cadus-delegacion-card__nombre, .cadus-delegacion-card__meta { min-width: 0; overflow-wrap: anywhere; }
 .cadus-delegacion-card__nombre { font-weight: 900; font-size: 1.15rem; line-height: 1.15; }
 .cadus-delegacion-card__meta { font-size: 0.98rem; color: #4b5157; }

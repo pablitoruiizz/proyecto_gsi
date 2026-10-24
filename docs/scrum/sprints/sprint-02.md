@@ -3,7 +3,7 @@
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla). **Contacto con el cliente:** Miguel Ángel Camacho Martín, que forma parte del CADUS.
 **Periodo:** 19/10/2026 – 25/10/2026 (entrega 2 del CMS, versión final)
-**Estado:** Planificado
+**Estado:** Cerrado. Alcance completado (29 de 29 SP) el 24/10/2026; la entrega 2 es el 25/10/2026
 
 ## Objetivo del Sprint
 
@@ -124,14 +124,14 @@ La diferencia entre el que más y el que menos es de 2 SP. Las tareas `E2-xx` (d
 
 ## Definición de Hecho (DoD) — Sprint 2
 
-- [ ] HU-09 a HU-12 y HU-19 implementadas, probadas por otra persona y con captura.
-- [ ] Contenido de ejemplo sustituido por contenido real validado con el cliente.
-- [ ] Roles Ejecutiva y Delegado asignados a usuarios reales.
-- [ ] Comparativa de al menos tres temas y de al menos tres plugins por tipo, con los obligatorios.
-- [ ] Mockups finales en Figma con descripción.
-- [ ] Burndown del Sprint 2 actualizado **cada día** y sin saltos de última hora.
-- [ ] Trazabilidad REM ↔ análisis ↔ diseño ↔ implementación completa.
-- [ ] Volcado `bd_cadus_v1_sprint2.sql` revisado y subido.
+- [x] HU-09 a HU-12 y HU-19 implementadas y probadas (las pruebas por rol de HU-19c las documenta Álvaro en la PR #32).
+- [ ] Contenido de ejemplo sustituido por contenido real validado con el cliente: pendiente de que el CADUS entregue los textos (ver `docs/cliente/noticias-reales.md`).
+- [ ] Roles asignados a las cuentas reales del CADUS: el cliente decidió cuentas institucionales (una del CADUS y una por delegación); el script está listo y las cuentas se crean al cerrar la entrega.
+- [x] Comparativa de cinco temas (`docs/entrega/comparativa-temas.md`) y de plugins por tipo con los obligatorios (`docs/entrega/datos/plugins.json`).
+- [ ] Mockups finales en Figma con descripción: pendientes (se entregan los mockups del Sprint 1 y capturas de la web final).
+- [ ] Burndown del Sprint 2 actualizado **cada día** y sin saltos de última hora. **No se cumplió**: el burndown se reconstruyó al final con las fechas reales de Git (ver la retrospectiva).
+- [x] Trazabilidad REM ↔ análisis ↔ diseño ↔ implementación en el documento de la entrega (sección 7).
+- [ ] Volcado `bd_cadus_v1_sprint2.sql` revisado y subido (al cerrar la entrega).
 - [ ] Sin secretos, credenciales ni datos personales reales en el repositorio.
 
 ## Fuera del alcance de este Sprint
@@ -147,3 +147,49 @@ HU-14 (móvil), HU-15 (accesibilidad WCAG), HU-16, HU-17 y HU-20 están planific
 | El CADUS tarda en dar contenido real o validar. | Miguel Ángel lo pide el lunes; si no llega a tiempo, se entrega con contenido de ejemplo marcado y la validación como pendiente. |
 | Todo el contacto con el cliente pasa por una sola persona. | Miguel Ángel resume cada reunión en Discord (#scrum) y Pablo, como Product Owner, valida las prioridades. |
 | Dos personas editan el mismo archivo del plugin propio. | Pull antes de empezar, commits pequeños y cada uno trabaja en su archivo (`includes/`). |
+
+## Resultado del Sprint 2
+
+- **Completado:** 29 de 29 SP. Cuatro historias están integradas en `main` y pasan las pruebas automáticas (privacidad de tickets y mediaciones, 0 fallos); HU-19c (2 SP) está terminada en la rama `feature/hu-19c-pruebas-rol` y se integra al fusionar la PR #32.
+
+| Historia | SP | Quién | Fecha de cierre | Qué se entregó |
+|---|---:|---|---|---|
+| HU-19a · HU-09b | 6 | Pablo (con Claude y Codex) | 19/10 | Menús de administración por rol, rol «Ejecutivo del CADUS» sin comentarios y privacidad de los tickets (RN-03) |
+| HU-19b | 3 | Miguel Ángel | 23/10 | Panel de inicio con accesos rápidos según el rol |
+| HU-10 | 3 | Miguel Ángel | 23/10 | Calendario de asambleas y eventos con The Events Calendar |
+| HU-12 | 5 | Álvaro (integrada por Pablo) | 23/10 | Solicitud de mediación estudiantil, privada y con la protección RN-03 |
+| HU-09a | 5 | Marcos | 24/10 | Filtros de tickets, aviso al estudiante por correo sin contenido, FAQ y aviso de privacidad |
+| HU-11 | 5 | Joaquín | 24/10 | Convocatorias de votación vinculadas a una asamblea (RN-05) |
+| HU-19c | 2 | Álvaro | 24/10 | Plan y ejecución de pruebas por rol (PR #32 pendiente de fusionar) |
+
+- **Decisiones del sprint:** se amplió el módulo propio del buzón en lugar de instalar SupportCandy (HU-09); las votaciones publican convocatorias y usan YOP Poll solo como papeleta opcional (no instalado); el cliente decidió **cuentas institucionales** (una del CADUS y una por delegación) en lugar de cuentas personales.
+- **Extras no planificados:** portada y páginas interiores rediseñadas con la identidad de cadus.us.es (logotipo y paleta oficiales), pie global de contacto, bateria de pruebas de privacidad, GitHub Project «CADUS · Scrum».
+
+## Sprint Review (24/10/2026)
+
+Se revisó el incremento sobre el servidor compartido:
+
+1. **Portada:** presentación del 40 aniversario, accesos, noticias con filtros por categoría, eventos del calendario, «Nuestro trabajo», galería, buscador, pasos del buzón y cierre con los datos de contacto.
+2. **Participación:** calendario de eventos, convocatorias de votación y solicitud de mediación.
+3. **Atención al estudiante:** buzón con código de seguimiento largo y aleatorio, panel de tickets con filtros y aviso al estudiante, FAQ y aviso de privacidad.
+4. **Administración:** menús por rol, panel de inicio y cuentas institucionales (script listo).
+
+**Pendiente de validar con el cliente (a través de Miguel Ángel):** textos reales de noticias, actas y delegaciones; los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024); y la lista de cuentas de delegación.
+
+## Retrospectiva
+
+**Qué ha ido bien**
+- La arquitectura por módulos del plugin permitió trabajar en paralelo: calendario, mediación, votaciones y buzón se integraron sin tocarse entre sí (filtros `cadus_menus_admin` y `cadus_barra_nuevos`).
+- La **revisión cruzada** entre Claude y Codex encontró fallos reales antes de entregar (contrastes ilegibles, permisos que se perdían, el autor «root» visible en las fichas) y las baterías de pruebas de privacidad se ampliaron con cada módulo.
+- GitHub Project como fuente única del backlog, con campos de SP, sprint y fecha de cierre.
+
+**Qué ha ido mal**
+- **Se repitió la lección del Sprint 1: el trabajo se concentró al final.** El 79 % de los puntos (23 de 29) se cerró el 23 y el 24 de octubre. El burndown no se actualizó cada día, como se había acordado, y hubo que reconstruirlo con el historial de Git.
+- Una rama (la de mediación) se hizo sobre una copia antigua del plugin y habría eliminado la portada, los menús por rol y el diseño al fusionarse. Se evitó integrando solo su módulo.
+- Varios entregables de documentación (mockups en Figma, entrevista con el cliente, contenido real) no estaban listos al cerrar el sprint.
+
+**Acciones para el próximo sprint**
+1. Actualizar el tablero y el burndown **cada día** (5 minutos en la daily); no cerrar historias «de golpe».
+2. Trabajar siempre desde `git pull` de `main` y abrir una pull request pequeña por historia; nunca copiar carpetas de otro equipo.
+3. Pedir al cliente los contenidos reales al **inicio** del sprint, no al final.
+4. Mantener la batería de pruebas de privacidad como requisito de cierre de cualquier historia que toque datos de estudiantes.

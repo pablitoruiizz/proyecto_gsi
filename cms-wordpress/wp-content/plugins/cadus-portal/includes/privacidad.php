@@ -135,6 +135,14 @@ add_filter('rest_pre_dispatch', function ($result, $server, WP_REST_Request $req
     return $result;
 }, 10, 3);
 
+/** La mediateca (AJAX get-attachment) tampoco usa WP_Query: se corta antes que el controlador del núcleo. */
+add_action('wp_ajax_get-attachment', function () {
+    $post = get_post((int) ($_REQUEST['id'] ?? 0));
+    if ($post && cadus_privacidad_tipo(get_post_type($post->post_parent))) {
+        wp_send_json_error(null, 404);
+    }
+}, 0);
+
 /** Guarda los datos solo en memoria, antes de cualquier INSERT de Fluent Forms. */
 function cadus_privacidad_capturar_ff($data, $form_id)
 {

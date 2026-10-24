@@ -22,7 +22,10 @@ for arg in sys.argv[1:]:
     gh("project", "item-edit", "--id", it["id"], "--project-id", proyecto["id"], "--field-id", campos["Status"]["id"], "--single-select-option-id", estados[estado])
     if fecha:
         gh("project", "item-edit", "--id", it["id"], "--project-id", proyecto["id"], "--field-id", campos["Cierre"]["id"], "--date", fecha)
+    num = str(it["content"]["number"])
     if estado == "Done":
-        num = it["content"]["number"]
-        gh("issue", "close", str(num), "-R", f"{DUENO}/proyecto_gsi", "--reason", "completed")
+        gh("issue", "close", num, "-R", f"{DUENO}/proyecto_gsi", "--reason", "completed")
+    else:  # reabrir trabajo: la issue vuelve a abrirse y se borra la fecha de cierre
+        gh("issue", "reopen", num, "-R", f"{DUENO}/proyecto_gsi")
+        gh("project", "item-edit", "--id", it["id"], "--project-id", proyecto["id"], "--field-id", campos["Cierre"]["id"], "--clear")
     print(clave, "→", estado, fecha)

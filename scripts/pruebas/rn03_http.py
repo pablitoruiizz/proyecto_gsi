@@ -67,6 +67,8 @@ def main():
                     tasks.append((role, path, auth, 'direct'))
                 for path in public:
                     tasks.append((role, path, auth, 'public'))
+            if not (role.startswith('cadus_ejecutiva') or role == 'administrator'):
+                tasks.append((role, f'/wp-admin/admin-ajax.php?action=get-attachment&id={attachment}', auth, 'ajax'))
             if auth:
                 for path in ['/wp-admin/edit.php?post_type=cadus_ticket', f'/wp-admin/post.php?post={tid}&action=edit', '/wp-admin/index.php']:
                     tasks.append((role, path, auth, 'admin'))
@@ -77,14 +79,24 @@ def main():
             allowed = role.startswith('cadus_ejecutiva') or role == 'administrator'
             if kind == 'admin' and allowed:
                 ok = status == 200
-                if 'edit.php' in path or 'index.php' in path:
+                if 'post.php?' in path:  # control positivo: la edición autorizada muestra el ticket
+                    falta = [s for s in ['RN03-CODEX-SECRETO', state['code']] if s not in body]
+                    ok = ok and not falta
+                    if falta:
+                        print('  falta en la edición autorizada:', falta)
+                else:
                     ok = ok and not any(s in body for s in ['RN03-CODEX-SECRETO', 'RN03-CODEX-ASUNTO', 'prueba@alum.us.es'])
+                    if 'edit.php' in path:
+                        ok = ok and state['code'] in body
             else:
-                ok = not any(s.lower() in body.lower() for s in forbidden)
+                # Un error de servidor no prueba nada: un 500 sin los textos no cuenta como correcto.
+                ok = status < 500 and not any(s.lower() in body.lower() for s in forbidden)
                 if kind == 'direct':
                     ok = ok and status in (403, 404)
                 if kind == 'admin' and 'index.php' not in path:
                     ok = ok and status == 403
+                if kind == 'ajax':  # get-attachment de un adjunto de ticket (revisión Codex)
+                    ok = ok and status in (400, 403, 404)
             return role + ' ' + path, ok, 'HTTP ' + str(status)
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:

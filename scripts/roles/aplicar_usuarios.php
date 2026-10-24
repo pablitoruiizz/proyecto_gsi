@@ -56,6 +56,7 @@ if (!$filas) {
 }
 
 $errores = 0;
+$vistos = [];
 foreach ($filas as $fila) {
     $login = sanitize_user($fila['usuario'] ?? '', true);
     $correo = sanitize_email($fila['correo'] ?? '');
@@ -64,9 +65,15 @@ foreach ($filas as $fila) {
     $titulo = ($fila['delegacion'] ?? '') !== '' ? $fila['delegacion'] : ($fila['nombre'] ?? '');
     $ficha = $por_titulo[mb_strtolower($titulo)] ?? null;
     $existente = get_user_by('login', $login) ?: get_user_by('email', $correo);
+    $por_correo = get_user_by('email', $correo);
     $problema = '';
     if ($login === '' || !is_email($correo)) {
         $problema = 'usuario o correo no válidos';
+    } elseif (isset($vistos['u:' . $login]) || isset($vistos['c:' . strtolower($correo)])) {
+        $problema = 'usuario o correo repetido en el CSV';
+    } elseif ($existente && (strcasecmp($existente->user_login, $login) !== 0 || strcasecmp($existente->user_email, $correo) !== 0)
+        && ($por_correo || get_user_by('login', $login))) {
+        $problema = "no coincide con la cuenta existente «{$existente->user_login}» ({$existente->user_email}): revisa usuario y correo";
     } elseif ($rol === '') {
         $problema = 'rol desconocido (usa ejecutivo, delegado o estudiante)';
     } elseif ($existente && in_array('administrator', $existente->roles, true)) {
@@ -77,6 +84,7 @@ foreach ($filas as $fila) {
         echo "  ✗ {$login}: {$problema}\n";
         continue;
     }
+    $vistos['u:' . $login] = $vistos['c:' . strtolower($correo)] = true;
     echo '  ' . ($existente ? '↻ actualizar ' : '+ crear ') . "{$login} ({$correo}) → {$rol}"
         . ($rol === 'cadus_delegado' ? ($ficha ? " · ficha «{$ficha->post_title}»" : " · ⚠ no hay ninguna ficha titulada «{$titulo}»: se asignará al volver a ejecutar cuando exista") : '') . "\n";
     if (!$aplicar) {

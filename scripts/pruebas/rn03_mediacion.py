@@ -69,7 +69,8 @@ def main():
                 if 'index.php' not in path:
                     ok = ok and 'no-store' in headers.get('Cache-Control', '')
             else:
-                ok = not any(s.lower() in body.lower() for s in forbidden)
+                # Un error de servidor no prueba nada: un 500 sin los textos no cuenta como correcto.
+                ok = status < 500 and not any(s.lower() in body.lower() for s in forbidden)
                 if kind == 'direct':
                     ok = ok and status in (403, 404)
                 if kind == 'admin' and 'index.php' not in path:

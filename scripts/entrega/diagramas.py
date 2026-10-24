@@ -274,10 +274,8 @@ def mockup_acta():
 
 
 # ---------------------------------------------------------------- burndown
-def burndown():
-    inicio, fin = dt.date(2026, 9, 28), dt.date(2026, 10, 18)
-    total = 70
-    hechos = {dt.date(2026, 9, 28): (5, "PB-002"), dt.date(2026, 10, 5): (5, "PB-005"), dt.date(2026, 10, 18): (60, "PB-006, PB-007, PB-008 y HU-01 a HU-08, HU-13, HU-18")}
+def burndown(sprint, inicio, fin, total, hechos):
+    """Genera el CSV y la gráfica de un sprint. hechos = {fecha: (SP cerrados ese día, texto)}."""
     dias = [(inicio + dt.timedelta(d)) for d in range((fin - inicio).days + 1)]
     n = len(dias) - 1
     filas, restante = [], total
@@ -285,11 +283,11 @@ def burndown():
         if d in hechos:
             restante -= hechos[d][0]
         filas.append((d.isoformat(), round(total * (1 - i / n), 1), restante, hechos.get(d, (0, ""))[1]))
-    with open(os.path.join(BURN, "sprint-01.csv"), "w", newline="", encoding="utf-8") as f:
+    with open(os.path.join(BURN, f"sprint-0{sprint}.csv"), "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["fecha", "ideal_sp", "real_sp", "tareas_completadas"])
         w.writerows(filas)
-    print("generado docs/scrum/burndown/sprint-01.csv")
+    print(f"generado docs/scrum/burndown/sprint-0{sprint}.csv")
     fig, ax = plt.subplots(figsize=(10, 5), dpi=110)
     x = list(range(len(dias)))
     ax.plot(x, [r[1] for r in filas], "--", color="#888", label="Ideal")
@@ -298,17 +296,30 @@ def burndown():
     for i, r in enumerate(filas):
         if r[3]:
             ax.annotate(r[3], (i, r[2]), textcoords="offset points", xytext=(6, 8), fontsize=8, color=ROJO)
-    ax.set_xticks(x[::3])
-    ax.set_xticklabels([dias[i].strftime("%d/%m") for i in x[::3]])
-    ax.set_xlabel("Días del Sprint 1 (28/09 – 18/10/2026)")
+    paso = 3 if len(x) > 10 else 1
+    ax.set_xticks(x[::paso])
+    ax.set_xticklabels([dias[i].strftime("%d/%m") for i in x[::paso]])
+    ax.set_xlabel(f"Días del Sprint {sprint} ({inicio:%d/%m} – {fin:%d/%m/%Y})")
     ax.set_ylabel("Puntos de historia pendientes")
-    ax.set_title("Burndown chart — Sprint 1 (alcance: 70 SP)", fontweight="bold", color=AZUL)
+    ax.set_title(f"Burndown chart — Sprint {sprint} (alcance: {total} SP)", fontweight="bold", color=AZUL)
     ax.set_ylim(0, total + 5)
     ax.grid(alpha=0.25)
     ax.legend()
-    fig.savefig(os.path.join(IMG, "burndown-sprint1.png"), bbox_inches="tight", facecolor="white")
+    fig.savefig(os.path.join(IMG, f"burndown-sprint{sprint}.png"), bbox_inches="tight", facecolor="white")
     plt.close(fig)
-    print("generado burndown-sprint1.png")
+    print(f"generado burndown-sprint{sprint}.png")
+
+
+def burndowns():
+    burndown(1, dt.date(2026, 9, 28), dt.date(2026, 10, 18), 70, {
+        dt.date(2026, 9, 28): (5, "PB-002"), dt.date(2026, 10, 5): (5, "PB-005"),
+        dt.date(2026, 10, 18): (60, "PB-006, PB-007, PB-008 y HU-01 a HU-08, HU-13, HU-18")})
+    # Sprint 2: fechas reales según el historial de Git y las pull requests (19/10: HU-19a y HU-09b;
+    # 23/10: HU-19b, HU-10 y HU-12 integradas en main; 24/10: HU-09a, HU-11 y HU-19c).
+    burndown(2, dt.date(2026, 10, 19), dt.date(2026, 10, 25), 29, {
+        dt.date(2026, 10, 19): (6, "HU-19a, HU-09b"),
+        dt.date(2026, 10, 23): (11, "HU-19b, HU-10, HU-12"),
+        dt.date(2026, 10, 24): (12, "HU-09a, HU-11, HU-19c")})
 
 
 if __name__ == "__main__":
@@ -319,4 +330,4 @@ if __name__ == "__main__":
     mockup_directorio()
     mockup_buzon()
     mockup_acta()
-    burndown()
+    burndowns()

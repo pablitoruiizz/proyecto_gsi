@@ -50,7 +50,8 @@ def sin_fugas(nombre, ruta, secretos=None):
     así que ahí se comprueban solo los datos que NO forman parte de la consulta."""
     estado, cuerpo, _ = pedir(ruta)
     fugas = [s for s in (secretos or SECRETOS) if s.lower() in cuerpo.lower()]
-    comprobar(nombre, not fugas, f"HTTP {estado}" + (f", fuga: {fugas}" if fugas else ""))
+    # Un error de servidor no prueba nada: un 500 sin los textos no cuenta como correcto.
+    comprobar(nombre, estado < 500 and not fugas, f"HTTP {estado}" + (f", fuga: {fugas}" if fugas else ""))
     return estado, cuerpo
 
 

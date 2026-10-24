@@ -113,7 +113,8 @@ def main():
 
     # 3. issues + elementos del proyecto
     ya = {x["title"]: x for x in gh("issue", "list", "-R", repo, "--state", "all", "--limit", "200", "--json", "title,url,state", json_salida=True)}
-    en_proyecto = {x["content"].get("url") for x in gh("project", "item-list", num, "--owner", DUENO, "--format", "json", "--limit", "200", json_salida=True)["items"] if x.get("content")}
+    # url → elemento del proyecto (con sus campos), para completar los que quedaron a medias en una ejecución anterior
+    en_proyecto = {x["content"]["url"]: x for x in gh("project", "item-list", num, "--owner", DUENO, "--format", "json", "--limit", "200", json_salida=True)["items"] if x.get("content", {}).get("url")}
     for it in items:
         corto = it["texto"] if len(it["texto"]) < 90 else it["texto"][:87] + "…"
         titulo = f"{it['id']} · {corto}"
@@ -132,18 +133,25 @@ def main():
             url = gh(*args).splitlines()[-1]
             if it["estado"] == "Hecho":
                 gh("issue", "close", url, "--reason", "completed")
-        if url in en_proyecto:
-            continue
-        item = gh("project", "item-add", num, "--owner", DUENO, "--url", url, "--format", "json", json_salida=True)
+        existente = en_proyecto.get(url) or {}
+        if existente:
+            item = {"id": existente["id"]}
+        else:
+            item = gh("project", "item-add", num, "--owner", DUENO, "--url", url, "--format", "json", json_salida=True)
         base = ["project", "item-edit", "--id", item["id"], "--project-id", pid]
-        gh(*base, "--field-id", campos["SP"]["id"], "--number", str(it["sp"]))
-        gh(*base, "--field-id", campos["Requisitos"]["id"], "--text", it["req"])
-        gh(*base, "--field-id", campos["Responsable"]["id"], "--text", resp)
-        if it["prioridad"] in prio_opc:
+        # solo se rellenan los campos vacíos: así relanzar el script no pisa lo que el equipo haya cambiado después
+        if existente.get("sP") is None and existente.get("sp") is None:
+            gh(*base, "--field-id", campos["SP"]["id"], "--number", str(it["sp"]))
+        if not existente.get("requisitos"):
+            gh(*base, "--field-id", campos["Requisitos"]["id"], "--text", it["req"])
+        if not existente.get("responsable"):
+            gh(*base, "--field-id", campos["Responsable"]["id"], "--text", resp)
+        if it["prioridad"] in prio_opc and not existente.get("prioridad"):
             gh(*base, "--field-id", campos["Prioridad"]["id"], "--single-select-option-id", prio_opc[it["prioridad"]])
-        gh(*base, "--field-id", campos["Status"]["id"], "--single-select-option-id", estado_opc[ESTADO.get(it["estado"], "Todo")])
+        if not existente.get("status"):
+            gh(*base, "--field-id", campos["Status"]["id"], "--single-select-option-id", estado_opc[ESTADO.get(it["estado"], "Todo")])
         m = re.search(r"Sprint-0?(\d+)", it["sprint"])
-        if m and f"Sprint {int(m.group(1))}" in iteracion:
+        if m and not existente.get("sprint") and f"Sprint {int(m.group(1))}" in iteracion:
             gh(*base, "--field-id", campos["Sprint"]["id"], "--iteration-id", iteracion[f"Sprint {int(m.group(1))}"])
         print("  ok", it["id"])
 
