@@ -14,6 +14,7 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/setup.php` | Páginas, menú, noticias de ejemplo, tema Blocksy, paleta y logotipo provisional | HU-01, HU-02, HU-18 · RF-01, RF-02 · UI-01, UI-02 |
 | `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo y su menú de administración | HU-10 · RF-11 · UI-02 |
 | `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
+| `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), papeleta de YOP Poll solo con la votación abierta, página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)
@@ -53,6 +54,8 @@ Comprobación manual: probar los tres roles, un administrador y un usuario multi
 | `[cadus_directorio]` | Directorio de delegaciones agrupado por facultad o escuela |
 | `[cadus_buzon]` | Formulario del buzón (Fluent Forms) con aviso de privacidad |
 | `[cadus_seguimiento]` | Consulta del estado de un ticket con código y correo |
+| `[cadus_votaciones]` | Votaciones abiertas, próximas y últimas cerradas (página «Votaciones») |
+| `[cadus_votaciones_portada]` | Bloque de la portada con las votaciones abiertas o próximas; se muestra solo, tras «¡Últimos eventos!» |
 
 ## Cómo se configura el sitio
 

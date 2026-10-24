@@ -28,5 +28,6 @@ require_once CADUS_PORTAL_DIR . 'includes/galeria.php';       // galería de fot
 require_once CADUS_PORTAL_DIR . 'includes/estilo.php';        // estilos y movimiento
 require_once CADUS_PORTAL_DIR . 'includes/calendario.php';    // calendario de asambleas y eventos (HU-10)
 require_once CADUS_PORTAL_DIR . 'includes/escritorio.php';    // panel de inicio con accesos directos (HU-19b)
+require_once CADUS_PORTAL_DIR . 'includes/votaciones.php';    // convocatorias de votación vinculadas a una asamblea (HU-11)
 
 register_activation_hook(__FILE__, 'cadus_portal_activar');
