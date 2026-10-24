@@ -95,7 +95,11 @@ function cadus_calendario_caps(): array
  */
 function cadus_calendario_migrar(): void
 {
-    if (!cadus_calendario_activo() || get_option('cadus_calendario_version') === CADUS_CALENDARIO_VERSION) {
+    // Autorreparable: si la versión ya está aplicada pero la Ejecutiva ha perdido los permisos de eventos
+    // (p. ej. porque otro proceso reescribió la lista de roles con una copia antigua), se vuelven a conceder.
+    $ejecutiva = get_role('cadus_ejecutiva');
+    $permisos_ok = $ejecutiva && $ejecutiva->has_cap('publish_tribe_events');
+    if (!cadus_calendario_activo() || (get_option('cadus_calendario_version') === CADUS_CALENDARIO_VERSION && $permisos_ok)) {
         return;
     }
     foreach (['cadus_ejecutiva', 'administrator'] as $slug) {
