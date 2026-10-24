@@ -30,6 +30,11 @@ function cadus_buzon_estados(): array
     return ['abierto' => 'Abierto', 'en_proceso' => 'En proceso', 'cerrado' => 'Cerrado'];
 }
 
+function cadus_buzon_tipos(): array
+{
+    return ['Consulta', 'Reclamación académica'];
+}
+
 /** Los bloqueos de MySQL se liberan también cuando se cierra la conexión. */
 function cadus_buzon_lock(string $resource): string
 {
@@ -288,7 +293,7 @@ function cadus_buzon_validar($errors, $form_data, $form, $fields)
             $errors[$key][] = 'Este campo es obligatorio.';
         }
     }
-    if (!in_array(cadus_buzon_input($data, 'tipo'), ['Consulta', 'Reclamación académica'], true)) {
+    if (!in_array(cadus_buzon_input($data, 'tipo'), cadus_buzon_tipos(), true)) {
         $errors['tipo'][] = 'Selecciona Consulta o Reclamación académica.';
     }
     $consent = $data['consentimiento'] ?? [];
@@ -413,7 +418,7 @@ function cadus_buzon_shortcode(): string
         return '<p>' . esc_html('El buzón no está disponible temporalmente. Disculpa las molestias.') . '</p>';
     }
     return '<p>' . esc_html('Tus datos se tratarán conforme al RGPD para atender tu solicitud. Las reclamaciones solo son visibles para el remitente y la Ejecutiva del CADUS, con acceso técnico de administración. Guarda tu código y no lo compartas.')
-        . '</p>' . do_shortcode('[fluentform id="' . absint($form_id) . '"]');
+        . ' <a href="' . esc_url(home_url('/aviso-de-privacidad/')) . '">' . esc_html('Consulta el aviso de privacidad') . '</a>.' . '</p>' . do_shortcode('[fluentform id="' . absint($form_id) . '"]');
 }
 
 function cadus_buzon_metaboxes($post): void
@@ -458,7 +463,30 @@ function cadus_buzon_respuestas_box($post): void
     echo cadus_buzon_respuestas_html((int) $post->ID);
     echo '<p><label for="cadus_ticket_respuesta">' . esc_html('Respuesta para el estudiante') . '</label></p>';
     echo '<textarea id="cadus_ticket_respuesta" name="cadus_ticket_respuesta" rows="6" class="widefat"></textarea>';
-    echo '<p>' . esc_html('Al actualizar el ticket se añadirá esta respuesta al seguimiento. No se enviará ningún correo.') . '</p>';
+    echo '<p><label><input type="checkbox" name="cadus_ticket_avisar" value="1" checked> '
+        . esc_html('Avisar al estudiante por correo') . '</label></p>';
+    echo '<p>' . esc_html('Al actualizar el ticket se añadirá esta respuesta al seguimiento. El aviso solo incluye el código y el enlace de seguimiento, nunca el texto de la respuesta (RN-03).') . '</p>';
+}
+
+/**
+ * Aviso al estudiante de que hay una respuesta (HU-09a). Por RN-03 el correo no lleva
+ * el asunto, la descripción ni la respuesta: el estudiante la lee en el seguimiento.
+ */
+function cadus_buzon_avisar_estudiante(int $post_id, string $state): bool
+{
+    $email = cadus_buzon_email((string) get_post_meta($post_id, '_cadus_email', true));
+    $code = (string) get_post_meta($post_id, '_cadus_codigo', true);
+    if ($email === '' || $code === '') {
+        return false;
+    }
+    $body = "Hola:\n\n"
+        . 'El CADUS ha respondido a tu solicitud con código ' . $code . '.' . "\n"
+        . 'Estado actual: ' . (cadus_buzon_estados()[$state] ?? 'Desconocido') . ".\n\n"
+        . "Para leer la respuesta, entra en la página de seguimiento e introduce tu código y tu correo universitario:\n"
+        . home_url('/atencion-al-estudiante/seguimiento-de-ticket/') . "\n\n"
+        . "Por privacidad, este correo no incluye el contenido de tu consulta ni de la respuesta.\n\n"
+        . "Consejo de Alumnos de la Universidad de Sevilla (CADUS)\n";
+    return wp_mail($email, 'CADUS: nueva respuesta a tu solicitud ' . $code, $body);
 }
 
 function cadus_buzon_guardar_ticket($post_id, $post, $update): void
@@ -498,12 +526,16 @@ function cadus_buzon_guardar_ticket($post_id, $post, $update): void
     if ($failed) {
         wp_die(esc_html('No se han podido guardar todos los cambios del buzón. Revisa el ticket antes de volver a enviar la respuesta.'));
     }
+    if ($answer !== '' && cadus_buzon_input($_POST, 'cadus_ticket_avisar') === '1') {
+        $sent = cadus_buzon_avisar_estudiante((int) $post_id, (string) get_post_meta($post_id, '_cadus_estado', true));
+        update_post_meta($post_id, '_cadus_ultimo_aviso', $sent ? current_time('mysql') : 'error');
+    }
 }
 
 function cadus_buzon_columnas(array $columns): array
 {
     return ['cb' => $columns['cb'] ?? '<input type="checkbox">', 'cadus_codigo' => 'Código',
-        'cadus_estado' => 'Estado', 'date' => 'Fecha'];
+        'cadus_tipo' => 'Tipo', 'cadus_estado' => 'Estado', 'date' => 'Fecha'];
 }
 
 function cadus_buzon_columna(string $column, int $post_id): void
@@ -520,6 +552,55 @@ function cadus_buzon_columna(string $column, int $post_id): void
             return;
         }
         echo esc_html($column === 'cadus_estado' ? (cadus_buzon_estados()[$value] ?? 'Desconocido') : $value);
+    }
+}
+
+function cadus_buzon_es_listado(): bool
+{
+    global $pagenow, $typenow;
+    return is_admin() && $pagenow === 'edit.php' && $typenow === 'cadus_ticket'
+        && current_user_can('read_private_cadus_tickets');
+}
+
+/** Desplegables de filtro sobre el listado de tickets (HU-09a). */
+function cadus_buzon_filtros(string $post_type): void
+{
+    if ($post_type !== 'cadus_ticket' || !cadus_buzon_es_listado()) {
+        return;
+    }
+    $state = cadus_buzon_input($_GET, 'cadus_estado');
+    $type = cadus_buzon_input($_GET, 'cadus_tipo');
+    echo '<label class="screen-reader-text" for="cadus_filtro_estado">' . esc_html('Filtrar por estado') . '</label>';
+    echo '<select id="cadus_filtro_estado" name="cadus_estado"><option value="">' . esc_html('Todos los estados') . '</option>';
+    foreach (cadus_buzon_estados() as $value => $label) {
+        echo '<option value="' . esc_attr($value) . '"' . selected($state, $value, false) . '>' . esc_html($label) . '</option>';
+    }
+    echo '</select>';
+    echo '<label class="screen-reader-text" for="cadus_filtro_tipo">' . esc_html('Filtrar por tipo') . '</label>';
+    echo '<select id="cadus_filtro_tipo" name="cadus_tipo"><option value="">' . esc_html('Todos los tipos') . '</option>';
+    foreach (cadus_buzon_tipos() as $value) {
+        echo '<option value="' . esc_attr($value) . '"' . selected($type, $value, false) . '>' . esc_html($value) . '</option>';
+    }
+    echo '</select>';
+}
+
+/** Solo se aceptan valores conocidos: el filtro no permite consultar metadatos arbitrarios. */
+function cadus_buzon_aplicar_filtros(WP_Query $query): void
+{
+    if (!$query->is_main_query() || !cadus_buzon_es_listado()) {
+        return;
+    }
+    $meta = [];
+    $state = cadus_buzon_input($_GET, 'cadus_estado');
+    if (isset(cadus_buzon_estados()[$state])) {
+        $meta[] = ['key' => '_cadus_estado', 'value' => $state];
+    }
+    $type = cadus_buzon_input($_GET, 'cadus_tipo');
+    if (in_array($type, cadus_buzon_tipos(), true)) {
+        $meta[] = ['key' => '_cadus_tipo', 'value' => $type];
+    }
+    if ($meta) {
+        $query->set('meta_query', array_merge(['relation' => 'AND'], $meta));
     }
 }
 
@@ -660,6 +741,8 @@ add_action('add_meta_boxes_cadus_ticket', 'cadus_buzon_metaboxes', 10, 1);
 add_action('save_post_cadus_ticket', 'cadus_buzon_guardar_ticket', 10, 3);
 add_filter('manage_cadus_ticket_posts_columns', 'cadus_buzon_columnas');
 add_action('manage_cadus_ticket_posts_custom_column', 'cadus_buzon_columna', 10, 2);
+add_action('restrict_manage_posts', 'cadus_buzon_filtros', 10, 1);
+add_action('pre_get_posts', 'cadus_buzon_aplicar_filtros');
 add_action('template_redirect', 'cadus_buzon_privacidad_seguimiento');
 add_shortcode('cadus_buzon', 'cadus_buzon_shortcode');
 add_shortcode('cadus_seguimiento', 'cadus_buzon_seguimiento_shortcode');

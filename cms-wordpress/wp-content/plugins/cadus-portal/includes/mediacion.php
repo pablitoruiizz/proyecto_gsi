@@ -394,7 +394,7 @@ function cadus_mediacion_shortcode(): string
     if (!$form_id) {
         return $no_disponible;
     }
-    return '<div class="cadus-aviso">' . esc_html('Tus datos se tratarán conforme al RGPD para gestionar tu solicitud. Las solicitudes de mediación solo son visibles para la Ejecutiva del CADUS, con acceso técnico de administración. Solo pueden solicitarla estudiantes con correo @alum.us.es.')
+    return '<div class="cadus-aviso">' . esc_html('Tus datos se tratarán conforme al RGPD para gestionar tu solicitud. Las solicitudes de mediación solo son visibles para la Ejecutiva del CADUS, con acceso técnico de administración. Solo pueden solicitarla estudiantes con correo @alum.us.es.') . ' <a href="' . esc_url(home_url('/aviso-de-privacidad/')) . '">' . esc_html('Consulta el aviso de privacidad') . '</a>.'
         . '</div>' . do_shortcode('[fluentform id="' . absint($form_id) . '"]');
 }
 

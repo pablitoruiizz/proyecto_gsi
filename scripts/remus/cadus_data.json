@@ -1,6 +1,6 @@
 {
-  "date": "2026-10-18",
-  "version": [1, 0],
+  "date": "2026-10-24",
+  "version": [2, 0],
   "cName": "Documento de Requisitos del Portal CADUS",
   "dName": "Documento de Análisis del Portal CADUS",
   "organizations": [
@@ -18,7 +18,7 @@
   "owner": "Pablo Ruiz Vidal",
   "client": "Delegación General del CADUS",
   "paragraphs": {
-    "intro": "Este documento presenta los requisitos del nuevo portal web institucional del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) de la Universidad de Sevilla. El proyecto consiste en rehacer y modernizar el portal www.cadus.us.es para ofrecer servicios de información, gestión de normativas y actas, directorio de delegaciones de centro, buzón de atención a estudiantes y transparencia. El portal se construye sobre WordPress y se desarrolla de forma iterativa e incremental con SCRUM; este documento corresponde a la versión 1.",
+    "intro": "Este documento presenta los requisitos del nuevo portal web institucional del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) de la Universidad de Sevilla. El proyecto consiste en rehacer y modernizar el portal www.cadus.us.es para ofrecer servicios de información, gestión de normativas y actas, directorio de delegaciones de centro, buzón de atención a estudiantes y transparencia. El portal se construye sobre WordPress y se desarrolla de forma iterativa e incremental con SCRUM; este documento corresponde a la versión 2, revisada al final del Sprint 2 con las decisiones tomadas al construir el buzón, la mediación, el calendario, las votaciones y los roles. La entrevista con el CADUS prevista en el Sprint 2 (E2-09) no se ha realizado; pasa al Sprint 3, y los puntos marcados como «pendiente de validar con el CADUS» se confirmarán en ella.",
     "current": "El CADUS dispone de un portal institucional en www.cadus.us.es que se pretende rehacer y modernizar. Este documento no analiza en detalle el portal actual: recoge los servicios que el nuevo portal debe ofrecer a los estudiantes, a las delegaciones de alumnos y a la Ejecutiva del CADUS.",
     "environment": "El equipo de cinco integrantes trabaja sobre un único entorno compartido. WordPress y su base de datos se alojan en un servidor local al que todos acceden mediante Tailscale; los archivos del proyecto (tema, plugins, documentación, SCRUM y requisitos) se gestionan con GitHub; y la comunicación y coordinación diaria se realiza en un servidor de Discord. Las siguientes restricciones recogen estas decisiones.",
     "glossary": [
@@ -28,6 +28,8 @@
       { "name": "Delegación de alumnos", "text": "Representación estudiantil de una Facultad o Escuela de la Universidad de Sevilla, a cargo de un delegado o representante de centro." },
       { "name": "Ticket", "text": "Registro de una consulta o reclamación enviada por un estudiante al buzón, identificado por un código de seguimiento único." },
       { "name": "Mediación estudiantil", "text": "Servicio por el que un estudiante solicita la intervención del CADUS para resolver un conflicto de ámbito académico." },
+      { "name": "Cuenta institucional", "text": "Cuenta del portal asociada a un órgano y no a una persona (la cuenta del CADUS o la de una delegación), con un correo institucional que pasa de un equipo al siguiente en cada relevo." },
+      { "name": "Aviso de privacidad", "text": "Página pública que informa, conforme al RGPD y la LOPDGDD, de quién trata los datos del buzón y de la mediación, para qué, con qué base legal, quién puede verlos, cuánto tiempo se guardan y cómo ejercer los derechos." },
       { "name": "Sprint", "text": "Iteración de duración fija de SCRUM al final de la cual el equipo entrega un incremento del producto." }
     ]
   },
@@ -51,13 +53,13 @@
     { "id": "IR-05", "name": "Delegaciones de alumnos", "concept": "a las delegaciones de alumnos de cada centro, más específicamente:", "importance": 3,
       "data": ["Facultad o Escuela", "Delegado o representante responsable", "Datos de contacto", "Horario de atención", "Enlaces de interés"] },
     { "id": "IR-06", "name": "Consultas y reclamaciones", "concept": "a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente:", "importance": 2,
-      "data": ["Código de seguimiento", "Remitente con correo @alum.us.es", "Asunto", "Estado: abierto, en proceso o cerrado", "Historial de respuestas", "Nivel de confidencialidad"] },
+      "data": ["Código de seguimiento CAD-AAAA-NNNNN", "Remitente con correo @alum.us.es", "Tipo: consulta o reclamación académica", "Asunto", "Descripción", "Estado: abierto, en proceso o cerrado", "Historial de respuestas", "Fecha del último aviso por correo al estudiante", "Nivel de confidencialidad"] },
     { "id": "IR-07", "name": "Calendario", "concept": "a las asambleas, eventos y votaciones estudiantiles, más específicamente:", "importance": 3,
-      "data": ["Título", "Tipo: asamblea, evento o votación", "Fecha y hora", "Lugar", "Descripción", "Asamblea a la que se vincula (para las votaciones)"] },
+      "data": ["Título", "Tipo: asamblea, evento o votación", "Fecha y hora", "Lugar", "Descripción", "Asamblea a la que se vincula (para las votaciones)", "Apertura y cierre de la votación", "Papeleta de la votación (encuesta asociada)"] },
     { "id": "IR-08", "name": "Solicitudes de mediación", "concept": "a las solicitudes de mediación estudiantil, más específicamente:", "importance": 3,
-      "data": ["Solicitante", "Facultad o Escuela", "Descripción del conflicto", "Fecha de la solicitud", "Estado de la solicitud"] },
+      "data": ["Referencia de la solicitud (MED-AAAA-NNNNN)", "Solicitante", "Correo @alum.us.es", "Facultad o Escuela", "Descripción del conflicto", "Consentimiento RGPD", "Fecha de la solicitud", "Estado: pendiente, en proceso o cerrada"] },
     { "id": "IR-09", "name": "Usuarios y roles", "concept": "a las personas con cuenta en el portal, más específicamente:", "importance": 2,
-      "data": ["Nombre", "Correo institucional", "Rol: estudiante, delegado, miembro de la Ejecutiva o administrador", "Delegación asociada (si es delegado)"] }
+      "data": ["Nombre de la cuenta (institucional: la del CADUS o la de una delegación)", "Correo institucional del órgano", "Rol: estudiante, delegado, miembro de la Ejecutiva o administrador", "Delegación asociada (si es delegado)"] }
   ],
   "actors": [
     { "id": "ACT-01", "name": "Usuario anónimo", "role": "a los visitantes del portal que no han iniciado sesión y solo acceden a contenido público" },
@@ -70,7 +72,7 @@
     { "id": "UI-01", "name": "Diseño gráfico", "description": "basarse en la identidad visual del CADUS (colores, logotipo y tipografía institucionales) y adaptarse a móviles y tablets", "comments": "HU-18 · RNF-02", "importance": 2, "urgency": 2 },
     { "id": "UI-02", "name": "Página principal", "description": "contar con una página principal donde se coloquen estas secciones:\n\n- Banner institucional del CADUS\n\n- Comunicados recientes, clasificados por categoría\n\n- Accesos destacados al directorio de delegaciones y al buzón de consultas\n\n- Próximas asambleas, eventos y votaciones", "comments": "HU-01 · HU-02", "importance": 2, "urgency": 2 },
     { "id": "UI-03", "name": "Directorio de delegaciones", "description": "mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención)", "comments": "HU-05 · HU-06", "importance": 2, "urgency": 2 },
-    { "id": "UI-04", "name": "Buzón de consultas", "description": "ofrecer un formulario de consulta o reclamación y una pantalla de seguimiento mediante el código de ticket", "comments": "HU-07 · HU-08", "importance": 2, "urgency": 2 },
+    { "id": "UI-04", "name": "Buzón de consultas", "description": "ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios", "comments": "HU-07 · HU-08 · E2-16", "importance": 2, "urgency": 2 },
     { "id": "UI-05", "name": "Ficha de acta o normativa", "description": "mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF", "comments": "HU-03 · HU-04", "importance": 2, "urgency": 2 }
   ],
   "functional": [
@@ -83,12 +85,12 @@
     { "id": "RF-07", "name": "Ficha de delegación", "description": "permitir gestionar la ficha de cada delegación: contacto, horario de atención y enlaces", "comments": "HU-06", "importance": 3, "urgency": 2 },
     { "id": "RF-08", "name": "Buzón de consultas y reclamaciones", "description": "ofrecer un buzón digital de consultas y reclamaciones académicas", "comments": "HU-07", "importance": 2, "urgency": 2 },
     { "id": "RF-09", "name": "Código de seguimiento", "description": "generar un código de ticket único para cada consulta enviada y permitir su seguimiento", "comments": "HU-07 · HU-08", "importance": 2, "urgency": 2 },
-    { "id": "RF-10", "name": "Gestión de tickets", "description": "ofrecer a la Ejecutiva un panel para gestionar y responder los tickets", "comments": "HU-09", "importance": 2, "urgency": 3 },
-    { "id": "RF-11", "name": "Calendario de asambleas y eventos", "description": "mostrar un calendario de asambleas, eventos y votaciones estudiantiles", "comments": "HU-10", "importance": 3, "urgency": 3 },
-    { "id": "RF-12", "name": "Convocatorias de votación", "description": "permitir publicar convocatorias de votación vinculadas a una asamblea del calendario", "comments": "HU-11", "importance": 3, "urgency": 3 },
-    { "id": "RF-13", "name": "Solicitud de mediación", "description": "ofrecer un formulario de solicitud de mediación estudiantil", "comments": "HU-12", "importance": 3, "urgency": 3 },
-    { "id": "RF-14", "name": "Roles y permisos", "description": "gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador", "comments": "HU-13", "importance": 2, "urgency": 2 },
-    { "id": "RF-15", "name": "Panel de administración", "description": "ofrecer un panel de administración de contenidos (noticias, actas y delegaciones) restringido por rol", "comments": "HU-19", "importance": 2, "urgency": 3 }
+    { "id": "RF-10", "name": "Gestión de tickets", "description": "ofrecer a la Ejecutiva un panel para gestionar y responder los tickets, filtrarlos por estado y por tipo, y avisar al estudiante por correo cuando hay una respuesta. El aviso solo incluye el código y el enlace de seguimiento, nunca el contenido", "comments": "HU-09a (Sprint 2): módulo propio del buzón en lugar de SupportCandy", "importance": 2, "urgency": 3 },
+    { "id": "RF-11", "name": "Calendario de asambleas y eventos", "description": "mostrar un calendario de asambleas, eventos y votaciones estudiantiles, con los próximos eventos en la página principal", "comments": "HU-10 (Sprint 2)", "importance": 3, "urgency": 3 },
+    { "id": "RF-12", "name": "Convocatorias de votación", "description": "permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con fecha y hora de apertura y de cierre; solo se puede votar mientras la votación está abierta", "comments": "HU-11 (Sprint 2)", "importance": 3, "urgency": 3 },
+    { "id": "RF-13", "name": "Solicitud de mediación", "description": "ofrecer un formulario de solicitud de mediación estudiantil que entregue al solicitante una referencia, y permitir a la Ejecutiva cambiar su estado (pendiente, en proceso o cerrada)", "comments": "HU-12 (Sprint 2)", "importance": 3, "urgency": 3 },
+    { "id": "RF-14", "name": "Roles y permisos", "description": "gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales", "comments": "HU-13 · E2-01 (Sprint 2). Lista de cuentas reales pendiente de validar con el CADUS", "importance": 2, "urgency": 2 },
+    { "id": "RF-15", "name": "Panel de administración", "description": "ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, que muestre a cada rol solo sus menús y un escritorio con accesos directos", "comments": "HU-19a · HU-19b (Sprint 2)", "importance": 2, "urgency": 3 }
   ],
   "usecases": [
     { "id": "UC-01", "name": "Enviar consulta o reclamación", "trigger": "cuando un estudiante necesita plantear una consulta o reclamación académica", "pre": "El estudiante dispone de un correo institucional @alum.us.es", "post": "Se ha registrado el ticket y el estudiante conoce su código de seguimiento",
@@ -116,13 +118,13 @@
     { "id": "RNF-05", "name": "Compatibilidad técnica", "description": "funcionar con PHP 8.x y MySQL 8.x sobre un servidor Apache local (WampServer, compatible con XAMPP)", "section": 47, "importance": 3 },
     { "id": "RNF-06", "name": "Disponibilidad", "description": "mantenerse estable durante los periodos críticos: matrícula, asambleas y votaciones", "section": 47, "importance": 3 },
     { "id": "RNF-07", "name": "Mantenibilidad", "description": "contar con configuración y código documentados para facilitar el relevo entre cursos del CADUS", "section": 47, "importance": 3 },
-    { "id": "RNF-08", "name": "Privacidad", "description": "tratar los datos de consultas y reclamaciones conforme al RGPD", "section": 47, "importance": 2 }
+    { "id": "RNF-08", "name": "Privacidad", "description": "tratar los datos de consultas, reclamaciones y solicitudes de mediación conforme al RGPD y la LOPDGDD, con consentimiento expreso en cada formulario y un aviso de privacidad público. Plazo de conservación de los datos pendiente de validar con el CADUS", "section": 47, "importance": 2 }
   ],
   "rules": [
     { "id": "RN-01", "name": "Aprobación de documentos", "description": "Toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva antes de publicarse." },
-    { "id": "RN-02", "name": "Correo institucional", "description": "Solo se aceptan consultas y reclamaciones enviadas desde un correo corporativo @alum.us.es." },
-    { "id": "RN-03", "name": "Privacidad de reclamaciones", "description": "Las reclamaciones académicas solo son visibles para el remitente y para la Ejecutiva." },
-    { "id": "RN-04", "name": "Edición de fichas", "description": "Cada ficha de delegación solo puede ser editada por su delegado asignado o por un administrador." },
+    { "id": "RN-02", "name": "Correo institucional", "description": "Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde un correo corporativo @alum.us.es." },
+    { "id": "RN-03", "name": "Privacidad de reclamaciones", "description": "Las reclamaciones académicas y las solicitudes de mediación solo son visibles para el remitente y para la Ejecutiva: no aparecen en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido." },
+    { "id": "RN-04", "name": "Edición de fichas", "description": "Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un administrador." },
     { "id": "RN-05", "name": "Votaciones vinculadas", "description": "Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada." }
   ],
   "environment": [
@@ -143,6 +145,9 @@
     ["RF-03", ["UC-02"]],
     ["RF-05", ["UC-02"]],
     ["RF-14", ["IR-09"]],
+    ["RF-10", ["IR-06", "RN-03"]],
+    ["RF-12", ["IR-07", "RN-05"]],
+    ["RF-13", ["IR-08", "RN-02", "RN-03"]],
     ["RF-15", ["IR-03", "IR-04", "IR-05"]],
     ["RC-01", ["RNF-06", "RNF-07"]],
     ["RC-02", ["RNF-07"]],
