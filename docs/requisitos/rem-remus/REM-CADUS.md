@@ -2,8 +2,8 @@
 
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
 **Sistema:** Portal web institucional (`www.cadus.us.es`) — CMS WordPress
-**Versión del documento:** 0.1 (borrador inicial para Sprint-00/01)
-**Estado:** Pendiente de validación con el cliente
+**Versión del documento:** 2.0 (revisión del Sprint 2, 24/10/2026) · en REMUS: `CADUS.rem` versión 2.0
+**Estado:** Pendiente de validación con el cliente. La entrevista con el CADUS (E2-09) no se ha realizado en el Sprint 2 y pasa al Sprint 3.
 
 > Este documento sigue la nomenclatura acordada en [README.md](README.md) de esta carpeta. La trazabilidad HU ↔ RF ↔ Sprint se completa en [`docs/scrum/backlog/product-backlog.md`](../../scrum/backlog/product-backlog.md).
 
@@ -34,16 +34,16 @@
 | RF-07 | El sistema debe permitir gestionar la ficha de cada delegación (contacto, horario de atención, enlaces). | Delegado, Administrador |
 | RF-08 | El sistema debe ofrecer un buzón digital de consultas y reclamaciones académicas. | Estudiante |
 | RF-09 | El sistema debe generar un código/ticket de seguimiento único para cada consulta enviada. | Estudiante |
-| RF-10 | El sistema debe ofrecer un panel de gestión y respuesta de tickets para la Ejecutiva. | Ejecutiva |
+| RF-10 | El sistema debe ofrecer un panel de gestión y respuesta de tickets para la Ejecutiva, con filtros por estado y por tipo y aviso por correo al estudiante cuando hay respuesta (el aviso no incluye el contenido). | Ejecutiva |
 | RF-11 | El sistema debe mostrar un calendario de asambleas, eventos y votaciones estudiantiles. | Usuario Anónimo, Estudiante |
-| RF-12 | El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario. | Ejecutiva |
-| RF-13 | El sistema debe ofrecer un formulario de solicitud de mediación estudiantil. | Estudiante |
-| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | Administrador |
-| RF-15 | El sistema debe ofrecer un panel de administración de contenidos (CRUD de noticias, actas y delegaciones) restringido por rol. | Administrador, Ejecutiva |
+| RF-12 | El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con apertura y cierre; solo se vota mientras está abierta. | Ejecutiva |
+| RF-13 | El sistema debe ofrecer un formulario de solicitud de mediación estudiantil que entregue una referencia (MED-AAAA-NNNNN); la Ejecutiva gestiona su estado (pendiente, en proceso, cerrada). | Estudiante, Ejecutiva |
+| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador), con cuentas institucionales: una del CADUS y una por delegación. | Administrador |
+| RF-15 | El sistema debe ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, con solo los menús de cada rol y un escritorio de accesos directos. | Administrador, Ejecutiva, Delegado |
 
 ---
 
-## 3. Requisitos de información (RI-01 a RI-06)
+## 3. Requisitos de información (RI-01 a RI-08)
 
 Modelo conceptual de datos mínimo que debe soportar el CMS:
 
@@ -52,9 +52,11 @@ Modelo conceptual de datos mínimo que debe soportar el CMS:
 | RI-01 | **Entrada de noticia** | título, cuerpo, categoría, fecha de publicación, autor, estado (borrador/publicada) |
 | RI-02 | **Acta/Documento** | tipo (acta/normativa), fecha, archivo PDF, estado de aprobación, pleno asociado |
 | RI-03 | **Delegación** | Facultad/Escuela, delegado responsable, contacto, horario de atención |
-| RI-04 | **Consulta/Ticket** | código de seguimiento, remitente, asunto, estado, historial de respuestas, nivel de confidencialidad |
+| RI-04 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente, tipo (consulta o reclamación académica), asunto, descripción, estado, historial de respuestas, fecha del último aviso, nivel de confidencialidad |
 | RI-05 | **Categoría** | nombre, tipo de contenido asociado (noticia o documento) |
-| RI-06 | **Usuario/Rol** | nombre, correo institucional, rol asignado, delegación asociada (si aplica) |
+| RI-06 | **Usuario/Rol** | nombre de la cuenta institucional, correo institucional del órgano, rol asignado, delegación asociada (si aplica) |
+| RI-07 | **Solicitud de mediación** | referencia, solicitante, correo `@alum.us.es`, Facultad/Escuela, descripción, consentimiento RGPD, fecha, estado |
+| RI-08 | **Convocatoria de votación** | título, descripción, asamblea vinculada, apertura, cierre, papeleta (encuesta asociada) |
 
 ---
 
@@ -63,9 +65,9 @@ Modelo conceptual de datos mínimo que debe soportar el CMS:
 | ID | Regla |
 |---|---|
 | RN-01 | Toda acta o normativa requiere aprobación de un miembro de la Ejecutiva antes de publicarse (ver RF-05). |
-| RN-02 | Solo se aceptan consultas y reclamaciones enviadas desde correo corporativo `@alum.us.es`. |
-| RN-03 | Las reclamaciones académicas se tratan con privacidad estricta: solo son visibles para el remitente y la Ejecutiva. |
-| RN-04 | Cada ficha de delegación solo puede ser editada por su delegado asignado o por un Administrador. |
+| RN-02 | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde correo corporativo `@alum.us.es`. |
+| RN-03 | Las reclamaciones académicas y las solicitudes de mediación se tratan con privacidad estricta: solo son visibles para el remitente y la Ejecutiva; no aparecen en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido. |
+| RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un Administrador. |
 | RN-05 | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ---
@@ -81,7 +83,7 @@ Modelo conceptual de datos mínimo que debe soportar el CMS:
 | RNF-05 | **Compatibilidad técnica:** PHP 8.x y MySQL 8.x sobre servidor Apache local (WampServer; compatible con XAMPP). |
 | RNF-06 | **Disponibilidad:** estabilidad del entorno durante periodos críticos (matrícula, asambleas, votaciones). |
 | RNF-07 | **Mantenibilidad:** configuración y código documentados para facilitar el relevo entre cursos académicos del CADUS. |
-| RNF-08 | **Privacidad:** tratamiento de datos de consultas/reclamaciones conforme a RGPD. |
+| RNF-08 | **Privacidad:** tratamiento de datos de consultas, reclamaciones y mediaciones conforme a RGPD y LOPDGDD, con consentimiento en cada formulario y aviso de privacidad público. Plazo de conservación pendiente de validar con el CADUS. |
 
 ---
 
@@ -97,6 +99,29 @@ Restricciones sobre el entorno de desarrollo y la gestión de la configuración 
 
 ---
 
-## 7. Trazabilidad
+## 7. Revisión del Sprint 2 (E2-15)
+
+La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacerse porque la entrevista no se ha realizado. En su lugar, el REM se ha actualizado con las decisiones tomadas al construir el Sprint 2, y se marca qué falta validar con el cliente.
+
+**Cambios incorporados (versión 2.0):**
+
+- RF-10 · HU-09a: la gestión de tickets se hace con el módulo propio del buzón (no con SupportCandy), con filtros por estado y tipo y aviso por correo al estudiante sin el contenido de la respuesta.
+- RF-12 · RN-05 · HU-11: las votaciones tienen apertura y cierre y siempre van vinculadas a una asamblea del calendario.
+- RF-13 · HU-12: la mediación entrega una referencia MED-AAAA-NNNNN y la Ejecutiva gestiona su estado; RN-02 y RN-03 se amplían a las solicitudes de mediación.
+- RF-14 · RN-04 · E2-01: cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales.
+- RF-15 · HU-19a/b: menús de administración por rol y escritorio con accesos directos.
+- RNF-08 · E2-16: aviso de privacidad público y consentimiento en cada formulario.
+- Requisitos de información: datos nuevos del ticket, la mediación, la votación y las cuentas.
+
+**Pendiente de validar con el CADUS (entrevista E2-09, Sprint 3):**
+
+- Plazo de conservación de los datos del buzón y de la mediación (RNF-08).
+- Lista de cuentas reales de las delegaciones y del CADUS (RF-14).
+- Prioridades del backlog para el Sprint 3 y conformidad con los requisitos de esta versión.
+- Logotipo e identidad visual oficiales (UI-01).
+
+El proyecto REMUS se regenera desde [`scripts/remus/cadus_data.json`](../../../scripts/remus/cadus_data.json) con `scripts/remus/build_rem.ps1`; la hoja [`carga-remus.md`](carga-remus.md) recoge su contenido.
+
+## 8. Trazabilidad
 
 La trazabilidad HU (historia de usuario) ↔ RF/RN/RNF ↔ Sprint se mantiene en el [Product Backlog](../../scrum/backlog/product-backlog.md). Cada historia de usuario debe referenciar el/los requisito(s) que implementa.

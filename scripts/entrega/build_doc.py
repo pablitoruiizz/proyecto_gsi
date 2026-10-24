@@ -417,8 +417,8 @@ comparar("Roles y permisos", ["members", "user-role-editor", "wpfront-user-role-
          "Members tiene la mejor valoración (4,9/5) y permite crear los roles Ejecutiva, Delegado y Estudiante con capacidades a medida, y restringir contenido por rol. Los roles Ejecutiva, Delegado y Estudiante los crea el plugin propio y se gestionan con Members. Son la base de RF-14 y del flujo de aprobación RF-05 / RN-01, que usa el estado nativo «Pendiente de revisión». User Role Editor tiene más instalaciones pero menos funciones de control de contenido.")
 comparar("Calendario de eventos (Sprint 2)", ["the-events-calendar", "my-calendar", "sugar-calendar-lite", "event-organiser"], "the-events-calendar",
          "The Events Calendar es el más instalado (600 k) y tiene vistas de calendario, lista y mes listas para usar; responde a RF-11 y RF-12. My Calendar y Event Organiser son alternativas válidas con menos uso.")
-comparar("Gestión de tickets (Sprint 2)", ["supportcandy", "awesome-support", "fluent-support"], "supportcandy",
-         "SupportCandy tiene la mejor valoración (4,9/5), un panel para que la Ejecutiva gestione y responda tickets (RF-10) y permisos por rol (RN-03). Awesome Support tiene una valoración inferior (3,5/5) y Fluent Support es de la misma familia que Fluent Forms pero con menos adopción.")
+comparar("Gestión de tickets (Sprint 2)", ["supportcandy", "awesome-support", "fluent-support"], "",
+         "En la Entrega 1 se seleccionó SupportCandy por su valoración (4,9/5) y su panel por rol. En el Sprint 2 (HU-09) se decidió no instalar ninguno y ampliar el módulo propio del buzón: SupportCandy guarda los tickets en sus propias tablas, así que habría que rehacer la integración con Fluent Forms, el código de seguimiento CAD-AAAA-NNNNN (RF-09) y la página de seguimiento (HU-08), o mantener dos sistemas a la vez. El módulo propio ya cumplía la privacidad de RN-03 (tickets privados, sin API REST ni búsqueda) y solo le faltaban los filtros y el aviso al estudiante, que se han añadido en HU-09a. Así se reduce el riesgo antes de la congelación y no se añade un plugin más que mantener. Awesome Support (3,5/5) y Fluent Support tienen el mismo problema de integración.")
 comparar("Votaciones (Sprint 2)", ["yop-poll", "wp-polls", "poll-maker"], "yop-poll",
          "YOP Poll admite votaciones programadas, control de votos únicos y resultados, necesarios para RF-12 y RN-05; tiene actualización reciente y 4,4/5.")
 comparar("Gestión de documentos descargables", ["download-monitor", "document-library-lite", "wp-document-revisions"], "",
@@ -447,7 +447,7 @@ imp_items = [
     ("14-seguimiento-ticket.jpg", "Seguimiento de ticket con código y correo. RF-09 · RN-03 · HU-08.",
      "La consulta exige código y correo a la vez. Muestra tipo, asunto, estado y respuestas. Si los datos no coinciden devuelve un mensaje genérico, sin revelar si el código existe (RN-03)."),
     ("15-admin-tickets.jpg", "Tickets del buzón en el panel de administración, visibles solo para la Ejecutiva. RF-10 · RN-03.",
-     "Los tickets son un tipo de contenido privado: no son públicos ni accesibles por la API REST. La Ejecutiva ve código, correo, tipo y estado, y puede cambiar el estado y añadir respuestas. El panel completo de gestión con SupportCandy es de la historia HU-09 (Sprint 2)."),
+     "Los tickets son un tipo de contenido privado: no son públicos ni accesibles por la API REST. La Ejecutiva ve código, correo, tipo y estado, y puede cambiar el estado y añadir respuestas. En el Sprint 2 (HU-09a) se amplía este módulo con filtros por estado y tipo y aviso por correo al estudiante."),
     ("19-fluent-forms-buzon.jpg", "Formulario «Buzón de consultas y reclamaciones» en Fluent Forms. RF-08 · RN-02 · RNF-04.",
      "El formulario lo crea el plugin propio al activarse e incluye consentimiento RGPD obligatorio. La validación del dominio y de los campos se repite en el servidor."),
     ("17-roles-members.jpg", "Listado de roles en Members con los roles del CADUS. RF-14 · RN-04 · HU-13.",
@@ -510,7 +510,7 @@ tabla(["Requisito (REM)", "Análisis (UML / mockup)", "Diseño (plugin)", "Imple
     ["RF-07 Ficha de delegación", "Clase Delegacion · UI-03", "Plugin propio + ACF + Members", F("12-delegaciones.jpg")],
     ["RF-08 Buzón de consultas", "Clase Ticket · UI-04", "Fluent Forms + plugin propio", f"{F('13-buzon-codigo-ticket.jpg')}, {F('19-fluent-forms-buzon.jpg')}"],
     ["RF-09 Código de seguimiento", "Ticket.codigoSeguimiento · UI-04", "Plugin propio", f"{F('13-buzon-codigo-ticket.jpg')}, {F('14-seguimiento-ticket.jpg')}"],
-    ["RF-10 Gestión de tickets", "Clases Ticket, RespuestaTicket", "Plugin propio; SupportCandy (previsto)", f"{F('15-admin-tickets.jpg')} (gestión básica); panel completo en Sprint 2"],
+    ["RF-10 Gestión de tickets", "Clases Ticket, RespuestaTicket", "Plugin propio (módulo buzón)", f"{F('15-admin-tickets.jpg')}; HU-09a: filtros y aviso al estudiante"],
     ["RF-11 Calendario", "Clase EventoCalendario", "The Events Calendar (previsto)", "Sprint 2"],
     ["RF-12 Convocatorias de votación", "EventoCalendario.asambleaVinculada", "The Events Calendar + YOP Poll (previstos)", "Sprint 2"],
     ["RF-13 Solicitud de mediación", "Clase SolicitudMediacion", "Fluent Forms", "Sprint 2 (HU-12)"],

@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [`scripts/remus/build_rem.ps1`](../../../scripts/remus/README.md) a partir de `scripts/remus/cadus_data.json`. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.0, 2026-10-24. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
@@ -42,10 +42,10 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18.
 | IR-03 | Noticias y comunicados | a las noticias y comunicados publicados por el CADUS, más específicamente: | Título; Cuerpo; Categoría: Becas, Movilidad, Normativa o Eventos; Fecha de publicación; Autor; Estado: borrador o publicada |
 | IR-04 | Actas y normativas | a las actas de los plenos y a las normativas del CADUS, más específicamente: | Tipo: acta o normativa; Fecha; Archivo PDF; Estado de aprobación: borrador, pendiente o aprobada; Pleno asociado |
 | IR-05 | Delegaciones de alumnos | a las delegaciones de alumnos de cada centro, más específicamente: | Facultad o Escuela; Delegado o representante responsable; Datos de contacto; Horario de atención; Enlaces de interés |
-| IR-06 | Consultas y reclamaciones | a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente: | Código de seguimiento; Remitente con correo @alum.us.es; Asunto; Estado: abierto, en proceso o cerrado; Historial de respuestas; Nivel de confidencialidad |
-| IR-07 | Calendario | a las asambleas, eventos y votaciones estudiantiles, más específicamente: | Título; Tipo: asamblea, evento o votación; Fecha y hora; Lugar; Descripción; Asamblea a la que se vincula (para las votaciones) |
-| IR-08 | Solicitudes de mediación | a las solicitudes de mediación estudiantil, más específicamente: | Solicitante; Facultad o Escuela; Descripción del conflicto; Fecha de la solicitud; Estado de la solicitud |
-| IR-09 | Usuarios y roles | a las personas con cuenta en el portal, más específicamente: | Nombre; Correo institucional; Rol: estudiante, delegado, miembro de la Ejecutiva o administrador; Delegación asociada (si es delegado) |
+| IR-06 | Consultas y reclamaciones | a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente: | Código de seguimiento CAD-AAAA-NNNNN; Remitente con correo @alum.us.es; Tipo: consulta o reclamación académica; Asunto; Descripción; Estado: abierto, en proceso o cerrado; Historial de respuestas; Fecha del último aviso por correo al estudiante; Nivel de confidencialidad |
+| IR-07 | Calendario | a las asambleas, eventos y votaciones estudiantiles, más específicamente: | Título; Tipo: asamblea, evento o votación; Fecha y hora; Lugar; Descripción; Asamblea a la que se vincula (para las votaciones); Apertura y cierre de la votación; Papeleta de la votación (encuesta asociada) |
+| IR-08 | Solicitudes de mediación | a las solicitudes de mediación estudiantil, más específicamente: | Referencia de la solicitud (MED-AAAA-NNNNN); Solicitante; Correo @alum.us.es; Facultad o Escuela; Descripción del conflicto; Consentimiento RGPD; Fecha de la solicitud; Estado: pendiente, en proceso o cerrada |
+| IR-09 | Usuarios y roles | a las personas con cuenta en el portal, más específicamente: | Nombre de la cuenta (institucional: la del CADUS o la de una delegación); Correo institucional del órgano; Rol: estudiante, delegado, miembro de la Ejecutiva o administrador; Delegación asociada (si es delegado) |
 
 ## 5. Actores
 
@@ -64,7 +64,7 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18.
 | UI-01 | Diseño gráfico | basarse en la identidad visual del CADUS (colores, logotipo y tipografía institucionales) y adaptarse a móviles y tablets | HU-18 · RNF-02 |
 | UI-02 | Página principal | contar con una página principal donde se coloquen estas secciones:  - Banner institucional del CADUS  - Comunicados recientes, clasificados por categoría  - Accesos destacados al directorio de delegaciones y al buzón de consultas  - Próximas asambleas, eventos y votaciones | HU-01 · HU-02 |
 | UI-03 | Directorio de delegaciones | mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención) | HU-05 · HU-06 |
-| UI-04 | Buzón de consultas | ofrecer un formulario de consulta o reclamación y una pantalla de seguimiento mediante el código de ticket | HU-07 · HU-08 |
+| UI-04 | Buzón de consultas | ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios | HU-07 · HU-08 · E2-16 |
 | UI-05 | Ficha de acta o normativa | mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF | HU-03 · HU-04 |
 
 ## 7. Requisitos funcionales
@@ -80,12 +80,12 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18.
 | RF-07 | Ficha de delegación | permitir gestionar la ficha de cada delegación: contacto, horario de atención y enlaces | HU-06 | Importante |
 | RF-08 | Buzón de consultas y reclamaciones | ofrecer un buzón digital de consultas y reclamaciones académicas | HU-07 | Vital |
 | RF-09 | Código de seguimiento | generar un código de ticket único para cada consulta enviada y permitir su seguimiento | HU-07 · HU-08 | Vital |
-| RF-10 | Gestión de tickets | ofrecer a la Ejecutiva un panel para gestionar y responder los tickets | HU-09 | Vital |
-| RF-11 | Calendario de asambleas y eventos | mostrar un calendario de asambleas, eventos y votaciones estudiantiles | HU-10 | Importante |
-| RF-12 | Convocatorias de votación | permitir publicar convocatorias de votación vinculadas a una asamblea del calendario | HU-11 | Importante |
-| RF-13 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación estudiantil | HU-12 | Importante |
-| RF-14 | Roles y permisos | gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador | HU-13 | Vital |
-| RF-15 | Panel de administración | ofrecer un panel de administración de contenidos (noticias, actas y delegaciones) restringido por rol | HU-19 | Vital |
+| RF-10 | Gestión de tickets | ofrecer a la Ejecutiva un panel para gestionar y responder los tickets, filtrarlos por estado y por tipo, y avisar al estudiante por correo cuando hay una respuesta. El aviso solo incluye el código y el enlace de seguimiento, nunca el contenido | HU-09a (Sprint 2): módulo propio del buzón en lugar de SupportCandy | Vital |
+| RF-11 | Calendario de asambleas y eventos | mostrar un calendario de asambleas, eventos y votaciones estudiantiles, con los próximos eventos en la página principal | HU-10 (Sprint 2) | Importante |
+| RF-12 | Convocatorias de votación | permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con fecha y hora de apertura y de cierre; solo se puede votar mientras la votación está abierta | HU-11 (Sprint 2) | Importante |
+| RF-13 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación estudiantil que entregue al solicitante una referencia, y permitir a la Ejecutiva cambiar su estado (pendiente, en proceso o cerrada) | HU-12 (Sprint 2) | Importante |
+| RF-14 | Roles y permisos | gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales | HU-13 · E2-01 (Sprint 2). Lista de cuentas reales pendiente de validar con el CADUS | Vital |
+| RF-15 | Panel de administración | ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, que muestre a cada rol solo sus menús y un escritorio con accesos directos | HU-19a · HU-19b (Sprint 2) | Vital |
 
 ## 8. Casos de uso
 
@@ -124,16 +124,16 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18.
 | RNF-05 | Compatibilidad técnica | funcionar con PHP 8.x y MySQL 8.x sobre un servidor Apache local (WampServer, compatible con XAMPP) | Importante |
 | RNF-06 | Disponibilidad | mantenerse estable durante los periodos críticos: matrícula, asambleas y votaciones | Importante |
 | RNF-07 | Mantenibilidad | contar con configuración y código documentados para facilitar el relevo entre cursos del CADUS | Importante |
-| RNF-08 | Privacidad | tratar los datos de consultas y reclamaciones conforme al RGPD | Vital |
+| RNF-08 | Privacidad | tratar los datos de consultas, reclamaciones y solicitudes de mediación conforme al RGPD y la LOPDGDD, con consentimiento expreso en cada formulario y un aviso de privacidad público. Plazo de conservación de los datos pendiente de validar con el CADUS | Vital |
 
 ## 10. Reglas de negocio
 
 | Código | Nombre | Regla |
 |---|---|---|
 | RN-01 | Aprobación de documentos | Toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva antes de publicarse. |
-| RN-02 | Correo institucional | Solo se aceptan consultas y reclamaciones enviadas desde un correo corporativo @alum.us.es. |
-| RN-03 | Privacidad de reclamaciones | Las reclamaciones académicas solo son visibles para el remitente y para la Ejecutiva. |
-| RN-04 | Edición de fichas | Cada ficha de delegación solo puede ser editada por su delegado asignado o por un administrador. |
+| RN-02 | Correo institucional | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde un correo corporativo @alum.us.es. |
+| RN-03 | Privacidad de reclamaciones | Las reclamaciones académicas y las solicitudes de mediación solo son visibles para el remitente y para la Ejecutiva: no aparecen en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido. |
+| RN-04 | Edición de fichas | Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un administrador. |
 | RN-05 | Votaciones vinculadas | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ## 11. Entorno de trabajo del equipo (restricciones)
@@ -160,6 +160,9 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 1.0, 2026-10-18.
 | RF-03 | UC-02 |
 | RF-05 | UC-02 |
 | RF-14 | IR-09 |
+| RF-10 | IR-06, RN-03 |
+| RF-12 | IR-07, RN-05 |
+| RF-13 | IR-08, RN-02, RN-03 |
 | RF-15 | IR-03, IR-04, IR-05 |
 | RC-01 | RNF-06, RNF-07 |
 | RC-02 | RNF-07 |
