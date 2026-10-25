@@ -75,7 +75,7 @@ def diagrama_clases():
     noticia = clase(ax, cx[1], ry[0], W, "Noticia", "IR-03 · RF-01 · RF-02 · UI-02", ["titulo", "cuerpo", "fechaPublicacion", "estado (borrador | publicada)"])
     evento = clase(ax, cx[2], ry[0], W, "EventoCalendario", "IR-07 · RF-11 · RF-12 · RN-05 · UI-06", ["titulo", "tipo (asamblea|evento|votacion)", "fechaHora", "lugar", "asambleaVinculada (0..1)", "apertura / cierre (votacion)"], VERDE)
     doc = clase(ax, cx[0], ry[1], W, "DocumentoInstitucional", "IR-04 · RF-03 · RF-04 · RF-05 · RN-01 · UI-05", ["tipo (acta | normativa)", "fecha", "archivoPDF", "estadoAprobacion", "plenoAsociado"])
-    usuario = clase(ax, cx[1], ry[1], W, "Usuario", "IR-09 · RF-14 · RF-15 · UI-08", ["cuenta institucional", "correoInstitucional", "rol: anonimo, estudiante, delegado,", "      ejecutiva o administrador"])
+    usuario = clase(ax, cx[1], ry[1], W, "Usuario", "IR-09 · RF-14 · RF-15 · UI-08", ["cuenta (del CADUS o de un delegado)", "correoAcceso", "rol: anonimo, estudiante, delegado,", "      ejecutiva o administrador"])
     deleg = clase(ax, cx[2], ry[1], W, "Delegacion", "IR-05 · RF-06 · RF-07 · RN-04 · UI-03", ["contacto", "horarioAtencion", "enlaces"])
     fac = clase(ax, cx[3], ry[1], W, "FacultadEscuela", "IR-05 · RF-06", ["nombre"], VERDE)
     solic = clase(ax, cx[0], ry[2], W, "SolicitudMediacion", "IR-08 · RF-13 · RN-02 · RN-03 · UI-07", ["referencia", "descripcionConflicto", "fechaSolicitud", "estado (pendiente|cerrada)"], VERDE)

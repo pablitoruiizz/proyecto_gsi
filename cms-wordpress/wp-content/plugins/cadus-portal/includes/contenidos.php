@@ -68,6 +68,8 @@ function cadus_registrar_contenidos(): void
         'supports' => ['title', 'editor', 'author'],
         'taxonomies' => ['cadus_centro'],
         'capability_type' => ['cadus_delegacion', 'cadus_delegacions'],
+        // Por defecto «crear» se concede con «editar»: el delegado podría abrir fichas nuevas. Solo la Ejecutiva y el administrador crean.
+        'capabilities' => ['create_posts' => 'create_cadus_delegacions'],
         'map_meta_cap' => true,
         'show_in_rest' => true,
     ]);

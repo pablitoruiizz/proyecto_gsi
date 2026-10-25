@@ -124,9 +124,9 @@ La diferencia entre el que más y el que menos es de 2 SP. Las tareas `E2-xx` (d
 
 ## Definición de Hecho (DoD) — Sprint 2
 
-- [x] HU-09 a HU-12 y HU-19 implementadas y probadas (las pruebas por rol de HU-19c las documenta Álvaro en la PR #32).
+- [x] HU-09 a HU-12 y HU-19 implementadas y probadas (las pruebas por rol de HU-19c y de la mediación, documentadas por Álvaro, están fusionadas en `main` con las PR #32 y #33).
 - [ ] Contenido de ejemplo sustituido por contenido real validado con el cliente: pendiente de que el CADUS entregue los textos (ver `docs/cliente/noticias-reales.md`).
-- [ ] Roles asignados a las cuentas reales del CADUS: el cliente decidió cuentas institucionales (una del CADUS y una por delegación); el script está listo y las cuentas se crean al cerrar la entrega.
+- [ ] Cuentas del portal: el cliente decidió una cuenta única del CADUS (`cadus`, dcadus@us.es, usada por toda la Ejecutiva, que da acceso a los delegados) y una cuenta por delegado con su correo de alumno. La cuenta del CADUS está creada; las de los delegados se crean con `scripts/roles/aplicar_usuarios.php` cuando el CADUS facilite la lista.
 - [x] Comparativa de cinco temas (`docs/entrega/comparativa-temas.md`) y de plugins por tipo con los obligatorios (`docs/entrega/datos/plugins.json`).
 - [ ] Mockups finales en Figma con descripción: pendientes (se entregan los mockups del Sprint 1 y capturas de la web final).
 - [ ] Burndown del Sprint 2 actualizado **cada día** y sin saltos de última hora. **No se cumplió**: el burndown se reconstruyó al final con las fechas reales de Git (ver la retrospectiva).
@@ -150,7 +150,7 @@ HU-14 (móvil), HU-15 (accesibilidad WCAG), HU-16, HU-17 y HU-20 están planific
 
 ## Resultado del Sprint 2
 
-- **Completado:** 29 de 29 SP. Cuatro historias están integradas en `main` y pasan las pruebas automáticas (privacidad de tickets y mediaciones, 0 fallos); HU-19c (2 SP) está terminada en la rama `feature/hu-19c-pruebas-rol` y se integra al fusionar la PR #32.
+- **Completado:** 29 de 29 SP. Las cinco historias están integradas en `main` (la documentación de las pruebas de HU-19c y HU-12 entró con las PR #32 y #33 el 25/10) y pasan las pruebas automáticas (privacidad de tickets y mediaciones, 0 fallos).
 
 | Historia | SP | Quién | Fecha de cierre | Qué se entregó |
 |---|---:|---|---|---|
@@ -160,9 +160,9 @@ HU-14 (móvil), HU-15 (accesibilidad WCAG), HU-16, HU-17 y HU-20 están planific
 | HU-12 | 5 | Álvaro (integrada por Pablo) | 23/10 | Solicitud de mediación estudiantil, privada y con la protección RN-03 |
 | HU-09a | 5 | Marcos | 24/10 | Filtros de tickets, aviso al estudiante por correo sin contenido, FAQ y aviso de privacidad |
 | HU-11 | 5 | Joaquín | 24/10 | Convocatorias de votación vinculadas a una asamblea (RN-05) |
-| HU-19c | 2 | Álvaro | 24/10 | Plan y ejecución de pruebas por rol (PR #32 pendiente de fusionar) |
+| HU-19c | 2 | Álvaro | 24/10 | Plan y ejecución de pruebas por rol (PR #32, fusionada el 25/10) |
 
-- **Decisiones del sprint:** se amplió el módulo propio del buzón en lugar de instalar SupportCandy (HU-09); las votaciones publican convocatorias y usan YOP Poll solo como papeleta opcional (no instalado); el cliente decidió **cuentas institucionales** (una del CADUS y una por delegación) en lugar de cuentas personales.
+- **Decisiones del sprint:** se amplió el módulo propio del buzón en lugar de instalar SupportCandy (HU-09); las votaciones publican convocatorias y usan YOP Poll solo como papeleta opcional (no instalado); el cliente decidió una **cuenta única del CADUS** (dcadus@us.es, para toda la Ejecutiva, que da acceso a los delegados) y una cuenta por delegado con su correo de alumno.
 - **Extras no planificados:** portada y páginas interiores rediseñadas con la identidad de cadus.us.es (logotipo y paleta oficiales), pie global de contacto, bateria de pruebas de privacidad, GitHub Project «CADUS · Scrum».
 
 ## Sprint Review (24/10/2026)
@@ -172,7 +172,7 @@ Se revisó el incremento sobre el servidor compartido:
 1. **Portada:** presentación del 40 aniversario, accesos, noticias con filtros por categoría, eventos del calendario, «Nuestro trabajo», galería, buscador, pasos del buzón y cierre con los datos de contacto.
 2. **Participación:** calendario de eventos, convocatorias de votación y solicitud de mediación.
 3. **Atención al estudiante:** buzón con código de seguimiento largo y aleatorio, panel de tickets con filtros y aviso al estudiante, FAQ y aviso de privacidad.
-4. **Administración:** menús por rol, panel de inicio y cuentas institucionales (script listo).
+4. **Administración:** menús por rol, panel de inicio y cuentas (la del CADUS creada; las de los delegados, con el script).
 
 **Pendiente de validar con el cliente (a través de Miguel Ángel):** textos reales de noticias, actas y delegaciones; los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024); y la lista de cuentas de delegación.
 

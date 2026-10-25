@@ -1,7 +1,7 @@
 <?php
 /**
- * Alta de las cuentas institucionales de las delegaciones (E2-01) a partir de usuarios-reales.csv.
- * Las cuentas son de órganos, no de personas: el CADUS se renueva cada año (ver README.md).
+ * Alta de las cuentas de los delegados (E2-01) a partir de usuarios-reales.csv: una por delegado, con su correo de alumno (@alum.us.es).
+ * La cuenta única del CADUS (dcadus@us.es) se crea con crear_cuenta_cadus.php (ver README.md).
  *
  * Uso (CLI, desde la raíz del repositorio):
  *   php scripts/roles/aplicar_usuarios.php            → ensayo en seco: muestra qué se haría y no cambia nada
@@ -76,6 +76,8 @@ foreach ($filas as $fila) {
         $problema = "no coincide con la cuenta existente «{$existente->user_login}» ({$existente->user_email}): revisa usuario y correo";
     } elseif ($rol === '') {
         $problema = 'rol desconocido (usa ejecutivo, delegado o estudiante)';
+    } elseif ($rol === 'cadus_delegado' && !preg_match('/@alum\.us\.es$/i', $correo)) {
+        $problema = 'los delegados entran con su correo de alumno (@alum.us.es)';
     } elseif ($existente && in_array('administrator', $existente->roles, true)) {
         $problema = 'es administrador: no se modifica desde este script';
     }

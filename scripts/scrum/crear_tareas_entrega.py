@@ -12,7 +12,7 @@ ASIGNADO = {"Pablo": "pablitoruiizz", "Joaquín": "joaquinluna2005-jpg", "Álvar
 ENLACE = "[sprint-02.md](../blob/main/docs/scrum/sprints/sprint-02.md)"
 # (id, título, responsable, prioridad, estado, fecha de cierre, requisitos)
 TAREAS = [
-    ("E2-01", "Cuentas institucionales: la del CADUS y una por delegación (script scripts/roles/aplicar_usuarios.php)", "Pablo", "Alta", "In Progress", "", "RF-14, RN-04"),
+    ("E2-01", "Cuentas: la única del CADUS (dcadus@us.es) y una por delegado con su correo de alumno (scripts/roles)", "Pablo", "Alta", "In Progress", "", "RF-14, RN-04"),
     ("E2-02", "Volcado bd_cadus_v1_sprint2.sql, push de la versión final y revisión de Wordfence", "Pablo", "Alta", "Todo", "", "RNF-04"),
     ("E2-03", "Montar el documento de la entrega 2 (Word y PDF) con la trazabilidad completa", "Pablo", "Alta", "In Progress", "", "—"),
     ("E2-04", "Priorizar el backlog con el cliente a través de Miguel Ángel", "Pablo", "Media", "Todo", "", "—"),
@@ -29,7 +29,7 @@ TAREAS = [
     ("E2-15", "Revisar el REM (versión 2.0) y regenerar CADUS.rem", "Marcos", "Alta", "Done", "2026-10-25", "Todos"),
     ("E2-16", "Preguntas frecuentes y aviso de privacidad (consentimiento RGPD)", "Marcos", "Media", "Done", "2026-10-24", "RNF-08, UI-04"),
     ("E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; hay PDF provisional)", "Pablo", "Alta", "In Progress", "", "Todos"),
-    ("E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "Pablo", "Media", "Todo", "", "RF-15"),
+    ("E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "Pablo", "Media", "Done", "2026-10-25", "RF-15"),
     ("E2-19", "Crear 2 o 3 eventos reales en el calendario para la demostración", "Miguel Ángel", "Media", "Todo", "", "RF-11"),
     ("E2-20", "Revisión cruzada final con Codex y corrección de los hallazgos", "Pablo", "Alta", "Done", "2026-10-25", "RN-03, RNF-03, RNF-04"),
 ]

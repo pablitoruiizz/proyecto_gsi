@@ -1460,10 +1460,10 @@
 <td colspan="2">
 <ul class="specific_data">
 <li id="DAT-1094">
-<span id="DAT-1094-description-html" class="">Nombre de la cuenta (institucional: la del CADUS o la de una delegación)</span>
+<span id="DAT-1094-description-html" class="">Nombre de la cuenta (la única del CADUS o la de un delegado)</span>
 </li>
 <li id="DAT-1095">
-<span id="DAT-1095-description-html" class="">Correo institucional del órgano</span>
+<span id="DAT-1095-description-html" class="">Correo de acceso: <a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x64;&#99;&#97;&#100;&#x75;&#x73;&#x40;u&#x73;&#x2e;&#101;&#115;">&#x64;&#x63;&#97;&#100;&#117;&#115;&#64;&#117;&#115;&#x2e;&#101;&#115;</a> para la <a href='#GLO-0010' class="rem_ref">cuenta del CADUS</a> o el correo de alumno (@alum.us.es) del delegado</span>
 </li>
 <li id="DAT-1096">
 <span id="DAT-1096-description-html" class="">Rol: estudiante, delegado, miembro de la Ejecutiva o administrador</span>
@@ -3029,7 +3029,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0022-description-html" class=""><p>El sistema deberá gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales.</p></div>
+<div id="FRQ-0022-description-html" class=""><p>El sistema deberá gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es).</p></div>
 </td>
 </tr>
 <tr>
@@ -3051,7 +3051,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0022-comments-html" class="remus_comments"><p>HU-13 · E2-01 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2). Lista de cuentas reales pendiente de validar con el CADUS</p></div>
+<div id="FRQ-0022-comments-html" class="remus_comments"><p>HU-13 · E2-01 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2). Lista de delegados y sus correos pendiente de validar con el CADUS</p></div>
 </td>
 </tr>
 </table>
@@ -3173,31 +3173,31 @@
 <tr id="STP-1122">
 <th class="step_number">1</th>
 <td colspan="1">
-<div id="STP-1122--html" class=""><p>El sistema solicita el asunto y el detalle de la consulta o reclamación (<em>(null)</em>)</p></div>
+<div id="STP-1122--html" class=""><p>El sistema solicita el asunto y el detalle de la consulta o reclamación</p></div>
 </td>
 </tr>
 <tr id="STP-1123">
 <th class="step_number">2</th>
 <td colspan="1">
-<div id="STP-1123--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     indica el asunto y el detalle (<em>(null)</em>)</p></div>
+<div id="STP-1123--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     indica el asunto y el detalle</p></div>
 </td>
 </tr>
 <tr id="STP-1124">
 <th class="step_number">3</th>
 <td colspan="1">
-<div id="STP-1124--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es (<em>(null)</em>)</p></div>
+<div id="STP-1124--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es</p></div>
 </td>
 </tr>
 <tr id="STP-1125">
 <th class="step_number">4</th>
 <td colspan="1">
-<div id="STP-1125--html" class=""><p>El sistema registra el <a href='#GLO-0008' class="rem_ref">ticket</a> con su nivel de confidencialidad y genera su código de seguimiento único (<em>(null)</em>)</p></div>
+<div id="STP-1125--html" class=""><p>El sistema registra el <a href='#GLO-0008' class="rem_ref">ticket</a> con su nivel de confidencialidad y genera su código de seguimiento único</p></div>
 </td>
 </tr>
 <tr id="STP-1126">
 <th class="step_number">5</th>
 <td colspan="1">
-<div id="STP-1126--html" class=""><p>El sistema muestra al estudiante el código para consultar más adelante el estado de su <a href='#GLO-0008' class="rem_ref">ticket</a> (<em>(null)</em>)</p></div>
+<div id="STP-1126--html" class=""><p>El sistema muestra al estudiante el código para consultar más adelante el estado de su <a href='#GLO-0008' class="rem_ref">ticket</a></p></div>
 </td>
 </tr>
 <tr>
@@ -3283,31 +3283,31 @@
 <tr id="STP-1128">
 <th class="step_number">1</th>
 <td colspan="1">
-<div id="STP-1128--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     sube el <a href='#GLO-0005' class="rem_ref">acta</a> en PDF y la envía a aprobación (<em>(null)</em>)</p></div>
+<div id="STP-1128--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     sube el <a href='#GLO-0005' class="rem_ref">acta</a> en PDF y la envía a aprobación</p></div>
 </td>
 </tr>
 <tr id="STP-1129">
 <th class="step_number">2</th>
 <td colspan="1">
-<div id="STP-1129--html" class=""><p>El sistema registra el <a href='#GLO-0005' class="rem_ref">acta</a> como pendiente de aprobación (<em>(null)</em>)</p></div>
+<div id="STP-1129--html" class=""><p>El sistema registra el <a href='#GLO-0005' class="rem_ref">acta</a> como pendiente de aprobación</p></div>
 </td>
 </tr>
 <tr id="STP-1130">
 <th class="step_number">3</th>
 <td colspan="1">
-<div id="STP-1130--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     revisa el <a href='#GLO-0005' class="rem_ref">acta</a> y la aprueba (<em>(null)</em>)</p></div>
+<div id="STP-1130--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     revisa el <a href='#GLO-0005' class="rem_ref">acta</a> y la aprueba</p></div>
 </td>
 </tr>
 <tr id="STP-1131">
 <th class="step_number">4</th>
 <td colspan="1">
-<div id="STP-1131--html" class=""><p>El sistema cambia el estado del <a href='#GLO-0005' class="rem_ref">acta</a> a aprobada y la publica en el repositorio (<em>(null)</em>)</p></div>
+<div id="STP-1131--html" class=""><p>El sistema cambia el estado del <a href='#GLO-0005' class="rem_ref">acta</a> a aprobada y la publica en el repositorio</p></div>
 </td>
 </tr>
 <tr id="STP-1132">
 <th class="step_number">5</th>
 <td colspan="1">
-<div id="STP-1132--html" class=""><p>El sistema permite su descarga en PDF a cualquier visitante del portal (<em>(null)</em>)</p></div>
+<div id="STP-1132--html" class=""><p>El sistema permite su descarga en PDF a cualquier visitante del portal</p></div>
 </td>
 </tr>
 <tr>
@@ -3393,25 +3393,25 @@
 <tr id="STP-1134">
 <th class="step_number">1</th>
 <td colspan="1">
-<div id="STP-1134--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre (<em>(null)</em>)</p></div>
+<div id="STP-1134--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre</p></div>
 </td>
 </tr>
 <tr id="STP-1135">
 <th class="step_number">2</th>
 <td colspan="1">
-<div id="STP-1135--html" class=""><p>El sistema comprueba que la asamblea existe en el calendario (RN-05) (<em>(null)</em>)</p></div>
+<div id="STP-1135--html" class=""><p>El sistema comprueba que la asamblea existe en el calendario (RN-05)</p></div>
 </td>
 </tr>
 <tr id="STP-1136">
 <th class="step_number">3</th>
 <td colspan="1">
-<div id="STP-1136--html" class=""><p>El sistema publica la convocatoria en el calendario y en la portada (<em>(null)</em>)</p></div>
+<div id="STP-1136--html" class=""><p>El sistema publica la convocatoria en el calendario y en la portada</p></div>
 </td>
 </tr>
 <tr id="STP-1137">
 <th class="step_number">4</th>
 <td colspan="1">
-<div id="STP-1137--html" class=""><p>El sistema permite votar solo mientras la convocatoria está abierta (<em>(null)</em>)</p></div>
+<div id="STP-1137--html" class=""><p>El sistema permite votar solo mientras la convocatoria está abierta</p></div>
 </td>
 </tr>
 <tr>
@@ -3497,31 +3497,31 @@
 <tr id="STP-1139">
 <th class="step_number">1</th>
 <td colspan="1">
-<div id="STP-1139--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     describe el conflicto, indica su Facultad o Escuela y acepta el tratamiento de datos (<em>(null)</em>)</p></div>
+<div id="STP-1139--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     describe el conflicto, indica su Facultad o Escuela y acepta el tratamiento de datos</p></div>
 </td>
 </tr>
 <tr id="STP-1140">
 <th class="step_number">2</th>
 <td colspan="1">
-<div id="STP-1140--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es (RN-02) (<em>(null)</em>)</p></div>
+<div id="STP-1140--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es (RN-02)</p></div>
 </td>
 </tr>
 <tr id="STP-1141">
 <th class="step_number">3</th>
 <td colspan="1">
-<div id="STP-1141--html" class=""><p>El sistema registra la solicitud como privada, solo visible para la Ejecutiva (RN-03) (<em>(null)</em>)</p></div>
+<div id="STP-1141--html" class=""><p>El sistema registra la solicitud como privada, solo visible para la Ejecutiva (RN-03)</p></div>
 </td>
 </tr>
 <tr id="STP-1142">
 <th class="step_number">4</th>
 <td colspan="1">
-<div id="STP-1142--html" class=""><p>El sistema muestra la referencia MED-AAAA-NNNNN sin repetir los datos de la solicitud (<em>(null)</em>)</p></div>
+<div id="STP-1142--html" class=""><p>El sistema muestra la referencia MED-AAAA-NNNNN sin repetir los datos de la solicitud</p></div>
 </td>
 </tr>
 <tr id="STP-1143">
 <th class="step_number">5</th>
 <td colspan="1">
-<div id="STP-1143--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     gestiona la solicitud y cambia su estado a pendiente, en proceso o cerrada (<em>(null)</em>)</p></div>
+<div id="STP-1143--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     gestiona la solicitud y cambia su estado a pendiente, en proceso o cerrada</p></div>
 </td>
 </tr>
 <tr>
@@ -4297,7 +4297,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="CRQ-0004-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un administrador..</p></div>
+<div id="CRQ-0004-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Cada ficha de delegación solo puede ser editada por la cuenta del delegado de esa delegación o por la <a href='#GLO-0010' class="rem_ref">cuenta del CADUS</a> (administrador)..</p></div>
 </td>
 </tr>
 <tr>
@@ -4604,7 +4604,7 @@
 <div id="GLO-0009-text-html" class=""><p><strong>Mediación estudiantil</strong>: Servicio por el que un estudiante solicita la intervención del CADUS para resolver un conflicto de ámbito académico.</p></div>
 </div>
 <div id="GLO-0010" class="glo">
-<div id="GLO-0010-text-html" class=""><p><strong>Cuenta institucional</strong>: Cuenta del portal asociada a un órgano y no a una persona (la cuenta del CADUS o la de una delegación), con un correo institucional que pasa de un equipo al siguiente en cada relevo.</p></div>
+<div id="GLO-0010-text-html" class=""><p><strong>Cuenta del CADUS</strong>: Cuenta única del portal (usuario cadus, correo dcadus@us.es) que usan todos los miembros de la Ejecutiva; desde ella se da de alta y de baja a los delegados. Su contraseña se restablece con el correo del CADUS en cada relevo.</p></div>
 </div>
 <div id="GLO-0011" class="glo">
 <div id="GLO-0011-text-html" class=""><p><strong>Aviso de privacidad</strong>: Página pública que informa, conforme al RGPD y la LOPDGDD, de quién trata los datos del buzón y de la mediación, para qué, con qué base legal, quién puede verlos, cuánto tiempo se guardan y cómo ejercer los derechos.</p></div>

@@ -38,7 +38,7 @@
 | RF-11 | El sistema debe mostrar un calendario de asambleas, eventos y votaciones estudiantiles. | Usuario Anónimo, Estudiante |
 | RF-12 | El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con apertura y cierre; solo se vota mientras está abierta. | Ejecutiva |
 | RF-13 | El sistema debe ofrecer un formulario de solicitud de mediación estudiantil que entregue una referencia (MED-AAAA-NNNNN); la Ejecutiva gestiona su estado (pendiente, en proceso, cerrada). | Estudiante, Ejecutiva |
-| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador), con cuentas institucionales: una del CADUS y una por delegación. | Administrador |
+| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador), con una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es). | Administrador |
 | RF-15 | El sistema debe ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, con solo los menús de cada rol y un escritorio de accesos directos. | Administrador, Ejecutiva, Delegado |
 
 ---
@@ -57,7 +57,7 @@ Modelo conceptual de datos mínimo que debe soportar el CMS (los mismos códigos
 | IR-06 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente, tipo (consulta o reclamación académica), asunto, descripción, estado, historial de respuestas, fecha del último aviso, nivel de confidencialidad |
 | IR-07 | **Calendario y votaciones** | título, tipo (asamblea, evento o votación), fecha y hora, lugar, descripción, asamblea a la que se vincula (votaciones), apertura y cierre, papeleta (encuesta asociada) |
 | IR-08 | **Solicitud de mediación** | referencia (MED-AAAA-NNNNN), solicitante, correo `@alum.us.es`, Facultad/Escuela, descripción, consentimiento RGPD, fecha, estado (pendiente, en proceso o cerrada) |
-| IR-09 | **Usuario/Rol** | nombre de la cuenta institucional, correo institucional del órgano, rol asignado, delegación asociada (si aplica) |
+| IR-09 | **Usuario/Rol** | nombre de la cuenta (la única del CADUS o la de un delegado), correo de acceso (dcadus@us.es o el correo de alumno del delegado), rol asignado, delegación asociada (si aplica) |
 
 Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no una entidad aparte.
 
@@ -90,7 +90,7 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 | RN-01 | Toda acta o normativa requiere aprobación de un miembro de la Ejecutiva antes de publicarse (ver RF-05). |
 | RN-02 | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde correo corporativo `@alum.us.es`. |
 | RN-03 | Las reclamaciones académicas y las solicitudes de mediación se tratan con privacidad estricta: solo son visibles para el remitente y la Ejecutiva; no aparecen en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido. |
-| RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un Administrador. |
+| RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta del delegado de esa delegación o por la cuenta del CADUS (administrador). |
 | RN-05 | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ---
@@ -131,7 +131,7 @@ La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacer
 - RF-10 · HU-09a: la gestión de tickets se hace con el módulo propio del buzón (no con SupportCandy), con filtros por estado y tipo y aviso por correo al estudiante sin el contenido de la respuesta.
 - RF-12 · RN-05 · HU-11: las votaciones tienen apertura y cierre y siempre van vinculadas a una asamblea del calendario.
 - RF-13 · HU-12: la mediación entrega una referencia MED-AAAA-NNNNN y la Ejecutiva gestiona su estado; RN-02 y RN-03 se amplían a las solicitudes de mediación.
-- RF-14 · RN-04 · E2-01: cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales.
+- RF-14 · RN-04 · E2-01: Una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es).
 - RF-15 · HU-19a/b: menús de administración por rol y escritorio con accesos directos.
 - RNF-08 · E2-16: aviso de privacidad público y consentimiento en cada formulario.
 - Requisitos de información: datos nuevos del ticket, la mediación, la votación y las cuentas; se usan en todo el documento los códigos IR de REMUS.
@@ -140,7 +140,7 @@ La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacer
 **Pendiente de validar con el CADUS (entrevista E2-09, Sprint 3):**
 
 - Plazo de conservación de los datos del buzón y de la mediación (RNF-08).
-- Lista de cuentas reales de las delegaciones y del CADUS (RF-14).
+- Lista de delegados y de sus correos de alumno (RF-14).
 - Prioridades del backlog para el Sprint 3 y conformidad con los requisitos de esta versión.
 - Logotipo e identidad visual oficiales (UI-01).
 

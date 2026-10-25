@@ -28,7 +28,7 @@
       { "name": "Delegación de alumnos", "text": "Representación estudiantil de una Facultad o Escuela de la Universidad de Sevilla, a cargo de un delegado o representante de centro." },
       { "name": "Ticket", "text": "Registro de una consulta o reclamación enviada por un estudiante al buzón, identificado por un código de seguimiento único." },
       { "name": "Mediación estudiantil", "text": "Servicio por el que un estudiante solicita la intervención del CADUS para resolver un conflicto de ámbito académico." },
-      { "name": "Cuenta institucional", "text": "Cuenta del portal asociada a un órgano y no a una persona (la cuenta del CADUS o la de una delegación), con un correo institucional que pasa de un equipo al siguiente en cada relevo." },
+      { "name": "Cuenta del CADUS", "text": "Cuenta única del portal (usuario cadus, correo dcadus@us.es) que usan todos los miembros de la Ejecutiva; desde ella se da de alta y de baja a los delegados. Su contraseña se restablece con el correo del CADUS en cada relevo." },
       { "name": "Aviso de privacidad", "text": "Página pública que informa, conforme al RGPD y la LOPDGDD, de quién trata los datos del buzón y de la mediación, para qué, con qué base legal, quién puede verlos, cuánto tiempo se guardan y cómo ejercer los derechos." },
       { "name": "Sprint", "text": "Iteración de duración fija de SCRUM al final de la cual el equipo entrega un incremento del producto." }
     ]
@@ -59,7 +59,7 @@
     { "id": "IR-08", "name": "Solicitudes de mediación", "concept": "a las solicitudes de mediación estudiantil, más específicamente:", "importance": 3,
       "data": ["Referencia de la solicitud (MED-AAAA-NNNNN)", "Solicitante", "Correo @alum.us.es", "Facultad o Escuela", "Descripción del conflicto", "Consentimiento RGPD", "Fecha de la solicitud", "Estado: pendiente, en proceso o cerrada"] },
     { "id": "IR-09", "name": "Usuarios y roles", "concept": "a las personas con cuenta en el portal, más específicamente:", "importance": 2,
-      "data": ["Nombre de la cuenta (institucional: la del CADUS o la de una delegación)", "Correo institucional del órgano", "Rol: estudiante, delegado, miembro de la Ejecutiva o administrador", "Delegación asociada (si es delegado)"] }
+      "data": ["Nombre de la cuenta (la única del CADUS o la de un delegado)", "Correo de acceso: dcadus@us.es para la cuenta del CADUS o el correo de alumno (@alum.us.es) del delegado", "Rol: estudiante, delegado, miembro de la Ejecutiva o administrador", "Delegación asociada (si es delegado)"] }
   ],
   "actors": [
     { "id": "ACT-01", "name": "Usuario anónimo", "role": "a los visitantes del portal que no han iniciado sesión y solo acceden a contenido público" },
@@ -92,7 +92,7 @@
     { "id": "RF-11", "name": "Calendario de asambleas y eventos", "description": "mostrar un calendario de asambleas, eventos y votaciones estudiantiles, con los próximos eventos en la página principal", "comments": "HU-10 (Sprint 2)", "importance": 3, "urgency": 3 },
     { "id": "RF-12", "name": "Convocatorias de votación", "description": "permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con fecha y hora de apertura y de cierre; solo se puede votar mientras la votación está abierta", "comments": "HU-11 (Sprint 2)", "importance": 3, "urgency": 3 },
     { "id": "RF-13", "name": "Solicitud de mediación", "description": "ofrecer un formulario de solicitud de mediación estudiantil que entregue al solicitante una referencia, y permitir a la Ejecutiva cambiar su estado (pendiente, en proceso o cerrada)", "comments": "HU-12 (Sprint 2)", "importance": 3, "urgency": 3 },
-    { "id": "RF-14", "name": "Roles y permisos", "description": "gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales", "comments": "HU-13 · E2-01 (Sprint 2). Lista de cuentas reales pendiente de validar con el CADUS", "importance": 2, "urgency": 2 },
+    { "id": "RF-14", "name": "Roles y permisos", "description": "gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es)", "comments": "HU-13 · E2-01 (Sprint 2). Lista de delegados y sus correos pendiente de validar con el CADUS", "importance": 2, "urgency": 2 },
     { "id": "RF-15", "name": "Panel de administración", "description": "ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, que muestre a cada rol solo sus menús y un escritorio con accesos directos", "comments": "HU-19a · HU-19b (Sprint 2)", "importance": 2, "urgency": 3 }
   ],
   "usecases": [
@@ -142,7 +142,7 @@
     { "id": "RN-01", "name": "Aprobación de documentos", "description": "Toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva antes de publicarse." },
     { "id": "RN-02", "name": "Correo institucional", "description": "Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde un correo corporativo @alum.us.es." },
     { "id": "RN-03", "name": "Privacidad de reclamaciones", "description": "Las reclamaciones académicas y las solicitudes de mediación solo son visibles para el remitente y para la Ejecutiva: no aparecen en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido." },
-    { "id": "RN-04", "name": "Edición de fichas", "description": "Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un administrador." },
+    { "id": "RN-04", "name": "Edición de fichas", "description": "Cada ficha de delegación solo puede ser editada por la cuenta del delegado de esa delegación o por la cuenta del CADUS (administrador)." },
     { "id": "RN-05", "name": "Votaciones vinculadas", "description": "Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada." }
   ],
   "environment": [

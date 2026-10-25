@@ -135,3 +135,5 @@ wp-content/cache/
 *.log
 # Permitir subir ejemplos comprimidos ligeros y sanitizados si se necesitan
 #!docs/ejemplos/*.zip
+# correos de alumnos (datos personales)
+scripts/roles/usuarios-reales.csv

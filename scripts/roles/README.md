@@ -1,58 +1,49 @@
-# Cuentas institucionales y roles (E2-01)
+# Cuentas y roles del portal (E2-01)
 
-Hoy las cinco cuentas del WordPress (`root`, `alvaro`, `joaquin`, `marcos`, `Miguel`) son administradoras: son las del equipo. Las cuentas del CADUS todavía no existen.
+Hoy las cinco cuentas del WordPress de desarrollo (`root`, `alvaro`, `joaquin`, `marcos`, `Miguel`) son administradoras: son las del equipo. Para el portal en producción el cliente decidió este modelo (octubre de 2026):
 
-## Cuentas institucionales, no personales
+| Cuenta | Quién la usa | Correo de acceso | Rol de WordPress | Cómo se da de alta |
+|---|---|---|---|---|
+| **`cadus`** (única) | **Todos los miembros de la Ejecutiva** | `dcadus@us.es` | Administrador | [`crear_cuenta_cadus.php`](crear_cuenta_cadus.php) |
+| **Una por delegado** | Cada delegado de centro | Su **correo de alumno** (`@alum.us.es`) | Delegado de centro | Desde la cuenta `cadus` (Usuarios › Añadir nuevo) o con [`aplicar_usuarios.php`](aplicar_usuarios.php) |
 
-El CADUS se renueva cada año: sus miembros y los de las delegaciones cambian con cada relevo. Por eso las cuentas del portal **no son de personas, sino de órganos**, y cada una va asociada a un correo institucional que pasa de un equipo al siguiente (decisión del cliente, octubre de 2026):
+- La Ejecutiva no tiene cuentas personales: entra siempre con `cadus`, que responde a un único correo (`dcadus@us.es`). WordPress no admite dos cuentas con el mismo correo, así que no hay una cuenta de «Ejecutivo del CADUS» aparte; ese rol existe para quien el CADUS quiera con permisos de contenido sin ser administrador.
+- **Es la cuenta `cadus` la que da acceso a los delegados**: los da de alta, los asigna a su delegación y los da de baja.
+- Cada delegado entra con su correo de alumno y solo puede editar **la ficha de su delegación** (RN-04).
 
-| Cuenta | Correo | Rol de WordPress | Cómo se da de alta |
-|---|---|---|---|
-| **CADUS** (única cuenta interna) | `dcadus@us.es` | Administrador | A mano, en **Usuarios › Añadir nuevo** (este script no toca administradores) |
-| **Una por delegación** | El correo propio de cada delegación | Delegado | Con este script, a partir de [`usuarios-reales.csv`](usuarios-reales.csv) |
+## Alta de la cuenta del CADUS
 
-- Todo el CADUS trabaja desde la cuenta `cadus`, porque responde a un único correo (`dcadus@us.es`). WordPress no admite dos cuentas con el mismo correo, así que no hay una cuenta de Ejecutivo aparte.
-- Cada delegación tiene su cuenta y solo puede editar **su propia ficha** (RN-04).
+```bash
+php scripts/roles/crear_cuenta_cadus.php
+```
 
-## Procedimiento
+No guarda ni muestra contraseñas y no envía correo. La primera vez se entra con **«¿Has olvidado tu contraseña?»** y el usuario `cadus`: el enlace llega a `dcadus@us.es`.
 
-1. **Miguel Ángel** rellena [`usuarios-reales.csv`](usuarios-reales.csv) con una línea por delegación: `usuario,nombre,correo,rol,delegacion`.
-   - `usuario`: nombre de acceso sin espacios ni tildes (p. ej. `d-etsii`, `d-quimica`).
-   - `nombre`: nombre visible de la delegación (p. ej. `Delegación de Alumnos ETSII`).
-   - `correo`: correo propio de la delegación.
-   - `rol`: se puede dejar vacío; vacío equivale a `delegado`.
-   - `delegacion`: se puede dejar vacío. Entonces el script busca la ficha de la delegación **cuyo título sea igual al `nombre`**. Solo hace falta rellenarla si la ficha tiene otro título.
+## Alta de los delegados
 
-   Ejemplo:
-   ```
-   usuario,nombre,correo,rol,delegacion
-   d-etsii,Delegación de Alumnos ETSII,delegacionetsii@us.es,delegado,Delegación de Escuela Técnica Superior de Ingeniería Informática
-   d-quimica,Delegación de Alumnos de Química,delegacionquimica@us.es,delegado,Delegación de Facultad de Química
-   ```
-
-   Las fichas de delegación se titulan «Delegación de» + el nombre oficial del centro (p. ej. `Delegación de Facultad de Química`), con las mismas tildes y mayúsculas. El ensayo en seco lista los títulos que existen. Si una ficha aún no existe (E2-12), la cuenta se crea igualmente y el script avisa con ⚠; al volver a ejecutarlo cuando la ficha exista, se le asigna.
-2. **Pablo** ejecuta primero el ensayo en seco (no cambia nada, muestra lo que haría, los errores y la lista de delegaciones existentes con su título exacto):
+1. Copiar [`usuarios-ejemplo.csv`](usuarios-ejemplo.csv) a `usuarios-reales.csv` (este fichero **no se sube a GitHub**: lleva correos de alumnos, que son datos personales) y rellenar una línea por delegado: `usuario,nombre,correo,rol,delegacion`.
+   - `usuario`: nombre de acceso sin espacios ni tildes (p. ej. `d-etsii`).
+   - `nombre`: nombre visible (p. ej. `Delegación de Alumnos ETSII`).
+   - `correo`: el **correo de alumno del delegado** (`@alum.us.es`); el script lo exige para los delegados.
+   - `rol`: vacío equivale a `delegado`.
+   - `delegacion`: título exacto de la ficha (p. ej. `Delegación de Facultad de Química`); si se deja vacío, se busca una ficha con el mismo título que `nombre`.
+2. Ensayo en seco (no cambia nada, lista los problemas y los títulos de las fichas existentes):
    ```bash
    php scripts/roles/aplicar_usuarios.php
    ```
-3. Si todo es correcto, aplica los cambios (`--avisar` envía a cada delegación el enlace para elegir su contraseña; necesita correo saliente configurado en el servidor):
+3. Aplicar los cambios (`--avisar` envía a cada delegado el enlace para elegir su contraseña; necesita correo saliente en el servidor):
    ```bash
    php scripts/roles/aplicar_usuarios.php --aplicar --avisar
    ```
-4. Crear a mano la cuenta `cadus` (`dcadus@us.es`, rol Administrador).
-5. Comprobar con una cuenta de delegación el menú y los permisos (HU-19c) y, al cerrar el proyecto, retirar las cuentas de administrador del equipo.
+4. Comprobar con una cuenta de delegado el menú y los permisos (HU-19c).
 
-## Relevo anual
+## Relevo de delegados
 
-Cuando entra un equipo nuevo en el CADUS o en una delegación, no se crea ninguna cuenta:
-
-1. En la pantalla de acceso, pulsar **«¿Has olvidado tu contraseña?»** e introducir el usuario (`cadus` o el de la delegación).
-2. El enlace llega al correo institucional, al que ya tiene acceso el equipo nuevo.
-3. Elegir una contraseña nueva. La del equipo anterior deja de funcionar.
+Cuando cambia el delegado de un centro, la cuenta `cadus` da de baja la cuenta anterior (Usuarios › Borrar, atribuyendo el contenido a `cadus`) y da de alta la del nuevo delegado, que queda como autor de la ficha de su delegación. Para el relevo de la Ejecutiva no hay que crear cuentas: se usa «¿Has olvidado tu contraseña?» con el usuario `cadus` y el enlace llega a `dcadus@us.es`, al que ya tiene acceso el equipo nuevo.
 
 ## Garantías
 
-- Las contraseñas no se guardan ni se muestran: se genera una aleatoria que nadie ve y cada titular la cambia con el enlace de «contraseña olvidada».
-- No toca cuentas de administrador.
+- Las contraseñas no se guardan ni se muestran: se genera una aleatoria que nadie ve y cada titular elige la suya con el enlace de «contraseña olvidada».
+- El script de delegados no toca las cuentas de administrador, rechaza usuarios o correos repetidos y no deja actualizar una cuenta distinta de la indicada.
 - Una delegación queda como **autora** de su ficha, que es lo que le permite editarla y nada más (RN-04).
-- El CSV solo contiene correos institucionales, no datos personales. Aun así, no deben añadirse nombres ni correos personales de los miembros.
+- `usuarios-reales.csv` está en `.gitignore`: los correos de alumnos no deben subirse al repositorio.

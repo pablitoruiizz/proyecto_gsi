@@ -398,9 +398,9 @@ t2 = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-02.md
 personas = ["Pablo", "Joaquín", "Miguel Ángel", "Álvaro", "Marcos"]
 estado2 = {"E2-01": "En curso", "E2-02": "Pendiente", "E2-03": "Hecho", "E2-04": "Pendiente", "E2-05": "Hecho", "E2-06": "Hecho", "E2-07": "Hecho",
            "E2-08": "Pendiente", "E2-09": "Pendiente", "E2-10": "Parcial", "E2-11": "Pendiente", "E2-12": "Parcial", "E2-13": "Hecho",
-           "E2-14": "Hecho", "E2-15": "Hecho", "E2-16": "Hecho", "HU-19c": "Hecho (PR #32)"}
+           "E2-14": "Hecho", "E2-15": "Hecho", "E2-16": "Hecho", "HU-19c": "Hecho"}
 extra = [["Pablo", "E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; PDF obtenido del HTML que genera REMUS)", "—", "En curso"],
-         ["Pablo", "E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "—", "Pendiente"],
+         ["Pablo", "E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "—", "Hecho"],
          ["Miguel Ángel", "E2-19", "Crear 2 o 3 eventos reales en el calendario para la demostración", "—", "Pendiente"],
          ["Pablo", "E2-20", "Revisión cruzada final con Codex y corrección de los hallazgos", "—", "Hecho"]]
 filas2 = []
@@ -412,7 +412,7 @@ for quien, t in zip(personas, [x for x in t2 if x[0][:2] == ["ID", "Tarea concre
 filas2 += extra  # tareas E2-17 a E2-20, añadidas durante el sprint
 tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas2, [2.4, 1.4, 9.2, 0.9, 3.1], tam=8, titulo="Sprint backlog del Sprint 2")
 sp2 = sum(int(f[3]) for f in filas2 if f[3].isdigit())
-par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, nueve están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario), dos parciales, dos en curso y siete pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
+par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, diez están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario), dos parciales, dos en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
 
 doc.add_heading("2.6 Burndown charts", 2)
 figura("burndown-sprint1.png", "Burndown chart del Sprint 1 (alcance 70 SP). Ideal frente a real.", 13.5)
@@ -421,7 +421,7 @@ figura("burndown-sprint2.png", "Burndown chart del Sprint 2 (alcance 29 SP). Ide
 rico("**Sprint 2.** El 19/10 se cerraron HU-19a y HU-09b (6 SP); el 23/10 HU-19b, HU-10 y HU-12 (11 SP) y el 24/10 HU-09a, HU-11 y HU-19c (12 SP), quedando 0 SP pendientes. **Lección:** la lección del Sprint 1 se repitió: 23 de los 29 puntos (el 79 %) se cerraron en los dos últimos días. Además, el burndown no se actualizó cada día como se había acordado: se reconstruyó al final con las fechas reales de los commits y de las pull requests. Datos en `docs/scrum/burndown/sprint-02.csv`; la gráfica y los datos se regeneran con `scripts/entrega/diagramas.py`.")
 
 doc.add_heading("2.7 Sprint Review y retrospectiva del Sprint 2", 2)
-rico("**Sprint Review (24/10/2026).** Se revisó el incremento sobre el servidor compartido: la portada (40 aniversario, accesos, noticias con filtros, eventos, «Nuestro trabajo», galería, buscador y pasos del buzón), la participación (calendario, convocatorias de votación y mediación), la atención al estudiante (buzón con código de seguimiento, panel de tickets con filtros, preguntas frecuentes y aviso de privacidad) y la administración (menús por rol, panel de inicio y cuentas institucionales). Queda por validar con el cliente, a través de Miguel Ángel, los textos reales, los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024) y la lista de cuentas de las delegaciones.")
+rico("**Sprint Review (24/10/2026).** Se revisó el incremento sobre el servidor compartido: la portada (40 aniversario, accesos, noticias con filtros, eventos, «Nuestro trabajo», galería, buscador y pasos del buzón), la participación (calendario, convocatorias de votación y mediación), la atención al estudiante (buzón con código de seguimiento, panel de tickets con filtros, preguntas frecuentes y aviso de privacidad) y la administración (menús por rol, panel de inicio y cuentas del CADUS y de los delegados). Queda por validar con el cliente, a través de Miguel Ángel, los textos reales, los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024) y la lista de cuentas de las delegaciones.")
 tabla(["Historia", "SP", "Quién", "Cierre", "Qué se entregó"], [
     ["HU-19a · HU-09b", "6", "Pablo", "19/10", "Menús de administración por rol y privacidad de los tickets (RN-03)"],
     ["HU-19b", "3", "Miguel Ángel", "23/10", "Panel de inicio con accesos según el rol"],
@@ -429,7 +429,7 @@ tabla(["Historia", "SP", "Quién", "Cierre", "Qué se entregó"], [
     ["HU-12", "5", "Álvaro", "23/10", "Solicitud de mediación privada con la protección RN-03"],
     ["HU-09a", "5", "Marcos", "24/10", "Filtros de tickets, aviso al estudiante sin contenido, FAQ y aviso de privacidad"],
     ["HU-11", "5", "Joaquín", "24/10", "Convocatorias de votación vinculadas a una asamblea (RN-05)"],
-    ["HU-19c", "2", "Álvaro", "24/10", "Plan y ejecución de pruebas por rol (PR #32 pendiente de fusionar)"],
+    ["HU-19c", "2", "Álvaro", "24/10", "Plan y ejecución de pruebas por rol (PR #32, fusionada el 25/10)"],
 ], [2.6, 0.9, 2.6, 1.5, 9.4], tam=8, titulo="Resultado del Sprint 2 por historia")
 rico("**Qué ha ido bien.** La arquitectura por módulos del plugin permitió trabajar en paralelo (calendario, mediación, votaciones y buzón se integraron sin tocarse entre sí). La revisión cruzada entre Claude y Codex encontró fallos reales antes de entregar y la batería de pruebas de privacidad se amplió con cada módulo. El GitHub Project fue la fuente única del backlog.")
 rico("**Qué ha ido mal.** Se repitió la concentración del trabajo al final y el burndown no se actualizó a diario. Una rama (la de mediación) se hizo sobre una copia antigua del plugin y habría eliminado la portada, los menús por rol y el diseño al fusionarse: se evitó integrando solo su módulo. Varios entregables (mockups en Figma, entrevista con el cliente y contenido real) no estaban listos al cerrar el sprint.")
@@ -445,7 +445,7 @@ rico("El backlog se gestiona en el proyecto público **«CADUS · Scrum»** de G
 
 # ------------------------------------------------------------------ 3. REM
 doc.add_heading("3. Requisitos (REM)", 1)
-par("Los requisitos se han recogido en REMUS (fichero CADUS.rem, versión 2.0 del 24/10/2026) con la estructura de cinco dimensiones: información, interfaz, funcionales, no funcionales y reglas de negocio. Cada requisito lleva su código de trazabilidad, que se repite en el análisis, el diseño y las capturas. La versión 2.0 recoge las decisiones del Sprint 2: tickets con el módulo propio del buzón, mediación con referencia MED-AAAA-NNNNN, votaciones vinculadas a una asamblea, cuentas institucionales (una del CADUS y una por delegación), privacidad ampliada a las mediaciones, requisitos de interfaz del calendario, la mediación y el panel por rol, y dos casos de uso nuevos. El documento generado por REMUS se entrega aparte (CADUS-REM-v2.pdf) junto al fichero CADUS.rem; las tablas siguientes son un resumen de su contenido. Una diferencia conocida: el código de ticket (CAD-AAAA-NNNNN) y la referencia de mediación (MED-AAAA-NNNNN) llevan en el portal un sufijo aleatorio de 32 caracteres hexadecimales que el REM aún no recoge; se incorporará al validarlo con el cliente. La entrevista con el CADUS prevista para confirmar los requisitos no se ha realizado: el REM queda marcado como pendiente de validar con el cliente, que incluye el plazo de conservación de los datos, la lista de cuentas reales y el logotipo oficial. La importancia indicada es la asignada en REMUS.")
+par("Los requisitos se han recogido en REMUS (fichero CADUS.rem, versión 2.0 del 24/10/2026) con la estructura de cinco dimensiones: información, interfaz, funcionales, no funcionales y reglas de negocio. Cada requisito lleva su código de trazabilidad, que se repite en el análisis, el diseño y las capturas. La versión 2.0 recoge las decisiones del Sprint 2: tickets con el módulo propio del buzón, mediación con referencia MED-AAAA-NNNNN, votaciones vinculadas a una asamblea, una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es), privacidad ampliada a las mediaciones, requisitos de interfaz del calendario, la mediación y el panel por rol, y dos casos de uso nuevos. El documento generado por REMUS se entrega aparte (CADUS-REM-v2.pdf) junto al fichero CADUS.rem; las tablas siguientes son un resumen de su contenido. Una diferencia conocida: el código de ticket (CAD-AAAA-NNNNN) y la referencia de mediación (MED-AAAA-NNNNN) llevan en el portal un sufijo aleatorio de 32 caracteres hexadecimales que el REM aún no recoge; se incorporará al validarlo con el cliente. La entrevista con el CADUS prevista para confirmar los requisitos no se ha realizado: el REM queda marcado como pendiente de validar con el cliente, que incluye el plazo de conservación de los datos, la lista de cuentas reales y el logotipo oficial. La importancia indicada es la asignada en REMUS.")
 imp = {2: "Vital", 3: "Importante", 4: "Quedaría bien"}
 doc.add_heading("3.1 Requisitos de información", 2)
 tabla(["Código", "Nombre", "Se almacenará información correspondiente a…", "Datos específicos"],
@@ -650,7 +650,7 @@ tabla(["Historia", "Estado", "Evidencia"], [
     ["HU-12", "Hecho", f"Solicitud de mediación privada ({F('p12-mediacion.jpg')})."],
     ["HU-13", "Hecho", f"Roles de WordPress y del CADUS ({F('a02-roles.jpg')})."],
     ["HU-18", "Hecho", f"Tema Blocksy con la identidad del CADUS ({F('p01-portada.jpg', '18-tema-blocksy.jpg')})."],
-    ["HU-19 (19a, 19b y 19c)", "Hecho", f"Menús por rol, escritorio con accesos y pruebas por rol ({F('a03-escritorio-ejecutivo.jpg', 'a04-escritorio-delegado.jpg')}); la documentación de las pruebas de HU-19c está en la PR #32."],
+    ["HU-19 (19a, 19b y 19c)", "Hecho", f"Menús por rol, escritorio con accesos y pruebas por rol ({F('a03-escritorio-ejecutivo.jpg', 'a04-escritorio-delegado.jpg')}); la documentación de las pruebas de HU-19c y HU-12 está en la carpeta tests/ (PR #32 y #33, fusionadas)."],
     ["HU-14 a HU-17 · HU-20", "Pendiente", "Sprints 3 y 4 (móvil, accesibilidad WCAG, filtros del panel, protección frente a spam y rendimiento)."],
 ], [4.4, 2.0, 10.6], titulo="Estado de la implementación")
 
@@ -729,7 +729,7 @@ tabla(["Pendiente", "Motivo", "Responsable"], [
     ["Contenido real (noticias, actas, estatutos, delegaciones)", "El CADUS no lo ha entregado; todo es de ejemplo y está marcado como tal", "Miguel Ángel · Joaquín"],
     ["Fichas de Química, Física, Biología y ETSI", "Faltan los datos de contacto de esas delegaciones", "Álvaro"],
     ["Mockups finales en Figma", "No se hicieron; se entregan siete mockups de baja fidelidad y las capturas finales", "Miguel Ángel"],
-    ["Cuentas institucionales: la del CADUS y una por delegación", "Script y lista listos; las cuentas se crean al cerrar la entrega con los correos reales", "Pablo"],
+    ["Cuentas de los delegados (una por delegado, con su correo de alumno)", "La cuenta única del CADUS (dcadus@us.es) ya está creada; las de los delegados se crean con el script cuando el CADUS facilite la lista", "Pablo"],
     ["Papeleta de las votaciones (YOP Poll) y eventos reales en el calendario", "No instalado; las convocatorias se publican sin papeleta. Decidir con el cliente", "Joaquín · Miguel Ángel"],
     ["Plazo de conservación y copias de seguridad de tickets y mediaciones (RNF-08)", "Pendiente de validar con el CADUS", "Pablo"],
     ["Volcado de la base de datos del Sprint 2 y revisión de Wordfence", "Se hace al cerrar la entrega", "Pablo"],
