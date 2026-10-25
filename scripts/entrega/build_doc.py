@@ -558,7 +558,7 @@ for i, caja in enumerate(trozos, 1):
         nfig["p01-portada.jpg"] = n_fig
     par(["Parte 1: cabecera con logotipo y menú principal, banner con el lema y los tres contadores, y presentación de los más de 40 años del CADUS.",
          "Parte 2: accesos a las seis secciones del portal y últimas noticias con filtro por categoría (Todo, Becas, Eventos, Movilidad y Normativa).",
-         "Parte 3: últimos eventos del calendario (aún sin eventos cargados) y «Nuestro trabajo» con los objetivos de la web oficial.",
+         "Parte 3: últimos eventos del calendario (de ejemplo) y «Nuestro trabajo» con los objetivos de la web oficial.",
          "Parte 4: galería de fotos, buscador de noticias, actas y delegaciones, y el inicio de «Cómo funciona el buzón».",
          "Parte 5: pasos 2 y 3 del buzón, botón para enviar la consulta y pie con los datos de contacto."][i - 1])
 publicas = [
@@ -581,9 +581,9 @@ publicas = [
     ("p10-privacidad.jpg", "Aviso de privacidad. RNF-08 · RN-03 · UI-04 · E2-16.",
      "Explica el responsable del tratamiento, qué datos se tratan, para qué, la base legal, quién puede verlos, cuánto tiempo se guardan, la seguridad y cómo ejercer los derechos. El plazo de conservación está pendiente de validar con el CADUS."),
     ("p13-calendario.jpg", "Calendario de asambleas y eventos. RF-11 · RF-12 · IR-07 · UI-06 · HU-10.",
-     "Calendario de The Events Calendar con vistas de lista, mes y día, buscador y suscripción. Está en el menú principal y alimenta los próximos eventos de la portada. En la captura no hay eventos porque aún no se han cargado los reales (tarea E2-19)."),
+     "Calendario de The Events Calendar con vistas de lista, mes y día, buscador y suscripción. Está en el menú principal y alimenta los próximos eventos de la portada. Los eventos de la captura son de ejemplo (llevan «(ejemplo)» en el título); los reales se cargarán con la tarea E2-19."),
     ("p11-votaciones.jpg", "Convocatorias de votación. RF-12 · RN-05 · IR-07 · UI-06 · HU-11.",
-     "Lista las convocatorias, cada una vinculada a una asamblea del calendario (RN-05) y con apertura y cierre. La papeleta, que solo se mostraría mientras la votación está abierta, depende de YOP Poll, que no está instalado (sección 5.2): hoy el portal publica las convocatorias, pero no permite emitir el voto, así que RF-12 está parcialmente implementado. No hay ninguna convocada, por eso aparece el mensaje vacío."),
+     "Lista las convocatorias, cada una vinculada a una asamblea del calendario (RN-05) y con apertura y cierre. La papeleta, que solo se mostraría mientras la votación está abierta, depende de YOP Poll, que no está instalado (sección 5.2): hoy el portal publica las convocatorias, pero no permite emitir el voto, así que RF-12 está parcialmente implementado. La convocatoria de la captura es de ejemplo y está vinculada a la asamblea de ejemplo del calendario."),
     ("p12-mediacion.jpg", "Solicitud de mediación estudiantil. RF-13 · RN-02 · RN-03 · RNF-08 · UI-07 · HU-12.",
      "Formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Al enviarlo entrega la referencia (MED-AAAA-NNNNN más un sufijo aleatorio de 32 caracteres hexadecimales) sin repetir los datos. La solicitud es privada: solo la Ejecutiva la ve, no aparece en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido."),
     ("p14-contacto.jpg", "Contacto. RNF-07 · UI-02.",

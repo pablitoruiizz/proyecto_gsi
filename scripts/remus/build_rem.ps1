@@ -120,7 +120,7 @@ foreach ($u in $d.usecases) {
         $aN++; $k++
         if ($st.who -eq 'actor') { Ins 'Action' @('oid', 'isUseCaseAction', 'useCase', 'isSystemAction', 'description', 'performanceValue', 'performanceTime', 'isActorAction', 'actor') @($aN, $false, $null, $false, $st.text, [single]0, 1, $true, [int]$ids[$st.actor]) }
         else { Ins 'Action' @('oid', 'isUseCaseAction', 'useCase', 'isSystemAction', 'description', 'performanceValue', 'performanceTime', 'isActorAction', 'actor') @($aN, $false, $null, $true, $st.text, [single]0, 1, $false, $null) }
-        Ins 'Step' @('oid', 'owner', 'order', 'isConditional', 'condition', 'action') @((NewOid), $o, $k, $false, 'PD', $aN)
+        Ins 'Step' @('oid', 'owner', 'order', 'isConditional', 'condition', 'action', 'comments') @((NewOid), $o, $k, $false, 'PD', $aN, 'Ninguno')
     }
 }
 # --- 10. no funcionales (47), reglas de negocio (51) y entorno de trabajo ---
