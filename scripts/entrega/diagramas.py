@@ -28,6 +28,12 @@ def lienzo(w, h, dpi=110):
 
 def guardar(fig, nombre):
     fig.savefig(os.path.join(IMG, nombre), bbox_inches="tight", facecolor="white")
+    if nombre.startswith(("mockup-0", "tematica-")):
+        # copia vectorial con el texto como texto, para importarla en Figma (docs/entrega/figma/)
+        carpeta = os.path.join(RAIZ, "docs", "entrega", "figma")
+        os.makedirs(carpeta, exist_ok=True)
+        with matplotlib.rc_context({"svg.fonttype": "none"}):
+            fig.savefig(os.path.join(carpeta, nombre.replace(".png", ".svg")), bbox_inches="tight", facecolor="white")
     plt.close(fig)
     print("generado", nombre)
 

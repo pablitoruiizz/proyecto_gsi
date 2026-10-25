@@ -21,7 +21,7 @@ TAREAS = [
     ("E2-07", "Comparativa razonada de al menos tres temas de WordPress", "Joaquín", "Alta", "Done", "2026-10-24", "UI-01, RNF-03"),
     ("E2-08", "Sustituir los comunicados de ejemplo por noticias reales del CADUS", "Joaquín", "Media", "Todo", "", "RF-01"),
     ("E2-09", "Entrevista con el CADUS: requisitos, prioridades, identidad visual y cuentas reales", "Miguel Ángel", "Alta", "Todo", "", "RF-14, UI-01"),
-    ("E2-10", "Mockups finales en Figma con descripción y etiquetas de trazabilidad", "Miguel Ángel", "Alta", "Todo", "", "UI-01 a UI-08"),
+    ("E2-10", "Mockups finales en Figma con descripción y etiquetas de trazabilidad", "Miguel Ángel", "Alta", "Done", "2026-10-25", "UI-01 a UI-08"),
     ("E2-11", "Sustituir actas, estatutos y páginas institucionales por los documentos reales", "Miguel Ángel", "Media", "Todo", "", "RF-03, RF-04"),
     ("E2-12", "Fichas reales de delegaciones (faltan Química, Física, Biología y ETSI) y edición restringida", "Álvaro", "Alta", "Todo", "", "RF-06, RF-07, RN-04"),
     ("E2-13", "Actualizar los diagramas UML (clases, estructura web y plugins) con las entidades nuevas", "Álvaro", "Alta", "Todo", "", "IR-01 a IR-09"),

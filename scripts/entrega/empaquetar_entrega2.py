@@ -66,6 +66,8 @@ open(os.path.join(DESTINO, "LEEME.md"), "w", encoding="utf-8").write("""# Entreg
 | `plugin-cadus-portal.zip` | Plugin propio del portal (CADUS Portal) |
 | `burndown-sprint-02.png` / `.csv` | Burndown chart del Sprint 2 y sus datos |
 
+Mockups en Figma: https://www.figma.com/design/IZ4OfXGSS6T8WLToDq8f8s/CADUS---Mockups-entrega-2
+
 Seguimiento SCRUM: https://github.com/users/pablitoruiizz/projects/1 (público). Repositorio: https://github.com/pablitoruiizz/proyecto_gsi
 
 ## Restaurar el portal en otro equipo

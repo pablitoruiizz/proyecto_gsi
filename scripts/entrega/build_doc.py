@@ -294,7 +294,7 @@ n = lambda k: len(datos[k])
 tabla(["Apartado solicitado", "Estado", "Sección"], [
     ["Planificación: herramientas, product backlog, sprint backlog y burndown del Sprint 2", "Completo: Sprint 2 cerrado con 29 de 29 SP; seguimiento en GitHub Project", "2"],
     [f"REM revisado (versión 2.0): {n('objectives')} objetivos, {n('information')} de información, {n('ui')} de interfaz, {n('functional')} funcionales, {n('nonfunctional')} no funcionales, {len(datos['rules'])} reglas y {n('usecases')} casos de uso", "REM 2.0 generado y documentado (PDF del documento que genera REMUS: CADUS-REM-v2.pdf). Falta la entrevista con el CADUS para validarlo: sigue pendiente", "3"],
-    ["Análisis: estructura web, diagrama de clases, mockups y capturas de menús y de la página principal", "Completo con 7 mockups de baja fidelidad y 3 temáticas visuales comparadas; los mockups finales en Figma están pendientes", "4"],
+    ["Análisis: estructura web, diagrama de clases, mockups y capturas de menús y de la página principal", "Completo con 7 mockups de baja fidelidad y 3 temáticas visuales comparadas; los mockups están también en Figma (bocetos de baja fidelidad)", "4"],
     ["Diseño: comparativa de al menos tres plugins por tipo (con los obligatorios) y de al menos tres temas", "Completo: 11 comparativas de plugins por tipo y 5 temas", "5"],
     ["Implementación: capturas explicadas una a una", "Completa para el alcance salvo la papeleta de las votaciones (RF-12 parcial: se publican las convocatorias, no se puede votar); el contenido sigue siendo de ejemplo", "6"],
     ["Trazabilidad entre REM, análisis, diseño e implementación", "Completo", "7"],
@@ -385,7 +385,7 @@ rico("**Objetivo del Sprint 2:** completar el portal con las historias de partic
 t2 = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-02.md"))
 personas = ["Pablo", "Joaquín", "Miguel Ángel", "Álvaro", "Marcos"]
 estado2 = {"E2-01": "En curso", "E2-02": "Pendiente", "E2-03": "Hecho", "E2-04": "Pendiente", "E2-05": "Hecho", "E2-06": "Hecho", "E2-07": "Hecho",
-           "E2-08": "Pendiente", "E2-09": "Pendiente", "E2-10": "Parcial", "E2-11": "Pendiente", "E2-12": "Parcial", "E2-13": "Hecho",
+           "E2-08": "Pendiente", "E2-09": "Pendiente", "E2-10": "Hecho", "E2-11": "Pendiente", "E2-12": "Parcial", "E2-13": "Hecho",
            "E2-14": "Hecho", "E2-15": "Hecho", "E2-16": "Hecho", "HU-19c": "Hecho"}
 extra = [["Pablo", "E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; PDF obtenido del HTML que genera REMUS)", "—", "Hecho"],
          ["Pablo", "E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "—", "Hecho"],
@@ -400,7 +400,7 @@ for quien, t in zip(personas, [x for x in t2 if x[0][:2] == ["ID", "Tarea concre
 filas2 += extra  # tareas E2-17 a E2-20, añadidas durante el sprint
 tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas2, [2.4, 1.4, 9.2, 0.9, 3.1], tam=8, titulo="Sprint backlog del Sprint 2")
 sp2 = sum(int(f[3]) for f in filas2 if f[3].isdigit())
-par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, once están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario y E2-17 con el PDF obtenido del HTML que genera REMUS), dos parciales, una en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
+par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, doce están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario, E2-10 con bocetos de baja fidelidad en Figma y E2-17 con el PDF obtenido del HTML que genera REMUS), una parcial, una en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
 
 doc.add_heading("2.6 Burndown chart del Sprint 2", 2)
 figura("burndown-sprint2.png", "Burndown chart del Sprint 2 (alcance 29 SP). Ideal frente a real.", 13.5)
@@ -467,7 +467,7 @@ doc.add_heading("4.2 Diagrama de clases", 2)
 par("El modelo de información se deriva de los requisitos de información IR-03 a IR-09. Las entidades en azul tienen requisito propio; las verdes se han deducido de los requisitos funcionales.")
 figura("uml-analisis-clases.png", "Diagrama de clases del análisis con las etiquetas de trazabilidad de cada entidad.", 17)
 doc.add_heading("4.3 Mockups", 2)
-par("Se muestran siete prototipos de baja fidelidad: los cuatro del Sprint 1 (portada, directorio de delegaciones, buzón de consultas y ficha de acta) y tres nuevos del Sprint 2 (calendario con votaciones, solicitud de mediación y panel de administración por rol). Cada uno indica los requisitos que cubre. Los mockups finales en Figma (tarea E2-10) siguen pendientes; la maqueta definitiva de cada pantalla es el portal implementado, que se muestra en la sección 6.")
+par("Se muestran siete prototipos de baja fidelidad: los cuatro del Sprint 1 (portada, directorio de delegaciones, buzón de consultas y ficha de acta) y tres nuevos del Sprint 2 (calendario con votaciones, solicitud de mediación y panel de administración por rol). Cada uno indica los requisitos que cubre. Los siete mockups y las tres temáticas de la sección 4.4 están también en Figma, como capas editables y con los códigos de requisito en cada pantalla: https://www.figma.com/design/IZ4OfXGSS6T8WLToDq8f8s/CADUS---Mockups-entrega-2. Son los mismos bocetos de baja fidelidad; la maqueta definitiva de cada pantalla es el portal implementado, que se muestra en la sección 6.")
 figura("mockup-01-portada.png", "Mockup de la portada. UI-01 · UI-02 · IR-01.", 13.5)
 par("Portada: banner institucional con el lema, comunicados recientes por categoría, accesos destacados al directorio de delegaciones y al buzón, y una franja con las próximas asambleas, eventos y votaciones. El pie lleva los datos de contacto. Navegación: menú principal de siete entradas.")
 figura("mockup-02-directorio.png", "Mockup del directorio de delegaciones y su ficha. UI-03 · RF-06 · RF-07.", 13.5)
@@ -761,7 +761,7 @@ tabla(["Pendiente", "Motivo", "Responsable"], [
     ["Entrevista con el CADUS y validación del REM", "Depende de la disponibilidad del cliente; condiciona el plazo de conservación de datos, la lista de cuentas y la identidad visual", "Miguel Ángel"],
     ["Contenido real (noticias, actas, estatutos, delegaciones)", "El CADUS no lo ha entregado; todo es de ejemplo y está marcado como tal", "Miguel Ángel · Joaquín"],
     ["Fichas de Química, Física, Biología y ETSI", "Faltan los datos de contacto de esas delegaciones", "Álvaro"],
-    ["Mockups finales en Figma", "No se hicieron; se entregan siete mockups de baja fidelidad y las capturas finales", "Miguel Ángel"],
+    ["Mockups de alta fidelidad en Figma", "Los siete mockups y las tres temáticas están en Figma como bocetos de baja fidelidad; falta un diseño de alta fidelidad con componentes, que no se ha hecho", "Miguel Ángel"],
     ["Cuentas de los delegados (una por delegado, con su correo de alumno)", "La cuenta única del CADUS (dcadus@us.es) ya está creada; las de los delegados se crean con el script cuando el CADUS facilite la lista", "Pablo"],
     ["Papeleta de las votaciones (YOP Poll) y eventos reales en el calendario", "No instalado; las convocatorias se publican sin papeleta. La emisión del voto es la historia HU-21 (Sprint 3), pendiente de validar con el cliente", "Joaquín · Miguel Ángel"],
     ["Plazo de conservación y copias de seguridad de tickets y mediaciones (RNF-08)", "Pendiente de validar con el CADUS", "Pablo"],
