@@ -378,7 +378,7 @@ tabla(["ID", "Historia de usuario", "Requisitos", "SP", "Sprint"], hu, [1.5, 9.1
 par(f"Total del product backlog: {sum(int(c[4]) for c in tb[0][1:]) + sum(int(c[4]) for c in tb[1][1:])} puntos de historia.", cursiva=True)
 
 doc.add_heading("2.4 Sprint 1 (28/09 – 18/10/2026): resumen", 2)
-rico("El Sprint 1 se entregó el 18/10/2026 y su sprint backlog y su burndown figuran en el documento de la entrega 1. **Se completaron los 70 SP comprometidos** (plataforma base, identidad visual, contenidos, directorio de delegaciones y buzón). Sus datos están en `docs/scrum/sprints/sprint-01.md` y `docs/scrum/burndown/sprint-01.csv`. Este documento recoge el sprint backlog y el burndown del sprint de esta entrega, el Sprint 2.")
+rico("El Sprint 1 se entregó el 18/10/2026 y su sprint backlog y su burndown figuran en el documento de la entrega 1. **Se completaron los 70 SP comprometidos** (plataforma base, identidad visual, contenidos, directorio de delegaciones y buzón). Sus datos están en `docs/scrum/sprints/sprint-01.md` y `docs/scrum/burndown/sprint-01.csv`. Este documento recoge el sprint backlog y el burndown del sprint de esta entrega, el Sprint 2; para ver la evolución del proyecto, el Anexo A añade también los del Sprint 1 y la comparación entre las dos entregas.")
 
 doc.add_heading("2.5 Sprint backlog del Sprint 2 (19/10 – 25/10/2026)", 2)
 rico("**Objetivo del Sprint 2:** completar el portal con las historias de participación (tickets avanzados, calendario, votaciones, mediación y panel de administración), sustituir el contenido de ejemplo por contenido real validado con el cliente y entregar la documentación final. **Alcance comprometido: 29 SP**, más las tareas de documentación `E2-xx`, que no llevan puntos. Contacto con el cliente: Miguel Ángel Camacho, que forma parte del CADUS.")
@@ -782,6 +782,111 @@ tabla(["Pendiente", "Motivo", "Responsable"], [
     ["Volcado de la base de datos del Sprint 2 y revisión de Wordfence", "Se hace al cerrar la entrega", "Pablo"],
     ["Sprint 3: HU-14 a HU-17 (móvil, accesibilidad WCAG 2.1 AA, filtros del panel y protección frente a spam)", "Planificado del 26/10 al 15/11 en el GitHub Project", "Equipo"],
 ], [6.0, 8.0, 3.0], tam=8, titulo="Pendientes y decisiones abiertas")
+
+# ------------------------------------------------------------------ anexo: evolución del proyecto
+import subprocess
+
+doc.add_heading("Anexo A. Evolución del proyecto", 1)
+par("Este anexo reúne lo que se hizo en el Sprint 1 y lo pone junto a lo que se construyó en el Sprint 2, para que se vea cómo ha ido creciendo el proyecto. El cuerpo del documento recoge, como pide el enunciado, solo el sprint backlog y el burndown del sprint de esta entrega; aquí se añade el del Sprint 1 y la comparación entre las dos entregas.")
+
+doc.add_heading("A.1 Línea de tiempo y avance del backlog", 2)
+figura("evolucion-tiempo.png", "Línea de tiempo del proyecto: Sprint 1 (28/09 – 18/10), Sprint 2 (19/10 – 25/10) y comienzo del Sprint 3.", 16)
+figura("evolucion-backlog.png", "Avance del product backlog: puntos de historia hechos en el Sprint 0 (3 SP), el Sprint 1 y el Sprint 2, y puntos pendientes.", 15.5)
+tbl = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "backlog", "product-backlog.md"))
+hu_filas = tbl[1][1:]
+sp_por = lambda sprint: sum(int(c[4]) for c in hu_filas if c[6] == sprint)
+tabla(["Sprint", "Periodo", "SP", "Resultado", "Qué se construyó"], [
+    ["Sprint 1", "28/09 – 18/10/2026", "70", "70 de 70 SP (entrega 1)", "Servidor compartido con Tailscale, plugins obligatorios, roles, noticias, actas, delegaciones, buzón con código de seguimiento y tema Blocksy con identidad provisional."],
+    ["Sprint 2", "19/10 – 25/10/2026", "29", "29 de 29 SP (entrega 2)", "Panel de tickets con filtros y privacidad, calendario, convocatorias de votación, mediación, menús y escritorio por rol, rediseño con la identidad oficial del CADUS y documentación final."],
+    ["Sprint 3", "26/10 – 15/11/2026", str(sp_por("Sprint-03")), "Planificado", "Móvil, accesibilidad WCAG 2.1 AA, filtros del panel, protección frente a spam y papeleta de votación (HU-14 a HU-17 y HU-21)."],
+    ["Sprint 4", "pendiente de fechas", str(sp_por("Sprint-04")), "Planificado", "Rendimiento, pruebas de aceptación y documentación final (HU-20)."],
+], [1.7, 3.0, 1.0, 3.3, 8.0], tam=8, titulo="Sprints del proyecto")
+
+doc.add_heading("A.2 Sprint 1: sprint backlog y burndown", 2)
+rico("**Objetivo del Sprint 1:** desplegar la plataforma base en WordPress, definir la identidad visual corporativa del CADUS y maquetar las secciones principales de información, delegaciones y buzón de consultas. **Alcance: 70 SP.**")
+ts1 = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-01.md"))
+miembros1 = [s_["name"] for s_ in datos["stakeholders"][1:]]
+filas_s1 = []
+for i, t in enumerate(ts1[:5]):
+    for c in t[1:]:
+        if not c[0].startswith("**"):
+            filas_s1.append([miembros1[i], c[0], c[1], c[2], "Hecho"])
+tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas_s1, [3.2, 1.5, 8.2, 1.0, 3.1], tam=8, titulo="Sprint backlog del Sprint 1")
+figura("burndown-sprint1.png", "Burndown chart del Sprint 1 (alcance 70 SP). Ideal frente a real.", 13.5)
+rico("**Sprint 1 frente a Sprint 2.** En el Sprint 1 se cerraron 60 de los 70 SP (el 86 %) el último día, el 18/10. En el Sprint 2 el trabajo se repartió algo más, pero 23 de los 29 SP (el 79 %) se cerraron en los dos últimos días: la lección se repitió y es la principal acción de mejora del Sprint 3 (sección 2.7). Datos en `docs/scrum/burndown/sprint-01.csv` y `sprint-02.csv`.")
+
+doc.add_heading("A.3 Evolución del portal: de la entrega 1 a la entrega 2", 2)
+par("Cada pantalla de la entrega 1 (captura del Sprint 1, con el tema Blocksy y un logotipo provisional) junto a la misma pantalla en la entrega 2. Sobre la portada, el boceto y la primera implementación están en la sección 4.5.")
+evo = [
+    ("evolucion-noticias.png", "Noticias y comunicados. RF-01 · RF-02 · IR-03.", "Se mantiene el listado filtrable por palabra clave, categoría y año; cambian la identidad (granate y dorado oficiales, logotipo del CADUS en lugar del provisional) y las tarjetas por categoría, cada una con su color."),
+    ("evolucion-actas.png", "Actas y normativa. RF-03 · RF-04 · IR-04 · UI-05.", "La tabla con filtro por tipo y descarga en PDF se mantiene, igual que el flujo de aprobación de la Ejecutiva (RN-01); cambia el diseño, con la paleta oficial del CADUS."),
+    ("evolucion-delegaciones.png", "Directorio de delegaciones. RF-06 · RF-07 · IR-05 · UI-03.", "El listado simple pasa a tarjetas de color agrupadas por facultad o escuela, con enlace a la ficha de cada delegación."),
+    ("evolucion-buzon.png", "Buzón de consultas. RF-08 · RF-09 · IR-06 · UI-04.", "La captura de la entrega 1 muestra la confirmación con el código; la de la entrega 2, el formulario con el consentimiento RGPD y el aviso de privacidad enlazado (RNF-08). El código ahora lleva un sufijo aleatorio."),
+    ("evolucion-seguimiento.png", "Seguimiento de ticket. RF-09 · RN-03 · IR-06.", "El seguimiento exige código y correo a la vez y limita los intentos (RN-03) en las dos entregas; en la entrega 2 se rediseña con la identidad oficial y el código de ticket pasa a llevar un sufijo aleatorio que impide adivinarlo."),
+    ("evolucion-tickets.png", "Tickets en el panel de administración. RF-10 · RN-03 · HU-09.", "En la entrega 1 el listado mostraba el título y el correo del remitente; en la entrega 2 solo muestra código, tipo y estado, con filtros por estado y tipo y aviso al estudiante sin su contenido, porque la privacidad (RN-03) se reforzó en el Sprint 2."),
+    ("evolucion-roles.png", "Roles del portal. RF-14 · IR-09.", "Los roles del CADUS ya existían en el Sprint 1 (entonces con el nombre «Ejecutiva del CADUS», ahora en género neutro: «Ejecutivo del CADUS»); en el Sprint 2 se ajustan sus permisos, se oculta a cada rol lo que no usa y el delegado ya no puede crear fichas."),
+]
+for archivo, pie, texto in evo:
+    figura(archivo, pie, 16.5)
+    par(texto)
+
+doc.add_heading("A.4 Evolución de los requisitos (REM)", 2)
+def _contar(d):
+    return [len(d.get(k, [])) for k in ("objectives", "information", "ui", "functional", "nonfunctional", "rules", "usecases", "environment")]
+try:
+    v1 = json.loads(subprocess.run(["git", "-C", RAIZ, "show", "ae8d901:scripts/remus/cadus_data.json"], capture_output=True, text=True, encoding="utf-8", check=True).stdout)
+except Exception:
+    v1 = None
+v2c = _contar(datos)
+if v1:
+    v1c = _contar(v1)
+    nombres = ["Objetivos", "Requisitos de información", "Requisitos de interfaz", "Requisitos funcionales", "Requisitos no funcionales", "Reglas de negocio", "Casos de uso", "Restricciones del entorno"]
+    tabla(["Dimensión del REM", "Versión 1.0 (entrega 1)", "Versión 2.0 (entrega 2)", "Diferencia"],
+          [[n, a, b, f"{b - a:+d}" if b != a else "="] for n, a, b in zip(nombres, v1c, v2c)], [6.5, 3.6, 3.6, 3.3], tam=8.5, titulo="Requisitos del REM en las dos entregas")
+for t in ("Requisitos de interfaz UI-06 (calendario y votaciones), UI-07 (mediación) y UI-08 (panel por rol), y casos de uso UC-03 (convocar una votación) y UC-04 (solicitar una mediación).",
+          "La gestión de tickets se hace con el módulo propio del buzón, con filtros por estado y tipo y aviso al estudiante sin el contenido (RF-10).",
+          "La mediación entrega una referencia y su privacidad se equipara a la del buzón (RF-13, RN-02, RN-03).",
+          "Las votaciones llevan apertura y cierre y siempre van vinculadas a una asamblea del calendario (RF-12, RN-05).",
+          "Modelo de cuentas: una cuenta única del CADUS para toda la Ejecutiva y una cuenta por delegado con su correo de alumno (RF-14, RN-04).",
+          "Aviso de privacidad público y consentimiento en cada formulario (RNF-08)."):
+    vineta(t)
+
+doc.add_heading("A.5 Evolución de la implementación: plugins y módulos del plugin propio", 2)
+tabla(["Plugin", "Entrega 1 (Sprint 1)", "Entrega 2 (Sprint 2)"], [
+    ["Wordfence, WP Fastest Cache, WP Statistics y Yoast SEO (obligatorios)", "Instalados y configurados", "Sin cambios"],
+    ["Advanced Custom Fields, Fluent Forms y Members", "Instalados", "Sin cambios; Fluent Forms se usa también para la mediación"],
+    ["The Events Calendar", "Previsto", "Instalado (versión 6.18.2) para el calendario"],
+    ["SupportCandy", "Previsto para los tickets", "Descartado: se amplió el módulo propio del buzón"],
+    ["YOP Poll", "Previsto para las votaciones", "No instalado: la papeleta pasa a HU-21 (Sprint 3)"],
+    ["CADUS Portal (plugin propio)", "Roles, contenidos, buzón y configuración inicial", "Se añaden calendario, mediación, votaciones, privacidad, escritorio por rol y el nuevo diseño"],
+], [6.0, 5.0, 6.0], tam=8.5, titulo="Plugins en las dos entregas")
+funciones = {"roles": "Roles y permisos (RF-14)", "contenidos": "Actas, delegaciones y noticias (RF-01 a RF-07)", "buzon": "Buzón, tickets y seguimiento (RF-08 a RF-10)",
+             "mediacion": "Solicitudes de mediación (RF-13)", "privacidad": "Privacidad de tickets y mediaciones (RN-03)", "calendario": "Calendario de eventos (RF-11)",
+             "votaciones": "Convocatorias de votación (RF-12, RN-05)", "escritorio": "Escritorio y menús por rol (RF-15)", "inicio": "Portada (UI-02)",
+             "portada_extra": "Bloques añadidos de la portada", "galeria": "Galería de fotos de la portada", "estilo": "Estilos del portal (UI-01)", "setup": "Configuración inicial y menús",
+             "admin": "Ajustes de administración"}
+filas_m = []
+for f in sorted(os.listdir(os.path.join(RAIZ, "cms-wordpress", "wp-content", "plugins", "cadus-portal", "includes"))):
+    if not f.endswith(".php"):
+        continue
+    try:
+        fechas = subprocess.run(["git", "-C", RAIZ, "log", "--diff-filter=A", "--format=%ad", "--date=format:%Y-%m-%d", "--", f"cms-wordpress/wp-content/plugins/cadus-portal/includes/{f}"],
+                                capture_output=True, text=True, encoding="utf-8", check=True).stdout.split()
+        alta = fechas[-1] if fechas else ""
+    except Exception:
+        alta = ""
+    if alta:
+        filas_m.append([alta, f[:-4] + ".php", funciones.get(f[:-4], "—"), "Sprint 1" if alta <= "2026-10-18" else "Sprint 2"])
+filas_m.sort()
+tabla(["Fecha de alta", "Módulo", "Función", "Sprint"], [[fecha(a), m, fu, sp] for a, m, fu, sp in filas_m], [2.6, 3.2, 8.5, 2.7], tam=8.5, titulo="Módulos del plugin propio y cuándo se añadieron (según el historial de Git)")
+
+doc.add_heading("A.6 Lecciones aprendidas de un sprint a otro", 2)
+tabla(["Tema", "Sprint 1", "Sprint 2", "Para el Sprint 3"], [
+    ["Reparto del trabajo", "Casi todo el contenido se cerró el último día (60 de 70 SP).", "Mejor repartido, pero 23 de 29 SP se cerraron en los dos últimos días.", "Actualizar el tablero y el burndown cada día y no cerrar historias «de golpe»."],
+    ["Integración", "Trabajo de varias personas sobre el mismo plugin.", "Una rama hecha sobre una copia antigua habría eliminado la portada y los menús; se evitó integrando solo su módulo.", "Partir siempre de `git pull` de `main` y abrir una pull request pequeña por historia."],
+    ["Contenido del cliente", "Contenido de ejemplo.", "Sigue siendo de ejemplo: la entrevista con el CADUS no se hizo.", "Pedir el contenido real al inicio del sprint."],
+    ["Privacidad", "Tickets privados y seguimiento con código y correo.", "Batería de pruebas de privacidad (RN-03) ampliada a mediaciones y adjuntos.", "Mantener las pruebas como requisito de cierre de cualquier historia con datos de estudiantes."],
+], [2.8, 4.6, 5.2, 4.4], tam=8, titulo="Lecciones aprendidas por sprint")
 
 # ------------------------------------------------------------------ pie de página
 fp = sec.footer.paragraphs[0]

@@ -523,6 +523,115 @@ def evolucion_portada():
 
 
 
+# ---------------------------------------------------------------- anexo: evolución del proyecto
+def avance_backlog():
+    """SP del product backlog por estado y sprint, leídos de docs/scrum/backlog/product-backlog.md."""
+    import re
+    tot = {"Sprint-00": 0, "Sprint-01": 0, "Sprint-02": 0, "Sprint-03": 0, "Sprint-04": 0, "otros": 0}
+    hecho = {k: 0 for k in tot}
+    for linea in open(os.path.join(RAIZ, "docs", "scrum", "backlog", "product-backlog.md"), encoding="utf-8"):
+        c = [x.strip() for x in linea.strip().strip("|").split("|")]
+        if not re.match(r"^(PB|HU)-\d+$", c[0] if c else ""):
+            continue
+        if c[0].startswith("PB"):
+            sp, estado, sprint = int(c[4]), c[5], c[6]
+        else:
+            sp, estado, sprint = int(c[4]), c[5], c[6]
+        clave = sprint if sprint in tot else "otros"
+        tot[clave] += sp
+        if estado == "Hecho":
+            hecho[clave] += sp
+    return tot, hecho
+
+
+def evolucion_backlog():
+    tot, hecho = avance_backlog()
+    total = sum(tot.values())
+    hechos_s0 = hecho["Sprint-00"]
+    hechos_s1 = hecho["Sprint-01"]
+    hechos_s2 = hecho["Sprint-02"]
+    pendiente = total - hechos_s0 - hechos_s1 - hechos_s2
+    fig, ax = plt.subplots(figsize=(10, 3.2), dpi=110)
+    partes = [(f"S0 ({hechos_s0} SP)", hechos_s0, "#7a8aa3"), ("Sprint 1 (hecho)", hechos_s1, AZUL), ("Sprint 2 (hecho)", hechos_s2, VERDE), ("Pendiente (Sprints 3 y 4)", pendiente, "#c9ced6")]
+    izq = 0
+    for nombre, v, color in partes:
+        ax.barh(0, v, left=izq, color=color, edgecolor="white", height=0.55)
+        if v > 10:
+            ax.text(izq + v / 2, 0, f"{v} SP\n{v / total:.0%}", ha="center", va="center", color="white" if color != "#c9ced6" else "#333", fontsize=11, fontweight="bold")
+        ax.text(izq + v / 2, 0.52, nombre, ha="center", va="bottom", fontsize=9.5, color="#333")
+        izq += v
+    ax.set_xlim(0, total)
+    ax.set_ylim(-0.6, 1.0)
+    ax.set_yticks([])
+    ax.set_xlabel(f"Puntos de historia del product backlog (total: {total} SP)")
+    ax.set_title("Avance del product backlog al cierre de la entrega 2", fontweight="bold", color=AZUL)
+    for lado in ("top", "right", "left"):
+        ax.spines[lado].set_visible(False)
+    fig.savefig(os.path.join(IMG, "evolucion-backlog.png"), bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    print("generado evolucion-backlog.png")
+
+
+def linea_tiempo():
+    hitos = [(dt.date(2026, 9, 28), "Inicio del\nSprint 1", "up"), (dt.date(2026, 10, 5), "Servidor compartido\ncon Tailscale", "down"),
+             (dt.date(2026, 10, 18), "Entrega 1\n70 SP", "up"), (dt.date(2026, 10, 19), "Inicio del\nSprint 2", "down"),
+             (dt.date(2026, 10, 23), "Calendario,\nmediación y panel", "up"), (dt.date(2026, 10, 24), "Sprint Review\ny votaciones", "down"),
+             (dt.date(2026, 10, 25), "Entrega 2\n(Sprints 1 y 2: 99 SP)", "up"), (dt.date(2026, 10, 26), "Sprint 3\n(hasta el 15/11)", "down")]
+    fig, ax = plt.subplots(figsize=(11, 5.2), dpi=110)
+    inicio = dt.date(2026, 9, 26)
+    ax.axhline(0, color=AZUL, lw=3, zorder=1)
+    ax.axvspan((dt.date(2026, 9, 28) - inicio).days, (dt.date(2026, 10, 18) - inicio).days + 0.5, ymin=0.46, ymax=0.54, color=AZUL, alpha=0.25)
+    ax.axvspan((dt.date(2026, 10, 19) - inicio).days, (dt.date(2026, 10, 25) - inicio).days + 0.5, ymin=0.46, ymax=0.54, color=VERDE, alpha=0.35)
+    contador = {"up": 0, "down": 0}
+    for k, (fecha, texto, lado) in enumerate(hitos):
+        x = (fecha - inicio).days
+        contador[lado] += 1
+        nivel = 1.0 if contador[lado] % 2 == 1 else 2.15  # etiquetas escalonadas para que no se pisen
+        y = nivel if lado == "up" else -nivel
+        ax.plot([x, x], [0, y * 0.9], color="#888", lw=1, zorder=1)
+        ax.scatter([x], [0], s=60, color=ROJO if "Entrega" in texto else AZUL, zorder=3)
+        ax.text(x, y * 0.95, f"{fecha:%d/%m}\n{texto}", ha="center", va="bottom" if lado == "up" else "top", fontsize=8.4)
+    ax.set_xlim(-1, (dt.date(2026, 10, 28) - inicio).days)
+    ax.set_ylim(-3.6, 3.6)
+    ax.axis("off")
+    ax.set_title("Línea de tiempo del proyecto (Sprint 1 en azul, Sprint 2 en verde)", fontweight="bold", color=AZUL)
+    fig.savefig(os.path.join(IMG, "evolucion-tiempo.png"), bbox_inches="tight", facecolor="white")
+    plt.close(fig)
+    print("generado evolucion-tiempo.png")
+
+
+def comparativas_evolucion():
+    """Cada pantalla del Sprint 1 (captura de la entrega 1) junto a la de la entrega 2."""
+    from PIL import Image, ImageDraw, ImageFont
+    pares = [("10-noticias.jpg", "p03-noticias.jpg", "noticias"), ("11-actas-y-normativa.jpg", "p04-actas-y-normativa.jpg", "actas"),
+             ("12-delegaciones.jpg", "p05-delegaciones.jpg", "delegaciones"), ("13-buzon-codigo-ticket.jpg", "p07-buzon.jpg", "buzon"),
+             ("14-seguimiento-ticket.jpg", "p08-seguimiento.jpg", "seguimiento"), ("15-admin-tickets.jpg", "20-admin-tickets-filtros.jpg", "tickets"),
+             ("17-roles-members.jpg", "a02-roles.jpg", "roles")]
+    try:
+        fuente = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        fuente = ImageFont.load_default()
+    for antes, despues, nombre in pares:
+        a = Image.open(os.path.join(IMG, "capturas", antes)).convert("RGB")
+        carpeta = "capturas" if despues.startswith("20-") else "capturas2"
+        b = Image.open(os.path.join(IMG, carpeta, despues)).convert("RGB")
+        b = b.crop((0, 0, b.width, min(b.height, 1150 if despues.startswith("p") else int(b.width * 9 / 16))))  # banner y primer contenido de la página
+        a = a.crop((0, 0, a.width, min(a.height, int(a.width * 9 / 16))))
+        alto = 620
+        a = a.resize((int(a.width * alto / a.height), alto))
+        b = b.resize((int(b.width * alto / b.height), alto))
+        hoja = Image.new("RGB", (a.width + b.width + 30, alto + 46), "white")
+        d = ImageDraw.Draw(hoja)
+        d.text((10, 10), "Entrega 1 · Sprint 1", fill="#1f3a5f", font=fuente)
+        d.text((a.width + 30, 10), "Entrega 2 · Sprint 2", fill="#8d0739", font=fuente)
+        hoja.paste(a, (0, 46))
+        hoja.paste(b, (a.width + 30, 46))
+        d.line([(a.width + 15, 46), (a.width + 15, alto + 46)], fill="#888", width=2)
+        hoja.save(os.path.join(IMG, f"evolucion-{nombre}.png"), quality=92)
+        print("generado", f"evolucion-{nombre}.png")
+
+
+
 def mockup_panel():
     fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/wp-admin/", "UI-08 · RF-14 · RF-15", "Inicio")
     ax.text(30, 150, "Escritorio del CADUS (según el rol)", fontsize=14, fontweight="bold", color=AZUL)
@@ -551,4 +660,7 @@ if __name__ == "__main__":
     tematicas()
     comparativas_mockups()
     evolucion_portada()
+    evolucion_backlog()
+    linea_tiempo()
+    comparativas_evolucion()
     burndowns()
