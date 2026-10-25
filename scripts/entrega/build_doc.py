@@ -294,7 +294,7 @@ n = lambda k: len(datos[k])
 tabla(["Apartado solicitado", "Estado", "Sección"], [
     ["Planificación: herramientas, product backlog, sprint backlog y burndown del Sprint 2", "Completo: Sprint 2 cerrado con 29 de 29 SP; seguimiento en GitHub Project", "2"],
     [f"REM revisado (versión 2.0): {n('objectives')} objetivos, {n('information')} de información, {n('ui')} de interfaz, {n('functional')} funcionales, {n('nonfunctional')} no funcionales, {len(datos['rules'])} reglas y {n('usecases')} casos de uso", "REM 2.0 generado y documentado (PDF del documento que genera REMUS: CADUS-REM-v2.pdf). Falta la entrevista con el CADUS para validarlo: sigue pendiente", "3"],
-    ["Análisis: estructura web, diagrama de clases, mockups y capturas de menús y de la página principal", "Completo con 7 mockups de baja fidelidad; los mockups finales en Figma están pendientes", "4"],
+    ["Análisis: estructura web, diagrama de clases, mockups y capturas de menús y de la página principal", "Completo con 7 mockups de baja fidelidad y 3 temáticas visuales comparadas; los mockups finales en Figma están pendientes", "4"],
     ["Diseño: comparativa de al menos tres plugins por tipo (con los obligatorios) y de al menos tres temas", "Completo: 11 comparativas de plugins por tipo y 5 temas", "5"],
     ["Implementación: capturas explicadas una a una", "Completa para el alcance salvo la papeleta de las votaciones (RF-12 parcial: se publican las convocatorias, no se puede votar); el contenido sigue siendo de ejemplo", "6"],
     ["Trazabilidad entre REM, análisis, diseño e implementación", "Completo", "7"],
@@ -356,7 +356,7 @@ tabla(["Criterio", "GitHub Projects", "Jira", "Trello", "Microsoft Planner", "Ta
     ["Plantillas SCRUM", "Plantillas de incidencias y de tablero", "Sí", "Sí", "Básicas", "Sí"],
     ["Curva de aprendizaje", "Baja (ya se usa GitHub)", "Media-alta", "Baja", "Baja", "Media"],
 ], [3.0, 3.0, 2.6, 2.6, 3.0, 2.8], tam=8, titulo="Comparativa de herramientas de gestión SCRUM")
-rico("**Recomendación: GitHub Projects**, con tablero, incidencias etiquetadas como historia de usuario (existen plantillas en `.github/ISSUE_TEMPLATE`) y los artefactos SCRUM versionados en el repositorio. Es la opción de menor fricción: el equipo ya trabaja en GitHub, que la guía define como fuente de la verdad, y cada historia puede enlazarse con sus commits y pull requests. Su carencia es el burndown nativo; se compensa generando el gráfico a partir de los puntos de historia del backlog (`docs/scrum/burndown/sprint-01.csv`, generado por `scripts/entrega/diagramas.py`). Si el equipo prefiere un burndown automático, Taiga sería la alternativa SCRUM puro.")
+rico("**Elección: GitHub Projects**, con tablero, incidencias etiquetadas como historia de usuario (existen plantillas en `.github/ISSUE_TEMPLATE`) y los artefactos SCRUM versionados en el repositorio. Es la opción de menor fricción: el equipo ya trabaja en GitHub, que la guía define como fuente de la verdad, y cada historia puede enlazarse con sus commits y pull requests. Su carencia es el burndown nativo; se compensa generando el gráfico a partir de los puntos de historia del backlog (`docs/scrum/burndown/sprint-01.csv`, generado por `scripts/entrega/diagramas.py`). Si el equipo prefiere un burndown automático, Taiga sería la alternativa SCRUM puro.")
 
 doc.add_heading("2.2.4 Sistema de control de versiones", 3)
 tabla(["Criterio", "Git + GitHub", "Git + GitLab", "Git + Bitbucket", "Subversion"], [
@@ -377,20 +377,8 @@ hu = [[c[0], c[1], c[2], c[4], c[6]] for c in tb[1][1:]]
 tabla(["ID", "Historia de usuario", "Requisitos", "SP", "Sprint"], hu, [1.5, 9.1, 3.0, 1.0, 2.4], tam=8, titulo="Product backlog: historias de usuario")
 par(f"Total del product backlog: {sum(int(c[4]) for c in tb[0][1:]) + sum(int(c[4]) for c in tb[1][1:])} puntos de historia.", cursiva=True)
 
-doc.add_heading("2.4 Sprint backlog del Sprint 1 (28/09 – 18/10/2026)", 2)
-rico("**Objetivo del Sprint 1:** desplegar la plataforma base en WordPress, definir la identidad visual corporativa del CADUS y maquetar las secciones principales de información, delegaciones y buzón de consultas. **Alcance comprometido: 70 SP.**")
-ts = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-01.md"))
-miembros = [s["name"] + " — " + s["role"] for s in datos["stakeholders"][1:]]
-filas_sp = []
-for i, t in enumerate(ts[:5]):
-    for c in t[1:]:
-        if c[0].startswith("**"):
-            continue
-        filas_sp.append([miembros[i].split(" — ")[0], c[0], c[1], c[2], "Hecho"])
-tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas_sp, [3.2, 1.5, 8.2, 1.0, 3.1], tam=8, titulo="Sprint backlog del Sprint 1")
-hecho_sp = sum(int(f[3]) for f in filas_sp if f[4] == "Hecho")
-tot_sp = sum(int(f[3]) for f in filas_sp)
-par(f"Resultado: {hecho_sp} de {tot_sp} SP completados ({hecho_sp / tot_sp:.0%}).", cursiva=True)
+doc.add_heading("2.4 Sprint 1 (28/09 – 18/10/2026): resumen", 2)
+rico("El Sprint 1 se entregó el 18/10/2026 y su sprint backlog y su burndown figuran en el documento de la entrega 1. **Se completaron los 70 SP comprometidos** (plataforma base, identidad visual, contenidos, directorio de delegaciones y buzón). Sus datos están en `docs/scrum/sprints/sprint-01.md` y `docs/scrum/burndown/sprint-01.csv`. Este documento recoge el sprint backlog y el burndown del sprint de esta entrega, el Sprint 2.")
 
 doc.add_heading("2.5 Sprint backlog del Sprint 2 (19/10 – 25/10/2026)", 2)
 rico("**Objetivo del Sprint 2:** completar el portal con las historias de participación (tickets avanzados, calendario, votaciones, mediación y panel de administración), sustituir el contenido de ejemplo por contenido real validado con el cliente y entregar la documentación final. **Alcance comprometido: 29 SP**, más las tareas de documentación `E2-xx`, que no llevan puntos. Contacto con el cliente: Miguel Ángel Camacho, que forma parte del CADUS.")
@@ -414,11 +402,9 @@ tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas2, [2.4, 1.4, 9.2, 0.
 sp2 = sum(int(f[3]) for f in filas2 if f[3].isdigit())
 par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, diez están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario), dos parciales, dos en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
 
-doc.add_heading("2.6 Burndown charts", 2)
-figura("burndown-sprint1.png", "Burndown chart del Sprint 1 (alcance 70 SP). Ideal frente a real.", 13.5)
-rico("**Sprint 1.** PB-002 se completó el 28/09 y PB-005 el 05/10; el 18/10 se cerraron PB-006, PB-007, PB-008 y las diez historias de contenido, quedando 0 SP. La curva real queda por encima de la ideal casi todo el sprint y cae de golpe al final. Datos en `docs/scrum/burndown/sprint-01.csv`.")
+doc.add_heading("2.6 Burndown chart del Sprint 2", 2)
 figura("burndown-sprint2.png", "Burndown chart del Sprint 2 (alcance 29 SP). Ideal frente a real.", 13.5)
-rico("**Sprint 2.** El 19/10 se cerraron HU-19a y HU-09b (6 SP); el 23/10 HU-19b, HU-10 y HU-12 (11 SP) y el 24/10 HU-09a, HU-11 y HU-19c (12 SP), quedando 0 SP pendientes. **Lección:** la lección del Sprint 1 se repitió: 23 de los 29 puntos (el 79 %) se cerraron en los dos últimos días. Además, el burndown no se actualizó cada día como se había acordado: se reconstruyó al final con las fechas reales de los commits y de las pull requests. Datos en `docs/scrum/burndown/sprint-02.csv`; la gráfica y los datos se regeneran con `scripts/entrega/diagramas.py`.")
+rico("El 19/10 se cerraron HU-19a y HU-09b (6 SP); el 23/10 HU-19b, HU-10 y HU-12 (11 SP) y el 24/10 HU-09a, HU-11 y HU-19c (12 SP), quedando 0 SP pendientes. **Lección:** se repitió lo del Sprint 1: 23 de los 29 puntos (el 79 %) se cerraron en los dos últimos días. Además, el burndown no se actualizó cada día como se había acordado: se reconstruyó al final con las fechas reales de los commits y de las pull requests. Datos en `docs/scrum/burndown/sprint-02.csv`; la gráfica y los datos se regeneran con `scripts/entrega/diagramas.py`.")
 
 doc.add_heading("2.7 Sprint Review y retrospectiva del Sprint 2", 2)
 rico("**Sprint Review (24/10/2026).** Se revisó el incremento sobre el servidor compartido: la portada (40 aniversario, accesos, noticias con filtros, eventos, «Nuestro trabajo», galería, buscador y pasos del buzón), la participación (calendario, convocatorias de votación y mediación), la atención al estudiante (buzón con código de seguimiento, panel de tickets con filtros, preguntas frecuentes y aviso de privacidad) y la administración (menús por rol, panel de inicio y cuentas del CADUS y de los delegados). Queda por validar con el cliente, a través de Miguel Ángel, los textos reales, los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024) y la lista de cuentas de las delegaciones.")
@@ -497,6 +483,39 @@ par("Mediación: formulario con nombre, correo @alum.us.es, facultad o escuela, 
 figura("mockup-07-panel.png", "Mockup del escritorio de administración y de los menús según el rol. UI-08 · RF-14 · RF-15.", 13.5)
 par("Escritorio: menú lateral con las secciones del CADUS, tarjetas con lo pendiente (tickets, mediaciones, actas y delegaciones) y un recuadro que resume qué menús ve cada rol: la Ejecutiva todos, el delegado solo su ficha y el estudiante ninguno.")
 
+doc.add_heading("4.4 Tres temáticas visuales para la comparativa", 2)
+par("Para elegir la identidad visual del portal se diseñaron tres temáticas distintas de la portada, cada una asociada a un tema de WordPress candidato. Los bocetos usan la misma estructura (cabecera, banner, accesos, noticias y pie) para que la comparación sea justa; solo cambian la paleta, el estilo y la composición.")
+TEM = json.load(open(os.path.join(ENTREGA, "datos", "tematicas.json"), encoding="utf-8"))
+figura("tematica-a.png", "Temática A · Institucional CADUS (tema candidato: Blocksy). UI-01 · UI-02.", 13)
+figura("tematica-b.png", "Temática B · Claro y sobrio (tema candidato: Astra). UI-01 · UI-02.", 13)
+figura("tematica-c.png", "Temática C · Oscuro contemporáneo (tema candidato: Kadence). UI-01 · UI-02.", 13)
+par("Métricas de la comparación: (1) valoración y número de valoraciones del tema candidato en wordpress.org; (2) etiqueta «Accessibility ready»; (3) contraste del texto principal sobre el fondo, del texto del banner, del botón y de las tarjetas, calculado con la fórmula de WCAG 2.1 (el mínimo del nivel AA es 4,5:1); (4) fidelidad a la identidad visual del CADUS (paleta, logotipo y tipografía de cadus.us.es).")
+filas_t = []
+for tm in TEM:
+    th = temas[tm["tema"]]
+    filas_t.append([f"{tm['clave']} · {tm['nombre']}", f"{th['nombre'].split(' ')[0]} {th['version']}", f"{th['rating'] / 20:.1f}".replace(".", ",") + "/5 (" + f"{th['votos']:,}".replace(",", ".") + ")",
+                    "Sí" if "Accessibility ready" in th["tags"] else "No", f"{tm['contraste_texto']}:1".replace(".", ","), f"{tm['contraste_banner']}:1".replace(".", ","),
+                    f"{tm['contraste_boton']}:1".replace(".", ","), f"{tm['contraste_tarjetas']}:1".replace(".", ","), tm["fidelidad"],
+                    "Seleccionada" if tm["clave"] == "A" else "Descartada"])
+tabla(["Temática", "Tema candidato", "Valoración", "Accessibility ready", "Contraste texto", "Contraste banner", "Contraste botón", "Contraste tarjetas", "Fidelidad a la identidad del CADUS", "Decisión"],
+      filas_t, [2.4, 1.7, 1.7, 1.4, 1.3, 1.3, 1.3, 1.3, 3.3, 1.6], tam=7.5, titulo="Comparativa de las tres temáticas visuales", resaltar=lambda f: f[-1] == "Seleccionada")
+rico("**Elección: temática A (institucional), con Blocksy.** Es la única que usa la paleta (granate `#8d0739` y dorado `#faba09`), el logotipo y la tipografía oficiales del CADUS, y todos sus contrastes superan con holgura el mínimo AA (el más bajo es de 7,2:1), con el tema mejor valorado (5,0/5) y con la etiqueta de accesibilidad. La temática B tiene buen contraste pero un aspecto genérico que no reconoce al CADUS (y Astra no declara la etiqueta de accesibilidad). La temática C conserva el dorado pero pierde el granate, y un fondo oscuro es incómodo para leer actas y normativas largas. La comparación de los cinco temas de WordPress con sus datos está en la sección 5.3.")
+
+doc.add_heading("4.5 Evolución del diseño: de los mockups de la entrega 1 al portal final", 2)
+par("Para que se vea la evolución del proyecto, esta sección compara los mockups de baja fidelidad de la entrega 1 con lo que se construyó. Primero, la portada en sus tres etapas: el boceto, la primera implementación del Sprint 1 (con el tema Blocksy y un logotipo provisional) y el portal final. Después, cada uno de los cuatro mockups de la entrega 1 (portada, directorio, buzón y ficha de acta) junto a la pantalla implementada, para ver qué se mantuvo y qué cambió al aplicar la identidad del CADUS y los requisitos del Sprint 2.")
+figura("evolucion-portada.png", "Evolución de la portada: mockup (entrega 1), primera implementación (Sprint 1) y portal final (Sprint 2). UI-01 · UI-02 · IR-01.", 16.5)
+figura("comparativa-1-portada.png", "Portada: mockup de la entrega 1 frente al portal implementado (primer tramo). UI-01 · UI-02 · IR-01.", 16.5)
+figura("comparativa-2-directorio.png", "Directorio de delegaciones: mockup frente al portal implementado. UI-03 · RF-06 · RF-07.", 16.5)
+figura("comparativa-3-buzon.png", "Buzón de consultas: mockup frente al portal implementado. UI-04 · RF-08 · RF-09 · RN-02 · RN-03.", 16.5)
+figura("comparativa-4-acta.png", "Actas y normativa: mockup frente al portal implementado. UI-05 · RF-03 · RF-04 · RF-05.", 16.5)
+tabla(["Pantalla", "Mockup de la entrega 1", "Portal implementado", "Qué cambió y por qué", "Requisitos"], [
+    ["Portada", "Banner azul genérico con «LOGO», tres comunicados, dos accesos y una franja de próximos eventos.", "Banner granate con el lema y tres contadores reales, presentación de los 40 años, seis accesos, noticias con filtro, eventos, «Nuestro trabajo», galería, buscador y pasos del buzón.", "Se aplicó la paleta, el logotipo y la tipografía oficiales del CADUS y la portada pasó de cuatro bloques a diez, con datos reales del portal.", "UI-01 · UI-02 · IR-01"],
+    ["Directorio de delegaciones", "Lista en filas con un desplegable para filtrar por centro y una ficha emergente.", "Tarjetas de color agrupadas por facultad o escuela, cada una con enlace a la ficha de la delegación.", "El agrupamiento por centro sustituye al desplegable y la ficha es una página propia, editable solo por su delegado (RN-04).", "UI-03 · RF-06 · RF-07"],
+    ["Buzón de consultas", "Formulario con el recuadro de seguimiento de ticket a su derecha y una nota de privacidad.", "Formulario con consentimiento RGPD y enlace al aviso de privacidad; el seguimiento tiene página propia y la confirmación entrega el código.", "Se separó el seguimiento (exige código y correo, sin caché) y se añadieron el consentimiento, las preguntas frecuentes y el aviso de privacidad.", "UI-04 · RF-08 · RF-09 · RN-02 · RN-03 · RNF-08"],
+    ["Actas y normativa", "Ficha con vista previa del PDF, datos del documento y botón de descarga.", "Tabla de documentos con filtro por tipo y botón de descarga; cada documento tiene su ficha.", "El listado con filtro permite encontrar un documento antes de abrir su ficha; el flujo de aprobación (RN-01) se aplica en el panel de administración.", "UI-05 · RF-03 · RF-04 · RF-05 · RN-01"],
+], [2.3, 3.7, 4.2, 4.8, 2.0], tam=7.5, titulo="Cambios entre los mockups de la entrega 1 y el portal implementado")
+par("Los tres mockups nuevos del Sprint 2 (calendario y votaciones, mediación y panel por rol) no tenían equivalente en la entrega 1: sus pantallas implementadas están en la sección 6.")
+
 # ------------------------------------------------------------------ 5. diseño
 doc.add_heading("5. Diseño", 1)
 doc.add_heading("5.1 Arquitectura de plugins", 2)
@@ -538,7 +557,7 @@ tt = parsear_tablas(CT)[0]
 tabla(["Tema", "Versión", "Última actualización", "Instalaciones activas", "Valoración", "Nº valoraciones", "«Accessibility ready»", "PHP mínimo", "Decisión"],
       [[c.replace("*", "") for c in fila] for fila in tt[1:]], [2.2, 1.5, 2.2, 2.0, 1.7, 1.9, 2.1, 1.7, 1.7], tam=8,
       titulo="Comparativa de temas de WordPress", resaltar=lambda f: f[-1] == "Seleccionado")
-par("Se descartó Twenty Twenty-Five (tema por defecto de WordPress) como candidato: solo tiene 14 valoraciones (4,0/5), una base de uso demasiado pequeña para compararlo con el resto. Los datos proceden de la API pública de wordpress.org consultada el 18/10/2026.")
+par("Se descartó Twenty Twenty-Five (tema por defecto de WordPress) como candidato: solo tiene 14 valoraciones (4,0/5), una base de uso demasiado pequeña para compararlo con el resto. Los datos proceden de la API pública de wordpress.org consultada el 18/10/2026. Los bocetos de las tres temáticas visuales que se compararon están en la sección 4.4.")
 for titulo in ("Justificación", "Coste de cambiar de tema", "Limitaciones asumidas"):
     doc.add_heading(titulo, 3)
     for linea in leer_seccion(CT, titulo):

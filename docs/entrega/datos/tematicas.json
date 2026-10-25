@@ -1,0 +1,32 @@
+[
+ {
+  "clave": "A",
+  "nombre": "Institucional CADUS",
+  "tema": "blocksy",
+  "fidelidad": "Alta: paleta, logotipo y tipografía de cadus.us.es",
+  "contraste_texto": 13.7,
+  "contraste_banner": 9.5,
+  "contraste_boton": 7.2,
+  "contraste_tarjetas": 7.2
+ },
+ {
+  "clave": "B",
+  "nombre": "Claro y sobrio",
+  "tema": "astra",
+  "fidelidad": "Baja: azul genérico, sin los colores del CADUS",
+  "contraste_texto": 11.5,
+  "contraste_banner": 9.8,
+  "contraste_boton": 5.4,
+  "contraste_tarjetas": 10.6
+ },
+ {
+  "clave": "C",
+  "nombre": "Oscuro contemporáneo",
+  "tema": "kadence",
+  "fidelidad": "Media: conserva el dorado, pierde el granate",
+  "contraste_texto": 15.0,
+  "contraste_banner": 16.3,
+  "contraste_boton": 10.4,
+  "contraste_tarjetas": 13.5
+ }
+]

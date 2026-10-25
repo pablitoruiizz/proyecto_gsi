@@ -1,6 +1,7 @@
 """Genera los diagramas, mockups y el burndown de la entrega. Uso: python scripts/entrega/diagramas.py"""
 import csv
 import datetime as dt
+import json
 import os
 import textwrap
 
@@ -360,6 +361,162 @@ def mockup_mediacion():
     guardar(fig, "mockup-06-mediacion.png")
 
 
+# ---------------------------------------------------------------- tres temáticas visuales para la comparativa
+def luminancia(hexa):
+    r, g, b = [int(hexa[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+    f = lambda c: c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+
+
+def contraste(a, b):
+    la, lb = sorted((luminancia(a), luminancia(b)), reverse=True)
+    return round((la + 0.05) / (lb + 0.05), 1)
+
+
+# nombre, tema de WordPress candidato, colores y pares (texto, fondo) que se miden
+TEMATICAS = [
+    dict(clave="A", nombre="Institucional CADUS", tema="blocksy", fondo="#f1f1f1", cab="#ffffff", hero="#8d0739", hero_txt="#ffffff", acento="#faba09",
+         tarjetas=["#8d0739", "#faba09", "#212529"], tarjeta_txt=["#ffffff", "#6b052b", "#ffffff"], texto="#212529", boton="#faba09", boton_txt="#6b052b",
+         fidelidad="Alta: paleta, logotipo y tipografía de cadus.us.es"),
+    dict(clave="B", nombre="Claro y sobrio", tema="astra", fondo="#ffffff", cab="#ffffff", hero="#e8eef7", hero_txt="#1f3a5f", acento="#2b6cb0",
+         tarjetas=["#f4f6f9", "#f4f6f9", "#f4f6f9"], tarjeta_txt=["#1f3a5f"] * 3, texto="#1f3a5f", boton="#2b6cb0", boton_txt="#ffffff",
+         fidelidad="Baja: azul genérico, sin los colores del CADUS"),
+    dict(clave="C", nombre="Oscuro contemporáneo", tema="kadence", fondo="#14161a", cab="#0d0f12", hero="#1d2026", hero_txt="#ffffff", acento="#faba09",
+         tarjetas=["#1d2026", "#1d2026", "#1d2026"], tarjeta_txt=["#e8eaed"] * 3, texto="#e8eaed", boton="#faba09", boton_txt="#14161a",
+         fidelidad="Media: conserva el dorado, pierde el granate"),
+]
+
+
+def dibujo_tematica(t):
+    fig, ax = lienzo(1000, 700, 100)
+    ax.add_patch(Rectangle((0, 0), 1000, 700, fc=t["fondo"], ec="#888", lw=1.5, zorder=0))
+    ax.add_patch(Rectangle((0, 0), 1000, 34, fc="#e6e8eb", ec="#888", zorder=1))
+    for i, c in enumerate(("#ff5f56", "#ffbd2e", "#27c93f")):
+        ax.add_patch(plt.Circle((20 + i * 20, 17), 6, fc=c, ec="none", zorder=2))
+    ax.add_patch(FancyBboxPatch((100, 7), 800, 20, boxstyle="round,pad=0,rounding_size=8", fc="white", ec="#bbb", zorder=2))
+    ax.text(116, 17, f"Temática {t['clave']} · {t['nombre']}", fontsize=8.5, va="center", color="#555", zorder=3)
+    ax.text(985, 118, f"UI-01 · UI-02 · tema candidato: {t['tema'].capitalize()}", ha="right", fontsize=9, color="#b3261e" if t["clave"] != "C" else "#faba09", fontstyle="italic", fontweight="bold", zorder=3)
+    ax.add_patch(Rectangle((0, 34), 1000, 70, fc=t["cab"], ec="#bbbbbb", zorder=1))
+    ax.add_patch(Rectangle((30, 50), 44, 38, fc=t["hero"] if t["clave"] != "B" else t["acento"], ec="none", zorder=2))
+    ax.text(52, 69, "LOGO", ha="center", va="center", fontsize=7.5, color="white" if t["clave"] != "C" else "#14161a", fontweight="bold", zorder=3)
+    ax.text(88, 69, "CADUS", fontsize=15, fontweight="bold", color=t["texto"], va="center", zorder=3)
+    x = 330
+    for m in ("Inicio", "Qué es", "Noticias", "Actas", "Delegaciones", "Calendario", "Atención"):
+        ax.text(x, 69, m, fontsize=9.5, color=t["texto"], va="center", zorder=3)
+        x += len(m) * 8.8 + 24
+    # banner
+    ax.add_patch(Rectangle((30, 125), 940, 190, fc=t["hero"], ec="none", zorder=1))
+    if t["clave"] == "A":
+        ax.add_patch(FancyBboxPatch((780, 150), 150, 165, boxstyle="round,pad=0,rounding_size=70", fc="white", ec="none", zorder=2))
+        ax.add_patch(FancyBboxPatch((700, 205), 70, 110, boxstyle="round,pad=0,rounding_size=30", fc=t["acento"], ec="none", zorder=2))
+        ax.text(855, 240, "logotipo", ha="center", va="center", fontsize=10, color=t["hero"], fontweight="bold", zorder=3)
+        ax.text(60, 180, "LA VOZ DEL\nALUMNADO", fontsize=26, fontweight="bold", color=t["hero_txt"], va="center", linespacing=1.0, zorder=3)
+    elif t["clave"] == "B":
+        ax.add_patch(Rectangle((600, 140, ), 350, 160, fc="#c5d3e6", ec="none", zorder=2))
+        ax.text(775, 220, "imagen", ha="center", va="center", fontsize=11, color="#6b7f99", zorder=3)
+        ax.text(60, 180, "La voz del alumnado\nde la Universidad de Sevilla", fontsize=19, fontweight="bold", color=t["hero_txt"], va="center", zorder=3)
+    else:
+        ax.add_patch(Rectangle((60, 150), 8, 70, fc=t["acento"], ec="none", zorder=3))
+        ax.text(85, 185, "LA VOZ DEL ALUMNADO", fontsize=22, fontweight="bold", color=t["hero_txt"], va="center", zorder=3)
+        ax.text(85, 225, "Consejo de Alumnos · Universidad de Sevilla", fontsize=11, color=t["acento"], va="center", zorder=3)
+    ax.add_patch(FancyBboxPatch((60, 262), 220, 36, boxstyle="round,pad=0,rounding_size=6", fc=t["boton"], ec="none", zorder=3))
+    ax.text(170, 280, "Enviar una consulta", ha="center", va="center", fontsize=10, fontweight="bold", color=t["boton_txt"], zorder=4)
+    # tarjetas de acceso
+    for i, (nombre, desc) in enumerate((("Comunicados", "Novedades del CADUS"), ("Actas y normativa", "Consulta y descarga"), ("Buzón de consultas", "Envía tu duda"))):
+        x0 = 30 + i * 320
+        ax.add_patch(FancyBboxPatch((x0, 340), 300, 130, boxstyle="round,pad=0,rounding_size=8", fc=t["tarjetas"][i],
+                                    ec=t["acento"] if t["clave"] == "C" else ("#d6dce5" if t["clave"] == "B" else "none"), lw=1.2, zorder=1))
+        ax.text(x0 + 20, 380, nombre, fontsize=14, fontweight="bold", color=t["tarjeta_txt"][i], zorder=3)
+        ax.text(x0 + 20, 410, desc, fontsize=9.5, color=t["tarjeta_txt"][i], zorder=3)
+    ax.text(30, 505, "Últimas noticias", fontsize=13, fontweight="bold", color=t["texto"], zorder=3)
+    for i in range(3):
+        ax.add_patch(Rectangle((30 + i * 320, 525), 300, 90, fc="white" if t["clave"] != "C" else "#1d2026", ec="#c5cad1" if t["clave"] != "C" else "#3a3f48", zorder=1))
+        ax.text(45 + i * 320, 550, "Titular del comunicado", fontsize=10, fontweight="bold", color="#212529" if t["clave"] != "C" else "#e8eaed", zorder=3)
+        ax.text(45 + i * 320, 575, "Resumen de dos líneas…", fontsize=9, color="#555" if t["clave"] != "C" else "#aab0b9", zorder=3)
+    ax.add_patch(Rectangle((0, 650), 1000, 50, fc=t["hero"] if t["clave"] != "B" else "#1f3a5f", ec="none", zorder=1))
+    ax.text(30, 675, "Pie · cadus@us.es · Pabellón de Uruguay", fontsize=9, color="white", va="center", zorder=3)
+    guardar(fig, f"tematica-{t['clave'].lower()}.png")
+
+
+def tematicas():
+    resultado = []
+    for t in TEMATICAS:
+        dibujo_tematica(t)
+        resultado.append(dict(clave=t["clave"], nombre=t["nombre"], tema=t["tema"], fidelidad=t["fidelidad"],
+                              contraste_texto=contraste(t["texto"], t["fondo"]),
+                              contraste_banner=contraste(t["hero_txt"], t["hero"]),
+                              contraste_boton=contraste(t["boton_txt"], t["boton"]),
+                              contraste_tarjetas=min(contraste(a, b) for a, b in zip(t["tarjeta_txt"], t["tarjetas"]))))
+    with open(os.path.join(RAIZ, "docs", "entrega", "datos", "tematicas.json"), "w", encoding="utf-8") as f:
+        json.dump(resultado, f, ensure_ascii=False, indent=1)
+    print("generado datos/tematicas.json")
+
+
+
+# ---------------------------------------------------------------- mockups de la entrega 1 frente al portal implementado
+def comparativas_mockups():
+    """Une cada mockup de la entrega 1 con la captura de la pantalla implementada (necesita las capturas de capturas_publicas.py)."""
+    from PIL import Image, ImageDraw, ImageFont
+    pares = [("mockup-01-portada.png", "p01-portada.jpg", (0, 1500), "comparativa-1-portada.png"),
+             ("mockup-02-directorio.png", "p05-delegaciones.jpg", None, "comparativa-2-directorio.png"),
+             ("mockup-03-buzon.png", "p07-buzon.jpg", None, "comparativa-3-buzon.png"),
+             ("mockup-04-acta.png", "p04-actas-y-normativa.jpg", None, "comparativa-4-acta.png")]
+    try:
+        fuente = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        fuente = ImageFont.load_default()
+    for mockup, captura, recorte, salida in pares:
+        a = Image.open(os.path.join(IMG, mockup)).convert("RGB")
+        b = Image.open(os.path.join(IMG, "capturas2", captura)).convert("RGB")
+        if recorte:
+            b = b.crop((0, recorte[0], b.width, min(recorte[1], b.height)))
+        alto = 720
+        a = a.resize((int(a.width * alto / a.height), alto))
+        b = b.resize((int(b.width * alto / b.height), alto))
+        hoja = Image.new("RGB", (a.width + b.width + 30, alto + 46), "white")
+        d = ImageDraw.Draw(hoja)
+        d.text((10, 10), "Entrega 1 · mockup de baja fidelidad", fill="#1f3a5f", font=fuente)
+        d.text((a.width + 30, 10), "Entrega 2 · portal implementado", fill="#8d0739", font=fuente)
+        hoja.paste(a, (0, 46))
+        hoja.paste(b, (a.width + 30, 46))
+        d.line([(a.width + 15, 46), (a.width + 15, alto + 46)], fill="#888", width=2)
+        hoja.save(os.path.join(IMG, salida), quality=92)
+        print("generado", salida)
+
+
+
+def evolucion_portada():
+    """La portada en tres etapas: mockup (entrega 1), primera implementación (Sprint 1) y portal final (Sprint 2)."""
+    from PIL import Image, ImageDraw, ImageFont
+    try:
+        fuente = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        fuente = ImageFont.load_default()
+    etapas = [("1 · Mockup (entrega 1)", os.path.join(IMG, "mockup-01-portada.png"), None, "#1f3a5f"),
+              ("2 · Primera implementación (Sprint 1)", os.path.join(IMG, "capturas", "09-portada-final.jpg"), None, "#1f3a5f"),
+              ("3 · Portal final (Sprint 2)", os.path.join(IMG, "capturas2", "p01-portada.jpg"), (0, 1500), "#8d0739")]
+    alto = 640
+    ims = []
+    for titulo, ruta, recorte, color in etapas:
+        im = Image.open(ruta).convert("RGB")
+        if recorte:
+            im = im.crop((0, recorte[0], im.width, min(recorte[1], im.height)))
+        ims.append((titulo, color, im.resize((int(im.width * alto / im.height), alto))))
+    ancho = sum(i.width for _, _, i in ims) + 20 * (len(ims) - 1)
+    hoja = Image.new("RGB", (ancho, alto + 46), "white")
+    d = ImageDraw.Draw(hoja)
+    x = 0
+    for k, (titulo, color, im) in enumerate(ims):
+        d.text((x + 6, 10), titulo, fill=color, font=fuente)
+        hoja.paste(im, (x, 46))
+        x += im.width + 20
+        if k < len(ims) - 1:
+            d.text((x - 17, alto // 2 + 30), "›", fill="#888", font=fuente)
+    hoja.save(os.path.join(IMG, "evolucion-portada.png"), quality=92)
+    print("generado evolucion-portada.png")
+
+
+
 def mockup_panel():
     fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/wp-admin/", "UI-08 · RF-14 · RF-15", "Inicio")
     ax.text(30, 150, "Escritorio del CADUS (según el rol)", fontsize=14, fontweight="bold", color=AZUL)
@@ -385,4 +542,7 @@ if __name__ == "__main__":
     mockup_calendario()
     mockup_mediacion()
     mockup_panel()
+    tematicas()
+    comparativas_mockups()
+    evolucion_portada()
     burndowns()
