@@ -194,7 +194,7 @@ def indice(paginas):
             continue
         pag = paginas.get(ident, "")
         sangria = "" if nivel == 1 else ' style="margin-left:2em"'
-        items.append(f'<li{sangria}><a href="#{ident}">{html.escape(texto, quote=False)}</a> <span class="pag">{pag}</span></li>')
+        items.append(f'<li{sangria}><a href="#{ident}">{html.escape(texto, quote=False)}<span class="pag">{pag}</span></a></li>')
     return '<nav id="toc" role="navigation"><h1>Índice</h1><ul class="toc_list toc_list_level_1">' + "".join(items) + "</ul></nav>"
 
 
@@ -264,6 +264,46 @@ def a_pdf(contenido, destino):
         nav.close()
 
 
+def enlazar_pdf(ruta, pagina_indice=1):
+    """Los enlaces del índice (destinos con nombre de Chrome) pasan a ser UN enlace directo a página por línea, que todos los
+    visores entienden, y el PDF recibe marcadores (panel de navegación) con los mismos apartados."""
+    d = pymupdf.open(ruta)
+    destinos = d.resolve_names()
+    pagina = d[pagina_indice]
+    nombrados = [l for l in pagina.get_links() if l.get("kind") == pymupdf.LINK_NAMED and l.get("nameddest") in destinos]
+    if not nombrados:
+        d.close()
+        return 0
+    grupos = {}  # una línea del índice puede llegar como varios rectángulos (título y número): se unen
+    for l in nombrados:
+        g = grupos.setdefault(l["nameddest"], {"rect": pymupdf.Rect(l["from"]), "lineas": []})
+        g["rect"] |= pymupdf.Rect(l["from"])
+        g["lineas"].append(l)
+    for l in nombrados:
+        pagina.delete_link(l)
+    minimo = min(g["rect"].x0 for g in grupos.values())
+    toc = []
+    for nombre, g in sorted(grupos.items(), key=lambda kv: (round(kv[1]["rect"].y0), kv[1]["rect"].x0)):
+        meta = destinos[nombre]
+        destino_pag = int(meta["page"])
+        punto = pymupdf.Point(*meta.get("to", (0, 0))[:2])
+        pagina.insert_link({"kind": pymupdf.LINK_GOTO, "from": g["rect"], "page": destino_pag, "to": punto, "zoom": 0})
+        titulo = pagina.get_textbox(g["rect"]).replace("\n", " ").strip()
+        titulo = re.sub(r"^\d{1,3}\s+(?=\S)", "", re.sub(r"\s+\d{1,3}\s*$", "", titulo))  # sin el número de página, que va a la derecha
+        if titulo and not titulo.isdigit():
+            toc.append([1 if g["rect"].x0 - minimo < 12 else 2, titulo, destino_pag + 1])
+    previo = 0
+    for e in toc:  # un marcador no puede bajar más de un nivel a la vez
+        e[0] = min(e[0], previo + 1)
+        previo = e[0]
+    d.set_toc(toc)
+    tmp = ruta + ".tmp"
+    d.save(tmp, garbage=3, deflate=True)
+    d.close()
+    os.replace(tmp, ruta)
+    return len(toc)
+
+
 def paginas_de_titulos(pdf):
     """Página de cada encabezado: se busca su texto desde donde empieza el cuerpo (tras el índice), siempre hacia delante."""
     d = pymupdf.open(pdf)
@@ -286,6 +326,8 @@ if __name__ == "__main__":
     # el índice ocupa lo mismo con o sin números: segunda pasada con las páginas reales
     paginas = paginas_de_titulos(SALIDA_PDF)
     a_pdf(construir(paginas), SALIDA_PDF)
+    print("enlaces y marcadores del PDF de la entrega:", enlazar_pdf(SALIDA_PDF))
     rem_pdf(os.path.join(ENTREGA, "paquete", "CADUS-REM-v2.pdf"))
+    print("enlaces y marcadores del PDF del REM:", enlazar_pdf(os.path.join(ENTREGA, "paquete", "CADUS-REM-v2.pdf")))
     d = pymupdf.open(SALIDA_PDF)
     print("generado", SALIDA_PDF, "·", len(d), "páginas ·", figura_n[0], "figuras ·", tabla_n[0], "tablas")
