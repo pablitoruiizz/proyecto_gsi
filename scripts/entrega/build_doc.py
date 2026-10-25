@@ -612,6 +612,20 @@ for archivo, pie, texto in publicas:
     nfig[archivo] = figura(archivo, pie, 15.5, CAP2)
     par(texto)
 
+doc.add_heading("Capturas del equipo de las pantallas de atención al estudiante", 3)
+par("Capturas de Marcos Delgado (HU-09a y E2-16) a 1920×1080 de las mismas pantallas, tal como se vieron al implementarlas: las preguntas frecuentes, el aviso de privacidad y el buzón con el aviso enlazado.")
+equipo = [
+    ("22-preguntas-frecuentes.jpg", "Preguntas frecuentes (captura de Marcos). RF-08 · UI-04 · E2-16.",
+     "Lista de preguntas desplegables: quién puede usar el buzón, qué diferencia hay entre una consulta y una reclamación académica, cómo saber el estado de la solicitud y cuándo se avisa al estudiante."),
+    ("23-aviso-de-privacidad.jpg", "Aviso de privacidad (captura de Marcos). RNF-08 · RN-03 · UI-04 · E2-16.",
+     "Arranca con el responsable del tratamiento (el CADUS y su correo de contacto) y sigue con los datos que se tratan, para qué, la base legal, quién puede verlos y los derechos del estudiante."),
+    ("24-buzon-aviso-privacidad.jpg", "Buzón con el aviso de privacidad enlazado (captura de Marcos). RF-08 · RN-02 · RNF-08 · UI-04 · HU-07.",
+     "Encima del formulario se avisa de que los datos se tratan conforme al RGPD, de que las reclamaciones solo las ven el remitente y la Ejecutiva, y se enlaza el aviso de privacidad completo."),
+]
+for archivo, pie, texto in equipo:
+    nfig[archivo] = figura(archivo, pie, 15.5, CAP)
+    par(texto)
+
 doc.add_heading("6.2 Administración y configuración", 2)
 admin = [
     (CAP, "20-admin-tickets-filtros.jpg", "Panel de tickets con filtros por estado y tipo. RF-10 · RN-03 · HU-09a.",
@@ -716,7 +730,7 @@ tabla(["Requisito (REM)", "Análisis (UML / mockup)", "Diseño (plugin)", "Imple
     ["UI-01 Diseño gráfico", "Mockup de portada", "Tema Blocksy + plugin propio", F("p01-portada.jpg", "18-tema-blocksy.jpg")],
     ["UI-02 Página principal", "Mockup 1 · estructura web", "Tema + Yoast SEO", F("p01-portada.jpg")],
     ["UI-03 Directorio", "Mockup 2", "Plugin propio", F("p05-delegaciones.jpg")],
-    ["UI-04 Buzón de consultas", "Mockup 3", "Fluent Forms + plugin propio", F("p07-buzon.jpg", "p09-faq.jpg", "p10-privacidad.jpg")],
+    ["UI-04 Buzón de consultas", "Mockup 3", "Fluent Forms + plugin propio", F("p07-buzon.jpg", "24-buzon-aviso-privacidad.jpg", "p09-faq.jpg", "22-preguntas-frecuentes.jpg", "p10-privacidad.jpg", "23-aviso-de-privacidad.jpg")],
     ["UI-05 Ficha de acta o normativa", "Mockup 4", "Plugin propio + ACF", F("p04-actas-y-normativa.jpg")],
     ["UI-06 Calendario y votaciones", "Mockup 5", "The Events Calendar + plugin propio", F("p13-calendario.jpg", "p11-votaciones.jpg")],
     ["UI-07 Solicitud de mediación", "Mockup 6", "Fluent Forms + plugin propio", F("p12-mediacion.jpg")],
