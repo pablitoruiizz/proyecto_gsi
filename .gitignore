@@ -137,3 +137,7 @@ wp-content/cache/
 #!docs/ejemplos/*.zip
 # correos de alumnos (datos personales)
 scripts/roles/usuarios-reales.csv
+
+# Python
+__pycache__/
+*.pyc
