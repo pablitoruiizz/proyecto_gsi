@@ -632,6 +632,41 @@ def comparativas_evolucion():
 
 
 
+def comparativas_uml():
+    """Los UML de la entrega 1 (sacados del historial de Git) junto a los actuales."""
+    import io
+    import subprocess
+    from PIL import Image, ImageDraw, ImageFont
+    try:
+        fuente = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        fuente = ImageFont.load_default()
+    for fichero, salida in (("uml-analisis-estructura-web.png", "evolucion-uml-estructura.png"), ("uml-analisis-clases.png", "evolucion-uml-clases.png"),
+                            ("uml-diseno-plugins.png", "evolucion-uml-plugins.png")):
+        try:
+            primera = subprocess.run(["git", "-C", RAIZ, "log", "--format=%h", "--diff-filter=A", "--", f"docs/entrega/img/{fichero}"], capture_output=True, text=True, check=True).stdout.split()[-1]
+            viejo = subprocess.run(["git", "-C", RAIZ, "show", f"{primera}:docs/entrega/img/{fichero}"], capture_output=True, check=True).stdout
+            a = Image.open(io.BytesIO(viejo)).convert("RGB")
+        except Exception as e:
+            print("sin historial para", fichero, e)
+            continue
+        b = Image.open(os.path.join(IMG, fichero)).convert("RGB")
+        ancho = 900
+        a = a.resize((ancho, int(a.height * ancho / a.width)))
+        b = b.resize((ancho, int(b.height * ancho / b.width)))
+        alto = max(a.height, b.height)
+        hoja = Image.new("RGB", (2 * ancho + 30, alto + 46), "white")
+        d = ImageDraw.Draw(hoja)
+        d.text((10, 10), "Entrega 1", fill="#1f3a5f", font=fuente)
+        d.text((ancho + 40, 10), "Entrega 2", fill="#8d0739", font=fuente)
+        hoja.paste(a, (0, 46))
+        hoja.paste(b, (ancho + 30, 46))
+        d.line([(ancho + 15, 46), (ancho + 15, alto + 46)], fill="#888", width=2)
+        hoja.save(os.path.join(IMG, salida), quality=92)
+        print("generado", salida)
+
+
+
 def mockup_panel():
     fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/wp-admin/", "UI-08 · RF-14 · RF-15", "Inicio")
     ax.text(30, 150, "Escritorio del CADUS (según el rol)", fontsize=14, fontweight="bold", color=AZUL)
@@ -663,4 +698,5 @@ if __name__ == "__main__":
     evolucion_backlog()
     linea_tiempo()
     comparativas_evolucion()
+    comparativas_uml()
     burndowns()

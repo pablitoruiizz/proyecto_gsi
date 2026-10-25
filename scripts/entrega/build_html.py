@@ -142,6 +142,7 @@ def marca(sufijo):
 
 bloque_a = FUENTE[marca("resumen"):marca("3. REM")]
 bloque_b = FUENTE[marca("4. análisis"):marca("pie de página")]
+bloque_rem_evo = FUENTE[marca("3.8 evolución del REM"):marca("4. análisis")]
 
 
 # ------------------------------------------------------------------ capítulo 3: el documento de REMUS, incrustado
@@ -228,6 +229,7 @@ def construir(paginas):
     figura_n[0] = tabla_n[0] = 0
     exec(compile(bloque_a, "build_doc:2-secciones", "exec"), ns)
     capitulo_rem()
+    exec(compile(bloque_rem_evo, "build_doc:3.8-evolucion-rem", "exec"), ns)
     exec(compile(bloque_b, "build_doc:4-8-secciones", "exec"), ns)
     cerrar_lista()
     cuerpo = "".join(out)
