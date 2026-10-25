@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Solo desde la línea de comandos.'); }
 /**
  * Volcado de la base de datos del portal con PHP (para cuando mysqldump no puede conectar con caching_sha2_password).
  * Uso: php scripts/entrega/volcado_bd.php [ruta.sql]   (por defecto cms-wordpress/backup-db/bd_cadus_v1_sprint2.sql)

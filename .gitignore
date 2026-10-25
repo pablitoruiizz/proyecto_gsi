@@ -117,6 +117,10 @@ mysql/logs/
 # trabaje sobre la misma base de datos.
 # Revisar antes de cada commit que no contengan datos personales reales.
 !cms-wordpress/backup-db/*.sql
+# Los volcados con contraseñas cifradas y datos del sitio no se suben por descuido (usar git add -f si hace falta)
+cms-wordpress/backup-db/bd_cadus_v1_sprint*.sql
+docs/entrega/entrega2/*.sql
+
 # ===== Binarios y pesados no deseados =====
 *.zip
 *.tar

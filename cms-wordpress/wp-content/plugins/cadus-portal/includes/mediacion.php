@@ -328,6 +328,8 @@ function cadus_mediacion_crear(int|string $insert_id, $form_data, $form): void
             '_cadus_solicitante' => cadus_buzon_input($form_data, 'solicitante'),
             '_cadus_centro' => $centro, '_cadus_estado' => 'pendiente',
             '_cadus_entrada_ff' => (int) $insert_id,
+            // IR-08: la aceptación del tratamiento de datos (validada arriba) se conserva con la solicitud, aunque se purgue la entrada de Fluent Forms.
+            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de octubre de 2026',
         ];
         foreach ($meta as $key => $value) {
             if (!add_post_meta($post_id, $key, wp_slash($value), true)) {

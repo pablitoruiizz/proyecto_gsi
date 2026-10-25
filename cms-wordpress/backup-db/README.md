@@ -9,7 +9,7 @@ Por eso **no hace falta que cada integrante importe un volcado para trabajar**: 
 - **Recuperación** si el servidor falla o hay que montar uno nuevo.
 
 > [!WARNING]
-> Los volcados de esta carpeta se versionan en Git (excepción `!cms-wordpress/backup-db/*.sql` del `.gitignore`). Cada volcado queda para siempre en el historial: subir solo los necesarios y revisar antes que no contengan datos personales reales de estudiantes.
+> Los volcados contienen las contraseñas cifradas de los usuarios y datos del sitio. Los de los sprints (`bd_cadus_v1_sprint*.sql`) están en el `.gitignore` para no subirlos por descuido (si el curso exige subirlos, `git add -f` y revisar antes que no haya datos personales reales: cada volcado queda para siempre en el historial). Esta carpeta lleva un `.htaccess` que impide descargarlos por HTTP y el `.htaccess` de la raíz del repositorio cierra además `scripts/`, `docs/` y `tests/`.
 
 ## 1. Exportar la base de datos desde phpMyAdmin
 

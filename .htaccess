@@ -1,0 +1,14 @@
+# Este directorio es la raíz del repositorio y Apache lo sirve entero: aquí se cierra lo que NO debe verse ni ejecutarse por HTTP.
+# El portal (cms-wordpress/) sigue funcionando con normalidad.
+
+# Volcados de la base de datos, proyecto REMUS, registros y scripts de apoyo: nunca por HTTP
+<FilesMatch "\.(sql|rem|log|ps1|py|csv|env)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+# Scripts de mantenimiento y pruebas, documentación y paquete de entrega, historial de Git y copias de seguridad
+RewriteRule ^(scripts|tests|docs|\.git|cms-wordpress/backup-db)(/|$) - [F,L]
+RewriteRule ^(\.gitignore|\.gitattributes)$ - [F,L]
+</IfModule>

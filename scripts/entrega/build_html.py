@@ -59,9 +59,9 @@ class Doc:
     def add_heading(self, texto, nivel):
         ident = f"H{len(titulos) + 1}"
         titulos.append((nivel, ident, texto))
-        if nivel == 1 and len(titulos) > 1:
-            emitir('<div class="pagebreak"></div>')
-        emitir(f'<h{nivel} id="{ident}" class="section">{html.escape(texto, quote=False)}</h{nivel}>')
+        # salto de página antes de cada capítulo con CSS (un div de salto dejaba páginas vacías si la anterior terminaba justo abajo)
+        salto_css = ' style="break-before:page"' if nivel == 1 and len(titulos) > 1 else ""
+        emitir(f'<h{nivel} id="{ident}" class="section"{salto_css}>{html.escape(texto, quote=False)}</h{nivel}>')
 
 
 doc = Doc()
@@ -162,8 +162,7 @@ def capitulo_rem():
         return f'<h{nivel} id="{ident}" class="{m.group(3)}">3.{numero} {resto}</h{nivel}>'
     h = re.sub(r'<h([1-4]) id="([^"]+)" class="([^"]*)">(\d+(?:\.\d+)*)\s+(.*?)</h\1>', sube, h, flags=re.S)
     nivel_max = 5
-    emitir('<div class="pagebreak"></div>')
-    emitir('<h1 id="H_REM" class="section">3. Requisitos (REM)</h1>')
+    emitir('<h1 id="H_REM" class="section" style="break-before:page">3. Requisitos (REM)</h1>')
     rico("Este capítulo reproduce, sin cambios, el documento de requisitos que genera REMUS a partir de CADUS.rem (versión 2.0, 24/10/2026), "
          "con su estructura de cinco dimensiones (información, interfaz, funcionales, no funcionales y reglas de negocio), los actores, los casos de uso, "
          "las restricciones del entorno y el glosario. Su numeración interna (1 a 7) pasa a ser 3.1 a 3.7. El documento completo de REMUS se entrega además aparte (CADUS-REM-v2.pdf).")

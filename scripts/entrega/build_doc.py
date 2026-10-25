@@ -387,7 +387,7 @@ personas = ["Pablo", "Joaquín", "Miguel Ángel", "Álvaro", "Marcos"]
 estado2 = {"E2-01": "En curso", "E2-02": "Pendiente", "E2-03": "Hecho", "E2-04": "Pendiente", "E2-05": "Hecho", "E2-06": "Hecho", "E2-07": "Hecho",
            "E2-08": "Pendiente", "E2-09": "Pendiente", "E2-10": "Parcial", "E2-11": "Pendiente", "E2-12": "Parcial", "E2-13": "Hecho",
            "E2-14": "Hecho", "E2-15": "Hecho", "E2-16": "Hecho", "HU-19c": "Hecho"}
-extra = [["Pablo", "E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; PDF obtenido del HTML que genera REMUS)", "—", "En curso"],
+extra = [["Pablo", "E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; PDF obtenido del HTML que genera REMUS)", "—", "Hecho"],
          ["Pablo", "E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "—", "Hecho"],
          ["Miguel Ángel", "E2-19", "Crear 2 o 3 eventos reales en el calendario para la demostración", "—", "Pendiente"],
          ["Pablo", "E2-20", "Revisión cruzada final con Codex y corrección de los hallazgos", "—", "Hecho"]]
@@ -400,7 +400,7 @@ for quien, t in zip(personas, [x for x in t2 if x[0][:2] == ["ID", "Tarea concre
 filas2 += extra  # tareas E2-17 a E2-20, añadidas durante el sprint
 tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas2, [2.4, 1.4, 9.2, 0.9, 3.1], tam=8, titulo="Sprint backlog del Sprint 2")
 sp2 = sum(int(f[3]) for f in filas2 if f[3].isdigit())
-par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, diez están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario), dos parciales, dos en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
+par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, once están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario y E2-17 con el PDF obtenido del HTML que genera REMUS), dos parciales, una en curso y seis pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
 
 doc.add_heading("2.6 Burndown chart del Sprint 2", 2)
 figura("burndown-sprint2.png", "Burndown chart del Sprint 2 (alcance 29 SP). Ideal frente a real.", 13.5)
@@ -414,7 +414,7 @@ tabla(["Historia", "SP", "Quién", "Cierre", "Qué se entregó"], [
     ["HU-10", "3", "Miguel Ángel", "23/10", "Calendario de asambleas y eventos (The Events Calendar)"],
     ["HU-12", "5", "Álvaro", "23/10", "Solicitud de mediación privada con la protección RN-03"],
     ["HU-09a", "5", "Marcos", "24/10", "Filtros de tickets, aviso al estudiante sin contenido, FAQ y aviso de privacidad"],
-    ["HU-11", "5", "Joaquín", "24/10", "Convocatorias de votación vinculadas a una asamblea (RN-05)"],
+    ["HU-11", "5", "Joaquín", "24/10", "Convocatorias de votación vinculadas a una asamblea (RN-05); la emisión del voto pasa a HU-21 (Sprint 3)"],
     ["HU-19c", "2", "Álvaro", "24/10", "Plan y ejecución de pruebas por rol (PR #32, fusionada el 25/10)"],
 ], [2.6, 0.9, 2.6, 1.5, 9.4], tam=8, titulo="Resultado del Sprint 2 por historia")
 rico("**Qué ha ido bien.** La arquitectura por módulos del plugin permitió trabajar en paralelo (calendario, mediación, votaciones y buzón se integraron sin tocarse entre sí). La revisión cruzada entre Claude y Codex encontró fallos reales antes de entregar y la batería de pruebas de privacidad se amplió con cada módulo. El GitHub Project fue la fuente única del backlog.")
@@ -604,7 +604,7 @@ publicas = [
     ("p11-votaciones.jpg", "Convocatorias de votación. RF-12 · RN-05 · IR-07 · UI-06 · HU-11.",
      "Lista las convocatorias, cada una vinculada a una asamblea del calendario (RN-05) y con apertura y cierre. La papeleta, que solo se mostraría mientras la votación está abierta, depende de YOP Poll, que no está instalado (sección 5.2): hoy el portal publica las convocatorias, pero no permite emitir el voto, así que RF-12 está parcialmente implementado. La convocatoria de la captura es de ejemplo y está vinculada a la asamblea de ejemplo del calendario."),
     ("p12-mediacion.jpg", "Solicitud de mediación estudiantil. RF-13 · RN-02 · RN-03 · RNF-08 · UI-07 · HU-12.",
-     "Formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Al enviarlo entrega la referencia (MED-AAAA-NNNNN más un sufijo aleatorio de 32 caracteres hexadecimales) sin repetir los datos. La solicitud es privada: solo la Ejecutiva la ve, no aparece en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido."),
+     "Formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Al enviarlo entrega la referencia (MED-AAAA-NNNNN más un sufijo aleatorio de 32 caracteres hexadecimales) sin repetir los datos. La aceptación del tratamiento de datos se conserva con la solicitud. La solicitud es privada: solo la Ejecutiva la ve, no aparece en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido."),
     ("p14-contacto.jpg", "Contacto. RNF-07 · UI-02.",
      "Datos del CADUS: dirección en el Pabellón de Uruguay y correo. El mismo bloque de contacto cierra todas las páginas del portal."),
 ]
@@ -665,12 +665,12 @@ tabla(["Historia", "Estado", "Evidencia"], [
     ["HU-07 · HU-08", "Hecho", f"Buzón, código de ticket y seguimiento ({F('p07-buzon.jpg', 'p08-seguimiento.jpg')})."],
     ["HU-09 (9a y 9b)", "Hecho", f"Panel de tickets con filtros, aviso al estudiante y privacidad RN-03 ({F('20-admin-tickets-filtros.jpg', '21-ticket-aviso-correo.jpg')})."],
     ["HU-10", "Hecho", f"Calendario de asambleas y eventos ({F('p13-calendario.jpg')})."],
-    ["HU-11", "Hecho (sin papeleta)", f"Convocatorias de votación vinculadas a una asamblea ({F('p11-votaciones.jpg')}); falta la papeleta para votar (YOP Poll no instalado)."],
+    ["HU-11", "Hecho (sin papeleta)", f"Convocatorias de votación vinculadas a una asamblea ({F('p11-votaciones.jpg')}); falta la papeleta para votar (YOP Poll no instalado), que pasa a HU-21 en el Sprint 3."],
     ["HU-12", "Hecho", f"Solicitud de mediación privada ({F('p12-mediacion.jpg')})."],
     ["HU-13", "Hecho", f"Roles de WordPress y del CADUS ({F('a02-roles.jpg')})."],
     ["HU-18", "Hecho", f"Tema Blocksy con la identidad del CADUS ({F('p01-portada.jpg', '18-tema-blocksy.jpg')})."],
     ["HU-19 (19a, 19b y 19c)", "Hecho", f"Menús por rol, escritorio con accesos y pruebas por rol ({F('a03-escritorio-ejecutivo.jpg', 'a04-escritorio-delegado.jpg')}); la documentación de las pruebas de HU-19c y HU-12 está en la carpeta tests/ (PR #32 y #33, fusionadas)."],
-    ["HU-14 a HU-17 · HU-20", "Pendiente", "Sprints 3 y 4 (móvil, accesibilidad WCAG, filtros del panel, protección frente a spam y rendimiento)."],
+    ["HU-14 a HU-17 · HU-20 · HU-21", "Pendiente", "Sprints 3 y 4 (móvil, accesibilidad WCAG, filtros del panel, protección frente a spam, rendimiento y papeleta de votación)."],
 ], [4.4, 2.0, 10.6], titulo="Estado de la implementación")
 
 doc.add_heading("Pruebas realizadas", 2)
@@ -721,6 +721,20 @@ tabla(["Requisito (REM)", "Análisis (UML / mockup)", "Diseño (plugin)", "Imple
     ["UI-06 Calendario y votaciones", "Mockup 5", "The Events Calendar + plugin propio", F("p13-calendario.jpg", "p11-votaciones.jpg")],
     ["UI-07 Solicitud de mediación", "Mockup 6", "Fluent Forms + plugin propio", F("p12-mediacion.jpg")],
     ["UI-08 Panel de administración por rol", "Mockup 7", "Plugin propio + Members", F("a03-escritorio-ejecutivo.jpg", "a04-escritorio-delegado.jpg")],
+    ["IR-01 Página principal", "Mockup 1 · estructura web (Inicio)", "Tema Blocksy + plugin propio (inicio)", F("p01-portada.jpg")],
+    ["IR-02 Menús", "Estructura del sitio web (sección 4.1)", "Menús de WordPress configurados por el plugin propio", F("p01-portada.jpg")],
+    ["IR-03 Noticias y comunicados", "Clases Noticia y Categoria", "Plugin propio + Yoast SEO", F("p03-noticias.jpg")],
+    ["IR-04 Actas y normativas", "Clase DocumentoInstitucional", "Plugin propio + ACF", F("p04-actas-y-normativa.jpg", "16-admin-actas.jpg")],
+    ["IR-05 Delegaciones de alumnos", "Clases Delegacion y FacultadEscuela", "Plugin propio + ACF", F("p05-delegaciones.jpg")],
+    ["IR-06 Consultas y reclamaciones", "Clases Ticket y RespuestaTicket", "Fluent Forms + plugin propio (buzón)", F("p07-buzon.jpg", "p08-seguimiento.jpg", "20-admin-tickets-filtros.jpg")],
+    ["IR-07 Calendario", "Clase EventoCalendario", "The Events Calendar + plugin propio (votaciones)", F("p13-calendario.jpg", "p11-votaciones.jpg", "a06-eventos.jpg")],
+    ["IR-08 Solicitudes de mediación", "Clase SolicitudMediacion", "Fluent Forms + plugin propio (mediación)", F("p12-mediacion.jpg")],
+    ["IR-09 Usuarios y roles", "Clase Usuario", "Members + plugin propio (roles)", F("a02-roles.jpg")],
+    ["RN-01 Aprobación de documentos", "DocumentoInstitucional.estadoAprobacion", "Plugin propio + Members (solo la Ejecutiva publica)", F("16-admin-actas.jpg")],
+    ["RN-02 Correo institucional", "Ticket y SolicitudMediacion (correo @alum.us.es)", "Fluent Forms + validación en el servidor del plugin propio", F("p07-buzon.jpg", "p12-mediacion.jpg") + "; prueba de rechazo en la sección 6"],
+    ["RN-03 Privacidad de reclamaciones", "Ticket.confidencial", "Plugin propio (contenido privado, sin API ni búsqueda)", F("p08-seguimiento.jpg", "20-admin-tickets-filtros.jpg") + "; baterías de pruebas de la sección 6"],
+    ["RN-04 Edición de fichas", "Delegacion (autor = delegado)", "Plugin propio + Members (rol de delegado)", F("a04-escritorio-delegado.jpg", "p05-delegaciones.jpg")],
+    ["RN-05 Votaciones vinculadas", "EventoCalendario.asambleaVinculada", "Plugin propio (votaciones) + The Events Calendar (categoría Asambleas)", F("a07-votaciones.jpg", "p11-votaciones.jpg")],
 ], [4.3, 4.7, 4.3, 3.7], tam=8, titulo="Trazabilidad requisito → análisis → diseño → implementación")
 
 # ------------------------------------------------------------------ 8. calidad e incidencias
@@ -749,7 +763,7 @@ tabla(["Pendiente", "Motivo", "Responsable"], [
     ["Fichas de Química, Física, Biología y ETSI", "Faltan los datos de contacto de esas delegaciones", "Álvaro"],
     ["Mockups finales en Figma", "No se hicieron; se entregan siete mockups de baja fidelidad y las capturas finales", "Miguel Ángel"],
     ["Cuentas de los delegados (una por delegado, con su correo de alumno)", "La cuenta única del CADUS (dcadus@us.es) ya está creada; las de los delegados se crean con el script cuando el CADUS facilite la lista", "Pablo"],
-    ["Papeleta de las votaciones (YOP Poll) y eventos reales en el calendario", "No instalado; las convocatorias se publican sin papeleta. Decidir con el cliente", "Joaquín · Miguel Ángel"],
+    ["Papeleta de las votaciones (YOP Poll) y eventos reales en el calendario", "No instalado; las convocatorias se publican sin papeleta. La emisión del voto es la historia HU-21 (Sprint 3), pendiente de validar con el cliente", "Joaquín · Miguel Ángel"],
     ["Plazo de conservación y copias de seguridad de tickets y mediaciones (RNF-08)", "Pendiente de validar con el CADUS", "Pablo"],
     ["Volcado de la base de datos del Sprint 2 y revisión de Wordfence", "Se hace al cerrar la entrega", "Pablo"],
     ["Sprint 3: HU-14 a HU-17 (móvil, accesibilidad WCAG 2.1 AA, filtros del panel y protección frente a spam)", "Planificado del 26/10 al 15/11 en el GitHub Project", "Equipo"],

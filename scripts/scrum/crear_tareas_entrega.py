@@ -28,7 +28,7 @@ TAREAS = [
     ("E2-14", "Comparativa de plugins: tres alternativas por tipo, con los obligatorios", "Marcos", "Alta", "Done", "2026-10-24", "RNF-01, RNF-04, RNF-08"),
     ("E2-15", "Revisar el REM (versión 2.0) y regenerar CADUS.rem", "Marcos", "Alta", "Done", "2026-10-25", "Todos"),
     ("E2-16", "Preguntas frecuentes y aviso de privacidad (consentimiento RGPD)", "Marcos", "Media", "Done", "2026-10-24", "RNF-08, UI-04"),
-    ("E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; hay PDF provisional)", "Pablo", "Alta", "In Progress", "", "Todos"),
+    ("E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; hay PDF provisional)", "Pablo", "Alta", "Done", "2026-10-25", "Todos"),
     ("E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "Pablo", "Media", "Done", "2026-10-25", "RF-15"),
     ("E2-19", "Crear 2 o 3 eventos reales en el calendario para la demostración", "Miguel Ángel", "Media", "Todo", "", "RF-11"),
     ("E2-20", "Revisión cruzada final con Codex y corrección de los hallazgos", "Pablo", "Alta", "Done", "2026-10-25", "RN-03, RNF-03, RNF-04"),

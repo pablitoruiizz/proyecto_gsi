@@ -79,7 +79,7 @@ def diagrama_clases():
     usuario = clase(ax, cx[1], ry[1], W, "Usuario", "IR-09 · RF-14 · RF-15 · UI-08", ["cuenta (del CADUS o de un delegado)", "correoAcceso", "rol: anonimo, estudiante, delegado,", "      ejecutiva o administrador"])
     deleg = clase(ax, cx[2], ry[1], W, "Delegacion", "IR-05 · RF-06 · RF-07 · RN-04 · UI-03", ["contacto", "horarioAtencion", "enlaces"])
     fac = clase(ax, cx[3], ry[1], W, "FacultadEscuela", "IR-05 · RF-06", ["nombre"], VERDE)
-    solic = clase(ax, cx[0], ry[2], W, "SolicitudMediacion", "IR-08 · RF-13 · RN-02 · RN-03 · UI-07", ["referencia", "descripcionConflicto", "fechaSolicitud", "estado (pendiente|cerrada)"], VERDE)
+    solic = clase(ax, cx[0], ry[2], W, "SolicitudMediacion", "IR-08 · RF-13 · RN-02 · RN-03 · UI-07", ["referencia", "descripcionConflicto", "fechaSolicitud", "estado (pendiente|en_proceso|", "          cerrada)"], VERDE)
     ticket = clase(ax, cx[1], ry[2], W, "Ticket", "IR-06 · RF-08 · RF-09 · RF-10 · RN-02 · RN-03 · UI-04", ["codigoSeguimiento", "asunto", "estado (abierto|en_proceso|cerrado)", "fechaUltimoAviso", "confidencial"])
     resp = clase(ax, cx[2], ry[2], W, "RespuestaTicket", "RF-10", ["mensaje", "fecha"], VERDE)
     rel(ax, cat, "der", noticia, "izq", "clasifica", "1", "*", dy=-22)

@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Solo desde la línea de comandos.'); }
 /**
  * Carga 2 eventos y 1 convocatoria de votación de EJEMPLO (marcados «(ejemplo)») para la demostración del calendario.
  * Se puede repetir: no duplica nada. Para retirarlos, bórralos desde Eventos y Votaciones, o ejecuta con --quitar.
@@ -21,6 +22,9 @@ $eventos = [
     ['Jornada de bienvenida al alumnado (ejemplo)', '2026-11-19', '11:00', '14:00', 'Evento de ejemplo para la demostración del portal. Sustituir por un evento real.'],
 ];
 $ids = [];
+if (!$quitar && !term_exists('asambleas', 'tribe_events_cat')) {
+    wp_insert_term('Asambleas', 'tribe_events_cat', ['slug' => 'asambleas']);
+}
 foreach ($eventos as [$titulo, $dia, $ini, $fin, $texto]) {
     $id = $existe($titulo, 'tribe_events');
     if ($quitar) {
@@ -36,6 +40,9 @@ foreach ($eventos as [$titulo, $dia, $ini, $fin, $texto]) {
         echo "creado evento $id: $titulo\n";
     }
     $ids[$titulo] = $id;
+    if (str_starts_with($titulo, 'Asamblea')) {
+        wp_set_object_terms($id, 'asambleas', 'tribe_events_cat'); // RN-05: solo las asambleas admiten votaciones vinculadas
+    }
 }
 
 $tituloVot = 'Votación de los estatutos (ejemplo)';

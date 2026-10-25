@@ -89,10 +89,16 @@ function cadus_votaciones_categorias_asamblea(): array
     if (!taxonomy_exists('tribe_events_cat')) {
         return [];
     }
-    return array_values(array_filter(['asamblea', 'asambleas'], static fn(string $s): bool => (bool) term_exists($s, 'tribe_events_cat')));
+    $slugs = array_values(array_filter(['asamblea', 'asambleas'], static fn(string $s): bool => (bool) term_exists($s, 'tribe_events_cat')));
+    if (!$slugs && is_admin()) {
+        // La categoría de asambleas se crea sola al abrir el formulario de una convocatoria.
+        $nuevo = wp_insert_term('Asambleas', 'tribe_events_cat', ['slug' => 'asambleas']);
+        $slugs = is_wp_error($nuevo) ? [] : ['asambleas'];
+    }
+    return $slugs;
 }
 
-/** Asamblea válida: evento publicado o programado del calendario (y de la categoría de asambleas, si existe). */
+/** Asamblea válida (RN-05): evento publicado o programado del calendario que está en la categoría «Asambleas». */
 function cadus_votaciones_es_asamblea(int $id): bool
 {
     if ($id <= 0 || !cadus_votaciones_hay_calendario() || get_post_type($id) !== 'tribe_events') {
@@ -102,7 +108,7 @@ function cadus_votaciones_es_asamblea(int $id): bool
         return false;
     }
     $categorias = cadus_votaciones_categorias_asamblea();
-    return !$categorias || has_term($categorias, 'tribe_events_cat', $id);
+    return $categorias && has_term($categorias, 'tribe_events_cat', $id);
 }
 
 /** Marca de tiempo de inicio de un evento del calendario (0 si no se puede leer). */
@@ -126,9 +132,10 @@ function cadus_votaciones_asambleas(): array
     }
     $args = ['post_type' => 'tribe_events', 'post_status' => ['publish', 'future'], 'posts_per_page' => 100, 'no_found_rows' => true];
     $categorias = cadus_votaciones_categorias_asamblea();
-    if ($categorias) {
-        $args['tax_query'] = [['taxonomy' => 'tribe_events_cat', 'field' => 'slug', 'terms' => $categorias]];
+    if (!$categorias) {
+        return [];
     }
+    $args['tax_query'] = [['taxonomy' => 'tribe_events_cat', 'field' => 'slug', 'terms' => $categorias]];
     if (function_exists('tribe_get_events')) {
         // «custom» sin fechas: todos los eventos, también los ya celebrados.
         $consulta = tribe_get_events($args + ['eventDisplay' => 'custom', 'orderby' => 'event_date', 'order' => 'DESC']);

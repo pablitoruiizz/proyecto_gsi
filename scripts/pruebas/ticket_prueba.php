@@ -1,4 +1,5 @@
 <?php
+if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Solo desde la línea de comandos.'); }
 /**
  * Ticket de prueba para las comprobaciones de privacidad (RN-03).
  * Uso (CLI): php ticket_prueba.php crear | borrar | roles

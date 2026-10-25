@@ -162,7 +162,7 @@ HU-14 (móvil), HU-15 (accesibilidad WCAG), HU-16, HU-17 y HU-20 están planific
 | HU-11 | 5 | Joaquín | 24/10 | Convocatorias de votación vinculadas a una asamblea (RN-05) |
 | HU-19c | 2 | Álvaro | 24/10 | Plan y ejecución de pruebas por rol (PR #32, fusionada el 25/10) |
 
-- **Decisiones del sprint:** se amplió el módulo propio del buzón en lugar de instalar SupportCandy (HU-09); las votaciones publican convocatorias y usan YOP Poll solo como papeleta opcional (no instalado); el cliente decidió una **cuenta única del CADUS** (dcadus@us.es, para toda la Ejecutiva, que da acceso a los delegados) y una cuenta por delegado con su correo de alumno.
+- **Decisiones del sprint:** se amplió el módulo propio del buzón en lugar de instalar SupportCandy (HU-09); las votaciones publican convocatorias y la emisión del voto (papeleta con YOP Poll, no instalado) pasa a la historia HU-21 del Sprint 3, un cambio de alcance pendiente de validar con el CADUS; el cliente decidió una **cuenta única del CADUS** (dcadus@us.es, para toda la Ejecutiva, que da acceso a los delegados) y una cuenta por delegado con su correo de alumno.
 - **Extras no planificados:** portada y páginas interiores rediseñadas con la identidad de cadus.us.es (logotipo y paleta oficiales), pie global de contacto, bateria de pruebas de privacidad, GitHub Project «CADUS · Scrum».
 
 ## Sprint Review (24/10/2026)

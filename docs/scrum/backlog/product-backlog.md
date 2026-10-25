@@ -42,6 +42,7 @@
 | HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Pendiente | Sprint-04 | `[Nombre]` |
+| HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
 
 ## Roadmap por versiones
 
@@ -52,7 +53,7 @@
 
 ### V2 — Participación, optimización, seguridad y entrega
 - **Sprint-02** (gestión avanzada de contenidos y participación estudiantil; **completado el 24/10/2026**, 29 de 29 SP): HU-09, HU-10, HU-11, HU-12, HU-19
-- **Sprint-03** (optimización, filtros, accesibilidad y seguridad): HU-14, HU-15, HU-16, HU-17
+- **Sprint-03** (optimización, filtros, accesibilidad, seguridad y papeleta de votación): HU-14, HU-15, HU-16, HU-17, HU-21
 - **Sprint-04** (entrega final): HU-20 + pruebas de aceptación, revisión de DoD y documentación final
 
 ## Reglas mínimas

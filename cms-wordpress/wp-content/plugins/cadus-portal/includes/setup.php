@@ -285,7 +285,15 @@ function cadus_adjuntar(string $archivo_relativo, string $titulo): int
     require_once ABSPATH . 'wp-admin/includes/image.php';
     $existentes = get_posts(['post_type' => 'attachment', 'post_status' => 'inherit', 'title' => $titulo, 'numberposts' => 1]);
     if ($existentes) {
-        return (int) $existentes[0]->ID;
+        $id_existente = (int) $existentes[0]->ID;
+        $ruta = get_attached_file($id_existente);
+        $semilla = CADUS_PORTAL_DIR . $archivo_relativo;
+        // El registro existe pero el archivo no (p. ej. tras restaurar solo la base de datos): se repone en la misma ruta y con el mismo ID.
+        if ($ruta && !file_exists($ruta) && is_readable($semilla)) {
+            wp_mkdir_p(dirname($ruta));
+            copy($semilla, $ruta);
+        }
+        return $id_existente;
     }
     $origen = CADUS_PORTAL_DIR . $archivo_relativo;
     if (!is_readable($origen)) {
