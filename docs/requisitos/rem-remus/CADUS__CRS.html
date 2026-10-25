@@ -26,9 +26,9 @@
 <div id="document_logo">
 <img alt="Universidad de Sevilla" src="https://cdn.jsdelivr.net/gh/amador-duran-toro/rem/assets/images/logo_us.gif" />
 </div>
-<div id="document_name">Especificación de Requisitos del Portal CADUS</div>
-<div id="document_version">Versión 0.1</div>
-<div id="document_date">Fecha 05/10/2026</div>
+<div id="document_name">Documento de Requisitos del Portal CADUS</div>
+<div id="document_version">Versión 2.0</div>
+<div id="document_date">Fecha 24/10/2026</div>
 <div id="document_prepared_for">Preparado para:<p>
 <a href="#ORG-0001">CADUS - Consejo de Alumnos de la Universidad de Sevilla</a>
 </p>
@@ -43,84 +43,36 @@
 <h1>Índice</h1>
 <ul class="toc_list toc_list_level_1">
 <li>1 <a href="#SEC-0001">Introducción</a></li>
+<li>2 <a href="#SEC-0002">Participantes en el Proyecto</a></li>
 <ul class="toc_list">
-<li>1.1 <a href="#SEC-0058">Alcance del proyecto</a></li>
-<li>1.2 <a href="#SEC-0085">Participantes en el proyecto</a></li>
+<li>2.1 <a href="#SEC-0003">Organizaciones</a></li>
+<li>2.2 <a href="#SEC-0004">Personas</a></li>
+</ul>
+<li>3 <a href="#SEC-0005">Descripción del Sistema Actual</a></li>
+<li>4 <a href="#SEC-0006">Objetivos del Sistema</a></li>
+<li>5 <a href="#SEC-0007">Catálogo de Requisitos del Sistema</a></li>
 <ul class="toc_list">
-<li>1.2.1 <a href="#SEC-0086">Organizaciones participantes</a></li>
-<li>1.2.2 <a href="#SEC-0087">Personas participantes</a></li>
-</ul>
-<li>1.3 <a href="#SEC-0059">Objetivos del proyecto</a></li>
-</ul>
-<li>2 <a href="#SEC-0002">Información sobre el dominio del problema</a></li>
+<li>5.1 <a href="#SEC-0008">Requisitos de Información</a></li>
+<li>5.2 <a href="#SEC-0009">Requisitos de Interfaz de Usuario y Funcionales</a></li>
 <ul class="toc_list">
-<li>2.1 <a href="#SEC-0039">Introducción al dominio del problema</a></li>
-<li>2.2 <a href="#SEC-0029">Glosario de términos del dominio del problema</a></li>
+<li>5.2.1 <a href="#SEC-0010">Actores</a></li>
+<li>5.2.2 <a href="#SEC-0011">Requisitos de Interfaz de Usuario</a></li>
+<li>5.2.3 <a href="#SEC-0012">Requisitos Funcionales</a></li>
 </ul>
-<li>3 <a href="#SEC-0003">Descripción de la situación actual</a></li>
-<ul class="toc_list">
-<li>3.1 <a href="#SEC-0030">Pros y contras de la situación actual</a></li>
-<ul class="toc_list">
-<li>3.1.1 <a href="#SEC-0052">Fortalezas de la situación actual</a></li>
-<li>3.1.2 <a href="#SEC-0053">Debilidades de la situación actual</a></li>
+<li>5.3 <a href="#SEC-0013">Requisitos No Funcionales</a></li>
+<li>5.4 <a href="#SEC-0014">Reglas de Negocio</a></li>
 </ul>
-<li>3.2 <a href="#SEC-0005">Modelos de procesos de negocio actuales</a></li>
-<ul class="toc_list">
-<li>3.2.1 <a href="#SEC-0046">Descripción de actores de negocio actuales</a></li>
-<li>3.2.2 <a href="#SEC-0045">Descripción de procesos de negocio actuales</a></li>
-</ul>
-<li>3.3 <a href="#SEC-0006">Entorno tecnológico actual</a></li>
-<ul class="toc_list">
-<li>3.3.1 <a href="#SEC-0054">Descripción del entorno de hardware actual</a></li>
-<li>3.3.2 <a href="#SEC-0055">Descripción del entorno de software actual</a></li>
-</ul>
-</ul>
-<li>4 <a href="#SEC-0007">Necesidades de negocio</a></li>
-<ul class="toc_list">
-<li>4.1 <a href="#SEC-0008">Objetivos de negocio</a></li>
-<li>4.2 <a href="#SEC-0009">Modelos de procesos de negocio a implantar</a></li>
-<ul class="toc_list">
-<li>4.2.1 <a href="#SEC-0050">Descripción de actores de negocio a implantar</a></li>
-<li>4.2.2 <a href="#SEC-0049">Descripción de procesos de negocio a implantar</a></li>
-</ul>
-</ul>
-<li>5 <a href="#SEC-0048">Descripción de los subsistemas del sistema a desarrollar</a></li>
-<li>6 <a href="#SEC-0016">Catálogo de requisitos del sistema a desarrollar</a></li>
-<ul class="toc_list">
-<li>6.1 <a href="#SEC-0011">Requisitos generales del sistema</a></li>
-<li>6.2 <a href="#SEC-0012">Casos de uso del sistema</a></li>
-<ul class="toc_list">
-<li>6.2.1 <a href="#SEC-0013">Diagramas de casos de uso del sistema</a></li>
-<li>6.2.2 <a href="#SEC-0014">Especificación de actores del sistema</a></li>
-<li>6.2.3 <a href="#SEC-0015">Especificación de casos de uso del sistema</a></li>
-</ul>
-<li>6.3 <a href="#SEC-0040">Requisitos funcionales del sistema</a></li>
-<ul class="toc_list">
-<li>6.3.1 <a href="#SEC-0017">Requisitos de información del sistema</a></li>
-<li>6.3.2 <a href="#SEC-0018">Requisitos de reglas de negocio del sistema</a></li>
-<li>6.3.3 <a href="#SEC-0019">Requisitos de conducta del sistema</a></li>
-</ul>
-<li>6.4 <a href="#SEC-0022">Requisitos no funcionales del sistema</a></li>
-<ul class="toc_list">
-<li>6.4.1 <a href="#SEC-0032">Requisitos de fiabilidad del sistema</a></li>
-<li>6.4.2 <a href="#SEC-0033">Requisitos de usabilidad del sistema</a></li>
-<li>6.4.3 <a href="#SEC-0035">Requisitos de mantenibilidad del sistema</a></li>
-<li>6.4.4 <a href="#SEC-0034">Requisitos de eficiencia del sistema</a></li>
-<li>6.4.5 <a href="#SEC-0036">Requisitos de portabilidad del sistema</a></li>
-<li>6.4.6 <a href="#SEC-0037">Requisitos de seguridad del sistema</a></li>
-<li>6.4.7 <a href="#SEC-0057">Otros requisitos no funcionales del sistema</a></li>
-</ul>
-<li>6.5 <a href="#SEC-0023">Restricciones técnicas del sistema</a></li>
-<li>6.6 <a href="#SEC-0031">Requisitos de integración del sistema</a></li>
-<li>6.7 <a href="#SEC-0060">Información sobre trazabilidad</a></li>
-</ul>
+<li>6 <a href="#SEC-0016">Entorno de Trabajo del Equipo</a></li>
+<li>7 <a href="#SEC-0015">Glosario de términos</a></li>
 </ul>
 </nav>
 <div class="pagebreak"></div>
 <h1 id="SEC-0001" class="section">1 Introducción</h1>
-<h2 id="SEC-0058" class="section">1.1 Alcance del proyecto</h2>
-<h2 id="SEC-0085" class="section">1.2 Participantes en el proyecto</h2>
-<h3 id="SEC-0086" class="section">1.2.1 Organizaciones participantes</h3>
+<div id="PRG-0001">
+<div id="PRG-0001-text-html" class=""><p>Este documento presenta los requisitos del nuevo portal web institucional del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) de la Universidad de Sevilla. El proyecto consiste en rehacer y modernizar el portal <a href="http://www.cadus.us.es">www.cadus.us.es</a> para ofrecer servicios de información, gestión de normativas y actas, directorio de delegaciones de centro, buzón de atención a estudiantes y transparencia. El portal se construye sobre WordPress y se desarrolla de forma iterativa e incremental con SCRUM; este documento corresponde a la versión 2, revisada al final del <a href='#GLO-0012' class="rem_ref">Sprint</a> 2 con las decisiones tomadas al construir el buzón, la mediación, el calendario, las votaciones y los roles. La entrevista con el CADUS prevista en el <a href='#GLO-0012' class="rem_ref">Sprint</a> 2 (E2-09) no se ha realizado; pasa al <a href='#GLO-0012' class="rem_ref">Sprint</a> 3, y los puntos marcados como «pendiente de validar con el CADUS» se confirmarán en ella.</p></div>
+</div>
+<h1 id="SEC-0002" class="section">2 Participantes en el Proyecto</h1>
+<h2 id="SEC-0003" class="section">2.1 Organizaciones</h2>
 <div id="ORG-0001">
 <table class="organization remus_table">
 <thead>
@@ -162,12 +114,12 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="ORG-0002-comments-html" class="remus_comments"><p>Grupo de desarrollo.</p></div>
+<div id="ORG-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
 </td>
 </tr>
 </table>
 </div>
-<h3 id="SEC-0087" class="section">1.2.2 Personas participantes</h3>
+<h2 id="SEC-0004" class="section">2.2 Personas</h2>
 <div id="STK-0001">
 <table class="stakeholder remus_table">
 <thead>
@@ -186,7 +138,7 @@
 <tr>
 <th>Rol</th>
 <td colspan="1">
-<span id="STK-0001-stakeholderRole-html" class="">Cliente y usuario (Ejecutiva del CADUS)                        (es cliente, es usuario)                    </span>
+<span id="STK-0001-stakeholderRole-html" class="">Cliente y usuario (<a href='#GLO-0006' class="rem_ref">Ejecutiva del CADUS</a>)                        (es cliente, es usuario)                    </span>
 </td>
 </tr>
 <tr>
@@ -342,34 +294,23 @@
 </tr>
 </table>
 </div>
-<h2 id="SEC-0059" class="section">1.3 Objetivos del proyecto</h2>
-<h1 id="SEC-0002" class="section">2 Información sobre el dominio del problema</h1>
-<h2 id="SEC-0039" class="section">2.1 Introducción al dominio del problema</h2>
-<h2 id="SEC-0029" class="section">2.2 Glosario de términos del dominio del problema</h2>
-<h1 id="SEC-0003" class="section">3 Descripción de la situación actual</h1>
-<h2 id="SEC-0030" class="section">3.1 Pros y contras de la situación actual</h2>
-<h3 id="SEC-0052" class="section">3.1.1 Fortalezas de la situación actual</h3>
-<h3 id="SEC-0053" class="section">3.1.2 Debilidades de la situación actual</h3>
-<h2 id="SEC-0005" class="section">3.2 Modelos de procesos de negocio actuales</h2>
-<h3 id="SEC-0046" class="section">3.2.1 Descripción de actores de negocio actuales</h3>
-<h3 id="SEC-0045" class="section">3.2.2 Descripción de procesos de negocio actuales</h3>
-<h2 id="SEC-0006" class="section">3.3 Entorno tecnológico actual</h2>
-<h3 id="SEC-0054" class="section">3.3.1 Descripción del entorno de hardware actual</h3>
-<h3 id="SEC-0055" class="section">3.3.2 Descripción del entorno de software actual</h3>
-<h1 id="SEC-0007" class="section">4 Necesidades de negocio</h1>
-<h2 id="SEC-0008" class="section">4.1 Objetivos de negocio</h2>
+<h1 id="SEC-0005" class="section">3 Descripción del Sistema Actual</h1>
+<div id="PRG-0002">
+<div id="PRG-0002-text-html" class=""><p>El CADUS dispone de un portal institucional en <a href="http://www.cadus.us.es">www.cadus.us.es</a> que se pretende rehacer y modernizar. Este documento no analiza en detalle el portal actual: recoge los servicios que el nuevo portal debe ofrecer a los estudiantes, a las delegaciones de alumnos y a la <a href='#GLO-0006' class="rem_ref">Ejecutiva del CADUS</a>.</p></div>
+</div>
+<h1 id="SEC-0006" class="section">4 Objetivos del Sistema</h1>
 <div id="OBJ-0001">
 <table class="objective remus_table">
 <thead>
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0001</th>
-<th class="name_column" colspan="1">OBJ-01 - Modernizar el portal institucional</th>
+<th class="name_column" colspan="1">OBJ-01 - Modernización del portal</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -395,7 +336,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0001-description-html" class=""><p>El sistema deberá Rehacer <code>www.cadus.us.es</code> con un portal actual, accesible y adaptado a móvil..</p></div>
+<div id="OBJ-0001-description-html" class=""><p>El sistema deberá rehacer el portal institucional del CADUS con un diseño actual, accesible y adaptado a dispositivos móviles.</p></div>
 </td>
 </tr>
 <tr>
@@ -428,12 +369,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0002</th>
-<th class="name_column" colspan="1">OBJ-02 - Informar a los estudiantes</th>
+<th class="name_column" colspan="1">OBJ-02 - Información al estudiante</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -459,7 +400,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0002-description-html" class=""><p>El sistema deberá Difundir noticias y comunicados categorizados por áreas (Becas, Movilidad, Normativa, Eventos)..</p></div>
+<div id="OBJ-0002-description-html" class=""><p>El sistema deberá difundir noticias y comunicados clasificados por áreas: Becas, Movilidad, Normativa y Eventos.</p></div>
 </td>
 </tr>
 <tr>
@@ -492,12 +433,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0003</th>
-<th class="name_column" colspan="1">OBJ-03 - Dar transparencia institucional</th>
+<th class="name_column" colspan="1">OBJ-03 - Transparencia institucional</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -523,7 +464,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0003-description-html" class=""><p>El sistema deberá Publicar actas de plenos y normativas, previa aprobación de la Ejecutiva..</p></div>
+<div id="OBJ-0003-description-html" class=""><p>El sistema deberá publicar las actas de los plenos y las normativas, previa aprobación de la Ejecutiva.</p></div>
 </td>
 </tr>
 <tr>
@@ -556,12 +497,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0004</th>
-<th class="name_column" colspan="1">OBJ-04 - Dar visibilidad a las delegaciones</th>
+<th class="name_column" colspan="1">OBJ-04 - Visibilidad de las delegaciones</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -587,7 +528,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0004-description-html" class=""><p>El sistema deberá Ofrecer un directorio de Delegaciones de Alumnos por Facultad/Escuela..</p></div>
+<div id="OBJ-0004-description-html" class=""><p>El sistema deberá ofrecer un directorio de Delegaciones de Alumnos por Facultad o Escuela.</p></div>
 </td>
 </tr>
 <tr>
@@ -620,12 +561,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0005</th>
-<th class="name_column" colspan="1">OBJ-05 - Atender al estudiante</th>
+<th class="name_column" colspan="1">OBJ-05 - Atención al estudiante</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -651,7 +592,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0005-description-html" class=""><p>El sistema deberá Habilitar un buzón de consultas y reclamaciones con seguimiento, y facilitar la mediación estudiantil..</p></div>
+<div id="OBJ-0005-description-html" class=""><p>El sistema deberá habilitar un buzón de consultas y reclamaciones con seguimiento y facilitar la solicitud de <a href='#GLO-0009' class="rem_ref">mediación estudiantil</a>.</p></div>
 </td>
 </tr>
 <tr>
@@ -684,12 +625,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/objective.png" /> OBJ-0006</th>
-<th class="name_column" colspan="1">OBJ-06 - Fomentar la participación</th>
+<th class="name_column" colspan="1">OBJ-06 - Participación estudiantil</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -715,7 +656,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="OBJ-0006-description-html" class=""><p>El sistema deberá Dar acceso al calendario de asambleas, eventos y votaciones..</p></div>
+<div id="OBJ-0006-description-html" class=""><p>El sistema deberá dar acceso al calendario de asambleas, eventos y votaciones estudiantiles.</p></div>
 </td>
 </tr>
 <tr>
@@ -742,33 +683,841 @@
 </tr>
 </table>
 </div>
-<h2 id="SEC-0009" class="section">4.2 Modelos de procesos de negocio a implantar</h2>
-<h3 id="SEC-0050" class="section">4.2.1 Descripción de actores de negocio a implantar</h3>
-<h3 id="SEC-0049" class="section">4.2.2 Descripción de procesos de negocio a implantar</h3>
-<h1 id="SEC-0048" class="section">5 Descripción de los subsistemas del sistema a desarrollar</h1>
-<h1 id="SEC-0016" class="section">6 Catálogo de requisitos del sistema a desarrollar</h1>
-<h2 id="SEC-0011" class="section">6.1 Requisitos generales del sistema</h2>
-<h2 id="SEC-0012" class="section">6.2 Casos de uso del sistema</h2>
-<h3 id="SEC-0013" class="section">6.2.1 Diagramas de casos de uso del sistema</h3>
-<h3 id="SEC-0014" class="section">6.2.2 Especificación de actores del sistema</h3>
+<h1 id="SEC-0007" class="section">5 Catálogo de Requisitos del Sistema</h1>
+<h2 id="SEC-0008" class="section">5.1 Requisitos de Información</h2>
+<div id="IRQ-0001">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0001</th>
+<th class="name_column" colspan="2">IR-01 - Página principal</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0001-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a la página principal del portal, que deberá contener estos elementos:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1032">
+<span id="DAT-1032-description-html" class="">Banner institucional del CADUS</span>
+</li>
+<li id="DAT-1033">
+<span id="DAT-1033-description-html" class="">Comunicados recientes: titular, resumen y categoría</span>
+</li>
+<li id="DAT-1034">
+<span id="DAT-1034-description-html" class="">Acceso destacado al directorio de delegaciones</span>
+</li>
+<li id="DAT-1035">
+<span id="DAT-1035-description-html" class="">Acceso destacado al buzón de consultas</span>
+</li>
+<li id="DAT-1036">
+<span id="DAT-1036-description-html" class="">Próximas asambleas, eventos y votaciones</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0002">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0002</th>
+<th class="name_column" colspan="2">IR-02 - Menús</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0002-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a los menús del portal, que serán:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1038">
+<span id="DAT-1038-description-html" class="">Inicio</span>
+</li>
+<li id="DAT-1039">
+<span id="DAT-1039-description-html" class="">Qué es el CADUS</span>
+</li>
+<li id="DAT-1040">
+<span id="DAT-1040-description-html" class="">Gobierno y estatutos</span>
+</li>
+<li id="DAT-1041">
+<span id="DAT-1041-description-html" class="">Actas y normativa</span>
+</li>
+<li id="DAT-1042">
+<span id="DAT-1042-description-html" class="">Noticias y comunicados</span>
+</li>
+<li id="DAT-1043">
+<span id="DAT-1043-description-html" class="">Delegaciones de alumnos</span>
+</li>
+<li id="DAT-1044">
+<span id="DAT-1044-description-html" class="">Calendario de asambleas, eventos y votaciones</span>
+</li>
+<li id="DAT-1045">
+<span id="DAT-1045-description-html" class="">Atención al estudiante: buzón de consultas, mediación y preguntas frecuentes</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0003">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0003</th>
+<th class="name_column" colspan="2">IR-03 - Noticias y comunicados</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0003-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las noticias y comunicados publicados por el CADUS, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1047">
+<span id="DAT-1047-description-html" class="">Título</span>
+</li>
+<li id="DAT-1048">
+<span id="DAT-1048-description-html" class="">Cuerpo</span>
+</li>
+<li id="DAT-1049">
+<span id="DAT-1049-description-html" class="">Categoría: Becas, Movilidad, Normativa o Eventos</span>
+</li>
+<li id="DAT-1050">
+<span id="DAT-1050-description-html" class="">Fecha de publicación</span>
+</li>
+<li id="DAT-1051">
+<span id="DAT-1051-description-html" class="">Autor</span>
+</li>
+<li id="DAT-1052">
+<span id="DAT-1052-description-html" class="">Estado: borrador o publicada</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0004">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0004</th>
+<th class="name_column" colspan="2">IR-04 - Actas y normativas</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0004-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las actas de los plenos y a las normativas del CADUS, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1054">
+<span id="DAT-1054-description-html" class="">Tipo: <a href='#GLO-0005' class="rem_ref">acta</a> o normativa</span>
+</li>
+<li id="DAT-1055">
+<span id="DAT-1055-description-html" class="">Fecha</span>
+</li>
+<li id="DAT-1056">
+<span id="DAT-1056-description-html" class="">Archivo PDF</span>
+</li>
+<li id="DAT-1057">
+<span id="DAT-1057-description-html" class="">Estado de aprobación: borrador, pendiente o aprobada</span>
+</li>
+<li id="DAT-1058">
+<span id="DAT-1058-description-html" class=""><a href='#GLO-0004' class="rem_ref">Pleno</a> asociado</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0005">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0005</th>
+<th class="name_column" colspan="2">IR-05 - Delegaciones de alumnos</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0005-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las delegaciones de alumnos de cada centro, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1060">
+<span id="DAT-1060-description-html" class="">Facultad o Escuela</span>
+</li>
+<li id="DAT-1061">
+<span id="DAT-1061-description-html" class="">Delegado o representante responsable</span>
+</li>
+<li id="DAT-1062">
+<span id="DAT-1062-description-html" class="">Datos de contacto</span>
+</li>
+<li id="DAT-1063">
+<span id="DAT-1063-description-html" class="">Horario de atención</span>
+</li>
+<li id="DAT-1064">
+<span id="DAT-1064-description-html" class="">Enlaces de interés</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0006">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0006</th>
+<th class="name_column" colspan="2">IR-06 - Consultas y reclamaciones</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0006-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1066">
+<span id="DAT-1066-description-html" class="">Código de seguimiento CAD-AAAA-NNNNN</span>
+</li>
+<li id="DAT-1067">
+<span id="DAT-1067-description-html" class="">Remitente con correo @alum.us.es</span>
+</li>
+<li id="DAT-1068">
+<span id="DAT-1068-description-html" class="">Tipo: consulta o reclamación académica</span>
+</li>
+<li id="DAT-1069">
+<span id="DAT-1069-description-html" class="">Asunto</span>
+</li>
+<li id="DAT-1070">
+<span id="DAT-1070-description-html" class="">Descripción</span>
+</li>
+<li id="DAT-1071">
+<span id="DAT-1071-description-html" class="">Estado: abierto, en proceso o cerrado</span>
+</li>
+<li id="DAT-1072">
+<span id="DAT-1072-description-html" class="">Historial de respuestas</span>
+</li>
+<li id="DAT-1073">
+<span id="DAT-1073-description-html" class="">Fecha del último aviso por correo al estudiante</span>
+</li>
+<li id="DAT-1074">
+<span id="DAT-1074-description-html" class="">Nivel de confidencialidad</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0006-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0007">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0007</th>
+<th class="name_column" colspan="2">IR-07 - Calendario</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0007-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las asambleas, eventos y votaciones estudiantiles, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1076">
+<span id="DAT-1076-description-html" class="">Título</span>
+</li>
+<li id="DAT-1077">
+<span id="DAT-1077-description-html" class="">Tipo: asamblea, evento o votación</span>
+</li>
+<li id="DAT-1078">
+<span id="DAT-1078-description-html" class="">Fecha y hora</span>
+</li>
+<li id="DAT-1079">
+<span id="DAT-1079-description-html" class="">Lugar</span>
+</li>
+<li id="DAT-1080">
+<span id="DAT-1080-description-html" class="">Descripción</span>
+</li>
+<li id="DAT-1081">
+<span id="DAT-1081-description-html" class="">Asamblea a la que se vincula (para las votaciones)</span>
+</li>
+<li id="DAT-1082">
+<span id="DAT-1082-description-html" class="">Apertura y cierre de la votación</span>
+</li>
+<li id="DAT-1083">
+<span id="DAT-1083-description-html" class="">Papeleta de la votación (encuesta asociada)</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0007-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0008">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0008</th>
+<th class="name_column" colspan="2">IR-08 - Solicitudes de mediación</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0008-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las solicitudes de <a href='#GLO-0009' class="rem_ref">mediación estudiantil</a>, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1085">
+<span id="DAT-1085-description-html" class="">Referencia de la solicitud (MED-AAAA-NNNNN)</span>
+</li>
+<li id="DAT-1086">
+<span id="DAT-1086-description-html" class="">Solicitante</span>
+</li>
+<li id="DAT-1087">
+<span id="DAT-1087-description-html" class="">Correo @alum.us.es</span>
+</li>
+<li id="DAT-1088">
+<span id="DAT-1088-description-html" class="">Facultad o Escuela</span>
+</li>
+<li id="DAT-1089">
+<span id="DAT-1089-description-html" class="">Descripción del conflicto</span>
+</li>
+<li id="DAT-1090">
+<span id="DAT-1090-description-html" class="">Consentimiento RGPD</span>
+</li>
+<li id="DAT-1091">
+<span id="DAT-1091-description-html" class="">Fecha de la solicitud</span>
+</li>
+<li id="DAT-1092">
+<span id="DAT-1092-description-html" class="">Estado: pendiente, en proceso o cerrada</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0008-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="IRQ-0009">
+<table class="information_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0009</th>
+<th class="name_column" colspan="2">IR-09 - Usuarios y roles</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2">
+<div id="IRQ-0009-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a a las personas con cuenta en el portal, más específicamente:. En concreto:</p></div>
+</td>
+</tr>
+<tr>
+<th>Datos específicos</th>
+<td colspan="2">
+<ul class="specific_data">
+<li id="DAT-1094">
+<span id="DAT-1094-description-html" class="">Nombre de la cuenta (institucional: la del CADUS o la de una delegación)</span>
+</li>
+<li id="DAT-1095">
+<span id="DAT-1095-description-html" class="">Correo institucional del órgano</span>
+</li>
+<li id="DAT-1096">
+<span id="DAT-1096-description-html" class="">Rol: estudiante, delegado, miembro de la Ejecutiva o administrador</span>
+</li>
+<li id="DAT-1097">
+<span id="DAT-1097-description-html" class="">Delegación asociada (si es delegado)</span>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="IRQ-0009-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0009" class="section">5.2 Requisitos de Interfaz de Usuario y Funcionales</h2>
+<h3 id="SEC-0010" class="section">5.2.1 Actores</h3>
 <div id="ACT-0001">
 <table class="actor remus_table">
 <thead>
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/actor.png" /> ACT-0001</th>
-<th class="name_column" colspan="1">Usuario Anónimo</th>
+<th class="name_column" colspan="1">Usuario anónimo</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="ACT-0001-actorRole-html" class=""><p>Este actor representa Visitante sin autenticar. Accede a contenido público: noticias, actas publicadas, directorio, calendario..</p></div>
+<div id="ACT-0001-actorRole-html" class=""><p>Este actor representa a los visitantes del portal que no han iniciado sesión y solo acceden a contenido público.</p></div>
 </td>
 </tr>
 <tr>
@@ -790,13 +1539,13 @@
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="ACT-0002-actorRole-html" class=""><p>Este actor representa Usuario con correo institucional <code>@alum.us.es</code>. Puede enviar consultas, reclamaciones y solicitudes de mediación..</p></div>
+<div id="ACT-0002-actorRole-html" class=""><p>Este actor representa a los estudiantes de la Universidad de Sevilla con correo institucional @alum.us.es.</p></div>
 </td>
 </tr>
 <tr>
@@ -813,18 +1562,18 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/actor.png" /> ACT-0003</th>
-<th class="name_column" colspan="1">Representante/Delegado de Centro</th>
+<th class="name_column" colspan="1">Delegado de centro</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="ACT-0003-actorRole-html" class=""><p>Este actor representa Estudiante responsable de una delegación; mantiene la ficha de su Facultad/Escuela..</p></div>
+<div id="ACT-0003-actorRole-html" class=""><p>Este actor representa a los representantes o delegados de alumnos responsables de la delegación de una Facultad o Escuela.</p></div>
 </td>
 </tr>
 <tr>
@@ -841,18 +1590,18 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/actor.png" /> ACT-0004</th>
-<th class="name_column" colspan="1">Miembro de la Ejecutiva del CADUS</th>
+<th class="name_column" colspan="1">Miembro de la Ejecutiva</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="ACT-0004-actorRole-html" class=""><p>Este actor representa Aprueba y publica actas/normativas, gestiona el buzón y las convocatorias..</p></div>
+<div id="ACT-0004-actorRole-html" class=""><p>Este actor representa a los miembros de la <a href='#GLO-0006' class="rem_ref">Ejecutiva del CADUS</a> que aprueban contenidos y atienden el buzón.</p></div>
 </td>
 </tr>
 <tr>
@@ -869,18 +1618,18 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/actor.png" /> ACT-0005</th>
-<th class="name_column" colspan="1">Administrador Web</th>
+<th class="name_column" colspan="1">Administrador web</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="ACT-0005-actorRole-html" class=""><p>Este actor representa Gestiona usuarios, roles, categorías y configuración técnica..</p></div>
+<div id="ACT-0005-actorRole-html" class=""><p>Este actor representa a las personas que gestionan usuarios, roles, categorías y la configuración técnica del portal.</p></div>
 </td>
 </tr>
 <tr>
@@ -891,850 +1640,19 @@
 </tr>
 </table>
 </div>
-<h3 id="SEC-0015" class="section">6.2.3 Especificación de casos de uso del sistema</h3>
-<h2 id="SEC-0040" class="section">6.3 Requisitos funcionales del sistema</h2>
-<h3 id="SEC-0017" class="section">6.3.1 Requisitos de información del sistema</h3>
-<div id="IRQ-0001">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0001</th>
-<th class="name_column" colspan="2">RI-01 - Entrada de noticia</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0001-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Noticia o comunicado publicado por el CADUS. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1017">
-<span id="DAT-1017-description-html" class="">título</span>
-</li>
-<li id="DAT-1018">
-<span id="DAT-1018-description-html" class="">cuerpo</span>
-</li>
-<li id="DAT-1019">
-<span id="DAT-1019-description-html" class="">categoría</span>
-</li>
-<li id="DAT-1020">
-<span id="DAT-1020-description-html" class="">fecha de publicación</span>
-</li>
-<li id="DAT-1021">
-<span id="DAT-1021-description-html" class="">autor</span>
-</li>
-<li id="DAT-1022">
-<span id="DAT-1022-description-html" class="">estado (borrador/publicada)</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0001-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="IRQ-0002">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0002</th>
-<th class="name_column" colspan="2">RI-02 - Acta/Documento</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0002-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Acta de pleno o normativa en PDF. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1024">
-<span id="DAT-1024-description-html" class="">tipo (acta/normativa)</span>
-</li>
-<li id="DAT-1025">
-<span id="DAT-1025-description-html" class="">fecha</span>
-</li>
-<li id="DAT-1026">
-<span id="DAT-1026-description-html" class="">archivo PDF</span>
-</li>
-<li id="DAT-1027">
-<span id="DAT-1027-description-html" class="">estado de aprobación</span>
-</li>
-<li id="DAT-1028">
-<span id="DAT-1028-description-html" class="">pleno asociado</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0002-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="IRQ-0003">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0003</th>
-<th class="name_column" colspan="2">RI-03 - Delegación</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0003-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Delegación de alumnos de una Facultad/Escuela. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1030">
-<span id="DAT-1030-description-html" class="">Facultad/Escuela</span>
-</li>
-<li id="DAT-1031">
-<span id="DAT-1031-description-html" class="">delegado responsable</span>
-</li>
-<li id="DAT-1032">
-<span id="DAT-1032-description-html" class="">contacto</span>
-</li>
-<li id="DAT-1033">
-<span id="DAT-1033-description-html" class="">horario de atención</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0003-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="IRQ-0004">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0004</th>
-<th class="name_column" colspan="2">RI-04 - Consulta/Ticket</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0004-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Consulta o reclamación de un estudiante. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1035">
-<span id="DAT-1035-description-html" class="">código de seguimiento</span>
-</li>
-<li id="DAT-1036">
-<span id="DAT-1036-description-html" class="">remitente</span>
-</li>
-<li id="DAT-1037">
-<span id="DAT-1037-description-html" class="">asunto</span>
-</li>
-<li id="DAT-1038">
-<span id="DAT-1038-description-html" class="">estado</span>
-</li>
-<li id="DAT-1039">
-<span id="DAT-1039-description-html" class="">historial de respuestas</span>
-</li>
-<li id="DAT-1040">
-<span id="DAT-1040-description-html" class="">nivel de confidencialidad</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0004-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="IRQ-0005">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0005</th>
-<th class="name_column" colspan="2">RI-05 - Categoría</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0005-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Clasificación temática de noticias y documentos. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1042">
-<span id="DAT-1042-description-html" class="">nombre</span>
-</li>
-<li id="DAT-1043">
-<span id="DAT-1043-description-html" class="">tipo de contenido asociado (noticia o documento)</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0005-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="IRQ-0006">
-<table class="information_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/informationRequirement.png" /> IRQ-0006</th>
-<th class="name_column" colspan="2">RI-06 - Usuario/Rol</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="2">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="2">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="2">
-<div id="IRQ-0006-relevantConcept-html" class="relevant_concept"><p>El sistema deberá almacenar la información correspondiente a Persona con cuenta en el sitio. En concreto:</p></div>
-</td>
-</tr>
-<tr>
-<th>Datos específicos</th>
-<td colspan="2">
-<ul class="specific_data">
-<li id="DAT-1045">
-<span id="DAT-1045-description-html" class="">nombre</span>
-</li>
-<li id="DAT-1046">
-<span id="DAT-1046-description-html" class="">correo institucional</span>
-</li>
-<li id="DAT-1047">
-<span id="DAT-1047-description-html" class="">rol asignado</span>
-</li>
-<li id="DAT-1048">
-<span id="DAT-1048-description-html" class="">delegación asociada (si aplica)</span>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="2">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="2">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="2">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="2">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="2">
-<div id="IRQ-0006-comments-html" class="remus_comments"><p>Tiempos de vida y ocurrencias por estimar (<span class="tbd" title='Por determinar'>PD</span>).</p></div>
-</td>
-</tr>
-</table>
-</div>
-<h3 id="SEC-0018" class="section">6.3.2 Requisitos de reglas de negocio del sistema</h3>
-<div id="CRQ-0001">
-<table class="constraint_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0001</th>
-<th class="name_column" colspan="1">RN-01 - Aprobación de documentos</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="CRQ-0001-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Toda acta o normativa requiere aprobación de un miembro de la Ejecutiva antes de publicarse..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="CRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="CRQ-0002">
-<table class="constraint_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0002</th>
-<th class="name_column" colspan="1">RN-02 - Correo institucional</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="CRQ-0002-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Solo se aceptan consultas y reclamaciones enviadas desde correo <code>@alum.us.es</code>..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="CRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="CRQ-0003">
-<table class="constraint_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0003</th>
-<th class="name_column" colspan="1">RN-03 - Privacidad de reclamaciones</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="CRQ-0003-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Las reclamaciones son visibles solo para el remitente y la Ejecutiva..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="CRQ-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="CRQ-0004">
-<table class="constraint_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0004</th>
-<th class="name_column" colspan="1">RN-04 - Edición de fichas</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="CRQ-0004-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Cada ficha de delegación solo puede ser editada por su delegado asignado o un Administrador..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="CRQ-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="CRQ-0005">
-<table class="constraint_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0005</th>
-<th class="name_column" colspan="1">RN-05 - Votaciones vinculadas</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="CRQ-0005-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Toda votación del calendario debe estar vinculada a una convocatoria de asamblea previa..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">vital</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">inmediatamente</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="CRQ-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<h3 id="SEC-0019" class="section">6.3.3 Requisitos de conducta del sistema</h3>
+<h3 id="SEC-0011" class="section">5.2.2 Requisitos de Interfaz de Usuario</h3>
 <div id="FRQ-0001">
 <table class="functional_requirement remus_table">
 <thead>
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0001</th>
-<th class="name_column" colspan="1">RF-01 - Publicar noticias categorizadas</th>
+<th class="name_column" colspan="1">UI-01 - Diseño gráfico</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -1760,7 +1678,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0001-description-html" class=""><p>El sistema deberá El sistema debe permitir publicar noticias/comunicados categorizados por área (Becas, Movilidad, Normativa, Eventos)..</p></div>
+<div id="FRQ-0001-description-html" class=""><p>El sistema deberá basarse en la identidad visual del CADUS (colores, logotipo y tipografía institucionales) y adaptarse a móviles y tablets.</p></div>
 </td>
 </tr>
 <tr>
@@ -1782,7 +1700,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0001-comments-html" class="remus_comments"><p>Historias de usuario: HU-01</p></div>
+<div id="FRQ-0001-comments-html" class="remus_comments"><p>HU-18 · RNF-02</p></div>
 </td>
 </tr>
 </table>
@@ -1793,12 +1711,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0002</th>
-<th class="name_column" colspan="1">RF-02 - Filtrar y buscar noticias</th>
+<th class="name_column" colspan="1">UI-02 - Página principal</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -1824,12 +1742,18 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0002-description-html" class=""><p>El sistema deberá El sistema debe permitir filtrar y buscar noticias por categoría, fecha y palabra clave..</p></div>
+<div id="FRQ-0002-description-html" class=""><p>El sistema deberá contar con una página principal donde se coloquen estas secciones:</p>
+<ul>
+<li><p>Banner institucional del CADUS</p></li>
+<li><p>Comunicados recientes, clasificados por categoría</p></li>
+<li><p>Accesos destacados al directorio de delegaciones y al buzón de consultas</p></li>
+<li><p>Próximas asambleas, eventos y votaciones.</p></li>
+</ul></div>
 </td>
 </tr>
 <tr>
 <th>Importancia</th>
-<td colspan="1">importante</td>
+<td colspan="1">vital</td>
 </tr>
 <tr>
 <th>Urgencia</th>
@@ -1846,7 +1770,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0002-comments-html" class="remus_comments"><p>Historias de usuario: HU-02, HU-16</p></div>
+<div id="FRQ-0002-comments-html" class="remus_comments"><p>HU-01 · HU-02</p></div>
 </td>
 </tr>
 </table>
@@ -1857,12 +1781,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0003</th>
-<th class="name_column" colspan="1">RF-03 - Repositorio de actas</th>
+<th class="name_column" colspan="1">UI-03 - Directorio de delegaciones</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -1888,7 +1812,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0003-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un repositorio de actas de plenos descargables en PDF..</p></div>
+<div id="FRQ-0003-description-html" class=""><p>El sistema deberá mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención).</p></div>
 </td>
 </tr>
 <tr>
@@ -1910,7 +1834,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0003-comments-html" class="remus_comments"><p>Historias de usuario: HU-03, HU-04</p></div>
+<div id="FRQ-0003-comments-html" class="remus_comments"><p>HU-05 · HU-06</p></div>
 </td>
 </tr>
 </table>
@@ -1921,12 +1845,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0004</th>
-<th class="name_column" colspan="1">RF-04 - Repositorio de normativas</th>
+<th class="name_column" colspan="1">UI-04 - Buzón de consultas</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -1952,7 +1876,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0004-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un repositorio de normativas y reglamentos descargables en PDF..</p></div>
+<div id="FRQ-0004-description-html" class=""><p>El sistema deberá ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de <a href='#GLO-0008' class="rem_ref">ticket</a>, una página de preguntas frecuentes y un <a href='#GLO-0011' class="rem_ref">aviso de privacidad</a> enlazado desde los formularios.</p></div>
 </td>
 </tr>
 <tr>
@@ -1974,7 +1898,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0004-comments-html" class="remus_comments"><p>Historias de usuario: HU-04</p></div>
+<div id="FRQ-0004-comments-html" class="remus_comments"><p>HU-07 · HU-08 · E2-16</p></div>
 </td>
 </tr>
 </table>
@@ -1985,12 +1909,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0005</th>
-<th class="name_column" colspan="1">RF-05 - Aprobación previa de documentos</th>
+<th class="name_column" colspan="1">UI-05 - Ficha de acta o normativa</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2016,7 +1940,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0005-description-html" class=""><p>El sistema deberá El sistema debe requerir la aprobación de un miembro de la Ejecutiva antes de publicar cualquier acta o normativa..</p></div>
+<div id="FRQ-0005-description-html" class=""><p>El sistema deberá mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF.</p></div>
 </td>
 </tr>
 <tr>
@@ -2038,7 +1962,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0005-comments-html" class="remus_comments"><p>Historias de usuario: HU-03</p></div>
+<div id="FRQ-0005-comments-html" class="remus_comments"><p>HU-03 · HU-04</p></div>
 </td>
 </tr>
 </table>
@@ -2049,12 +1973,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0006</th>
-<th class="name_column" colspan="1">RF-06 - Directorio de delegaciones</th>
+<th class="name_column" colspan="1">UI-06 - Calendario y votaciones</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2080,7 +2004,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0006-description-html" class=""><p>El sistema deberá El sistema debe mostrar un directorio interactivo de Delegaciones de Alumnos por Facultad/Escuela..</p></div>
+<div id="FRQ-0006-description-html" class=""><p>El sistema deberá mostrar el calendario de asambleas y eventos (vista de mes y de lista) y las convocatorias de votación con su apertura y cierre, cada una vinculada a su asamblea.</p></div>
 </td>
 </tr>
 <tr>
@@ -2102,7 +2026,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0006-comments-html" class="remus_comments"><p>Historias de usuario: HU-05</p></div>
+<div id="FRQ-0006-comments-html" class="remus_comments"><p>HU-10 · HU-11</p></div>
 </td>
 </tr>
 </table>
@@ -2113,12 +2037,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0007</th>
-<th class="name_column" colspan="1">RF-07 - Ficha de delegación</th>
+<th class="name_column" colspan="1">UI-07 - Solicitud de mediación</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2144,12 +2068,12 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0007-description-html" class=""><p>El sistema deberá El sistema debe permitir gestionar la ficha de cada delegación (contacto, horario de atención, enlaces)..</p></div>
+<div id="FRQ-0007-description-html" class=""><p>El sistema deberá ofrecer un formulario de solicitud de mediación con consentimiento RGPD y una confirmación que entregue la referencia MED-AAAA-NNNNN sin mostrar los datos de la solicitud.</p></div>
 </td>
 </tr>
 <tr>
 <th>Importancia</th>
-<td colspan="1">importante</td>
+<td colspan="1">vital</td>
 </tr>
 <tr>
 <th>Urgencia</th>
@@ -2166,7 +2090,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0007-comments-html" class="remus_comments"><p>Historias de usuario: HU-06</p></div>
+<div id="FRQ-0007-comments-html" class="remus_comments"><p>HU-12</p></div>
 </td>
 </tr>
 </table>
@@ -2177,12 +2101,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0008</th>
-<th class="name_column" colspan="1">RF-08 - Buzón de consultas y reclamaciones</th>
+<th class="name_column" colspan="1">UI-08 - Panel de administración por rol</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2208,7 +2132,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0008-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un buzón digital de consultas y reclamaciones académicas..</p></div>
+<div id="FRQ-0008-description-html" class=""><p>El sistema deberá mostrar a cada rol solo sus menús de administración y un escritorio con accesos directos a las tareas de su rol.</p></div>
 </td>
 </tr>
 <tr>
@@ -2230,23 +2154,24 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0008-comments-html" class="remus_comments"><p>Historias de usuario: HU-07</p></div>
+<div id="FRQ-0008-comments-html" class="remus_comments"><p>HU-19a · HU-19b</p></div>
 </td>
 </tr>
 </table>
 </div>
+<h3 id="SEC-0012" class="section">5.2.3 Requisitos Funcionales</h3>
 <div id="FRQ-0009">
 <table class="functional_requirement remus_table">
 <thead>
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0009</th>
-<th class="name_column" colspan="1">RF-09 - Código de seguimiento</th>
+<th class="name_column" colspan="1">RF-01 - Publicación de noticias categorizadas</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2272,7 +2197,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0009-description-html" class=""><p>El sistema deberá El sistema debe generar un código/ticket de seguimiento único para cada consulta enviada..</p></div>
+<div id="FRQ-0009-description-html" class=""><p>El sistema deberá permitir publicar noticias y comunicados clasificados por áreas: Becas, Movilidad, Normativa y Eventos.</p></div>
 </td>
 </tr>
 <tr>
@@ -2294,7 +2219,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0009-comments-html" class="remus_comments"><p>Historias de usuario: HU-07, HU-08</p></div>
+<div id="FRQ-0009-comments-html" class="remus_comments"><p>HU-01</p></div>
 </td>
 </tr>
 </table>
@@ -2305,12 +2230,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0010</th>
-<th class="name_column" colspan="1">RF-10 - Gestión de tickets</th>
+<th class="name_column" colspan="1">RF-02 - Búsqueda y filtrado de noticias</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2336,16 +2261,16 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0010-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un panel de gestión y respuesta de tickets para la Ejecutiva..</p></div>
+<div id="FRQ-0010-description-html" class=""><p>El sistema deberá permitir filtrar y buscar las noticias por categoría, fecha y palabra clave.</p></div>
 </td>
 </tr>
 <tr>
 <th>Importancia</th>
-<td colspan="1">vital</td>
+<td colspan="1">importante</td>
 </tr>
 <tr>
 <th>Urgencia</th>
-<td colspan="1">hay presión</td>
+<td colspan="1">inmediatamente</td>
 </tr>
 <tr>
 <th>Estado</th>
@@ -2358,7 +2283,7 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0010-comments-html" class="remus_comments"><p>Historias de usuario: HU-09</p></div>
+<div id="FRQ-0010-comments-html" class="remus_comments"><p>HU-02 · HU-16</p></div>
 </td>
 </tr>
 </table>
@@ -2369,12 +2294,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0011</th>
-<th class="name_column" colspan="1">RF-11 - Calendario</th>
+<th class="name_column" colspan="1">RF-03 - Repositorio de actas</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2400,199 +2325,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0011-description-html" class=""><p>El sistema deberá El sistema debe mostrar un calendario de asambleas, eventos y votaciones estudiantiles..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="FRQ-0011-comments-html" class="remus_comments"><p>Historias de usuario: HU-10</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="FRQ-0012">
-<table class="functional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0012</th>
-<th class="name_column" colspan="1">RF-12 - Convocatorias de votación</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="FRQ-0012-description-html" class=""><p>El sistema deberá El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="FRQ-0012-comments-html" class="remus_comments"><p>Historias de usuario: HU-11</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="FRQ-0013">
-<table class="functional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0013</th>
-<th class="name_column" colspan="1">RF-13 - Solicitud de mediación</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="FRQ-0013-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un formulario de solicitud de mediación estudiantil..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="FRQ-0013-comments-html" class="remus_comments"><p>Historias de usuario: HU-12</p></div>
-</td>
-</tr>
-</table>
-</div>
-<div id="FRQ-0014">
-<table class="functional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0014</th>
-<th class="name_column" colspan="1">RF-14 - Roles y permisos</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="FRQ-0014-description-html" class=""><p>El sistema deberá El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador)..</p></div>
+<div id="FRQ-0011-description-html" class=""><p>El sistema deberá ofrecer un repositorio de actas de plenos descargables en formato PDF.</p></div>
 </td>
 </tr>
 <tr>
@@ -2614,23 +2347,23 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0014-comments-html" class="remus_comments"><p>Historias de usuario: HU-13</p></div>
+<div id="FRQ-0011-comments-html" class="remus_comments"><p>HU-03 · HU-04</p></div>
 </td>
 </tr>
 </table>
 </div>
-<div id="FRQ-0015">
+<div id="FRQ-0012">
 <table class="functional_requirement remus_table">
 <thead>
 <tr>
 <th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0015</th>
-<th class="name_column" colspan="1">RF-15 - Panel de administración</th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0012</th>
+<th class="name_column" colspan="1">RF-04 - Repositorio de normativas</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2656,7 +2389,391 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="FRQ-0015-description-html" class=""><p>El sistema deberá El sistema debe ofrecer un panel de administración de contenidos (CRUD de noticias, actas y delegaciones) restringido por rol..</p></div>
+<div id="FRQ-0012-description-html" class=""><p>El sistema deberá ofrecer un repositorio de normativas y reglamentos descargables en formato PDF.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0012-comments-html" class="remus_comments"><p>HU-04</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0013">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0013</th>
+<th class="name_column" colspan="1">RF-05 - Aprobación previa de documentos</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0013-description-html" class=""><p>El sistema deberá exigir la aprobación de un miembro de la Ejecutiva antes de publicar cualquier <a href='#GLO-0005' class="rem_ref">acta</a> o normativa.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0013-comments-html" class="remus_comments"><p>HU-03</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0014">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0014</th>
+<th class="name_column" colspan="1">RF-06 - Directorio de delegaciones</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0014-description-html" class=""><p>El sistema deberá mostrar un directorio interactivo de Delegaciones de Alumnos por Facultad o Escuela.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0014-comments-html" class="remus_comments"><p>HU-05</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0015">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0015</th>
+<th class="name_column" colspan="1">RF-07 - Ficha de delegación</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0015-description-html" class=""><p>El sistema deberá permitir gestionar la ficha de cada delegación: contacto, horario de atención y enlaces.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0015-comments-html" class="remus_comments"><p>HU-06</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0016">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0016</th>
+<th class="name_column" colspan="1">RF-08 - Buzón de consultas y reclamaciones</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0016-description-html" class=""><p>El sistema deberá ofrecer un buzón digital de consultas y reclamaciones académicas.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0016-comments-html" class="remus_comments"><p>HU-07</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0017">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0017</th>
+<th class="name_column" colspan="1">RF-09 - Código de seguimiento</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0017-description-html" class=""><p>El sistema deberá generar un código de <a href='#GLO-0008' class="rem_ref">ticket</a> único para cada consulta enviada y permitir su seguimiento.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0017-comments-html" class="remus_comments"><p>HU-07 · HU-08</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0018">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0018</th>
+<th class="name_column" colspan="1">RF-10 - Gestión de tickets</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0018-description-html" class=""><p>El sistema deberá ofrecer a la Ejecutiva un panel para gestionar y responder los tickets, filtrarlos por estado y por tipo, y avisar al estudiante por correo cuando hay una respuesta. El aviso solo incluye el código y el enlace de seguimiento, nunca el contenido.</p></div>
 </td>
 </tr>
 <tr>
@@ -2678,25 +2795,23 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="FRQ-0015-comments-html" class="remus_comments"><p>Historias de usuario: HU-19</p></div>
+<div id="FRQ-0018-comments-html" class="remus_comments"><p>HU-09a (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2): módulo propio del buzón en lugar de SupportCandy</p></div>
 </td>
 </tr>
 </table>
 </div>
-<h2 id="SEC-0022" class="section">6.4 Requisitos no funcionales del sistema</h2>
-<h3 id="SEC-0032" class="section">6.4.1 Requisitos de fiabilidad del sistema</h3>
-<div id="NFR-0006">
-<table class="nonfunctional_requirement remus_table">
+<div id="FRQ-0019">
+<table class="functional_requirement remus_table">
 <thead>
 <tr>
 <th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0006</th>
-<th class="name_column" colspan="1">RNF-06 - Disponibilidad</th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0019</th>
+<th class="name_column" colspan="1">RF-11 - Calendario de asambleas y eventos</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2722,7 +2837,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="NFR-0006-description-html" class=""><p>El sistema deberá Estabilidad del entorno durante periodos críticos (matrícula, asambleas, votaciones)..</p></div>
+<div id="FRQ-0019-description-html" class=""><p>El sistema deberá mostrar un calendario de asambleas, eventos y votaciones estudiantiles, con los próximos eventos en la página principal.</p></div>
 </td>
 </tr>
 <tr>
@@ -2744,12 +2859,766 @@
 <tr>
 <th>Comentarios</th>
 <td colspan="1">
-<div id="NFR-0006-comments-html" class="remus_comments"><p>Ninguno</p></div>
+<div id="FRQ-0019-comments-html" class="remus_comments"><p>HU-10 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2)</p></div>
 </td>
 </tr>
 </table>
 </div>
-<h3 id="SEC-0033" class="section">6.4.2 Requisitos de usabilidad del sistema</h3>
+<div id="FRQ-0020">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0020</th>
+<th class="name_column" colspan="1">RF-12 - Convocatorias de votación</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0020-description-html" class=""><p>El sistema deberá permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con fecha y hora de apertura y de cierre; solo se puede votar mientras la votación está abierta.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0020-comments-html" class="remus_comments"><p>HU-11 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2)</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0021">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0021</th>
+<th class="name_column" colspan="1">RF-13 - Solicitud de mediación</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0021-description-html" class=""><p>El sistema deberá ofrecer un formulario de solicitud de <a href='#GLO-0009' class="rem_ref">mediación estudiantil</a> que entregue al solicitante una referencia, y permitir a la Ejecutiva cambiar su estado (pendiente, en proceso o cerrada).</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0021-comments-html" class="remus_comments"><p>HU-12 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2)</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0022">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0022</th>
+<th class="name_column" colspan="1">RF-14 - Roles y permisos</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0022-description-html" class=""><p>El sistema deberá gestionar roles y permisos diferenciados: anónimo, estudiante, delegado, miembro de la Ejecutiva y administrador, con cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0022-comments-html" class="remus_comments"><p>HU-13 · E2-01 (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2). Lista de cuentas reales pendiente de validar con el CADUS</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="FRQ-0023">
+<table class="functional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/functionalRequirement.png" /> FRQ-0023</th>
+<th class="name_column" colspan="1">RF-15 - Panel de administración</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="FRQ-0023-description-html" class=""><p>El sistema deberá ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, que muestre a cada rol solo sus menús y un escritorio con accesos directos.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="FRQ-0023-comments-html" class="remus_comments"><p>HU-19a · HU-19b (<a href='#GLO-0012' class="rem_ref">Sprint</a> 2)</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="UC-0001">
+<table class="use_case remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/useCase.png" /> UC-0001</th>
+<th class="name_column" colspan="2">UC-01 - Enviar consulta o reclamación </th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2"><div id="UC-0001--html" class=""><p>El sistema deberá comportarse tal como se describe en el siguiente caso de uso cuando cuando un estudiante necesita plantear una consulta o reclamación académica. </p></div>
+</td>
+</tr>
+<tr>
+<th>Precondición</th>
+<td colspan="2">
+<div id="UC-0001-precondition-html" class=""><p>El estudiante dispone de un correo institucional @alum.us.es</p></div>
+</td>
+</tr>
+<tr>
+<th rowspan="6">Secuencia normal</th>
+<th class="step_number_column">Paso</th>
+<th class="step_action_column">Acción</th>
+</tr>
+<tr id="STP-1122">
+<th class="step_number">1</th>
+<td colspan="1">
+<div id="STP-1122--html" class=""><p>El sistema solicita el asunto y el detalle de la consulta o reclamación (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1123">
+<th class="step_number">2</th>
+<td colspan="1">
+<div id="STP-1123--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     indica el asunto y el detalle (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1124">
+<th class="step_number">3</th>
+<td colspan="1">
+<div id="STP-1124--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1125">
+<th class="step_number">4</th>
+<td colspan="1">
+<div id="STP-1125--html" class=""><p>El sistema registra el <a href='#GLO-0008' class="rem_ref">ticket</a> con su nivel de confidencialidad y genera su código de seguimiento único (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1126">
+<th class="step_number">5</th>
+<td colspan="1">
+<div id="STP-1126--html" class=""><p>El sistema muestra al estudiante el código para consultar más adelante el estado de su <a href='#GLO-0008' class="rem_ref">ticket</a> (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr>
+<th>Postcondición</th>
+<td colspan="2">
+<div id="UC-0001-postcondition-html" class=""><p>Se ha registrado el <a href='#GLO-0008' class="rem_ref">ticket</a> y el estudiante conoce su código de seguimiento</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="UC-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="UC-0002">
+<table class="use_case remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/useCase.png" /> UC-0002</th>
+<th class="name_column" colspan="2">UC-02 - Aprobar y publicar un acta </th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2"><div id="UC-0002--html" class=""><p>El sistema deberá comportarse tal como se describe en el siguiente caso de uso cuando tras la celebración de un <a href='#GLO-0004' class="rem_ref">pleno</a>. </p></div>
+</td>
+</tr>
+<tr>
+<th>Precondición</th>
+<td colspan="2">
+<div id="UC-0002-precondition-html" class=""><p>El <a href='#GLO-0005' class="rem_ref">acta</a> está subida en formato PDF en estado borrador</p></div>
+</td>
+</tr>
+<tr>
+<th rowspan="6">Secuencia normal</th>
+<th class="step_number_column">Paso</th>
+<th class="step_action_column">Acción</th>
+</tr>
+<tr id="STP-1128">
+<th class="step_number">1</th>
+<td colspan="1">
+<div id="STP-1128--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     sube el <a href='#GLO-0005' class="rem_ref">acta</a> en PDF y la envía a aprobación (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1129">
+<th class="step_number">2</th>
+<td colspan="1">
+<div id="STP-1129--html" class=""><p>El sistema registra el <a href='#GLO-0005' class="rem_ref">acta</a> como pendiente de aprobación (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1130">
+<th class="step_number">3</th>
+<td colspan="1">
+<div id="STP-1130--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     revisa el <a href='#GLO-0005' class="rem_ref">acta</a> y la aprueba (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1131">
+<th class="step_number">4</th>
+<td colspan="1">
+<div id="STP-1131--html" class=""><p>El sistema cambia el estado del <a href='#GLO-0005' class="rem_ref">acta</a> a aprobada y la publica en el repositorio (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1132">
+<th class="step_number">5</th>
+<td colspan="1">
+<div id="STP-1132--html" class=""><p>El sistema permite su descarga en PDF a cualquier visitante del portal (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr>
+<th>Postcondición</th>
+<td colspan="2">
+<div id="UC-0002-postcondition-html" class=""><p>El <a href='#GLO-0005' class="rem_ref">acta</a> queda publicada y disponible para su descarga</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="UC-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="UC-0003">
+<table class="use_case remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/useCase.png" /> UC-0003</th>
+<th class="name_column" colspan="2">UC-03 - Convocar una votación </th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2"><div id="UC-0003--html" class=""><p>El sistema deberá comportarse tal como se describe en el siguiente caso de uso cuando cuando se convoca una asamblea en la que el alumnado debe votar. </p></div>
+</td>
+</tr>
+<tr>
+<th>Precondición</th>
+<td colspan="2">
+<div id="UC-0003-precondition-html" class=""><p>La asamblea está creada en el calendario</p></div>
+</td>
+</tr>
+<tr>
+<th rowspan="5">Secuencia normal</th>
+<th class="step_number_column">Paso</th>
+<th class="step_action_column">Acción</th>
+</tr>
+<tr id="STP-1134">
+<th class="step_number">1</th>
+<td colspan="1">
+<div id="STP-1134--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1135">
+<th class="step_number">2</th>
+<td colspan="1">
+<div id="STP-1135--html" class=""><p>El sistema comprueba que la asamblea existe en el calendario (RN-05) (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1136">
+<th class="step_number">3</th>
+<td colspan="1">
+<div id="STP-1136--html" class=""><p>El sistema publica la convocatoria en el calendario y en la portada (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1137">
+<th class="step_number">4</th>
+<td colspan="1">
+<div id="STP-1137--html" class=""><p>El sistema permite votar solo mientras la convocatoria está abierta (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr>
+<th>Postcondición</th>
+<td colspan="2">
+<div id="UC-0003-postcondition-html" class=""><p>La convocatoria queda publicada y solo se puede votar entre su apertura y su cierre</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="UC-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="UC-0004">
+<table class="use_case remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/useCase.png" /> UC-0004</th>
+<th class="name_column" colspan="2">UC-04 - Solicitar una mediación estudiantil </th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="2">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="2">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="2"><div id="UC-0004--html" class=""><p>El sistema deberá comportarse tal como se describe en el siguiente caso de uso cuando cuando un estudiante necesita la intervención del CADUS en un conflicto. </p></div>
+</td>
+</tr>
+<tr>
+<th>Precondición</th>
+<td colspan="2">
+<div id="UC-0004-precondition-html" class=""><p>El estudiante dispone de un correo institucional @alum.us.es</p></div>
+</td>
+</tr>
+<tr>
+<th rowspan="6">Secuencia normal</th>
+<th class="step_number_column">Paso</th>
+<th class="step_action_column">Acción</th>
+</tr>
+<tr id="STP-1139">
+<th class="step_number">1</th>
+<td colspan="1">
+<div id="STP-1139--html" class=""><p>El actor     <a href="#ACT-0002">Estudiante US (ACT-0002)</a>     describe el conflicto, indica su Facultad o Escuela y acepta el tratamiento de datos (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1140">
+<th class="step_number">2</th>
+<td colspan="1">
+<div id="STP-1140--html" class=""><p>El sistema verifica que el correo pertenece al dominio @alum.us.es (RN-02) (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1141">
+<th class="step_number">3</th>
+<td colspan="1">
+<div id="STP-1141--html" class=""><p>El sistema registra la solicitud como privada, solo visible para la Ejecutiva (RN-03) (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1142">
+<th class="step_number">4</th>
+<td colspan="1">
+<div id="STP-1142--html" class=""><p>El sistema muestra la referencia MED-AAAA-NNNNN sin repetir los datos de la solicitud (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr id="STP-1143">
+<th class="step_number">5</th>
+<td colspan="1">
+<div id="STP-1143--html" class=""><p>El actor     <a href="#ACT-0004">Miembro de la Ejecutiva (ACT-0004)</a>     gestiona la solicitud y cambia su estado a pendiente, en proceso o cerrada (<em>(null)</em>)</p></div>
+</td>
+</tr>
+<tr>
+<th>Postcondición</th>
+<td colspan="2">
+<div id="UC-0004-postcondition-html" class=""><p>La solicitud queda registrada en privado y el estudiante conoce su referencia</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="2">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="2">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="2">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="2">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="2">
+<div id="UC-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="SEC-0013" class="section">5.3 Requisitos No Funcionales</h2>
+<div id="NFR-0001">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0001</th>
+<th class="name_column" colspan="1">RNF-01 - Rendimiento</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0001-description-html" class=""><p>El sistema deberá cargar cada página en menos de 3 segundos en condiciones estándar de red del campus.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
 <div id="NFR-0002">
 <table class="nonfunctional_requirement remus_table">
 <thead>
@@ -2761,7 +3630,7 @@
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2787,7 +3656,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="NFR-0002-description-html" class=""><p>El sistema deberá Diseño responsive, funcional en móviles y tablets..</p></div>
+<div id="NFR-0002-description-html" class=""><p>El sistema deberá adaptarse a móviles y tablets mediante un diseño responsive.</p></div>
 </td>
 </tr>
 <tr>
@@ -2825,7 +3694,7 @@
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -2851,7 +3720,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="NFR-0003-description-html" class=""><p>El sistema deberá Cumplimiento de WCAG 2.1 nivel AA..</p></div>
+<div id="NFR-0003-description-html" class=""><p>El sistema deberá cumplir el nivel AA de las pautas de accesibilidad WCAG 2.1.</p></div>
 </td>
 </tr>
 <tr>
@@ -2878,202 +3747,6 @@
 </tr>
 </table>
 </div>
-<h3 id="SEC-0035" class="section">6.4.3 Requisitos de mantenibilidad del sistema</h3>
-<div id="NFR-0007">
-<table class="nonfunctional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0007</th>
-<th class="name_column" colspan="1">RNF-07 - Mantenibilidad</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="NFR-0007-description-html" class=""><p>El sistema deberá Configuración y código documentados para facilitar el relevo entre cursos del CADUS..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="NFR-0007-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<h3 id="SEC-0034" class="section">6.4.4 Requisitos de eficiencia del sistema</h3>
-<div id="NFR-0001">
-<table class="nonfunctional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0001</th>
-<th class="name_column" colspan="1">RNF-01 - Rendimiento</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="NFR-0001-description-html" class=""><p>El sistema deberá Tiempo de carga de página inferior a 3 s en condiciones estándar de red del campus..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="NFR-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<h3 id="SEC-0036" class="section">6.4.5 Requisitos de portabilidad del sistema</h3>
-<div id="NFR-0005">
-<table class="nonfunctional_requirement remus_table">
-<thead>
-<tr>
-<th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0005</th>
-<th class="name_column" colspan="1">RNF-05 - Compatibilidad técnica</th>
-</tr>
-</thead>
-<tr>
-<th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
-</td>
-</tr>
-<tr>
-<th>Autores</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0002">Pablo Ruiz Vidal</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Fuentes</th>
-<td colspan="1">
-<ul class="stakeholders">
-<li>
-<a href="#STK-0001">Delegación General del CADUS</a>
-</li>
-</ul>
-</td>
-</tr>
-<tr>
-<th>Descripción</th>
-<td colspan="1">
-<div id="NFR-0005-description-html" class=""><p>El sistema deberá PHP 8.x y MySQL 8.x sobre servidor Apache local (WampServer; compatible con XAMPP)..</p></div>
-</td>
-</tr>
-<tr>
-<th>Importancia</th>
-<td colspan="1">importante</td>
-</tr>
-<tr>
-<th>Urgencia</th>
-<td colspan="1">hay presión</td>
-</tr>
-<tr>
-<th>Estado</th>
-<td colspan="1">en construcción</td>
-</tr>
-<tr>
-<th>Estabilidad</th>
-<td colspan="1">media</td>
-</tr>
-<tr>
-<th>Comentarios</th>
-<td colspan="1">
-<div id="NFR-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
-</td>
-</tr>
-</table>
-</div>
-<h3 id="SEC-0037" class="section">6.4.6 Requisitos de seguridad del sistema</h3>
 <div id="NFR-0004">
 <table class="nonfunctional_requirement remus_table">
 <thead>
@@ -3085,7 +3758,7 @@
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -3111,7 +3784,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="NFR-0004-description-html" class=""><p>El sistema deberá Validación y sanitización de entradas, protección frente a spam e inyección..</p></div>
+<div id="NFR-0004-description-html" class=""><p>El sistema deberá validar y sanear las entradas de todos los formularios y protegerse frente a spam e inyección.</p></div>
 </td>
 </tr>
 <tr>
@@ -3138,18 +3811,18 @@
 </tr>
 </table>
 </div>
-<div id="NFR-0008">
+<div id="NFR-0005">
 <table class="nonfunctional_requirement remus_table">
 <thead>
 <tr>
 <th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0008</th>
-<th class="name_column" colspan="1">RNF-08 - Privacidad</th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0005</th>
+<th class="name_column" colspan="1">RNF-05 - Compatibilidad técnica</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -3175,7 +3848,199 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="NFR-0008-description-html" class=""><p>El sistema deberá Tratamiento de datos de consultas/reclamaciones conforme a RGPD..</p></div>
+<div id="NFR-0005-description-html" class=""><p>El sistema deberá funcionar con PHP 8.x y MySQL 8.x sobre un servidor Apache local (WampServer, compatible con XAMPP).</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="NFR-0006">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0006</th>
+<th class="name_column" colspan="1">RNF-06 - Disponibilidad</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0006-description-html" class=""><p>El sistema deberá mantenerse estable durante los periodos críticos: matrícula, asambleas y votaciones.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0006-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="NFR-0007">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0007</th>
+<th class="name_column" colspan="1">RNF-07 - Mantenibilidad</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0007-description-html" class=""><p>El sistema deberá contar con configuración y código documentados para facilitar el relevo entre cursos del CADUS.</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">importante</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">hay presión</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="NFR-0007-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="NFR-0008">
+<table class="nonfunctional_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/nonFunctionalRequirement.png" /> NFR-0008</th>
+<th class="name_column" colspan="1">RNF-08 - Privacidad</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="NFR-0008-description-html" class=""><p>El sistema deberá tratar los datos de consultas, reclamaciones y solicitudes de mediación conforme al RGPD y la LOPDGDD, con consentimiento expreso en cada formulario y un <a href='#GLO-0011' class="rem_ref">aviso de privacidad</a> público. Plazo de conservación de los datos pendiente de validar con el CADUS.</p></div>
 </td>
 </tr>
 <tr>
@@ -3202,20 +4067,19 @@
 </tr>
 </table>
 </div>
-<h3 id="SEC-0057" class="section">6.4.7 Otros requisitos no funcionales del sistema</h3>
-<h2 id="SEC-0023" class="section">6.5 Restricciones técnicas del sistema</h2>
-<div id="CRQ-0006">
+<h2 id="SEC-0014" class="section">5.4 Reglas de Negocio</h2>
+<div id="CRQ-0001">
 <table class="constraint_requirement remus_table">
 <thead>
 <tr>
 <th>
-<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0006</th>
-<th class="name_column" colspan="1">RC-01 - Entorno compartido con Tailscale</th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0001</th>
+<th class="name_column" colspan="1">RN-01 - Aprobación de documentos</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -3233,7 +4097,7 @@
 <td colspan="1">
 <ul class="stakeholders">
 <li>
-<a href="#STK-0003">Joaquin Luna Canela</a>
+<a href="#STK-0001">Delegación General del CADUS</a>
 </li>
 </ul>
 </td>
@@ -3241,7 +4105,331 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="CRQ-0006-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: WordPress y la base de datos <code>bd_cadus</code> se alojan en un único servidor local (WampServer) al que accede todo el equipo mediante <strong>Tailscale</strong> (VPN privada), trabajando a la vez sobre la misma instancia. Acceso limitado a la red de Tailscale, cuentas de WordPress individuales y puerto de BD no expuesto. Disponible solo con el equipo anfitrión encendido..</p></div>
+<div id="CRQ-0001-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Toda <a href='#GLO-0005' class="rem_ref">acta</a> o normativa requiere la aprobación de un miembro de la Ejecutiva antes de publicarse..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0001-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="CRQ-0002">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0002</th>
+<th class="name_column" colspan="1">RN-02 - Correo institucional</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0002-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde un correo corporativo @alum.us.es..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0002-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="CRQ-0003">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0003</th>
+<th class="name_column" colspan="1">RN-03 - Privacidad de reclamaciones</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0003-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Las reclamaciones académicas y las solicitudes de mediación solo son visibles para el remitente y para la Ejecutiva: no aparecen en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0003-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="CRQ-0004">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0004</th>
+<th class="name_column" colspan="1">RN-04 - Edición de fichas</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0004-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Cada ficha de delegación solo puede ser editada por la cuenta de su delegación o por un administrador..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0004-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<div id="CRQ-0005">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0005</th>
+<th class="name_column" colspan="1">RN-05 - Votaciones vinculadas</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0001">Delegación General del CADUS</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0005-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0005-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h1 id="SEC-0016" class="section">6 Entorno de Trabajo del Equipo</h1>
+<div id="PRG-0003">
+<div id="PRG-0003-text-html" class=""><p>El equipo de cinco integrantes trabaja sobre un único entorno compartido. WordPress y su base de datos se alojan en un servidor local al que todos acceden mediante Tailscale; los archivos del proyecto (tema, plugins, documentación, SCRUM y requisitos) se gestionan con GitHub; y la comunicación y coordinación diaria se realiza en un servidor de Discord. Las siguientes restricciones recogen estas decisiones.</p></div>
+</div>
+<div id="CRQ-0006">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0006</th>
+<th class="name_column" colspan="1">RC-01 - Servidor compartido con Tailscale</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0006-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: WordPress y la base de datos bd_cadus se alojan en un único servidor local (WampServer) en el equipo de un integrante. El resto del equipo accede mediante Tailscale (VPN privada), de modo que los cinco integrantes trabajan a la vez sobre la misma instancia. El acceso web se limita a la red de Tailscale, cada integrante usa su propia cuenta de WordPress y el puerto de la base de datos no se expone. El servidor solo está disponible mientras el equipo anfitrión esté encendido..</p></div>
 </td>
 </tr>
 <tr>
@@ -3274,12 +4462,12 @@
 <tr>
 <th>
 <img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0007</th>
-<th class="name_column" colspan="1">RC-02 - Gestión de configuración con GitHub</th>
+<th class="name_column" colspan="1">RC-02 - Control de versiones con GitHub</th>
 </tr>
 </thead>
 <tr>
 <th>Versión</th>
-<td colspan="1">0.1 (05/10/2026)
+<td colspan="1">2.0 (24/10/2026)
 </td>
 </tr>
 <tr>
@@ -3297,7 +4485,7 @@
 <td colspan="1">
 <ul class="stakeholders">
 <li>
-<a href="#STK-0003">Joaquin Luna Canela</a>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
 </li>
 </ul>
 </td>
@@ -3305,7 +4493,7 @@
 <tr>
 <th>Descripción</th>
 <td colspan="1">
-<div id="CRQ-0007-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Todo el contenido en forma de archivo (tema, plugins, documentación, SCRUM, REM, maquetas) se versiona en GitHub. No se versionan <code>wp-config.php</code>, <code>wp-content/uploads/</code> ni credenciales. Los volcados de BD son copia de seguridad y de entrega, no mecanismo de sincronización..</p></div>
+<div id="CRQ-0007-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: Todo el contenido en forma de archivo (tema, plugins, documentación, artefactos SCRUM, requisitos y maquetas) se versiona en el repositorio de GitHub del proyecto. No se versionan wp-config.php, wp-content/uploads ni credenciales. Los volcados de la base de datos son copia de seguridad y de entrega, no mecanismo de sincronización..</p></div>
 </td>
 </tr>
 <tr>
@@ -3332,11 +4520,98 @@
 </tr>
 </table>
 </div>
-<h2 id="SEC-0031" class="section">6.6 Requisitos de integración del sistema</h2>
-<h2 id="SEC-0060" class="section">6.7 Información sobre trazabilidad</h2>
-<h1 id="SEC-0027" class="appendix">A Actas de reuniones</h1>
-<h1 id="SEC-0028" class="appendix">B Documentación relevante</h1>
-<h1 id="SEC-0038" class="appendix">C Glosario de acrónimos y abreviaturas</h1>
+<div id="CRQ-0008">
+<table class="constraint_requirement remus_table">
+<thead>
+<tr>
+<th>
+<img src="https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/assets/images/icons/constraintRequirement.png" /> CRQ-0008</th>
+<th class="name_column" colspan="1">RC-03 - Coordinación del equipo con Discord</th>
+</tr>
+</thead>
+<tr>
+<th>Versión</th>
+<td colspan="1">2.0 (24/10/2026)
+</td>
+</tr>
+<tr>
+<th>Autores</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Fuentes</th>
+<td colspan="1">
+<ul class="stakeholders">
+<li>
+<a href="#STK-0002">Pablo Ruiz Vidal</a>
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<th>Descripción</th>
+<td colspan="1">
+<div id="CRQ-0008-description-html" class=""><p>El sistema deberá respetar la siguiente regla de negocio o restricción: El equipo se coordina en un servidor de Discord (GSI - CADUS) organizado en categorías: INFO (anuncios, entorno y recursos), SCRUM (daily, <a href='#GLO-0012' class="rem_ref">sprint</a>-review y retrospectiva), DESARROLLO (un canal por área: infra-y-bd, portada, institucional-y-normativa, delegaciones y buzon-y-faq, además de github y avisos-servidor) y VOZ (Sala de trabajo y Daily) para las reuniones y el trabajo a distancia..</p></div>
+</td>
+</tr>
+<tr>
+<th>Importancia</th>
+<td colspan="1">vital</td>
+</tr>
+<tr>
+<th>Urgencia</th>
+<td colspan="1">inmediatamente</td>
+</tr>
+<tr>
+<th>Estado</th>
+<td colspan="1">en construcción</td>
+</tr>
+<tr>
+<th>Estabilidad</th>
+<td colspan="1">media</td>
+</tr>
+<tr>
+<th>Comentarios</th>
+<td colspan="1">
+<div id="CRQ-0008-comments-html" class="remus_comments"><p>Ninguno</p></div>
+</td>
+</tr>
+</table>
+</div>
+<h1 id="SEC-0015" class="section">7 Glosario de términos</h1>
+<div id="GLO-0004" class="glo">
+<div id="GLO-0004-text-html" class=""><p><strong>Pleno</strong>: Reunión del CADUS en la que se debaten y aprueban los asuntos de la organización y de la que se levanta un <a href='#GLO-0005' class="rem_ref">acta</a>.</p></div>
+</div>
+<div id="GLO-0005" class="glo">
+<div id="GLO-0005-text-html" class=""><p><strong>Acta</strong>: Documento que recoge lo tratado y acordado en un <a href='#GLO-0004' class="rem_ref">pleno</a>. Para publicarse en el portal debe ser aprobada previamente por un miembro de la Ejecutiva.</p></div>
+</div>
+<div id="GLO-0006" class="glo">
+<div id="GLO-0006-text-html" class=""><p><strong>Ejecutiva del CADUS</strong>: Grupo de miembros del CADUS que gestiona el portal: aprueba actas y normativas, atiende el buzón de consultas y convoca asambleas y votaciones.</p></div>
+</div>
+<div id="GLO-0007" class="glo">
+<div id="GLO-0007-text-html" class=""><p><strong>Delegación de alumnos</strong>: Representación estudiantil de una Facultad o Escuela de la Universidad de Sevilla, a cargo de un delegado o representante de centro.</p></div>
+</div>
+<div id="GLO-0008" class="glo">
+<div id="GLO-0008-text-html" class=""><p><strong>Ticket</strong>: Registro de una consulta o reclamación enviada por un estudiante al buzón, identificado por un código de seguimiento único.</p></div>
+</div>
+<div id="GLO-0009" class="glo">
+<div id="GLO-0009-text-html" class=""><p><strong>Mediación estudiantil</strong>: Servicio por el que un estudiante solicita la intervención del CADUS para resolver un conflicto de ámbito académico.</p></div>
+</div>
+<div id="GLO-0010" class="glo">
+<div id="GLO-0010-text-html" class=""><p><strong>Cuenta institucional</strong>: Cuenta del portal asociada a un órgano y no a una persona (la cuenta del CADUS o la de una delegación), con un correo institucional que pasa de un equipo al siguiente en cada relevo.</p></div>
+</div>
+<div id="GLO-0011" class="glo">
+<div id="GLO-0011-text-html" class=""><p><strong>Aviso de privacidad</strong>: Página pública que informa, conforme al RGPD y la LOPDGDD, de quién trata los datos del buzón y de la mediación, para qué, con qué base legal, quién puede verlos, cuánto tiempo se guardan y cómo ejercer los derechos.</p></div>
+</div>
+<div id="GLO-0012" class="glo">
+<div id="GLO-0012-text-html" class=""><p><strong>Sprint</strong>: Iteración de duración fija de SCRUM al final de la cual el equipo entrega un incremento del producto.</p></div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
             // set tooltips of rem:ref references to glossary items or class supertypes

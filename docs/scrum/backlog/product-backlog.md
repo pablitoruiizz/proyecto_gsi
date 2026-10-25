@@ -22,17 +22,17 @@
 
 | ID | Historia de usuario | Requisito(s) | Prioridad | SP | Estado | Sprint | Responsable |
 |---|---|---|---|---:|---|---|---|
-| HU-01 | Como Ejecutiva, quiero publicar noticias categorizadas (Becas, Movilidad, Normativa, Eventos) para informar a los estudiantes. | RF-01 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
+| HU-01 | Como miembro de la Ejecutiva, quiero publicar noticias categorizadas (Becas, Movilidad, Normativa, Eventos) para informar a los estudiantes. | RF-01 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-02 | Como Estudiante, quiero filtrar y buscar noticias por categoría, fecha y palabra clave. | RF-02 | Media | 3 | Hecho | Sprint-01 | `[Nombre]` |
-| HU-03 | Como Ejecutiva, quiero subir actas de pleno en PDF y enviarlas a aprobación antes de publicarlas. | RF-03, RF-05, RN-01 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
+| HU-03 | Como miembro de la Ejecutiva, quiero subir actas de pleno en PDF y enviarlas a aprobación antes de publicarlas. | RF-03, RF-05, RN-01 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-04 | Como Estudiante, quiero descargar actas y normativas en PDF organizadas por fecha y tipo. | RF-03, RF-04 | Alta | 3 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-05 | Como Estudiante, quiero consultar el directorio de delegaciones por Facultad/Escuela. | RF-06 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-06 | Como Delegado, quiero mantener actualizada la ficha de contacto y horario de mi delegación. | RF-07, RN-04 | Media | 3 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-07 | Como Estudiante, quiero enviar una consulta o reclamación académica desde un buzón digital y recibir un código de ticket. | RF-08, RF-09, RN-02 | Alta | 8 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-08 | Como Estudiante, quiero hacer seguimiento del estado de mi consulta con el código de ticket. | RF-09 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
-| HU-09 | Como Ejecutiva, quiero gestionar y responder tickets desde un panel, respetando la privacidad de las reclamaciones. | RF-10, RN-03 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
+| HU-09 | Como miembro de la Ejecutiva, quiero gestionar y responder tickets desde un panel, respetando la privacidad de las reclamaciones. | RF-10, RN-03 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-10 | Como Estudiante, quiero consultar el calendario de asambleas y eventos del CADUS. | RF-11 | Media | 3 | Hecho | Sprint-02 | `[Nombre]` |
-| HU-11 | Como Ejecutiva, quiero publicar convocatorias de votación vinculadas a una asamblea del calendario. | RF-12, RN-05 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
+| HU-11 | Como miembro de la Ejecutiva, quiero publicar convocatorias de votación vinculadas a una asamblea del calendario. | RF-12, RN-05 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-12 | Como Estudiante, quiero solicitar mediación estudiantil mediante un formulario. | RF-13 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-13 | Como Administrador, quiero gestionar roles y permisos de usuario (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | RF-14 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Pendiente | Sprint-03 | `[Nombre]` |

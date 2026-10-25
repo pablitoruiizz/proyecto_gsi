@@ -73,7 +73,10 @@
     { "id": "UI-02", "name": "Página principal", "description": "contar con una página principal donde se coloquen estas secciones:\n\n- Banner institucional del CADUS\n\n- Comunicados recientes, clasificados por categoría\n\n- Accesos destacados al directorio de delegaciones y al buzón de consultas\n\n- Próximas asambleas, eventos y votaciones", "comments": "HU-01 · HU-02", "importance": 2, "urgency": 2 },
     { "id": "UI-03", "name": "Directorio de delegaciones", "description": "mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención)", "comments": "HU-05 · HU-06", "importance": 2, "urgency": 2 },
     { "id": "UI-04", "name": "Buzón de consultas", "description": "ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios", "comments": "HU-07 · HU-08 · E2-16", "importance": 2, "urgency": 2 },
-    { "id": "UI-05", "name": "Ficha de acta o normativa", "description": "mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF", "comments": "HU-03 · HU-04", "importance": 2, "urgency": 2 }
+    { "id": "UI-05", "name": "Ficha de acta o normativa", "description": "mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF", "comments": "HU-03 · HU-04", "importance": 2, "urgency": 2 },
+    { "id": "UI-06", "name": "Calendario y votaciones", "description": "mostrar el calendario de asambleas y eventos (vista de mes y de lista) y las convocatorias de votación con su apertura y cierre, cada una vinculada a su asamblea", "comments": "HU-10 · HU-11", "importance": 2, "urgency": 2 },
+    { "id": "UI-07", "name": "Solicitud de mediación", "description": "ofrecer un formulario de solicitud de mediación con consentimiento RGPD y una confirmación que entregue la referencia MED-AAAA-NNNNN sin mostrar los datos de la solicitud", "comments": "HU-12", "importance": 2, "urgency": 2 },
+    { "id": "UI-08", "name": "Panel de administración por rol", "description": "mostrar a cada rol solo sus menús de administración y un escritorio con accesos directos a las tareas de su rol", "comments": "HU-19a · HU-19b", "importance": 2, "urgency": 2 }
   ],
   "functional": [
     { "id": "RF-01", "name": "Publicación de noticias categorizadas", "description": "permitir publicar noticias y comunicados clasificados por áreas: Becas, Movilidad, Normativa y Eventos", "comments": "HU-01", "importance": 2, "urgency": 2 },
@@ -108,6 +111,21 @@
         { "who": "actor", "actor": "ACT-04", "text": "revisa el acta y la aprueba" },
         { "who": "system", "text": "cambia el estado del acta a aprobada y la publica en el repositorio" },
         { "who": "system", "text": "permite su descarga en PDF a cualquier visitante del portal" }
+      ] },
+    { "id": "UC-03", "name": "Convocar una votación", "trigger": "cuando se convoca una asamblea en la que el alumnado debe votar", "pre": "La asamblea está creada en el calendario", "post": "La convocatoria queda publicada y solo se puede votar entre su apertura y su cierre",
+      "steps": [
+        { "who": "actor", "actor": "ACT-04", "text": "crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre" },
+        { "who": "system", "text": "comprueba que la asamblea existe en el calendario (RN-05)" },
+        { "who": "system", "text": "publica la convocatoria en el calendario y en la portada" },
+        { "who": "system", "text": "permite votar solo mientras la convocatoria está abierta" }
+      ] },
+    { "id": "UC-04", "name": "Solicitar una mediación estudiantil", "trigger": "cuando un estudiante necesita la intervención del CADUS en un conflicto", "pre": "El estudiante dispone de un correo institucional @alum.us.es", "post": "La solicitud queda registrada en privado y el estudiante conoce su referencia",
+      "steps": [
+        { "who": "actor", "actor": "ACT-02", "text": "describe el conflicto, indica su Facultad o Escuela y acepta el tratamiento de datos" },
+        { "who": "system", "text": "verifica que el correo pertenece al dominio @alum.us.es (RN-02)" },
+        { "who": "system", "text": "registra la solicitud como privada, solo visible para la Ejecutiva (RN-03)" },
+        { "who": "system", "text": "muestra la referencia MED-AAAA-NNNNN sin repetir los datos de la solicitud" },
+        { "who": "actor", "actor": "ACT-04", "text": "gestiona la solicitud y cambia su estado a pendiente, en proceso o cerrada" }
       ] }
   ],
   "nonfunctional": [
@@ -137,8 +155,8 @@
     ["OBJ-02", ["RF-01", "RF-02", "IR-03", "UI-02"]],
     ["OBJ-03", ["RF-03", "RF-04", "RF-05", "IR-04", "RN-01", "UI-05"]],
     ["OBJ-04", ["RF-06", "RF-07", "IR-05", "RN-04", "UI-03"]],
-    ["OBJ-05", ["RF-08", "RF-09", "RF-10", "RF-13", "IR-06", "IR-08", "RN-02", "RN-03", "RNF-04", "RNF-08", "UI-04"]],
-    ["OBJ-06", ["RF-11", "RF-12", "IR-07", "RN-05"]],
+    ["OBJ-05", ["RF-08", "RF-09", "RF-10", "RF-13", "IR-06", "IR-08", "RN-02", "RN-03", "RNF-04", "RNF-08", "UI-04", "UI-07", "UC-04"]],
+    ["OBJ-06", ["RF-11", "RF-12", "IR-07", "RN-05", "UI-06", "UC-03"]],
     ["UI-02", ["IR-01", "IR-02"]],
     ["RF-08", ["UC-01"]],
     ["RF-09", ["UC-01"]],
@@ -146,9 +164,9 @@
     ["RF-05", ["UC-02"]],
     ["RF-14", ["IR-09"]],
     ["RF-10", ["IR-06", "RN-03"]],
-    ["RF-12", ["IR-07", "RN-05"]],
-    ["RF-13", ["IR-08", "RN-02", "RN-03"]],
-    ["RF-15", ["IR-03", "IR-04", "IR-05"]],
+    ["RF-12", ["IR-07", "RN-05", "UC-03"]],
+    ["RF-13", ["IR-08", "RN-02", "RN-03", "UC-04"]],
+    ["RF-15", ["IR-03", "IR-04", "IR-05", "UI-08"]],
     ["RC-01", ["RNF-06", "RNF-07"]],
     ["RC-02", ["RNF-07"]],
     ["RC-03", ["RNF-07"]]

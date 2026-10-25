@@ -43,20 +43,43 @@
 
 ---
 
-## 3. Requisitos de información (RI-01 a RI-08)
+## 3. Requisitos de información (IR-01 a IR-09)
 
-Modelo conceptual de datos mínimo que debe soportar el CMS:
+Modelo conceptual de datos mínimo que debe soportar el CMS (los mismos códigos que en REMUS):
 
 | ID | Entidad | Atributos principales |
 |---|---|---|
-| RI-01 | **Entrada de noticia** | título, cuerpo, categoría, fecha de publicación, autor, estado (borrador/publicada) |
-| RI-02 | **Acta/Documento** | tipo (acta/normativa), fecha, archivo PDF, estado de aprobación, pleno asociado |
-| RI-03 | **Delegación** | Facultad/Escuela, delegado responsable, contacto, horario de atención |
-| RI-04 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente, tipo (consulta o reclamación académica), asunto, descripción, estado, historial de respuestas, fecha del último aviso, nivel de confidencialidad |
-| RI-05 | **Categoría** | nombre, tipo de contenido asociado (noticia o documento) |
-| RI-06 | **Usuario/Rol** | nombre de la cuenta institucional, correo institucional del órgano, rol asignado, delegación asociada (si aplica) |
-| RI-07 | **Solicitud de mediación** | referencia, solicitante, correo `@alum.us.es`, Facultad/Escuela, descripción, consentimiento RGPD, fecha, estado |
-| RI-08 | **Convocatoria de votación** | título, descripción, asamblea vinculada, apertura, cierre, papeleta (encuesta asociada) |
+| IR-01 | **Página principal** | banner institucional, comunicados recientes (titular, resumen y categoría), accesos destacados al directorio y al buzón, próximas asambleas, eventos y votaciones |
+| IR-02 | **Menús** | Inicio, Qué es el CADUS, Gobierno y estatutos, Actas y normativa, Noticias y comunicados, Delegaciones de alumnos, Calendario, Atención al estudiante (buzón, mediación y preguntas frecuentes) |
+| IR-03 | **Noticia y comunicado** | título, cuerpo, categoría (Becas, Movilidad, Normativa o Eventos), fecha de publicación, autor, estado (borrador/publicada) |
+| IR-04 | **Acta/Documento** | tipo (acta/normativa), fecha, archivo PDF, estado de aprobación, pleno asociado |
+| IR-05 | **Delegación** | Facultad/Escuela, delegado responsable, contacto, horario de atención, enlaces de interés |
+| IR-06 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente, tipo (consulta o reclamación académica), asunto, descripción, estado, historial de respuestas, fecha del último aviso, nivel de confidencialidad |
+| IR-07 | **Calendario y votaciones** | título, tipo (asamblea, evento o votación), fecha y hora, lugar, descripción, asamblea a la que se vincula (votaciones), apertura y cierre, papeleta (encuesta asociada) |
+| IR-08 | **Solicitud de mediación** | referencia (MED-AAAA-NNNNN), solicitante, correo `@alum.us.es`, Facultad/Escuela, descripción, consentimiento RGPD, fecha, estado (pendiente, en proceso o cerrada) |
+| IR-09 | **Usuario/Rol** | nombre de la cuenta institucional, correo institucional del órgano, rol asignado, delegación asociada (si aplica) |
+
+Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no una entidad aparte.
+
+## 3 bis. Requisitos de interfaz (UI-01 a UI-08) y casos de uso (UC-01 a UC-04)
+
+| ID | Requisito de interfaz | Historias |
+|---|---|---|
+| UI-01 | Diseño gráfico basado en la identidad visual del CADUS (colores, logotipo y tipografía), adaptado a móviles y tablets | HU-18 · RNF-02 |
+| UI-02 | Página principal con banner, comunicados recientes por categoría, accesos al directorio y al buzón y próximas asambleas, eventos y votaciones | HU-01 · HU-02 |
+| UI-03 | Directorio agrupado por Facultad o Escuela, con la ficha de cada delegación | HU-05 · HU-06 |
+| UI-04 | Buzón de consultas: formulario, seguimiento por código, preguntas frecuentes y aviso de privacidad | HU-07 · HU-08 · E2-16 |
+| UI-05 | Ficha de acta o normativa con descarga en PDF | HU-03 · HU-04 |
+| UI-06 | Calendario de asambleas y eventos (mes y lista) y convocatorias de votación con apertura y cierre, vinculadas a su asamblea | HU-10 · HU-11 |
+| UI-07 | Solicitud de mediación con consentimiento RGPD y confirmación con la referencia MED-AAAA-NNNNN, sin repetir los datos | HU-12 |
+| UI-08 | Panel de administración con solo los menús de cada rol y un escritorio con accesos directos | HU-19a · HU-19b |
+
+| Caso de uso | Actor principal | Resumen |
+|---|---|---|
+| UC-01 Enviar consulta o reclamación | Estudiante US | Se verifica el correo `@alum.us.es`, se registra el ticket privado y se entrega el código de seguimiento |
+| UC-02 Aprobar y publicar un acta | Miembro de la Ejecutiva | El acta pasa de borrador a pendiente y a aprobada; solo entonces se publica y se puede descargar |
+| UC-03 Convocar una votación | Miembro de la Ejecutiva | Se crea la convocatoria vinculada a una asamblea del calendario, con apertura y cierre (RN-05) |
+| UC-04 Solicitar una mediación estudiantil | Estudiante US | Se verifica el correo, se registra la solicitud como privada (RN-03) y se entrega la referencia; la Ejecutiva gestiona su estado |
 
 ---
 
@@ -111,7 +134,8 @@ La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacer
 - RF-14 · RN-04 · E2-01: cuentas institucionales (una del CADUS y una por delegación) en lugar de cuentas personales.
 - RF-15 · HU-19a/b: menús de administración por rol y escritorio con accesos directos.
 - RNF-08 · E2-16: aviso de privacidad público y consentimiento en cada formulario.
-- Requisitos de información: datos nuevos del ticket, la mediación, la votación y las cuentas.
+- Requisitos de información: datos nuevos del ticket, la mediación, la votación y las cuentas; se usan en todo el documento los códigos IR de REMUS.
+- Requisitos de interfaz UI-06 (calendario y votaciones), UI-07 (mediación) y UI-08 (panel de administración por rol), y casos de uso UC-03 (convocar una votación) y UC-04 (solicitar una mediación), con sus trazas.
 
 **Pendiente de validar con el CADUS (entrevista E2-09, Sprint 3):**
 

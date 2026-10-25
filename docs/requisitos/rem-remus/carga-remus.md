@@ -66,6 +66,9 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.0, 2026-10-24.
 | UI-03 | Directorio de delegaciones | mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención) | HU-05 · HU-06 |
 | UI-04 | Buzón de consultas | ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios | HU-07 · HU-08 · E2-16 |
 | UI-05 | Ficha de acta o normativa | mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF | HU-03 · HU-04 |
+| UI-06 | Calendario y votaciones | mostrar el calendario de asambleas y eventos (vista de mes y de lista) y las convocatorias de votación con su apertura y cierre, cada una vinculada a su asamblea | HU-10 · HU-11 |
+| UI-07 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación con consentimiento RGPD y una confirmación que entregue la referencia MED-AAAA-NNNNN sin mostrar los datos de la solicitud | HU-12 |
+| UI-08 | Panel de administración por rol | mostrar a cada rol solo sus menús de administración y un escritorio con accesos directos a las tareas de su rol | HU-19a · HU-19b |
 
 ## 7. Requisitos funcionales
 
@@ -113,6 +116,29 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.0, 2026-10-24.
   4. El sistema cambia el estado del acta a aprobada y la publica en el repositorio
   5. El sistema permite su descarga en PDF a cualquier visitante del portal
 
+### UC-03 - Convocar una votación
+
+- **Evento disparador:** cuando se convoca una asamblea en la que el alumnado debe votar
+- **Precondición:** La asamblea está creada en el calendario
+- **Postcondición:** La convocatoria queda publicada y solo se puede votar entre su apertura y su cierre
+- **Pasos:**
+  1. Miembro de la Ejecutiva crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre
+  2. El sistema comprueba que la asamblea existe en el calendario (RN-05)
+  3. El sistema publica la convocatoria en el calendario y en la portada
+  4. El sistema permite votar solo mientras la convocatoria está abierta
+
+### UC-04 - Solicitar una mediación estudiantil
+
+- **Evento disparador:** cuando un estudiante necesita la intervención del CADUS en un conflicto
+- **Precondición:** El estudiante dispone de un correo institucional @alum.us.es
+- **Postcondición:** La solicitud queda registrada en privado y el estudiante conoce su referencia
+- **Pasos:**
+  1. Estudiante US describe el conflicto, indica su Facultad o Escuela y acepta el tratamiento de datos
+  2. El sistema verifica que el correo pertenece al dominio @alum.us.es (RN-02)
+  3. El sistema registra la solicitud como privada, solo visible para la Ejecutiva (RN-03)
+  4. El sistema muestra la referencia MED-AAAA-NNNNN sin repetir los datos de la solicitud
+  5. Miembro de la Ejecutiva gestiona la solicitud y cambia su estado a pendiente, en proceso o cerrada
+
 ## 9. Requisitos no funcionales
 
 | Código | Nombre | El sistema deberá | Importancia |
@@ -152,8 +178,8 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.0, 2026-10-24.
 | OBJ-02 | RF-01, RF-02, IR-03, UI-02 |
 | OBJ-03 | RF-03, RF-04, RF-05, IR-04, RN-01, UI-05 |
 | OBJ-04 | RF-06, RF-07, IR-05, RN-04, UI-03 |
-| OBJ-05 | RF-08, RF-09, RF-10, RF-13, IR-06, IR-08, RN-02, RN-03, RNF-04, RNF-08, UI-04 |
-| OBJ-06 | RF-11, RF-12, IR-07, RN-05 |
+| OBJ-05 | RF-08, RF-09, RF-10, RF-13, IR-06, IR-08, RN-02, RN-03, RNF-04, RNF-08, UI-04, UI-07, UC-04 |
+| OBJ-06 | RF-11, RF-12, IR-07, RN-05, UI-06, UC-03 |
 | UI-02 | IR-01, IR-02 |
 | RF-08 | UC-01 |
 | RF-09 | UC-01 |
@@ -161,9 +187,9 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.0, 2026-10-24.
 | RF-05 | UC-02 |
 | RF-14 | IR-09 |
 | RF-10 | IR-06, RN-03 |
-| RF-12 | IR-07, RN-05 |
-| RF-13 | IR-08, RN-02, RN-03 |
-| RF-15 | IR-03, IR-04, IR-05 |
+| RF-12 | IR-07, RN-05, UC-03 |
+| RF-13 | IR-08, RN-02, RN-03, UC-04 |
+| RF-15 | IR-03, IR-04, IR-05, UI-08 |
 | RC-01 | RNF-06, RNF-07 |
 | RC-02 | RNF-07 |
 | RC-03 | RNF-07 |

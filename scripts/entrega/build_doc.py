@@ -10,13 +10,17 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Inches, Pt, RGBColor
+import tempfile
+
+import numpy as np
+from PIL import Image
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 ENTREGA = os.path.join(RAIZ, "docs", "entrega")
 IMG = os.path.join(ENTREGA, "img")
 CAP = os.path.join(IMG, "capturas")
-SALIDA = os.path.join(ENTREGA, "Entrega1-CMS-CADUS.docx")
-FECHA_DATOS = "18/10/2026"
+SALIDA = os.path.join(ENTREGA, "Entrega2-CMS-CADUS.docx")
+FECHA_DATOS = "24/10/2026"
 
 datos = json.load(open(os.path.join(RAIZ, "scripts", "remus", "cadus_data.json"), encoding="utf-8"))
 plugins = {p["slug"]: p for p in json.load(open(os.path.join(ENTREGA, "datos", "plugins.json"), encoding="utf-8"))}
@@ -157,8 +161,15 @@ def tabla(cabecera, filas, anchos, tam=8.5, titulo=None, resaltar=None):
     return t
 
 
-def figura(archivo, texto, ancho=16.5, carpeta=IMG):
+def figura(archivo, texto, ancho=16.5, carpeta=IMG, max_h=22.0, caja=None):
+    """Inserta una imagen con su pie. Si es muy alta se reduce para que quepa en la página; caja=(y0, y1) recorta un trozo."""
     ruta = os.path.join(carpeta, archivo)
+    if caja:
+        base = Image.open(ruta)
+        ruta = os.path.join(tempfile.gettempdir(), f"trozo_{caja[0]}_{archivo}")
+        base.crop((0, caja[0], base.width, caja[1])).convert("RGB").save(ruta, quality=90)
+    w, h = Image.open(ruta).size
+    ancho = min(ancho, max_h * w / h)
     p = doc.add_paragraph()
     p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.keep_with_next = True
@@ -168,6 +179,46 @@ def figura(archivo, texto, ancho=16.5, carpeta=IMG):
     c.alignment = WD_ALIGN_PARAGRAPH.CENTER
     c.add_run(f"Figura {figura_n[0]}. {texto}")
     return figura_n[0]
+
+
+def cortes(archivo, carpeta, n):
+    """Divide una captura muy alta en n trozos, cortando por filas lisas (entre secciones) cuando es posible."""
+    a = np.asarray(Image.open(os.path.join(carpeta, archivo)).convert("RGB")).astype(int)
+    alto = len(a)
+    puntos = [0]
+    for i in range(1, n):
+        objetivo = alto * i // n
+        corte = objetivo
+        for d in range(0, 450, 3):
+            ok = [y for y in (objetivo - d, objetivo + d) if 0 < y < alto and a[y].max() - a[y].min() < 4]
+            if ok:
+                corte = ok[0]
+                break
+        puntos.append(corte)
+    puntos.append(alto)
+    return list(zip(puntos[:-1], puntos[1:]))
+
+
+def leer_seccion(ruta, titulo):
+    """Líneas de la sección «## titulo» de un Markdown, hasta la siguiente sección."""
+    dentro, salida = False, []
+    for linea in open(ruta, encoding="utf-8").read().splitlines():
+        if linea.startswith("## "):
+            dentro = linea[3:].strip() == titulo
+            continue
+        if dentro and linea.strip():
+            salida.append(linea)
+    return salida
+
+
+def md_linea(linea):
+    """Un párrafo o una viñeta de Markdown con negrita y código; quita la cursiva y los enlaces."""
+    linea = re.sub(r"(?<!\*)\*([^*\n]+)\*(?!\*)", r"\1", linea)
+    linea = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", linea)
+    if linea.startswith("- "):
+        vineta(linea[2:])
+    elif not linea.startswith(("|", ">")):
+        rico(linea)
 
 
 def salto():
@@ -227,7 +278,7 @@ for _ in range(3):
 par("Universidad de Sevilla · Gestión de Sistemas de Información (GSI)", color=RGBColor(0x55, 0x55, 0x55), alin=WD_ALIGN_PARAGRAPH.CENTER, tam=12)
 par("Portal web del CADUS", negrita=True, color=AZUL, tam=30, alin=WD_ALIGN_PARAGRAPH.CENTER, despues=2)
 par("Sistema 1 · CMS en WordPress", color=AZUL, tam=16, alin=WD_ALIGN_PARAGRAPH.CENTER)
-par("Entrega 1 · Versión 1 · 18 de octubre de 2026", negrita=True, tam=13, alin=WD_ALIGN_PARAGRAPH.CENTER, despues=24)
+par("Entrega 2 · Versión final · 25 de octubre de 2026", negrita=True, tam=13, alin=WD_ALIGN_PARAGRAPH.CENTER, despues=24)
 tabla(["Integrante", "Rol SCRUM / Área"], [[s["name"], s["role"]] for s in datos["stakeholders"][1:]], [7.0, 10.0], tam=10, titulo="Equipo del proyecto")
 par("Cliente: CADUS – Consejo de Alumnos de la Universidad de Sevilla · Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla · cadus@us.es", cursiva=True, tam=9.5, alin=WD_ALIGN_PARAGRAPH.CENTER)
 salto()
@@ -238,19 +289,18 @@ salto()
 
 # ------------------------------------------------------------------ resumen
 doc.add_heading("Resumen del estado de la entrega", 1)
-par("Esta entrega recoge los apartados pedidos para la primera entrega del CMS (versión 1, 18 de octubre). Quedan fuera, por pertenecer a la entrega 2 (25 de octubre), la comparativa de temas, el portal final y el burndown final del segundo sprint. El detalle de cada apartado está en la sección indicada.")
+par("Esta es la segunda entrega del CMS (versión final, 25 de octubre): incorpora el Sprint 2 completo y mantiene lo ya entregado el 18 de octubre. El portal está en funcionamiento sobre WordPress 7.1 con todas las historias de usuario del alcance (HU-01 a HU-13, HU-18 y HU-19). Lo que falta, y por qué, está en la sección 8.")
 n = lambda k: len(datos[k])
 tabla(["Apartado solicitado", "Estado", "Sección"], [
-    ["Propuesta de temática y empresa (versión definitiva)", "Completo", "1"],
-    ["Comparativas: hosting WordPress, comunicación, gestión SCRUM, control de versiones", "Completo", "2.2"],
-    ["Product backlog, sprint backlog y burndown chart", "Completo: sprint cerrado con 70 de 70 SP", "2.3 – 2.5"],
-    [f"Requisitos (REM): {n('objectives')} objetivos, {n('information')} de información, {n('ui')} de interfaz, {n('functional')} funcionales, {n('nonfunctional')} no funcionales, {len(datos['rules'])} reglas de negocio", "Completo (fichero CADUS.rem)", "3"],
-    ["Análisis: UML de la estructura web y mockups", "Completo", "4"],
-    ["Diseño: UML de plugins, tabla comparativa de plugins (con los obligatorios) y mockups", "Completo", "4.3 · 5"],
-    ["Implementación: capturas de WordPress", "Completa para el alcance del Sprint 1: portal con tema, roles, noticias, actas, directorio y buzón", "6"],
+    ["Planificación: herramientas, product backlog, sprint backlog y burndown del Sprint 2", "Completo: Sprint 2 cerrado con 29 de 29 SP; seguimiento en GitHub Project", "2"],
+    [f"REM revisado (versión 2.0): {n('objectives')} objetivos, {n('information')} de información, {n('ui')} de interfaz, {n('functional')} funcionales, {n('nonfunctional')} no funcionales, {len(datos['rules'])} reglas y {n('usecases')} casos de uso", "REM 2.0 generado y documentado (PDF del documento que genera REMUS: CADUS-REM-v2.pdf). Falta la entrevista con el CADUS para validarlo: sigue pendiente", "3"],
+    ["Análisis: estructura web, diagrama de clases, mockups y capturas de menús y de la página principal", "Completo con 7 mockups de baja fidelidad; los mockups finales en Figma están pendientes", "4"],
+    ["Diseño: comparativa de al menos tres plugins por tipo (con los obligatorios) y de al menos tres temas", "Completo: 11 comparativas de plugins por tipo y 5 temas", "5"],
+    ["Implementación: capturas explicadas una a una", "Completa para el alcance salvo la papeleta de las votaciones (RF-12 parcial: se publican las convocatorias, no se puede votar); el contenido sigue siendo de ejemplo", "6"],
     ["Trazabilidad entre REM, análisis, diseño e implementación", "Completo", "7"],
+    ["Calidad, incidencias y pendientes", "Revisión cruzada Claude–Codex, incidencias y decisiones abiertas", "8"],
 ], [9.5, 5.5, 2.0], titulo="Estado de cada apartado de la entrega")
-par("Nota sobre el sprint: se han completado los 70 SP comprometidos, pero el trabajo de contenido se concentró en el último día (ver el burndown y la retrospectiva de la sección 2.5). Los contenidos del portal son de ejemplo y deben sustituirse por los reales validados con el cliente.", cursiva=True)
+par("Nota sobre el sprint: se completaron los 29 SP comprometidos, pero el trabajo se concentró otra vez en los dos últimos días (23 de los 29 puntos, el 79 %, se cerraron el 23 y el 24 de octubre) y el burndown no se actualizó cada día como se había acordado. La retrospectiva (sección 2.7) recoge las acciones para el Sprint 3.", cursiva=True)
 
 # ------------------------------------------------------------------ 1. propuesta
 doc.add_heading("1. Propuesta de temática y empresa (versión definitiva)", 1)
@@ -327,9 +377,8 @@ hu = [[c[0], c[1], c[2], c[4], c[6]] for c in tb[1][1:]]
 tabla(["ID", "Historia de usuario", "Requisitos", "SP", "Sprint"], hu, [1.5, 9.1, 3.0, 1.0, 2.4], tam=8, titulo="Product backlog: historias de usuario")
 par(f"Total del product backlog: {sum(int(c[4]) for c in tb[0][1:]) + sum(int(c[4]) for c in tb[1][1:])} puntos de historia.", cursiva=True)
 
-doc.add_heading("2.4 Sprint backlog (Sprint 1: 28/09 – 18/10/2026)", 2)
+doc.add_heading("2.4 Sprint backlog del Sprint 1 (28/09 – 18/10/2026)", 2)
 rico("**Objetivo del Sprint 1:** desplegar la plataforma base en WordPress, definir la identidad visual corporativa del CADUS y maquetar las secciones principales de información, delegaciones y buzón de consultas. **Alcance comprometido: 70 SP.**")
-hechas = {"PB-002", "PB-005", "PB-006", "PB-007", "PB-008"}
 ts = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-01.md"))
 miembros = [s["name"] + " — " + s["role"] for s in datos["stakeholders"][1:]]
 filas_sp = []
@@ -341,15 +390,62 @@ for i, t in enumerate(ts[:5]):
 tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas_sp, [3.2, 1.5, 8.2, 1.0, 3.1], tam=8, titulo="Sprint backlog del Sprint 1")
 hecho_sp = sum(int(f[3]) for f in filas_sp if f[4] == "Hecho")
 tot_sp = sum(int(f[3]) for f in filas_sp)
-par(f"Resultado: {hecho_sp} de {tot_sp} SP completados ({hecho_sp / tot_sp:.0%}). Las historias HU-09 a HU-12 y HU-19 (tickets avanzados, calendario, votaciones, mediación y panel de administración) corresponden al Sprint 2.", cursiva=True)
+par(f"Resultado: {hecho_sp} de {tot_sp} SP completados ({hecho_sp / tot_sp:.0%}).", cursiva=True)
 
-doc.add_heading("2.5 Burndown chart del sprint", 2)
-figura("burndown-sprint1.png", "Burndown chart del Sprint 1 (alcance 70 SP). Ideal frente a real.", 14.5)
-rico("**Lectura.** El sprint arrancó con 70 SP pendientes. PB-002 (entorno WordPress) se completó el 28/09 y PB-005 (servidor compartido con Tailscale) el 05/10. El 18/10 se cerraron PB-006, PB-007 y PB-008 y se implementaron y probaron las diez historias de contenido (HU-01 a HU-08, HU-13 y HU-18), quedando 0 SP pendientes. **Lección aprendida:** la curva real queda por encima de la ideal durante casi todo el sprint y cae de golpe al final; el trabajo de contenido se aplazó en lugar de repartirse. En el Sprint 2 las historias se repartirán a lo largo de las dos semanas y el burndown se actualizará cada día. Los datos están en `docs/scrum/burndown/sprint-01.csv`.")
+doc.add_heading("2.5 Sprint backlog del Sprint 2 (19/10 – 25/10/2026)", 2)
+rico("**Objetivo del Sprint 2:** completar el portal con las historias de participación (tickets avanzados, calendario, votaciones, mediación y panel de administración), sustituir el contenido de ejemplo por contenido real validado con el cliente y entregar la documentación final. **Alcance comprometido: 29 SP**, más las tareas de documentación `E2-xx`, que no llevan puntos. Contacto con el cliente: Miguel Ángel Camacho, que forma parte del CADUS.")
+t2 = parsear_tablas(os.path.join(RAIZ, "docs", "scrum", "sprints", "sprint-02.md"))
+personas = ["Pablo", "Joaquín", "Miguel Ángel", "Álvaro", "Marcos"]
+estado2 = {"E2-01": "En curso", "E2-02": "Pendiente", "E2-03": "Hecho", "E2-04": "Pendiente", "E2-05": "Hecho", "E2-06": "Hecho", "E2-07": "Hecho",
+           "E2-08": "Pendiente", "E2-09": "Pendiente", "E2-10": "Parcial", "E2-11": "Pendiente", "E2-12": "Parcial", "E2-13": "Hecho",
+           "E2-14": "Hecho", "E2-15": "Hecho", "E2-16": "Hecho", "HU-19c": "Hecho (PR #32)"}
+extra = [["Pablo", "E2-17", "Exportar el REM a PDF desde REMUS (la vista previa de REMUS sale en blanco; PDF obtenido del HTML que genera REMUS)", "—", "En curso"],
+         ["Pablo", "E2-18", "Fusionar las pull requests #32 y #33 de Álvaro (pruebas por rol y su documentación)", "—", "Pendiente"],
+         ["Miguel Ángel", "E2-19", "Crear 2 o 3 eventos reales en el calendario para la demostración", "—", "Pendiente"],
+         ["Pablo", "E2-20", "Revisión cruzada final con Codex y corrección de los hallazgos", "—", "Hecho"]]
+filas2 = []
+for quien, t in zip(personas, [x for x in t2 if x[0][:2] == ["ID", "Tarea concreta"]]):
+    for c in t[1:]:
+        corto = re.sub(r"\s+", " ", c[1])
+        corto = corto if len(corto) < 150 else corto[:147].rsplit(" ", 1)[0] + "…"
+        filas2.append([quien, c[0], corto.replace("`", "").replace("**", ""), c[2], estado2.get(c[0], "Hecho")])
+filas2 += extra  # tareas E2-17 a E2-20, añadidas durante el sprint
+tabla(["Responsable", "ID", "Tarea", "SP", "Estado"], filas2, [2.4, 1.4, 9.2, 0.9, 3.1], tam=8, titulo="Sprint backlog del Sprint 2")
+sp2 = sum(int(f[3]) for f in filas2 if f[3].isdigit())
+par(f"Resultado: {sp2} de {sp2} SP completados (100 %). De las 20 tareas `E2-xx` de documentación y entrega, nueve están hechas (E2-05 con la salvedad de que el burndown no se actualizó a diario), dos parciales, dos en curso y siete pendientes por depender de datos del cliente o del cierre de la entrega (sección 8). El reparto final de puntos fue de 5 a 7 SP por persona.".replace("`", ""), cursiva=True)
+
+doc.add_heading("2.6 Burndown charts", 2)
+figura("burndown-sprint1.png", "Burndown chart del Sprint 1 (alcance 70 SP). Ideal frente a real.", 13.5)
+rico("**Sprint 1.** PB-002 se completó el 28/09 y PB-005 el 05/10; el 18/10 se cerraron PB-006, PB-007, PB-008 y las diez historias de contenido, quedando 0 SP. La curva real queda por encima de la ideal casi todo el sprint y cae de golpe al final. Datos en `docs/scrum/burndown/sprint-01.csv`.")
+figura("burndown-sprint2.png", "Burndown chart del Sprint 2 (alcance 29 SP). Ideal frente a real.", 13.5)
+rico("**Sprint 2.** El 19/10 se cerraron HU-19a y HU-09b (6 SP); el 23/10 HU-19b, HU-10 y HU-12 (11 SP) y el 24/10 HU-09a, HU-11 y HU-19c (12 SP), quedando 0 SP pendientes. **Lección:** la lección del Sprint 1 se repitió: 23 de los 29 puntos (el 79 %) se cerraron en los dos últimos días. Además, el burndown no se actualizó cada día como se había acordado: se reconstruyó al final con las fechas reales de los commits y de las pull requests. Datos en `docs/scrum/burndown/sprint-02.csv`; la gráfica y los datos se regeneran con `scripts/entrega/diagramas.py`.")
+
+doc.add_heading("2.7 Sprint Review y retrospectiva del Sprint 2", 2)
+rico("**Sprint Review (24/10/2026).** Se revisó el incremento sobre el servidor compartido: la portada (40 aniversario, accesos, noticias con filtros, eventos, «Nuestro trabajo», galería, buscador y pasos del buzón), la participación (calendario, convocatorias de votación y mediación), la atención al estudiante (buzón con código de seguimiento, panel de tickets con filtros, preguntas frecuentes y aviso de privacidad) y la administración (menús por rol, panel de inicio y cuentas institucionales). Queda por validar con el cliente, a través de Miguel Ángel, los textos reales, los objetivos de «Nuestro trabajo» (proceden de la web oficial y son de 2024) y la lista de cuentas de las delegaciones.")
+tabla(["Historia", "SP", "Quién", "Cierre", "Qué se entregó"], [
+    ["HU-19a · HU-09b", "6", "Pablo", "19/10", "Menús de administración por rol y privacidad de los tickets (RN-03)"],
+    ["HU-19b", "3", "Miguel Ángel", "23/10", "Panel de inicio con accesos según el rol"],
+    ["HU-10", "3", "Miguel Ángel", "23/10", "Calendario de asambleas y eventos (The Events Calendar)"],
+    ["HU-12", "5", "Álvaro", "23/10", "Solicitud de mediación privada con la protección RN-03"],
+    ["HU-09a", "5", "Marcos", "24/10", "Filtros de tickets, aviso al estudiante sin contenido, FAQ y aviso de privacidad"],
+    ["HU-11", "5", "Joaquín", "24/10", "Convocatorias de votación vinculadas a una asamblea (RN-05)"],
+    ["HU-19c", "2", "Álvaro", "24/10", "Plan y ejecución de pruebas por rol (PR #32 pendiente de fusionar)"],
+], [2.6, 0.9, 2.6, 1.5, 9.4], tam=8, titulo="Resultado del Sprint 2 por historia")
+rico("**Qué ha ido bien.** La arquitectura por módulos del plugin permitió trabajar en paralelo (calendario, mediación, votaciones y buzón se integraron sin tocarse entre sí). La revisión cruzada entre Claude y Codex encontró fallos reales antes de entregar y la batería de pruebas de privacidad se amplió con cada módulo. El GitHub Project fue la fuente única del backlog.")
+rico("**Qué ha ido mal.** Se repitió la concentración del trabajo al final y el burndown no se actualizó a diario. Una rama (la de mediación) se hizo sobre una copia antigua del plugin y habría eliminado la portada, los menús por rol y el diseño al fusionarse: se evitó integrando solo su módulo. Varios entregables (mockups en Figma, entrevista con el cliente y contenido real) no estaban listos al cerrar el sprint.")
+par("Acciones para el Sprint 3:")
+for t in ("Actualizar el tablero y el burndown cada día (cinco minutos en la daily) y no cerrar historias «de golpe».",
+          "Trabajar siempre desde `git pull` de `main` y abrir una pull request pequeña por historia; no copiar carpetas de otra rama.",
+          "Pedir al cliente los contenidos reales al inicio del sprint, no al final.",
+          "Mantener la batería de pruebas de privacidad como requisito de cierre de cualquier historia que toque datos de estudiantes."):
+    vineta(t)
+
+doc.add_heading("2.8 Seguimiento en GitHub Project", 2)
+rico("El backlog se gestiona en el proyecto público **«CADUS · Scrum»** de GitHub (`github.com/users/pablitoruiizz/projects/1`), vinculado al repositorio. Tiene dos vistas guardadas: **Product backlog** (tabla agrupada por sprint) y **Sprint backlog** (tablero del sprint actual). Cada ítem lleva los campos SP, Requisitos (códigos del REM), Prioridad, Responsable, Sprint (iteración) y Cierre (fecha real, de la que sale el burndown). Contiene las historias y tareas técnicas, las 20 tareas de documentación del Sprint 2 y las historias del Sprint 3 ya asignadas a su iteración. Los cinco integrantes tienen acceso de escritura.")
 
 # ------------------------------------------------------------------ 3. REM
 doc.add_heading("3. Requisitos (REM)", 1)
-par("Los requisitos se han elicitado a partir del encargo del cliente y se han registrado en REMUS (fichero CADUS.rem, versión 1.0) con la estructura de cinco dimensiones: información, interfaz, funcionales, no funcionales y reglas de negocio. Cada requisito lleva su código de trazabilidad, que se repite en el análisis, el diseño y las capturas. La importancia indicada es la asignada en REMUS.")
+par("Los requisitos se han recogido en REMUS (fichero CADUS.rem, versión 2.0 del 24/10/2026) con la estructura de cinco dimensiones: información, interfaz, funcionales, no funcionales y reglas de negocio. Cada requisito lleva su código de trazabilidad, que se repite en el análisis, el diseño y las capturas. La versión 2.0 recoge las decisiones del Sprint 2: tickets con el módulo propio del buzón, mediación con referencia MED-AAAA-NNNNN, votaciones vinculadas a una asamblea, cuentas institucionales (una del CADUS y una por delegación), privacidad ampliada a las mediaciones, requisitos de interfaz del calendario, la mediación y el panel por rol, y dos casos de uso nuevos. El documento generado por REMUS se entrega aparte (CADUS-REM-v2.pdf) junto al fichero CADUS.rem; las tablas siguientes son un resumen de su contenido. Una diferencia conocida: el código de ticket (CAD-AAAA-NNNNN) y la referencia de mediación (MED-AAAA-NNNNN) llevan en el portal un sufijo aleatorio de 32 caracteres hexadecimales que el REM aún no recoge; se incorporará al validarlo con el cliente. La entrevista con el CADUS prevista para confirmar los requisitos no se ha realizado: el REM queda marcado como pendiente de validar con el cliente, que incluye el plazo de conservación de los datos, la lista de cuentas reales y el logotipo oficial. La importancia indicada es la asignada en REMUS.")
 imp = {2: "Vital", 3: "Importante", 4: "Quedaría bien"}
 doc.add_heading("3.1 Requisitos de información", 2)
 tabla(["Código", "Nombre", "Se almacenará información correspondiente a…", "Datos específicos"],
@@ -385,16 +481,26 @@ doc.add_heading("4.2 Diagrama de clases", 2)
 par("El modelo de información se deriva de los requisitos de información IR-03 a IR-09. Las entidades en azul tienen requisito propio; las verdes se han deducido de los requisitos funcionales.")
 figura("uml-analisis-clases.png", "Diagrama de clases del análisis con las etiquetas de trazabilidad de cada entidad.", 17)
 doc.add_heading("4.3 Mockups", 2)
-par("Se muestran los cuatro prototipos esenciales y visuales de la web (portada, directorio de delegaciones, buzón de consultas y ficha de acta). Son bocetos de baja fidelidad; la identidad visual definitiva (HU-18) queda para el Sprint 2.")
+par("Se muestran siete prototipos de baja fidelidad: los cuatro del Sprint 1 (portada, directorio de delegaciones, buzón de consultas y ficha de acta) y tres nuevos del Sprint 2 (calendario con votaciones, solicitud de mediación y panel de administración por rol). Cada uno indica los requisitos que cubre. Los mockups finales en Figma (tarea E2-10) siguen pendientes; la maqueta definitiva de cada pantalla es el portal implementado, que se muestra en la sección 6.")
 figura("mockup-01-portada.png", "Mockup de la portada. UI-01 · UI-02 · IR-01.", 13.5)
+par("Portada: banner institucional con el lema, comunicados recientes por categoría, accesos destacados al directorio de delegaciones y al buzón, y una franja con las próximas asambleas, eventos y votaciones. El pie lleva los datos de contacto. Navegación: menú principal de siete entradas.")
 figura("mockup-02-directorio.png", "Mockup del directorio de delegaciones y su ficha. UI-03 · RF-06 · RF-07.", 13.5)
+par("Directorio: filtro por facultad o escuela y delegaciones agrupadas por centro. Al pulsar una delegación se abre su ficha con delegado, correo, teléfono, horario de atención y enlaces; solo el delegado de esa delegación puede editarla (RN-04).")
 figura("mockup-03-buzon.png", "Mockup del buzón de consultas y del seguimiento de ticket. UI-04 · RF-08 · RF-09 · RN-02 · RN-03.", 13.5)
+par("Buzón: formulario con correo @alum.us.es, asunto, tipo y descripción; a la derecha, la consulta del estado con el código de seguimiento (abierto, en proceso o cerrado) y el recuadro de privacidad (RN-03). Estados: envío correcto con código, error de dominio de correo (RN-02) y consulta sin coincidencia.")
 figura("mockup-04-acta.png", "Mockup de la ficha de acta o normativa. UI-05 · RF-03 · RF-04 · RF-05 · RN-01.", 13.5)
+par("Ficha de documento: vista previa del PDF, datos (tipo, fecha, pleno, estado y categoría) y botón de descarga. El recuadro recuerda el flujo de aprobación borrador → pendiente → aprobada (RN-01).")
+figura("mockup-05-calendario.png", "Mockup del calendario de asambleas y eventos y de la convocatoria de votación. UI-06 · RF-11 · RF-12 · RN-05.", 13.5)
+par("Calendario: buscador, vistas de lista, mes y día, y los próximos eventos con su fecha. A la derecha, la convocatoria de votación vinculada a una asamblea con su apertura y cierre; solo se puede votar con la votación abierta. Estados: sin eventos programados y votación próxima, abierta o cerrada.")
+figura("mockup-06-mediacion.png", "Mockup de la solicitud de mediación y su confirmación. UI-07 · RF-13 · RN-02 · RN-03.", 13.5)
+par("Mediación: formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Tras enviarlo se muestra solo la referencia, sin repetir los datos; el recuadro explica que la solicitud es privada (RN-03).")
+figura("mockup-07-panel.png", "Mockup del escritorio de administración y de los menús según el rol. UI-08 · RF-14 · RF-15.", 13.5)
+par("Escritorio: menú lateral con las secciones del CADUS, tarjetas con lo pendiente (tickets, mediaciones, actas y delegaciones) y un recuadro que resume qué menús ve cada rol: la Ejecutiva todos, el delegado solo su ficha y el estudiante ninguno.")
 
 # ------------------------------------------------------------------ 5. diseño
 doc.add_heading("5. Diseño", 1)
 doc.add_heading("5.1 Arquitectura de plugins", 2)
-par("La figura muestra qué plugin da respuesta a cada requisito. En verde, los ya instalados; en naranja, los previstos para el Sprint 2.")
+par("La figura muestra qué plugin da respuesta a cada requisito. En verde, los instalados y activos; en naranja, los previstos en el Sprint 1 que finalmente no se instalaron (SupportCandy y YOP Poll), con el motivo en la comparativa.")
 figura("uml-diseno-plugins.png", "Diagrama de diseño: plugins de WordPress y requisitos a los que responden.", 16.5)
 
 doc.add_heading("5.2 Comparativa y elección de plugins", 2)
@@ -415,148 +521,225 @@ comparar("Tipos de contenido y campos personalizados", ["advanced-custom-fields"
          "ACF aporta los campos de las actas (fecha, pleno y archivo PDF) y de las delegaciones (contacto y horario), con más de 2 M de instalaciones; los campos se definen por código en el plugin propio para que viajen con el repositorio. Los tipos de contenido se registran con la función nativa de WordPress desde ese mismo plugin, de modo que no hace falta Custom Post Type UI, que solo registra tipos y taxonomías. Pods ofrece lo mismo que ACF con una comunidad menor. Cubre RF-03, RF-04, RF-06 y RF-07.")
 comparar("Roles y permisos", ["members", "user-role-editor", "wpfront-user-role-editor"], "members",
          "Members tiene la mejor valoración (4,9/5) y permite crear los roles Ejecutiva, Delegado y Estudiante con capacidades a medida, y restringir contenido por rol. Los roles Ejecutiva, Delegado y Estudiante los crea el plugin propio y se gestionan con Members. Son la base de RF-14 y del flujo de aprobación RF-05 / RN-01, que usa el estado nativo «Pendiente de revisión». User Role Editor tiene más instalaciones pero menos funciones de control de contenido.")
-comparar("Calendario de eventos (Sprint 2)", ["the-events-calendar", "my-calendar", "sugar-calendar-lite", "event-organiser"], "the-events-calendar",
-         "The Events Calendar es el más instalado (600 k) y tiene vistas de calendario, lista y mes listas para usar; responde a RF-11 y RF-12. My Calendar y Event Organiser son alternativas válidas con menos uso.")
-comparar("Gestión de tickets (Sprint 2)", ["supportcandy", "awesome-support", "fluent-support"], "",
+comparar("Calendario de eventos", ["the-events-calendar", "my-calendar", "sugar-calendar-lite", "event-organiser"], "the-events-calendar",
+         "The Events Calendar es el más instalado (600 k) y tiene vistas de calendario, lista y mes listas para usar; responde a RF-11 y RF-12. Se instaló y configuró en el Sprint 2 (versión 6.18.2), con permisos propios para la Ejecutiva. My Calendar y Event Organiser son alternativas válidas con menos uso.")
+comparar("Gestión de tickets", ["supportcandy", "awesome-support", "fluent-support"], "",
          "En la Entrega 1 se seleccionó SupportCandy por su valoración (4,9/5) y su panel por rol. En el Sprint 2 (HU-09) se decidió no instalar ninguno y ampliar el módulo propio del buzón: SupportCandy guarda los tickets en sus propias tablas, así que habría que rehacer la integración con Fluent Forms, el código de seguimiento CAD-AAAA-NNNNN (RF-09) y la página de seguimiento (HU-08), o mantener dos sistemas a la vez. El módulo propio ya cumplía la privacidad de RN-03 (tickets privados, sin API REST ni búsqueda) y solo le faltaban los filtros y el aviso al estudiante, que se han añadido en HU-09a. Así se reduce el riesgo antes de la congelación y no se añade un plugin más que mantener. Awesome Support (3,5/5) y Fluent Support tienen el mismo problema de integración.")
-comparar("Votaciones (Sprint 2)", ["yop-poll", "wp-polls", "poll-maker"], "yop-poll",
-         "YOP Poll admite votaciones programadas, control de votos únicos y resultados, necesarios para RF-12 y RN-05; tiene actualización reciente y 4,4/5.")
+comparar("Votaciones", ["yop-poll", "wp-polls", "poll-maker"], "yop-poll",
+         "YOP Poll admite votaciones programadas, control de votos únicos y resultados, necesarios para RF-12 y RN-05; tiene actualización reciente y 4,4/5. En el Sprint 2 no se ha instalado: las convocatorias se publican con apertura y cierre desde el plugin propio y la papeleta con YOP Poll queda como mejora, a confirmar con el cliente.")
 comparar("Gestión de documentos descargables", ["download-monitor", "document-library-lite", "wp-document-revisions"], "",
          "Por ahora no se instala ninguno: un campo de archivo de ACF sobre un tipo «Acta» cubre RF-03 y RF-04 sin plugin adicional. Download Monitor (80 k, 4,5/5) se incorporará solo si se necesitan estadísticas de descarga.")
 
 doc.add_heading("5.3 Tema de WordPress", 2)
-rico("**Tema elegido: Blocksy**, instalado y activo (versión 2.1.60). Se eligió por su valoración (5/5 en más de 800 valoraciones), su actualización reciente (15/10/2026), la etiqueta «Accessibility ready» (RNF-03), un generador de cabeceras gratuito y una paleta de colores editable, que permitió aplicar la identidad del CADUS (UI-01) sin escribir CSS. Se configuró con una paleta azul marino y dorado y un logotipo provisional.")
-par("La comparativa razonada de al menos tres temas corresponde a la documentación de la versión final y se entregará en la entrega 2 (25/10); los datos de partida están recogidos en docs/entrega/datos/themes.json. El logotipo y los colores son provisionales hasta que el cliente facilite su identidad visual.")
+CT = os.path.join(ENTREGA, "comparativa-temas.md")
+for linea in leer_seccion(CT, "Criterios"):
+    md_linea(linea)
+tt = parsear_tablas(CT)[0]
+tabla(["Tema", "Versión", "Última actualización", "Instalaciones activas", "Valoración", "Nº valoraciones", "«Accessibility ready»", "PHP mínimo", "Decisión"],
+      [[c.replace("*", "") for c in fila] for fila in tt[1:]], [2.2, 1.5, 2.2, 2.0, 1.7, 1.9, 2.1, 1.7, 1.7], tam=8,
+      titulo="Comparativa de temas de WordPress", resaltar=lambda f: f[-1] == "Seleccionado")
+par("Se descartó Twenty Twenty-Five (tema por defecto de WordPress) como candidato: solo tiene 14 valoraciones (4,0/5), una base de uso demasiado pequeña para compararlo con el resto. Los datos proceden de la API pública de wordpress.org consultada el 18/10/2026.")
+for titulo in ("Justificación", "Coste de cambiar de tema", "Limitaciones asumidas"):
+    doc.add_heading(titulo, 3)
+    for linea in leer_seccion(CT, titulo):
+        md_linea(linea)
 
 # ------------------------------------------------------------------ 6. implementación
+CAP2 = os.path.join(IMG, "capturas2")
 doc.add_heading("6. Implementación", 1)
-par("Capturas del WordPress del equipo (servidor local WampServer, WordPress 7.1, tema Blocksy) con todo lo implementado en el Sprint 1. Cada captura indica los requisitos y las historias a las que corresponde. Los textos de noticias, actas y delegaciones son de ejemplo; se sustituirán por contenido real.")
-imp_items = [
-    ("09-portada-final.jpg", "Portada del portal con tema Blocksy, logotipo y banner. UI-01 · UI-02 · IR-01 · HU-18.",
-     "La portada muestra el banner institucional con accesos al directorio y al buzón, y debajo los comunicados recientes. El tema Blocksy se configuró con la paleta del CADUS (azul marino y dorado) y un logotipo provisional."),
-    ("10-noticias.jpg", "Listado de noticias con filtro por palabra clave, categoría y año. RF-01 · RF-02 · IR-03 · HU-01 · HU-02.",
-     "Los comunicados se clasifican en las categorías Becas, Movilidad, Normativa y Eventos. El formulario filtra por palabra clave, categoría y año, y el listado se pagina."),
-    ("11-actas-y-normativa.jpg", "Repositorio de actas y normativas con filtro por tipo y descarga en PDF. RF-03 · RF-04 · UI-05 · HU-04.",
-     "La tabla se ordena por fecha y filtra por tipo (acta o normativa). Cada documento tiene su ficha con los datos y un botón de descarga del PDF. Solo se listan los documentos publicados."),
-    ("16-admin-actas.jpg", "Panel de administración de actas: dos publicadas y una «Pendiente». RF-05 · RN-01 · HU-03.",
-     "El acta «pendiente de aprobación» solo es visible aquí y no aparece en la web pública. Solo la Ejecutiva y el administrador tienen la capacidad de publicarla; un delegado solo puede dejarla pendiente."),
-    ("12-delegaciones.jpg", "Directorio de delegaciones agrupado por facultad o escuela. RF-06 · UI-03 · HU-05.",
-     "Cada centro lista sus delegaciones, con enlace a su ficha (delegado, correo, teléfono, horario y enlaces). Hay una delegación de ejemplo por cada uno de los seis centros cargados; los datos de contacto están por completar por cada delegado (HU-06)."),
-    ("13-buzon-codigo-ticket.jpg", "Buzón de consultas: confirmación con el código de seguimiento. RF-08 · RF-09 · RN-02 · UI-04 · HU-07.",
-     "Al enviar el formulario con un correo @alum.us.es se crea un ticket privado y se muestra el código CAD-AAAA-NNNNN. Con un correo de otro dominio el envío se rechaza con un mensaje de error (RN-02)."),
-    ("14-seguimiento-ticket.jpg", "Seguimiento de ticket con código y correo. RF-09 · RN-03 · HU-08.",
-     "La consulta exige código y correo a la vez. Muestra tipo, asunto, estado y respuestas. Si los datos no coinciden devuelve un mensaje genérico, sin revelar si el código existe (RN-03)."),
-    ("15-admin-tickets.jpg", "Tickets del buzón en el panel de administración, visibles solo para la Ejecutiva. RF-10 · RN-03.",
-     "Los tickets son un tipo de contenido privado: no son públicos ni accesibles por la API REST. La Ejecutiva ve código, correo, tipo y estado, y puede cambiar el estado y añadir respuestas. En el Sprint 2 (HU-09a) se amplía este módulo con filtros por estado y tipo y aviso por correo al estudiante."),
-    ("19-fluent-forms-buzon.jpg", "Formulario «Buzón de consultas y reclamaciones» en Fluent Forms. RF-08 · RN-02 · RNF-04.",
-     "El formulario lo crea el plugin propio al activarse e incluye consentimiento RGPD obligatorio. La validación del dominio y de los campos se repite en el servidor."),
-    ("17-roles-members.jpg", "Listado de roles en Members con los roles del CADUS. RF-14 · RN-04 · HU-13.",
-     "Además de los roles estándar de WordPress existen Ejecutiva del CADUS, Delegado de centro y Estudiante US, con los permisos descritos en la sección de pruebas."),
-    ("18-tema-blocksy.jpg", "Pantalla de temas con Blocksy instalado y activo. UI-01 · RNF-02 · RNF-03 · HU-18.",
-     "Blocksy es el tema activo. El aviso del tema sobre su plugin complementario es opcional y no se ha instalado."),
-    ("01-plugins-instalados.jpg", "Listado de plugins activos. RF-15 · RNF-01 · RNF-04 · RNF-08.",
-     "Plugins obligatorios del curso (Wordfence, WP Fastest Cache, WP Statistics y Yoast SEO), plugins funcionales (Advanced Custom Fields, Fluent Forms y Members) y el plugin propio CADUS Portal."),
-    ("08-yoast-seo-editor.jpg", "Editor de bloques con el panel de Yoast SEO. RF-01 · RF-02 · UI-02 · OBJ-02.",
-     "Yoast SEO se integra en el editor de cada entrada y página para definir frase clave, título y descripción."),
-    ("02-wp-fastest-cache-ajustes.jpg", "Ajustes de WP Fastest Cache guardados. RNF-01 · RNF-06.",
-     "Caché de páginas con compresión Gzip, excluyendo a los usuarios conectados para que el equipo vea sus cambios al instante."),
-    ("06-wordfence.jpg", "Panel de Wordfence con la protección activada. RNF-04 · RNF-08.",
-     "Cortafuegos de aplicaciones en modo de aprendizaje y licencia gratuita registrada."),
-    ("03-wp-statistics.jpg", "Resumen de WP Statistics, analítica sin cookies de terceros. RNF-08 · RNF-01.",
-     "Registra visitas y páginas más vistas en la propia base de datos, conforme al RGPD."),
-]
+par("Capturas del portal final (servidor local WampServer, WordPress 7.1, tema Blocksy con el plugin propio CADUS Portal), explicadas una a una. Cada pie indica los requisitos y las historias a las que corresponde. Las páginas públicas se han capturado a página completa sin sesión iniciada; las pantallas de administración, con la cuenta de cada rol. Los textos de noticias, actas y delegaciones son de ejemplo y se sustituirán por contenido real validado con el cliente (sección 8).")
 nfig = {}
-for archivo, pie, texto in imp_items:
-    nfig[archivo] = figura(archivo, pie, 15.5, CAP)
+doc.add_heading("6.1 Portal público", 2)
+rico("**Página principal.** Es una sola página con diez bloques que alternan los colores corporativos del CADUS (granate, dorado y gris oscuro): cabecera con el logotipo y el menú principal, banner con el lema «La voz del alumnado» y tres contadores reales (actas y normativas, delegaciones y comunicados publicados), la presentación de los más de 40 años del CADUS, los accesos a las secciones (comunicados, actas, delegaciones, buzón, seguimiento y calendario), las últimas noticias con filtro por categoría, los próximos eventos del calendario, «Nuestro trabajo» (objetivos de la web oficial), la galería de fotos, el buscador, los tres pasos del buzón y el pie con los datos de contacto. Cubre UI-01, UI-02, IR-01, RF-01, RF-11 e HU-01, HU-02 y HU-18.")
+trozos = cortes("p01-portada.jpg", CAP2, 5)
+for i, caja in enumerate(trozos, 1):
+    n_fig = figura("p01-portada.jpg", f"Página principal, parte {i} de {len(trozos)}. UI-01 · UI-02 · IR-01 · HU-01 · HU-02 · HU-18.", 15, CAP2, caja=caja)
+    if i == 1:
+        nfig["p01-portada.jpg"] = n_fig
+    par(["Parte 1: cabecera con logotipo y menú principal, banner con el lema y los tres contadores, y presentación de los más de 40 años del CADUS.",
+         "Parte 2: accesos a las seis secciones del portal y últimas noticias con filtro por categoría (Todo, Becas, Eventos, Movilidad y Normativa).",
+         "Parte 3: últimos eventos del calendario (aún sin eventos cargados) y «Nuestro trabajo» con los objetivos de la web oficial.",
+         "Parte 4: galería de fotos, buscador de noticias, actas y delegaciones, y el inicio de «Cómo funciona el buzón».",
+         "Parte 5: pasos 2 y 3 del buzón, botón para enviar la consulta y pie con los datos de contacto."][i - 1])
+publicas = [
+    ("p02-que-es-el-cadus.jpg", "Página «Qué es el CADUS». IR-02 · RNF-07.",
+     "Presenta al CADUS y enlaza con su gobierno y estatutos. Lleva un aviso visible de que el texto es provisional hasta que la Delegación General lo valide. Es el segundo elemento del menú principal."),
+    ("p03-noticias.jpg", "Noticias y comunicados con filtro por palabra clave, categoría y año. RF-01 · RF-02 · IR-03 · HU-01 · HU-02.",
+     "Los comunicados se clasifican en Becas, Movilidad, Normativa y Eventos. El formulario filtra por palabra clave, categoría y año y el listado se pagina. Cada categoría tiene su color."),
+    ("p04-actas-y-normativa.jpg", "Repositorio de actas y normativas con filtro por tipo y descarga en PDF. RF-03 · RF-04 · UI-05 · HU-03 · HU-04.",
+     "La tabla se ordena por fecha y se filtra por tipo (acta o normativa). Solo se listan los documentos publicados: los que están pendientes de aprobación de la Ejecutiva no aparecen (RN-01). Cada fila tiene su botón de descarga del PDF."),
+    ("p05-delegaciones.jpg", "Directorio de delegaciones agrupado por facultad o escuela. RF-06 · RF-07 · UI-03 · HU-05 · HU-06.",
+     "Cada centro agrupa sus delegaciones y enlaza con su ficha (delegado, correo, teléfono, horario y enlaces). Hay una ficha de ejemplo por cada uno de los seis centros cargados; faltan las de Química, Física, Biología y la ETSI, que dependen de los datos del CADUS."),
+    ("p06-atencion-al-estudiante.jpg", "Atención al estudiante: acceso al buzón, al seguimiento, a la mediación y a las preguntas frecuentes. RF-08 · RF-13 · UI-04.",
+     "Reúne en una sola pantalla los cuatro servicios al estudiante con un botón claro en cada tarjeta."),
+    ("p07-buzon.jpg", "Buzón de consultas y reclamaciones. RF-08 · RF-09 · RN-02 · RNF-04 · RNF-08 · UI-04 · HU-07.",
+     "Formulario con correo universitario, asunto, tipo (consulta o reclamación académica), descripción y consentimiento RGPD obligatorio, con enlace al aviso de privacidad. El servidor comprueba que el correo termina en @alum.us.es (RN-02) y, al enviar, entrega un código de seguimiento con el formato CAD-AAAA-NNNNN seguido de un sufijo aleatorio de 32 caracteres hexadecimales, para que no se pueda adivinar. La reclamación se guarda como contenido privado."),
+    ("p08-seguimiento.jpg", "Seguimiento de ticket con código y correo. RF-09 · RN-03 · HU-08.",
+     "Exige el código y el correo a la vez. Muestra tipo, asunto, estado y respuestas, sin repetir el texto original. Si los datos no coinciden devuelve un mensaje genérico, sin revelar si el código existe, y limita los intentos. La página no se guarda en caché."),
+    ("p09-faq.jpg", "Preguntas frecuentes. RF-08 · RNF-07 · UI-04 · E2-16.",
+     "Respuestas desplegables a las dudas habituales: quién puede usar el buzón, diferencia entre consulta y reclamación, cómo saber el estado y qué hacer si se pierde el código."),
+    ("p10-privacidad.jpg", "Aviso de privacidad. RNF-08 · RN-03 · UI-04 · E2-16.",
+     "Explica el responsable del tratamiento, qué datos se tratan, para qué, la base legal, quién puede verlos, cuánto tiempo se guardan, la seguridad y cómo ejercer los derechos. El plazo de conservación está pendiente de validar con el CADUS."),
+    ("p13-calendario.jpg", "Calendario de asambleas y eventos. RF-11 · RF-12 · IR-07 · UI-06 · HU-10.",
+     "Calendario de The Events Calendar con vistas de lista, mes y día, buscador y suscripción. Está en el menú principal y alimenta los próximos eventos de la portada. En la captura no hay eventos porque aún no se han cargado los reales (tarea E2-19)."),
+    ("p11-votaciones.jpg", "Convocatorias de votación. RF-12 · RN-05 · IR-07 · UI-06 · HU-11.",
+     "Lista las convocatorias, cada una vinculada a una asamblea del calendario (RN-05) y con apertura y cierre. La papeleta, que solo se mostraría mientras la votación está abierta, depende de YOP Poll, que no está instalado (sección 5.2): hoy el portal publica las convocatorias, pero no permite emitir el voto, así que RF-12 está parcialmente implementado. No hay ninguna convocada, por eso aparece el mensaje vacío."),
+    ("p12-mediacion.jpg", "Solicitud de mediación estudiantil. RF-13 · RN-02 · RN-03 · RNF-08 · UI-07 · HU-12.",
+     "Formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Al enviarlo entrega la referencia (MED-AAAA-NNNNN más un sufijo aleatorio de 32 caracteres hexadecimales) sin repetir los datos. La solicitud es privada: solo la Ejecutiva la ve, no aparece en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido."),
+    ("p14-contacto.jpg", "Contacto. RNF-07 · UI-02.",
+     "Datos del CADUS: dirección en el Pabellón de Uruguay y correo. El mismo bloque de contacto cierra todas las páginas del portal."),
+]
+for archivo, pie, texto in publicas:
+    nfig[archivo] = figura(archivo, pie, 15.5, CAP2)
     par(texto)
 
+doc.add_heading("6.2 Administración y configuración", 2)
+admin = [
+    (CAP, "20-admin-tickets-filtros.jpg", "Panel de tickets con filtros por estado y tipo. RF-10 · RN-03 · HU-09a.",
+     "Solo la Ejecutiva y el administrador ven los tickets. El listado muestra el código de seguimiento en lugar del asunto y permite filtrar por estado y tipo. Los tickets no son públicos ni accesibles por la API REST ni por la búsqueda."),
+    (CAP, "21-ticket-aviso-correo.jpg", "Respuesta a un ticket y aviso al estudiante. RF-10 · RN-03 · HU-09a.",
+     "Al responder, la Ejecutiva cambia el estado y escribe la respuesta. El estudiante recibe un correo que solo incluye el código y el enlace de seguimiento, nunca el contenido de la respuesta."),
+    (CAP, "16-admin-actas.jpg", "Panel de actas con una «Pendiente» de aprobación. RF-05 · RN-01 · HU-03.",
+     "El acta pendiente solo se ve aquí y no en la web pública. Solo la Ejecutiva y el administrador gestionan y publican las actas; el delegado no tiene acceso a ellas (RN-01)."),
+    (CAP, "19-fluent-forms-buzon.jpg", "Formulario del buzón en Fluent Forms. RF-08 · RN-02 · RNF-04.",
+     "El formulario lo crea el plugin propio al activarse e incluye el consentimiento RGPD obligatorio; la validación del dominio y de los campos se repite en el servidor."),
+    (CAP, "18-tema-blocksy.jpg", "Pantalla de temas con Blocksy activo. UI-01 · RNF-03 · HU-18.",
+     "Blocksy es el tema activo; el aviso sobre su plugin complementario es opcional y no se ha instalado. La identidad visual (paleta, logotipo, menús) se aplica desde el plugin propio."),
+    (CAP, "08-yoast-seo-editor.jpg", "Editor de bloques con el panel de Yoast SEO. RF-01 · RF-02 · UI-02.",
+     "Yoast SEO se integra en el editor de cada entrada y página para definir frase clave, título y descripción."),
+    (CAP, "02-wp-fastest-cache-ajustes.jpg", "Ajustes de WP Fastest Cache. RNF-01 · RNF-06.",
+     "Caché de páginas con compresión Gzip; se excluyen los usuarios conectados para que el equipo vea sus cambios al instante y las páginas del buzón no se guardan en caché."),
+    (CAP, "06-wordfence.jpg", "Panel de Wordfence con la protección activada. RNF-04 · RNF-08.",
+     "Cortafuegos de aplicaciones y escáner de malware con la licencia gratuita registrada."),
+    (CAP, "03-wp-statistics.jpg", "Resumen de WP Statistics, analítica sin cookies de terceros. RNF-08 · RNF-01.",
+     "Registra visitas y páginas más vistas en la propia base de datos, conforme al RGPD."),
+]
+admin_nuevas = [
+    ("a01-plugins.jpg", "Plugins activos. RF-15 · RNF-01 · RNF-04 · RNF-08.",
+     "Plugins obligatorios (Wordfence, WP Fastest Cache, WP Statistics y Yoast SEO), funcionales (ACF, Fluent Forms, Members y The Events Calendar) y el plugin propio CADUS Portal."),
+    ("a02-roles.jpg", "Roles del portal en Members. RF-14 · RN-04 · HU-13.",
+     "Además de los roles de WordPress existen los del CADUS (miembro de la Ejecutiva, delegado de centro y estudiante), con los permisos descritos en la sección de pruebas."),
+    ("a03-escritorio-ejecutivo.jpg", "Escritorio de la Ejecutiva con accesos directos. RF-15 · UI-08 · HU-19b.",
+     "Panel de inicio con accesos a noticias, actas, delegaciones, tickets del buzón y calendario, con los avisos de lo pendiente (por ejemplo, un acta que espera aprobación)."),
+    ("a04-escritorio-delegado.jpg", "Escritorio y menú del delegado. RF-15 · RN-04 · UI-08 · HU-19a.",
+     "El delegado solo ve su ficha de delegación: se ocultan el resto de menús de administración y no tiene acceso a los tickets ni a las mediaciones. La cuenta de prueba de la captura no tenía ninguna delegación asignada, por eso el panel lo indica."),
+    ("a06-eventos.jpg", "Formulario de nuevo evento del calendario. RF-11 · HU-10.",
+     "La Ejecutiva crea asambleas y eventos con título, descripción, fecha y hora de inicio y fin, recinto y organizadores. El menú «Eventos» solo aparece a los roles con permiso, y lo creado se muestra en el calendario y en la portada."),
+    ("a07-votaciones.jpg", "Formulario de convocatoria de votación. RF-12 · RN-05 · HU-11.",
+     "Cada convocatoria exige elegir una asamblea del calendario (RN-05) y fijar la apertura y el cierre; sin ambos datos no se puede publicar y se guarda como borrador. El identificador de la encuesta de YOP Poll es opcional."),
+]
+for carpeta, archivo, pie, texto in admin:
+    nfig[archivo] = figura(archivo, pie, 15.5, carpeta)
+    par(texto)
+for archivo, pie, texto in admin_nuevas:
+    if os.path.exists(os.path.join(CAP2, archivo)):
+        nfig[archivo] = figura(archivo, pie, 15.5, CAP2)
+        par(texto)
+
 doc.add_heading("Estado de la implementación por historia de usuario", 2)
-F = lambda a: f"figura {nfig[a]}"
+F = lambda *a: ", ".join(f"figura {nfig[x]}" for x in a if x in nfig) or "—"
 tabla(["Historia", "Estado", "Evidencia"], [
-    ["PB-002 · PB-005 · PB-006", "Hecho", "Servidor Wamp, acceso por Tailscale y servidor de Discord operativos."],
-    ["PB-007", "Hecho", f"Siete plugins de terceros y el plugin propio activos ({F('01-plugins-instalados.jpg')})."],
-    ["PB-008", "Hecho", "CADUS.rem (REMUS) generado y revisado."],
-    ["HU-01 · HU-02", "Hecho", f"Portada con comunicados y listado filtrable ({F('09-portada-final.jpg')}, {F('10-noticias.jpg')})."],
-    ["HU-03 · HU-04", "Hecho", f"Flujo de aprobación y repositorio con descarga ({F('16-admin-actas.jpg')}, {F('11-actas-y-normativa.jpg')})."],
-    ["HU-05 · HU-06", "Hecho", f"Directorio y ficha de delegación ({F('12-delegaciones.jpg')}); edición restringida al delegado propietario."],
-    ["HU-07 · HU-08", "Hecho", f"Buzón, código de ticket y seguimiento ({F('13-buzon-codigo-ticket.jpg')}, {F('14-seguimiento-ticket.jpg')})."],
-    ["HU-13", "Hecho", f"Roles Ejecutiva, Delegado y Estudiante ({F('17-roles-members.jpg')})."],
-    ["HU-18", "Hecho", f"Tema Blocksy con paleta y logotipo provisional ({F('18-tema-blocksy.jpg')})."],
-], [4.0, 2.0, 11.0], titulo="Estado de la implementación")
+    ["PB-002 · PB-005 · PB-006 · PB-007 · PB-008", "Hecho", "Servidor Wamp con acceso por Tailscale, servidor de Discord, plugins y REM."],
+    ["HU-01 · HU-02", "Hecho", f"Portada y noticias con filtros ({F('p01-portada.jpg', 'p03-noticias.jpg')})."],
+    ["HU-03 · HU-04", "Hecho", f"Flujo de aprobación y repositorio con descarga ({F('16-admin-actas.jpg', 'p04-actas-y-normativa.jpg')})."],
+    ["HU-05 · HU-06", "Hecho", f"Directorio y ficha de delegación ({F('p05-delegaciones.jpg')}); edición restringida al delegado propietario."],
+    ["HU-07 · HU-08", "Hecho", f"Buzón, código de ticket y seguimiento ({F('p07-buzon.jpg', 'p08-seguimiento.jpg')})."],
+    ["HU-09 (9a y 9b)", "Hecho", f"Panel de tickets con filtros, aviso al estudiante y privacidad RN-03 ({F('20-admin-tickets-filtros.jpg', '21-ticket-aviso-correo.jpg')})."],
+    ["HU-10", "Hecho", f"Calendario de asambleas y eventos ({F('p13-calendario.jpg')})."],
+    ["HU-11", "Hecho (sin papeleta)", f"Convocatorias de votación vinculadas a una asamblea ({F('p11-votaciones.jpg')}); falta la papeleta para votar (YOP Poll no instalado)."],
+    ["HU-12", "Hecho", f"Solicitud de mediación privada ({F('p12-mediacion.jpg')})."],
+    ["HU-13", "Hecho", f"Roles de WordPress y del CADUS ({F('a02-roles.jpg')})."],
+    ["HU-18", "Hecho", f"Tema Blocksy con la identidad del CADUS ({F('p01-portada.jpg', '18-tema-blocksy.jpg')})."],
+    ["HU-19 (19a, 19b y 19c)", "Hecho", f"Menús por rol, escritorio con accesos y pruebas por rol ({F('a03-escritorio-ejecutivo.jpg', 'a04-escritorio-delegado.jpg')}); la documentación de las pruebas de HU-19c está en la PR #32."],
+    ["HU-14 a HU-17 · HU-20", "Pendiente", "Sprints 3 y 4 (móvil, accesibilidad WCAG, filtros del panel, protección frente a spam y rendimiento)."],
+], [4.4, 2.0, 10.6], titulo="Estado de la implementación")
 
 doc.add_heading("Pruebas realizadas", 2)
-par("Las pruebas se hicieron en el servidor compartido; los datos de prueba (un ticket con un correo ficticio) se eliminaron después.")
+par("Las pruebas se hicieron en el servidor compartido con datos ficticios (correos de prueba, cuentas temporales) que se eliminan al terminar; cada batería comprueba al final que no queda ningún dato de prueba.")
 tabla(["Prueba", "Resultado esperado", "Resultado"], [
     ["Enviar el buzón con un correo de gmail.com", "Rechazo con mensaje (RN-02)", "Correcto: «Utiliza un correo universitario válido terminado en @alum.us.es»"],
-    ["Enviar el buzón con un correo @alum.us.es", "Ticket creado y código mostrado (RF-09)", "Correcto: se mostró el código CAD-2026-00049"],
+    ["Enviar el buzón y la mediación con un correo @alum.us.es", "Código CAD-AAAA-NNNNN o referencia MED-AAAA-NNNNN, ambos con sufijo aleatorio (RF-09, RF-13)", "Correcto"],
     ["Seguimiento con código correcto y correo equivocado", "Sin datos del ticket (RN-03)", "Correcto: mensaje genérico, no revela si el código existe"],
-    ["Seguimiento con código y correo correctos, en mayúsculas y minúsculas", "Muestra tipo, asunto y estado", "Correcto"],
-    ["Permisos de cada rol sobre actas, delegaciones y tickets", "Solo Ejecutiva y administrador publican actas y ven tickets; el delegado edita solo lo suyo (RN-01, RN-03, RN-04)", "Correcto en los cuatro roles"],
-    ["Acta en estado pendiente en la web pública", "No aparece (RN-01)", "Correcto: solo se listan los publicados"],
-    ["Parámetro manipulado ?tipo[]=acta en el listado de actas", "Sin error del servidor", "Corregido tras la revisión de código (antes devolvía error 500)"],
-    ["Volver a ejecutar la configuración del plugin", "No duplica contenido", "Correcto: mismas entradas, páginas, actas, delegaciones y elementos de menú"],
-], [5.5, 5.5, 6.0], tam=8, titulo="Pruebas funcionales y de seguridad")
+    ["Batería de privacidad de tickets (privacidad_tickets.py)", "Ningún dato del ticket sale en URLs, búsqueda, feeds, mapas del sitio ni API REST para anónimos ni para ningún rol salvo Ejecutiva y administrador", "40 comprobaciones correctas, 0 fallos"],
+    ["Batería HTTP RN-03 por rol (rn03_http.py) y de mediaciones (rn03_mediacion.py)", "Ningún rol sin permiso ve tickets ni mediaciones, ni sus adjuntos por la API REST o AJAX; un error 500 no cuenta como correcto", "0 fallos y sin datos de prueba al terminar"],
+    ["Permisos de cada rol sobre actas, delegaciones, tickets y calendario", "Solo Ejecutiva y administrador publican y ven tickets; el delegado edita solo su ficha (RN-01, RN-03, RN-04)", "Correcto en todos los roles"],
+    ["Páginas públicas (interiores_http.py)", "Un único título h1 y un único pie por página", "34 páginas HTML inspeccionadas: todas con un único pie; 32 con un único h1. La portada y el calendario tienen un segundo h1 (el del tema y el de The Events Calendar); se corrige en HU-15 (accesibilidad)"],
+    ["Volver a ejecutar la configuración del plugin", "No duplica contenido ni quita permisos", "Correcto (los permisos del calendario se reponen solos si se pierden)"],
+], [5.5, 6.0, 5.5], tam=8, titulo="Pruebas funcionales y de seguridad")
 
 # ------------------------------------------------------------------ 7. trazabilidad
 doc.add_heading("7. Matriz de trazabilidad", 1)
-par("Cada requisito del REM aparece con el mismo código en el análisis (entidad o pantalla), en el diseño (plugin) y en la implementación (figura).")
+par("Cada requisito del REM aparece con el mismo código en el análisis (entidad o pantalla), en el diseño (plugin) y en la implementación (figura). Los números de figura se recalculan al regenerar el documento.")
 tabla(["Requisito (REM)", "Análisis (UML / mockup)", "Diseño (plugin)", "Implementación"], [
-    ["RF-01 Publicación de noticias", "Clases Noticia, Categoria · UI-02", "Plugin propio + Yoast SEO", f"{F('10-noticias.jpg')}, {F('08-yoast-seo-editor.jpg')}"],
-    ["RF-02 Búsqueda de noticias", "Clase Noticia · UI-02", "Plugin propio (filtro)", F("10-noticias.jpg")],
-    ["RF-03 Repositorio de actas", "Clase DocumentoInstitucional · UI-05", "Plugin propio + ACF", F("11-actas-y-normativa.jpg")],
-    ["RF-04 Repositorio de normativas", "Clase DocumentoInstitucional · UI-05", "Plugin propio + ACF", F("11-actas-y-normativa.jpg")],
+    ["RF-01 Publicación de noticias", "Clases Noticia, Categoria · UI-02", "Plugin propio + Yoast SEO", F("p03-noticias.jpg", "08-yoast-seo-editor.jpg")],
+    ["RF-02 Búsqueda de noticias", "Clase Noticia · UI-02", "Plugin propio (filtro)", F("p03-noticias.jpg")],
+    ["RF-03 Repositorio de actas", "Clase DocumentoInstitucional · UI-05", "Plugin propio + ACF", F("p04-actas-y-normativa.jpg")],
+    ["RF-04 Repositorio de normativas", "Clase DocumentoInstitucional · UI-05", "Plugin propio + ACF", F("p04-actas-y-normativa.jpg")],
     ["RF-05 Aprobación previa", "DocumentoInstitucional.estadoAprobacion", "Plugin propio + Members", F("16-admin-actas.jpg")],
-    ["RF-06 Directorio de delegaciones", "Clases Delegacion, FacultadEscuela · UI-03", "Plugin propio + ACF", F("12-delegaciones.jpg")],
-    ["RF-07 Ficha de delegación", "Clase Delegacion · UI-03", "Plugin propio + ACF + Members", F("12-delegaciones.jpg")],
-    ["RF-08 Buzón de consultas", "Clase Ticket · UI-04", "Fluent Forms + plugin propio", f"{F('13-buzon-codigo-ticket.jpg')}, {F('19-fluent-forms-buzon.jpg')}"],
-    ["RF-09 Código de seguimiento", "Ticket.codigoSeguimiento · UI-04", "Plugin propio", f"{F('13-buzon-codigo-ticket.jpg')}, {F('14-seguimiento-ticket.jpg')}"],
-    ["RF-10 Gestión de tickets", "Clases Ticket, RespuestaTicket", "Plugin propio (módulo buzón)", f"{F('15-admin-tickets.jpg')}; HU-09a: filtros y aviso al estudiante"],
-    ["RF-11 Calendario", "Clase EventoCalendario", "The Events Calendar (previsto)", "Sprint 2"],
-    ["RF-12 Convocatorias de votación", "EventoCalendario.asambleaVinculada", "The Events Calendar + YOP Poll (previstos)", "Sprint 2"],
-    ["RF-13 Solicitud de mediación", "Clase SolicitudMediacion", "Fluent Forms", "Sprint 2 (HU-12)"],
-    ["RF-14 Roles y permisos", "Clase Usuario (rol)", "Plugin propio + Members", F("17-roles-members.jpg")],
-    ["RF-15 Panel de administración", "Todas las clases", "Panel de WordPress + ACF + Members", f"{F('01-plugins-instalados.jpg')}, {F('16-admin-actas.jpg')}"],
-    ["RNF-01 Rendimiento", "—", "WP Fastest Cache", F("02-wp-fastest-cache-ajustes.jpg")],
-    ["RNF-03 Accesibilidad", "Mockups", "Tema Blocksy", F("18-tema-blocksy.jpg")],
-    ["RNF-04 Seguridad en formularios", "—", "Wordfence + Fluent Forms", f"{F('06-wordfence.jpg')}, {F('13-buzon-codigo-ticket.jpg')}"],
-    ["RNF-08 Privacidad", "Ticket.confidencial · UI-04", "WP Statistics + Wordfence + plugin propio", f"{F('03-wp-statistics.jpg')}, {F('14-seguimiento-ticket.jpg')}"],
-    ["UI-01 Diseño gráfico", "Mockup de portada", "Tema Blocksy", f"{F('09-portada-final.jpg')}, {F('18-tema-blocksy.jpg')}"],
-    ["UI-02 Página principal", "Mockup 1 · estructura web", "Tema + Yoast SEO", F("09-portada-final.jpg")],
-    ["UI-03 Directorio", "Mockup 2", "Plugin propio", F("12-delegaciones.jpg")],
-    ["UI-04 Buzón de consultas", "Mockup 3", "Fluent Forms + plugin propio", F("13-buzon-codigo-ticket.jpg")],
-    ["UI-05 Ficha de acta o normativa", "Mockup 4", "Plugin propio + ACF", F("11-actas-y-normativa.jpg")],
+    ["RF-06 Directorio de delegaciones", "Clases Delegacion, FacultadEscuela · UI-03", "Plugin propio + ACF", F("p05-delegaciones.jpg")],
+    ["RF-07 Ficha de delegación", "Clase Delegacion · UI-03", "Plugin propio + ACF + Members", F("p05-delegaciones.jpg")],
+    ["RF-08 Buzón de consultas", "Clase Ticket · UI-04", "Fluent Forms + plugin propio", F("p07-buzon.jpg", "19-fluent-forms-buzon.jpg")],
+    ["RF-09 Código de seguimiento", "Ticket.codigoSeguimiento · UI-04", "Plugin propio", F("p07-buzon.jpg", "p08-seguimiento.jpg")],
+    ["RF-10 Gestión de tickets", "Clases Ticket, RespuestaTicket", "Plugin propio (módulo buzón)", F("20-admin-tickets-filtros.jpg", "21-ticket-aviso-correo.jpg")],
+    ["RF-11 Calendario", "Clase EventoCalendario · UI-06", "The Events Calendar", F("p13-calendario.jpg", "a06-eventos.jpg")],
+    ["RF-12 Convocatorias de votación", "EventoCalendario.asambleaVinculada · UI-06", "Plugin propio (YOP Poll opcional)", F("p11-votaciones.jpg", "a07-votaciones.jpg") + " (parcial: sin papeleta)"],
+    ["RF-13 Solicitud de mediación", "Clase SolicitudMediacion · UI-07", "Fluent Forms + plugin propio", F("p12-mediacion.jpg", "a05-mediaciones.jpg")],
+    ["RF-14 Roles y permisos", "Clase Usuario (rol) · UI-08", "Plugin propio + Members", F("a02-roles.jpg")],
+    ["RF-15 Panel de administración", "Todas las clases · UI-08", "Panel de WordPress + ACF + Members", F("a01-plugins.jpg", "a03-escritorio-ejecutivo.jpg", "a04-escritorio-delegado.jpg")],
+    ["RNF-01 Rendimiento", "Requisito de calidad: sin elemento propio en el análisis", "WP Fastest Cache", F("02-wp-fastest-cache-ajustes.jpg") + "; medición del tiempo de carga pendiente (HU-20)"],
+    ["RNF-02 Usabilidad móvil", "Mockups (diseño adaptable)", "Tema Blocksy + CSS propio", "Capturas a 1366 px; la comprobación en móvil y tablet está pendiente (HU-14, Sprint 3)"],
+    ["RNF-03 Accesibilidad", "Mockups", "Tema Blocksy (declarado «Accessibility ready»)", F("18-tema-blocksy.jpg") + "; la verificación WCAG 2.1 AA está pendiente (HU-15, Sprint 3)"],
+    ["RNF-04 Seguridad en formularios", "Requisito de calidad: sin elemento propio en el análisis", "Wordfence + Fluent Forms + validación en el servidor", F("06-wordfence.jpg", "p07-buzon.jpg") + "; baterías de pruebas de la sección 6"],
+    ["RNF-05 Compatibilidad técnica", "Restricción del entorno RC-01", "WampServer: Apache, PHP 8.x y MySQL 8.x", "WordPress 7.1 funcionando sobre ese servidor (todas las capturas)"],
+    ["RNF-06 Disponibilidad", "Restricción del entorno RC-01", "WP Fastest Cache + servidor compartido por Tailscale", F("02-wp-fastest-cache-ajustes.jpg") + "; limitada a que el equipo anfitrión esté encendido (sección 2.2.1)"],
+    ["RNF-07 Mantenibilidad", "Restricciones RC-02 y RC-03", "Plugin propio documentado, scripts y repositorio GitHub", "README del plugin, carpeta scripts/ y docs/ del repositorio (sin captura)"],
+    ["RNF-08 Privacidad", "Ticket.confidencial · UI-04 · UI-07", "WP Statistics + Wordfence + plugin propio", F("03-wp-statistics.jpg", "p10-privacidad.jpg", "p08-seguimiento.jpg") + "; pendientes el plazo de conservación y las copias de seguridad"],
+    ["UI-01 Diseño gráfico", "Mockup de portada", "Tema Blocksy + plugin propio", F("p01-portada.jpg", "18-tema-blocksy.jpg")],
+    ["UI-02 Página principal", "Mockup 1 · estructura web", "Tema + Yoast SEO", F("p01-portada.jpg")],
+    ["UI-03 Directorio", "Mockup 2", "Plugin propio", F("p05-delegaciones.jpg")],
+    ["UI-04 Buzón de consultas", "Mockup 3", "Fluent Forms + plugin propio", F("p07-buzon.jpg", "p09-faq.jpg", "p10-privacidad.jpg")],
+    ["UI-05 Ficha de acta o normativa", "Mockup 4", "Plugin propio + ACF", F("p04-actas-y-normativa.jpg")],
+    ["UI-06 Calendario y votaciones", "Mockup 5", "The Events Calendar + plugin propio", F("p13-calendario.jpg", "p11-votaciones.jpg")],
+    ["UI-07 Solicitud de mediación", "Mockup 6", "Fluent Forms + plugin propio", F("p12-mediacion.jpg")],
+    ["UI-08 Panel de administración por rol", "Mockup 7", "Plugin propio + Members", F("a03-escritorio-ejecutivo.jpg", "a04-escritorio-delegado.jpg")],
 ], [4.3, 4.7, 4.3, 3.7], tam=8, titulo="Trazabilidad requisito → análisis → diseño → implementación")
-par("Los números de figura corresponden a la numeración de este documento; se recalculan automáticamente al regenerarlo.", cursiva=True, tam=9)
 
 # ------------------------------------------------------------------ 8. calidad e incidencias
-doc.add_heading("8. Calidad, incidencias y próximos pasos", 1)
+doc.add_heading("8. Calidad, incidencias y pendientes", 1)
 doc.add_heading("Revisión cruzada del código", 2)
-par("El plugin propio se repartió entre dos asistentes de programación: Claude escribió los roles, las actas, las delegaciones y la configuración del sitio, y Codex escribió el módulo del buzón. Después cada uno revisó el código del otro, y el resultado se probó en el servidor. El código se revisó y comprendió antes de integrarlo; el desglose está en el README del plugin (cms-wordpress/wp-content/plugins/cadus-portal/README.md).")
-tabla(["Revisor", "Hallazgos", "Resolución"], [
-    ["Codex sobre el código de Claude", "9: error 500 con ?tipo[]=; borrado de contenido por defecto en cada activación; ajustes del equipo sobrescritos al reactivar; ejemplos recreados al renombrarlos; la búsqueda de noticias incluía páginas y actas; actas sin fecha omitidas y sin paginación; enlace al PDF perdido sin ACF; orden de enlaces y tipos; roles borrados y recreados", "Los 9 corregidos y verificados (sección 6, pruebas)"],
-    ["Claude sobre el código de Codex", "Sin fallos bloqueantes. Observaciones: el código del ticket no es correlativo (deriva del ID); el seguimiento no acredita la propiedad del correo, solo la coincidencia", "Aceptado y documentado; se mitigó con límite de intentos y exigiendo código y correo"],
-], [4.0, 8.5, 4.5], tam=8, titulo="Revisión cruzada")
-doc.add_heading("Incidencias resueltas durante el sprint", 2)
+par("El plugin propio se reparte entre dos asistentes de programación: Claude escribe la mayor parte y Codex escribe módulos y revisa. Después cada uno revisó el trabajo del otro y el resultado se probó en el servidor; el código se revisó y comprendió antes de integrarlo (desglose en el README del plugin).")
+tabla(["Revisión", "Hallazgos", "Resolución"], [
+    ["Sprint 1. Codex sobre el código de Claude", "9: error 500 con ?tipo[]=; borrado de contenido por defecto en cada activación; ajustes sobrescritos al reactivar; ejemplos recreados al renombrarlos; la búsqueda incluía páginas y actas; actas sin fecha omitidas; enlace al PDF perdido sin ACF; orden de enlaces; roles borrados y recreados", "Los 9 corregidos y verificados"],
+    ["Sprint 1. Claude sobre el código de Codex", "Sin fallos bloqueantes. El código del ticket no es correlativo y el seguimiento no acredita la propiedad del correo", "Aceptado y documentado; se mitigó con límite de intentos y exigiendo código y correo"],
+    ["Sprint 2. Codex sobre el diseño y la portada", "Contrastes ilegibles en el texto de las tarjetas al pasar el ratón y el autor «root» visible en las fichas", "Corregidos; el marcado de las páginas públicas se inspecciona con una batería (un solo pie en todas; dos páginas con un h1 de más, ver pruebas)"],
+    ["Sprint 2. Codex sobre toda la entrega (25/10)", "8: adjuntos privados accesibles por AJAX (alto); el importador de cuentas podía modificar otra cuenta (alto); autorreparación del calendario incompleta; pruebas que daban por bueno un error 500; reapertura de tareas en el script de Scrum; foco invisible en tarjetas oscuras; el Project no recuperaba elementos incompletos; resumen que afirmaba una integración pendiente", "Los 8 corregidos y las baterías de pruebas, repetidas sin fallos"],
+], [4.0, 8.6, 4.4], tam=8, titulo="Revisión cruzada")
+doc.add_heading("Incidencias resueltas durante los sprints", 2)
 tabla(["Incidencia", "Causa", "Solución"], [
     ["WordPress no podía descargar plugins (cURL error 77)", "Faltaba wp-includes/certificates/ca-bundle.crt: el .gitignore excluye *.crt", "Restaurado el archivo desde el repositorio oficial de WordPress"],
-    ["Pantallas de Yoast y Fluent Forms en blanco; editor de bloques sin cargar", "Faltaban wp-includes/js/dist, css/dist y build: el .gitignore excluye dist/ y build/", "Restauradas desde el paquete oficial de WordPress 7.1 (404 archivos)"],
+    ["Pantallas de Yoast y Fluent Forms en blanco", "Faltaban wp-includes/js/dist, css/dist y build: el .gitignore excluye dist/ y build/", "Restauradas desde el paquete oficial de WordPress 7.1"],
     ["WP Fastest Cache no guardaba sus ajustes", "No existía el archivo .htaccess", "Creado el .htaccess estándar de WordPress"],
-    ["Un clon nuevo del repositorio no reproducía el entorno", "Los patrones del .gitignore dejaban fuera esos archivos del núcleo", "Excepciones en cms-wordpress/.gitignore; los plugins de terceros dejan de versionarse y se documentan aquí"],
-    ["Enlaces de las páginas sin index.php daban error 404", "El sitio usaba la estructura de enlaces antigua", "Enlaces permanentes por nombre fijados desde el plugin propio"],
+    ["La Ejecutiva perdía los permisos de eventos", "Otro proceso reescribió la lista de roles con una copia antigua", "El módulo del calendario comprueba y repone todos los permisos en cada carga"],
+    ["Una rama de mediación habría eliminado la portada, los menús por rol y el diseño", "Se hizo sobre una copia antigua del plugin", "Se integró solo su módulo y los tres cambios de configuración necesarios"],
+    ["La vista previa de impresión de REMUS salía en blanco", "Sin confirmar: el HTML que genera REMUS es correcto y se ve bien en un navegador, así que falla el visor interno de REMUS", "El PDF del REM se obtiene imprimiendo ese HTML desde Chrome"],
 ], [4.8, 6.0, 6.2], tam=8, titulo="Incidencias técnicas y su resolución")
-doc.add_heading("Próximos pasos (Sprint 2, entrega del 25/10)", 2)
-for t in ("Sustituir los textos de ejemplo por contenido real validado con la Delegación General del CADUS y completar las fichas de las delegaciones.",
-          "Asignar los roles Ejecutiva y Delegado a los usuarios reales del cliente (hoy el equipo usa cuentas de administrador).",
-          "Instalar y configurar The Events Calendar, SupportCandy y YOP Poll (HU-09 a HU-12) y el panel de administración (HU-19).",
-          "Reemplazar el logotipo provisional por la identidad visual real del cliente.",
-          "Repartir el trabajo a lo largo del sprint y actualizar el burndown cada día.",
-          "Para la entrega 2: comparativa razonada de al menos tres temas y versión final del portal."):
-    vineta(t)
+doc.add_heading("Pendientes y decisiones abiertas", 2)
+tabla(["Pendiente", "Motivo", "Responsable"], [
+    ["Entrevista con el CADUS y validación del REM", "Depende de la disponibilidad del cliente; condiciona el plazo de conservación de datos, la lista de cuentas y la identidad visual", "Miguel Ángel"],
+    ["Contenido real (noticias, actas, estatutos, delegaciones)", "El CADUS no lo ha entregado; todo es de ejemplo y está marcado como tal", "Miguel Ángel · Joaquín"],
+    ["Fichas de Química, Física, Biología y ETSI", "Faltan los datos de contacto de esas delegaciones", "Álvaro"],
+    ["Mockups finales en Figma", "No se hicieron; se entregan siete mockups de baja fidelidad y las capturas finales", "Miguel Ángel"],
+    ["Cuentas institucionales: la del CADUS y una por delegación", "Script y lista listos; las cuentas se crean al cerrar la entrega con los correos reales", "Pablo"],
+    ["Papeleta de las votaciones (YOP Poll) y eventos reales en el calendario", "No instalado; las convocatorias se publican sin papeleta. Decidir con el cliente", "Joaquín · Miguel Ángel"],
+    ["Plazo de conservación y copias de seguridad de tickets y mediaciones (RNF-08)", "Pendiente de validar con el CADUS", "Pablo"],
+    ["Volcado de la base de datos del Sprint 2 y revisión de Wordfence", "Se hace al cerrar la entrega", "Pablo"],
+    ["Sprint 3: HU-14 a HU-17 (móvil, accesibilidad WCAG 2.1 AA, filtros del panel y protección frente a spam)", "Planificado del 26/10 al 15/11 en el GitHub Project", "Equipo"],
+], [6.0, 8.0, 3.0], tam=8, titulo="Pendientes y decisiones abiertas")
 
 # ------------------------------------------------------------------ pie de página
 fp = sec.footer.paragraphs[0]
 fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = fp.add_run("Portal CADUS · Entrega 1 (CMS) · Página ")
+r = fp.add_run("Portal CADUS · Entrega 2 (CMS) · Página ")
 r.font.size = Pt(8.5)
 campo(fp, "PAGE", "1")
 
@@ -566,7 +749,7 @@ u = OxmlElement("w:updateFields")
 u.set(qn("w:val"), "true")
 settings.append(u)
 
-doc.core_properties.title = "Portal web del CADUS — Entrega 1 (CMS)"
+doc.core_properties.title = "Portal web del CADUS — Entrega 2 (CMS, versión final)"
 doc.core_properties.author = "Equipo GSI — CADUS"
 doc.save(SALIDA)
 print("documento generado:", SALIDA, "·", figura_n[0], "figuras ·", tabla_n[0], "tablas")

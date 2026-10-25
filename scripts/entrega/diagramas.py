@@ -73,13 +73,13 @@ def diagrama_clases():
     ry = [70, 410, 760]
     cat = clase(ax, cx[0], ry[0], W, "Categoria", "IR-03 · RF-01", ["nombre", "tipoContenido (noticia|documento)"])
     noticia = clase(ax, cx[1], ry[0], W, "Noticia", "IR-03 · RF-01 · RF-02 · UI-02", ["titulo", "cuerpo", "fechaPublicacion", "estado (borrador | publicada)"])
-    evento = clase(ax, cx[2], ry[0], W, "EventoCalendario", "IR-07 · RF-11 · RF-12 · RN-05", ["titulo", "tipo (asamblea|evento|votacion)", "fechaHora", "lugar", "asambleaVinculada (0..1)"], VERDE)
+    evento = clase(ax, cx[2], ry[0], W, "EventoCalendario", "IR-07 · RF-11 · RF-12 · RN-05 · UI-06", ["titulo", "tipo (asamblea|evento|votacion)", "fechaHora", "lugar", "asambleaVinculada (0..1)", "apertura / cierre (votacion)"], VERDE)
     doc = clase(ax, cx[0], ry[1], W, "DocumentoInstitucional", "IR-04 · RF-03 · RF-04 · RF-05 · RN-01 · UI-05", ["tipo (acta | normativa)", "fecha", "archivoPDF", "estadoAprobacion", "plenoAsociado"])
-    usuario = clase(ax, cx[1], ry[1], W, "Usuario", "IR-09 · RF-14", ["nombre", "correoInstitucional", "rol: anonimo, estudiante, delegado,", "      ejecutiva o administrador"])
+    usuario = clase(ax, cx[1], ry[1], W, "Usuario", "IR-09 · RF-14 · RF-15 · UI-08", ["cuenta institucional", "correoInstitucional", "rol: anonimo, estudiante, delegado,", "      ejecutiva o administrador"])
     deleg = clase(ax, cx[2], ry[1], W, "Delegacion", "IR-05 · RF-06 · RF-07 · RN-04 · UI-03", ["contacto", "horarioAtencion", "enlaces"])
     fac = clase(ax, cx[3], ry[1], W, "FacultadEscuela", "IR-05 · RF-06", ["nombre"], VERDE)
-    solic = clase(ax, cx[0], ry[2], W, "SolicitudMediacion", "IR-08 · RF-13", ["descripcionConflicto", "fechaSolicitud", "estado"], VERDE)
-    ticket = clase(ax, cx[1], ry[2], W, "Ticket", "IR-06 · RF-08 · RF-09 · RF-10 · RN-02 · RN-03 · UI-04", ["codigoSeguimiento", "asunto", "estado (abierto|en_proceso|cerrado)", "confidencial"])
+    solic = clase(ax, cx[0], ry[2], W, "SolicitudMediacion", "IR-08 · RF-13 · RN-02 · RN-03 · UI-07", ["referencia", "descripcionConflicto", "fechaSolicitud", "estado (pendiente|cerrada)"], VERDE)
+    ticket = clase(ax, cx[1], ry[2], W, "Ticket", "IR-06 · RF-08 · RF-09 · RF-10 · RN-02 · RN-03 · UI-04", ["codigoSeguimiento", "asunto", "estado (abierto|en_proceso|cerrado)", "fechaUltimoAviso", "confidencial"])
     resp = clase(ax, cx[2], ry[2], W, "RespuestaTicket", "RF-10", ["mensaje", "fecha"], VERDE)
     rel(ax, cat, "der", noticia, "izq", "clasifica", "1", "*", dy=-22)
     rel(ax, usuario, "arr", noticia, "abj", "redacta", "1", "*", dx=38)
@@ -103,29 +103,30 @@ def caja(ax, x, y, w, h, titulo, sub="", fc=AZUL_CLARO, ec=AZUL, bold=True, subc
 
 
 def diagrama_estructura():
-    fig, ax = lienzo(1560, 880)
+    fig, ax = lienzo(1560, 990)
     ax.text(780, 22, "Estructura del sitio web (análisis): menús y páginas con sus etiquetas de trazabilidad", ha="center", fontsize=13, fontweight="bold", color=AZUL)
-    caja(ax, 40, 380, 190, 70, "Inicio", "UI-02 · IR-01", fc=AZUL, ec=AZUL, subcolor="#ffd2cf", titcolor="white")
+    caja(ax, 40, 435, 190, 70, "Inicio", "UI-02 · IR-01", fc=AZUL, ec=AZUL, subcolor="#ffd2cf", titcolor="white")
     secciones = [
         ("Qué es el CADUS", "IR-02", ["Gobierno", "Estatutos"]),
         ("Noticias y comunicados", "RF-01 · RF-02 · IR-03", ["Becas", "Movilidad", "Normativa", "Eventos"]),
         ("Actas y normativa", "RF-03 · RF-04 · RF-05 · UI-05", ["Ficha de acta / normativa (PDF)"]),
         ("Delegaciones", "RF-06 · RF-07 · UI-03", ["Facultad / Escuela", "Ficha de delegación"]),
-        ("Calendario", "RF-11 · RF-12 · IR-07", ["Asambleas", "Eventos", "Votaciones"]),
-        ("Atención al estudiante", "RF-08 · RF-09 · RF-13 · UI-04", ["Buzón de consultas", "Seguimiento de ticket", "Mediación estudiantil", "Preguntas frecuentes"]),
+        ("Calendario", "RF-11 · RF-12 · IR-07 · UI-06", ["Asambleas", "Eventos", "Votaciones"]),
+        ("Atención al estudiante", "RF-08 · RF-09 · RF-13 · UI-04 · UI-07", ["Buzón de consultas", "Seguimiento de ticket", "Mediación estudiantil", "Preguntas frecuentes"]),
+        ("Contacto y legal", "RNF-08 · UI-04", ["Contacto", "Aviso de privacidad"]),
     ]
     y = 62
     for nombre, tag, hijos in secciones:
         alto = max(1, len(hijos)) * 36 + 20
         cy = y + alto / 2
         caja(ax, 330, cy - 32, 300, 64, nombre, tag)
-        ax.plot([230, 280, 280, 330], [415, 415, cy, cy], color="#555", lw=1.2, zorder=1)
+        ax.plot([230, 280, 280, 330], [470, 470, cy, cy], color="#555", lw=1.2, zorder=1)
         for i, h in enumerate(hijos):
             hy = y + 10 + i * 36
             caja(ax, 800, hy, 330, 28, h, fc="white", bold=False)
             ax.plot([630, 715, 715, 800], [cy, cy, hy + 14, hy + 14], color="#888", lw=1, zorder=1)
         y += alto + 14
-    ax.text(40, 860, "Acceso para usuarios con rol: la gestión de contenidos (RF-15) y los roles (RF-14, IR-09) se realizan desde el panel de administración de WordPress.", fontsize=8.5, color="#555")
+    ax.text(40, 965, "Acceso para usuarios con rol: la gestión de contenidos (RF-15, UI-08) y los roles (RF-14, IR-09) se realizan desde el panel de administración de WordPress.", fontsize=8.5, color="#555")
     guardar(fig, "uml-analisis-estructura-web.png")
 
 
@@ -151,30 +152,30 @@ def diagrama_plugins():
     obl = [("Wordfence Security", "Seguridad: cortafuegos y escáner de malware", "RNF-04 · RNF-08"),
            ("WP Fastest Cache", "Caché de páginas, Gzip y de navegador", "RNF-01 · RNF-06"),
            ("WP Statistics", "Analítica sin cookies y conforme al RGPD", "RNF-08 · RNF-01"),
-           ("Yoast SEO", "SEO: metadatos, sitemap y análisis de contenido", "RF-01 · RF-02 · UI-02 · OBJ-02")]
+           ("Yoast SEO", "SEO: metadatos, sitemap y contenido", "RF-01 · RF-02 · UI-02 · OBJ-02")]
     for i, (n, f, t) in enumerate(obl):
         _, y = plugin(40, 95 + i * 98, n, f, t)
         ax.plot([420, 470], [y + 41, 395], color="#888", lw=1.1, zorder=1)
 
     ax.text(1140, 70, "Plugins funcionales (instalados)", fontsize=11, fontweight="bold", color=VERDE)
-    fun = [("Advanced Custom Fields", "Campos de actas y delegaciones (PDF, fecha, contacto)", "RF-03 · RF-04 · RF-06 · RF-07 · RF-15"),
-           ("Fluent Forms", "Formularios: buzón, mediación y validación de correo", "RF-08 · RF-09 · RF-13 · RN-02 · RNF-04"),
-           ("Members", "Roles y permisos (Ejecutiva, Delegado, Estudiante)", "RF-05 · RF-14 · RN-01 · RN-03 · RN-04")]
+    fun = [("Advanced Custom Fields", "Campos de actas y delegaciones", "RF-03 · RF-04 · RF-06 · RF-07 · RF-15"),
+           ("Fluent Forms", "Formularios: buzón y mediación", "RF-08 · RF-09 · RF-13 · RN-02 · RNF-04"),
+           ("Members", "Roles y permisos (Ejecutiva, Delegado, Estudiante)", "RF-05 · RF-14 · RN-01 · RN-03 · RN-04"),
+           ("The Events Calendar", "Calendario de asambleas y eventos (HU-10)", "RF-11 · RF-12 · RN-05 · UI-06")]
     for i, (n, f, t) in enumerate(fun):
         _, y = plugin(1140, 95 + i * 98, n, f, t)
         ax.plot([1140, 1090], [y + 41, 395], color="#888", lw=1.1, zorder=1)
 
     ax.text(590, 505, "Plugin propio del equipo (instalado)", fontsize=11, fontweight="bold", color=AZUL)
-    plugin(590, 520, "CADUS Portal", "Roles, actas, delegaciones, buzón, páginas y menú", "RF-01 a RF-09 · RF-14 · RN-01 a RN-04 · UI-01 a UI-05")
+    plugin(590, 520, "CADUS Portal", "Roles, buzón, mediación, votaciones", "RF-01 a RF-15 · RN-01 a RN-05 · UI-01 a UI-08")
     ax.plot([780, 780], [475, 520], color="#888", lw=1.1, zorder=1)
-    ax.text(40, 625, "Plugins previstos para el Sprint 2 (por instalar)", fontsize=11, fontweight="bold", color=NARANJA)
-    prev = [("The Events Calendar", "Calendario de asambleas y eventos", "RF-11 · RF-12 · RN-05"),
-            ("SupportCandy", "Gestión de tickets y respuestas de la Ejecutiva", "RF-10 · RN-03"),
-            ("YOP Poll", "Votaciones estudiantiles vinculadas a una asamblea", "RF-12 · RN-05")]
+    ax.text(40, 625, "Decisiones del Sprint 2: plugins previstos que no se han instalado", fontsize=11, fontweight="bold", color=NARANJA)
+    prev = [("SupportCandy (descartado)", "Tickets: módulo propio (HU-09a)", "RF-10 · RN-03"),
+            ("YOP Poll (opcional, pendiente)", "Papeleta de votaciones (opcional)", "RF-12 · RN-05")]
     for i, (n, f, t) in enumerate(prev):
         plugin(40 + i * 430, 650, n, f, t, "previsto")
     ax.add_patch(Rectangle((40, 775), 12, 12, fc=VERDE, ec=VERDE)); ax.text(60, 782, "Instalado y activo", fontsize=9, va="center")
-    ax.add_patch(Rectangle((260, 775), 12, 12, fc="#fff6e5", ec=NARANJA, ls="--")); ax.text(280, 782, "Previsto (Sprint 2)", fontsize=9, va="center")
+    ax.add_patch(Rectangle((260, 775), 12, 12, fc="#fff6e5", ec=NARANJA, ls="--")); ax.text(280, 782, "No instalado (decisión del Sprint 2)", fontsize=9, va="center")
     ax.text(40, 820, "Las etiquetas en rojo son los códigos de requisito del documento REM (CADUS.rem) a los que da respuesta cada plugin.", fontsize=9, color="#555")
     guardar(fig, "uml-diseno-plugins.png")
 
@@ -322,6 +323,57 @@ def burndowns():
         dt.date(2026, 10, 24): (12, "HU-09a, HU-11, HU-19c")})
 
 
+def mockup_calendario():
+    fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/events/", "UI-06 · RF-11 · RF-12 · RN-05", "Calendario")
+    ax.text(30, 150, "Calendario de asambleas y eventos", fontsize=14, fontweight="bold", color=AZUL)
+    bloque(ax, 30, 170, 420, 30, "Buscar por eventos…", "white", 9)
+    for i, v in enumerate(("Lista", "Mes", "Día")):
+        bloque(ax, 480 + i * 70, 170, 62, 30, v, AZUL if i == 0 else "white", 9, "white" if i == 0 else "#444")
+    for i, (fecha, titulo, tipo) in enumerate((("12 NOV", "Asamblea general ordinaria", "Asamblea"), ("19 NOV", "Jornada de bienvenida", "Evento"), ("26 NOV", "Votación de los estatutos", "Votación"))):
+        y = 225 + i * 82
+        bloque(ax, 30, y, 70, 68, fecha, "#cfd8e6", 10, AZUL)
+        bloque(ax, 100, y, 520, 68, f"{titulo}\n{tipo} · Pabellón de Uruguay", "white", 9.5)
+    ax.add_patch(Rectangle((650, 225), 320, 200, fc="#fffbe6", ec=NARANJA, ls="--"))
+    ax.text(665, 247, "Convocatoria de votación (RF-12)", fontsize=9, fontweight="bold")
+    ax.text(665, 272, "· Vinculada a una asamblea\n· Apertura: 24 NOV 10:00\n· Cierre: 26 NOV 20:00\n· Solo se vota con la votación\n  abierta (RN-05)", fontsize=8.8, va="top", linespacing=1.6)
+    bloque(ax, 650, 445, 320, 44, "Suscribirse al calendario", "white", 10)
+    guardar(fig, "mockup-05-calendario.png")
+
+
+def mockup_mediacion():
+    fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/atencion-al-estudiante/mediacion-estudiantil/", "UI-07 · RF-13 · RN-02 · RN-03", "Atención")
+    ax.text(30, 150, "Solicitud de mediación estudiantil", fontsize=14, fontweight="bold", color=AZUL)
+    campos = [("Nombre y apellidos *", 36), ("Correo universitario (@alum.us.es) *", 36), ("Facultad o Escuela *", 36), ("Descripción del conflicto *", 100)]
+    y = 185
+    for txt, h in campos:
+        ax.text(30, y, txt, fontsize=9.5, fontweight="bold", color="#333")
+        bloque(ax, 30, y + 10, 560, h, "", "white")
+        y += 22 + h + 18
+    ax.text(30, y + 4, "☐  Consiento el tratamiento de mis datos (RGPD) · Aviso de privacidad", fontsize=8.8, color="#333")
+    bloque(ax, 30, y + 24, 180, 34, "Solicitar mediación", AZUL, 10.5, "white")
+    ax.add_patch(Rectangle((630, 185), 340, 170, fc="#eef7ee", ec=VERDE))
+    ax.text(645, 208, "Confirmación", fontsize=11, fontweight="bold", color=VERDE)
+    ax.text(645, 234, "Solicitud registrada.\nTu referencia:  MED-2026-00017\nNo se repiten los datos enviados.", fontsize=9.2, va="top", linespacing=1.7)
+    ax.add_patch(Rectangle((630, 375), 340, 150, fc="#fdeaea", ec=ROJO, ls="--"))
+    ax.text(645, 398, "Privacidad (RN-03)", fontsize=10, fontweight="bold", color=ROJO)
+    ax.text(645, 420, "Solo la Ejecutiva ve las solicitudes.\nNo aparecen en la web pública, el buscador\nni la API, ni en los avisos por correo.", fontsize=8.8, va="top", linespacing=1.6)
+    guardar(fig, "mockup-06-mediacion.png")
+
+
+def mockup_panel():
+    fig, ax = marco("localhost/proyecto_gsi/cms-wordpress/wp-admin/", "UI-08 · RF-14 · RF-15", "Inicio")
+    ax.text(30, 150, "Escritorio del CADUS (según el rol)", fontsize=14, fontweight="bold", color=AZUL)
+    ax.add_patch(Rectangle((30, 175), 200, 480, fc="#23282d", ec="#23282d"))
+    for i, m in enumerate(("Escritorio", "Noticias", "Actas y normativa", "Delegaciones", "Tickets del buzón", "Mediaciones", "Eventos", "Votaciones")):
+        ax.text(45, 200 + i * 34, m, fontsize=9.5, color="white" if i else "#ffd54f", va="center", fontweight="bold" if not i else "normal")
+    for i, (t, d) in enumerate((("Tickets", "3 pendientes"), ("Mediaciones", "1 pendiente"), ("Actas", "1 por aprobar"), ("Delegaciones", "6 fichas"))):
+        bloque(ax, 260 + (i % 2) * 235, 175 + (i // 2) * 120, 220, 105, f"{t}\n{d}", "white", 10.5)
+    ax.add_patch(Rectangle((260, 425), 455, 230, fc="#fffbe6", ec=NARANJA, ls="--"))
+    ax.text(275, 447, "Menús visibles según el rol (RF-14 · RF-15)", fontsize=10, fontweight="bold")
+    ax.text(275, 472, "· Ejecutiva / CADUS: todos los menús del portal\n· Delegado: solo su ficha de delegación (RN-04)\n· Estudiante: sin acceso al panel de administración\n· Las reclamaciones y mediaciones solo las ve la Ejecutiva (RN-03)", fontsize=9, va="top", linespacing=1.8)
+    guardar(fig, "mockup-07-panel.png")
+
+
 if __name__ == "__main__":
     diagrama_clases()
     diagrama_estructura()
@@ -330,4 +382,7 @@ if __name__ == "__main__":
     mockup_directorio()
     mockup_buzon()
     mockup_acta()
+    mockup_calendario()
+    mockup_mediacion()
+    mockup_panel()
     burndowns()
