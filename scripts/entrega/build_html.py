@@ -153,6 +153,7 @@ def capitulo_rem():
     # REMUS escribe «(null)» tras los pasos de los casos de uso cuando no tienen comentario (build_rem.ps1 ya lo rellena con «Ninguno»)
     h = h.replace(" (<em>(null)</em>)", "")
     # los capítulos de REMUS pasan a ser subapartados 3.x: un nivel más de encabezado y número con prefijo
+    titulos.append((1, "H_REM", "3. Requisitos (REM)"))  # antes que sus subapartados, para que el índice salga en orden
     def sube(m):
         nivel = int(m.group(1)) + 1
         numero, resto = m.group(4), m.group(5)
@@ -162,7 +163,6 @@ def capitulo_rem():
     h = re.sub(r'<h([1-4]) id="([^"]+)" class="([^"]*)">(\d+(?:\.\d+)*)\s+(.*?)</h\1>', sube, h, flags=re.S)
     nivel_max = 5
     emitir('<div class="pagebreak"></div>')
-    titulos.append((1, "H_REM", "3. Requisitos (REM)"))
     emitir('<h1 id="H_REM" class="section">3. Requisitos (REM)</h1>')
     rico("Este capítulo reproduce, sin cambios, el documento de requisitos que genera REMUS a partir de CADUS.rem (versión 2.0, 24/10/2026), "
          "con su estructura de cinco dimensiones (información, interfaz, funcionales, no funcionales y reglas de negocio), los actores, los casos de uso, "
