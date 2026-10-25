@@ -50,7 +50,8 @@ def comprimir(carpeta, nombre_zip, raiz_zip):
     return n
 
 
-comprimir(PLUGIN, "plugin-cadus-portal.zip", "cadus-portal")
+if comprimir(PLUGIN, "plugin-cadus-portal.zip", "cadus-portal") < 10 or not os.path.exists(os.path.join(PLUGIN, "cadus-portal.php")):
+    fallos.append("plugin-cadus-portal.zip (plugin incompleto o no encontrado)")
 if comprimir(UPLOADS, "wp-content-uploads.zip", "uploads") == 0:
     fallos.append("wp-content-uploads.zip (sin ficheros)")
 
@@ -73,7 +74,7 @@ Seguimiento SCRUM: https://github.com/users/pablitoruiizz/projects/1 (público).
 ## Restaurar el portal en otro equipo
 1. Instalar WordPress 7.1 (Wamp o XAMPP, PHP 8.x y MySQL 8.x), crear la base `bd_cadus` y restaurar `bd_cadus_v1_sprint2.sql` (si el sitio cambia de dirección, actualizar `siteurl` y `home` en `wp_options`).
 2. Copiar el contenido del repositorio `cms-wordpress/` a la carpeta del servidor y ajustar `wp-config.php` (base de datos).
-3. Descomprimir `wp-content-uploads.zip` en `wp-content/uploads/` y `plugin-cadus-portal.zip` en `wp-content/plugins/` (el plugin también está en el repositorio).
+3. Descomprimir `wp-content-uploads.zip` dentro de `wp-content/` (el zip ya contiene la carpeta `uploads/`) y `plugin-cadus-portal.zip` dentro de `wp-content/plugins/` (contiene la carpeta `cadus-portal/`; el plugin también está en el repositorio).
 4. Activar el plugin **CADUS Portal**, entrar con la cuenta `cadus` (`¿Has olvidado tu contraseña?` envía el enlace a dcadus@us.es) y comprobar los menús, la portada y el calendario.
 """)
 print("ok       LEEME.md")

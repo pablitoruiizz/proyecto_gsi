@@ -159,22 +159,22 @@ def diagrama_plugins():
     obl = [("Wordfence Security", "Seguridad: cortafuegos y escáner de malware", "RNF-04 · RNF-08"),
            ("WP Fastest Cache", "Caché de páginas, Gzip y de navegador", "RNF-01 · RNF-06"),
            ("WP Statistics", "Analítica sin cookies y conforme al RGPD", "RNF-08 · RNF-01"),
-           ("Yoast SEO", "SEO: metadatos, sitemap y contenido", "RF-01 · RF-02 · UI-02 · OBJ-02")]
+           ("Yoast SEO", "SEO: metadatos, sitemap y contenido", "RF-01 · RF-02 · IR-03 · UI-02 · OBJ-02")]
     for i, (n, f, t) in enumerate(obl):
         _, y = plugin(40, 95 + i * 98, n, f, t)
         ax.plot([420, 470], [y + 41, 395], color="#888", lw=1.1, zorder=1)
 
     ax.text(1140, 70, "Plugins funcionales (instalados)", fontsize=11, fontweight="bold", color=VERDE)
-    fun = [("Advanced Custom Fields", "Campos de actas y delegaciones", "RF-03 · RF-04 · RF-06 · RF-07 · RF-15"),
-           ("Fluent Forms", "Formularios: buzón y mediación", "RF-08 · RF-09 · RF-13 · RN-02 · RNF-04"),
-           ("Members", "Roles y permisos (Ejecutiva, Delegado, Estudiante)", "RF-05 · RF-14 · RN-01 · RN-03 · RN-04"),
-           ("The Events Calendar", "Calendario de asambleas y eventos (HU-10)", "RF-11 · RF-12 · RN-05 · UI-06")]
+    fun = [("Advanced Custom Fields", "Campos de actas y delegaciones", "RF-03 · RF-04 · RF-06 · RF-07 · IR-04 · IR-05"),
+           ("Fluent Forms", "Formularios: buzón y mediación", "RF-08 · RF-09 · RF-13 · IR-06 · IR-08 · RN-02"),
+           ("Members", "Roles y permisos (Ejecutiva, Delegado, Estudiante)", "RF-05 · RF-14 · IR-09 · RN-01 · RN-03 · RN-04"),
+           ("The Events Calendar", "Calendario de asambleas y eventos (HU-10)", "RF-11 · RF-12 · IR-07 · RN-05 · UI-06")]
     for i, (n, f, t) in enumerate(fun):
         _, y = plugin(1140, 95 + i * 98, n, f, t)
         ax.plot([1140, 1090], [y + 41, 395], color="#888", lw=1.1, zorder=1)
 
     ax.text(590, 505, "Plugin propio del equipo (instalado)", fontsize=11, fontweight="bold", color=AZUL)
-    plugin(590, 520, "CADUS Portal", "Roles, buzón, mediación, votaciones", "RF-01 a RF-15 · RN-01 a RN-05 · UI-01 a UI-08")
+    plugin(590, 520, "CADUS Portal", "Roles, buzón, mediación, votaciones", "RF-01 a RF-15 · IR-01 a IR-09 · RN-01 a RN-05 · UI-01 a UI-08")
     ax.plot([780, 780], [475, 520], color="#888", lw=1.1, zorder=1)
     ax.text(40, 625, "Decisiones del Sprint 2: plugins previstos que no se han instalado", fontsize=11, fontweight="bold", color=NARANJA)
     prev = [("SupportCandy (descartado)", "Tickets: módulo propio (HU-09a)", "RF-10 · RN-03"),

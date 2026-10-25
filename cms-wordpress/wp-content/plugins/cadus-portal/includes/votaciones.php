@@ -321,9 +321,9 @@ function cadus_votaciones_errores(int $id): array
         if (!cadus_votaciones_es_asamblea((int) get_post_meta($id, '_cadus_vot_asamblea', true))) {
             $errores[] = 'Debe vincularse a una asamblea ya creada en el calendario (RN-05).';
         }
-    } elseif ((string) get_post_meta($id, '_cadus_vot_asamblea_titulo', true) === ''
-        || !cadus_votaciones_ts_sql((string) get_post_meta($id, '_cadus_vot_asamblea_fecha', true))) {
-        $errores[] = 'Indica el título y la fecha de la asamblea a la que se vincula (RN-05).';
+    } else {
+        // Sin The Events Calendar no hay asambleas que vincular: la votación se queda en borrador (RN-05).
+        $errores[] = 'The Events Calendar no está activo: sin calendario no se puede vincular la votación a una asamblea (RN-05).';
     }
     $apertura = cadus_votaciones_ts((string) get_post_meta($id, '_cadus_vot_apertura', true));
     $cierre = cadus_votaciones_ts((string) get_post_meta($id, '_cadus_vot_cierre', true));

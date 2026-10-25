@@ -352,6 +352,8 @@ function cadus_buzon_crear_ticket($insert_id, $form_data, $form): void
             '_cadus_tipo' => $type, '_cadus_estado' => 'abierto',
             '_cadus_confidencial' => $type === 'Reclamación académica' ? '1' : '0',
             '_cadus_entrada_ff' => (int) $insert_id,
+            // La aceptación del tratamiento de datos se conserva con el ticket aunque se purgue la entrada de Fluent Forms.
+            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de octubre de 2026',
         ];
         foreach ($meta as $key => $value) {
             if (!add_post_meta($post_id, $key, wp_slash($value), true)) {

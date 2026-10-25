@@ -2,7 +2,7 @@
 # El portal (cms-wordpress/) sigue funcionando con normalidad.
 
 # Volcados de la base de datos, proyecto REMUS, registros y scripts de apoyo: nunca por HTTP
-<FilesMatch "\.(sql|rem|log|ps1|py|csv|env)$">
+<FilesMatch "\.(sql|rem|log|ps1|py|csv|env|md)$">
     Require all denied
 </FilesMatch>
 

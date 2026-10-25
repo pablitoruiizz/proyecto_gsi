@@ -572,7 +572,7 @@ doc.add_heading("6.1 Portal público", 2)
 rico("**Página principal.** Es una sola página con diez bloques que alternan los colores corporativos del CADUS (granate, dorado y gris oscuro): cabecera con el logotipo y el menú principal, banner con el lema «La voz del alumnado» y tres contadores reales (actas y normativas, delegaciones y comunicados publicados), la presentación de los más de 40 años del CADUS, los accesos a las secciones (comunicados, actas, delegaciones, buzón, seguimiento y calendario), las últimas noticias con filtro por categoría, los próximos eventos del calendario, «Nuestro trabajo» (objetivos de la web oficial), la galería de fotos, el buscador, los tres pasos del buzón y el pie con los datos de contacto. Cubre UI-01, UI-02, IR-01, RF-01, RF-11 e HU-01, HU-02 y HU-18.")
 trozos = cortes("p01-portada.jpg", CAP2, 5)
 for i, caja in enumerate(trozos, 1):
-    n_fig = figura("p01-portada.jpg", f"Página principal, parte {i} de {len(trozos)}. UI-01 · UI-02 · IR-01 · HU-01 · HU-02 · HU-18.", 15, CAP2, caja=caja)
+    n_fig = figura("p01-portada.jpg", f"Página principal, parte {i} de {len(trozos)}. UI-01 · UI-02 · IR-01 · IR-02 · HU-01 · HU-02 · HU-18.", 15, CAP2, caja=caja)
     if i == 1:
         nfig["p01-portada.jpg"] = n_fig
     par(["Parte 1: cabecera con logotipo y menú principal, banner con el lema y los tres contadores, y presentación de los más de 40 años del CADUS.",
@@ -585,15 +585,15 @@ publicas = [
      "Presenta al CADUS y enlaza con su gobierno y estatutos. Lleva un aviso visible de que el texto es provisional hasta que la Delegación General lo valide. Es el segundo elemento del menú principal."),
     ("p03-noticias.jpg", "Noticias y comunicados con filtro por palabra clave, categoría y año. RF-01 · RF-02 · IR-03 · HU-01 · HU-02.",
      "Los comunicados se clasifican en Becas, Movilidad, Normativa y Eventos. El formulario filtra por palabra clave, categoría y año y el listado se pagina. Cada categoría tiene su color."),
-    ("p04-actas-y-normativa.jpg", "Repositorio de actas y normativas con filtro por tipo y descarga en PDF. RF-03 · RF-04 · UI-05 · HU-03 · HU-04.",
+    ("p04-actas-y-normativa.jpg", "Repositorio de actas y normativas con filtro por tipo y descarga en PDF. RF-03 · RF-04 · IR-04 · UI-05 · HU-03 · HU-04.",
      "La tabla se ordena por fecha y se filtra por tipo (acta o normativa). Solo se listan los documentos publicados: los que están pendientes de aprobación de la Ejecutiva no aparecen (RN-01). Cada fila tiene su botón de descarga del PDF."),
-    ("p05-delegaciones.jpg", "Directorio de delegaciones agrupado por facultad o escuela. RF-06 · RF-07 · UI-03 · HU-05 · HU-06.",
+    ("p05-delegaciones.jpg", "Directorio de delegaciones agrupado por facultad o escuela. RF-06 · RF-07 · IR-05 · UI-03 · HU-05 · HU-06.",
      "Cada centro agrupa sus delegaciones y enlaza con su ficha (delegado, correo, teléfono, horario y enlaces). Hay una ficha de ejemplo por cada uno de los seis centros cargados; faltan las de Química, Física, Biología y la ETSI, que dependen de los datos del CADUS."),
     ("p06-atencion-al-estudiante.jpg", "Atención al estudiante: acceso al buzón, al seguimiento, a la mediación y a las preguntas frecuentes. RF-08 · RF-13 · UI-04.",
      "Reúne en una sola pantalla los cuatro servicios al estudiante con un botón claro en cada tarjeta."),
-    ("p07-buzon.jpg", "Buzón de consultas y reclamaciones. RF-08 · RF-09 · RN-02 · RNF-04 · RNF-08 · UI-04 · HU-07.",
+    ("p07-buzon.jpg", "Buzón de consultas y reclamaciones. RF-08 · RF-09 · IR-06 · RN-02 · RNF-04 · RNF-08 · UI-04 · HU-07.",
      "Formulario con correo universitario, asunto, tipo (consulta o reclamación académica), descripción y consentimiento RGPD obligatorio, con enlace al aviso de privacidad. El servidor comprueba que el correo termina en @alum.us.es (RN-02) y, al enviar, entrega un código de seguimiento con el formato CAD-AAAA-NNNNN seguido de un sufijo aleatorio de 32 caracteres hexadecimales, para que no se pueda adivinar. La reclamación se guarda como contenido privado."),
-    ("p08-seguimiento.jpg", "Seguimiento de ticket con código y correo. RF-09 · RN-03 · HU-08.",
+    ("p08-seguimiento.jpg", "Seguimiento de ticket con código y correo. RF-09 · IR-06 · RN-03 · HU-08.",
      "Exige el código y el correo a la vez. Muestra tipo, asunto, estado y respuestas, sin repetir el texto original. Si los datos no coinciden devuelve un mensaje genérico, sin revelar si el código existe, y limita los intentos. La página no se guarda en caché."),
     ("p09-faq.jpg", "Preguntas frecuentes. RF-08 · RNF-07 · UI-04 · E2-16.",
      "Respuestas desplegables a las dudas habituales: quién puede usar el buzón, diferencia entre consulta y reclamación, cómo saber el estado y qué hacer si se pierde el código."),
@@ -603,7 +603,7 @@ publicas = [
      "Calendario de The Events Calendar con vistas de lista, mes y día, buscador y suscripción. Está en el menú principal y alimenta los próximos eventos de la portada. Los eventos de la captura son de ejemplo (llevan «(ejemplo)» en el título); los reales se cargarán con la tarea E2-19."),
     ("p11-votaciones.jpg", "Convocatorias de votación. RF-12 · RN-05 · IR-07 · UI-06 · HU-11.",
      "Lista las convocatorias, cada una vinculada a una asamblea del calendario (RN-05) y con apertura y cierre. La papeleta, que solo se mostraría mientras la votación está abierta, depende de YOP Poll, que no está instalado (sección 5.2): hoy el portal publica las convocatorias, pero no permite emitir el voto, así que RF-12 está parcialmente implementado. La convocatoria de la captura es de ejemplo y está vinculada a la asamblea de ejemplo del calendario."),
-    ("p12-mediacion.jpg", "Solicitud de mediación estudiantil. RF-13 · RN-02 · RN-03 · RNF-08 · UI-07 · HU-12.",
+    ("p12-mediacion.jpg", "Solicitud de mediación estudiantil. RF-13 · IR-08 · RN-02 · RN-03 · RNF-08 · UI-07 · HU-12.",
      "Formulario con nombre, correo @alum.us.es, facultad o escuela, descripción del conflicto y consentimiento RGPD. Al enviarlo entrega la referencia (MED-AAAA-NNNNN más un sufijo aleatorio de 32 caracteres hexadecimales) sin repetir los datos. La aceptación del tratamiento de datos se conserva con la solicitud. La solicitud es privada: solo la Ejecutiva la ve, no aparece en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido."),
     ("p14-contacto.jpg", "Contacto. RNF-07 · UI-02.",
      "Datos del CADUS: dirección en el Pabellón de Uruguay y correo. El mismo bloque de contacto cierra todas las páginas del portal."),
@@ -636,7 +636,7 @@ admin = [
 admin_nuevas = [
     ("a01-plugins.jpg", "Plugins activos. RF-15 · RNF-01 · RNF-04 · RNF-08.",
      "Plugins obligatorios (Wordfence, WP Fastest Cache, WP Statistics y Yoast SEO), funcionales (ACF, Fluent Forms, Members y The Events Calendar) y el plugin propio CADUS Portal."),
-    ("a02-roles.jpg", "Roles del portal en Members. RF-14 · RN-04 · HU-13.",
+    ("a02-roles.jpg", "Roles del portal en Members. RF-14 · IR-09 · RN-04 · HU-13.",
      "Además de los roles de WordPress existen los del CADUS (miembro de la Ejecutiva, delegado de centro y estudiante), con los permisos descritos en la sección de pruebas."),
     ("a03-escritorio-ejecutivo.jpg", "Escritorio de la Ejecutiva con accesos directos. RF-15 · UI-08 · HU-19b.",
      "Panel de inicio con accesos a noticias, actas, delegaciones, tickets del buzón y calendario, con los avisos de lo pendiente (por ejemplo, un acta que espera aprobación)."),

@@ -10,7 +10,7 @@ import sys
 from playwright.sync_api import sync_playwright
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-PHP = os.path.join(RAIZ, "..", "..", "apps proyecto", "php", "php.exe")
+PHP = os.environ.get("PHP_EXE") or os.path.join(RAIZ, "..", "..", "apps proyecto", "php", "php.exe")  # PHP_EXE: ruta de php.exe si no es la de Wamp del equipo
 HELPER = os.path.join(RAIZ, "scripts", "pruebas", "rn03_auditoria.php")
 BASE = "http://localhost/proyecto_gsi/cms-wordpress"
 SALIDA = os.path.join(RAIZ, "docs", "entrega", "img", "capturas2")
