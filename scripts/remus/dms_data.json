@@ -1,0 +1,895 @@
+{
+  "date": "2026-10-30",
+  "version": [
+    1,
+    0
+  ],
+  "cName": "DMS del CADUS",
+  "dName": "DMS del CADUS",
+  "organizations": [
+    {
+      "oid": 13,
+      "name": "CADUS - Consejo de Alumnos de la Universidad de Sevilla",
+      "address": "Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla",
+      "telephone": "PD",
+      "fax": "PD"
+    },
+    {
+      "oid": 14,
+      "name": "Equipo de proyecto GSI",
+      "address": "Universidad de Sevilla - Gestión de Sistemas de Información (GSI)",
+      "telephone": "PD",
+      "fax": "PD"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Delegación General del CADUS",
+      "role": "Cliente y usuario (Ejecutiva del CADUS)",
+      "customer": true,
+      "developer": false,
+      "user": true,
+      "org": 13
+    },
+    {
+      "name": "Pablo Ruiz Vidal",
+      "role": "Product Owner y Dev Infraestructura",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Joaquin Luna Canela",
+      "role": "Scrum Master y Dev Portada",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Miguel Angel Camacho Martin",
+      "role": "Dev Sección Institucional y Normativa",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Alvaro Martinez Ocaña",
+      "role": "Dev Directorio de Delegaciones",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Marcos-Paban Delgado Rodriguez",
+      "role": "Dev Atención al Estudiante y Buzón",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    }
+  ],
+  "owner": "Pablo Ruiz Vidal",
+  "client": "Delegación General del CADUS",
+  "paragraphs": {
+    "intro": "Este documento presenta los requisitos del sistema de gestión documental (DMS) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El DMS guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal.",
+    "current": "Este documento no analiza en detalle cómo gestiona hoy el CADUS sus documentos internos. Recoge los documentos que el DMS debe organizar, quién puede verlos y cómo se buscan.",
+    "environment": "El equipo de cinco integrantes crea y configura el DMS en SharePoint de la Universidad de Sevilla con sus cuentas de alumno. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria se realiza en Discord. Las siguientes restricciones recogen estas decisiones.",
+    "glossary": [
+      {
+        "name": "DMS",
+        "text": "Sistema de gestión documental: almacena documentos, los organiza en sitios y carpetas, los describe con metadatos y controla quién puede verlos."
+      },
+      {
+        "name": "Sitio",
+        "text": "Espacio de SharePoint con sus bibliotecas y sus grupos de permisos (Propietarios, Integrantes y Visitantes). Permite asignar permisos de golpe a muchos documentos."
+      },
+      {
+        "name": "Biblioteca",
+        "text": "Lista de documentos de un sitio. Las columnas de metadatos y las vistas se definen en cada biblioteca."
+      },
+      {
+        "name": "Metadato",
+        "text": "Dato que describe un documento (tipo, fecha, estado…) y se guarda como columna de la biblioteca. Permite filtrar sin abrir los documentos."
+      },
+      {
+        "name": "Vista plana",
+        "text": "Vista de una biblioteca que muestra todos sus documentos sin carpetas, para poder aplicarles filtros por metadatos."
+      },
+      {
+        "name": "Aprobación de contenido",
+        "text": "Opción de SharePoint por la que un documento en borrador solo lo ven su autor y los aprobadores hasta que se aprueba."
+      },
+      {
+        "name": "Acta",
+        "text": "Documento que recoge lo tratado y acordado en un pleno o una asamblea. Solo se ve fuera de la Ejecutiva cuando está aprobada."
+      },
+      {
+        "name": "Expediente",
+        "text": "Documento que recoge una reclamación o una mediación ya resuelta. Se conserva 2 años desde su resolución y solo lo ve la Ejecutiva."
+      },
+      {
+        "name": "Registro de votación",
+        "text": "Documento con el resultado de una votación presencial de asamblea: un voto por delegación (sí, no o abstención), sin guardar el DNI y, si la votación es secreta, sin vincular el voto a la delegación."
+      },
+      {
+        "name": "Delegación",
+        "text": "Representación estudiantil de una Facultad o Escuela. Hay 27; cada una vota con un único voto que representa a sus estudiantes."
+      },
+      {
+        "name": "Ejecutiva del CADUS",
+        "text": "Grupo de miembros del CADUS que gestiona el DMS con la cuenta única del CADUS (dcadus@us.es)."
+      }
+    ]
+  },
+  "actors": [
+    {
+      "id": "ACT-D01",
+      "name": "Ejecutiva del CADUS",
+      "role": "a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios de los sitios (leen y escriben)"
+    },
+    {
+      "id": "ACT-D02",
+      "name": "Delegado",
+      "role": "a los delegados de las 27 delegaciones, que acceden con su correo @alum.us.es y solo leen"
+    },
+    {
+      "id": "ACT-D03",
+      "name": "Estudiante",
+      "role": "a los estudiantes de la Universidad de Sevilla, que solo leen la normativa vigente"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "OBJ-D01",
+      "name": "Documentación reunida",
+      "description": "reunir en un único sitio los documentos internos del CADUS, organizados por tipo y con permisos por rol",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D02",
+      "name": "Búsqueda por metadatos",
+      "description": "localizar un documento por sus metadatos (tipo, fecha, estado, curso, facultad) o con una búsqueda genérica",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D03",
+      "name": "Privacidad y conservación",
+      "description": "proteger los expedientes de reclamaciones y mediaciones y conservarlos solo los 2 años que pide el cliente",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D04",
+      "name": "Constancia de votaciones",
+      "description": "dejar constancia de las votaciones presenciales por delegación sin guardar datos personales innecesarios",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "information": [
+    {
+      "id": "IR-D01",
+      "name": "Documento",
+      "concept": "a cada documento del DMS, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Nombre y archivo",
+        "Tipo de documento (Acta, Normativa, Expediente o Votación)",
+        "Fecha",
+        "Curso académico",
+        "Estado"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "IR-D02",
+      "name": "Acta",
+      "concept": "a un acta de pleno o de asamblea, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Pleno o asamblea",
+        "Fecha",
+        "Estado de aprobación (borrador o aprobada)",
+        "Curso académico",
+        "Resumen del contenido (deseable)"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "IR-D03",
+      "name": "Normativa",
+      "concept": "a una norma o estatuto del CADUS, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Título",
+        "Año",
+        "Estado (vigente o derogada)"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "IR-D04",
+      "name": "Expediente",
+      "concept": "a una reclamación o mediación resuelta, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Código del ticket (CAD) o de la mediación (MED)",
+        "Facultad",
+        "Fecha de resolución",
+        "Fecha de caducidad (resolución más 2 años)"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "IR-D05",
+      "name": "Registro de votación",
+      "concept": "al resultado de una votación presencial de asamblea, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Asamblea y número de votación",
+        "Fecha",
+        "Tipo de voto (nominal o secreto)",
+        "Resultado",
+        "Por cada una de las 27 delegaciones: presente o ausente y si se comprobó su identidad",
+        "Voto nominal: el voto de cada delegación (sí, no o abstención)",
+        "Voto secreto: solo el recuento total de sí, no y abstenciones"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "IR-D06",
+      "name": "Metadato",
+      "concept": "a una columna de una biblioteca que describe sus documentos, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Nombre de la columna",
+        "Tipo de columna (elección, fecha, texto, calculada)",
+        "Valores permitidos"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "ui": [
+    {
+      "id": "UI-D01",
+      "name": "Formulario guiado de metadatos",
+      "description": "pedir los metadatos de cada documento en pocos pasos, con listas de valores, para que una persona sin conocimientos informáticos pueda rellenarlos",
+      "comments": "RNF-D02",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "UI-D02",
+      "name": "Vistas predefinidas",
+      "description": "ofrecer vistas planas ya filtradas: normativa vigente, actas aprobadas, votaciones y expedientes caducados",
+      "comments": "RF-D05",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "functional": [
+    {
+      "id": "RF-D01",
+      "name": "Organización en sitios y carpetas",
+      "description": "organizar los documentos en tres sitios (Documentación pública, Órganos de gobierno y Atención al estudiante) con una biblioteca por tipo de documento",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RF-D02",
+      "name": "Tipo de documento obligatorio",
+      "description": "exigir en todo documento el metadato Tipo de documento (Acta, Normativa, Expediente o Votación), además de los propios de su tipo",
+      "comments": "DMS-HU-02",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D03",
+      "name": "Aprobación de actas",
+      "description": "usar la aprobación de contenido para que un acta en borrador solo la vean su autor y la Ejecutiva, y los delegados solo vean las aprobadas",
+      "comments": "DMS-HU-04",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Miguel Angel Camacho Martin"
+      ]
+    },
+    {
+      "id": "RF-D04",
+      "name": "Búsqueda genérica",
+      "description": "buscar por el nombre y por el contenido de los documentos",
+      "comments": "DMS-HU-03",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña"
+      ]
+    },
+    {
+      "id": "RF-D05",
+      "name": "Búsqueda por metadatos",
+      "description": "ofrecer en cada biblioteca una vista plana, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint",
+      "comments": "DMS-HU-03 · DMS-HU-05",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña",
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D06",
+      "name": "Permisos por rol",
+      "description": "asignar permisos por sitio y biblioteca con los grupos Propietario, Integrante y Visitante",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RF-D07",
+      "name": "Fecha de caducidad calculada",
+      "description": "calcular la fecha de caducidad de un expediente como su fecha de resolución más 2 años",
+      "comments": "DMS-HU-06",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Marcos-Paban Delgado Rodriguez"
+      ]
+    },
+    {
+      "id": "RF-D08",
+      "name": "Expedientes caducados",
+      "description": "mostrar los expedientes cuya fecha de caducidad es anterior a hoy para retirarlos",
+      "comments": "DMS-HU-06",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Marcos-Paban Delgado Rodriguez"
+      ]
+    },
+    {
+      "id": "RF-D09",
+      "name": "Plantillas",
+      "description": "ofrecer plantillas de acta y de registro de votación para que todos los documentos tengan la misma estructura",
+      "comments": "DMS-HU-04 · DMS-HU-07",
+      "importance": 2,
+      "urgency": 3,
+      "authors": [
+        "Miguel Angel Camacho Martin"
+      ]
+    },
+    {
+      "id": "RF-D10",
+      "name": "Resumen automático del acta",
+      "description": "generar automáticamente un resumen del contenido del acta como metadato (deseable; solo si sobra tiempo)",
+      "comments": "Sin historia en este sprint",
+      "importance": 3,
+      "urgency": 3,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "usecases": [
+    {
+      "id": "CU-D01",
+      "name": "Redactar, aprobar y archivar un acta",
+      "trigger": "después de cada pleno o asamblea del CADUS",
+      "pre": "La Ejecutiva dispone de la plantilla de acta y del acta redactada",
+      "post": "El acta está aprobada y es visible para los delegados",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "crea el acta a partir de la plantilla en la biblioteca Actas",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "guarda el acta como borrador visible solo para su autor y la Ejecutiva"
+        },
+        {
+          "who": "system",
+          "text": "solicita el tipo de documento, la fecha, el curso académico y la asamblea"
+        },
+        {
+          "who": "actor",
+          "text": "rellena los metadatos y envía el acta a aprobación",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "actor",
+          "text": "aprueba el acta",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "publica el acta aprobada para los delegados"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D02",
+      "name": "Consultar las actas aprobadas",
+      "trigger": "antes de cada asamblea, para repasar lo acordado",
+      "pre": "El delegado ha iniciado sesión con su correo @alum.us.es",
+      "post": "El delegado ha abierto el acta que buscaba",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "abre la vista plana de actas aprobadas",
+          "actor": "ACT-D02"
+        },
+        {
+          "who": "system",
+          "text": "muestra solo las actas aprobadas, sin los borradores"
+        },
+        {
+          "who": "actor",
+          "text": "filtra por fecha, curso o palabra clave",
+          "actor": "ACT-D02"
+        },
+        {
+          "who": "system",
+          "text": "muestra las actas que cumplen los filtros"
+        },
+        {
+          "who": "actor",
+          "text": "abre el acta",
+          "actor": "ACT-D02"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D03",
+      "name": "Consultar la normativa vigente",
+      "trigger": "cuando tienen una duda sobre sus derechos o el funcionamiento del CADUS",
+      "pre": "El usuario puede acceder al sitio Documentación pública",
+      "post": "El usuario ha leído la norma que buscaba",
+      "steps": [
+        {
+          "who": "actor",
+          "actor": "ACT-D02",
+          "text": "o el estudiante entra en el sitio Documentación pública; el delegado accede con su correo @alum.us.es"
+        },
+        {
+          "who": "actor",
+          "text": "abre la vista de normativa vigente",
+          "actor": "ACT-D03"
+        },
+        {
+          "who": "system",
+          "text": "muestra las normas con estado vigente y oculta las derogadas"
+        },
+        {
+          "who": "actor",
+          "text": "busca por palabra clave o filtra por año",
+          "actor": "ACT-D03"
+        },
+        {
+          "who": "system",
+          "text": "muestra las normas que cumplen la búsqueda"
+        },
+        {
+          "who": "actor",
+          "text": "abre la norma",
+          "actor": "ACT-D03"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D04",
+      "name": "Archivar un expediente resuelto",
+      "trigger": "cada vez que se resuelve una reclamación o una mediación",
+      "pre": "La Ejecutiva ha resuelto el ticket o la mediación",
+      "post": "El expediente está archivado con su fecha de caducidad",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "sube el expediente a la biblioteca Expedientes",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "solicita el código, la facultad y la fecha de resolución"
+        },
+        {
+          "who": "actor",
+          "text": "rellena los metadatos",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "calcula la fecha de caducidad (resolución más 2 años)"
+        },
+        {
+          "who": "system",
+          "text": "guarda el expediente visible solo para la Ejecutiva"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D05",
+      "name": "Retirar los expedientes caducados",
+      "trigger": "una vez al mes",
+      "pre": "Existen expedientes con fecha de caducidad anterior a hoy",
+      "post": "Los expedientes caducados se han eliminado, con sus versiones y de la papelera",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "abre la vista de expedientes caducados",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra los expedientes cuya caducidad es anterior a hoy"
+        },
+        {
+          "who": "actor",
+          "text": "elimina cada expediente y vacía la papelera de reciclaje",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "deja de conservar esos expedientes y sus versiones"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D06",
+      "name": "Registrar el resultado de una votación presencial",
+      "trigger": "en cada asamblea con votación",
+      "pre": "Se ha celebrado la votación y se ha comprobado la identidad de los delegados presentes",
+      "post": "Queda constancia del resultado sin guardar el DNI",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "crea el registro a partir de la plantilla en la biblioteca Votaciones",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra una fila por cada delegación para indicar si está presente y si se comprobó su identidad"
+        },
+        {
+          "who": "actor",
+          "text": "marca la presencia y la identidad de cada delegación y el tipo de voto",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "si el voto es nominal, solicita el voto de cada delegación; si es secreto, solo el recuento total"
+        },
+        {
+          "who": "actor",
+          "text": "introduce el resultado",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "guarda el registro visible solo para la Ejecutiva, sin números de DNI"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "nonfunctional": [
+    {
+      "id": "RNF-D01",
+      "name": "Privacidad",
+      "description": "cumplir el RGPD y la LOPDGDD en los expedientes y los registros de votación, sin guardar datos que no sean necesarios",
+      "section": 47,
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RNF-D02",
+      "name": "Facilidad de uso",
+      "description": "permitir que una persona sin conocimientos informáticos suba un documento y rellene sus metadatos con una guía de pocos pasos",
+      "section": 47,
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RNF-D03",
+      "name": "Mantenibilidad",
+      "description": "dejar documentada la estructura de sitios, columnas y permisos para el relevo entre cursos",
+      "section": 47,
+      "importance": 3,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RNF-D04",
+      "name": "Conservación",
+      "description": "conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (excepción aceptada por la periodicidad mensual de la revisión)",
+      "section": 47,
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RNF-D05",
+      "name": "Disponibilidad",
+      "description": "mantener los documentos accesibles durante las asambleas",
+      "section": 47,
+      "importance": 3,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "RN-D01",
+      "name": "Actas aprobadas",
+      "description": "Un acta solo es visible para los delegados cuando un miembro de la Ejecutiva la ha aprobado (coherente con RN-01 del portal).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D02",
+      "name": "Expedientes privados",
+      "description": "Los expedientes de reclamaciones y mediaciones solo los ve la Ejecutiva (coherente con RN-03 del portal).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D03",
+      "name": "Conservación de 2 años",
+      "description": "Un expediente se retira en la primera revisión mensual posterior al cumplimiento de los 2 años desde su resolución, así que se conserva como máximo 2 años y un mes. Retirar significa eliminar el documento, sus versiones y su copia en la papelera de reciclaje.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D04",
+      "name": "Votación sin DNI",
+      "description": "El registro de votación no guarda el número de DNI: solo si se comprobó la identidad del delegado. En una votación secreta tampoco se guarda el voto de cada delegación: la lista de participación y el recuento van separados y no se pueden relacionar.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D05",
+      "name": "Un voto por delegación",
+      "description": "En cada votación cuenta un voto por delegación (27 delegaciones), que representa a sus estudiantes; solo votan los delegados. La plantilla trae una fila por delegación con presente o ausente (la ausencia no es abstención) y cada asamblea puede tener varias votaciones numeradas.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D06",
+      "name": "Tipo de documento",
+      "description": "Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "id": "RC-D01",
+      "name": "SharePoint de la Universidad de Sevilla",
+      "description": "El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D02",
+      "name": "Acceso con correo corporativo",
+      "description": "Los delegados y los estudiantes acceden con su correo corporativo @alum.us.es; la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D03",
+      "name": "Documentación independiente",
+      "description": "La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "traces": [
+    [
+      "OBJ-D01",
+      [
+        "RF-D01",
+        "RF-D06",
+        "RF-D09",
+        "IR-D01",
+        "IR-D02",
+        "IR-D03",
+        "IR-D04",
+        "IR-D05",
+        "RNF-D03",
+        "RNF-D05"
+      ]
+    ],
+    [
+      "OBJ-D02",
+      [
+        "RF-D02",
+        "RF-D04",
+        "RF-D05",
+        "IR-D06",
+        "UI-D02",
+        "RN-D06"
+      ]
+    ],
+    [
+      "OBJ-D03",
+      [
+        "RF-D03",
+        "RF-D07",
+        "RF-D08",
+        "RNF-D01",
+        "RNF-D04",
+        "RN-D01",
+        "RN-D02",
+        "RN-D03"
+      ]
+    ],
+    [
+      "OBJ-D04",
+      [
+        "RN-D04",
+        "RN-D05",
+        "IR-D05",
+        "RF-D09"
+      ]
+    ],
+    [
+      "CU-D01",
+      [
+        "RF-D01",
+        "RF-D02",
+        "RF-D03",
+        "RF-D09",
+        "RN-D01",
+        "IR-D02",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D02",
+      [
+        "RF-D03",
+        "RF-D04",
+        "RF-D05",
+        "RF-D06",
+        "RF-D10",
+        "RN-D01",
+        "IR-D02",
+        "ACT-D02"
+      ]
+    ],
+    [
+      "CU-D03",
+      [
+        "RF-D04",
+        "RF-D05",
+        "RF-D06",
+        "IR-D03",
+        "ACT-D03",
+        "ACT-D02"
+      ]
+    ],
+    [
+      "CU-D04",
+      [
+        "RF-D01",
+        "RF-D02",
+        "RF-D07",
+        "RN-D02",
+        "IR-D04",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D05",
+      [
+        "RF-D07",
+        "RF-D08",
+        "RN-D03",
+        "RNF-D04",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D06",
+      [
+        "RF-D01",
+        "RF-D02",
+        "RF-D09",
+        "RN-D04",
+        "RN-D05",
+        "IR-D05",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "UI-D01",
+      [
+        "RNF-D02",
+        "RF-D02"
+      ]
+    ],
+    [
+      "RNF-D01",
+      [
+        "RN-D02",
+        "RN-D04"
+      ]
+    ]
+  ]
+}

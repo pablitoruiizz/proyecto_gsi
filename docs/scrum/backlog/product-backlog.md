@@ -41,8 +41,10 @@
 | HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | Pendiente | Sprint-03 | `[Nombre]` |
 | HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
-| HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Pendiente | Sprint-04 | `[Nombre]` |
-| HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Cancelada | — | `[Nombre]` |
+| HU-22 | Como Delegado, quiero dar de alta a mi sucesor cuando me doy de baja, para que la delegación no se quede sin cuenta. | RF-14, RN-04 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-23 | Como miembro de la Ejecutiva, quiero que los tickets y las mediaciones se borren o anonimicen a los 2 años de resolverse, para cumplir el plazo de conservación. | RNF-08, RN-03 | Media | 2 | Pendiente | Sprint-03 | `[Nombre]` |
 
 ## Roadmap por versiones
 
@@ -53,8 +55,7 @@
 
 ### V2 — Participación, optimización, seguridad y entrega
 - **Sprint-02** (gestión avanzada de contenidos y participación estudiantil; **completado el 24/10/2026**, 29 de 29 SP): HU-09, HU-10, HU-11, HU-12, HU-19
-- **Sprint-03** (optimización, filtros, accesibilidad, seguridad y papeleta de votación): HU-14, HU-15, HU-16, HU-17, HU-21
-- **Sprint-04** (entrega final): HU-20 + pruebas de aceptación, revisión de DoD y documentación final
+- **Sprint-03** (26/10 – 15/11/2026, un único sprint de tres semanas; móvil, accesibilidad, filtros, seguridad, rendimiento, relevo de delegados, borrado a los 2 años, despliegue, pruebas de aceptación y documentación final): HU-14, HU-15, HU-16, HU-17, HU-20, HU-22, HU-23 (36 SP). **HU-21 cancelada** tras la entrevista del 26/10: las votaciones son presenciales y no se publican resultados
 
 ## Reglas mínimas
 - Priorizar por valor para cliente y riesgo.

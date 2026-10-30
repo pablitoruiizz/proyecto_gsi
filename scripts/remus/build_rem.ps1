@@ -138,9 +138,12 @@ foreach ($r in $d.environment) {
 }
 
 # --- 11. autoria, fuentes y trazabilidad ---
+$au = @{}
+foreach ($lst in @($d.objectives, $d.information, $d.ui, $d.functional, $d.usecases, $d.nonfunctional, $d.rules, $d.environment)) { foreach ($r in $lst) { if ($r.authors) { $au[$r.id] = @($r.authors) } } }
 $aI = 0; $sI = 0
 foreach ($c in $src2.Keys) {
-    $aI++; Ins 'IsAuthorOf' @('oid', 'stakeholder', 'specificationObject') @($aI, $owner, $ids[$c])
+    $lista = if ($au.ContainsKey($c)) { $au[$c] } else { @($d.owner) }
+    foreach ($n in $lista) { $aI++; Ins 'IsAuthorOf' @('oid', 'stakeholder', 'specificationObject') @($aI, $stkByName[$n], $ids[$c]) }
     $sI++; $who = if ($src2[$c] -eq 'team') { $owner } else { $client }
     Ins 'IsSourceOf' @('oid', 'stakeholder', 'specificationObject') @($sI, $who, $ids[$c])
 }
@@ -163,9 +166,10 @@ if ($md) {
     $L = New-Object System.Collections.Generic.List[string]
     function Cell($s) { return (([string]$s) -replace "`r?`n", ' ' -replace '\|', '/') }
     function Imp($n) { switch ([int]$n) { 2 { 'Vital' } 3 { 'Importante' } default { 'Quedaría bien' } } }
-    $L.Add('# Hoja de carga para REMUS — Proyecto CADUS'); $L.Add('')
-    $L.Add('> Archivo **generado** por [`scripts/remus/build_rem.ps1`](../../../scripts/remus/README.md) a partir de `scripts/remus/cadus_data.json`. No editar a mano: modificar el JSON y regenerar.'); $L.Add('')
-    $L.Add("Contenido del proyecto [`CADUS.rem`](CADUS.rem) (REMUS), versión $vMaj.$vMin, $($d.date). Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación."); $L.Add('')
+    $datoNombre = [IO.Path]::GetFileName($data); $remNombre = [IO.Path]::GetFileName($dst)
+    $L.Add("# Hoja de carga para REMUS — $($d.cName)"); $L.Add('')
+    $L.Add("> Archivo **generado** por [`scripts/remus/build_rem.ps1`](../../../scripts/remus/README.md) a partir de `scripts/remus/$datoNombre`. No editar a mano: modificar el JSON y regenerar."); $L.Add('')
+    $L.Add("Contenido del proyecto [$remNombre]($remNombre) (REMUS), versión $vMaj.$vMin, $($d.date). Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación."); $L.Add('')
     $L.Add('## 1. Organizaciones'); $L.Add(''); $L.Add('| Nombre | Dirección |'); $L.Add('|---|---|')
     foreach ($o in $d.organizations) { $L.Add("| $(Cell $o.name) | $(Cell $o.address) |") }; $L.Add('')
     $L.Add('## 2. Personas'); $L.Add(''); $L.Add('| Nombre | Rol |'); $L.Add('|---|---|')

@@ -25,11 +25,12 @@ RESPONSABLE = {
     "HU-13": "Pablo", "HU-18": "Pablo", "HU-01": "Joaquín", "HU-02": "Joaquín", "HU-03": "Miguel Ángel", "HU-04": "Miguel Ángel",
     "HU-05": "Álvaro", "HU-06": "Álvaro", "HU-07": "Marcos", "HU-08": "Marcos",
     "HU-09": "Marcos y Pablo", "HU-10": "Miguel Ángel", "HU-11": "Joaquín", "HU-12": "Álvaro", "HU-19": "Pablo, Miguel Ángel y Álvaro",
+    "HU-22": "Miguel Ángel", "HU-23": "Álvaro",
 }
 # Solo se asigna la issue a una cuenta cuando está claro quién es.
 ASIGNADO = {"Pablo": "pablitoruiizz", "Joaquín": "joaquinluna2005-jpg", "Álvaro": "Alvaromartinez07"}
-ITERACIONES = [("Sprint 1", "2026-09-28", 21), ("Sprint 2", "2026-10-19", 7)]
-ESTADO = {"Hecho": "Done", "Pendiente": "Todo"}
+ITERACIONES = [("Sprint 1", "2026-09-28", 21), ("Sprint 2", "2026-10-19", 7), ("Sprint 3", "2026-10-26", 21)]
+ESTADO = {"Hecho": "Done", "Pendiente": "Todo", "Cancelada": "Todo"}  # una historia cancelada se cierra aparte como «not planned»
 # Fechas reales de cierre del Sprint 1 (las issues se cerraron de golpe al crearlas, así que la gráfica nativa de GitHub no las refleja).
 CIERRE = {"PB-002": "2026-09-28", "PB-005": "2026-10-05", **{i: "2026-10-18" for i in
           ["PB-006", "PB-007", "PB-008", "HU-01", "HU-02", "HU-03", "HU-04", "HU-05", "HU-06", "HU-07", "HU-08", "HU-13", "HU-18"]}}
