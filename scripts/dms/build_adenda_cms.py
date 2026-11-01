@@ -53,7 +53,7 @@ def historias():
 def main():
     doc = B.nuevo()
     doc.add_heading("CMS del CADUS — Adenda de la entrega del 08/11/2026", 0)
-    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · Sprint 3 del CMS (26/10 – 15/11/2026) · estado a 30/10/2026", cursiva=True)
+    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · Sprint 3 del CMS (26/10 – 15/11/2026) · estado a 01/11/2026", cursiva=True)
     doc.add_heading("1. Qué se adjunta y qué cambia", 1)
     B.par(doc, "El proyecto del CMS es el mismo, así que se **reutiliza el documento de la entrega 2** (`Entrega2-CMS-CADUS`) para la propuesta de temática, las comparativas (hosting, comunicación, SCRUM, control de versiones y plugins), el análisis, el diseño, los mockups y las capturas. Esta adenda recoge solo lo que cambia desde entonces.")
     B.tabla(doc, ["Contenido pedido para el CMS", "Qué se adjunta"], [
@@ -109,7 +109,7 @@ def main():
 
     doc.add_heading("5. Burndown chart del Sprint 3", 1)
     B.figura(doc, burndown_cms(), "Burndown del Sprint 3 del CMS: línea ideal, hitos semanales y puntos pendientes reales.", 15)
-    B.par(doc, "A 30/10 no hay ninguna historia cerrada en el GitHub Project (36 SP pendientes). La línea ideal es lineal; los hitos semanales (18 SP el 01/11 y 10 SP el 08/11) son el compromiso real del equipo, para no repetir el cierre de última hora de los sprints 1 y 2. El burndown se actualiza cada día en `docs/scrum/burndown/sprint-03.csv`.")
+    B.par(doc, "A 01/11, fin de la semana 1, no hay ninguna historia cerrada en el GitHub Project (36 SP pendientes frente a los 18 SP comprometidos para esa fecha): el equipo va por detrás del hito y la semana 2 debe recuperarlo. La línea ideal es lineal; los hitos semanales (18 SP el 01/11 y 10 SP el 08/11) son el compromiso real del equipo, para no repetir el cierre de última hora de los sprints 1 y 2. El burndown se actualiza cada día en `docs/scrum/burndown/sprint-03.csv`.")
 
     doc.add_heading("6. Implementación", 1)
     B.par(doc, "Las capturas del portal son las de la entrega 2. El Sprint 3 acaba de empezar (planning el 26/10) y todavía no hay historias cerradas; las capturas de móvil, accesibilidad, relevo de delegados y rendimiento se añadirán al documento final del 15/11.")

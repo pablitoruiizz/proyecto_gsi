@@ -1,0 +1,2430 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE rem:requirementsProject SYSTEM "https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/xml/remus.dtd">
+<rem:requirementsProject xmlns:rem="http://rem.lsi.us.es">
+<rem:name>DMS</rem:name>
+<rem:c_requirementsSpecification oid = "CRS-0001">
+<rem:name>DMS del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:preparedFor organizations = "ORG-0001 "/>
+<rem:preparedBy organizations = "ORG-0002 "/>
+<rem:section oid="SEC-0001">
+<rem:name>Introducción</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>1 </rem:number>
+<rem:paragraph oid="PRG-0001">
+<rem:name>Introducción</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Este documento presenta los requisitos del sistema de gestión documental (<rem:ref oid="GLO-0004">DMS</rem:ref>) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El <rem:ref oid="GLO-0004">DMS</rem:ref> guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal.</rem:text>
+</rem:paragraph>
+</rem:section>
+<rem:section oid="SEC-0002">
+<rem:name>Participantes en el Proyecto</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>2 </rem:number>
+<rem:section oid="SEC-0003">
+<rem:name>Organizaciones</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>2.1 </rem:number>
+<rem:organization
+ oid="ORG-0001">
+<rem:name>CADUS - Consejo de Alumnos de la Universidad de Sevilla</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:address>Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla</rem:address>
+<rem:telephone><rem:tbd/></rem:telephone>
+<rem:fax><rem:tbd/></rem:fax>
+</rem:organization>
+<rem:organization
+ oid="ORG-0002">
+<rem:name>Equipo de proyecto GSI</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:address>Universidad de Sevilla - Gestión de Sistemas de Información (GSI)</rem:address>
+<rem:telephone><rem:tbd/></rem:telephone>
+<rem:fax><rem:tbd/></rem:fax>
+</rem:organization>
+</rem:section>
+<rem:section oid="SEC-0004">
+<rem:name>Personas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>2.2 </rem:number>
+<rem:stakeholder oid="STK-0001">
+<rem:name>Delegación General del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Cliente y usuario (<rem:ref oid="GLO-0014">Ejecutiva del CADUS</rem:ref>)</rem:stakeholderRole>
+<rem:isCustomer/>
+<rem:isUser/>
+<rem:worksFor organization = "ORG-0001"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0002">
+<rem:name>Pablo Ruiz Vidal</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Product Owner y Dev Infraestructura</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0003">
+<rem:name>Joaquin Luna Canela</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Scrum Master y Dev Portada</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0004">
+<rem:name>Miguel Angel Camacho Martin</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Dev Sección Institucional y Normativa</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0005">
+<rem:name>Alvaro Martinez Ocaña</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Dev Directorio de Delegaciones</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0006">
+<rem:name>Marcos-Paban Delgado Rodriguez</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Dev Atención al Estudiante y Buzón</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0005">
+<rem:name>Descripción del Sistema Actual</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>3 </rem:number>
+<rem:paragraph oid="PRG-0002">
+<rem:name>Sistema Actual</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Este documento no analiza en detalle cómo gestiona hoy el CADUS sus documentos internos. Recoge los documentos que el <rem:ref oid="GLO-0004">DMS</rem:ref> debe organizar, quién puede verlos y cómo se buscan.</rem:text>
+</rem:paragraph>
+</rem:section>
+<rem:section oid="SEC-0006">
+<rem:name>Objetivos del Sistema</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>4 </rem:number>
+<rem:objective oid="OBJ-0001">
+<rem:name>OBJ-D01 - Documentación reunida</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>reunir en un único <rem:ref oid="GLO-0005">sitio</rem:ref> los documentos internos del CADUS, organizados por tipo y con permisos por rol</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0002">
+<rem:name>OBJ-D02 - Búsqueda por metadatos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>localizar un documento por sus metadatos (tipo, fecha, estado, curso, facultad) o con una búsqueda genérica</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0003">
+<rem:name>OBJ-D03 - Privacidad y conservación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>proteger los expedientes de reclamaciones y mediaciones y conservarlos solo los 2 años que pide el cliente</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0004">
+<rem:name>OBJ-D04 - Constancia de votaciones</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>dejar constancia de las votaciones presenciales por <rem:ref oid="GLO-0013">delegación</rem:ref> sin guardar datos personales innecesarios</rem:description>
+</rem:objective>
+</rem:section>
+<rem:section oid="SEC-0007">
+<rem:name>Catálogo de Requisitos del Sistema</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>5 </rem:number>
+<rem:section oid="SEC-0008">
+<rem:name>Requisitos de Información</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.1 </rem:number>
+<rem:informationRequirement oid="IRQ-0001">
+<rem:name>IR-D01 - Documento</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada documento del <rem:ref oid="GLO-0004">DMS</rem:ref>, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1030">
+<rem:description>Nombre y archivo</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1031">
+<rem:description>Tipo de documento (<rem:ref oid="GLO-0010">Acta</rem:ref>, Normativa, <rem:ref oid="GLO-0011">Expediente</rem:ref> o Votación)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1032">
+<rem:description>Fecha</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1033">
+<rem:description>Curso académico</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1034">
+<rem:description>Estado</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0002">
+<rem:name>IR-D02 - Acta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a un <rem:ref oid="GLO-0010">acta</rem:ref> de pleno o de asamblea, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1036">
+<rem:description>Pleno o asamblea</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1037">
+<rem:description>Fecha</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1038">
+<rem:description>Estado de aprobación (borrador o aprobada)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1039">
+<rem:description>Curso académico</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1040">
+<rem:description>Resumen del contenido (deseable)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0003">
+<rem:name>IR-D03 - Normativa</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a una norma o estatuto del CADUS, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1042">
+<rem:description>Título</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1043">
+<rem:description>Año</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1044">
+<rem:description>Estado (vigente o derogada)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0004">
+<rem:name>IR-D04 - Expediente</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a una reclamación o mediación resuelta, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1046">
+<rem:description>Código del ticket (CAD) o de la mediación (MED)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1047">
+<rem:description>Facultad</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1048">
+<rem:description>Fecha de resolución</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1049">
+<rem:description>Fecha de caducidad (resolución más 2 años)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0005">
+<rem:name>IR-D05 - Registro de votación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>al resultado de una votación presencial de asamblea, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1051">
+<rem:description>Asamblea y número de votación</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1052">
+<rem:description>Fecha</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1053">
+<rem:description>Tipo de voto (nominal o secreto)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1054">
+<rem:description>Resultado</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1055">
+<rem:description>Por cada una de las 27 delegaciones: presente o ausente y si se comprobó su identidad</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1056">
+<rem:description>Voto nominal: el voto de cada <rem:ref oid="GLO-0013">delegación</rem:ref> (sí, no o abstención)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1057">
+<rem:description>Voto secreto: solo el recuento total de sí, no y abstenciones</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0006">
+<rem:name>IR-D06 - Metadato</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a una columna de una <rem:ref oid="GLO-0006">biblioteca</rem:ref> que describe sus documentos, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1059">
+<rem:description>Nombre de la columna</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1060">
+<rem:description>Tipo de columna (elección, fecha, texto, calculada)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1061">
+<rem:description>Valores permitidos</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+</rem:section>
+<rem:section oid="SEC-0009">
+<rem:name>Requisitos de Interfaz de Usuario y Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.2 </rem:number>
+<rem:section oid="SEC-0010">
+<rem:name>Actores</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.1 </rem:number>
+<rem:actor oid="ACT-0001">
+<rem:name>Ejecutiva del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios de los sitios (leen y escriben)</rem:actorRole>
+</rem:actor>
+<rem:actor oid="ACT-0002">
+<rem:name>Delegado</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a los delegados de las 27 delegaciones, que acceden con su correo @alum.us.es y solo leen</rem:actorRole>
+</rem:actor>
+<rem:actor oid="ACT-0003">
+<rem:name>Estudiante</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a los estudiantes de la Universidad de Sevilla, que solo leen la normativa vigente</rem:actorRole>
+</rem:actor>
+</rem:section>
+<rem:section oid="SEC-0011">
+<rem:name>Requisitos de Interfaz de Usuario</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.2 </rem:number>
+<rem:functionalRequirement oid="FRQ-0001">
+<rem:name>UI-D01 - Formulario guiado de metadatos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>RNF-D02</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>pedir los metadatos de cada documento en pocos pasos, con listas de valores, para que una persona sin conocimientos informáticos pueda rellenarlos</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0002">
+<rem:name>UI-D02 - Vistas predefinidas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>RF-D05</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer vistas planas ya filtradas: normativa vigente, actas aprobadas, votaciones y expedientes caducados</rem:description>
+</rem:functionalRequirement>
+</rem:section>
+<rem:section oid="SEC-0012">
+<rem:name>Requisitos Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.3 </rem:number>
+<rem:functionalRequirement oid="FRQ-0003">
+<rem:name>RF-D01 - Organización en sitios y carpetas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-01</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>organizar los documentos en tres sitios (Documentación pública, Órganos de gobierno y Atención al estudiante) con una <rem:ref oid="GLO-0006">biblioteca</rem:ref> por tipo de documento</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0004">
+<rem:name>RF-D02 - Tipo de documento obligatorio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0003 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-02</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>exigir en todo documento el <rem:ref oid="GLO-0007">metadato</rem:ref> Tipo de documento (<rem:ref oid="GLO-0010">Acta</rem:ref>, Normativa, <rem:ref oid="GLO-0011">Expediente</rem:ref> o Votación), además de los propios de su tipo</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0005">
+<rem:name>RF-D03 - Aprobación de actas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0004 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-04</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>usar la <rem:ref oid="GLO-0009">aprobación de contenido</rem:ref> para que un <rem:ref oid="GLO-0010">acta</rem:ref> en borrador solo la vean su autor y la Ejecutiva, y los delegados solo vean las aprobadas</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0006">
+<rem:name>RF-D04 - Búsqueda genérica</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0005 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-03</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>buscar por el nombre y por el contenido de los documentos</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0007">
+<rem:name>RF-D05 - Búsqueda por metadatos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0003 STK-0005 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-03 · <rem:ref oid="GLO-0004">DMS</rem:ref>-HU-05</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer en cada <rem:ref oid="GLO-0006">biblioteca</rem:ref> una <rem:ref oid="GLO-0008">vista plana</rem:ref>, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un <rem:ref oid="GLO-0005">sitio</rem:ref> se usa la búsqueda de SharePoint</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0008">
+<rem:name>RF-D06 - Permisos por rol</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-01</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>asignar permisos por <rem:ref oid="GLO-0005">sitio</rem:ref> y <rem:ref oid="GLO-0006">biblioteca</rem:ref> con los grupos Propietario, Integrante y Visitante</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0009">
+<rem:name>RF-D07 - Fecha de caducidad calculada</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0006 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-06</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>calcular la fecha de caducidad de un <rem:ref oid="GLO-0011">expediente</rem:ref> como su fecha de resolución más 2 años</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0010">
+<rem:name>RF-D08 - Expedientes caducados</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0006 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-06</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>mostrar los expedientes cuya fecha de caducidad es anterior a hoy para retirarlos</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0011">
+<rem:name>RF-D09 - Plantillas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0004 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments><rem:ref oid="GLO-0004">DMS</rem:ref>-HU-04 · <rem:ref oid="GLO-0004">DMS</rem:ref>-HU-07</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer plantillas de <rem:ref oid="GLO-0010">acta</rem:ref> y de <rem:ref oid="GLO-0012">registro de votación</rem:ref> para que todos los documentos tengan la misma estructura</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0012">
+<rem:name>RF-D10 - Resumen automático del acta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Sin historia en este sprint</rem:comments>
+<rem:importance value = "IMV-0003"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>generar automáticamente un resumen del contenido del <rem:ref oid="GLO-0010">acta</rem:ref> como <rem:ref oid="GLO-0007">metadato</rem:ref> (deseable; solo si sobra tiempo)</rem:description>
+</rem:functionalRequirement>
+<rem:useCase oid="UC-0001">
+<rem:name>CU-D01 - Redactar, aprobar y archivar un acta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>después de cada pleno o asamblea del CADUS</rem:triggeringEvent>
+<rem:precondition>La Ejecutiva dispone de la plantilla de <rem:ref oid="GLO-0010">acta</rem:ref> y del <rem:ref oid="GLO-0010">acta</rem:ref> redactada</rem:precondition>
+<rem:postcondition>El <rem:ref oid="GLO-0010">acta</rem:ref> está aprobada y es visible para los delegados</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1075">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>crea el <rem:ref oid="GLO-0010">acta</rem:ref> a partir de la plantilla en la <rem:ref oid="GLO-0006">biblioteca</rem:ref> Actas</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1076">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>guarda el <rem:ref oid="GLO-0010">acta</rem:ref> como borrador visible solo para su autor y la Ejecutiva</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1077">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>solicita el tipo de documento, la fecha, el curso académico y la asamblea</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1078">
+<rem:number>4</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>rellena los metadatos y envía el <rem:ref oid="GLO-0010">acta</rem:ref> a aprobación</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1079">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>aprueba el <rem:ref oid="GLO-0010">acta</rem:ref></rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1080">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>publica el <rem:ref oid="GLO-0010">acta</rem:ref> aprobada para los delegados</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0002">
+<rem:name>CU-D02 - Consultar las actas aprobadas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>antes de cada asamblea, para repasar lo acordado</rem:triggeringEvent>
+<rem:precondition>El delegado ha iniciado sesión con su correo @alum.us.es</rem:precondition>
+<rem:postcondition>El delegado ha abierto el <rem:ref oid="GLO-0010">acta</rem:ref> que buscaba</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1082">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>abre la <rem:ref oid="GLO-0008">vista plana</rem:ref> de actas aprobadas</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1083">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>muestra solo las actas aprobadas, sin los borradores</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1084">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>filtra por fecha, curso o palabra clave</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1085">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>muestra las actas que cumplen los filtros</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1086">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>abre el <rem:ref oid="GLO-0010">acta</rem:ref></rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0003">
+<rem:name>CU-D03 - Consultar la normativa vigente</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cuando tienen una duda sobre sus derechos o el funcionamiento del CADUS</rem:triggeringEvent>
+<rem:precondition>El usuario puede acceder al <rem:ref oid="GLO-0005">sitio</rem:ref> Documentación pública</rem:precondition>
+<rem:postcondition>El usuario ha leído la norma que buscaba</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1088">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>o el estudiante entra en el <rem:ref oid="GLO-0005">sitio</rem:ref> Documentación pública; el delegado accede con su correo @alum.us.es</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1089">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>abre la vista de normativa vigente</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1090">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>muestra las normas con estado vigente y oculta las derogadas</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1091">
+<rem:number>4</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>busca por palabra clave o filtra por año</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1092">
+<rem:number>5</rem:number>
+<rem:systemAction>
+<rem:description>muestra las normas que cumplen la búsqueda</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1093">
+<rem:number>6</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>abre la norma</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0004">
+<rem:name>CU-D04 - Archivar un expediente resuelto</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cada vez que se resuelve una reclamación o una mediación</rem:triggeringEvent>
+<rem:precondition>La Ejecutiva ha resuelto el ticket o la mediación</rem:precondition>
+<rem:postcondition>El <rem:ref oid="GLO-0011">expediente</rem:ref> está archivado con su fecha de caducidad</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1095">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>sube el <rem:ref oid="GLO-0011">expediente</rem:ref> a la <rem:ref oid="GLO-0006">biblioteca</rem:ref> Expedientes</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1096">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>solicita el código, la facultad y la fecha de resolución</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1097">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>rellena los metadatos</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1098">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>calcula la fecha de caducidad (resolución más 2 años)</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1099">
+<rem:number>5</rem:number>
+<rem:systemAction>
+<rem:description>guarda el <rem:ref oid="GLO-0011">expediente</rem:ref> visible solo para la Ejecutiva</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0005">
+<rem:name>CU-D05 - Retirar los expedientes caducados</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>una vez al mes</rem:triggeringEvent>
+<rem:precondition>Existen expedientes con fecha de caducidad anterior a hoy</rem:precondition>
+<rem:postcondition>Los expedientes caducados se han eliminado, con sus versiones y de la papelera</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1101">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>abre la vista de expedientes caducados</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1102">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>muestra los expedientes cuya caducidad es anterior a hoy</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1103">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>elimina cada <rem:ref oid="GLO-0011">expediente</rem:ref> y vacía la papelera de reciclaje</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1104">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>deja de conservar esos expedientes y sus versiones</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0006">
+<rem:name>CU-D06 - Registrar el resultado de una votación presencial</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>en cada asamblea con votación</rem:triggeringEvent>
+<rem:precondition>Se ha celebrado la votación y se ha comprobado la identidad de los delegados presentes</rem:precondition>
+<rem:postcondition>Queda constancia del resultado sin guardar el DNI</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1106">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>crea el registro a partir de la plantilla en la <rem:ref oid="GLO-0006">biblioteca</rem:ref> Votaciones</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1107">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>muestra una fila por cada <rem:ref oid="GLO-0013">delegación</rem:ref> para indicar si está presente y si se comprobó su identidad</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1108">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>marca la presencia y la identidad de cada <rem:ref oid="GLO-0013">delegación</rem:ref> y el tipo de voto</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1109">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>si el voto es nominal, solicita el voto de cada <rem:ref oid="GLO-0013">delegación</rem:ref>; si es secreto, solo el recuento total</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1110">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>introduce el resultado</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1111">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>guarda el registro visible solo para la Ejecutiva, sin números de DNI</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0013">
+<rem:name>Requisitos No Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.3 </rem:number>
+<rem:nonFunctionalRequirement oid="NFR-0001">
+<rem:name>RNF-D01 - Privacidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>cumplir el RGPD y la LOPDGDD en los expedientes y los registros de votación, sin guardar datos que no sean necesarios</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0002">
+<rem:name>RNF-D02 - Facilidad de uso</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>permitir que una persona sin conocimientos informáticos suba un documento y rellene sus metadatos con una guía de pocos pasos</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0003">
+<rem:name>RNF-D03 - Mantenibilidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0003"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>dejar documentada la estructura de sitios, columnas y permisos para el relevo entre cursos</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0004">
+<rem:name>RNF-D04 - Conservación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (excepción aceptada por la periodicidad mensual de la revisión)</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0005">
+<rem:name>RNF-D05 - Disponibilidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0003"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>mantener los documentos accesibles durante las asambleas</rem:description>
+</rem:nonFunctionalRequirement>
+</rem:section>
+<rem:section oid="SEC-0014">
+<rem:name>Reglas de Negocio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.4 </rem:number>
+<rem:constraintRequirement
+ oid="CRQ-0001">
+<rem:name>RN-D01 - Actas aprobadas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Un <rem:ref oid="GLO-0010">acta</rem:ref> solo es visible para los delegados cuando un miembro de la Ejecutiva la ha aprobado (coherente con RN-01 del portal).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0002">
+<rem:name>RN-D02 - Expedientes privados</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Los expedientes de reclamaciones y mediaciones solo los ve la Ejecutiva (coherente con RN-03 del portal).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0003">
+<rem:name>RN-D03 - Conservación de 2 años</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Un <rem:ref oid="GLO-0011">expediente</rem:ref> se retira en la primera revisión mensual posterior al cumplimiento de los 2 años desde su resolución, así que se conserva como máximo 2 años y un mes. Retirar significa eliminar el documento, sus versiones y su copia en la papelera de reciclaje.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0004">
+<rem:name>RN-D04 - Votación sin DNI</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>El <rem:ref oid="GLO-0012">registro de votación</rem:ref> no guarda el número de DNI: solo si se comprobó la identidad del delegado. En una votación secreta tampoco se guarda el voto de cada <rem:ref oid="GLO-0013">delegación</rem:ref>: la lista de participación y el recuento van separados y no se pueden relacionar.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0005">
+<rem:name>RN-D05 - Un voto por delegación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>En cada votación cuenta un voto por <rem:ref oid="GLO-0013">delegación</rem:ref> (27 delegaciones), que representa a sus estudiantes; solo votan los delegados. La plantilla trae una fila por <rem:ref oid="GLO-0013">delegación</rem:ref> con presente o ausente (la ausencia no es abstención) y cada asamblea puede tener varias votaciones numeradas.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0006">
+<rem:name>RN-D06 - Tipo de documento</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos.</rem:description>
+</rem:constraintRequirement>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0016">
+<rem:name>Entorno de Trabajo del Equipo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>6 </rem:number>
+<rem:paragraph oid="PRG-0003">
+<rem:name>Entorno de trabajo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>El equipo de cinco integrantes crea y configura el <rem:ref oid="GLO-0004">DMS</rem:ref> en SharePoint de la Universidad de Sevilla con sus cuentas de alumno. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria se realiza en Discord. Las siguientes restricciones recogen estas decisiones.</rem:text>
+</rem:paragraph>
+<rem:constraintRequirement
+ oid="CRQ-0007">
+<rem:name>RC-D01 - SharePoint de la Universidad de Sevilla</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>El <rem:ref oid="GLO-0004">DMS</rem:ref> se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0008">
+<rem:name>RC-D02 - Acceso con correo corporativo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Los delegados y los estudiantes acceden con su correo corporativo @alum.us.es; la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0009">
+<rem:name>RC-D03 - Documentación independiente</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>La documentación del <rem:ref oid="GLO-0004">DMS</rem:ref> (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/<rem:ref oid="GLO-0004">dms</rem:ref> del repositorio de GitHub y la coordinación diaria se hace en Discord.</rem:description>
+</rem:constraintRequirement>
+</rem:section>
+<rem:section oid="SEC-0015">
+<rem:name>Glosario de términos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>7 </rem:number>
+<rem:glossaryItem oid="GLO-0004">
+<rem:name>DMS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Sistema de gestión documental: almacena documentos, los organiza en sitios y carpetas, los describe con metadatos y controla quién puede verlos.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0005">
+<rem:name>Sitio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Espacio de SharePoint con sus bibliotecas y sus grupos de permisos (Propietarios, Integrantes y Visitantes). Permite asignar permisos de golpe a muchos documentos.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0006">
+<rem:name>Biblioteca</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Lista de documentos de un <rem:ref oid="GLO-0005">sitio</rem:ref>. Las columnas de metadatos y las vistas se definen en cada <rem:ref oid="GLO-0006">biblioteca</rem:ref>.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0007">
+<rem:name>Metadato</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Dato que describe un documento (tipo, fecha, estado…) y se guarda como columna de la <rem:ref oid="GLO-0006">biblioteca</rem:ref>. Permite filtrar sin abrir los documentos.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0008">
+<rem:name>Vista plana</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Vista de una <rem:ref oid="GLO-0006">biblioteca</rem:ref> que muestra todos sus documentos sin carpetas, para poder aplicarles filtros por metadatos.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0009">
+<rem:name>Aprobación de contenido</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Opción de SharePoint por la que un documento en borrador solo lo ven su autor y los aprobadores hasta que se aprueba.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0010">
+<rem:name>Acta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Documento que recoge lo tratado y acordado en un pleno o una asamblea. Solo se ve fuera de la Ejecutiva cuando está aprobada.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0011">
+<rem:name>Expediente</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Documento que recoge una reclamación o una mediación ya resuelta. Se conserva 2 años desde su resolución y solo lo ve la Ejecutiva.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0012">
+<rem:name>Registro de votación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Documento con el resultado de una votación presencial de asamblea: un voto por <rem:ref oid="GLO-0013">delegación</rem:ref> (sí, no o abstención), sin guardar el DNI y, si la votación es secreta, sin vincular el voto a la <rem:ref oid="GLO-0013">delegación</rem:ref>.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0013">
+<rem:name>Delegación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Representación estudiantil de una Facultad o Escuela. Hay 27; cada una vota con un único voto que representa a sus estudiantes.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0014">
+<rem:name>Ejecutiva del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Grupo de miembros del CADUS que gestiona el <rem:ref oid="GLO-0004">DMS</rem:ref> con la cuenta única del CADUS (dcadus@us.es).</rem:text>
+</rem:glossaryItem>
+</rem:section>
+</rem:c_requirementsSpecification>
+<rem:d_requirementsSpecification oid = "DRS-0002">
+<rem:name>DMS del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:d_requirementsSpecification>
+<rem:defectsSpecification oid = "DFS-0003">
+<rem:name>Registro de Conflictos y Defectos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2018</rem:year>
+<rem:month>10</rem:month>
+<rem:day>3</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:defectsSpecification>
+<rem:changeRequestsSpecification oid = "CHS-0004">
+<rem:name>Registro de Peticiones de Cambio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2018</rem:year>
+<rem:month>10</rem:month>
+<rem:day>3</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:changeRequestsSpecification>
+<rem:trace source="OBJ-0004"  target="IRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0009" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0005" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="ACT-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="FRQ-0006" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="CRQ-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="CRQ-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="CRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="NFR-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="CRQ-0006" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="CRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="NFR-0004" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="CRQ-0001" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0006" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0012" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="IRQ-0006" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="CRQ-0001" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="FRQ-0001"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0009" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="CRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="IRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="ACT-0003" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="IRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="NFR-0004" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="FRQ-0001"  target="NFR-0002" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="CRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="FRQ-0009" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="IRQ-0005" >
+</rem:trace>
+<rem:trace source="NFR-0001"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="CRQ-0005" >
+</rem:trace>
+<rem:trace source="NFR-0001"  target="CRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="ACT-0002" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="UC-0006"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="NFR-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="NFR-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0006" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0004" >
+</rem:trace>
+<rem:predefinedValueTypes>
+<rem:predefinedValueType oid="PVT-0006">
+<rem:name>Time</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type (non-standard)</rem:comments>
+<rem:description>Hour:minutes:seconds</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0002">
+<rem:name>Integer</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Integer numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0005">
+<rem:name>Date</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type (non-standard)</rem:comments>
+<rem:description>Dates</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0004">
+<rem:name>String</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Alphanumeric strings</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0003">
+<rem:name>Natural</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Natural numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0001">
+<rem:name>Real</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Real numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+</rem:predefinedValueTypes>
+<rem:predefinedValues>
+<rem:changeRequestStatusValue oid = "CRV-0003">
+<rem:name>pendiente de aprobar/rechazar</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0001">
+<rem:name>PD</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0002">
+<rem:name>pendiente de análisis</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0005">
+<rem:name>verificado</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0004">
+<rem:name>pendiente de realización</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0006">
+<rem:name>rechazado</rem:name>
+</rem:changeRequestStatusValue>
+<rem:conflictStatusValue oid = "CSV-0001">
+<rem:name>PD</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0003">
+<rem:name>en proceso de negociación</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0002">
+<rem:name>no resuelto</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0004">
+<rem:name>resuelto</rem:name>
+</rem:conflictStatusValue>
+<rem:defectStatusValue oid = "DSV-0001">
+<rem:name>PD</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0002">
+<rem:name>no eliminado</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0004">
+<rem:name>eliminado</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0003">
+<rem:name>en proceso de negociación</rem:name>
+</rem:defectStatusValue>
+<rem:defectTypeValue oid = "DTV-0001">
+<rem:name>PD</rem:name>
+<rem:description>
+<![CDATA[Por Determinar]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0012">
+<rem:name>Incompleción</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no describen todo lo que el sistema se supone que deberá hacer, no describen las respuestas del sistema a todas las posibles situaciones o incluyen elementos por determinar (PD)]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0016">
+<rem:name>No rastreabilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están trazados hacia sus orígenes, bien requisitos de nivel superior (objetivos), bien clientes y usuarios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0004">
+<rem:name>Incomprensibilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no pueden ser entendidos por algún lector]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0009">
+<rem:name>Dependiente del diseño</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos incluyen elementos dependientes del diseño del sistema]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0023">
+<rem:name>Otro</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos presentan otro tipo de defecto]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0014">
+<rem:name>Estabilidad no establecida</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no tienen estimada su estabilidad]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0010">
+<rem:name>Redundancia</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos son redundantes o contienen elementos redundantes]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0003">
+<rem:name>No necesidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no son necesarios porque no contribuyen a satisfacer ninguna necesidad de clientes o usuarios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0002">
+<rem:name>Ambigüedad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos, aunque comprensibles, tienen más de una interpretación posible]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0006">
+<rem:name>Inconsistencia</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no son consistentes, es decir, presentan contradicciones internas o entre varios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0005">
+<rem:name>No verificabilidad</rem:name>
+<rem:description>
+<![CDATA[No se puede comprobar que el sistema satisface el requisito o requisitos]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0011">
+<rem:name>Imprecisión</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no se expresan de forma precisa, es decir, usando cantidades numéricas siempre que sea posible con el nivel adecuado de precisión]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0013">
+<rem:name>Prioridad no establecida</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no tienen establecida su prioridad, es decir, su importancia y su urgencia]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0015">
+<rem:name>Nivel incorrecto de detalle</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están expresados con el nivel adecuado de detalle, es decir, son demasiado abstractos o demasiado detallados]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0007">
+<rem:name>No implementabilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no pueden ser implementados con la tecnología actual o dentro de un coste razonable]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0008">
+<rem:name>Verbosidad excesiva</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos pueden expresarse de forma más concisa sin alterar su significado]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0017">
+<rem:name>Organización incorrecta</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están organizados correctamente según la normativa aplicada o el documento no contiene las secciones obligatorias]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:importanceValue oid = "IMV-0001">
+<rem:name>PD</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0002">
+<rem:name>vital</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0004">
+<rem:name>quedaría bien</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0003">
+<rem:name>importante</rem:name>
+</rem:importanceValue>
+<rem:stabilityValue oid = "SBV-0003">
+<rem:name>media</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0001">
+<rem:name>PD</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0002">
+<rem:name>baja</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0004">
+<rem:name>alta</rem:name>
+</rem:stabilityValue>
+<rem:statusValue oid = "STV-0002">
+<rem:name>en construcción</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0003">
+<rem:name>pendiente de verificación</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0004">
+<rem:name>pendiente de validación</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0001">
+<rem:name>PD</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0005">
+<rem:name>validado</rem:name>
+</rem:statusValue>
+<rem:terminationValue oid = "TEV-0001">
+<rem:name>PD</rem:name>
+</rem:terminationValue>
+<rem:terminationValue oid = "TEV-0002">
+<rem:name>continúa</rem:name>
+</rem:terminationValue>
+<rem:terminationValue oid = "TEV-0003">
+<rem:name>queda sin efecto</rem:name>
+</rem:terminationValue>
+<rem:timeUnitValue oid = "TUV-0001">
+<rem:name>PD</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0009">
+<rem:name>hora(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0008">
+<rem:name>día(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0010">
+<rem:name>minuto(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0007">
+<rem:name>semana(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0002">
+<rem:name>año(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0005">
+<rem:name>mes(es)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0012">
+<rem:name>décima(s) de segundo</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0011">
+<rem:name>segundo(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0014">
+<rem:name>milisegundo(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0013">
+<rem:name>centésima(s) de segundo</rem:name>
+</rem:timeUnitValue>
+<rem:urgencyValue oid = "URV-0002">
+<rem:name>inmediatamente</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0003">
+<rem:name>hay presión</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0001">
+<rem:name>PD</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0004">
+<rem:name>puede esperar</rem:name>
+</rem:urgencyValue>
+</rem:predefinedValues>
+</rem:requirementsProject>

@@ -256,7 +256,7 @@ def entrega():
     doc.add_heading("DMS del CADUS — Entrega del sistema de gestión documental", 0)
     par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · Lab 4 (DMS)", cursiva=True)
     par(doc, "Equipo: Pablo Ruiz Vidal (Product Owner), Joaquín Luna Canela (Scrum Master), Miguel Ángel Camacho Martín, Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez. Cliente: CADUS (contacto: Miguel Ángel Camacho Martín).")
-    par(doc, "Fecha de entrega: 08/11/2026 · Versión 1.0 (estado a 30/10/2026)")
+    par(doc, "Fecha de entrega: 08/11/2026 · Versión 1.0 (estado a 01/11/2026)")
 
     doc.add_heading("1. Resumen", 1)
     par(doc, "El DMS guarda y organiza los documentos internos del CADUS —actas, normativa, expedientes de reclamaciones y registros de votación— en **SharePoint de Microsoft 365 de la Universidad de Sevilla**. Es independiente del portal web (CMS): tiene su propio REM, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos salen de la entrevista con el CADUS del 26/10/2026.")

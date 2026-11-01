@@ -15,8 +15,8 @@ RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
 ARCHIVOS = [
     ("docs/entrega/Entrega2-CMS-CADUS.docx", "CMS/Entrega2-CMS-CADUS.docx"),
     ("docs/entrega/entrega2/Entrega2-CMS-CADUS.pdf", "CMS/Entrega2-CMS-CADUS.pdf"),
-    ("docs/entrega/paquete/CADUS-REM-v2.pdf", "CMS/REM-CADUS-v2.pdf"),
-    ("docs/entrega/paquete/CADUS.rem", "CMS/CADUS.rem"),
+    ("docs/requisitos/rem-remus/REM-CADUS-v2.1.pdf", "CMS/REM-CADUS-v2.1.pdf"),
+    ("docs/requisitos/rem-remus/CADUS.rem", "CMS/CADUS.rem"),
     ("docs/dms/entrega/cms/Adenda-CMS-Sprint3.docx", "CMS/Adenda-CMS-Sprint3.docx"),
     ("docs/dms/entrega/cms/Adenda-CMS-Sprint3.pdf", "CMS/Adenda-CMS-Sprint3.pdf"),
     ("docs/scrum/sprints/sprint-03.md", "CMS/seguimiento/sprint-03.md"),
@@ -27,6 +27,7 @@ ARCHIVOS = [
     ("docs/dms/entrega/Entrega-DMS-CADUS.docx", "DMS/Entrega-DMS-CADUS.docx"),
     ("docs/dms/entrega/Entrega-DMS-CADUS.pdf", "DMS/Entrega-DMS-CADUS.pdf"),
     ("docs/dms/rem-remus/DMS.rem", "DMS/1-Requisitos/DMS.rem"),
+    ("docs/dms/rem-remus/REM-DMS-v1.0.pdf", "DMS/1-Requisitos/REM-DMS-v1.0.pdf"),
     ("docs/dms/rem-remus/carga-remus.md", "DMS/1-Requisitos/carga-remus.md"),
     ("docs/dms/REM-DMS.md", "DMS/1-Requisitos/REM-DMS.md"),
     ("docs/dms/img/uml-dms-analisis.png", "DMS/2-Analisis/uml-dms-analisis.png"),
@@ -52,13 +53,13 @@ Equipo: Pablo Ruiz Vidal, Joaquín Luna Canela, Miguel Ángel Camacho Martín, �
 ## CMS (portal WordPress)
 El proyecto es el mismo que en la entrega anterior, así que se vuelve a adjuntar el documento de la entrega 2 (propuesta de temática, comparativas de hosting, comunicación, SCRUM, control de versiones y plugins, análisis, diseño, mockups y capturas) y se añade una adenda con lo que cambia:
 - `Entrega2-CMS-CADUS.docx` / `.pdf`: documento de la entrega 2, sin cambios (sus gráficos de burndown son los de los sprints anteriores; el burndown de esta entrega es el del Sprint 3, en la adenda).
-- `REM-CADUS-v2.pdf` y `CADUS.rem`: REM del CMS actualizado a la versión 2.1 con las respuestas de la entrevista (el PDF se regenera al exportar de nuevo desde REMUS).
+- `REM-CADUS-v2.1.pdf` y `CADUS.rem`: REM del CMS (versión 2.1), exportado desde REMUS, con las respuestas de la entrevista.
 - `Adenda-CMS-Sprint3.docx` / `.pdf`: cambios de requisitos tras la entrevista, product backlog actualizado, sprint backlog y burndown del Sprint 3.
 - `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
 
 ## DMS (SharePoint de la Universidad de Sevilla)
 - `Entrega-DMS-CADUS.docx` / `.pdf`: documento principal (requisitos, análisis, diseño, casos de uso, implementación y seguimiento SCRUM).
-- `1-Requisitos`: `DMS.rem` (proyecto REMUS), hoja `carga-remus.md` y `REM-DMS.md`.
+- `1-Requisitos`: `DMS.rem` (proyecto REMUS) y `REM-DMS-v1.0.pdf` (su exportación), hoja `carga-remus.md` y `REM-DMS.md`.
 - `2-Analisis`: UML de análisis y diagrama de casos de uso.
 - `3-Diseno`: UML de diseño (del análisis a SharePoint).
 - `4-Casos-de-uso`: 4 documentos de casos de uso (acta y expediente con 2 casos de uso cada uno).
