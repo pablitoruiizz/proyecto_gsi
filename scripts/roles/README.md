@@ -45,13 +45,14 @@ No guarda ni muestra contraseñas y no envía correo. La primera vez se entra co
 
 La cuenta **no se borra ni se crea de nuevo**: pasa al equipo entrante con una contraseña nueva. Así la ficha, las entradas y el historial siguen en la misma cuenta.
 
-- **Delegación**: el delegado saliente o cualquier miembro de la Ejecutiva, con efecto inmediato:
-  1. El equipo nuevo pulsa **«¿Has olvidado tu contraseña?»** con el usuario de la delegación (el enlace llega al correo de la delegación), o la Ejecutiva pone una contraseña nueva desde **Usuarios › Editar**.
-  2. En la misma pantalla, **«Cerrar la sesión en todas partes»**, para que el equipo anterior pierda el acceso al momento.
-  3. Si cambia quién gestiona el buzón de la delegación, el CADUS lo tramita con la US; la cuenta de la web no cambia.
-- **Ejecutiva**: igual, con el usuario `cadus`; el enlace llega a `dcadus@us.es`, al que ya tiene acceso el equipo nuevo.
-
-La función para que el delegado saliente haga el relevo desde su propio perfil, limitado a su delegación, es la HU-22 (Sprint 3).
+- **Delegación** (HU-22): en **Delegaciones › Relevo de la cuenta**, con efecto inmediato.
+  - El **delegado saliente** solo ve su propia cuenta; **la Ejecutiva** elige cualquier cuenta de delegación (nunca la de un administrador).
+  - **Contraseña nueva**: se escribe (o se acepta la que propone la web, de 16 caracteres) y se entrega en mano al equipo entrante. No necesita correo.
+  - **Enlace al correo de la delegación**: el equipo entrante elige su contraseña desde el correo. Necesita correo saliente (SMTP con `dcadus@us.es`); si el correo falla, la web lo avisa y se repite con «Contraseña nueva».
+  - En los dos casos se **cierran todas las sesiones** de la cuenta: el equipo anterior pierde el acceso en ese momento, también en otros navegadores y móviles. La ficha sigue en la misma cuenta.
+  - La Ejecutiva ve una tabla con todas las cuentas, su ficha y el último relevo (fecha, modo y quién lo hizo), y un aviso con las fichas que no tienen cuenta de delegación.
+  - Si cambia quién gestiona el buzón de correo de la delegación, el CADUS lo tramita con la US; la cuenta de la web no cambia.
+- **Ejecutiva**: «¿Has olvidado tu contraseña?» con el usuario `cadus` (el enlace llega a `dcadus@us.es`, al que ya tiene acceso el equipo nuevo), o el administrador pone una contraseña nueva en **Usuarios › Editar** y pulsa «Cerrar la sesión en todas partes». Sin correo saliente, solo vale la segunda opción.
 
 ## Garantías
 

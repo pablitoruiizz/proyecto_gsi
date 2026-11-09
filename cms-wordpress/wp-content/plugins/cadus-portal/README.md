@@ -15,6 +15,7 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo y su menú de administración | HU-10 · RF-11 · UI-02 |
 | `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
 | `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), papeleta de YOP Poll solo con la votación abierta, página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
+| `includes/relevo.php` | «Delegaciones › Relevo de la cuenta»: el delegado saliente (solo su cuenta) o la Ejecutiva (cualquier cuenta de delegación) pasan la cuenta al equipo entrante con una contraseña nueva o un enlace al correo de la delegación; se cierran todas sus sesiones al momento y queda un historial sin datos personales | HU-22 · RF-14 · RN-04 |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)

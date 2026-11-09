@@ -60,7 +60,7 @@ HU-14, HU-15, HU-16, HU-17 y HU-20 se dividen en subtareas para repartir la carg
 | HU-17b | Revisión de saneamiento, nonces y escape de salida; revisión de Wordfence | 2 |
 | HU-20a | Optimización de imágenes (tamaño, formato y carga diferida) | 2 |
 | HU-20b | Caché y minificación con WP Fastest Cache; medición antes y después | 3 |
-| HU-22 | El delegado da de alta a su sucesor (y cualquier ejecutivo puede hacerlo), con efecto inmediato. Criterios: el delegado solo crea a su propio sucesor; al darlo de alta se revoca el acceso del anterior; la ficha pasa a la cuenta nueva; cada delegación tiene exactamente una cuenta activa | 3 |
+| HU-22 | Relevo de la cuenta de la delegación por el delegado saliente o cualquier ejecutivo, con efecto inmediato (una cuenta por delegación, decidido el 09/11). Criterios: el delegado solo actúa sobre su propia cuenta; el relevo cierra todas las sesiones y el equipo anterior pierde el acceso; la ficha sigue en la misma cuenta; cada delegación tiene exactamente una cuenta activa; funciona sin correo saliente | 3 |
 | HU-23 | Borrado o anonimización de tickets y mediaciones a los 2 años de resolverse | 2 |
 | **Total** | | **36** |
 
@@ -103,9 +103,9 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | HU-22 | Relevo de la cuenta de la delegación (decidido el 09/11: **una cuenta por delegación**, con el correo institucional de la delegación). Lo hace el delegado saliente o cualquier ejecutivo, con efecto inmediato: la cuenta no cambia, se pone una contraseña nueva y se cierran sus sesiones. Debe: limitar al delegado a su propia delegación, cortar el acceso del equipo anterior y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
 | HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. | 2 |
 | HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). | 2 |
-| E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. | — |
+| E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. **Respondido por el CADUS (09/11), sin escribir a la US:** acceso por SFTP, HTTPS activo, PHP 7.2/7.3 con MySQL, sin correo saliente ni cron; acceso a la base de datos sin confirmar. | — |
 | E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). | — |
-| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. | — |
+| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. | — |
 
 ### Álvaro Martínez Ocaña — Dev Directorio de Delegaciones (8 SP)
 
