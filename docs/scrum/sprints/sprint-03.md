@@ -20,7 +20,7 @@ La entrevista completa está en [`docs/cliente/entrevista-cliente.md`](../../cli
 | Las votaciones son presenciales, solo votan los delegados (un voto por delegación, con DNI) y no se publican resultados | **HU-21 (papeleta online) cancelada.** El portal solo anuncia la votación, como ya hace HU-11. El registro de la votación pasa al DMS |
 | El delegado puede dar de alta a su sucesor cuando se da de baja | **Nueva HU-22** |
 | Tickets y mediaciones se conservan 2 años desde que se resuelven | **Nueva HU-23** (borrado o anonimización) |
-| Aviso de ticket al correo de `dcadus`, plazo de respuesta de 4 días y datos mínimos (nombre y apellidos, facultad y correo US) | Tarea E3-08 |
+| Aviso de ticket al correo de `dcadus`, plazo de respuesta (máximo 4 días hábiles desde que la Ejecutiva revisa el ticket) y datos mínimos (nombre y apellidos, facultad y correo US) | Tarea E3-08 |
 | Calendario con asambleas y cursos | Tarea E3-07 |
 | Móvil, tablet y ordenador | HU-14 incluye la tablet |
 | Accesibilidad para personas ciegas o daltónicas y pautas DUA | HU-15 añade esos criterios |
@@ -100,7 +100,7 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 
 | ID | Tarea concreta | SP |
 |---|---|---:|
-| HU-22 | Permitir que el delegado dé de alta a su sucesor (y que cualquier ejecutivo lo haga) con efecto inmediato. Debe: limitar al delegado a su propia delegación, revocar el acceso del anterior, traspasar la ficha y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
+| HU-22 | Relevo de la cuenta de la delegación (decidido el 09/11: **una cuenta por delegación**, con el correo institucional de la delegación). Lo hace el delegado saliente o cualquier ejecutivo, con efecto inmediato: la cuenta no cambia, se pone una contraseña nueva y se cierran sus sesiones. Debe: limitar al delegado a su propia delegación, cortar el acceso del equipo anterior y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
 | HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. | 2 |
 | HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). | 2 |
 | E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. | — |
@@ -124,7 +124,7 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | HU-15b | Etiquetas de formularios, textos alternativos, jerarquía de encabezados, ARIA y lector de pantalla. | 3 |
 | HU-16b | Búsqueda en el panel de tickets sin exponer datos del estudiante (RN-03); ampliar la batería de pruebas de privacidad. | 2 |
 | E3-05 | Revisar el REM y la trazabilidad con los cambios del sprint y regenerar `CADUS.rem` con `scripts/remus/build_rem.ps1`: ampliar RN-03 a todas las consultas y RN-01 a todo el contenido, cerrar el plazo de conservación (2 años), añadir RF-14 con el relevo de delegados y los criterios de accesibilidad (DUA) y la regla de las tres operaciones en menos de un minuto. | — |
-| E3-08 | Tickets: aviso al correo de `dcadus` y datos mínimos del estudiante (nombre y apellidos, facultad y correo US). El plazo de respuesta (el cliente dijo «al menos 4 días») no se publica hasta aclarar con Miguel Ángel si es mínimo o máximo, en días naturales o hábiles y desde cuándo se cuenta. | — |
+| E3-08 | Tickets: aviso al correo de `dcadus` y datos mínimos del estudiante (nombre y apellidos, facultad y correo US). Plazo de respuesta aclarado con Miguel Ángel el 09/11: **máximo 4 días hábiles, contados desde que la Ejecutiva revisa el ticket**. Publicarlo en el buzón con el texto «Te responderemos en un máximo de 4 días hábiles desde que revisemos tu consulta». | — |
 
 **Capacidad total comprometida del Sprint:** 36 SP, más las tareas `E3-xx`.
 
