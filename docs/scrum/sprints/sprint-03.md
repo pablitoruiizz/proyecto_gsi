@@ -104,7 +104,7 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. | 2 |
 | HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). | 2 |
 | E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. **Respondido por el CADUS (09/11), sin escribir a la US:** acceso por SFTP, HTTPS activo, PHP 7.2/7.3 con MySQL, sin correo saliente ni cron; acceso a la base de datos sin confirmar. | — |
-| E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). | — |
+| E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). **Hecho (09/11):** `cadus-portal` crea una vez las categorías «Asambleas» y «Cursos» en The Events Calendar (reutiliza «asamblea» o «curso» si ya existen). Al crear un evento, la Ejecutiva marca su categoría; las votaciones solo ofrecen eventos de «Asambleas» (RN-05). | — |
 | E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. | — |
 
 ### Álvaro Martínez Ocaña — Dev Directorio de Delegaciones (8 SP)
