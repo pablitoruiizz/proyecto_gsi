@@ -2,8 +2,8 @@
 
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
 **Sistema:** Portal web institucional (`www.cadus.us.es`) — CMS WordPress
-**Versión del documento:** 2.0 (revisión del Sprint 2, 24/10/2026) · en REMUS: `CADUS.rem` versión 2.0
-**Estado:** Pendiente de validación con el cliente. La entrevista con el CADUS (E2-09) no se ha realizado en el Sprint 2 y pasa al Sprint 3.
+**Versión del documento:** 2.2 (revisión del Sprint 3, 11/11/2026) · en REMUS: `CADUS.rem` versión 2.2
+**Estado:** Revisado con las respuestas de la entrevista con el CADUS del 26/10/2026 ([`entrevista-cliente.md`](../../cliente/entrevista-cliente.md)). Queda por aclarar el plazo de respuesta de los tickets y la lista de delegados.
 
 > Este documento sigue la nomenclatura acordada en [README.md](README.md) de esta carpeta. La trazabilidad HU ↔ RF ↔ Sprint se completa en [`docs/scrum/backlog/product-backlog.md`](../../scrum/backlog/product-backlog.md).
 
@@ -14,8 +14,8 @@
 | Actor | Descripción |
 |---|---|
 | **Usuario Anónimo** | Visitante sin autenticar. Accede a contenido público (noticias, actas publicadas, directorio, calendario). |
-| **Estudiante US** | Usuario autenticado con correo institucional (`@alum.us.es`). Puede enviar consultas/reclamaciones y solicitudes de mediación. |
-| **Representante/Delegado de Centro** | Estudiante con responsabilidad de delegación. Mantiene actualizada la ficha de su Facultad/Escuela en el directorio. |
+| **Estudiante US** | Estudiante de la Universidad de Sevilla con correo institucional (`@alum.us.es`). Puede enviar consultas, reclamaciones y solicitudes de mediación sin necesidad de cuenta en el portal. |
+| **Representante/Delegado de Centro** | Estudiante con responsabilidad de delegación. Mantiene actualizada la ficha de su Facultad/Escuela en el directorio y puede dar de alta a su sucesor cuando se da de baja. |
 | **Miembro de la Ejecutiva del CADUS** | Aprueba y publica actas/normativas, gestiona el buzón de consultas y las convocatorias de asamblea/votación. |
 | **Administrador Web** | Gestiona usuarios, roles, categorías y configuración técnica del portal. |
 
@@ -32,13 +32,13 @@
 | RF-05 | El sistema debe requerir aprobación previa de un miembro de la Ejecutiva antes de publicar cualquier acta o normativa. | Ejecutiva |
 | RF-06 | El sistema debe mostrar un directorio interactivo de Delegaciones de Alumnos por Facultad/Escuela. | Usuario Anónimo, Estudiante |
 | RF-07 | El sistema debe permitir gestionar la ficha de cada delegación (contacto, horario de atención, enlaces). | Delegado, Administrador |
-| RF-08 | El sistema debe ofrecer un buzón digital de consultas y reclamaciones académicas. | Estudiante |
+| RF-08 | El sistema debe ofrecer un buzón digital de consultas y reclamaciones académicas que solo pida los datos mínimos del estudiante: nombre y apellidos, Facultad o Escuela y correo de la US. | Estudiante |
 | RF-09 | El sistema debe generar un código/ticket de seguimiento único para cada consulta enviada. | Estudiante |
-| RF-10 | El sistema debe ofrecer un panel de gestión y respuesta de tickets para la Ejecutiva, con filtros por estado y por tipo y aviso por correo al estudiante cuando hay respuesta (el aviso no incluye el contenido). | Ejecutiva |
-| RF-11 | El sistema debe mostrar un calendario de asambleas, eventos y votaciones estudiantiles. | Usuario Anónimo, Estudiante |
-| RF-12 | El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con apertura y cierre; solo se vota mientras está abierta. | Ejecutiva |
+| RF-10 | El sistema debe ofrecer un panel de gestión y respuesta de tickets para la Ejecutiva, con filtros por estado y por tipo, búsqueda por código o por asunto (sin mirar la descripción ni los datos del estudiante) y aviso por correo al estudiante cuando hay respuesta (el aviso no incluye el contenido). El aviso de cada ticket nuevo llega al correo de la cuenta del CADUS (dcadus@us.es), solo con el código, el tipo, la fecha y el enlace al panel. | Ejecutiva |
+| RF-11 | El sistema debe mostrar un calendario de asambleas, cursos y eventos del CADUS, y los anuncios de votación, con los próximos eventos en la página principal. | Usuario Anónimo, Estudiante |
+| RF-12 | El sistema debe permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con apertura y cierre, para informar de que se va a realizar la votación. Las votaciones son presenciales (solo votan los delegados, un voto por delegación): el portal no recoge votos ni publica resultados. | Ejecutiva |
 | RF-13 | El sistema debe ofrecer un formulario de solicitud de mediación estudiantil que entregue una referencia (MED-AAAA-NNNNN); la Ejecutiva gestiona su estado (pendiente, en proceso, cerrada). | Estudiante, Ejecutiva |
-| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador), con una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es). | Administrador |
+| RF-14 | El sistema debe gestionar roles y permisos diferenciados (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador), con una cuenta única del CADUS (dcadus@us.es) que usan todos los miembros de la Ejecutiva y desde la que se da acceso a los delegados, y una cuenta por delegado con su correo de alumno (@alum.us.es). El delegado puede dar de alta a su sucesor cuando se da de baja, y cualquier miembro de la Ejecutiva también, con efecto inmediato: se revoca el acceso del anterior, se traspasa la ficha y queda una sola cuenta activa por delegación (hay 27 delegaciones y la cuenta representa a la delegación, no a la persona). | Administrador, Ejecutiva, Delegado |
 | RF-15 | El sistema debe ofrecer un panel de administración de contenidos (noticias, actas, delegaciones, tickets, mediaciones, eventos y votaciones) restringido por rol, con solo los menús de cada rol y un escritorio de accesos directos. | Administrador, Ejecutiva, Delegado |
 
 ---
@@ -54,8 +54,8 @@ Modelo conceptual de datos mínimo que debe soportar el CMS (los mismos códigos
 | IR-03 | **Noticia y comunicado** | título, cuerpo, categoría (Becas, Movilidad, Normativa o Eventos), fecha de publicación, autor, estado (borrador/publicada) |
 | IR-04 | **Acta/Documento** | tipo (acta/normativa), fecha, archivo PDF, estado de aprobación, pleno asociado |
 | IR-05 | **Delegación** | Facultad/Escuela, delegado responsable, contacto, horario de atención, enlaces de interés |
-| IR-06 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente, tipo (consulta o reclamación académica), asunto, descripción, estado, historial de respuestas, fecha del último aviso, nivel de confidencialidad |
-| IR-07 | **Calendario y votaciones** | título, tipo (asamblea, evento o votación), fecha y hora, lugar, descripción, asamblea a la que se vincula (votaciones), apertura y cierre, papeleta (encuesta asociada) |
+| IR-06 | **Consulta/Ticket** | código de seguimiento (CAD-AAAA-NNNNN), remitente (nombre y apellidos, Facultad o Escuela y correo `@alum.us.es`: los datos mínimos), tipo (consulta o reclamación académica), asunto, descripción, consentimiento RGPD, estado, historial de respuestas, fecha del aviso a la cuenta del CADUS y del último aviso al estudiante, nivel de confidencialidad |
+| IR-07 | **Calendario y votaciones** | título, tipo (asamblea, curso, evento o votación), fecha y hora, lugar, descripción, asamblea a la que se vincula (votaciones), apertura y cierre de la votación |
 | IR-08 | **Solicitud de mediación** | referencia (MED-AAAA-NNNNN), solicitante, correo `@alum.us.es`, Facultad/Escuela, descripción, consentimiento RGPD, fecha, estado (pendiente, en proceso o cerrada) |
 | IR-09 | **Usuario/Rol** | nombre de la cuenta (la única del CADUS o la de un delegado), correo de acceso (dcadus@us.es o el correo de alumno del delegado), rol asignado, delegación asociada (si aplica) |
 
@@ -68,7 +68,7 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 | UI-01 | Diseño gráfico basado en la identidad visual del CADUS (colores, logotipo y tipografía), adaptado a móviles y tablets | HU-18 · RNF-02 |
 | UI-02 | Página principal con banner, comunicados recientes por categoría, accesos al directorio y al buzón y próximas asambleas, eventos y votaciones | HU-01 · HU-02 |
 | UI-03 | Directorio agrupado por Facultad o Escuela, con la ficha de cada delegación | HU-05 · HU-06 |
-| UI-04 | Buzón de consultas: formulario, seguimiento por código, preguntas frecuentes y aviso de privacidad | HU-07 · HU-08 · E2-16 |
+| UI-04 | Buzón de consultas: formulario con los datos mínimos, seguimiento por código, preguntas frecuentes y aviso de privacidad; todos los campos con etiqueta visible y ayuda asociada | HU-07 · HU-08 · E2-16 · HU-15b · E3-08 |
 | UI-05 | Ficha de acta o normativa con descarga en PDF | HU-03 · HU-04 |
 | UI-06 | Calendario de asambleas y eventos (mes y lista) y convocatorias de votación con apertura y cierre, vinculadas a su asamblea | HU-10 · HU-11 |
 | UI-07 | Solicitud de mediación con consentimiento RGPD y confirmación con la referencia MED-AAAA-NNNNN, sin repetir los datos | HU-12 |
@@ -76,9 +76,9 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 
 | Caso de uso | Actor principal | Resumen |
 |---|---|---|
-| UC-01 Enviar consulta o reclamación | Estudiante US | Se verifica el correo `@alum.us.es`, se registra el ticket privado y se entrega el código de seguimiento |
+| UC-01 Enviar consulta o reclamación | Estudiante US | Se piden los datos mínimos, se verifica el correo `@alum.us.es` (RN-02) y que el envío no es automático (RNF-04), se registra el ticket privado (RN-03), se avisa a la cuenta del CADUS sin datos del estudiante y se entrega el código de seguimiento |
 | UC-02 Aprobar y publicar un acta | Miembro de la Ejecutiva | El acta pasa de borrador a pendiente y a aprobada; solo entonces se publica y se puede descargar |
-| UC-03 Convocar una votación | Miembro de la Ejecutiva | Se crea la convocatoria vinculada a una asamblea del calendario, con apertura y cierre (RN-05) |
+| UC-03 Convocar una votación | Miembro de la Ejecutiva | Se crea la convocatoria vinculada a una asamblea del calendario, con apertura y cierre (RN-05); el portal solo la anuncia, porque la votación es presencial |
 | UC-04 Solicitar una mediación estudiantil | Estudiante US | Se verifica el correo, se registra la solicitud como privada (RN-03) y se entrega la referencia; la Ejecutiva gestiona su estado |
 
 ---
@@ -87,26 +87,27 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 
 | ID | Regla |
 |---|---|
-| RN-01 | Toda acta o normativa requiere aprobación de un miembro de la Ejecutiva antes de publicarse (ver RF-05). |
+| RN-01 | Todo contenido pasa por la Ejecutiva antes de publicarse; en particular, toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva (ver RF-05). |
 | RN-02 | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde correo corporativo `@alum.us.es`. |
-| RN-03 | Las reclamaciones académicas y las solicitudes de mediación se tratan con privacidad estricta: solo son visibles para el remitente y la Ejecutiva; no aparecen en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido. |
+| RN-03 | Todas las consultas, reclamaciones y solicitudes de mediación se tratan con total privacidad: solo son visibles para el remitente y la Ejecutiva; no aparecen en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido. |
 | RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta del delegado de esa delegación o por la cuenta del CADUS (administrador). |
 | RN-05 | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ---
 
-## 5. Requisitos no funcionales (RNF-01 a RNF-08)
+## 5. Requisitos no funcionales (RNF-01 a RNF-09)
 
 | ID | Requisito |
 |---|---|
 | RNF-01 | **Rendimiento:** tiempo de carga de página inferior a 3 s en condiciones estándar de red del campus. |
-| RNF-02 | **Usabilidad móvil:** diseño responsive, funcional en dispositivos móviles y tablets. |
-| RNF-03 | **Accesibilidad:** cumplimiento de WCAG 2.1 nivel AA. |
-| RNF-04 | **Seguridad en formularios:** validación y sanitización de entradas, protección frente a spam e inyección. |
+| RNF-02 | **Usabilidad móvil:** diseño responsive, funcional en móviles, tablets y ordenadores. |
+| RNF-03 | **Accesibilidad:** cumplimiento de WCAG 2.1 nivel AA y de las pautas del Diseño Universal para el Aprendizaje (DUA), con atención a las personas ciegas y daltónicas: campos de formulario con etiqueta y ayuda asociadas, textos alternativos, jerarquía de encabezados sin saltos, mensajes de error anunciados y uso completo con teclado y con lector de pantalla. |
+| RNF-04 | **Seguridad en formularios:** validación y sanitización de entradas, protección frente a spam e inyección. El buzón y la mediación exigen un campo trampa oculto (honeypot) vacío y un nonce válido, y admiten como máximo 10 envíos por dirección IP cada 15 minutos. |
 | RNF-05 | **Compatibilidad técnica:** PHP 8.x y MySQL 8.x sobre servidor Apache local (WampServer; compatible con XAMPP). |
 | RNF-06 | **Disponibilidad:** estabilidad del entorno durante periodos críticos (matrícula, asambleas, votaciones). |
 | RNF-07 | **Mantenibilidad:** configuración y código documentados para facilitar el relevo entre cursos académicos del CADUS. |
-| RNF-08 | **Privacidad:** tratamiento de datos de consultas, reclamaciones y mediaciones conforme a RGPD y LOPDGDD, con consentimiento en cada formulario y aviso de privacidad público. Plazo de conservación pendiente de validar con el CADUS. |
+| RNF-08 | **Privacidad:** tratamiento de datos de consultas, reclamaciones y mediaciones conforme a RGPD y LOPDGDD, con consentimiento en cada formulario y aviso de privacidad público. Los tickets y las mediaciones se conservan 2 años desde que se resuelven y después se borran o anonimizan; solo se piden nombre y apellidos, facultad y correo de la US. El plazo de respuesta («al menos 4 días») está pendiente de aclarar con el CADUS. |
+| RNF-09 | **Facilidad de uso:** un estudiante debe poder completar en menos de un minuto cada una de estas tres operaciones: crear un ticket en el buzón, consultar el calendario y consultar las asambleas, los eventos y las últimas noticias. |
 
 ---
 
@@ -137,11 +138,27 @@ La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacer
 - Requisitos de información: datos nuevos del ticket, la mediación, la votación y las cuentas; se usan en todo el documento los códigos IR de REMUS.
 - Requisitos de interfaz UI-06 (calendario y votaciones), UI-07 (mediación) y UI-08 (panel de administración por rol), y casos de uso UC-03 (convocar una votación) y UC-04 (solicitar una mediación), con sus trazas.
 
-**Pendiente de validar con el CADUS (entrevista E2-09, Sprint 3):**
+## 7 bis. Revisión del Sprint 3 (E3-05)
 
-- Plazo de conservación de los datos del buzón y de la mediación (RNF-08).
+La entrevista con el CADUS se hizo el 26/10/2026. La versión 2.1 recogió sus respuestas y la versión 2.2 añade lo construido en el Sprint 3.
+
+**Cambios incorporados (versiones 2.1 y 2.2):**
+
+- RN-03: la privacidad se amplía de las reclamaciones y las mediaciones a **todas** las consultas del buzón.
+- RN-01: la aprobación de la Ejecutiva se amplía de las actas y la normativa a **todo** el contenido publicado.
+- RNF-08 · HU-23: se cierra el plazo de conservación: 2 años desde que el ticket o la mediación se resuelven; después se borran o anonimizan.
+- RF-08 · IR-06 · UI-04 · E3-08: el buzón pide los datos mínimos (nombre y apellidos, Facultad o Escuela y correo de la US).
+- RF-10 · E3-08 · HU-16b: aviso de cada ticket nuevo a la cuenta del CADUS (dcadus@us.es) sin datos del estudiante, y búsqueda del panel por código o por asunto.
+- RF-14 · RN-04 · HU-22: relevo de delegados (el delegado o un miembro de la Ejecutiva dan de alta al sucesor, con una sola cuenta activa por delegación).
+- RF-11 · RF-12 · IR-07 · UC-03: el calendario incluye cursos; las votaciones son presenciales y el portal solo las anuncia (HU-21 cancelada).
+- RNF-03 · HU-15: accesibilidad WCAG 2.1 AA con las pautas DUA y atención a personas ciegas y daltónicas.
+- RNF-04 · HU-17a: campo trampa, nonce y límite de envíos en el buzón y la mediación.
+- RNF-09 (nuevo) · E3-04: regla de las tres operaciones en menos de un minuto.
+
+**Pendiente de aclarar con el CADUS:**
+
+- Plazo de respuesta de los tickets: el cliente dijo «al menos 4 días»; falta saber si es mínimo o máximo, en días naturales o hábiles y desde cuándo se cuenta. No se publica hasta entonces (E3-08).
 - Lista de delegados y de sus correos de alumno (RF-14).
-- Prioridades del backlog para el Sprint 3 y conformidad con los requisitos de esta versión.
 - Logotipo e identidad visual oficiales (UI-01).
 
 El proyecto REMUS se regenera desde [`scripts/remus/cadus_data.json`](../../../scripts/remus/cadus_data.json) con `scripts/remus/build_rem.ps1`; la hoja [`carga-remus.md`](carga-remus.md) recoge su contenido.

@@ -28,21 +28,26 @@ if ($action === 'cleanup') {
         wp_delete_post((int) $id, true);
     }
     delete_transient('cadus_seg_' . hash_hmac('sha256', '192.0.2.91', wp_salt('nonce')));
+    delete_transient('cadus_buz_' . hash_hmac('sha256', '192.0.2.91', wp_salt('nonce'))); // límite de envíos del buzón (HU-17a)
 } elseif ($action === 'fixture') {
     $form_id = (int) get_option('cadus_buzon_form_id');
-    $mail_count = 0;
-    add_filter('pre_wp_mail', function ($result) use (&$mail_count) { ++$mail_count; return true; });
+    // Sprint 3 (E3-08): el único correo permitido es el aviso a la Ejecutiva, y no puede llevar datos del ticket.
+    $mail_count = 0; $mail_text = '';
+    add_filter('pre_wp_mail', function ($result, $atts) use (&$mail_count, &$mail_text) { ++$mail_count; $mail_text .= wp_json_encode($atts, JSON_UNESCAPED_UNICODE); return true; }, 10, 2);
     $ff_sensitive_insert = false;
     add_filter('query', function ($sql) use (&$ff_sensitive_insert) {
         if (preg_match('/^\s*(INSERT|UPDATE)/i', $sql) && str_contains($sql, 'fluentform_')
-            && (str_contains($sql, 'RN03-CODEX-SECRETO') || str_contains($sql, 'prueba@alum.us.es'))) {
+            && (str_contains($sql, 'RN03-CODEX-SECRETO') || str_contains($sql, 'RN03-CODEX-NOMBRE') || str_contains($sql, 'prueba@alum.us.es'))) {
             $ff_sensitive_insert = true;
         }
         return $sql;
     });
-    $data = ['email' => 'prueba@alum.us.es', 'asunto' => 'RN03-CODEX-ASUNTO',
+    // Sprint 3: datos mínimos (E3-08) y nonce y campo trampa obligatorios también en el buzón (HU-17a).
+    $data = ['solicitante' => 'RN03-CODEX-NOMBRE', 'email' => 'prueba@alum.us.es', 'centro' => cadus_mediacion_centros()[0],
+        'asunto' => 'RN03-CODEX-ASUNTO',
         'descripcion' => 'RN03-CODEX-SECRETO', 'tipo' => 'Reclamación académica', 'consentimiento' => ['acepto'],
-        '__fluent_form_embded_post_id' => 18, '_fluentform_' . $form_id . '_fluentformnonce' => wp_create_nonce('fluentform_submit')];
+        '__fluent_form_embded_post_id' => 18, '_fluentform_' . $form_id . '_fluentformnonce' => wp_create_nonce('fluentform-submit-form'),
+        'item_' . $form_id . '__fluent_sf' => ''];
     try {
         $result = (new FluentForm\App\Services\Form\SubmissionHandlerService())->handleSubmission($data, $form_id);
         $id = cadus_buzon_ticket_por_entrada((int) $result['insert_id']);
@@ -57,7 +62,9 @@ if ($action === 'cleanup') {
             $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->prefix}{$table} WHERE {$key}=%d", $result['insert_id']));
             rn03_check($table . ': sin copia del envío', $count !== null && (int) $count === 0 && !$wpdb->last_error);
         }
-        rn03_check('Sin wp_mail', $mail_count === 0);
+        rn03_check('Único correo: aviso a la Ejecutiva con el código y sin datos del ticket', $mail_count === 1 && str_contains($mail_text, $code)
+            && !str_contains($mail_text, 'RN03-CODEX-SECRETO') && !str_contains($mail_text, 'RN03-CODEX-ASUNTO')
+            && !str_contains($mail_text, 'RN03-CODEX-NOMBRE') && !str_contains($mail_text, 'prueba@alum.us.es'));
         rn03_check('Feeds/notificaciones FF bloqueados aunque se configuren', apply_filters('fluentform/global_notification_active_types', ['notifications' => 'email_notifications'], $form_id) === []);
         rn03_check('Otros formularios conservan sus feeds', isset(apply_filters('fluentform/global_notification_active_types', ['notifications' => 'email_notifications'], -1)['notifications']));
         rn03_check('Sin revisiones', !post_type_supports('cadus_ticket', 'revisions') && wp_revisions_to_keep(get_post($id)) === 0);

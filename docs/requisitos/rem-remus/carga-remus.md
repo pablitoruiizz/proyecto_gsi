@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/cadus_data.json. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.2, 2026-11-11. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
@@ -42,7 +42,7 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 | IR-03 | Noticias y comunicados | a las noticias y comunicados publicados por el CADUS, más específicamente: | Título; Cuerpo; Categoría: Becas, Movilidad, Normativa o Eventos; Fecha de publicación; Autor; Estado: borrador o publicada |
 | IR-04 | Actas y normativas | a las actas de los plenos y a las normativas del CADUS, más específicamente: | Tipo: acta o normativa; Fecha; Archivo PDF; Estado de aprobación: borrador, pendiente o aprobada; Pleno asociado |
 | IR-05 | Delegaciones de alumnos | a las delegaciones de alumnos de cada centro, más específicamente: | Facultad o Escuela; Delegado o representante responsable; Datos de contacto; Horario de atención; Enlaces de interés |
-| IR-06 | Consultas y reclamaciones | a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente: | Código de seguimiento CAD-AAAA-NNNNN; Remitente con correo @alum.us.es; Tipo: consulta o reclamación académica; Asunto; Descripción; Estado: abierto, en proceso o cerrado; Historial de respuestas; Fecha del último aviso por correo al estudiante; Nivel de confidencialidad |
+| IR-06 | Consultas y reclamaciones | a las consultas y reclamaciones enviadas por los estudiantes al buzón, más específicamente: | Código de seguimiento CAD-AAAA-NNNNN; Remitente: nombre y apellidos, Facultad o Escuela y correo @alum.us.es (datos mínimos); Tipo: consulta o reclamación académica; Asunto; Descripción; Consentimiento RGPD; Estado: abierto, en proceso o cerrado; Historial de respuestas; Fecha del aviso a la cuenta del CADUS y del último aviso por correo al estudiante; Nivel de confidencialidad |
 | IR-07 | Calendario | a las asambleas, eventos y votaciones estudiantiles, más específicamente: | Título; Tipo: asamblea, curso, evento o votación; Fecha y hora; Lugar; Descripción; Asamblea a la que se vincula (para las votaciones); Apertura y cierre de la votación |
 | IR-08 | Solicitudes de mediación | a las solicitudes de mediación estudiantil, más específicamente: | Referencia de la solicitud (MED-AAAA-NNNNN); Solicitante; Correo @alum.us.es; Facultad o Escuela; Descripción del conflicto; Consentimiento RGPD; Fecha de la solicitud; Estado: pendiente, en proceso o cerrada |
 | IR-09 | Usuarios y roles | a las personas con cuenta en el portal, más específicamente: | Nombre de la cuenta (la única del CADUS o la de un delegado); Correo de acceso: dcadus@us.es para la cuenta del CADUS o el correo de alumno (@alum.us.es) del delegado; Rol: estudiante, delegado, miembro de la Ejecutiva o administrador; Delegación asociada (si es delegado) |
@@ -64,7 +64,7 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 | UI-01 | Diseño gráfico | basarse en la identidad visual del CADUS (colores, logotipo y tipografía institucionales) y adaptarse a móviles y tablets | HU-18 · RNF-02 |
 | UI-02 | Página principal | contar con una página principal donde se coloquen estas secciones:  - Banner institucional del CADUS  - Comunicados recientes, clasificados por categoría  - Accesos destacados al directorio de delegaciones y al buzón de consultas  - Próximas asambleas, eventos y votaciones | HU-01 · HU-02 |
 | UI-03 | Directorio de delegaciones | mostrar el directorio agrupado por Facultad o Escuela, con acceso a la ficha de cada delegación (contacto y horario de atención) | HU-05 · HU-06 |
-| UI-04 | Buzón de consultas | ofrecer un formulario de consulta o reclamación, una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios | HU-07 · HU-08 · E2-16 |
+| UI-04 | Buzón de consultas | ofrecer un formulario de consulta o reclamación con los datos mínimos (nombre y apellidos, Facultad o Escuela y correo de la US), una pantalla de seguimiento mediante el código de ticket, una página de preguntas frecuentes y un aviso de privacidad enlazado desde los formularios; todos los campos llevan etiqueta visible y ayuda asociada | HU-07 · HU-08 · E2-16 · HU-15b · E3-08 |
 | UI-05 | Ficha de acta o normativa | mostrar el detalle del documento (tipo, fecha y estado) y permitir su descarga en formato PDF | HU-03 · HU-04 |
 | UI-06 | Calendario y votaciones | mostrar el calendario de asambleas y eventos (vista de mes y de lista) y las convocatorias de votación con su apertura y cierre, cada una vinculada a su asamblea | HU-10 · HU-11 |
 | UI-07 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación con consentimiento RGPD y una confirmación que entregue la referencia MED-AAAA-NNNNN sin mostrar los datos de la solicitud | HU-12 |
@@ -81,9 +81,9 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 | RF-05 | Aprobación previa de documentos | exigir la aprobación de un miembro de la Ejecutiva antes de publicar cualquier acta o normativa | HU-03 | Vital |
 | RF-06 | Directorio de delegaciones | mostrar un directorio interactivo de Delegaciones de Alumnos por Facultad o Escuela | HU-05 | Vital |
 | RF-07 | Ficha de delegación | permitir gestionar la ficha de cada delegación: contacto, horario de atención y enlaces | HU-06 | Importante |
-| RF-08 | Buzón de consultas y reclamaciones | ofrecer un buzón digital de consultas y reclamaciones académicas | HU-07 | Vital |
+| RF-08 | Buzón de consultas y reclamaciones | ofrecer un buzón digital de consultas y reclamaciones académicas que solo pida los datos mínimos del estudiante: nombre y apellidos, Facultad o Escuela y correo de la US | HU-07 · E3-08 (Sprint 3) | Vital |
 | RF-09 | Código de seguimiento | generar un código de ticket único para cada consulta enviada y permitir su seguimiento | HU-07 · HU-08 | Vital |
-| RF-10 | Gestión de tickets | ofrecer a la Ejecutiva un panel para gestionar y responder los tickets, filtrarlos por estado y por tipo, y avisar al estudiante por correo cuando hay una respuesta. El aviso solo incluye el código y el enlace de seguimiento, nunca el contenido. Además, el aviso de cada ticket nuevo llega al correo de la cuenta del CADUS (dcadus@us.es) | HU-09a (Sprint 2): módulo propio del buzón en lugar de SupportCandy | Vital |
+| RF-10 | Gestión de tickets | ofrecer a la Ejecutiva un panel para gestionar y responder los tickets, filtrarlos por estado y por tipo, buscarlos por código o por asunto (la búsqueda no mira la descripción ni los datos del estudiante y el listado solo muestra la referencia, el tipo, el estado y la fecha) y avisar al estudiante por correo cuando hay una respuesta. El aviso solo incluye el código y el enlace de seguimiento, nunca el contenido. Además, el aviso de cada ticket nuevo llega al correo de la cuenta del CADUS (dcadus@us.es), solo con el código, el tipo, la fecha y el enlace al panel | HU-09a (Sprint 2): módulo propio del buzón en lugar de SupportCandy. HU-16b y E3-08 (Sprint 3): búsqueda del panel y aviso a la cuenta del CADUS | Vital |
 | RF-11 | Calendario de asambleas y eventos | mostrar un calendario de asambleas, cursos y eventos del CADUS, y los anuncios de votación, con los próximos eventos en la página principal | HU-10 (Sprint 2) | Importante |
 | RF-12 | Convocatorias de votación | permitir publicar convocatorias de votación vinculadas a una asamblea del calendario, con fecha y hora de apertura y de cierre, para informar de que se va a realizar la votación. Las votaciones son presenciales: solo votan los delegados, con un voto por delegación (sí, no o abstención), y el portal no recoge votos ni publica resultados | HU-11 (Sprint 2). HU-21 cancelada tras la entrevista | Importante |
 | RF-13 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación estudiantil que entregue al solicitante una referencia, y permitir a la Ejecutiva cambiar su estado (pendiente, en proceso o cerrada) | HU-12 (Sprint 2) | Importante |
@@ -98,11 +98,12 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 - **Precondición:** El estudiante dispone de un correo institucional @alum.us.es
 - **Postcondición:** Se ha registrado el ticket y el estudiante conoce su código de seguimiento
 - **Pasos:**
-  1. El sistema solicita el asunto y el detalle de la consulta o reclamación
-  2. Estudiante US indica el asunto y el detalle
-  3. El sistema verifica que el correo pertenece al dominio @alum.us.es
-  4. El sistema registra el ticket con su nivel de confidencialidad y genera su código de seguimiento único
-  5. El sistema muestra al estudiante el código para consultar más adelante el estado de su ticket
+  1. El sistema solicita el nombre y apellidos, la Facultad o Escuela, el correo de la US, el asunto, el tipo y el detalle de la consulta o reclamación, y el consentimiento RGPD
+  2. Estudiante US indica sus datos, el asunto y el detalle y acepta el tratamiento de datos
+  3. El sistema verifica que el correo pertenece al dominio @alum.us.es (RN-02) y que el envío no es automático: campo trampa vacío y límite de envíos no superado (RNF-04)
+  4. El sistema registra el ticket como privado (RN-03) y genera su código de seguimiento único
+  5. El sistema avisa a la cuenta del CADUS (dcadus@us.es) de que hay un ticket nuevo, sin incluir los datos del estudiante ni el contenido
+  6. El sistema muestra al estudiante el código para consultar más adelante el estado de su ticket
 
 ### UC-02 - Aprobar y publicar un acta
 
@@ -118,14 +119,14 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 
 ### UC-03 - Convocar una votación
 
-- **Evento disparador:** cuando se convoca una asamblea en la que el alumnado debe votar
+- **Evento disparador:** cuando se convoca una asamblea en la que los delegados deben votar
 - **Precondición:** La asamblea está creada en el calendario
-- **Postcondición:** La convocatoria queda publicada y solo se puede votar entre su apertura y su cierre
+- **Postcondición:** La convocatoria queda publicada con su apertura y su cierre; la votación es presencial y el portal no recoge votos ni publica resultados
 - **Pasos:**
   1. Miembro de la Ejecutiva crea la convocatoria de votación, la vincula a una asamblea e indica la apertura y el cierre
   2. El sistema comprueba que la asamblea existe en el calendario (RN-05)
   3. El sistema publica la convocatoria en el calendario y en la portada
-  4. El sistema permite votar solo mientras la convocatoria está abierta
+  4. El sistema informa de la fecha y la hora de apertura y de cierre de la votación, que se celebra de forma presencial
 
 ### UC-04 - Solicitar una mediación estudiantil
 
@@ -145,12 +146,13 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 |---|---|---|---|
 | RNF-01 | Rendimiento | cargar cada página en menos de 3 segundos en condiciones estándar de red del campus | Importante |
 | RNF-02 | Usabilidad móvil | adaptarse a móviles, tablets y ordenadores mediante un diseño responsive | Vital |
-| RNF-03 | Accesibilidad | cumplir el nivel AA de las pautas de accesibilidad WCAG 2.1 y las pautas del Diseño Universal para el Aprendizaje (DUA), con atención a las personas ciegas y daltónicas | Importante |
-| RNF-04 | Seguridad en formularios | validar y sanear las entradas de todos los formularios y protegerse frente a spam e inyección | Vital |
+| RNF-03 | Accesibilidad | cumplir el nivel AA de las pautas de accesibilidad WCAG 2.1 y las pautas del Diseño Universal para el Aprendizaje (DUA), con atención a las personas ciegas y daltónicas: campos de formulario con etiqueta y ayuda asociadas, textos alternativos, jerarquía de encabezados sin saltos, mensajes de error anunciados y uso completo con teclado y con lector de pantalla | Importante |
+| RNF-04 | Seguridad en formularios | validar y sanear las entradas de todos los formularios y protegerse frente a spam e inyección. El buzón y la mediación exigen un campo trampa oculto (honeypot) vacío y un nonce válido, y admiten como máximo 10 envíos por dirección IP cada 15 minutos | Vital |
 | RNF-05 | Compatibilidad técnica | funcionar con PHP 8.x y MySQL 8.x sobre un servidor Apache local (WampServer, compatible con XAMPP) | Importante |
 | RNF-06 | Disponibilidad | mantenerse estable durante los periodos críticos: matrícula, asambleas y votaciones | Importante |
 | RNF-07 | Mantenibilidad | contar con configuración y código documentados para facilitar el relevo entre cursos del CADUS | Importante |
 | RNF-08 | Privacidad | tratar los datos de consultas, reclamaciones y solicitudes de mediación conforme al RGPD y la LOPDGDD, con consentimiento expreso en cada formulario y un aviso de privacidad público. Los tickets y las mediaciones se conservan 2 años desde que se resuelven y después se borran o anonimizan; solo se piden nombre y apellidos, facultad y correo de la US. El plazo de respuesta («al menos 4 días») está pendiente de aclarar con el CADUS | Vital |
+| RNF-09 | Facilidad de uso | permitir que un estudiante complete en menos de un minuto cada una de estas tres operaciones: crear un ticket en el buzón, consultar el calendario y consultar las asambleas, los eventos y las últimas noticias | Vital |
 
 ## 10. Reglas de negocio
 
@@ -174,14 +176,14 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.1, 2026-10-30.
 
 | Origen | Destinos |
 |---|---|
-| OBJ-01 | UI-01, RNF-01, RNF-02, RNF-03, RNF-05 |
+| OBJ-01 | UI-01, RNF-01, RNF-02, RNF-03, RNF-05, RNF-09 |
 | OBJ-02 | RF-01, RF-02, IR-03, UI-02 |
 | OBJ-03 | RF-03, RF-04, RF-05, IR-04, RN-01, UI-05 |
 | OBJ-04 | RF-06, RF-07, IR-05, RN-04, UI-03 |
 | OBJ-05 | RF-08, RF-09, RF-10, RF-13, IR-06, IR-08, RN-02, RN-03, RNF-04, RNF-08, UI-04, UI-07, UC-04 |
 | OBJ-06 | RF-11, RF-12, IR-07, RN-05, UI-06, UC-03 |
 | UI-02 | IR-01, IR-02 |
-| RF-08 | UC-01 |
+| RF-08 | UC-01, IR-06 |
 | RF-09 | UC-01 |
 | RF-03 | UC-02 |
 | RF-05 | UC-02 |
