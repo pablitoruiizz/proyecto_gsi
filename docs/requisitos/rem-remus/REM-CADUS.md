@@ -2,8 +2,8 @@
 
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla)
 **Sistema:** Portal web institucional (`www.cadus.us.es`) — CMS WordPress
-**Versión del documento:** 2.2 (revisión del Sprint 3, 11/11/2026) · en REMUS: `CADUS.rem` versión 2.2
-**Estado:** Revisado con las respuestas de la entrevista con el CADUS del 26/10/2026 ([`entrevista-cliente.md`](../../cliente/entrevista-cliente.md)). Queda por aclarar el plazo de respuesta de los tickets y la lista de delegados.
+**Versión del documento:** 2.3 (revisión del Sprint 3, 12/11/2026) · en REMUS: `CADUS.rem` versión 2.3
+**Estado:** Revisado con las respuestas de la entrevista con el CADUS del 26/10/2026 ([`entrevista-cliente.md`](../../cliente/entrevista-cliente.md)). El plazo de respuesta de los tickets se aclaró con el CADUS el 09/11/2026. Queda por aclarar la lista de delegados.
 
 > Este documento sigue la nomenclatura acordada en [README.md](README.md) de esta carpeta. La trazabilidad HU ↔ RF ↔ Sprint se completa en [`docs/scrum/backlog/product-backlog.md`](../../scrum/backlog/product-backlog.md).
 
@@ -106,7 +106,7 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 | RNF-05 | **Compatibilidad técnica:** PHP 8.x y MySQL 8.x sobre servidor Apache local (WampServer; compatible con XAMPP). |
 | RNF-06 | **Disponibilidad:** estabilidad del entorno durante periodos críticos (matrícula, asambleas, votaciones). |
 | RNF-07 | **Mantenibilidad:** configuración y código documentados para facilitar el relevo entre cursos académicos del CADUS. |
-| RNF-08 | **Privacidad:** tratamiento de datos de consultas, reclamaciones y mediaciones conforme a RGPD y LOPDGDD, con consentimiento en cada formulario y aviso de privacidad público. Los tickets y las mediaciones se conservan 2 años desde que se resuelven y después se borran o anonimizan; solo se piden nombre y apellidos, facultad y correo de la US. El plazo de respuesta («al menos 4 días») está pendiente de aclarar con el CADUS. |
+| RNF-08 | **Privacidad:** tratamiento de datos de consultas, reclamaciones y mediaciones conforme a RGPD y LOPDGDD, con consentimiento en cada formulario y aviso de privacidad público. Los tickets y las mediaciones se conservan 2 años desde que se resuelven y después se borran o anonimizan; solo se piden nombre y apellidos, facultad y correo de la US. La Ejecutiva responde en un máximo de 4 días hábiles, contados desde que revisa el ticket (aclarado con el CADUS el 09/11/2026); el plazo se publica en el buzón, en la confirmación del ticket y en la FAQ. |
 | RNF-09 | **Facilidad de uso:** un estudiante debe poder completar en menos de un minuto cada una de estas tres operaciones: crear un ticket en el buzón, consultar el calendario y consultar las asambleas, los eventos y las últimas noticias. |
 
 ---
@@ -140,9 +140,9 @@ La revisión prevista tras la entrevista con el CADUS (E2-09) no ha podido hacer
 
 ## 7 bis. Revisión del Sprint 3 (E3-05)
 
-La entrevista con el CADUS se hizo el 26/10/2026. La versión 2.1 recogió sus respuestas y la versión 2.2 añade lo construido en el Sprint 3.
+La entrevista con el CADUS se hizo el 26/10/2026. La versión 2.1 recogió sus respuestas, la versión 2.2 añade lo construido en el Sprint 3 y la versión 2.3 publica el plazo de respuesta de los tickets.
 
-**Cambios incorporados (versiones 2.1 y 2.2):**
+**Cambios incorporados (versiones 2.1 a 2.3):**
 
 - RN-03: la privacidad se amplía de las reclamaciones y las mediaciones a **todas** las consultas del buzón.
 - RN-01: la aprobación de la Ejecutiva se amplía de las actas y la normativa a **todo** el contenido publicado.
@@ -154,10 +154,10 @@ La entrevista con el CADUS se hizo el 26/10/2026. La versión 2.1 recogió sus r
 - RNF-03 · HU-15: accesibilidad WCAG 2.1 AA con las pautas DUA y atención a personas ciegas y daltónicas.
 - RNF-04 · HU-17a: campo trampa, nonce y límite de envíos en el buzón y la mediación.
 - RNF-09 (nuevo) · E3-04: regla de las tres operaciones en menos de un minuto.
+- RNF-08 · E3-08: plazo de respuesta aclarado el 09/11/2026 (máximo 4 días hábiles desde que la Ejecutiva revisa el ticket) y publicado en el buzón, la confirmación y la FAQ.
 
 **Pendiente de aclarar con el CADUS:**
 
-- Plazo de respuesta de los tickets: el cliente dijo «al menos 4 días»; falta saber si es mínimo o máximo, en días naturales o hábiles y desde cuándo se cuenta. No se publica hasta entonces (E3-08).
 - Lista de delegados y de sus correos de alumno (RF-14).
 - Logotipo e identidad visual oficiales (UI-01).
 

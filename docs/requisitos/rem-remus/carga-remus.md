@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/cadus_data.json. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.2, 2026-11-11. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.3, 2026-11-12. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
