@@ -20,7 +20,7 @@ Un expediente es el documento que queda de una reclamación o una mediación ya 
 | Metadato | Tipo de columna | Obligatorio |
 |---|---|---|
 | Tipo de documento | Elección (Expediente) | Sí |
-| Fecha | Fecha | Sí |
+| Fecha | Fecha | No |
 | Curso académico | Elección | No |
 | Código | Texto (`CAD-…` o `MED-…`) | No |
 | Facultad | Elección | No |
@@ -96,20 +96,20 @@ La vista «Caducados» filtra los expedientes cuya fecha de caducidad es anterio
 
 ![CU-D05: eliminación del expediente caducado MED-2024-0002.](../capturas/10-cu-d05-eliminar.jpg)
 
-PENDIENTE (captura de Marcos): la Ejecutiva elimina MED-2024-0002 desde la vista «Caducados». Paso 3 de CU-D05 (RN-D03).
+La Ejecutiva selecciona MED-2024-0002 en la vista «Caducados» y pulsa «Eliminar». SharePoint pide confirmación y avisa de que el archivo irá a la papelera de reciclaje del sitio. Paso 3 de CU-D05 (RN-D03).
 
 ![CU-D05: papelera de reciclaje del sitio vaciada.](../capturas/11-cu-d05-papelera.jpg)
 
-PENDIENTE (captura de Marcos): el expediente aparece en la papelera del sitio y se elimina de ella. Paso 3 de CU-D05 (RN-D03).
+El expediente aparece en la papelera de reciclaje del sitio, eliminado el 12/11/2026 por la cuenta propietaria, con su ubicación original en la biblioteca Expedientes. La Ejecutiva lo selecciona y lo elimina también de aquí. Paso 3 de CU-D05 (RN-D03).
 
 ![CU-D05: papelera de segunda fase sin el expediente.](../capturas/12-cu-d05-papelera-segunda-fase.jpg)
 
-PENDIENTE (captura de Marcos): la papelera de segunda fase ya no contiene el expediente y la vista «Caducados» queda vacía. Paso 4 de CU-D05 y postcondición (RN-D03, RNF-D04).
+En la «Papelera de reciclaje de segundo nivel» la Ejecutiva elimina el expediente de forma permanente; SharePoint avisa de que ya no se podrá restaurar. Después la vista «Caducados» queda vacía. Paso 4 de CU-D05 y postcondición (RN-D03, RNF-D04).
 
 ## 6. Pruebas
 
 | Fecha | Quién | Qué | Resultado |
 |---|---|---|---|
-| 13/11/2026 | Marcos | CU-D05 de principio a fin con MED-2024-0002 (cuenta propietaria) | PENDIENTE |
-| 14/11/2026 | Álvaro | CU-D04 y CU-D05 con el expediente caducado nuevo que prepara Marcos | PENDIENTE |
+| 12/11/2026 | Marcos | CU-D05 de principio a fin con MED-2024-0002 (cuenta propietaria) | Correcto: el expediente se borra de la biblioteca y de las dos papeleras, y «Caducados» queda vacía. Se deja MED-2024-0003 (resuelto el 15/09/2024, caducado desde el 15/09/2026) para la prueba de Álvaro. |
+| 14/11/2026 | Álvaro | CU-D04 y CU-D05 con el expediente caducado MED-2024-0003 | PENDIENTE |
 | 14/11/2026 | Álvaro | Rol estudiante: no ve la biblioteca Expedientes ni por enlace directo | PENDIENTE |
