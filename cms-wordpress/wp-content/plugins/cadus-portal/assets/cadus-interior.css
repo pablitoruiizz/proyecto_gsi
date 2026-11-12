@@ -237,3 +237,26 @@
 
 /* el autor de la publicación no se muestra: firma el CADUS (ver includes/estilo.php) */
 .cadus-interior .entry-meta .meta-author { display: none; }
+
+/* ------------------------------------------------------------------ toques en móvil y tablet (HU-14c)
+   Medido con la emulación de 375 y 768 px: botón del menú, casilla de consentimiento, enlaces del pie y controles del calendario
+   quedaban por debajo de los 44 px recomendados para tocar con el dedo. */
+@media (max-width: 1024px) {
+  .ct-header-trigger { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+  .fluentform .ff-el-form-check { display: flex; align-items: flex-start; gap: 12px; }
+  .fluentform .ff-el-form-check label { margin: 0; padding-top: 3px; }
+  .fluentform .ff-el-form-check-input[type="checkbox"], .fluentform .ff-el-form-check-input[type="radio"] { flex: 0 0 26px; width: 26px; height: 26px; margin: 0; accent-color: #8d0739; }
+  .cadus-contacto__datos a, .cadus-contacto__enlaces a { min-height: 44px; display: inline-flex; align-items: center; }
+  .cadus-interior .tribe-events :is(.tribe-events-c-events-bar__search-button, .tribe-events-c-view-selector__button, .tribe-events-c-subscribe-dropdown__button-text, .tribe-events-c-nav__prev, .tribe-events-c-nav__next, .tribe-events-c-nav__today, .tribe-events-c-top-bar__datepicker-button) {
+    min-height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center;
+  }
+  /* preguntas frecuentes y desplegables */
+  .cadus-interior .entry-content details > summary { min-height: 44px; display: flex; align-items: center; }
+  /* enlaces que van solos en una celda, un dato, un título o una línea: zona táctil de al menos 44 px de alto */
+  .cadus-interior .entry-content :is(dd, td, li > a:only-child, h2, h3, h4) > a:not(.cadus-boton):not(.cadus-chip):not(.cadus-descarga):not(.cadus-delegacion-card__enlace),
+  .cadus-interior .entry-content li > a:not(.cadus-boton):not(.cadus-chip):not(.cadus-descarga):not(.cadus-delegacion-card__enlace):not(:only-child),
+  .cadus-interior .entry-content p > a:is([href*="lostpassword"], [href^="mailto:"], [href^="tel:"]),
+  .cadus-interior .tribe-events :is(.tribe-events-calendar-list__event-title-link, .tribe-events-calendar-list__event-title a) { display: inline-block; padding-block: 10px; }
+  .cadus-ficha dd a { display: inline-block; padding-block: 10px; }
+  .cadus-interior .entry-header a, .cadus-interior .hero-section .meta-categories a { display: inline-block; padding-block: 10px; }
+}
