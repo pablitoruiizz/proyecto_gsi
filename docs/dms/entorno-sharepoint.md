@@ -19,7 +19,7 @@ Cada sitio tiene 5 miembros: Pablo como propietario y, como miembros (grupo Inte
 - **Votaciones:** columnas comunes más Número de votación, Tipo de voto y Resultado; permisos exclusivos (Propietarios e Integrantes; sin Visitantes).
 - **Plantillas:** plantilla de acta y plantilla de registro de votación (27 filas).
 - **Expedientes:** columnas comunes más Código, Facultad, Estado, Fecha de resolución (obligatoria) y Fecha de caducidad (calculada, resolución + 2 años); vista «Caducados»; permisos exclusivos (sin Visitantes).
-- Documentos de ejemplo ficticios en todas las bibliotecas, sin datos personales ni DNI.
+- Documentos de ejemplo ficticios en todas las bibliotecas, sin datos personales ni DNI. **Corregido el 12/11/2026:** los de la carga del 30/10 pesaban 2 bytes (el contenido era `{}`, un fallo de la subida por la API) y no se abrían en Word en línea, en la vista previa ni descargados. Se sustituyeron por 8 Word válidos generados con `scripts/dms/generar_ejemplos_docx.py` (Normativa 3, Actas 2, Votaciones 2 y Expedientes 1), con el mismo nombre y metadatos; el acta aprobada conserva su estado y el borrador sigue en borrador. Quedan por sustituir los archivos que otros hayan subido con el mismo fallo (a 12/11, «Votacion 1 de la asamblea de noviembre.docx»).
 
 ## Pendiente
 
