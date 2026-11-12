@@ -32,5 +32,7 @@ require_once CADUS_PORTAL_DIR . 'includes/votaciones.php';    // convocatorias d
 require_once CADUS_PORTAL_DIR . 'includes/relevo.php';        // relevo de la cuenta de una delegación (HU-22)
 require_once CADUS_PORTAL_DIR . 'includes/gestion.php';       // acceso y gestión desde el portal (HU-24)
 require_once CADUS_PORTAL_DIR . 'includes/delegaciones.php';  // las delegaciones y escudos de cadus.us.es (HU-05, HU-06)
+require_once CADUS_PORTAL_DIR . 'includes/imagenes.php';      // optimización de las imágenes subidas (HU-20a)
+require_once CADUS_PORTAL_DIR . 'includes/institucional.php';  // contenido real de «Qué es el CADUS» y «Gobierno y estatutos» (E2-11)
 
 register_activation_hook(__FILE__, 'cadus_portal_activar');

@@ -101,8 +101,8 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | ID | Tarea concreta | SP |
 |---|---|---:|
 | HU-22 | Relevo de la cuenta de la delegación (decidido el 09/11: **una cuenta por delegación**, con el correo institucional de la delegación). Lo hace el delegado saliente o cualquier ejecutivo, con efecto inmediato: la cuenta no cambia, se pone una contraseña nueva y se cierran sus sesiones. Debe: limitar al delegado a su propia delegación, cortar el acceso del equipo anterior y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
-| HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. | 2 |
-| HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). | 2 |
+| HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. **Hecho (12/11):** axe sin fallos en 17 páginas (escritorio y móvil) y Lighthouse 100 en accesibilidad; se corrigen seis fallos, dos de ellos de daltonismo (menú y filtros). Informe en [`docs/accesibilidad/HU-15c-auditoria.md`](../../accesibilidad/HU-15c-auditoria.md). | 2 |
+| HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). **Hecho (12/11):** fotos de la galería en WebP de 360 y 720 px con `srcset` (de 1 MB a 0,15 MB en ordenador), logotipo de 47 a 17 KB, los 25 escudos de 1,6 a 0,3 MB, y para las imágenes que se suban: máximo 1920 px, tamaños intermedios en WebP y límite de 8 MB (`includes/imagenes.php`). | 2 |
 | E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. **Respondido por el CADUS (09/11), sin escribir a la US:** acceso por SFTP, HTTPS activo, PHP 7.2/7.3 con MySQL, sin correo saliente ni cron; acceso a la base de datos sin confirmar. | — |
 | E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). **Hecho (09/11):** `cadus-portal` crea una vez las categorías «Asambleas» y «Cursos» en The Events Calendar (reutiliza «asamblea» o «curso» si ya existen). Al crear un evento, la Ejecutiva marca su categoría; las votaciones solo ofrecen eventos de «Asambleas» (RN-05). | — |
 | E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. | — |
@@ -131,6 +131,8 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 ## Pendiente del Sprint 2
 
 Siguen abiertas en el GitHub Project las tareas de contenido y cliente del Sprint 2: entrevista con el CADUS (E2-09, hecha el 26/10), actas e institucional reales (E2-11), fichas de delegaciones (E2-12, ahora con las 27 fichas sacadas de `cadus.us.es/delegaciones/`), noticias reales (E2-08), eventos reales del calendario (E2-19) y cuentas de los delegados (E2-01). No suman puntos. El cliente indicó que todo contenido pasa por la Ejecutiva y que el portal actual es una web de prueba.
+
+**Avance del 12/11 (Miguel Ángel):** E2-11 tiene ya el contenido real de «Qué es el CADUS» y «Gobierno y estatutos», basado en el art. 21 de los Estatutos de la US (Decreto 98/2025) y en el REOREUS (`includes/institucional.php`). Las actas reales las sube la Ejecutiva desde **Actas y normativas**. Para E2-19 hay un cargador de eventos reales con su categoría (`scripts/eventos/`).
 
 ## Tareas de todo el equipo
 
@@ -194,6 +196,8 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 **Cambio de alcance (12/11): HU-24, acceso y gestión desde el portal (8 SP, Pablo).** Pedida por el cliente en la entrevista (portal fácil de usar para personas con pocos conocimientos informáticos) y por Pablo al probar la cuenta del CADUS: apartado «Acceder» en el menú, página de acceso dentro del portal y página «Gestión» donde cada rol ve solo lo que puede hacer (la Ejecutiva crea noticias, eventos del calendario, actas y normativas con su PDF y gestiona las delegaciones; cada delegación edita solo su ficha). Módulo `includes/gestion.php`; pruebas en `scripts/pruebas/gestion.php` (93 correctas, 0 fallos, con peticiones HTTP reales a los formularios y a la API REST). El compromiso del sprint pasa de 36 a 44 SP.
 
 **SP pendientes: 25 de 44** (11 hechos más los 8 de HU-24, que están hechos pero sin prueba cruzada; el resto del sprint sigue igual) (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
+
+**Actualización del 12/11 por la tarde (Miguel Ángel):** HU-15c y HU-20a están hechas (4 SP), con lo que Miguel Ángel termina sus 7 SP. HU-20a atiende además la recomendación del informe de HU-20b: los 25 escudos pasan de 1,6 MB a 0,3 MB y se sirven en WebP a su tamaño.
 
 **Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP.
 

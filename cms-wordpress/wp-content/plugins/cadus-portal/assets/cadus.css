@@ -225,6 +225,7 @@ html, html body.cadus-portada { overflow-x: clip; }
 .cadus-seccion--galeria { background: var(--papel); }
 .cadus-fotos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end; margin: 0; padding: 0; list-style: none; }
 .cadus-foto figure { margin: 0; }
+.cadus-foto picture { display: block; }
 .cadus-foto img {
   display: block;
   width: 100%;
@@ -258,10 +259,10 @@ html, html body.cadus-portada { overflow-x: clip; }
 .cadus-seccion--noticias { background: var(--gris); }
 .cadus-tarjetas { margin-block: 0; }
 .cadus-tarjeta { border: 0; border-radius: var(--radio); background: var(--papel); padding: 24px; transition: transform 200ms var(--ease-out); }
-.cadus-tarjeta h3 { font: 800 1.35rem/1.15 var(--fuente); }
-.cadus-tarjeta h3 a,
-.cadus-tarjeta h3 a:hover,
-.cadus-tarjeta h3 a:visited { color: var(--granate); text-decoration: none; }
+.cadus-tarjeta :is(h2, h3) { font: 800 1.35rem/1.15 var(--fuente); }
+.cadus-tarjeta :is(h2, h3) a,
+.cadus-tarjeta :is(h2, h3) a:hover,
+.cadus-tarjeta :is(h2, h3) a:visited { color: var(--granate); text-decoration: none; }
 .cadus-meta { color: #4b5157; font-size: 0.95rem; }
 
 /* ------------------------------------------------------------------ pasos del buzón: paneles que se apilan al bajar */
@@ -369,6 +370,9 @@ html, html body.cadus-portada { overflow-x: clip; }
 }
 .cadus-chip:active { transform: scale(0.97); }
 .cadus-chip[aria-pressed="true"] { background: var(--granate); color: var(--papel); }
+/* HU-15c (daltonismo, WCAG 1.4.1): el filtro activo no se distingue solo por el color, también lleva una marca.
+   El texto alternativo vacío («/ ""») evita que el lector de pantalla lea «marca de verificación»: ya anuncia aria-current. */
+.cadus-chip[aria-pressed="true"]::before, .cadus-chip[aria-current="true"]::before, .cadus-chip[aria-current="page"]::before { content: "✓"; content: "✓" / ""; margin-right: 0.4em; }
 .cadus-chip:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
 
 .cadus-carrusel__pista {
@@ -464,6 +468,7 @@ html, html body.cadus-portada { overflow-x: clip; }
 /* ------------------------------------------------------------------ pie: el nombre enorme, tres columnas y barra legal */
 .cadus-seccion--contacto { background: var(--granate); color: var(--papel); padding-bottom: clamp(24px, 3vw, 40px); overflow: hidden; }
 .cadus-contacto__marca { margin: 0 0 clamp(-20px, -1.6vw, -6px); font: 900 clamp(4.5rem, 21vw, 21rem)/0.8 var(--fuente); letter-spacing: -0.07em; color: var(--granate-os); white-space: nowrap; user-select: none; }
+.cadus-contacto__marca::before { content: "CADUS"; }
 .cadus-seccion--contacto .cadus-seccion__titulo { color: var(--papel); max-width: 22ch; margin-bottom: clamp(28px, 4vw, 52px); }
 .cadus-contacto { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: clamp(28px, 4vw, 64px); max-width: 1240px; margin: 0 auto clamp(32px, 4vw, 56px); padding-top: clamp(24px, 3vw, 36px); border-top: 2px solid rgba(255, 255, 255, 0.28); }
 .cadus-contacto__col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -514,4 +519,12 @@ html, html body.cadus-portada { overflow-x: clip; }
   .cadus-evento__enlace, .cadus-evento__enlace:hover,
   .cadus-carrusel__ant, .cadus-carrusel__sig, .cadus-carrusel__ant:hover, .cadus-carrusel__sig:hover { transform: none; transition: none; }
   .cadus-carrusel__pista { scroll-behavior: auto; }
+}
+
+/* ------------------------------------------------------------------ HU-15c: página actual del menú sin depender del color (WCAG 1.4.1) */
+.ct-header .ct-menu-link[aria-current="page"],
+.ct-header .current-menu-ancestor > .ct-menu-link {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.45em;
 }
