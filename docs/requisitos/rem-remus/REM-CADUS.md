@@ -92,7 +92,7 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 | RN-01 | Todo contenido pasa por la Ejecutiva antes de publicarse; en particular, toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva (ver RF-05). |
 | RN-02 | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde correo corporativo `@alum.us.es`. |
 | RN-03 | Todas las consultas, reclamaciones y solicitudes de mediación se tratan con total privacidad: solo son visibles para el remitente y la Ejecutiva; no aparecen en la web pública, el buscador ni la API, y los avisos por correo no incluyen su contenido. |
-| RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (administrador). |
+| RN-04 | Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (Ejecutiva y administrador). La Ejecutiva puede editar cualquier ficha, aunque la haya creado otra cuenta, para completarla o corregirla, cambiar su nombre y su centro y pasarla a otra cuenta de delegación (decisión X7, 12/11/2026); la delegación solo cambia los datos de contacto, el horario, las redes, los enlaces y los miembros de su propia ficha, ni por el portal ni por la API. |
 | RN-05 | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ---

@@ -931,7 +931,7 @@
     {
       "id": "RN-04",
       "name": "Edición de fichas",
-      "description": "Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (administrador).",
+      "description": "Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (Ejecutiva y administrador). La Ejecutiva puede editar cualquier ficha, aunque la haya creado otra cuenta, para completarla o corregirla, cambiar su nombre y su centro y pasarla a otra cuenta de delegación (decisión X7, 12/11/2026); la delegación solo cambia los datos de contacto, el horario, las redes, los enlaces y los miembros de su propia ficha, ni por el portal ni por la API.",
       "authors": [
         "Pablo Ruiz Vidal",
         "Marcos-Paban Delgado Rodriguez"

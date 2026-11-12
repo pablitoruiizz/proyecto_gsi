@@ -163,7 +163,7 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.3, 2026-11-12.
 | RN-01 | Aprobación de documentos | Todo contenido pasa por la Ejecutiva antes de publicarse; en particular, toda acta o normativa requiere la aprobación de un miembro de la Ejecutiva. |
 | RN-02 | Correo institucional | Solo se aceptan consultas, reclamaciones y solicitudes de mediación enviadas desde un correo corporativo @alum.us.es. |
 | RN-03 | Privacidad de reclamaciones | Todas las consultas, reclamaciones y solicitudes de mediación se tratan con total privacidad: solo son visibles para el remitente y para la Ejecutiva, no aparecen en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido. |
-| RN-04 | Edición de fichas | Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (administrador). |
+| RN-04 | Edición de fichas | Cada ficha de delegación solo puede ser editada por la cuenta de esa delegación o por la cuenta del CADUS (Ejecutiva y administrador). La Ejecutiva puede editar cualquier ficha, aunque la haya creado otra cuenta, para completarla o corregirla, cambiar su nombre y su centro y pasarla a otra cuenta de delegación (decisión X7, 12/11/2026); la delegación solo cambia los datos de contacto, el horario, las redes, los enlaces y los miembros de su propia ficha, ni por el portal ni por la API. |
 | RN-05 | Votaciones vinculadas | Toda votación publicada en el calendario debe estar vinculada a una convocatoria de asamblea previamente creada. |
 
 ## 11. Entorno de trabajo del equipo (restricciones)

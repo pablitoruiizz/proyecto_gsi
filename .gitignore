@@ -145,3 +145,6 @@ scripts/roles/usuarios-reales.csv
 # Python
 __pycache__/
 *.pyc
+
+# Configuración local de Claude Code (permisos personales)
+.claude/settings.local.json
