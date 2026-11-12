@@ -1,6 +1,8 @@
 import { colord } from 'colord'
 
 export const normalizeColor = (color) => {
+	color = color.trim()
+
 	const parsedColor = colord(color)
 
 	if (!parsedColor.parsed) {

@@ -12,24 +12,33 @@
  *
  * @see     https://woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 11.2.0
+ * @version 11.3.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- WooCommerce template override, hooks and variables are WooCommerce's
+
 do_action( 'woocommerce_before_cart' );
 
+/**
+ * Filters the CSS class applied to the cart page wrapper element.
+ *
+ * @since 2.0.1
+ *
+ * @param string $wrapper_class Space-separated list of CSS classes.
+ */
 $wrapper_class = apply_filters(
 	'blocksy:woocommerce:cart:wrapper-class',
 	'ct-woocommerce-cart-form'
 );
 
-$image_size = blocksy_get_theme_mod('cart_page_image_size', 'woocommerce_thumbnail');
-$image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
+$image_size  = blocksy_get_theme_mod( 'cart_page_image_size', 'woocommerce_thumbnail' );
+$image_ratio = blocksy_get_theme_mod( 'cart_page_image_ratio', '1/1' );
 
 ?>
 
-<div class="<?php echo $wrapper_class ?>">
+<div class="<?php echo $wrapper_class; ?>">
 
 <form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
 	<?php do_action( 'woocommerce_before_cart_table' ); ?>
@@ -81,19 +90,19 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 
 						<td class="product-thumbnail">
 							<?php
-								$thumbnail_args = [
+								$thumbnail_args = array(
 									'no_image_type' => 'woo',
 									'attachment_id' => $_product->get_image_id(),
-									'post_id' => $_product->get_id(),
-									'size' => $image_size,
-									'ratio' => $image_ratio,
-								];
+									'post_id'       => $_product->get_id(),
+									'size'          => $image_size,
+									'ratio'         => $image_ratio,
+								);
 
 								if ( $product_permalink ) {
-									$thumbnail_args['tag_name'] = 'a';
-									$thumbnail_args['html_atts'] = [
+									$thumbnail_args['tag_name']  = 'a';
+									$thumbnail_args['html_atts'] = array(
 										'href' => esc_url( $product_permalink ),
-									];
+									);
 								}
 
 								$thumbnail = apply_filters(
@@ -109,19 +118,19 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 
 						<td role="rowheader" class="product-name" data-title="<?php esc_attr_e( 'Product', 'blocksy' ); ?>">
 							<?php
-								if ( ! $product_permalink ) {
-									echo wp_kses_post( $product_name . '&nbsp;' );
-								} else {
-									/**
-									 * Filter the product name.
-									 *
-									 * @since 2.1.0
-									 * @param string $product_name Name of the product in the cart.
-									 * @param array $cart_item The product in the cart.
-									 * @param string $cart_item_key Key for the product in the cart.
-									 */
-									echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', blocksy_safe_sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $cart_item_name ), $cart_item, $cart_item_key ) );
-								}
+							if ( ! $product_permalink ) {
+								echo wp_kses_post( $product_name . '&nbsp;' );
+							} else {
+								/**
+								 * Filter the product name.
+								 *
+								 * @since 2.1.0
+								 * @param string $product_name Name of the product in the cart.
+								 * @param array $cart_item The product in the cart.
+								 * @param string $cart_item_key Key for the product in the cart.
+								 */
+								echo wp_kses_post( apply_filters( 'woocommerce_cart_item_name', blocksy_safe_sprintf( '<a href="%s">%s</a>', esc_url( $product_permalink ), $cart_item_name ), $cart_item, $cart_item_key ) );
+							}
 
 								do_action( 'woocommerce_after_cart_item_name', $cart_item, $cart_item_key );
 
@@ -129,9 +138,23 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 								echo wc_get_formatted_cart_item_data( $cart_item, false, $cart_item_name ); // PHPCS: XSS ok.
 
 								// Backorder notification.
-								if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
-									echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'blocksy' ) . '</p>', $product_id ) );
-								}
+							if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
+								/**
+								 * Filter the backorder notification shown for a cart item.
+								 *
+								 * Themes with an outdated copy of this template pass only the first two arguments, so callbacks that
+								 * accept `$cart_item` and `$cart_item_key` should give them default values, e.g. `$cart_item = null`.
+								 *
+								 * @param string $notification  The backorder notification HTML.
+								 * @param int    $product_id    The product ID. For a variation, this is the parent product ID.
+								 * @param array  $cart_item     The cart item data, including `variation_id` and the product in `data`.
+								 * @param string $cart_item_key Unique key for the cart item.
+								 *
+								 * @since 3.4.0
+								 * @since 11.3.0 Added the `$cart_item` and `$cart_item_key` parameters.
+								 */
+								echo wp_kses_post( apply_filters( 'woocommerce_cart_item_backorder_notification', '<p class="backorder_notification">' . esc_html__( 'Available on backorder', 'blocksy' ) . '</p>', $product_id, $cart_item, $cart_item_key ) );
+							}
 							?>
 							<p class="price ct-hidden-sm ct-hidden-md" data-title="<?php esc_attr_e( 'Price', 'blocksy' ); ?>">
 								<?php
@@ -141,21 +164,21 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 
 							<div class="product-mobile-actions ct-hidden-lg product-remove">
 								<?php
-									if ( $_product->is_sold_individually() ) {
-										$product_quantity = blocksy_safe_sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1">', $cart_item_key );
-									} else {
-										$product_quantity = woocommerce_quantity_input(
-											array(
-												'input_name'   => "cart[{$cart_item_key}][qty]",
-												'input_value'  => $cart_item['quantity'],
-												'max_value'    => $_product->get_max_purchase_quantity(),
-												'min_value'    => '0',
-												'product_name' => $product_name
-											),
-											$_product,
-											false
-										);
-									}
+								if ( $_product->is_sold_individually() ) {
+									$product_quantity = blocksy_safe_sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1">', $cart_item_key );
+								} else {
+									$product_quantity = woocommerce_quantity_input(
+										array(
+											'input_name'   => "cart[{$cart_item_key}][qty]",
+											'input_value'  => $cart_item['quantity'],
+											'max_value'    => $_product->get_max_purchase_quantity(),
+											'min_value'    => '0',
+											'product_name' => $product_name,
+										),
+										$_product,
+										false
+									);
+								}
 
 									echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 								?>
@@ -163,31 +186,31 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 								<span class="ct-product-multiply-symbol">×</span>
 
 								<?php
-									if (class_exists('WCS_ATT_Display_Cart')) {
-										remove_filter(
-											'woocommerce_cart_item_price',
-											array(
-												'WCS_ATT_Display_Cart',
-												'show_cart_item_subscription_options'
-											),
-											1000,
-											3
-										);
-									}
+								if ( class_exists( 'WCS_ATT_Display_Cart' ) ) {
+									remove_filter(
+										'woocommerce_cart_item_price',
+										array(
+											'WCS_ATT_Display_Cart',
+											'show_cart_item_subscription_options',
+										),
+										1000,
+										3
+									);
+								}
 
 									echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
 
-									if (class_exists('WCS_ATT_Display_Cart')) {
-										add_filter(
-											'woocommerce_cart_item_price',
-											array(
-												'WCS_ATT_Display_Cart',
-												'show_cart_item_subscription_options'
-											),
-											1000,
-											3
-										);
-									}
+								if ( class_exists( 'WCS_ATT_Display_Cart' ) ) {
+									add_filter(
+										'woocommerce_cart_item_price',
+										array(
+											'WCS_ATT_Display_Cart',
+											'show_cart_item_subscription_options',
+										),
+										1000,
+										3
+									);
+								}
 								?>
 
 								<?php
@@ -211,21 +234,21 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 
 						<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'blocksy' ); ?>">
 							<?php
-								if ( $_product->is_sold_individually() ) {
-									$product_quantity = blocksy_safe_sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1">', $cart_item_key );
-								} else {
-									$product_quantity = woocommerce_quantity_input(
-										array(
-											'input_name'   => "cart[{$cart_item_key}][qty]",
-											'input_value'  => $cart_item['quantity'],
-											'max_value'    => $_product->get_max_purchase_quantity(),
-											'min_value'    => '0',
-											'product_name' => $_product->get_name(),
-										),
-										$_product,
-										false
-									);
-								}
+							if ( $_product->is_sold_individually() ) {
+								$product_quantity = blocksy_safe_sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1">', $cart_item_key );
+							} else {
+								$product_quantity = woocommerce_quantity_input(
+									array(
+										'input_name'   => "cart[{$cart_item_key}][qty]",
+										'input_value'  => $cart_item['quantity'],
+										'max_value'    => $_product->get_max_purchase_quantity(),
+										'min_value'    => '0',
+										'product_name' => $_product->get_name(),
+									),
+									$_product,
+									false
+								);
+							}
 
 								echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
 							?>
@@ -305,11 +328,23 @@ $image_ratio = blocksy_get_theme_mod('cart_page_image_ratio', '1/1');
 
 <?php
 
-	do_action('blocksy:woocommerce:cart:before-cross-sells');
+	/**
+	 * Fires before the cross-sells section is rendered on the cart page.
+	 *
+	 * @since 2.1.1
+	 */
+	do_action( 'blocksy:woocommerce:cart:before-cross-sells' );
 
-	if (apply_filters('blocksy:woocommerce:cart:has-cross-sells', true)) {
-		woocommerce_cross_sell_display(null, 4);
-	}
+	/**
+	 * Filters whether the cross-sells section is displayed on the cart page.
+	 *
+	 * @since 1.8.0
+	 *
+	 * @param bool $has_cross_sells Whether to render the cross-sells section.
+	 */
+if ( apply_filters( 'blocksy:woocommerce:cart:has-cross-sells', true ) ) {
+	woocommerce_cross_sell_display( null, 4 );
+}
 
-	do_action('woocommerce_after_cart');
+	do_action( 'woocommerce_after_cart' );
 ?>

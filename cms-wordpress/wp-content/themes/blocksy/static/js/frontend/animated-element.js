@@ -10,6 +10,7 @@ if (window.IntersectionObserver) {
 				let hasBottom = (el.dataset.reveal || '').indexOf('bottom') > -1
 
 				if (hasBottom) {
+					el.style.setProperty('--card-reveal-index', index)
 					el.dataset.reveal = `yes:${index + 1}`
 				} else {
 					el.dataset.reveal = `yes`

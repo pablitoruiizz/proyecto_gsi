@@ -17,7 +17,7 @@ class Blocksy_Screen_Manager {
 		if (
 			isset( $_POST['action'] )
 			&&
-			strpos( $_POST['action'], 'prdctfltr' ) !== false
+			false !== strpos( sanitize_text_field( wp_unslash( $_POST['action'] ) ), 'prdctfltr' )
 		) {
 			return true;
 		}
@@ -546,7 +546,7 @@ class Blocksy_Screen_Manager {
 		$actual_post_type = get_query_var( 'post_type' );
 
 		if ( empty( $actual_post_type ) && isset( $_GET['ct_post_type'] ) ) {
-			$actual_post_type = explode( ':', $_GET['ct_post_type'] );
+			$actual_post_type = explode( ':', sanitize_text_field( wp_unslash( $_GET['ct_post_type'] ) ) );
 		}
 
 		if ( is_search() ) {

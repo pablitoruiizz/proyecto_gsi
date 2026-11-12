@@ -14,7 +14,7 @@ const ColorPickerIris = ({
 	picker,
 	onChange,
 	value,
-	value: { color, ...rest },
+	value: { color, ...rest }
 }) => {
 	const [copied, setCopied] = useState(false)
 
@@ -78,17 +78,20 @@ const ColorPickerIris = ({
 						setTimeout(() => {
 							setCopied(null)
 						}, 3000)
-					}}>
+					}}
+				>
 					<span
 						className={classnames('ct-copy-color', {
-							copied,
+							copied
 						})}
-						data-tooltip-reveal="top">
+						data-tooltip-reveal="top"
+					>
 						<svg
 							width="12"
 							height="12"
 							fill="currentColor"
-							viewBox="0 0 24 24">
+							viewBox="0 0 24 24"
+						>
 							<path d="M20.7 7.6h-9.8c-1.8 0-3.3 1.5-3.3 3.3v9.8c0 1.8 1.5 3.3 3.3 3.3h9.8c1.8 0 3.3-1.5 3.3-3.3v-9.8c0-1.8-1.5-3.3-3.3-3.3zm1.1 13.1c0 .6-.5 1.1-1.1 1.1h-9.8c-.6 0-1.1-.5-1.1-1.1v-9.8c0-.6.5-1.1 1.1-1.1h9.8c.6 0 1.1.5 1.1 1.1v9.8zM5.5 15.3c0 .6-.5 1.1-1.1 1.1H3.3c-1.8 0-3.3-1.5-3.3-3.3V3.3C0 1.5 1.5 0 3.3 0h9.8c1.8 0 3.3 1.5 3.3 3.3v1.1c0 .6-.5 1.1-1.1 1.1-.6 0-1.1-.5-1.1-1.1V3.3c0-.6-.5-1.1-1.1-1.1H3.3c-.6 0-1.1.5-1.1 1.1v9.8c0 .6.5 1.1 1.1 1.1h1.1c.6 0 1.1.5 1.1 1.1z" />
 						</svg>
 						<i className="ct-tooltip">
