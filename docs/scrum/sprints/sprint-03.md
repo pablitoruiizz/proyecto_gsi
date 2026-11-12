@@ -195,7 +195,18 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 **Cambio de alcance (12/11): HU-24, acceso y gestión desde el portal (8 SP, Pablo).** Pedida por el cliente en la entrevista (portal fácil de usar para personas con pocos conocimientos informáticos) y por Pablo al probar la cuenta del CADUS: apartado «Acceder» en el menú, página de acceso dentro del portal y página «Gestión» donde cada rol ve solo lo que puede hacer (la Ejecutiva crea noticias, eventos del calendario, actas y normativas con su PDF y gestiona las delegaciones; cada delegación edita solo su ficha). Módulo `includes/gestion.php`; pruebas en `scripts/pruebas/gestion.php` (93 correctas, 0 fallos, con peticiones HTTP reales a los formularios y a la API REST). El compromiso del sprint pasa de 36 a 44 SP.
 
-**SP pendientes: 25 de 44** (11 hechos más los 8 de HU-24, que están hechos pero sin prueba cruzada; el resto del sprint sigue igual) (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
+**Cierre del 12/11 por la noche: 9 SP pendientes de 44** (35 hechos). Se han fusionado en `main` los PR #69, #70 (Marcos) y #72, #73, #74 y #75 (Álvaro). Sin empezar según el repositorio: HU-14a (Joaquín), HU-14b (Álvaro) y HU-15a (Joaquín), 9 SP en total. El hito del 08/11 (10 SP pendientes) no se alcanzó.
+
+| Subtarea | Quién | Fecha | Evidencia |
+|---|---|---|---|
+| HU-17b revisión de saneado, nonces y escape; Wordfence (2 SP) | Pablo | 12/11 | `docs/seguridad/HU-17b-revision-formularios.md`; escaneo de Wordfence sin malware ni vulnerabilidades. **Pendiente de Pablo:** cambiar la contraseña de `root` (hallazgo crítico) y confirmar con Miguel Ángel su cuenta (aviso «creada fuera de WordPress») |
+| HU-20b caché y minificación con Lighthouse (3 SP) | Pablo | 12/11 | `docs/rendimiento/HU-20b-informe.md`: Rendimiento 91 → 99 (Inicio), 90 → 99 (Noticias), 79 → 97 (Delegaciones) y 83 → 99 (Actas); peso −40 % con Gzip |
+| HU-14c móvil y tablet (2 SP) | Pablo | 12/11 | `docs/pruebas/HU-14c-movil-tablet.md`, `scripts/pruebas/movil.py` (28 de 28 comprobaciones). **Solo en emulación:** el equipo decidió no probar en dispositivos reales |
+| HU-16a filtros por palabra clave y fecha (3 SP) | Álvaro | 12/11 | PR #72. Comprobada por HTTP el 12/11 por Pablo: en noticias, «becas» deja 2 de 5 y un texto inexistente muestra el aviso de vacío; en actas, «pleno» y los filtros «desde» y «hasta» filtran bien y los valores se escapan. Falta la prueba en navegador de los casos H16-1 a H16-6 |
+| HU-23 anonimización de tickets y mediaciones a los 2 años (2 SP) | Álvaro | 12/11 | PR #73; `scripts/pruebas/hu23_prueba_retencion.php` correcta (simulación y ejecución, segunda ejecución idempotente) |
+| E3-08 plazo de respuesta publicado (sin puntos) | Marcos | 12/11 | PR #69; REM del CMS 2.3 |
+
+**Decisión X7 (12/11):** la Ejecutiva puede editar las delegaciones de otros autores. RN-04 queda como «la cuenta de la delegación o la cuenta del CADUS (Ejecutiva y administrador)»; la delegación solo cambia los datos de contacto, el horario, las redes, los enlaces y los miembros de su propia ficha, y un delegado no puede cambiar el título, el centro ni el estado de la ficha ni por la API REST.
 
 **Actualización del 12/11 por la tarde (Miguel Ángel):** HU-15c y HU-20a están hechas (4 SP), con lo que Miguel Ángel termina sus 7 SP. HU-20a atiende además la recomendación del informe de HU-20b: los 25 escudos pasan de 1,6 MB a 0,3 MB y se sirven en WebP a su tamaño.
 
