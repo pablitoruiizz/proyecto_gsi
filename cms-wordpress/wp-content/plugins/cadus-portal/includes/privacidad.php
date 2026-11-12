@@ -67,7 +67,11 @@ add_filter('posts_where', function (string $where): string {
 /** WordPress puede ignorar post_type no consultables y devolver la portada (200). */
 add_action('template_redirect', function (): void {
     $types = isset($_GET['post_type']) ? (array) $_GET['post_type'] : [];
-    if (array_intersect(cadus_privacidad_tipos(), array_filter($types, 'is_string'))
+    // El feed de comentarios de una entrada privada (/?p=ID&feed=rss2) respondía 200 con un feed vacío.
+    $id = is_feed() ? absint($_GET['p'] ?? $_GET['page_id'] ?? $_GET['attachment_id'] ?? 0) : 0;
+    $post = $id ? get_post($id) : null;
+    $feed_privado = $post && (cadus_privacidad_tipo($post->post_type) || cadus_privacidad_tipo(get_post_type($post->post_parent)));
+    if ($feed_privado || array_intersect(cadus_privacidad_tipos(), array_filter($types, 'is_string'))
         || array_intersect(cadus_privacidad_tipos(), array_keys($_GET))) {
         global $wp_query;
         $wp_query->set_404();

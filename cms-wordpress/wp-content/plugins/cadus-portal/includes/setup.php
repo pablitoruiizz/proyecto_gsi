@@ -188,6 +188,7 @@ function cadus_contenido_aviso_privacidad(): string
  * Versión 2: el aviso deja de mostrar el texto provisional sobre el plazo de conservación.
  * Versión 3 (Sprint 3, entrevista del 26/10): plazo de conservación de dos años, datos mínimos (nombre y apellidos,
  * Facultad o Escuela y correo), privacidad de todas las consultas y los dos campos nuevos del formulario del buzón.
+ * También añade a «Atención al estudiante» el encabezado h2 que faltaba sobre las tarjetas (HU-15b).
  */
 define('CADUS_ATENCION_VERSION', '3');
 add_action('init', function () {
@@ -206,6 +207,13 @@ function cadus_actualizar_atencion(): void
     $kses = (bool) has_filter('content_save_pre', 'wp_filter_post_kses');
     if ($kses) {
         kses_remove_filters();
+    }
+    // HU-15b: las tarjetas de «Atención al estudiante» son h3 y colgaban directamente del h1 de la página.
+    // Se añade el encabezado h2 que faltaba, solo si la página conserva las tarjetas y todavía no tiene ninguno.
+    $tarjetas = "<!-- wp:html -->\n<div class=\"cadus-tarjetas\">";
+    if (str_contains($atencion->post_content, $tarjetas) && !preg_match('/<h2[\s>]/', $atencion->post_content)) {
+        wp_update_post(wp_slash(['ID' => $atencion->ID,
+            'post_content' => str_replace($tarjetas, cadus_b_h('Servicios de atención') . $tarjetas, $atencion->post_content)]));
     }
     $faq = cadus_buscar_semilla('pagina:atencion-al-estudiante/preguntas-frecuentes', 'page')
         ?? get_page_by_path('atencion-al-estudiante/preguntas-frecuentes');
@@ -396,6 +404,7 @@ function cadus_portal_configurar(): void
         cadus_b_p('Directorio de las delegaciones de alumnos agrupado por facultad o escuela.') . cadus_b_sc('[cadus_directorio]'));
     $atencion = cadus_pagina('atencion-al-estudiante', 'Atención al estudiante',
         cadus_b_p('Si necesitas plantear una consulta o una reclamación académica, usa el buzón. Recibirás un código para seguir el estado de tu solicitud.')
+        . cadus_b_h('Servicios de atención') // HU-15b: las tarjetas son h3 y necesitan un h2 por encima
         . cadus_b_html('<div class="cadus-tarjetas">'
             . '<div class="cadus-tarjeta"><h3>Buzón de consultas</h3><p>Envía tu consulta o reclamación.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/buzon-de-consultas/')) . '">Ir al buzón</a></div>'
             . '<div class="cadus-tarjeta"><h3>Seguimiento de ticket</h3><p>Consulta el estado con tu código.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/seguimiento-de-ticket/')) . '">Seguir mi ticket</a></div>'
