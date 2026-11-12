@@ -73,6 +73,7 @@ add_filter('gettext', function ($traduccion, $original, $dominio) {
         'Search Results for' => 'Resultados de la búsqueda de',
         'Nothing Found' => 'Sin resultados',
         'Read More' => 'Leer más',
+        'More' => 'Más',
     ];
     return $dominio === 'blocksy' && isset($es[$original]) ? $es[$original] : $traduccion;
 }, 10, 3);

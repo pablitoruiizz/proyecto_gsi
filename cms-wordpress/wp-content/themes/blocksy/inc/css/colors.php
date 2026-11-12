@@ -30,16 +30,11 @@ if ( ! function_exists( 'blocksy_get_colors' ) ) {
 }
 
 /**
- * Extract color from a descriptor.
- * id:
- *   - fw-custom
- *   - fw-no-color
- *   - color_skin_*
- *   - fw-inherit:location
- *   - fw-inherit:location:hover
- *   - fw-inherit:location:default
+ * Extract and validate a color from a descriptor.
  *
- * @param array $color_descriptor Single color descriptor.
+ * @param array $color_descriptor Color descriptor with a 'color' value.
+ * @return string|null Trimmed color or CT_CSS_SKIP_RULE when invalid.
+ *                     Returns null when the color is missing or null.
  */
 if ( ! function_exists( 'blocksy_get_color' ) ) {
 	function blocksy_get_color( $color_descriptor ) {
@@ -47,11 +42,9 @@ if ( ! function_exists( 'blocksy_get_color' ) ) {
 			return null;
 		}
 
-		if ( ! blocksy_validate_color( $color_descriptor['color'] ) ) {
-			return 'CT_CSS_SKIP_RULE';
-		}
+		$color = blocksy_validate_color( $color_descriptor['color'] );
 
-		return $color_descriptor['color'];
+		return $color ? $color : 'CT_CSS_SKIP_RULE';
 	}
 }
 

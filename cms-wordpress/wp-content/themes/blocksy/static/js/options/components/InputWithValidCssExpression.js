@@ -23,6 +23,13 @@ const InputWithValidCssExpression = ({
 
 	const { ref, actualInputProps = {} } = inputProps
 
+	const isValidValue = (value) =>
+		CSS.supports(propertyToCheckAgainst, value) &&
+		value.toString().length -
+			value.toString().replaceAll('(', '').length ===
+			value.toString().length -
+				value.toString().replaceAll(')', '').length
+
 	useEffect(() => {
 		const needToFocusOn = localValue.indexOf('()')
 
@@ -39,6 +46,11 @@ const InputWithValidCssExpression = ({
 			value={localValue === '__DEFAULT__' ? value : localValue}
 			type="text"
 			placeholder={placeholder}
+			onBlur={({ target: { value } }) => {
+				if (value === '' || isValidValue(value)) {
+					setLocalValue('__DEFAULT__')
+				}
+			}}
 			onChange={({ target: { value } }) => {
 				if (value === '' && shouldPropagateEmptyValue) {
 					setLocalValue('__DEFAULT__')
@@ -47,13 +59,7 @@ const InputWithValidCssExpression = ({
 
 				setLocalValue(value)
 
-				if (
-					CSS.supports(propertyToCheckAgainst, value) &&
-					value.toString().length -
-						value.toString().replaceAll('(', '').length ===
-						value.toString().length -
-							value.toString().replaceAll(')', '').length
-				) {
+				if (isValidValue(value)) {
 					onChange(value)
 					setLocalValue('__DEFAULT__')
 				}

@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/dms_data.json. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.1, 2026-11-12. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
@@ -37,9 +37,9 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 |---|---|---|---|
 | IR-D01 | Documento | a cada documento del DMS, con estos datos: | Nombre y archivo; Tipo de documento (Acta, Normativa, Expediente o Votación); Fecha; Curso académico; Estado |
 | IR-D02 | Acta | a un acta de pleno o de asamblea, con estos datos: | Pleno o asamblea; Fecha; Estado de aprobación (borrador o aprobada); Curso académico; Resumen del contenido (deseable) |
-| IR-D03 | Normativa | a una norma o estatuto del CADUS, con estos datos: | Título; Año; Estado (vigente o derogada) |
+| IR-D03 | Normativa | a una norma o estatuto del CADUS, con estos datos: | Título; Norma (identifica la misma norma entre sus versiones); Versión; Año; Estado (vigente o derogada) |
 | IR-D04 | Expediente | a una reclamación o mediación resuelta, con estos datos: | Código del ticket (CAD) o de la mediación (MED); Facultad; Fecha de resolución; Fecha de caducidad (resolución más 2 años) |
-| IR-D05 | Registro de votación | al resultado de una votación presencial de asamblea, con estos datos: | Asamblea y número de votación; Fecha; Tipo de voto (nominal o secreto); Resultado; Por cada una de las 27 delegaciones: presente o ausente y si se comprobó su identidad; Voto nominal: el voto de cada delegación (sí, no o abstención); Voto secreto: solo el recuento total de sí, no y abstenciones |
+| IR-D05 | Registro de votación | al resultado de una votación presencial de asamblea, con estos datos: | Asamblea y número de votación (los dos obligatorios, para encontrar y distinguir cada registro); Fecha; Tipo de voto (nominal o secreto); Resultado; Por cada una de las 27 delegaciones: presente o ausente y si se comprobó su identidad; Voto nominal: el voto de cada delegación (sí, no o abstención); Voto secreto: solo el recuento total de sí, no y abstenciones |
 | IR-D06 | Metadato | a una columna de una biblioteca que describe sus documentos, con estos datos: | Nombre de la columna; Tipo de columna (elección, fecha, texto, calculada); Valores permitidos |
 
 ## 5. Actores
@@ -47,7 +47,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 | Código | Nombre | Representa… |
 |---|---|---|
 | ACT-D01 | Ejecutiva del CADUS | a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios de los sitios (leen y escriben) |
-| ACT-D02 | Delegado | a los delegados de las 27 delegaciones, que acceden con su correo @alum.us.es y solo leen |
+| ACT-D02 | Delegado | a los delegados de las 27 delegaciones, que acceden con la cuenta de su delegación (correo institucional de la delegación; una cuenta por delegación, no por persona) y solo leen |
 | ACT-D03 | Estudiante | a los estudiantes de la Universidad de Sevilla, que solo leen la normativa vigente |
 
 ## 6. Requisitos de interfaz de usuario
@@ -90,7 +90,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 ### CU-D02 - Consultar las actas aprobadas
 
 - **Evento disparador:** antes de cada asamblea, para repasar lo acordado
-- **Precondición:** El delegado ha iniciado sesión con su correo @alum.us.es
+- **Precondición:** El delegado ha iniciado sesión con la cuenta de su delegación
 - **Postcondición:** El delegado ha abierto el acta que buscaba
 - **Pasos:**
   1. Delegado abre la vista plana de actas aprobadas
@@ -105,7 +105,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 - **Precondición:** El usuario puede acceder al sitio Documentación pública
 - **Postcondición:** El usuario ha leído la norma que buscaba
 - **Pasos:**
-  1. Delegado o el estudiante entra en el sitio Documentación pública; el delegado accede con su correo @alum.us.es
+  1. Delegado o el estudiante entra en el sitio Documentación pública; el delegado accede con la cuenta de su delegación y el estudiante con su correo @alum.us.es
   2. Estudiante abre la vista de normativa vigente
   3. El sistema muestra las normas con estado vigente y oculta las derogadas
   4. Estudiante busca por palabra clave o filtra por año
@@ -148,6 +148,30 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
   5. Ejecutiva del CADUS introduce el resultado
   6. El sistema guarda el registro visible solo para la Ejecutiva, sin números de DNI
 
+### CU-D07 - Publicar una nueva versión de una norma y derogar la anterior
+
+- **Evento disparador:** cuando la Ejecutiva aprueba la revisión de una norma ya publicada
+- **Precondición:** La norma anterior está en la biblioteca Normativa con estado Vigente y la Ejecutiva dispone del documento de la versión nueva
+- **Postcondición:** La versión nueva es la única vigente de su norma y la anterior queda derogada y conservada
+- **Pasos:**
+  1. Ejecutiva del CADUS sube el documento de la versión nueva a la biblioteca Normativa
+  2. El sistema solicita el tipo de documento, la norma, la versión, la fecha, el curso académico y el estado
+  3. Ejecutiva del CADUS rellena los metadatos con la misma norma, la versión nueva y el estado Vigente
+  4. Ejecutiva del CADUS abre la versión anterior de esa norma y cambia su estado a Derogada
+  5. El sistema muestra en la vista de normativa vigente solo la versión nueva y conserva la derogada, sin borrarla
+
+### CU-D08 - Consultar los registros de votaciones anteriores
+
+- **Evento disparador:** cuando la Ejecutiva necesita comprobar qué se decidió en una votación de una asamblea anterior
+- **Precondición:** Existen registros de votación guardados y quien consulta es miembro de la Ejecutiva
+- **Postcondición:** La Ejecutiva ha abierto el registro de votación que buscaba
+- **Pasos:**
+  1. Ejecutiva del CADUS abre la biblioteca Votaciones
+  2. El sistema muestra la vista plana con todos los registros, solo a la Ejecutiva
+  3. Ejecutiva del CADUS filtra por asamblea y por tipo de voto
+  4. El sistema muestra los registros que cumplen los filtros, identificados por su asamblea y su número de votación
+  5. Ejecutiva del CADUS abre el registro
+
 ## 9. Requisitos no funcionales
 
 | Código | Nombre | El sistema deberá | Importancia |
@@ -168,13 +192,14 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 | RN-D04 | Votación sin DNI | El registro de votación no guarda el número de DNI: solo si se comprobó la identidad del delegado. En una votación secreta tampoco se guarda el voto de cada delegación: la lista de participación y el recuento van separados y no se pueden relacionar. |
 | RN-D05 | Un voto por delegación | En cada votación cuenta un voto por delegación (27 delegaciones), que representa a sus estudiantes; solo votan los delegados. La plantilla trae una fila por delegación con presente o ausente (la ausencia no es abstención) y cada asamblea puede tener varias votaciones numeradas. |
 | RN-D06 | Tipo de documento | Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos. |
+| RN-D07 | Una versión vigente por norma | Por cada norma solo puede haber una versión vigente (puede haber varias normas distintas vigentes a la vez). Al publicar una versión nueva, la anterior pasa a Derogada y se conserva: no se borra. |
 
 ## 11. Entorno de trabajo del equipo (restricciones)
 
 | Código | Nombre | Descripción |
 |---|---|---|
 | RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros. |
-| RC-D02 | Acceso con correo corporativo | Los delegados y los estudiantes acceden con su correo corporativo @alum.us.es; la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
+| RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 
 ## 12. Trazabilidad entre requisitos
@@ -182,7 +207,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 | Origen | Destinos |
 |---|---|
 | OBJ-D01 | RF-D01, RF-D06, RF-D09, IR-D01, IR-D02, IR-D03, IR-D04, IR-D05, RNF-D03, RNF-D05 |
-| OBJ-D02 | RF-D02, RF-D04, RF-D05, IR-D06, UI-D02, RN-D06 |
+| OBJ-D02 | RF-D02, RF-D04, RF-D05, IR-D06, UI-D02, RN-D06, RN-D07 |
 | OBJ-D03 | RF-D03, RF-D07, RF-D08, RNF-D01, RNF-D04, RN-D01, RN-D02, RN-D03 |
 | OBJ-D04 | RN-D04, RN-D05, IR-D05, RF-D09 |
 | CU-D01 | RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, IR-D02, ACT-D01 |
@@ -191,5 +216,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.0, 2026-10-30. Cad
 | CU-D04 | RF-D01, RF-D02, RF-D07, RN-D02, IR-D04, ACT-D01 |
 | CU-D05 | RF-D07, RF-D08, RN-D03, RNF-D04, ACT-D01 |
 | CU-D06 | RF-D01, RF-D02, RF-D09, RN-D04, RN-D05, IR-D05, ACT-D01 |
+| CU-D07 | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03, ACT-D01 |
+| CU-D08 | RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01, IR-D05, ACT-D01 |
 | UI-D01 | RNF-D02, RF-D02 |
 | RNF-D01 | RN-D02, RN-D04 |

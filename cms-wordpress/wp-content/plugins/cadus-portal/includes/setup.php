@@ -172,6 +172,7 @@ function cadus_contenido_aviso_privacidad(): string
         . cadus_b_html(''
             . '<h2>Responsable del tratamiento</h2><p>Consejo de Alumnos de la Universidad de Sevilla (CADUS). Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla. Correo: <a href="mailto:dcadus@us.es">dcadus@us.es</a>.</p>'
             . '<h2>Qué datos tratamos</h2><p>En el buzón de consultas y reclamaciones y en la solicitud de mediación: tu nombre y apellidos, tu Facultad o Escuela, tu correo universitario (@alum.us.es) y lo que escribas en el formulario (el asunto, el tipo de solicitud y la descripción). Son los datos mínimos para poder atenderte: no pedimos DNI, teléfono ni otros datos.</p>'
+            . '<h2>Delegaciones de alumnos</h2><p>El directorio de delegaciones publica el correo, el teléfono, el Instagram y los nombres de los miembros de cada delegación, tal y como ya figuran en la web oficial del CADUS (www.cadus.us.es), para que el alumnado sepa a quién acudir. La base legal es el interés legítimo del CADUS en dar a conocer a sus representantes (artículo 6.1.f del RGPD). Si eres miembro de una delegación y quieres rectificar o retirar tus datos, escribe a dcadus@us.es o díselo a tu delegación, que puede editar su ficha.</p>'
             . '<h2>Para qué los usamos</h2><p>Solo para atender tu consulta, reclamación o solicitud de mediación, responderte y permitirte seguir su estado con tu código. No usamos tus datos para enviarte publicidad ni para elaborar perfiles.</p>'
             . '<h2>Base legal</h2><p>Tu consentimiento (artículo 6.1.a del RGPD), que das al marcar la casilla del formulario. Puedes retirarlo cuando quieras escribiendo a dcadus@us.es, sin que afecte al tratamiento ya realizado.</p>'
             . '<h2>Quién puede verlos</h2><p>Solo la Ejecutiva del CADUS y el personal técnico que administra la web, y únicamente cuando es necesario. Todas las consultas, reclamaciones y solicitudes de mediación son confidenciales (RN-03): no se muestran en la web pública, en el buscador ni en la API, y los avisos por correo, tanto el que recibes tú como el que recibe la Ejecutiva cuando entra una consulta nueva, solo llevan el código, nunca tus datos ni el contenido. No cedemos tus datos a terceros salvo obligación legal.</p>'
@@ -478,21 +479,8 @@ function cadus_portal_configurar(): void
         }
     }
 
-    // Delegaciones de ejemplo (HU-05, HU-06): una por centro, con los datos por completar
-    foreach ($centros as $centro) {
-        $titulo = 'Delegación de ' . $centro;
-        if (cadus_buscar_semilla('delegacion:' . sanitize_title($centro), 'cadus_delegacion', $titulo)) {
-            continue;
-        }
-        $id = wp_insert_post([
-            'post_type' => 'cadus_delegacion', 'post_status' => 'publish', 'post_title' => $titulo, 'post_author' => 1,
-            'post_content' => cadus_b_p('Ficha pendiente de completar por el delegado o representante del centro.'),
-        ]);
-        if ($id && !is_wp_error($id)) {
-            update_post_meta($id, '_cadus_semilla', 'delegacion:' . sanitize_title($centro));
-            wp_set_object_terms($id, $centro, 'cadus_centro');
-        }
-    }
+    // Delegaciones (HU-05, HU-06): todas las de www.cadus.us.es con sus miembros, contacto y escudo
+    cadus_delegaciones_cargar();
 
     // Buzón (HU-07): lo implementa includes/buzon.php
     if (function_exists('cadus_buzon_setup')) {
@@ -515,13 +503,14 @@ function cadus_portal_configurar(): void
             ['atencion-al-estudiante/seguimiento-de-ticket', 1], ['atencion-al-estudiante/preguntas-frecuentes', 1], ['contacto', 0],
         ];
         $padres = [];
+        $cortos = ['noticias' => 'Noticias', 'delegaciones' => 'Delegaciones']; // etiquetas breves para que la barra quepa sin «Más»
         foreach ($orden as [$r, $nivel]) {
             $pid = $ruta($r);
             if (!$pid) {
                 continue;
             }
             $item = wp_update_nav_menu_item($menu_id, 0, [
-                'menu-item-title' => get_the_title($pid), 'menu-item-object' => 'page', 'menu-item-object-id' => $pid,
+                'menu-item-title' => $cortos[$r] ?? get_the_title($pid), 'menu-item-object' => 'page', 'menu-item-object-id' => $pid,
                 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish', 'menu-item-parent-id' => $nivel ? end($padres) : 0,
             ]);
             if (!$nivel) {

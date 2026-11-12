@@ -1,3 +1,12 @@
+2.1.61: 2026-10-29
+- Improvement: About Me block - show only users with published content
+- Improvement: Cards Reveal Effect - improve staggered animations for larger groups of cards
+- Improvement: Cart page - improve compatibility with WooCommerce 11.3
+- Improvement: Customizer - improve mobile and tablet preview sizes to better reflect real devices
+- Improvement: Customizer colors - correctly apply HEX values with leading or trailing spaces
+- Improvement: Search - validate post type and taxonomy filter parameters
+- Improvement: WooCommerce notices - prevent icons from overlapping text on small screens in RTL languages
+
 2.1.60: 2026-10-15
 - Improvement: Block editor - make theme typography and colors easier to override with block styles
 - Improvement: Customizer - improve handling of custom labels and colors

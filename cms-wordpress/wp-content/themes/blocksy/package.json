@@ -1,6 +1,6 @@
 {
 	"name": "small-ct",
-	"version": "2.1.60",
+	"version": "2.1.61",
 	"title": "Blocksy",
 	"browserslist": "> 1%, not opera > 0, not op_mini all",
 	"devDependencies": {
@@ -16,6 +16,7 @@
 	},
 	"scripts": {
 		"dev": "gulp dev",
+		"dev:auto": "node scripts/dev-auto.mjs",
 		"build": "cross-env NODE_ENV=production gulp build --silent",
 		"gettext-generate": "gulp gettext-generate --silent",
 		"changelogs": "env-cmd --silent node scripts/get-changelog.js",

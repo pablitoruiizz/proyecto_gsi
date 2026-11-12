@@ -464,11 +464,13 @@ function blocksy_sanitize_user_html( $html, $args = array() ) {
 
 if ( ! function_exists( 'blocksy_validate_color' ) ) {
 	function blocksy_validate_color( $color ) {
-		if (
-			! is_string( $color )
-			||
-			! preg_match( '/^(?!.*url\()[\w#%.-]+(\([\w#%(),. \/-]*\))?$/Di', $color )
-		) {
+		if ( ! is_string( $color ) ) {
+			return null;
+		}
+
+		$color = trim( $color );
+
+		if ( ! preg_match( '/^(?!.*url\()[\w#%.-]+(\([\w#%(),. \/-]*\))?$/Di', $color ) ) {
 			return null;
 		}
 
