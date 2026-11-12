@@ -1,5 +1,3 @@
-> Copia del `LEEME.md` del zip de la entrega del 08/11/2026. En el repositorio los documentos están en `docs/dms/entrega/` (DMS, entrevista, adenda del CMS) y `docs/entrega/` (entrega 2 del CMS); las rutas de abajo son las del zip.
-
 # Entrega del 08/11/2026 — CADUS (CMS + DMS)
 
 Equipo: Pablo Ruiz Vidal, Joaquín Luna Canela, Miguel Ángel Camacho Martín, Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez.
@@ -25,8 +23,6 @@ El proyecto es el mismo que en la entrega anterior, así que se vuelve a adjunta
 
 Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, `cadus-organos-de-gobierno` y `cadus-atencion-al-estudiante`.
 
-## Estado a 09/11/2026
-
-- **CMS:** el repositorio de GitHub no recoge cambios posteriores al 01/11, así que ninguna historia del Sprint 3 está cerrada y el hito del 08/11 (10 SP pendientes) no se ha alcanzado. El burndown real se mantiene en 36 SP, como indica la adenda. El sprint se cierra el 15/11 y, si hay retraso, se recorta primero HU-16.
-- **DMS:** configurado y observado con la cuenta de Pablo; las pruebas cruzadas con cuentas de delegado y de estudiante siguen pendientes (ver la sección «Pendiente y limitaciones» de `Entrega-DMS-CADUS`).
-- Las capturas de implementación del CMS son las de la entrega 2; las del Sprint 3 se añadirán al documento final del 15/11.
+## Estado a 12/11/2026
+- **CMS:** en el Sprint 3 se han cerrado 11 de los 36 SP (HU-22 relevo de la cuenta de la delegación; HU-17a, HU-16b y HU-15b del buzón) y las tareas E3-03, E3-05, E3-07 y E3-08. Quedan 25 SP; el hito del 08/11 no se alcanzó. El despliegue en el servidor de la US (E3-09) está bloqueado porque ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior. Detalle en `Adenda-CMS-Sprint3`.
+- **DMS:** configurado y observado con la cuenta de Pablo; las pruebas cruzadas con cuentas de delegado y de estudiante siguen pendientes.

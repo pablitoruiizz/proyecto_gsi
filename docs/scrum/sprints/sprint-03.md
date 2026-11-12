@@ -179,6 +179,24 @@ Siguen abiertas en el GitHub Project las tareas de contenido y cliente del Sprin
 | El borrado a los 2 años (HU-23) podría eliminar datos que aún se necesiten. | Probarlo con datos de ejemplo y anonimizar en lugar de borrar cuando haya dudas. |
 | Todo el contacto con el cliente pasa por una sola persona. | Miguel Ángel resume cada reunión en Discord (#scrum) y Pablo, como Product Owner, valida las prioridades. |
 
+## Estado a 12/11/2026
+
+Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resultados de pruebas del propio equipo.
+
+| Subtarea | Quién | Fecha | Evidencia |
+|---|---|---|---|
+| HU-22 relevo de la cuenta de la delegación (3 SP) | Miguel Ángel | 09/11 | `includes/relevo.php`; `scripts/roles` |
+| HU-17a honeypot y límite de envíos (3 SP) | Marcos | 11/11 | baterías `sprint3_buzon.py` (81 correctas, 0 fallos) y de privacidad |
+| HU-16b búsqueda de tickets sin exponer datos (2 SP) | Marcos | 11/11 | `sprint3_buzon.py` |
+| HU-15b etiquetas, encabezados y ARIA en Atención al estudiante (3 SP) | Marcos | 12/11 | `hu15b_accesibilidad.py` (59 correctas, 0 fallos) |
+| E3-03, E3-05, E3-07 y E3-08 (sin puntos) | Miguel Ángel y Marcos | 09–11/11 | `scripts/pruebas/SPRINT3_BUZON.md`, calendario con «Asambleas» y «Cursos», REM v2.2 |
+
+**SP pendientes: 25 de 36** (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
+
+**Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP.
+
+**Sin prueba cruzada:** las pruebas anteriores las ejecutó quien hizo cada subtarea; falta que otra persona las repita (T-01).
+
 ## Resultado del Sprint 3
 
 *(se completará al cerrar el sprint)*

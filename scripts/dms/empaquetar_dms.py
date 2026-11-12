@@ -1,4 +1,4 @@
-"""Monta el zip de la entrega del 08/11 (CMS + DMS) en docs/dms/entrega/paquete/. Uso: python scripts/dms/empaquetar_dms.py"""
+﻿"""Monta el zip de la entrega del 08/11 (CMS + DMS) en docs/dms/entrega/paquete/. Uso: python scripts/dms/empaquetar_dms.py"""
 import os
 import shutil
 import sys
@@ -67,6 +67,10 @@ El proyecto es el mismo que en la entrega anterior, así que se vuelve a adjunta
 - `seguimiento`: product backlog, sprint backlog y burndown del DMS (independientes de los del CMS).
 
 Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, `cadus-organos-de-gobierno` y `cadus-atencion-al-estudiante`.
+
+## Estado a 12/11/2026
+- **CMS:** en el Sprint 3 se han cerrado 11 de los 36 SP (HU-22 relevo de la cuenta de la delegación; HU-17a, HU-16b y HU-15b del buzón) y las tareas E3-03, E3-05, E3-07 y E3-08. Quedan 25 SP; el hito del 08/11 no se alcanzó. El despliegue en el servidor de la US (E3-09) está bloqueado porque ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior. Detalle en `Adenda-CMS-Sprint3`.
+- **DMS:** configurado y observado con la cuenta de Pablo; las pruebas cruzadas con cuentas de delegado y de estudiante siguen pendientes.
 """
 
 

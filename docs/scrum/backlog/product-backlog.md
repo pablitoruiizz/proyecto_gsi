@@ -36,14 +36,14 @@
 | HU-12 | Como Estudiante, quiero solicitar mediación estudiantil mediante un formulario. | RF-13 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-13 | Como Administrador, quiero gestionar roles y permisos de usuario (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | RF-14 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Pendiente | Sprint-03 | `[Nombre]` |
-| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | Pendiente | Sprint-03 | `[Nombre]` |
-| HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | Pendiente | Sprint-03 | `[Nombre]` |
-| HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | En curso | Sprint-03 | `[Nombre]` |
+| HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | En curso | Sprint-03 | `[Nombre]` |
+| HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | En curso | Sprint-03 | `[Nombre]` |
 | HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Pendiente | Sprint-03 | `[Nombre]` |
 | HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Cancelada | — | `[Nombre]` |
-| HU-22 | Como Delegado, quiero pasar la cuenta de mi delegación a mi sucesor cuando me doy de baja, para que la delegación no se quede sin acceso. | RF-14, RN-04 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-22 | Como Delegado, quiero pasar la cuenta de mi delegación a mi sucesor cuando me doy de baja, para que la delegación no se quede sin acceso. | RF-14, RN-04 | Media | 3 | Hecho | Sprint-03 | `[Nombre]` |
 | HU-23 | Como miembro de la Ejecutiva, quiero que los tickets y las mediaciones se borren o anonimicen a los 2 años de resolverse, para cumplir el plazo de conservación. | RNF-08, RN-03 | Media | 2 | Pendiente | Sprint-03 | `[Nombre]` |
 
 ## Roadmap por versiones
