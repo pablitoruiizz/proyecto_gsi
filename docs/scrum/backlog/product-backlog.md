@@ -43,7 +43,7 @@
 | HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Pendiente | Sprint-03 | `[Nombre]` |
 | HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Cancelada | — | `[Nombre]` |
-| HU-22 | Como Delegado, quiero dar de alta a mi sucesor cuando me doy de baja, para que la delegación no se quede sin cuenta. | RF-14, RN-04 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-22 | Como Delegado, quiero pasar la cuenta de mi delegación a mi sucesor cuando me doy de baja, para que la delegación no se quede sin acceso. | RF-14, RN-04 | Media | 3 | Pendiente | Sprint-03 | `[Nombre]` |
 | HU-23 | Como miembro de la Ejecutiva, quiero que los tickets y las mediaciones se borren o anonimicen a los 2 años de resolverse, para cumplir el plazo de conservación. | RNF-08, RN-03 | Media | 2 | Pendiente | Sprint-03 | `[Nombre]` |
 
 ## Roadmap por versiones

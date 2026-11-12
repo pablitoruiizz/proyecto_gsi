@@ -1,6 +1,7 @@
 <?php
 /**
- * Alta de las cuentas de los delegados (E2-01) a partir de usuarios-reales.csv: una por delegado, con su correo de alumno (@alum.us.es).
+ * Alta de las cuentas de las delegaciones (E2-01) a partir de usuarios-reales.csv: una por delegación, con el correo institucional
+ * de la delegación (no el correo de alumno del delegado: la cuenta representa a la delegación, no a la persona).
  * La cuenta única del CADUS (dcadus@us.es) se crea con crear_cuenta_cadus.php (ver README.md).
  *
  * Uso (CLI, desde la raíz del repositorio):
@@ -13,8 +14,9 @@
  *   delegacion = título exacto de la ficha de la delegación; vacío = se busca una ficha cuyo título sea igual al «nombre».
  *   Si la ficha todavía no existe, la cuenta se crea igualmente y se avisa: al volver a ejecutar el script se asigna.
  * Reglas: nunca se guardan ni muestran contraseñas (se genera una aleatoria que nadie ve; cada titular la cambia con el enlace
- * de «contraseña olvidada»); no se tocan las cuentas de administrador; un delegado queda como autor de SU delegación,
- * que es lo que le permite editarla y nada más (RN-04).
+ * de «contraseña olvidada»); no se tocan las cuentas de administrador; la cuenta de una delegación queda como autora de SU ficha,
+ * que es lo que le permite editarla y nada más (RN-04); y hay una sola cuenta por delegación: el relevo se hace con una
+ * contraseña nueva en la misma cuenta, no creando otra (ver README.md).
  */
 if (PHP_SAPI !== 'cli') {
     exit('Solo desde la línea de comandos.');
@@ -55,6 +57,16 @@ if (!$filas) {
     exit(0);
 }
 
+/** Cuenta de delegación que ya es autora de la ficha y no es la que se está dando de alta (una sola por delegación). */
+function cuenta_de_ficha(WP_Post $ficha, $existente): ?WP_User
+{
+    $autor = get_user_by('id', (int) $ficha->post_author);
+    if (!$autor || !in_array('cadus_delegado', $autor->roles, true) || ($existente && $autor->ID === $existente->ID)) {
+        return null;
+    }
+    return $autor;
+}
+
 $errores = 0;
 $vistos = [];
 foreach ($filas as $fila) {
@@ -76,8 +88,12 @@ foreach ($filas as $fila) {
         $problema = "no coincide con la cuenta existente «{$existente->user_login}» ({$existente->user_email}): revisa usuario y correo";
     } elseif ($rol === '') {
         $problema = 'rol desconocido (usa ejecutivo, delegado o estudiante)';
-    } elseif ($rol === 'cadus_delegado' && !preg_match('/@alum\.us\.es$/i', $correo)) {
-        $problema = 'los delegados entran con su correo de alumno (@alum.us.es)';
+    } elseif ($rol === 'cadus_delegado' && preg_match('/@alum\.us\.es$/i', $correo)) {
+        $problema = 'las delegaciones entran con el correo institucional de la delegación, no con un correo de alumno (@alum.us.es)';
+    } elseif ($rol === 'cadus_delegado' && $ficha && isset($vistos['f:' . $ficha->ID])) {
+        $problema = "la delegación «{$ficha->post_title}» aparece en más de una fila: solo puede tener una cuenta";
+    } elseif ($rol === 'cadus_delegado' && $ficha && ($otra = cuenta_de_ficha($ficha, $existente))) {
+        $problema = "la delegación «{$ficha->post_title}» ya tiene la cuenta «{$otra->user_login}»: para el relevo cambia su contraseña, no crees otra";
     } elseif ($existente && in_array('administrator', $existente->roles, true)) {
         $problema = 'es administrador: no se modifica desde este script';
     }
@@ -87,6 +103,9 @@ foreach ($filas as $fila) {
         continue;
     }
     $vistos['u:' . $login] = $vistos['c:' . strtolower($correo)] = true;
+    if ($rol === 'cadus_delegado' && $ficha) {
+        $vistos['f:' . $ficha->ID] = true;
+    }
     echo '  ' . ($existente ? '↻ actualizar ' : '+ crear ') . "{$login} ({$correo}) → {$rol}"
         . ($rol === 'cadus_delegado' ? ($ficha ? " · ficha «{$ficha->post_title}»" : " · ⚠ no hay ninguna ficha titulada «{$titulo}»: se asignará al volver a ejecutar cuando exista") : '') . "\n";
     if (!$aplicar) {

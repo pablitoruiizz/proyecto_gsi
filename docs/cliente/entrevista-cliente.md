@@ -35,6 +35,8 @@ Cualquier ejecutivo, o el propio delegado que se da de baja, y con acción inmed
 **8. ¿Quién atiende los tickets y en qué plazo?**
 Cualquier ejecutivo. El aviso de ticket debe llegar al correo de `dcadus`. El plazo de respuesta es de al menos 4 días.
 
+> **Aclaración (09/11/2026, Miguel Ángel Camacho, miembro del CADUS):** los 4 días son un **máximo** para responder, en **días hábiles**, y se cuentan **desde que la Ejecutiva revisa el ticket** (no desde que el estudiante lo envía).
+
 **9. ¿Qué consultas recibís más y cuáles son delicadas?**
 Becas y conflictos con profesores. Lo de los profesores es más sensible, aunque todas las consultas deberían tratarse con total privacidad.
 
@@ -90,7 +92,7 @@ En un servidor SFTP de la US, y lo mantendrá quien ellos crean necesario. Busca
 | Las votaciones son presenciales y no se publican resultados (1-4) | **La papeleta online (HU-21) deja de tener sentido.** El portal solo anuncia la votación (ya cubierto por HU-11). El registro de la votación por delegación pasa al DMS | HU-21, RF-12, RN-05 |
 | La cuenta de delegado representa a la delegación y puede dar de alta al nuevo delegado (5, 7) | Nuevo permiso: el delegado crea la cuenta de su sucesor; cualquier ejecutivo también | RF-14, RN-04 (nueva historia) |
 | 27 delegaciones, datos de `cadus.us.es/delegaciones/` (5, 15) | Cargar las 27 fichas desde la web del CADUS | E2-12 |
-| Aviso de ticket al correo `dcadus` y plazo de respuesta «de al menos 4 días» (8) | El aviso al buzón de la Ejecutiva. **El plazo se publica solo cuando se aclare** si es mínimo o máximo, en días naturales o hábiles y desde cuándo se cuenta | RF-10, E3-08 |
+| Aviso de ticket al correo `dcadus` y plazo de respuesta «de al menos 4 días» (8) | El aviso al buzón de la Ejecutiva. Plazo aclarado el 09/11: **máximo 4 días hábiles desde que la Ejecutiva revisa el ticket**; se publica en el buzón con ese texto | RF-10, E3-08 |
 | Conservación de 2 años desde la resolución (10) | Cierra el plazo pendiente de RNF-08; hay que borrar o anonimizar a los 2 años | RNF-08 (nueva tarea) |
 | Datos mínimos: nombre y apellidos, facultad y correo (11) | Revisar los campos del buzón y de la mediación | HU-17 |
 | Aviso al estudiante por correo y en el portal (12) | Ya cubierto: aviso por correo sin contenido y seguimiento en el portal con código | RF-09 |
