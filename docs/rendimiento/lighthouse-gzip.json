@@ -1,0 +1,62 @@
+{
+  "etiqueta": "gzip",
+  "veces": 5,
+  "paginas": {
+    "Inicio": {
+      "FCP (ms)": 1381.225,
+      "LCP (ms)": 1873.074,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 1381.225,
+      "Respuesta del servidor (ms)": 7.764,
+      "Peso total (bytes)": 318936,
+      "Rendimiento (0-100)": 99,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 14
+    },
+    "Noticias": {
+      "FCP (ms)": 1386.935,
+      "LCP (ms)": 1983.452,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 1386.935,
+      "Respuesta del servidor (ms)": 7.056,
+      "Peso total (bytes)": 316948,
+      "Rendimiento (0-100)": 99,
+      "Accesibilidad (0-100)": 95,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 15
+    },
+    "Delegaciones": {
+      "FCP (ms)": 1372.549,
+      "LCP (ms)": 2510.622,
+      "TBT (ms)": 7,
+      "CLS": 0.068,
+      "Speed Index (ms)": 1372.549,
+      "Respuesta del servidor (ms)": 8.078,
+      "Peso total (bytes)": 1118687,
+      "Rendimiento (0-100)": 97,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 37
+    },
+    "Actas y normativa": {
+      "FCP (ms)": 1412.656,
+      "LCP (ms)": 1988.995,
+      "TBT (ms)": 5,
+      "CLS": 0,
+      "Speed Index (ms)": 1412.656,
+      "Respuesta del servidor (ms)": 9.593,
+      "Peso total (bytes)": 316860,
+      "Rendimiento (0-100)": 99,
+      "Accesibilidad (0-100)": 97,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 15
+    }
+  }
+}
