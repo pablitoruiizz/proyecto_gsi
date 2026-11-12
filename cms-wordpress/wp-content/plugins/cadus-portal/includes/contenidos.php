@@ -186,11 +186,32 @@ function cadus_paginacion($paginas): string
     return '<nav class="cadus-paginacion" aria-label="Paginación">' . $marcado->get_updated_html() . '</nav>';
 }
 
-/** [cadus_actas]: listado de actas y normativas filtrable por tipo y ordenado por fecha (HU-04). */
+/** Palabra clave del filtro (parámetro q), ya saneada. Vacía si no hay. */
+function cadus_filtro_palabra(): string
+{
+    return isset($_GET['q']) && is_string($_GET['q']) ? sanitize_text_field(wp_unslash($_GET['q'])) : '';
+}
+
+/** Rango de fechas del filtro (parámetros desde y hasta, formato AAAA-MM-DD). Descarta fechas inválidas y ordena el rango. */
+function cadus_filtro_fechas(): array
+{
+    $leer = static function (string $clave): string {
+        $valor = isset($_GET[$clave]) && is_string($_GET[$clave]) ? sanitize_text_field(wp_unslash($_GET[$clave])) : '';
+        return preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $valor, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1]) ? $valor : '';
+    };
+    $desde = $leer('desde');
+    $hasta = $leer('hasta');
+    return $desde !== '' && $hasta !== '' && $desde > $hasta ? [$hasta, $desde] : [$desde, $hasta];
+}
+
+/** [cadus_actas]: listado de actas y normativas filtrable por tipo, palabra clave y fechas, ordenado por fecha (HU-04, HU-16a). */
 function cadus_shortcode_actas(): string
 {
     $tipo = isset($_GET['tipo']) && is_string($_GET['tipo']) ? sanitize_title(wp_unslash($_GET['tipo'])) : '';
     $pag = isset($_GET['pag']) ? max(1, absint($_GET['pag'])) : 1;
+    $q = cadus_filtro_palabra();
+    [$desde, $hasta] = cadus_filtro_fechas();
+    $filtros = array_filter(['q' => $q, 'desde' => $desde, 'hasta' => $hasta]);
     $args = [
         'post_type' => 'cadus_acta', 'post_status' => 'publish', 'posts_per_page' => 20, 'paged' => $pag,
         'meta_query' => [
@@ -203,12 +224,30 @@ function cadus_shortcode_actas(): string
     if ($tipo) {
         $args['tax_query'] = [['taxonomy' => 'cadus_tipo_documento', 'field' => 'slug', 'terms' => $tipo]];
     }
+    if ($q !== '') {
+        $args['s'] = $q;
+    }
+    if ($desde !== '' || $hasta !== '') {
+        // La fecha del acta se guarda como AAAAMMDD: un documento sin fecha no puede entrar en un rango.
+        $args['meta_query'] = ['con_fecha' => [
+            'key' => 'fecha', 'type' => 'NUMERIC', 'compare' => 'BETWEEN',
+            'value' => [(int) str_replace('-', '', $desde ?: '1900-01-01'), (int) str_replace('-', '', $hasta ?: '2999-12-31')],
+        ]];
+    }
     $consulta = new WP_Query($args);
     $base = get_permalink();
-    $html = '<nav class="cadus-filtros-tipo" aria-label="Filtrar por tipo"><a class="cadus-chip" href="' . esc_url($base) . '"' . ($tipo === '' ? ' aria-current="true"' : '') . '>Todos</a>';
+    $html = '<form class="cadus-filtros-form" method="get" action="' . esc_url($base) . '" role="search" aria-label="Filtrar actas y normativa">'
+        . '<label>Palabra clave<input class="cadus-campo" type="search" name="q" value="' . esc_attr($q) . '"></label>'
+        . '<label>Desde<input class="cadus-campo" type="date" name="desde" value="' . esc_attr($desde) . '"></label>'
+        . '<label>Hasta<input class="cadus-campo" type="date" name="hasta" value="' . esc_attr($hasta) . '"></label>'
+        . ($tipo !== '' ? '<input type="hidden" name="tipo" value="' . esc_attr($tipo) . '">' : '')
+        . '<button type="submit" class="cadus-boton">Filtrar</button>'
+        . ($filtros ? '<a class="cadus-chip" href="' . esc_url($tipo !== '' ? add_query_arg('tipo', $tipo, $base) : $base) . '">Quitar filtros</a>' : '')
+        . '</form>';
+    $html .= '<nav class="cadus-filtros-tipo" aria-label="Filtrar por tipo"><a class="cadus-chip" href="' . esc_url(add_query_arg($filtros, $base)) . '"' . ($tipo === '' ? ' aria-current="true"' : '') . '>Todos</a>';
     $terminos = get_terms(['taxonomy' => 'cadus_tipo_documento', 'hide_empty' => false]);
     foreach (is_wp_error($terminos) ? [] : $terminos as $t) {
-        $html .= '<a class="cadus-chip" href="' . esc_url(add_query_arg('tipo', $t->slug, $base)) . '"' . ($tipo === $t->slug ? ' aria-current="true"' : '') . '>' . esc_html($t->name) . '</a>';
+        $html .= '<a class="cadus-chip" href="' . esc_url(add_query_arg($filtros + ['tipo' => $t->slug], $base)) . '"' . ($tipo === $t->slug ? ' aria-current="true"' : '') . '>' . esc_html($t->name) . '</a>';
     }
     $html .= '</nav>';
     if (!$consulta->have_posts()) {
@@ -230,7 +269,7 @@ function cadus_shortcode_actas(): string
     wp_reset_postdata();
     $paginas = paginate_links([
         'base' => esc_url_raw(add_query_arg('pag', '%#%', $base)), 'format' => '', 'current' => $pag,
-        'total' => max(1, (int) $consulta->max_num_pages), 'add_args' => array_filter(['tipo' => $tipo ?: null]),
+        'total' => max(1, (int) $consulta->max_num_pages), 'add_args' => array_filter(['tipo' => $tipo ?: null] + $filtros),
     ]);
     return $html . '</tbody></table>' . cadus_paginacion($paginas);
 }
