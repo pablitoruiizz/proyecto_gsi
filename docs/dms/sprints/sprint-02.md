@@ -9,7 +9,7 @@ Entregar los casos de uso divididos por secciones, con dos casos en cada documen
 
 ## Orden de trabajo
 
-1. **Viernes 13/11, por la mañana (Pablo y Miguel Ángel):** cerrar identidad y reglas de CU-D07 y CU-D08 (ver «Decisiones previas»), confirmar la fecha y el alcance con el profesor, y subir `REM-DMS` y `dms_data.json` a 1.1. Hasta que esto no esté, el resto escribe sobre borradores.
+1. **Viernes 13/11, por la mañana (Pablo y Miguel Ángel):** cerrar identidad y reglas de CU-D07 y CU-D08 (ver «Decisiones previas»), confirmar la fecha y el alcance con el profesor, y subir `REM-DMS` y `dms_data.json` a 1.1. Hasta que esto no esté, el resto escribe sobre borradores. **Hecho (12/11):** `REM-DMS.md` y `dms_data.json` están en la versión 1.1 con CU-D07 y CU-D08, RN-D07 (una versión vigente por norma), las columnas Norma, Versión y Número de votación, y la cuenta por delegación en ACT-D02, CU-D02, CU-D03 y RC-D02; `DMS.rem` y `carga-remus.md` regenerados (48 objetos, 87 trazas). Falta exportar el HTML y el PDF desde REMUS.
 2. **Viernes 13/11 (todos):** cada uno su documento de casos de uso y su captura; Marcos adapta el generador; Álvaro actualiza los diagramas.
 3. **Sábado 14/11:** pruebas cruzadas, prueba con cuentas de visitante y de estudiante, cambios que salgan de ellas y exportación del REM desde REMUS.
 4. **Domingo 15/11:** documento final y zip, y comprobación del contenido del zip frente a la lista del profesor.
