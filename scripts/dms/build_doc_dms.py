@@ -338,6 +338,12 @@ def comprobar_md(tipo):
         pasos_json = pasos_de(CU[cid])
         if [normal(x) for x in pasos_md] != [normal(x) for x in pasos_json]:
             aviso(f"{tipo['archivo']}.md: los pasos de {cid} no coinciden con dms_data.json ({len(pasos_md)} en el .md, {len(pasos_json)} en el JSON)")
+    for pie, archivo in re.findall(r"^!\[(.*)\]\((.+)\)\s*$", texto, flags=re.M):
+        if not os.path.exists(os.path.normpath(os.path.join(CU_MD, archivo))):
+            aviso(f"{tipo['archivo']}.md: falta la captura {os.path.relpath(os.path.normpath(os.path.join(CU_MD, archivo)), RAIZ)}")
+    for linea in texto.splitlines():
+        if linea.startswith("PENDIENTE"):
+            aviso(f"{tipo['archivo']}.md: {linea[:90]}")
     if vistos != tipo["cus"]:
         aviso(f"{tipo['archivo']}.md: tiene {', '.join(vistos) or 'ningún caso'} y debería tener {', '.join(tipo['cus'])}")
 
@@ -608,6 +614,12 @@ if __name__ == "__main__":
     import sys
     for t in TIPOS:
         comprobar_md(t)
+    for c in sorted(DOC_DE):
+        if c not in CU:
+            aviso(f"{c} no está en dms_data.json")
+    for k in sorted(CAPS):
+        if not os.path.exists(os.path.join(CAP, CAPS[k][0])):
+            aviso(f"falta la captura docs/dms/capturas/{CAPS[k][0]}")
     if "--comprobar" not in sys.argv:
         for t in TIPOS:
             print("generado", doc_cu(t))
