@@ -195,7 +195,7 @@ CAPS = {
            "SharePoint guarda lo que se borra de la papelera del sitio en la papelera de segunda fase. Se vacía también, y la vista «Caducados» queda sin expedientes: ya no se conserva ninguna copia (paso 4 y postcondición de CU-D05, RN-D03 y RNF-D04)."),
     "13": ("13-cu-d07-nueva-version.jpg", "CU-D07: nueva versión de una norma y la anterior derogada.",
            "La biblioteca Normativa con las columnas Norma y Versión: la versión nueva está vigente y la anterior ha pasado a derogada; la vista «Vigente» solo muestra la nueva (CU-D07, RN-D07)."),
-    "14": ("14-cu-d08-votaciones-filtradas.jpg", "CU-D08: registros de votación filtrados por asamblea y tipo de voto.",
+    "14": ("14-votaciones-consulta.jpg", "CU-D08: registros de votación filtrados por asamblea y tipo de voto.",
            "La Ejecutiva filtra los registros de la biblioteca Votaciones por asamblea y tipo de voto; Asamblea y Número de votación son obligatorias para poder distinguirlos (CU-D08, RN-D04, RN-D05)."),
 }
 
@@ -311,9 +311,9 @@ def md_a_docx(ruta):
 
 
 def normal(paso):
-    """Compara pasos sin tener en cuenta el artículo inicial, las mayúsculas ni el punto final."""
+    """Compara pasos sin tener en cuenta el artículo inicial, las mayúsculas, las comas ni el punto final."""
     paso = re.sub(r"^(la|el|los|las)\s+", "", paso.strip().lower())
-    return paso.rstrip(".")
+    return re.sub(r"\s+", " ", paso.replace(",", "")).rstrip(".")
 
 
 def comprobar_md(tipo):
