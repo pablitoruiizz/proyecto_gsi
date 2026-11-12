@@ -137,7 +137,24 @@ Validación local del 23/10/2026, WordPress 7.1: `privacidad_tickets.py` → **4
 
 Evidencia y revisión independiente: `scripts/pruebas/RN03_AUDITORIA.md`, `rn03_resultados.txt`, `rn03_reprueba_panel.txt` y `RN03_REVISION_PRUEBAS.md`. El endpoint `/wp-json/wp/v2/users` devolvió **401 anónimo**, sin listado; no se modificó.
 
-Decisiones pendientes del equipo: plazo de retención de tickets, mediaciones y backups; eventual sustitución de códigos antiguos; verificación de la propiedad del correo (el dominio no demuestra que pertenezca al solicitante); ajuste del límite de envíos para redes universitarias con IP compartida; sincronización automática de centros; y almacenamiento privado de ficheros si se incorporan adjuntos. Actualmente los formularios no admiten ficheros: bloquear una URL de WordPress no protege por sí solo un fichero estático en `uploads`.
+### Sprint 3: protección de los formularios, búsqueda del panel y datos mínimos (HU-17a, HU-16b, HU-15b, E3-08)
+
+- **Campo trampa y límite de envíos (HU-17a).** El nonce de Fluent Forms y el campo trampa oculto (honeypot: una persona lo deja vacío y un robot lo rellena) se exigen ahora en los dos formularios privados, el buzón y la mediación. Cada formulario admite **10 envíos con campos válidos por IP cada 15 minutos**, con cuentas separadas (`cadus_privacidad_permitir_envio('buz' | 'med')`); los envíos rechazados por validación no gastan intentos. Los mensajes de rechazo se muestran en español.
+- **Búsqueda del panel (HU-16b).** La búsqueda de `Tickets del buzón` y de `Mediaciones` solo mira el título, es decir, la referencia más el asunto (tickets) o el centro (mediaciones). No busca en la descripción ni en el nombre o el correo del estudiante, y el resultado es el listado minimizado de siempre. Se combina con los filtros de estado y de tipo. El botón dice «Buscar por código o asunto».
+- **Datos mínimos y aviso a la Ejecutiva (E3-08).** El buzón pide nombre y apellidos, Facultad o Escuela y correo de la US, además de la consulta. `cadus_buzon_asegurar_campos()` añade los dos campos nuevos a un formulario creado antes del Sprint 3 sin tocar el resto. El desplegable de centros del buzón y de la mediación se lee de la taxonomía `cadus_centro` al pintar y al validar, así que una delegación nueva aparece sin editar el formulario. Los datos se guardan en `_cadus_solicitante` y `_cadus_centro` y solo se ven en la ficha del ticket. Cada ticket nuevo envía un correo a `dcadus@us.es` (opción o filtro `cadus_buzon_correo_avisos`) que solo lleva el código, el tipo, la fecha y el enlace al panel; el resultado queda en `_cadus_aviso_ejecutiva`. El plazo de respuesta no se publica hasta aclararlo con el CADUS.
+- **Accesibilidad de los formularios (HU-15b).** El formulario de seguimiento lleva ayudas enlazadas con `aria-describedby`, no depende del placeholder y, al responder, mueve el foco al resultado para que el lector de pantalla empiece por él.
+- **Borrado a los dos años (HU-23).** Quien implemente el borrado o la anonimización tiene que incluir los metadatos nuevos del ticket: `_cadus_solicitante`, `_cadus_centro` y `_cadus_aviso_ejecutiva`.
+
+Pruebas nuevas, desde la raíz del repositorio y con el sitio local arrancado:
+
+```powershell
+python scripts/pruebas/sprint3_buzon.py          # HU-17a, HU-16b y E3-08 (servicio de Fluent Forms, HTTP anónimo y panel)
+python scripts/pruebas/hu15b_accesibilidad.py    # HU-15b: etiquetas, textos alternativos, encabezados y ARIA
+```
+
+Las baterías anteriores (`rn03_http.py`, `privacidad_tickets.py`) se han adaptado a los campos nuevos y buscan PHP en la variable `CADUS_PHP`, en la ruta del servidor del equipo, en el `PATH` o en Wamp. El resultado está en `scripts/pruebas/SPRINT3_BUZON.md`.
+
+Decisiones pendientes del equipo: plazo de respuesta de los tickets (el de retención ya está cerrado: 2 años, HU-23) y retención de los backups; eventual sustitución de códigos antiguos; verificación de la propiedad del correo (el dominio no demuestra que pertenezca al solicitante); ajuste del límite de envíos para redes universitarias con IP compartida; y almacenamiento privado de ficheros si se incorporan adjuntos. Actualmente los formularios no admiten ficheros: bloquear una URL de WordPress no protege por sí solo un fichero estático en `uploads`.
 
 Referencias técnicas: [registro de tipos de WordPress](https://developer.wordpress.org/reference/functions/register_post_type/) y [ciclo de envío de Fluent Forms](https://developers.fluentforms.com/submission-lifecycle/), contrastados con el código instalado.
 

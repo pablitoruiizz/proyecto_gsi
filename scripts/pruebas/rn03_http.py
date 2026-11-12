@@ -1,7 +1,10 @@
 """Auditoría Codex RN-03. Sesiones temporales en memoria; limpieza en finally."""
 import concurrent.futures
+import glob
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import urllib.error
@@ -10,7 +13,16 @@ import urllib.request
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8')
-PHP = r'C:\Users\ruizv\OneDrive\Escritorio\UNI\GSI\apps proyecto\php\php.exe'
+
+
+def _php():
+    """PHP de línea de comandos: variable CADUS_PHP, la ruta del servidor del equipo, el PATH o el PHP de Wamp."""
+    candidatos = [os.environ.get('CADUS_PHP'), r'C:\Users\ruizv\OneDrive\Escritorio\UNI\GSI\apps proyecto\php\php.exe',
+                  shutil.which('php'), *sorted(glob.glob(r'C:\wamp64\bin\php\php8*\php.exe'), reverse=True)]
+    return next((c for c in candidatos if c and os.path.exists(c)), 'php')
+
+
+PHP = _php()
 HELPER = Path(__file__).with_name('rn03_auditoria.php')
 BASE = 'http://localhost/proyecto_gsi/cms-wordpress'
 failures = []
@@ -48,7 +60,7 @@ def main():
         for label, ok in state['checks'].items():
             check(label, ok)
         tid, attachment = state['id'], state['attachment']
-        forbidden = ['RN03-CODEX-SECRETO', 'RN03-CODEX-ASUNTO', 'prueba@alum.us.es', state['code'], 'RN03-ADJUNTO']
+        forbidden = ['RN03-CODEX-SECRETO', 'RN03-CODEX-ASUNTO', 'RN03-CODEX-NOMBRE', 'prueba@alum.us.es', state['code'], 'RN03-ADJUNTO']
         tasks = []
         direct = [f'/?p={tid}', f'/?post_type=cadus_ticket&p={tid}', f'/?p={tid}&preview=true',
                   f'/?attachment_id={tid}', f'/?attachment_id={attachment}', f'/?p={tid}&feed=rss2',
@@ -85,7 +97,7 @@ def main():
                     if falta:
                         print('  falta en la edición autorizada:', falta)
                 else:
-                    ok = ok and not any(s in body for s in ['RN03-CODEX-SECRETO', 'RN03-CODEX-ASUNTO', 'prueba@alum.us.es'])
+                    ok = ok and not any(s in body for s in ['RN03-CODEX-SECRETO', 'RN03-CODEX-ASUNTO', 'RN03-CODEX-NOMBRE', 'prueba@alum.us.es'])
                     if 'edit.php' in path:
                         ok = ok and state['code'] in body
             else:

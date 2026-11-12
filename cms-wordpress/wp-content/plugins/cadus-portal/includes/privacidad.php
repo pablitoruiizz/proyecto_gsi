@@ -67,7 +67,11 @@ add_filter('posts_where', function (string $where): string {
 /** WordPress puede ignorar post_type no consultables y devolver la portada (200). */
 add_action('template_redirect', function (): void {
     $types = isset($_GET['post_type']) ? (array) $_GET['post_type'] : [];
-    if (array_intersect(cadus_privacidad_tipos(), array_filter($types, 'is_string'))
+    // El feed de comentarios de una entrada privada (/?p=ID&feed=rss2) respondía 200 con un feed vacío.
+    $id = is_feed() ? absint($_GET['p'] ?? $_GET['page_id'] ?? $_GET['attachment_id'] ?? 0) : 0;
+    $post = $id ? get_post($id) : null;
+    $feed_privado = $post && (cadus_privacidad_tipo($post->post_type) || cadus_privacidad_tipo(get_post_type($post->post_parent)));
+    if ($feed_privado || array_intersect(cadus_privacidad_tipos(), array_filter($types, 'is_string'))
         || array_intersect(cadus_privacidad_tipos(), array_keys($_GET))) {
         global $wp_query;
         $wp_query->set_404();
@@ -198,20 +202,38 @@ add_filter('fluentform/submission_message_parse', function ($message, $id, $data
     return $message;
 }, 98, 4);
 
-/** El nonce existe en el HTML de FF, pero su comprobación está desactivada por defecto. */
+/**
+ * El nonce existe en el HTML de FF, pero su comprobación está desactivada por defecto.
+ * HU-17a: el nonce y el campo trampa (honeypot, un campo oculto que una persona deja vacío y un robot
+ * rellena) se exigen en los dos formularios privados, el buzón y la mediación.
+ */
 foreach (['fluentform/nonce_verify', 'fluentform/honeypot_status'] as $hook) {
     add_filter($hook, function ($enabled, $form_id) {
-        return (int) $form_id > 0 && (int) $form_id === (int) get_option('cadus_mediacion_form_id', 0)
-            ? true : $enabled;
+        return cadus_privacidad_formulario($form_id) ? true : $enabled;
     }, PHP_INT_MAX, 2);
 }
 
-/** Límite independiente del seguimiento; sin guardar correo ni IP en claro. */
-function cadus_privacidad_permitir_mediacion(): bool
+/** Los mensajes de rechazo de Fluent Forms salen en inglés: en estos formularios se muestran en español. */
+add_filter('fluentform/honeypot_spam_message', function ($message, $form_id) {
+    return cadus_privacidad_formulario($form_id)
+        ? 'No hemos podido enviar el formulario. Recarga la página e inténtalo de nuevo.' : $message;
+}, PHP_INT_MAX, 2);
+add_filter('fluentform/nonce_error', function ($errors) {
+    $form_id = absint($_REQUEST['form_id'] ?? 0);
+    return cadus_privacidad_formulario($form_id)
+        ? ['_fluentformnonce' => ['La página ha caducado. Recárgala y vuelve a enviar el formulario.']] : $errors;
+}, PHP_INT_MAX);
+
+/**
+ * Límite de envíos por formulario (HU-17a): 10 envíos con campos válidos por IP cada 15 minutos.
+ * Es independiente del límite del seguimiento y no guarda el correo ni la IP en claro.
+ * $prefijo: «med» para la mediación y «buz» para el buzón; cada formulario lleva su propia cuenta.
+ */
+function cadus_privacidad_permitir_envio(string $prefijo): bool
 {
     $ip = cadus_buzon_input($_SERVER, 'REMOTE_ADDR');
     $ip = filter_var($ip, FILTER_VALIDATE_IP) ? $ip : 'sin_ip';
-    $key = 'cadus_med_' . hash_hmac('sha256', $ip, wp_salt('nonce'));
+    $key = 'cadus_' . $prefijo . '_' . hash_hmac('sha256', $ip, wp_salt('nonce'));
     $lock = cadus_buzon_lock($key);
     if ($lock === '') {
         return false;
@@ -235,11 +257,37 @@ function cadus_privacidad_permitir_mediacion(): bool
         cadus_buzon_unlock($lock);
     }
 }
+
+function cadus_privacidad_permitir_mediacion(): bool
+{
+    return cadus_privacidad_permitir_envio('med');
+}
+
+function cadus_privacidad_permitir_buzon(): bool
+{
+    return cadus_privacidad_permitir_envio('buz');
+}
+
+// Solo cuentan los envíos que han pasado el resto de validaciones: un error de escritura no gasta intentos.
 add_filter('fluentform/validation_errors', function ($errors, $data, $form) {
-    if (cadus_mediacion_es_formulario($form) && !$errors && !cadus_privacidad_permitir_mediacion()) {
-        $errors['mediacion'][] = 'Has alcanzado el límite de envíos. Espera quince minutos antes de volver a intentarlo.';
+    $limite = 'Has alcanzado el límite de envíos. Espera quince minutos antes de volver a intentarlo.';
+    if (!$errors && cadus_mediacion_es_formulario($form) && !cadus_privacidad_permitir_mediacion()) {
+        $errors['mediacion'][] = $limite;
+    } elseif (!$errors && cadus_buzon_es_formulario($form) && !cadus_privacidad_permitir_buzon()) {
+        $errors['buzon'][] = $limite;
     }
     return $errors;
+}, PHP_INT_MAX, 3);
+
+/**
+ * HU-16b: la búsqueda del panel de tickets y de mediaciones solo mira el título, que es la referencia más el
+ * asunto (tickets) o el centro (mediaciones). No busca en la descripción ni en el correo o el nombre del
+ * estudiante, así que no sirve para localizar a una persona ni para sondear el contenido (RN-03).
+ * El resultado es el listado de siempre: referencia, tipo, estado y fecha.
+ */
+add_filter('post_search_columns', function ($columns, $search, $query) {
+    $type = $query instanceof WP_Query ? $query->get('post_type') : '';
+    return is_string($type) && cadus_privacidad_tipo($type) ? ['post_title'] : $columns;
 }, PHP_INT_MAX, 3);
 
 /** Antes de validar, incluso los errores de nonce y antispam deben ser no-store. */
