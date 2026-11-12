@@ -77,3 +77,23 @@ add_filter('gettext', function ($traduccion, $original, $dominio) {
     ];
     return $dominio === 'blocksy' && isset($es[$original]) ? $es[$original] : $traduccion;
 }, 10, 3);
+
+/**
+ * Meta descripción (auditoría Lighthouse de HU-15c): el resumen de la entrada o página, o la descripción del sitio.
+ * Si se instala un plugin de SEO (Yoast, Rank Math, SEOPress), se deja que lo haga él.
+ */
+add_action('wp_head', function () {
+    if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION') || defined('SEOPRESS_VERSION')) {
+        return;
+    }
+    // La portada se compone de secciones: su resumen sería una lista de títulos, así que usa la descripción del sitio.
+    $singular = is_singular() && !is_front_page();
+    $texto = $singular && has_excerpt() ? get_the_excerpt() : '';
+    if ($texto === '' && $singular) {
+        $texto = wp_trim_words(wp_strip_all_tags(strip_shortcodes((string) get_post_field('post_content', get_queried_object_id()))), 28, '…');
+    }
+    if (trim($texto) === '') {
+        $texto = get_bloginfo('description') ?: 'Consejo de Alumnos de la Universidad de Sevilla: representación estudiantil, delegaciones, actas, noticias y buzón de consultas.';
+    }
+    echo '<meta name="description" content="' . esc_attr(wp_html_excerpt(trim(preg_replace('/\s+/', ' ', $texto)), 160, '…')) . '">' . "\n";
+}, 1);

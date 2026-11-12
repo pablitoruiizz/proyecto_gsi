@@ -78,12 +78,14 @@ function cadus_aplicar_diseno(): void
     update_option('cadus_diseno_version', CADUS_DISENO_VERSION);
 }
 
-function cadus_tarjeta_noticia(WP_Post $p): string
+/** Tarjeta de un comunicado. $nivel: nivel del título (2 en el listado, que va justo bajo el h1; 3 dentro de una sección). */
+function cadus_tarjeta_noticia(WP_Post $p, int $nivel = 3): string
 {
+    $h = 'h' . max(2, min(4, $nivel));
     $cats = get_the_category($p->ID);
     $nombres = $cats ? implode(', ', wp_list_pluck($cats, 'name')) : 'Sin categoría';
     return '<article class="cadus-tarjeta"><div class="cadus-meta">' . esc_html(get_the_date('d/m/Y', $p)) . ' · ' . esc_html($nombres) . '</div>'
-        . '<h3><a href="' . esc_url(get_permalink($p)) . '">' . esc_html(get_the_title($p)) . '</a></h3>'
+        . "<{$h}><a href=\"" . esc_url(get_permalink($p)) . '">' . esc_html(get_the_title($p)) . "</a></{$h}>"
         . '<p>' . esc_html(wp_trim_words(get_the_excerpt($p), 28)) . '</p></article>';
 }
 
@@ -135,7 +137,7 @@ function cadus_shortcode_noticias(): string
     }
     $html .= '<div class="cadus-tarjetas">';
     foreach ($consulta->posts as $p) {
-        $html .= cadus_tarjeta_noticia($p);
+        $html .= cadus_tarjeta_noticia($p, 2); // HU-15c: sin saltos de nivel (h1 de la página → h2 de cada comunicado)
     }
     $html .= '</div>';
     $paginas = paginate_links([
@@ -390,13 +392,9 @@ function cadus_portal_configurar(): void
         . cadus_b_sc('[cadus_ultimas_noticias n="3"]')
         . cadus_b_h('Participación estudiantil')
         . cadus_b_p('El calendario de asambleas, eventos y votaciones se publicará en la próxima versión del portal.'));
-    $que_es = cadus_pagina('que-es-el-cadus', 'Qué es el CADUS',
-        cadus_b_p('El CADUS es el Consejo de Alumnos de la Universidad de Sevilla, la organización de representación estudiantil de la universidad.')
-        . cadus_b_p('Este portal ofrece información y comunicados, las actas y normativas, el directorio de delegaciones de alumnos de cada centro y un buzón para consultas y reclamaciones.')
-        . '<div class="cadus-aviso">' . 'Texto provisional: el contenido institucional definitivo está pendiente de validar con la Delegación General del CADUS.' . '</div>');
-    cadus_pagina('gobierno-y-estatutos', 'Gobierno y estatutos',
-        cadus_b_p('Aquí se publicarán la estructura de gobierno del CADUS y sus estatutos.')
-        . '<div class="cadus-aviso">Contenido pendiente de recibir de la Delegación General del CADUS.</div>', $que_es);
+    // Contenido institucional real (E2-11, includes/institucional.php).
+    $que_es = cadus_pagina('que-es-el-cadus', 'Qué es el CADUS', cadus_contenido_que_es());
+    cadus_pagina('gobierno-y-estatutos', 'Gobierno y estatutos', cadus_contenido_gobierno(), $que_es);
     cadus_pagina('noticias', 'Noticias y comunicados',
         cadus_b_p('Comunicados del CADUS clasificados por áreas: becas, movilidad, normativa y eventos.') . cadus_b_sc('[cadus_noticias]'));
     cadus_pagina('actas-y-normativa', 'Actas y normativa',

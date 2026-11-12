@@ -263,7 +263,8 @@ function cadus_shortcode_contacto(): string
     // Icono de Instagram en línea (decorativo): el enlace ya lleva su nombre en texto.
     $icono = '<svg class="cadus-contacto__icono" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>';
     $html = '<section class="cadus-seccion cadus-seccion--contacto" aria-labelledby="cadus-contacto-titulo">'
-        . '<p class="cadus-contacto__marca" aria-hidden="true">' . esc_html('CADUS') . '</p>'
+        // Marca de agua decorativa: el texto lo pone el CSS (::before), así no es contenido ni lo leen los lectores (HU-15c).
+        . '<div class="cadus-contacto__marca" aria-hidden="true"></div>'
         . '<h2 id="cadus-contacto-titulo" class="cadus-seccion__titulo">' . esc_html('Consejo de Alumnos de la Universidad de Sevilla') . '</h2>'
         . '<div class="cadus-contacto">'
         . '<div class="cadus-contacto__col"><h3 class="cadus-contacto__cab">Contacto</h3><address class="cadus-contacto__datos">'

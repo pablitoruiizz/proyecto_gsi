@@ -1,0 +1,15 @@
+{
+  "name": "cadus-pruebas-accesibilidad",
+  "private": true,
+  "type": "module",
+  "description": "Auditoría de accesibilidad del portal del CADUS (HU-15c): axe-core, Lighthouse y simulación de daltonismo.",
+  "scripts": {
+    "axe": "node axe.mjs resultados-axe.json",
+    "daltonismo": "node daltonismo.mjs capturas"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.2",
+    "lighthouse": "12.2.1",
+    "playwright": "1.48.2"
+  }
+}

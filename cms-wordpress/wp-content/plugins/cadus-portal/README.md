@@ -16,6 +16,7 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
 | `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), papeleta de YOP Poll solo con la votación abierta, página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
 | `includes/relevo.php` | «Delegaciones › Relevo de la cuenta»: el delegado saliente (solo su cuenta) o la Ejecutiva (cualquier cuenta de delegación) pasan la cuenta al equipo entrante con una contraseña nueva o un enlace al correo de la delegación; se cierran todas sus sesiones al momento y queda un historial sin datos personales | HU-22 · RF-14 · RN-04 |
+| `includes/imagenes.php` | Imágenes subidas: máximo 1920 px (el original grande no se sirve), tamaños intermedios en WebP si el servidor lo admite, calidad 82, sin el tamaño 2048 px y límite de 8 MB por imagen. En webs ya instaladas cambia una vez los escudos y el logotipo de la biblioteca por los optimizados | HU-20a |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)
@@ -94,7 +95,7 @@ Reparto: **Codex** escribió el marcado y los datos (`includes/inicio.php`: hero
 
 - **Dirección:** «cartel plano» (skill *design-taste-frontend*): colores planos, tipografía muy pesada y arcos de la Real Fábrica de Tabacos. Movimiento según las reglas de Emil Kowalski (*animate*): solo `transform` y `opacity`, `cubic-bezier(0.23,1,0.32,1)`, botones con `scale(0.97)`, hover solo con puntero fino y variante `prefers-reduced-motion`.
 - **Todo cuelga de `body.cadus-portada`**, clase que añade `estilo.php` cuando la página contiene `[cadus_hero]`. Cada sección lleva su variante (`cadus-seccion--accesos|galeria|buscador|noticias|pasos`).
-- **Fotos** (`assets/fotos/`, optimizadas a 1400 px): proceden de cadus.us.es y son del CADUS. Confirmar con el cliente su uso y la autorización de las personas que aparecen. Los originales descargados (152 archivos, 216 MB) están en `docs/recursos/fotos-cadus-original/`, fuera de Git.
+- **Fotos** (`assets/fotos/`, HU-20a: recortadas a 3:4 en 360 y 720 px, en WebP con JPEG de reserva, generadas con `scripts/imagenes/optimizar_imagenes.py` desde `docs/recursos/imagenes-originales/`): proceden de cadus.us.es y son del CADUS. Confirmar con el cliente su uso y la autorización de las personas que aparecen. Los originales descargados (152 archivos, 216 MB) están en `docs/recursos/fotos-cadus-original/`, fuera de Git.
 - **Caché:** WP Fastest Cache guarda HTML con la versión antigua de los archivos. Tras cambiar `cadus.css` o `cadus.js`, vaciar la caché (Ajustes de WP Fastest Cache → Delete Cache).
 - **Logotipo y colores:** logotipo oficial y paleta (granate `#8d0739`, dorado `#faba09`) tomados de cadus.us.es. La migración de diseño (`cadus_aplicar_diseno`) solo se ejecuta desde el panel, con Blocksy activo, y no pisa una paleta o un logotipo que el equipo haya cambiado.
 
