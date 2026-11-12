@@ -1,4 +1,4 @@
-# DMS del CADUS
+﻿# DMS del CADUS
 
 Sistema de gestión documental del CADUS (Lab 4). Es independiente del CMS: tiene su propio REM, análisis, diseño, implementación y seguimiento SCRUM.
 
@@ -7,6 +7,7 @@ Sistema de gestión documental del CADUS (Lab 4). Es independiente del CMS: tien
 | Requisitos, casos de uso, metadatos y permisos | [`REM-DMS.md`](REM-DMS.md) |
 | Product backlog | [`backlog/product-backlog.md`](backlog/product-backlog.md) |
 | Sprint 1 del DMS (26/10 – 08/11) | [`sprints/sprint-01.md`](sprints/sprint-01.md) |
+| Versión definitiva: qué hace cada uno | [`reparto-version-definitiva.md`](reparto-version-definitiva.md) |
 | Burndown | [`burndown/sprint-01.csv`](burndown/sprint-01.csv) |
 
 **Entrega:** 08/11/2026 (el CMS se entrega el 15/11/2026).
