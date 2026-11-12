@@ -1,4 +1,4 @@
-# REM del DMS del CADUS (borrador 0.1)
+# REM del DMS del CADUS (versión 1.1)
 
 Documento de requisitos del **sistema de gestión documental (DMS)** del CADUS. Es independiente del REM del CMS ([`docs/requisitos/rem-remus/REM-CADUS.md`](../requisitos/rem-remus/REM-CADUS.md)): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM, como pide el Lab 4.
 
@@ -13,7 +13,7 @@ El portal web del CADUS (CMS) informa a los estudiantes; el DMS guarda y organiz
 | Actor | Descripción | Rol en el DMS |
 |---|---|---|
 | Ejecutiva del CADUS | Todos sus miembros usan la cuenta única `dcadus@us.es` | **Propietario** (lee y escribe) |
-| Delegado | Representa a una de las 27 delegaciones (la cuenta es de la delegación, no de la persona); entra con su correo `@alum.us.es` | **Visitante** (solo lectura) |
+| Delegado | Representa a una de las 27 delegaciones; la cuenta es de la delegación, no de la persona, y entra con el correo institucional de su delegación (decisión del CADUS del 09/11) | **Visitante** (solo lectura) |
 | Estudiante | Estudiante de la US | **Visitante**, solo de la normativa pública |
 
 El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indicó que todos los ejecutivos comparten la cuenta del CADUS. Se deja prevista para cuando haya cuentas personales.
@@ -33,9 +33,9 @@ El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indic�
 |---|---|---|
 | IR-D01 | Documento | Nombre, archivo, tipo de documento, fecha, curso académico, estado |
 | IR-D02 | Acta | Pleno o asamblea, fecha, estado (borrador o aprobada), curso, resumen del contenido |
-| IR-D03 | Normativa | Título, año, estado (vigente o derogada) |
+| IR-D03 | Normativa | Título, norma (identifica la misma norma entre versiones), versión, año, estado (vigente o derogada) |
 | IR-D04 | Expediente | Código de ticket (`CAD-…`) o de mediación (`MED-…`), facultad, fecha de resolución, fecha de caducidad |
-| IR-D05 | Registro de votación | Asamblea, número de votación, fecha, tipo de voto (nominal o secreto), resultado y, por cada una de las 27 delegaciones, si estaba presente y si se comprobó su identidad. **Voto nominal:** el voto de cada delegación (sí, no o abstención). **Voto secreto:** solo el recuento total de sí, no y abstenciones, sin vincularlo a ninguna delegación |
+| IR-D05 | Registro de votación | Asamblea y número de votación (obligatorios), fecha, tipo de voto (nominal o secreto), resultado y, por cada una de las 27 delegaciones, si estaba presente y si se comprobó su identidad. **Voto nominal:** el voto de cada delegación (sí, no o abstención). **Voto secreto:** solo el recuento total de sí, no y abstenciones, sin vincularlo a ninguna delegación |
 | IR-D06 | Metadato | Columna de un tipo de dato que se añade a los documentos para poder filtrar |
 
 ## 5. Requisitos funcionales
@@ -80,10 +80,11 @@ El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indic�
 | RN-D04 | El registro de votación **no guarda el número de DNI**: solo si se comprobó la identidad del delegado. En una votación **secreta** tampoco se guarda el voto de cada delegación: la lista de participación y el recuento van separados y no se pueden relacionar. |
 | RN-D05 | En cada votación cuenta un voto por delegación (27 delegaciones), que representa a sus estudiantes; solo votan los delegados. La plantilla trae una fila por delegación con Presente o Ausente (la ausencia no es abstención) y una columna de voto que solo admite sí, no o abstención; cada asamblea puede tener varias votaciones numeradas. |
 | RN-D06 | Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos. |
+| RN-D07 | Por cada norma solo puede haber una versión vigente (puede haber varias normas distintas vigentes a la vez). Al publicar una versión nueva, la anterior pasa a Derogada y se conserva: no se borra. |
 
 ## 8. Casos de uso
 
-Cada tipo de documento tiene al menos un caso de uso y el acta tiene dos, como pide el Lab 4.
+Los casos de uso se dividen por secciones (acta, normativa, expediente y votación) y cada sección tiene dos, ocho en total, como pidió el profesor y exige el Lab 4 (al menos uno por documento).
 
 | ID | Caso de uso | Actor | Cuándo | Documento | Requisitos |
 |---|---|---|---|---|---|
@@ -93,6 +94,8 @@ Cada tipo de documento tiene al menos un caso de uso y el acta tiene dos, como p
 | CU-D04 | Archivar un expediente resuelto | Ejecutiva | Cada vez que se resuelve una reclamación o una mediación | Expediente | RF-D01, RF-D02, RF-D07, RN-D02 |
 | CU-D05 | Retirar los expedientes caducados | Ejecutiva | Una vez al mes | Expediente | RF-D07, RF-D08, RN-D03 |
 | CU-D06 | Registrar el resultado de una votación presencial | Ejecutiva | En cada asamblea con votación | Registro de votación | RF-D01, RF-D02, RF-D09, RN-D04, RN-D05 |
+| CU-D07 | Publicar una nueva versión de una norma y derogar la anterior | Ejecutiva | Cuando se aprueba la revisión de una norma ya publicada | Normativa | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07 |
+| CU-D08 | Consultar los registros de votaciones anteriores | Ejecutiva | Cuando necesita comprobar qué se decidió en una votación anterior | Registro de votación | RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01 |
 
 ### Detalle
 
@@ -108,6 +111,10 @@ Cada tipo de documento tiene al menos un caso de uso y el acta tiene dos, como p
 
 **CU-D06 Registrar el resultado de una votación presencial.** Tras una votación en asamblea, un ejecutivo rellena la plantilla: la lista de delegaciones presentes y si se comprobó su identidad y, según el tipo de voto, el voto de cada delegación (nominal) o solo el recuento total (secreto). *Resultado:* queda constancia sin guardar el DNI y, en las votaciones secretas, sin poder saber qué votó cada delegación.
 
+**CU-D07 Publicar una nueva versión de una norma y derogar la anterior.** Cuando la Ejecutiva aprueba la revisión de una norma, sube el documento nuevo a la biblioteca *Normativa* y rellena sus metadatos con la misma *Norma*, la *Versión* nueva y el estado Vigente; después abre la versión anterior de esa norma y cambia su estado a Derogada. *Resultado:* la vista de normativa vigente solo muestra la versión nueva y la derogada se conserva (RN-D07).
+
+**CU-D08 Consultar los registros de votaciones anteriores.** La Ejecutiva abre la biblioteca *Votaciones*, que solo ella puede ver, y filtra la vista plana por asamblea y por tipo de voto. *Resultado:* abre el registro que buscaba, identificado por su asamblea y su número de votación.
+
 ## 9. Metadatos
 
 | Metadato | Tipo de columna | Se usa en |
@@ -116,7 +123,10 @@ Cada tipo de documento tiene al menos un caso de uso y el acta tiene dos, como p
 | Fecha | Fecha | todos |
 | Curso académico | Elección | todos |
 | Estado | Elección (Borrador, Aprobada, Vigente, Derogada, Resuelto) | Acta, Normativa, Expediente |
-| Asamblea | Texto | Acta, Votación |
+| Asamblea | Texto (obligatorio en Votación) | Acta, Votación |
+| Norma | Texto (identifica la misma norma entre versiones) | Normativa |
+| Versión | Texto (por ejemplo, v1 o v2) | Normativa |
+| Número de votación | Número (obligatorio) | Votación |
 | Tipo de voto | Elección (Nominal, Secreto) | Votación |
 | Resultado | Elección (Aprobada, Rechazada) | Votación |
 | Facultad | Elección | Expediente |
@@ -130,9 +140,9 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 
 | Sitio | Biblioteca | Tipo de documento | Columnas propias | Vistas |
 |---|---|---|---|---|
-| Documentación pública | Normativa | Normativa | Fecha, Curso académico, Estado | Vigente (plana, filtrada por Estado) |
+| Documentación pública | Normativa | Normativa | Fecha, Curso académico, Norma, Versión, Estado | Vigente (plana, filtrada por Estado) |
 | Órganos de gobierno | Actas | Acta | Fecha, Curso académico, Asamblea, Estado de aprobación, Resumen | Aprobadas (plana) |
-| Órganos de gobierno | Votaciones | Votación | Fecha, Curso académico, Asamblea, Tipo de voto, Resultado | Todas (plana) |
+| Órganos de gobierno | Votaciones | Votación | Fecha, Curso académico, Asamblea, Número de votación, Tipo de voto, Resultado | Todas (plana) |
 | Atención al estudiante | Expedientes | Expediente | Facultad, Fecha de resolución, Fecha de caducidad (calculada), Estado | Caducados (plana, caducidad anterior a hoy) |
 
 ## 11. Roles y permisos
@@ -149,7 +159,7 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 | ID | Restricción |
 |---|---|
 | RC-D01 | Plataforma: **SharePoint de Microsoft 365 de la Universidad de Sevilla**, con sitios, carpetas, columnas de metadatos, vistas y los grupos Propietario, Integrante y Visitante. |
-| RC-D02 | Los delegados y los estudiantes acceden con su correo corporativo `@alum.us.es`. |
+| RC-D02 | Los estudiantes acceden con su correo corporativo `@alum.us.es`; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11). |
 | RC-D03 | La documentación del DMS (REM, análisis, diseño, implementación y SCRUM) es independiente de la del CMS. |
 
 ## 13. Del análisis al diseño
@@ -173,13 +183,16 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 | CU-D04 | RF-D01, RF-D02, RF-D07 | DMS-HU-06 |
 | CU-D05 | RF-D07, RF-D08 | DMS-HU-06 |
 | CU-D06 | RF-D01, RF-D02, RF-D09 | DMS-HU-07 |
+| CU-D07 | RF-D02, RF-D05, RF-D06 | DMS-HU-08 |
+| CU-D08 | RF-D05, RF-D06 | DMS-HU-09 |
 
 | Regla o requisito no funcional | Se comprueba en |
 |---|---|
 | RN-D01 | DMS-HU-04 (aprobación de contenido) |
 | RN-D02, RNF-D01 | DMS-HU-01 (permisos del sitio Atención al estudiante) |
 | RN-D03, RNF-D04 | DMS-HU-06 (vista de caducados y revisión mensual) |
-| RN-D04, RN-D05 | DMS-HU-07 (plantilla de votación) |
+| RN-D04, RN-D05 | DMS-HU-07 (plantilla de votación) y DMS-HU-09 (consulta de registros) |
 | RN-D06 | DMS-HU-02 (columna Tipo de documento obligatoria) |
+| RN-D07 | DMS-HU-08 (versión vigente única por norma) |
 | RNF-D02, RNF-D03 | Documentación del DMS (D-04, D-06) |
 | RNF-D05 | Prueba de acceso durante la asamblea (D-04) |

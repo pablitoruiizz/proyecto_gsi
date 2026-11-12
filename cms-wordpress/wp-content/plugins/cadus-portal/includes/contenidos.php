@@ -53,6 +53,8 @@ function cadus_registrar_contenidos(): void
         'public' => true,
         'show_in_rest' => true,
         'rewrite' => ['slug' => 'centro'],
+        // El delegado edita su ficha pero no la mueve de centro: ni en el panel, ni en el editor, ni por la API REST.
+        'capabilities' => ['assign_terms' => 'edit_others_cadus_delegacions'],
     ]);
 
     register_post_type('cadus_delegacion', [
@@ -74,6 +76,31 @@ function cadus_registrar_contenidos(): void
         'show_in_rest' => true,
     ]);
 }
+
+/**
+ * Quien solo edita su propia delegación no puede cambiar el título, el autor ni el estado de la ficha, edite donde edite
+ * (panel del portal, editor de WordPress o API REST /wp/v2/cadus_delegacion). El centro lo protege la capacidad assign_terms.
+ */
+add_filter('wp_insert_post_data', function (array $datos, array $original) {
+    $id = (int) ($original['ID'] ?? 0);
+    if ($datos['post_type'] !== 'cadus_delegacion' || $id <= 0 || !is_user_logged_in() || current_user_can('edit_others_cadus_delegacions')) {
+        return $datos;
+    }
+    $actual = get_post($id);
+    if ($actual instanceof WP_Post) {
+        foreach (['post_title', 'post_author', 'post_status', 'post_name'] as $campo) {
+            $datos[$campo] = $actual->$campo;
+        }
+    }
+    return $datos;
+}, 10, 2);
+add_filter('rest_pre_insert_cadus_delegacion', function ($post, WP_REST_Request $peticion) {
+    if (is_user_logged_in() && !current_user_can('edit_others_cadus_delegacions')
+        && ($peticion->has_param('cadus_centro') || $peticion->has_param('author') || $peticion->has_param('title') || $peticion->has_param('status'))) {
+        return new WP_Error('cadus_sin_permiso', 'Solo la Ejecutiva puede cambiar el nombre, el centro o el estado de una delegación.', ['status' => 403]);
+    }
+    return $post;
+}, 10, 2);
 
 /** Campos ACF definidos por código para que viajen con el repositorio. */
 function cadus_registrar_campos(): void
@@ -103,6 +130,10 @@ function cadus_registrar_campos(): void
             ['key' => 'field_cadus_deleg_tel', 'label' => 'Teléfono', 'name' => 'telefono', 'type' => 'text'],
             ['key' => 'field_cadus_deleg_horario', 'label' => 'Horario de atención', 'name' => 'horario', 'type' => 'text'],
             ['key' => 'field_cadus_deleg_enlaces', 'label' => 'Enlaces de interés (uno por línea)', 'name' => 'enlaces', 'type' => 'textarea', 'rows' => 4],
+            ['key' => 'field_cadus_deleg_miembros', 'label' => 'Miembros de la delegación (uno por línea)', 'name' => 'miembros', 'type' => 'textarea', 'rows' => 6],
+            ['key' => 'field_cadus_deleg_instagram', 'label' => 'Instagram (dirección completa)', 'name' => 'instagram', 'type' => 'url'],
+            ['key' => 'field_cadus_deleg_escudo', 'label' => 'Escudo', 'name' => 'escudo', 'type' => 'image', 'return_format' => 'id',
+                'preview_size' => 'thumbnail', 'library' => 'all'],
         ],
         'location' => [[['param' => 'post_type', 'operator' => '==', 'value' => 'cadus_delegacion']]],
         'position' => 'normal',
@@ -152,12 +183,22 @@ function cadus_ficha_en_contenido(string $contenido): string
         $listado = 'actas-y-normativa';
     } else {
         $enlaces = array_filter(array_map('trim', explode("\n", (string) cadus_campo('enlaces', $id))));
-        $html .= '<dl class="cadus-ficha">';
-        $html .= '<div class="cadus-ficha__fila"><dt>Delegado/a</dt><dd>' . esc_html((string) cadus_campo('delegado', $id) ?: 'Por completar') . '</dd></div>';
+        $escudo = function_exists('cadus_delegacion_escudo') ? cadus_delegacion_escudo($id, 'cadus-escudo cadus-escudo--ficha') : '';
+        $html .= $escudo ? '<p class="cadus-escudo-ficha">' . $escudo . '</p>' : '';
         $correo = (string) cadus_campo('correo', $id);
-        $html .= '<div class="cadus-ficha__fila"><dt>Correo</dt><dd>' . ($correo ? '<a href="' . esc_url('mailto:' . $correo) . '">' . esc_html($correo) . '</a>' : 'Por completar') . '</dd></div>';
-        $html .= '<div class="cadus-ficha__fila"><dt>Teléfono</dt><dd>' . esc_html((string) cadus_campo('telefono', $id) ?: 'Por completar') . '</dd></div>';
-        $html .= '<div class="cadus-ficha__fila"><dt>Horario de atención</dt><dd>' . esc_html((string) cadus_campo('horario', $id) ?: 'Por completar') . '</dd></div>';
+        $instagram = (string) cadus_campo('instagram', $id);
+        $usuario_ig = trim((string) wp_parse_url($instagram, PHP_URL_PATH), '/');
+        $filas = [
+            'Delegado/a' => esc_html((string) cadus_campo('delegado', $id)),
+            'Correo' => $correo ? '<a href="' . esc_url('mailto:' . $correo) . '">' . esc_html($correo) . '</a>' : '',
+            'Teléfono' => esc_html((string) cadus_campo('telefono', $id)),
+            'Instagram' => $instagram ? '<a href="' . esc_url($instagram) . '">' . esc_html($usuario_ig ? '@' . $usuario_ig : $instagram) . '</a>' : '',
+            'Horario de atención' => esc_html((string) cadus_campo('horario', $id)),
+        ];
+        $html .= '<dl class="cadus-ficha">';
+        foreach (array_filter($filas) as $nombre => $valor) {
+            $html .= '<div class="cadus-ficha__fila"><dt>' . esc_html($nombre) . '</dt><dd>' . $valor . '</dd></div>';
+        }
         if ($enlaces) {
             $html .= '<div class="cadus-ficha__fila"><dt>Enlaces de interés</dt><dd><ul>';
             foreach ($enlaces as $e) {
@@ -166,6 +207,14 @@ function cadus_ficha_en_contenido(string $contenido): string
             $html .= '</ul></dd></div>';
         }
         $html .= '</dl>';
+        $miembros = function_exists('cadus_delegacion_miembros') ? cadus_delegacion_miembros($id) : [];
+        if ($miembros) {
+            $html .= '<h2 class="cadus-ficha__subtitulo">Miembros de la delegación</h2><ul class="cadus-miembros">';
+            foreach ($miembros as $m) {
+                $html .= '<li>' . esc_html($m) . '</li>';
+            }
+            $html .= '</ul>';
+        }
         $listado = 'delegaciones';
     }
     return $contenido . $html . '<p><a class="cadus-chip" href="' . esc_url(cadus_inicio_url($listado)) . '">← Volver al listado</a></p>';
@@ -242,31 +291,44 @@ function cadus_shortcode_directorio(): string
     if (is_wp_error($centros) || !$centros) {
         return '<p class="cadus-vacio">El directorio se está completando.</p>';
     }
-    $html = '<div class="cadus-centros">';
-    $indice = 0;
+    $total = 0;
+    $tarjetas = '';
     foreach ($centros as $centro) {
         $consulta = new WP_Query([
             'post_type' => 'cadus_delegacion', 'post_status' => 'publish', 'posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC',
             'tax_query' => [['taxonomy' => 'cadus_centro', 'field' => 'term_id', 'terms' => $centro->term_id]],
         ]);
-        if (!$consulta->have_posts()) {
-            continue;
-        }
-        $html .= '<section class="cadus-centro" data-reveal style="--i:' . esc_attr((string) $indice++) . '"><h2 class="cadus-centro__titulo">' . esc_html($centro->name) . '</h2><ul class="cadus-delegaciones">';
         while ($consulta->have_posts()) {
             $consulta->the_post();
             $id = get_the_ID();
+            // El nombre visible es el del centro; si la ficha tiene otro nombre propio (varias por centro) se añade debajo.
+            $propio = get_the_title() !== 'Delegación de ' . $centro->name ? get_the_title() : '';
             $deleg = (string) cadus_campo('delegado', $id);
-            $horario = (string) cadus_campo('horario', $id);
-            $correo = (string) cadus_campo('correo', $id);
-            $meta = array_filter([$deleg ? 'Delegado/a: ' . $deleg : '', $correo, $horario], static fn($valor) => $valor !== '');
-            $html .= '<li class="cadus-delegacion-card"><a class="cadus-delegacion-card__enlace" href="' . esc_url(get_permalink()) . '">'
-                . '<span class="cadus-delegacion-card__nombre">' . esc_html(get_the_title()) . '</span>'
+            $meta = array_filter([$propio, $deleg ? 'Delegado/a: ' . $deleg : '', (string) cadus_campo('correo', $id)], static fn($valor) => $valor !== '');
+            $escudo = function_exists('cadus_delegacion_escudo') ? cadus_delegacion_escudo($id, 'cadus-escudo') : '';
+            // Texto que mira el buscador: centro, nombre de la ficha, siglas (nombre del archivo del escudo), delegado, correo e Instagram.
+            // No lleva la lista de miembros: así el HTML del directorio no reúne en un solo sitio los nombres de decenas de personas.
+            $siglas = (int) cadus_campo('escudo', $id) > 0 ? pathinfo((string) get_attached_file((int) cadus_campo('escudo', $id)), PATHINFO_FILENAME) : '';
+            $busqueda = strtolower(remove_accents(implode(' ', [$centro->name, get_the_title(), $siglas, $deleg, (string) cadus_campo('correo', $id),
+                (string) cadus_campo('instagram', $id)])));
+            $tarjetas .= '<li class="cadus-delegacion-card" data-buscar="' . esc_attr($busqueda) . '" data-reveal style="--i:' . esc_attr((string) ($total % 6)) . '"><a class="cadus-delegacion-card__enlace" href="' . esc_url(get_permalink()) . '">'
+                . '<span class="cadus-delegacion-card__escudo">' . ($escudo ?: '<span class="cadus-delegacion-card__inicial" aria-hidden="true">' . esc_html(mb_substr($centro->name, 0, 1)) . '</span>') . '</span>'
+                . '<span class="cadus-delegacion-card__texto"><span class="cadus-delegacion-card__nombre">' . esc_html($centro->name) . '</span>'
                 . ($meta ? '<span class="cadus-delegacion-card__meta">' . esc_html(implode(' · ', $meta)) . '</span>' : '')
-                . '<span class="cadus-delegacion-card__ver">Ver ficha</span></a></li>';
+                . '<span class="cadus-delegacion-card__ver">Ver ficha<span class="screen-reader-text">: ' . esc_html(get_the_title()) . '</span></span></span></a></li>';
+            ++$total;
         }
         wp_reset_postdata();
-        $html .= '</ul></section>';
     }
-    return $html . '</div>';
+    // El buscador filtra en el navegador; sin JavaScript queda oculto y se ve el listado completo.
+    $buscador = '<p class="cadus-buscador" id="cadus-buscador" hidden><label for="cadus-buscar">Buscar tu delegación</label>'
+        . '<input type="search" id="cadus-buscar" autocomplete="off" aria-controls="cadus-lista" aria-describedby="cadus-buscar-ayuda" placeholder="Centro, siglas (ETSII) o correo">'
+        . '<small id="cadus-buscar-ayuda">Escribe y el listado se filtra solo.</small></p>';
+    $script = '<script>(function(){var f=document.getElementById("cadus-buscador"),i=document.getElementById("cadus-buscar"),t=document.getElementById("cadus-total"),l=document.getElementById("cadus-lista");if(!f||!i||!t||!l)return;f.hidden=false;'
+        . 'var n=function(s){return s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().trim()},c=[].slice.call(l.children),m=t.textContent;'
+        . 'i.addEventListener("input",function(){var q=n(i.value).split(/\s+/).filter(Boolean),v=0;c.forEach(function(e){var ok=q.every(function(w){return e.getAttribute("data-buscar").indexOf(w)>-1});e.hidden=!ok;if(ok)v++});'
+        . 't.textContent=q.length?(v?v+(v===1?" delegación encontrada":" delegaciones encontradas"):"No hay ninguna delegación con esa búsqueda. Prueba con otra palabra."):m})})();</script>';
+    return $buscador
+        . '<p class="cadus-delegaciones-total" id="cadus-total" role="status" aria-live="polite">' . esc_html(sprintf(_n('%s delegación de centro', '%s delegaciones de centro', $total, 'cadus-portal'), $total)) . '</p>'
+        . '<ul class="cadus-delegaciones" id="cadus-lista" aria-label="Delegaciones de alumnos por facultad o escuela">' . $tarjetas . '</ul>' . $script;
 }

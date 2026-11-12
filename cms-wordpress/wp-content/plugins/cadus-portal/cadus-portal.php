@@ -29,7 +29,13 @@ require_once CADUS_PORTAL_DIR . 'includes/estilo.php';        // estilos y movim
 require_once CADUS_PORTAL_DIR . 'includes/calendario.php';    // calendario de asambleas y eventos (HU-10)
 require_once CADUS_PORTAL_DIR . 'includes/escritorio.php';    // panel de inicio con accesos directos (HU-19b)
 require_once CADUS_PORTAL_DIR . 'includes/votaciones.php';    // convocatorias de votación vinculadas a una asamblea (HU-11)
+
 require_once CADUS_PORTAL_DIR . 'includes/retencion.php';      // anonimización de tickets y mediaciones a los 2 años (HU-23)
+
+require_once CADUS_PORTAL_DIR . 'includes/relevo.php';        // relevo de la cuenta de una delegación (HU-22)
+require_once CADUS_PORTAL_DIR . 'includes/gestion.php';       // acceso y gestión desde el portal (HU-24)
+require_once CADUS_PORTAL_DIR . 'includes/delegaciones.php';  // las delegaciones y escudos de cadus.us.es (HU-05, HU-06)
+
 
 register_activation_hook(__FILE__, 'cadus_portal_activar');
 register_deactivation_hook(__FILE__, function () {

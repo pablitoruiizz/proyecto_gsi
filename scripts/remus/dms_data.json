@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-11-12",
   "version": [
     1,
-    0
+    1
   ],
   "cName": "DMS del CADUS",
   "dName": "DMS del CADUS",
@@ -75,7 +75,7 @@
   "owner": "Pablo Ruiz Vidal",
   "client": "Delegación General del CADUS",
   "paragraphs": {
-    "intro": "Este documento presenta los requisitos del sistema de gestión documental (DMS) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El DMS guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal.",
+    "intro": "Este documento presenta los requisitos del sistema de gestión documental (DMS) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El DMS guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal. La versión 1.1 (12/11/2026) divide los casos de uso por secciones, con dos casos en cada una (ocho en total), añade la regla de una sola versión vigente por norma y recoge que cada delegado accede con la cuenta de su delegación.",
     "current": "Este documento no analiza en detalle cómo gestiona hoy el CADUS sus documentos internos. Recoge los documentos que el DMS debe organizar, quién puede verlos y cómo se buscan.",
     "environment": "El equipo de cinco integrantes crea y configura el DMS en SharePoint de la Universidad de Sevilla con sus cuentas de alumno. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria se realiza en Discord. Las siguientes restricciones recogen estas decisiones.",
     "glossary": [
@@ -122,6 +122,10 @@
       {
         "name": "Ejecutiva del CADUS",
         "text": "Grupo de miembros del CADUS que gestiona el DMS con la cuenta única del CADUS (dcadus@us.es)."
+      },
+      {
+        "name": "Norma y versión",
+        "text": "Una norma es un texto normativo del CADUS que se identifica por su nombre; cada revisión suya es una versión. Solo una versión de cada norma está vigente; las anteriores quedan derogadas y se conservan."
       }
     ]
   },
@@ -134,7 +138,7 @@
     {
       "id": "ACT-D02",
       "name": "Delegado",
-      "role": "a los delegados de las 27 delegaciones, que acceden con su correo @alum.us.es y solo leen"
+      "role": "a los delegados de las 27 delegaciones, que acceden con la cuenta de su delegación (correo institucional de la delegación; una cuenta por delegación, no por persona) y solo leen"
     },
     {
       "id": "ACT-D03",
@@ -220,6 +224,8 @@
       "importance": 2,
       "data": [
         "Título",
+        "Norma (identifica la misma norma entre sus versiones)",
+        "Versión",
         "Año",
         "Estado (vigente o derogada)"
       ],
@@ -248,7 +254,7 @@
       "concept": "al resultado de una votación presencial de asamblea, con estos datos:",
       "importance": 2,
       "data": [
-        "Asamblea y número de votación",
+        "Asamblea y número de votación (los dos obligatorios, para encontrar y distinguir cada registro)",
         "Fecha",
         "Tipo de voto (nominal o secreto)",
         "Resultado",
@@ -456,7 +462,7 @@
       "id": "CU-D02",
       "name": "Consultar las actas aprobadas",
       "trigger": "antes de cada asamblea, para repasar lo acordado",
-      "pre": "El delegado ha iniciado sesión con su correo @alum.us.es",
+      "pre": "El delegado ha iniciado sesión con la cuenta de su delegación",
       "post": "El delegado ha abierto el acta que buscaba",
       "steps": [
         {
@@ -497,7 +503,7 @@
         {
           "who": "actor",
           "actor": "ACT-D02",
-          "text": "o el estudiante entra en el sitio Documentación pública; el delegado accede con su correo @alum.us.es"
+          "text": "o el estudiante entra en el sitio Documentación pública; el delegado accede con la cuenta de su delegación y el estudiante con su correo @alum.us.es"
         },
         {
           "who": "actor",
@@ -629,6 +635,76 @@
       "authors": [
         "Pablo Ruiz Vidal"
       ]
+    },
+    {
+      "id": "CU-D07",
+      "name": "Publicar una nueva versión de una norma y derogar la anterior",
+      "trigger": "cuando la Ejecutiva aprueba la revisión de una norma ya publicada",
+      "pre": "La norma anterior está en la biblioteca Normativa con estado Vigente y la Ejecutiva dispone del documento de la versión nueva",
+      "post": "La versión nueva es la única vigente de su norma y la anterior queda derogada y conservada",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "sube el documento de la versión nueva a la biblioteca Normativa",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "solicita el tipo de documento, la norma, la versión, la fecha, el curso académico y el estado"
+        },
+        {
+          "who": "actor",
+          "text": "rellena los metadatos con la misma norma, la versión nueva y el estado Vigente",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "actor",
+          "text": "abre la versión anterior de esa norma y cambia su estado a Derogada",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra en la vista de normativa vigente solo la versión nueva y conserva la derogada, sin borrarla"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D08",
+      "name": "Consultar los registros de votaciones anteriores",
+      "trigger": "cuando la Ejecutiva necesita comprobar qué se decidió en una votación de una asamblea anterior",
+      "pre": "Existen registros de votación guardados y quien consulta es miembro de la Ejecutiva",
+      "post": "La Ejecutiva ha abierto el registro de votación que buscaba",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "abre la biblioteca Votaciones",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra la vista plana con todos los registros, solo a la Ejecutiva"
+        },
+        {
+          "who": "actor",
+          "text": "filtra por asamblea y por tipo de voto",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra los registros que cumplen los filtros, identificados por su asamblea y su número de votación"
+        },
+        {
+          "who": "actor",
+          "text": "abre el registro",
+          "actor": "ACT-D01"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
     }
   ],
   "nonfunctional": [
@@ -731,6 +807,14 @@
       "authors": [
         "Pablo Ruiz Vidal"
       ]
+    },
+    {
+      "id": "RN-D07",
+      "name": "Una versión vigente por norma",
+      "description": "Por cada norma solo puede haber una versión vigente (puede haber varias normas distintas vigentes a la vez). Al publicar una versión nueva, la anterior pasa a Derogada y se conserva: no se borra.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
     }
   ],
   "environment": [
@@ -745,7 +829,7 @@
     {
       "id": "RC-D02",
       "name": "Acceso con correo corporativo",
-      "description": "Los delegados y los estudiantes acceden con su correo corporativo @alum.us.es; la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).",
+      "description": "Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).",
       "authors": [
         "Pablo Ruiz Vidal"
       ]
@@ -783,7 +867,8 @@
         "RF-D05",
         "IR-D06",
         "UI-D02",
-        "RN-D06"
+        "RN-D06",
+        "RN-D07"
       ]
     ],
     [
@@ -873,6 +958,31 @@
         "RF-D09",
         "RN-D04",
         "RN-D05",
+        "IR-D05",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D07",
+      [
+        "RF-D02",
+        "RF-D05",
+        "RF-D06",
+        "RN-D06",
+        "RN-D07",
+        "IR-D03",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D08",
+      [
+        "RF-D05",
+        "RF-D06",
+        "RN-D04",
+        "RN-D05",
+        "RN-D06",
+        "RNF-D01",
         "IR-D05",
         "ACT-D01"
       ]

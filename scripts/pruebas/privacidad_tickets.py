@@ -5,9 +5,12 @@ Pruebas HTTP como visitante anónimo (sin cookies) y de capacidades por rol sobr
 Uso: python scripts/pruebas/privacidad_tickets.py   (con Wamp en marcha; ajusta PHP si no está en esta ruta)
 Salida: una línea por prueba (OK / FALLO / SIN CONCLUIR) y código de salida 1 si algo falla.
 """
+import glob
 import http.cookiejar
 import json
+import os
 import re
+import shutil
 import subprocess
 import sys
 import urllib.error
@@ -16,9 +19,12 @@ import urllib.request
 from pathlib import Path
 
 BASE = "http://localhost/proyecto_gsi/cms-wordpress"
-PHP = r"C:\Users\ruizv\OneDrive\Escritorio\UNI\GSI\apps proyecto\php\php.exe"
+# PHP de línea de comandos: variable CADUS_PHP, la ruta del servidor del equipo, el PATH o el PHP de Wamp.
+PHP = next((c for c in [os.environ.get("CADUS_PHP"), r"C:\Users\ruizv\OneDrive\Escritorio\UNI\GSI\apps proyecto\php\php.exe",
+                        shutil.which("php"), *sorted(glob.glob(r"C:\wamp64\bin\php\php8*\php.exe"), reverse=True)]
+            if c and os.path.exists(c)), "php")
 AYUDA = str(Path(__file__).with_name("ticket_prueba.php"))
-SECRETOS = ["TEXTO-SECRETO-RN03", "CAD-2026-99999", "prueba@alum.us.es", "Asunto de prueba"]
+SECRETOS = ["TEXTO-SECRETO-RN03", "CAD-2026-99999", "prueba@alum.us.es", "Asunto de prueba", "NOMBRE-SECRETO-RN03"]
 sys.stdout.reconfigure(encoding="utf-8")
 resultados = []
 
@@ -64,9 +70,11 @@ def main():
     try:
         print(f"Ticket de prueba ID {tid}\n-- Visitante anónimo: URLs directas, búsqueda, feeds, sitemaps")
         # datos del ticket que no coinciden con el término buscado (el término sí se refleja legítimamente)
-        distintos = ["Asunto de prueba", "detalle de la reclamación de prueba"]
+        distintos = ["Asunto de prueba", "detalle de la reclamación de prueba", "NOMBRE-SECRETO-RN03"]
         for ruta in ["/?s=TEXTO-SECRETO-RN03", "/?s=TEXTO-SECRETO-RN03&post_type=cadus_ticket", "/?s=CAD-2026-99999",
-                     "/?s=prueba%40alum.us.es", "/?s=reclamaci%C3%B3n+de+prueba&post_type=cadus_ticket"]:
+                     "/?s=prueba%40alum.us.es", "/?s=reclamaci%C3%B3n+de+prueba&post_type=cadus_ticket",
+                     # Sprint 3 (E3-08): el ticket guarda ahora nombre y centro; tampoco se pueden buscar desde fuera.
+                     "/?s=NOMBRE-SECRETO&post_type=cadus_ticket", "/?s=Facultad+de+Derecho&post_type=cadus_ticket"]:
             sin_fugas(f"búsqueda anónima {ruta}", ruta, secretos=distintos)
         for ruta in [f"/?p={tid}", f"/?post_type=cadus_ticket&p={tid}", "/?post_type=cadus_ticket",
                      f"/?cadus_ticket={tid}", f"/?p={tid}&preview=true", f"/?page_id={tid}",
@@ -115,6 +123,7 @@ def main():
                 comprobar("código inexistente da el mismo mensaje genérico", "No hemos encontrado" in c2)
                 e3, c3, h3 = intentar("CAD-2026-99999", "PRUEBA@alum.us.es")
                 comprobar("código + correo correctos muestran el ticket (sin el texto de la reclamación)", "Asunto de prueba" in c3 and "TEXTO-SECRETO-RN03" not in c3)
+                comprobar("el seguimiento no muestra el nombre del estudiante (E3-08)", "NOMBRE-SECRETO-RN03" not in c3)
                 cc3 = (h3.get("Cache-Control") or h3.get("cache-control") or "").lower()
                 comprobar("respuesta con datos no es cacheable", "no-store" in cc3 or "no-cache" in cc3 or "private" in cc3, f"Cache-Control: {cc3 or '—'}")
 

@@ -29,6 +29,9 @@ if ($accion === 'crear') {
     }
     update_post_meta($id, '_cadus_codigo', CODIGO);
     update_post_meta($id, '_cadus_email', 'prueba@alum.us.es');
+    // Sprint 3 (E3-08): datos mínimos del estudiante; no deben salir fuera de la ficha autorizada.
+    update_post_meta($id, '_cadus_solicitante', 'NOMBRE-SECRETO-RN03');
+    update_post_meta($id, '_cadus_centro', 'Facultad de Derecho');
     update_post_meta($id, '_cadus_tipo', 'Reclamación');
     update_post_meta($id, '_cadus_estado', 'abierto');
     echo $id, "\n";

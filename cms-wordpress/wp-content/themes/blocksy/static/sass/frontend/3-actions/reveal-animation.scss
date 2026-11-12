@@ -18,10 +18,8 @@
 	}
 
 	[class*='entries'] {
-		@for $i from 2 through 12 {
-			[data-reveal*='#{$i}'] {
-				transition-delay: #{($i - 1) * 0.3}s;
-			}
+		[data-reveal*='yes:'] {
+			transition-delay: calc(var(--card-reveal-index, 0) * 0.3s);
 		}
 	}
 }

@@ -12,9 +12,10 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/contenidos.php` | Actas y normativas, delegaciones, campos ACF, directorio y listado de actas | HU-03 a HU-06 · RF-03 a RF-07 · IR-04, IR-05 · UI-03, UI-05 |
 | `includes/buzon.php` | Formulario del buzón, tickets privados, código de seguimiento y consulta de estado (**escrito por Codex**) | HU-07, HU-08 · RF-08, RF-09 · RN-02, RN-03 · UI-04 |
 | `includes/setup.php` | Páginas, menú, noticias de ejemplo, tema Blocksy, paleta y logotipo provisional | HU-01, HU-02, HU-18 · RF-01, RF-02 · UI-01, UI-02 |
-| `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo y su menú de administración | HU-10 · RF-11 · UI-02 |
+| `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo, su menú de administración y las categorías «Asambleas» y «Cursos» (se crean solas una vez) | HU-10 · RF-11 · UI-02 · E3-07 |
 | `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
 | `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), papeleta de YOP Poll solo con la votación abierta, página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
+| `includes/relevo.php` | «Delegaciones › Relevo de la cuenta»: el delegado saliente (solo su cuenta) o la Ejecutiva (cualquier cuenta de delegación) pasan la cuenta al equipo entrante con una contraseña nueva o un enlace al correo de la delegación; se cierran todas sus sesiones al momento y queda un historial sin datos personales | HU-22 · RF-14 · RN-04 |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)
@@ -136,7 +137,24 @@ Validación local del 23/10/2026, WordPress 7.1: `privacidad_tickets.py` → **4
 
 Evidencia y revisión independiente: `scripts/pruebas/RN03_AUDITORIA.md`, `rn03_resultados.txt`, `rn03_reprueba_panel.txt` y `RN03_REVISION_PRUEBAS.md`. El endpoint `/wp-json/wp/v2/users` devolvió **401 anónimo**, sin listado; no se modificó.
 
-Decisiones pendientes del equipo: plazo de retención de tickets, mediaciones y backups; eventual sustitución de códigos antiguos; verificación de la propiedad del correo (el dominio no demuestra que pertenezca al solicitante); ajuste del límite de envíos para redes universitarias con IP compartida; sincronización automática de centros; y almacenamiento privado de ficheros si se incorporan adjuntos. Actualmente los formularios no admiten ficheros: bloquear una URL de WordPress no protege por sí solo un fichero estático en `uploads`.
+### Sprint 3: protección de los formularios, búsqueda del panel y datos mínimos (HU-17a, HU-16b, HU-15b, E3-08)
+
+- **Campo trampa y límite de envíos (HU-17a).** El nonce de Fluent Forms y el campo trampa oculto (honeypot: una persona lo deja vacío y un robot lo rellena) se exigen ahora en los dos formularios privados, el buzón y la mediación. Cada formulario admite **10 envíos con campos válidos por IP cada 15 minutos**, con cuentas separadas (`cadus_privacidad_permitir_envio('buz' | 'med')`); los envíos rechazados por validación no gastan intentos. Los mensajes de rechazo se muestran en español.
+- **Búsqueda del panel (HU-16b).** La búsqueda de `Tickets del buzón` y de `Mediaciones` solo mira el título, es decir, la referencia más el asunto (tickets) o el centro (mediaciones). No busca en la descripción ni en el nombre o el correo del estudiante, y el resultado es el listado minimizado de siempre. Se combina con los filtros de estado y de tipo. El botón dice «Buscar por código o asunto».
+- **Datos mínimos y aviso a la Ejecutiva (E3-08).** El buzón pide nombre y apellidos, Facultad o Escuela y correo de la US, además de la consulta. `cadus_buzon_asegurar_campos()` añade los dos campos nuevos a un formulario creado antes del Sprint 3 sin tocar el resto. El desplegable de centros del buzón y de la mediación se lee de la taxonomía `cadus_centro` al pintar y al validar, así que una delegación nueva aparece sin editar el formulario. Los datos se guardan en `_cadus_solicitante` y `_cadus_centro` y solo se ven en la ficha del ticket. Cada ticket nuevo envía un correo a `dcadus@us.es` (opción o filtro `cadus_buzon_correo_avisos`) que solo lleva el código, el tipo, la fecha y el enlace al panel; el resultado queda en `_cadus_aviso_ejecutiva`. El plazo de respuesta no se publica hasta aclararlo con el CADUS.
+- **Accesibilidad de los formularios (HU-15b).** El formulario de seguimiento lleva ayudas enlazadas con `aria-describedby`, no depende del placeholder y, al responder, mueve el foco al resultado para que el lector de pantalla empiece por él.
+- **Borrado a los dos años (HU-23).** Quien implemente el borrado o la anonimización tiene que incluir los metadatos nuevos del ticket: `_cadus_solicitante`, `_cadus_centro` y `_cadus_aviso_ejecutiva`.
+
+Pruebas nuevas, desde la raíz del repositorio y con el sitio local arrancado:
+
+```powershell
+python scripts/pruebas/sprint3_buzon.py          # HU-17a, HU-16b y E3-08 (servicio de Fluent Forms, HTTP anónimo y panel)
+python scripts/pruebas/hu15b_accesibilidad.py    # HU-15b: etiquetas, textos alternativos, encabezados y ARIA
+```
+
+Las baterías anteriores (`rn03_http.py`, `privacidad_tickets.py`) se han adaptado a los campos nuevos y buscan PHP en la variable `CADUS_PHP`, en la ruta del servidor del equipo, en el `PATH` o en Wamp. El resultado está en `scripts/pruebas/SPRINT3_BUZON.md`.
+
+Decisiones pendientes del equipo: plazo de respuesta de los tickets (el de retención ya está cerrado: 2 años, HU-23) y retención de los backups; eventual sustitución de códigos antiguos; verificación de la propiedad del correo (el dominio no demuestra que pertenezca al solicitante); ajuste del límite de envíos para redes universitarias con IP compartida; y almacenamiento privado de ficheros si se incorporan adjuntos. Actualmente los formularios no admiten ficheros: bloquear una URL de WordPress no protege por sí solo un fichero estático en `uploads`.
 
 Referencias técnicas: [registro de tipos de WordPress](https://developer.wordpress.org/reference/functions/register_post_type/) y [ciclo de envío de Fluent Forms](https://developers.fluentforms.com/submission-lifecycle/), contrastados con el código instalado.
 
@@ -153,3 +171,17 @@ La portada reproduce lo principal de la web oficial, con el estilo propio del po
 | `[cadus_contacto]` | Cierre: dirección, teléfono, correo, Instagram y enlaces | fijo; enlaces a la web oficial marcados como tales |
 
 Marcado y datos: Codex (`includes/portada_extra.php`). Estilo y JS: Claude (`assets/cadus.css`, `assets/cadus.js`). La portada se reescribe sola (migración v2 en `inicio.php`) si no la ha editado el equipo. El JS añade el filtrado (con un aviso `role="status"` del número de noticias) y los botones del carrusel; sin JS la lista se desplaza en horizontal y se ve completa. Contrastes comprobados: todos los textos cumplen WCAG AA (mínimo 5,4:1). La revisión cruzada de Codex sobre el CSS y el JS quedó pendiente por límite de uso de Codex.
+
+## Acceso y gestión desde el portal (HU-24)
+
+`includes/gestion.php` añade el apartado **Acceder** al menú (`/acceso/`) y la página **Gestión** (`/gestion/`). Cada rol ve solo lo que puede hacer:
+
+- **Ejecutiva y administrador (cuenta `cadus`):** nueva noticia, nuevo evento (aparece en el calendario), nueva acta o normativa con su PDF y gestión de las delegaciones (datos, delegado y enlace al relevo de la cuenta).
+- **Delegación:** edita solo la ficha de su propia delegación (RN-04).
+- **Visitantes y estudiantes:** no tienen tareas de gestión.
+
+Comprueba en el servidor las capacidades de WordPress de cada tarea (crear, publicar, editar las de otros y subir archivos), de modo que una cuenta con menos permisos que la Ejecutiva no puede hacer en el portal lo que el panel le negaría. Pruebas: `php scripts/pruebas/gestion.php`.
+
+## Directorio de delegaciones y escudos
+
+`includes/delegaciones.php` carga las 27 delegaciones de www.cadus.us.es/delegaciones/ desde `data/delegaciones.json` (miembros, correo, teléfono, Instagram) y sus escudos desde `assets/escudos/` (reducidos a 320 px). Es idempotente: crea las fichas que faltan y solo rellena campos vacíos, nunca pisa lo que una delegación haya editado. Se ejecuta al activar el plugin o con `php scripts/entrega/cargar_delegaciones.php`. El directorio muestra una tarjeta con escudo por delegación y tiene buscador (centro, siglas, correo o miembro).

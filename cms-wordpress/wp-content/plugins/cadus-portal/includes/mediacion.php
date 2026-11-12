@@ -38,7 +38,7 @@ function cadus_mediacion_registrar(): void
             'name' => 'Solicitudes de mediación', 'singular_name' => 'Solicitud de mediación',
             'add_new' => 'Añadir solicitud', 'add_new_item' => 'Añadir solicitud de mediación',
             'edit_item' => 'Editar solicitud', 'new_item' => 'Nueva solicitud',
-            'view_item' => 'Ver solicitud', 'search_items' => 'Buscar solicitudes',
+            'view_item' => 'Ver solicitud', 'search_items' => 'Buscar por referencia o centro',
             'not_found' => 'No se han encontrado solicitudes',
             'not_found_in_trash' => 'No hay solicitudes en la papelera',
             'all_items' => 'Todas las solicitudes', 'menu_name' => 'Mediaciones',
@@ -329,7 +329,7 @@ function cadus_mediacion_crear(int|string $insert_id, $form_data, $form): void
             '_cadus_centro' => $centro, '_cadus_estado' => 'pendiente',
             '_cadus_entrada_ff' => (int) $insert_id,
             // IR-08: la aceptación del tratamiento de datos (validada arriba) se conserva con la solicitud, aunque se purgue la entrada de Fluent Forms.
-            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de octubre de 2026',
+            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de noviembre de 2026',
         ];
         foreach ($meta as $key => $value) {
             if (!add_post_meta($post_id, $key, wp_slash($value), true)) {

@@ -3,7 +3,7 @@
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla). **Contacto con el cliente:** Miguel Ángel Camacho Martín, que forma parte del CADUS.
 **Periodo:** 26/10/2026 – 15/11/2026 (un único sprint de tres semanas, como acordó el equipo con el profesor)
-**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23)
+**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
 
 ## Objetivo del Sprint
 
@@ -20,7 +20,7 @@ La entrevista completa está en [`docs/cliente/entrevista-cliente.md`](../../cli
 | Las votaciones son presenciales, solo votan los delegados (un voto por delegación, con DNI) y no se publican resultados | **HU-21 (papeleta online) cancelada.** El portal solo anuncia la votación, como ya hace HU-11. El registro de la votación pasa al DMS |
 | El delegado puede dar de alta a su sucesor cuando se da de baja | **Nueva HU-22** |
 | Tickets y mediaciones se conservan 2 años desde que se resuelven | **Nueva HU-23** (borrado o anonimización) |
-| Aviso de ticket al correo de `dcadus`, plazo de respuesta de 4 días y datos mínimos (nombre y apellidos, facultad y correo US) | Tarea E3-08 |
+| Aviso de ticket al correo de `dcadus`, plazo de respuesta (máximo 4 días hábiles desde que la Ejecutiva revisa el ticket) y datos mínimos (nombre y apellidos, facultad y correo US) | Tarea E3-08 |
 | Calendario con asambleas y cursos | Tarea E3-07 |
 | Móvil, tablet y ordenador | HU-14 incluye la tablet |
 | Accesibilidad para personas ciegas o daltónicas y pautas DUA | HU-15 añade esos criterios |
@@ -60,7 +60,7 @@ HU-14, HU-15, HU-16, HU-17 y HU-20 se dividen en subtareas para repartir la carg
 | HU-17b | Revisión de saneamiento, nonces y escape de salida; revisión de Wordfence | 2 |
 | HU-20a | Optimización de imágenes (tamaño, formato y carga diferida) | 2 |
 | HU-20b | Caché y minificación con WP Fastest Cache; medición antes y después | 3 |
-| HU-22 | El delegado da de alta a su sucesor (y cualquier ejecutivo puede hacerlo), con efecto inmediato. Criterios: el delegado solo crea a su propio sucesor; al darlo de alta se revoca el acceso del anterior; la ficha pasa a la cuenta nueva; cada delegación tiene exactamente una cuenta activa | 3 |
+| HU-22 | Relevo de la cuenta de la delegación por el delegado saliente o cualquier ejecutivo, con efecto inmediato (una cuenta por delegación, decidido el 09/11). Criterios: el delegado solo actúa sobre su propia cuenta; el relevo cierra todas las sesiones y el equipo anterior pierde el acceso; la ficha sigue en la misma cuenta; cada delegación tiene exactamente una cuenta activa; funciona sin correo saliente | 3 |
 | HU-23 | Borrado o anonimización de tickets y mediaciones a los 2 años de resolverse | 2 |
 | **Total** | | **36** |
 
@@ -100,12 +100,12 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 
 | ID | Tarea concreta | SP |
 |---|---|---:|
-| HU-22 | Permitir que el delegado dé de alta a su sucesor (y que cualquier ejecutivo lo haga) con efecto inmediato. Debe: limitar al delegado a su propia delegación, revocar el acceso del anterior, traspasar la ficha y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
+| HU-22 | Relevo de la cuenta de la delegación (decidido el 09/11: **una cuenta por delegación**, con el correo institucional de la delegación). Lo hace el delegado saliente o cualquier ejecutivo, con efecto inmediato: la cuenta no cambia, se pone una contraseña nueva y se cierran sus sesiones. Debe: limitar al delegado a su propia delegación, cortar el acceso del equipo anterior y mantener una sola cuenta activa por delegación. Actualizar RF-14 y RN-04. | 3 |
 | HU-15c | Daltonismo, pautas DUA, auditoría de accesibilidad con Lighthouse y axe, y corrección de los fallos. | 2 |
 | HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). | 2 |
-| E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. | — |
-| E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). | — |
-| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. | — |
+| E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. **Respondido por el CADUS (09/11), sin escribir a la US:** acceso por SFTP, HTTPS activo, PHP 7.2/7.3 con MySQL, sin correo saliente ni cron; acceso a la base de datos sin confirmar. | — |
+| E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). **Hecho (09/11):** `cadus-portal` crea una vez las categorías «Asambleas» y «Cursos» en The Events Calendar (reutiliza «asamblea» o «curso» si ya existen). Al crear un evento, la Ejecutiva marca su categoría; las votaciones solo ofrecen eventos de «Asambleas» (RN-05). | — |
+| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. | — |
 
 ### Álvaro Martínez Ocaña — Dev Directorio de Delegaciones (8 SP)
 
@@ -124,9 +124,9 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | HU-15b | Etiquetas de formularios, textos alternativos, jerarquía de encabezados, ARIA y lector de pantalla. | 3 |
 | HU-16b | Búsqueda en el panel de tickets sin exponer datos del estudiante (RN-03); ampliar la batería de pruebas de privacidad. | 2 |
 | E3-05 | Revisar el REM y la trazabilidad con los cambios del sprint y regenerar `CADUS.rem` con `scripts/remus/build_rem.ps1`: ampliar RN-03 a todas las consultas y RN-01 a todo el contenido, cerrar el plazo de conservación (2 años), añadir RF-14 con el relevo de delegados y los criterios de accesibilidad (DUA) y la regla de las tres operaciones en menos de un minuto. | — |
-| E3-08 | Tickets: aviso al correo de `dcadus` y datos mínimos del estudiante (nombre y apellidos, facultad y correo US). El plazo de respuesta (el cliente dijo «al menos 4 días») no se publica hasta aclarar con Miguel Ángel si es mínimo o máximo, en días naturales o hábiles y desde cuándo se cuenta. | — |
+| E3-08 | Tickets: aviso al correo de `dcadus` y datos mínimos del estudiante (nombre y apellidos, facultad y correo US). Plazo de respuesta aclarado con Miguel Ángel el 09/11: **máximo 4 días hábiles, contados desde que la Ejecutiva revisa el ticket**. Publicarlo en el buzón con el texto «Te responderemos en un máximo de 4 días hábiles desde que revisemos tu consulta». | — |
 
-**Capacidad total comprometida del Sprint:** 36 SP, más las tareas `E3-xx`.
+**Capacidad total comprometida del Sprint:** 36 SP iniciales (la línea ideal del burndown parte de 36), más 8 SP de HU-24 añadidos el 12/11 y las tareas `E3-xx`.
 
 ## Pendiente del Sprint 2
 
@@ -178,6 +178,26 @@ Siguen abiertas en el GitHub Project las tareas de contenido y cliente del Sprin
 | El DMS compite por las mismas personas y la entrega es el 08/11. | El DMS se planifica aparte con reparto propio (ver `docs/dms/`); el DMS es sobre todo documentación y configuración. |
 | El borrado a los 2 años (HU-23) podría eliminar datos que aún se necesiten. | Probarlo con datos de ejemplo y anonimizar en lugar de borrar cuando haya dudas. |
 | Todo el contacto con el cliente pasa por una sola persona. | Miguel Ángel resume cada reunión en Discord (#scrum) y Pablo, como Product Owner, valida las prioridades. |
+
+## Estado a 12/11/2026
+
+Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resultados de pruebas del propio equipo.
+
+| Subtarea | Quién | Fecha | Evidencia |
+|---|---|---|---|
+| HU-22 relevo de la cuenta de la delegación (3 SP) | Miguel Ángel | 09/11 | `includes/relevo.php`; `scripts/roles` |
+| HU-17a honeypot y límite de envíos (3 SP) | Marcos | 11/11 | baterías `sprint3_buzon.py` (81 correctas, 0 fallos) y de privacidad |
+| HU-16b búsqueda de tickets sin exponer datos (2 SP) | Marcos | 11/11 | `sprint3_buzon.py` |
+| HU-15b etiquetas, encabezados y ARIA en Atención al estudiante (3 SP) | Marcos | 12/11 | `hu15b_accesibilidad.py` (59 correctas, 0 fallos) |
+| E3-03, E3-05, E3-07 y E3-08 (sin puntos) | Miguel Ángel y Marcos | 09–11/11 | `scripts/pruebas/SPRINT3_BUZON.md`, calendario con «Asambleas» y «Cursos», REM v2.2 |
+
+**Cambio de alcance (12/11): HU-24, acceso y gestión desde el portal (8 SP, Pablo).** Pedida por el cliente en la entrevista (portal fácil de usar para personas con pocos conocimientos informáticos) y por Pablo al probar la cuenta del CADUS: apartado «Acceder» en el menú, página de acceso dentro del portal y página «Gestión» donde cada rol ve solo lo que puede hacer (la Ejecutiva crea noticias, eventos del calendario, actas y normativas con su PDF y gestiona las delegaciones; cada delegación edita solo su ficha). Módulo `includes/gestion.php`; pruebas en `scripts/pruebas/gestion.php` (93 correctas, 0 fallos, con peticiones HTTP reales a los formularios y a la API REST). El compromiso del sprint pasa de 36 a 44 SP.
+
+**SP pendientes: 25 de 44** (11 hechos más los 8 de HU-24, que están hechos pero sin prueba cruzada; el resto del sprint sigue igual) (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
+
+**Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP.
+
+**Sin prueba cruzada:** las pruebas anteriores las ejecutó quien hizo cada subtarea; falta que otra persona las repita (T-01).
 
 ## Resultado del Sprint 3
 

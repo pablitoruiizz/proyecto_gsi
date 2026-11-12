@@ -152,11 +152,12 @@ function cadus_contenido_faq(): string
 {
     return cadus_b_html(''
         . '<details><summary><strong>¿Quién puede usar el buzón?</strong></summary><p>Cualquier estudiante de la Universidad de Sevilla con correo institucional @alum.us.es. Las solicitudes enviadas desde otras direcciones se rechazan para garantizar que solo escriben estudiantes de la US.</p></details>'
-        . '<details><summary><strong>¿Qué diferencia hay entre una consulta y una reclamación académica?</strong></summary><p>Una consulta es una duda o petición de información (becas, matrícula, normativa, representación). Una reclamación académica es un problema con una asignatura, un examen, una calificación o un servicio de la Universidad. Las reclamaciones se tratan como confidenciales.</p></details>'
+        . '<details><summary><strong>¿Qué diferencia hay entre una consulta y una reclamación académica?</strong></summary><p>Una consulta es una duda o petición de información (becas, matrícula, normativa, representación). Una reclamación académica es un problema con una asignatura, un examen, una calificación o un servicio de la Universidad. Tanto las consultas como las reclamaciones se tratan con total privacidad.</p></details>'
         . '<details><summary><strong>¿Cómo sé en qué estado está mi solicitud?</strong></summary><p>Al enviarla recibes un código de seguimiento que empieza por CAD-. Introdúcelo junto con tu correo universitario en la página Seguimiento de ticket. Verás el estado (Abierto, En proceso o Cerrado) y las respuestas del CADUS.</p></details>'
         . '<details><summary><strong>¿Me avisaréis cuando haya una respuesta?</strong></summary><p>Sí. Cuando la Ejecutiva responde, recibes un correo en tu cuenta @alum.us.es. Por privacidad, el correo no incluye el contenido de la respuesta: solo el código y el enlace a la página de seguimiento.</p></details>'
         . '<details><summary><strong>He perdido mi código de seguimiento, ¿qué hago?</strong></summary><p>Por seguridad no podemos mostrar tickets sin el código. Escribe a dcadus@us.es desde tu correo universitario indicando el asunto y la fecha aproximada del envío y te ayudaremos a localizarlo.</p></details>'
-        . '<details><summary><strong>¿Quién puede ver mi reclamación?</strong></summary><p>Solo tú (con tu código y tu correo) y la Ejecutiva del CADUS. Los delegados de centro y el resto de usuarios no tienen acceso, y las reclamaciones no aparecen en el buscador ni en la web pública. Consulta el aviso de privacidad para más detalles.</p></details>'
+        . '<details><summary><strong>¿Quién puede ver mi consulta o mi reclamación?</strong></summary><p>Solo tú (con tu código y tu correo) y la Ejecutiva del CADUS. Los delegados de centro y el resto de usuarios no tienen acceso, y ninguna consulta ni reclamación aparece en el buscador ni en la web pública. Consulta el aviso de privacidad para más detalles.</p></details>'
+        . '<details><summary><strong>¿Qué datos me pedís y cuánto tiempo los guardáis?</strong></summary><p>Solo los necesarios para atenderte: tu nombre y apellidos, tu Facultad o Escuela, tu correo universitario y lo que nos cuentes en el formulario. Se guardan mientras se gestiona tu solicitud y durante dos años desde que se resuelve; después se eliminan o se anonimizan.</p></details>'
         . '<details><summary><strong>¿Qué es la mediación estudiantil y cuándo puedo pedirla?</strong></summary><p>Es la intervención del CADUS para ayudar a resolver un conflicto entre estudiantes y profesorado, departamentos o servicios de la Universidad. Puedes solicitarla desde la página Mediación estudiantil con tu correo @alum.us.es.</p></details>'
         . '<details><summary><strong>¿Cómo contacto con la delegación de mi centro?</strong></summary><p>En el directorio de delegaciones aparece el correo, el teléfono, el horario de atención y las redes de la delegación de cada facultad o escuela.</p></details>'
         . '<details><summary><strong>¿Dónde están las actas y la normativa?</strong></summary><p>En la sección Actas y normativa. Cada documento lo aprueba la Ejecutiva antes de publicarse, así que lo que ves allí es la versión oficial.</p></details>'
@@ -169,14 +170,15 @@ function cadus_contenido_aviso_privacidad(): string
     return cadus_b_p('Este aviso explica cómo trata el CADUS los datos que envías a través de esta web, conforme al Reglamento General de Protección de Datos (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).')
         . cadus_b_html(''
             . '<h2>Responsable del tratamiento</h2><p>Consejo de Alumnos de la Universidad de Sevilla (CADUS). Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla. Correo: <a href="mailto:dcadus@us.es">dcadus@us.es</a>.</p>'
-            . '<h2>Qué datos tratamos</h2><p>En el buzón de consultas y reclamaciones y en la solicitud de mediación: tu correo universitario (@alum.us.es), el asunto, el tipo de solicitud y la descripción que escribas. No pedimos tu nombre, DNI ni otros datos que no sean necesarios.</p>'
+            . '<h2>Qué datos tratamos</h2><p>En el buzón de consultas y reclamaciones y en la solicitud de mediación: tu nombre y apellidos, tu Facultad o Escuela, tu correo universitario (@alum.us.es) y lo que escribas en el formulario (el asunto, el tipo de solicitud y la descripción). Son los datos mínimos para poder atenderte: no pedimos DNI, teléfono ni otros datos.</p>'
+            . '<h2>Delegaciones de alumnos</h2><p>El directorio de delegaciones publica el correo, el teléfono, el Instagram y los nombres de los miembros de cada delegación, tal y como ya figuran en la web oficial del CADUS (www.cadus.us.es), para que el alumnado sepa a quién acudir. La base legal es el interés legítimo del CADUS en dar a conocer a sus representantes (artículo 6.1.f del RGPD). Si eres miembro de una delegación y quieres rectificar o retirar tus datos, escribe a dcadus@us.es o díselo a tu delegación, que puede editar su ficha.</p>'
             . '<h2>Para qué los usamos</h2><p>Solo para atender tu consulta, reclamación o solicitud de mediación, responderte y permitirte seguir su estado con tu código. No usamos tus datos para enviarte publicidad ni para elaborar perfiles.</p>'
             . '<h2>Base legal</h2><p>Tu consentimiento (artículo 6.1.a del RGPD), que das al marcar la casilla del formulario. Puedes retirarlo cuando quieras escribiendo a dcadus@us.es, sin que afecte al tratamiento ya realizado.</p>'
-            . '<h2>Quién puede verlos</h2><p>Solo la Ejecutiva del CADUS y el personal técnico que administra la web, y únicamente cuando es necesario. Las reclamaciones son confidenciales (RN-03): no se muestran en la web pública, en el buscador ni en la API, y los avisos por correo no incluyen su contenido. No cedemos tus datos a terceros salvo obligación legal.</p>'
-            . '<h2>Cuánto tiempo los guardamos</h2><p>Mientras se gestiona tu solicitud y, una vez cerrada, durante el tiempo necesario para atender posibles reclamaciones. Después se eliminan.</p>'
-            . '<h2>Seguridad</h2><p>La web usa conexión cifrada, cuentas con permisos por rol, protección frente a accesos indebidos y límite de intentos en la consulta de seguimiento (RNF-08).</p>'
+            . '<h2>Quién puede verlos</h2><p>Solo la Ejecutiva del CADUS y el personal técnico que administra la web, y únicamente cuando es necesario. Todas las consultas, reclamaciones y solicitudes de mediación son confidenciales (RN-03): no se muestran en la web pública, en el buscador ni en la API, y los avisos por correo, tanto el que recibes tú como el que recibe la Ejecutiva cuando entra una consulta nueva, solo llevan el código, nunca tus datos ni el contenido. No cedemos tus datos a terceros salvo obligación legal.</p>'
+            . '<h2>Cuánto tiempo los guardamos</h2><p>Mientras se gestiona tu solicitud y durante dos años desde que se resuelve, para poder acreditar cómo se atendió. Pasado ese plazo, los datos se eliminan o se anonimizan.</p>'
+            . '<h2>Seguridad</h2><p>La web usa conexión cifrada, cuentas con permisos por rol, protección frente a accesos indebidos, protección de los formularios frente a envíos automáticos (un campo trampa y un límite de envíos) y límite de intentos en la consulta de seguimiento (RNF-04, RNF-08).</p>'
             . '<h2>Tus derechos</h2><p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a dcadus@us.es desde tu correo universitario. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es">www.aepd.es</a>).</p>'
-            . '<p><em>Última actualización: octubre de 2026.</em></p>');
+            . '<p><em>Última actualización: noviembre de 2026.</em></p>');
 }
 
 /**
@@ -185,8 +187,11 @@ function cadus_contenido_aviso_privacidad(): string
  * iniciales. Se corrige una sola vez por versión, desde el panel, y la FAQ y el aviso solo se sustituyen si siguen
  * siendo exactamente los de una versión anterior del plugin (para no pisar lo que el equipo haya editado).
  * Versión 2: el aviso deja de mostrar el texto provisional sobre el plazo de conservación.
+ * Versión 3 (Sprint 3, entrevista del 26/10): plazo de conservación de dos años, datos mínimos (nombre y apellidos,
+ * Facultad o Escuela y correo), privacidad de todas las consultas y los dos campos nuevos del formulario del buzón.
+ * También añade a «Atención al estudiante» el encabezado h2 que faltaba sobre las tarjetas (HU-15b).
  */
-define('CADUS_ATENCION_VERSION', '2');
+define('CADUS_ATENCION_VERSION', '3');
 add_action('init', function () {
     if (is_admin() && get_option('cadus_portal_version') && get_option('cadus_atencion_version') !== CADUS_ATENCION_VERSION) {
         cadus_actualizar_atencion();
@@ -204,17 +209,26 @@ function cadus_actualizar_atencion(): void
     if ($kses) {
         kses_remove_filters();
     }
+    // HU-15b: las tarjetas de «Atención al estudiante» son h3 y colgaban directamente del h1 de la página.
+    // Se añade el encabezado h2 que faltaba, solo si la página conserva las tarjetas y todavía no tiene ninguno.
+    $tarjetas = "<!-- wp:html -->\n<div class=\"cadus-tarjetas\">";
+    if (str_contains($atencion->post_content, $tarjetas) && !preg_match('/<h2[\s>]/', $atencion->post_content)) {
+        wp_update_post(wp_slash(['ID' => $atencion->ID,
+            'post_content' => str_replace($tarjetas, cadus_b_h('Servicios de atención') . $tarjetas, $atencion->post_content)]));
+    }
     $faq = cadus_buscar_semilla('pagina:atencion-al-estudiante/preguntas-frecuentes', 'page')
         ?? get_page_by_path('atencion-al-estudiante/preguntas-frecuentes');
-    // Huella de la FAQ de la primera versión (cinco preguntas), sin espacios: si coincide, nadie la ha editado.
-    if ($faq && md5((string) preg_replace('/\s+/', '', $faq->post_content)) === '03513f9f8c052cda00eef1e40f5eb21b') {
+    // Huellas de la FAQ de las versiones anteriores (cinco y nueve preguntas), sin espacios: si coincide, nadie la ha editado.
+    if ($faq && in_array(md5((string) preg_replace('/\s+/', '', $faq->post_content)),
+        ['03513f9f8c052cda00eef1e40f5eb21b', '0d8aaeb35572f9e4fd48e6449044ba96'], true)) {
         wp_update_post(['ID' => $faq->ID, 'post_content' => cadus_contenido_faq()]);
     } elseif (!$faq) {
         cadus_pagina('preguntas-frecuentes', 'Preguntas frecuentes', cadus_contenido_faq(), (int) $atencion->ID);
     }
-    // Huella del aviso de la versión 1 (con el texto provisional del plazo): si coincide, nadie lo ha editado.
+    // Huellas del aviso de las versiones 1 (texto provisional del plazo) y 2: si coincide, nadie lo ha editado.
     $aviso = cadus_buscar_semilla('pagina:aviso-de-privacidad', 'page') ?? get_page_by_path('aviso-de-privacidad');
-    if ($aviso && md5((string) preg_replace('/\s+/', '', $aviso->post_content)) === '37178d42bbff068513c6ca78f1425493') {
+    if ($aviso && in_array(md5((string) preg_replace('/\s+/', '', $aviso->post_content)),
+        ['37178d42bbff068513c6ca78f1425493', '2343c627eb14d70b8b2cc72631238e27'], true)) {
         wp_update_post(['ID' => $aviso->ID, 'post_content' => cadus_contenido_aviso_privacidad()]);
     } elseif (!$aviso) {
         cadus_pagina('aviso-de-privacidad', 'Aviso de privacidad', cadus_contenido_aviso_privacidad());
@@ -222,6 +236,8 @@ function cadus_actualizar_atencion(): void
     if ($kses) {
         kses_init_filters();
     }
+    // El formulario del buzón creado antes del Sprint 3 recibe los campos de nombre y de Facultad o Escuela (E3-08).
+    cadus_buzon_asegurar_campos();
     update_option('cadus_atencion_version', CADUS_ATENCION_VERSION);
 }
 
@@ -389,6 +405,7 @@ function cadus_portal_configurar(): void
         cadus_b_p('Directorio de las delegaciones de alumnos agrupado por facultad o escuela.') . cadus_b_sc('[cadus_directorio]'));
     $atencion = cadus_pagina('atencion-al-estudiante', 'Atención al estudiante',
         cadus_b_p('Si necesitas plantear una consulta o una reclamación académica, usa el buzón. Recibirás un código para seguir el estado de tu solicitud.')
+        . cadus_b_h('Servicios de atención') // HU-15b: las tarjetas son h3 y necesitan un h2 por encima
         . cadus_b_html('<div class="cadus-tarjetas">'
             . '<div class="cadus-tarjeta"><h3>Buzón de consultas</h3><p>Envía tu consulta o reclamación.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/buzon-de-consultas/')) . '">Ir al buzón</a></div>'
             . '<div class="cadus-tarjeta"><h3>Seguimiento de ticket</h3><p>Consulta el estado con tu código.</p><a class="cadus-boton" href="' . esc_url(home_url('/atencion-al-estudiante/seguimiento-de-ticket/')) . '">Seguir mi ticket</a></div>'
@@ -460,21 +477,8 @@ function cadus_portal_configurar(): void
         }
     }
 
-    // Delegaciones de ejemplo (HU-05, HU-06): una por centro, con los datos por completar
-    foreach ($centros as $centro) {
-        $titulo = 'Delegación de ' . $centro;
-        if (cadus_buscar_semilla('delegacion:' . sanitize_title($centro), 'cadus_delegacion', $titulo)) {
-            continue;
-        }
-        $id = wp_insert_post([
-            'post_type' => 'cadus_delegacion', 'post_status' => 'publish', 'post_title' => $titulo, 'post_author' => 1,
-            'post_content' => cadus_b_p('Ficha pendiente de completar por el delegado o representante del centro.'),
-        ]);
-        if ($id && !is_wp_error($id)) {
-            update_post_meta($id, '_cadus_semilla', 'delegacion:' . sanitize_title($centro));
-            wp_set_object_terms($id, $centro, 'cadus_centro');
-        }
-    }
+    // Delegaciones (HU-05, HU-06): todas las de www.cadus.us.es con sus miembros, contacto y escudo
+    cadus_delegaciones_cargar();
 
     // Buzón (HU-07): lo implementa includes/buzon.php
     if (function_exists('cadus_buzon_setup')) {
@@ -497,13 +501,14 @@ function cadus_portal_configurar(): void
             ['atencion-al-estudiante/seguimiento-de-ticket', 1], ['atencion-al-estudiante/preguntas-frecuentes', 1], ['contacto', 0],
         ];
         $padres = [];
+        $cortos = ['noticias' => 'Noticias', 'delegaciones' => 'Delegaciones']; // etiquetas breves para que la barra quepa sin «Más»
         foreach ($orden as [$r, $nivel]) {
             $pid = $ruta($r);
             if (!$pid) {
                 continue;
             }
             $item = wp_update_nav_menu_item($menu_id, 0, [
-                'menu-item-title' => get_the_title($pid), 'menu-item-object' => 'page', 'menu-item-object-id' => $pid,
+                'menu-item-title' => $cortos[$r] ?? get_the_title($pid), 'menu-item-object' => 'page', 'menu-item-object-id' => $pid,
                 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish', 'menu-item-parent-id' => $nivel ? end($padres) : 0,
             ]);
             if (!$nivel) {

@@ -7,7 +7,10 @@
  *  - la sección «¡Últimos eventos!» de la portada muestra los próximos eventos del calendario;
  *  - el acceso «Calendario» de la portada y el menú principal enlazan con la página del calendario;
  *  - el rol Ejecutivo del CADUS puede crear, editar y publicar eventos, lugares y organizadores;
- *  - el menú de administración de la Ejecutiva incluye «Eventos» (lista cerrada de HU-19a).
+ *  - el menú de administración de la Ejecutiva incluye «Eventos» (lista cerrada de HU-19a);
+ *  - el calendario trae las categorías «Asambleas» y «Cursos» (E3-07), para que la Ejecutiva clasifique cada evento
+ *    y el público filtre en /eventos/categoria/asambleas/ y /eventos/categoria/cursos/. Las votaciones (HU-11) usan
+ *    «Asambleas» para comprobar RN-05.
  *
  * Si The Events Calendar no está activo, nada de esto se aplica y la portada sigue usando
  * las entradas de la categoría Eventos, como en el Sprint 1.
@@ -18,8 +21,10 @@ if (!defined('ABSPATH')) {
 }
 
 define('CADUS_CALENDARIO_VERSION', '1');
+define('CADUS_CALENDARIO_CATEGORIAS_VERSION', '1'); // E3-07: «Asambleas» y «Cursos»
 
 add_action('init', 'cadus_calendario_migrar', 30);
+add_action('init', 'cadus_calendario_categorias', 31);
 add_action('transition_post_status', 'cadus_calendario_cambio_estado', 10, 3);
 add_action('deleted_post', 'cadus_calendario_borrado', 10, 2);
 add_filter('cadus_menus_admin', 'cadus_calendario_menus_admin', 10, 2);
@@ -117,6 +122,32 @@ function cadus_calendario_migrar(): void
     }
     cadus_calendario_menu();
     update_option('cadus_calendario_version', CADUS_CALENDARIO_VERSION);
+}
+
+/**
+ * Categorías del calendario (E3-07). Se crean una sola vez por versión, sin tocar los permisos ni el menú:
+ * si el equipo borra o renombra una categoría después, no se vuelve a crear.
+ * Reutiliza las que ya existan con el slug en singular o en plural (p. ej. «asamblea», que ya aceptan las votaciones).
+ */
+function cadus_calendario_categorias(): void
+{
+    if (!taxonomy_exists('tribe_events_cat') || get_option('cadus_calendario_categorias') === CADUS_CALENDARIO_CATEGORIAS_VERSION) {
+        return;
+    }
+    $categorias = [
+        'asambleas' => ['Asambleas', 'Asambleas del CADUS: ordinarias, extraordinarias y de delegaciones.', 'asamblea'],
+        'cursos' => ['Cursos', 'Cursos, jornadas y formativas abiertas a los estudiantes.', 'curso'],
+    ];
+    foreach ($categorias as $slug => [$nombre, $descripcion, $singular]) {
+        if (term_exists($slug, 'tribe_events_cat') || term_exists($singular, 'tribe_events_cat')) {
+            continue;
+        }
+        $termino = wp_insert_term($nombre, 'tribe_events_cat', ['slug' => $slug, 'description' => $descripcion]);
+        if (is_wp_error($termino) && $termino->get_error_code() !== 'term_exists') {
+            return; // se reintenta en la siguiente carga
+        }
+    }
+    update_option('cadus_calendario_categorias', CADUS_CALENDARIO_CATEGORIAS_VERSION);
 }
 
 /** Menú asignado a la cabecera; si no hay ninguno, el que crea el plugin. */

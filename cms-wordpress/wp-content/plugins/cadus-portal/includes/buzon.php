@@ -1,6 +1,10 @@
 <?php
 /**
- * Buzón del CADUS: formulario, tickets privados y seguimiento (RF-08/09, HU-07/08).
+ * Buzón del CADUS: formulario, tickets privados y seguimiento (RF-08/09/10, HU-07/08/09a).
+ *
+ * Sprint 3: datos mínimos del estudiante (nombre y apellidos, Facultad o Escuela y correo de la US) y aviso de
+ * cada ticket nuevo al correo de la Ejecutiva (E3-08), búsqueda del panel por código o asunto (HU-16b) y
+ * formulario de seguimiento accesible (HU-15b). El campo trampa y el límite de envíos (HU-17a) están en privacidad.php.
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -35,6 +39,16 @@ function cadus_buzon_tipos(): array
     return ['Consulta', 'Reclamación académica'];
 }
 
+/**
+ * Correo de la Ejecutiva que recibe el aviso de cada ticket nuevo (E3-08): la cuenta del CADUS.
+ * Se puede cambiar con la opción «cadus_buzon_correo_avisos» o con el filtro del mismo nombre.
+ */
+function cadus_buzon_correo_avisos(): string
+{
+    $email = (string) apply_filters('cadus_buzon_correo_avisos', get_option('cadus_buzon_correo_avisos', 'dcadus@us.es'));
+    return is_email($email) ? sanitize_email($email) : '';
+}
+
 /** Los bloqueos de MySQL se liberan también cuando se cierra la conexión. */
 function cadus_buzon_lock(string $resource): string
 {
@@ -59,7 +73,7 @@ function cadus_buzon_registrar_ticket(): void
             'name' => 'Tickets del buzón', 'singular_name' => 'Ticket del buzón',
             'add_new' => 'Añadir ticket', 'add_new_item' => 'Añadir ticket',
             'edit_item' => 'Editar ticket', 'new_item' => 'Nuevo ticket',
-            'view_item' => 'Ver ticket', 'search_items' => 'Buscar tickets',
+            'view_item' => 'Ver ticket', 'search_items' => 'Buscar por código o asunto',
             'not_found' => 'No se han encontrado tickets',
             'not_found_in_trash' => 'No hay tickets en la papelera',
             'all_items' => 'Todos los tickets', 'menu_name' => 'Tickets del buzón',
@@ -138,6 +152,149 @@ function cadus_buzon_campo(string $element, string $name, string $label, int $in
     ];
 }
 
+/**
+ * Campos del formulario del buzón. Datos mínimos pedidos por el CADUS en la entrevista del 26/10 (E3-08):
+ * nombre y apellidos, Facultad o Escuela y correo de la US, además de la consulta en sí.
+ */
+function cadus_buzon_campos_formulario(): array
+{
+    $nombre = cadus_buzon_campo('input_text', 'solicitante', 'Nombre y apellidos', 0);
+    $nombre['attributes']['type'] = 'text';
+    $nombre['attributes']['autocomplete'] = 'name';
+    $email = cadus_buzon_campo('input_email', 'email', 'Correo universitario', 1);
+    $email['attributes']['type'] = 'email';
+    $email['attributes']['placeholder'] = 'usuario@alum.us.es';
+    $email['attributes']['autocomplete'] = 'email';
+    $email['settings']['validation_rules']['email'] = [
+        'value' => true, 'message' => 'Introduce un correo electrónico válido.', 'global' => false,
+    ];
+    $centro = cadus_buzon_campo_centro(2);
+    $subject = cadus_buzon_campo('input_text', 'asunto', 'Asunto', 3);
+    $subject['attributes']['type'] = 'text';
+    $type = cadus_buzon_campo('select', 'tipo', 'Tipo', 4);
+    $type['settings']['placeholder'] = 'Selecciona un tipo';
+    $type['settings']['advanced_options'] = [
+        ['label' => 'Consulta', 'value' => 'Consulta', 'calc_value' => ''],
+        ['label' => 'Reclamación académica', 'value' => 'Reclamación académica', 'calc_value' => ''],
+    ];
+    $description = cadus_buzon_campo('textarea', 'descripcion', 'Descripción', 5);
+    $description['attributes']['rows'] = 6;
+    $description['attributes']['cols'] = 2;
+    $consent = cadus_buzon_campo('input_checkbox', 'consentimiento', 'Consentimiento RGPD', 6);
+    $consent['attributes']['type'] = 'checkbox';
+    $consent['attributes']['value'] = [];
+    $consent['settings']['advanced_options'] = [[
+        'label' => 'Consiento el tratamiento de mis datos por el CADUS para gestionar esta consulta o reclamación, conforme al RGPD.',
+        'value' => 'acepto', 'calc_value' => '', 'image' => '',
+    ]];
+    $consent['settings']['validation_rules']['required']['message'] = 'Debes aceptar el tratamiento de tus datos.';
+    return [
+        'fields' => [$nombre, $email, $centro, $subject, $type, $description, $consent],
+        'submitButton' => [
+            'uniqElKey' => 'el_cadus_buzon_enviar', 'element' => 'button',
+            'attributes' => ['type' => 'submit', 'class' => ''],
+            'settings' => [
+                'align' => 'left', 'button_style' => 'default', 'container_class' => '',
+                'help_message' => '', 'background_color' => '#9b1735', 'button_size' => 'md',
+                'color' => '#ffffff', 'button_ui' => ['type' => 'default', 'text' => 'Enviar al CADUS', 'img_url' => ''],
+            ],
+            'editor_options' => ['title' => 'Enviar al CADUS'],
+        ],
+    ];
+}
+
+/** Opciones de un desplegable de Fluent Forms a partir de una lista de textos. */
+function cadus_buzon_opciones(array $valores): array
+{
+    return array_map(static fn(string $v): array => ['label' => $v, 'value' => $v, 'calc_value' => ''], array_values($valores));
+}
+
+/** Desplegable «Facultad o Escuela»: los centros de la taxonomía del directorio (cadus_centro). */
+function cadus_buzon_campo_centro(int $index): array
+{
+    $centro = cadus_buzon_campo('select', 'centro', 'Facultad o Escuela', $index);
+    $centro['settings']['placeholder'] = 'Selecciona tu centro';
+    $centro['settings']['advanced_options'] = cadus_buzon_opciones(cadus_mediacion_centros());
+    return $centro;
+}
+
+/**
+ * Añade «Nombre y apellidos» y «Facultad o Escuela» a un formulario del buzón creado antes del Sprint 3 (E3-08).
+ * No toca los campos que ya existan: solo inserta los que falten, así no pisa lo que el equipo haya cambiado
+ * en el editor de Fluent Forms. Se ejecuta una vez por versión, al mostrar el formulario o desde el panel.
+ */
+function cadus_buzon_asegurar_campos(): void
+{
+    global $wpdb;
+    if (get_option('cadus_buzon_campos_version') === '2' || !cadus_buzon_tablas_disponibles()) {
+        return;
+    }
+    $form_id = (int) get_option('cadus_buzon_form_id', 0);
+    if (!cadus_buzon_formulario_existe($form_id)) {
+        return; // Todavía no hay formulario: se creará ya con todos los campos.
+    }
+    $lock = cadus_buzon_lock('actualizar_formulario');
+    if ($lock === '') {
+        return;
+    }
+    try {
+        $table = $wpdb->prefix . 'fluentform_forms';
+        $json = (string) $wpdb->get_var($wpdb->prepare("SELECT form_fields FROM {$table} WHERE id = %d", $form_id));
+        $form = json_decode($json, true);
+        if (!is_array($form) || !is_array($form['fields'] ?? null)) {
+            return;
+        }
+        $names = [];
+        foreach ($form['fields'] as $field) {
+            $names[] = is_array($field) ? (string) ($field['attributes']['name'] ?? '') : '';
+        }
+        $nuevos = cadus_buzon_campos_formulario()['fields'];
+        $changed = false;
+        if (!in_array('solicitante', $names, true)) {
+            array_unshift($form['fields'], $nuevos[0]);
+            array_unshift($names, 'solicitante');
+            $changed = true;
+        }
+        if (!in_array('centro', $names, true)) {
+            $pos = array_search('email', $names, true);
+            array_splice($form['fields'], $pos === false ? 1 : $pos + 1, 0, [$nuevos[2]]);
+            $changed = true;
+        }
+        if ($changed) {
+            foreach ($form['fields'] as $i => $field) {
+                if (is_array($field)) {
+                    $form['fields'][$i]['index'] = $i;
+                }
+            }
+            $ok = $wpdb->update($table, [
+                'form_fields' => wp_json_encode($form, JSON_UNESCAPED_UNICODE), 'updated_at' => current_time('mysql'),
+            ], ['id' => $form_id], ['%s', '%s'], ['%d']);
+            if ($ok === false) {
+                return;
+            }
+        }
+        update_option('cadus_buzon_campos_version', '2', true);
+    } finally {
+        cadus_buzon_unlock($lock);
+    }
+}
+
+/**
+ * Los centros se leen de la taxonomía cada vez que se pinta o se valida el desplegable «Facultad o Escuela»
+ * del buzón y de la mediación. Así, al añadir una delegación nueva no hay que tocar los formularios.
+ */
+function cadus_buzon_centros_al_dia($field, $form)
+{
+    if (is_array($field) && ($field['attributes']['name'] ?? '') === 'centro'
+        && cadus_privacidad_formulario(is_object($form) ? ($form->id ?? 0) : 0)) {
+        $centros = cadus_mediacion_centros();
+        if ($centros) {
+            $field['settings']['advanced_options'] = cadus_buzon_opciones($centros);
+        }
+    }
+    return $field;
+}
+
 /** Crea el formulario una sola vez; devuelve 0 si Fluent Forms no está disponible. */
 function cadus_buzon_crear_formulario(): int
 {
@@ -157,44 +314,7 @@ function cadus_buzon_crear_formulario(): int
         if (cadus_buzon_formulario_existe($form_id)) {
             return $form_id;
         }
-        $email = cadus_buzon_campo('input_email', 'email', 'Correo universitario', 0);
-        $email['attributes']['type'] = 'email';
-        $email['attributes']['placeholder'] = 'usuario@alum.us.es';
-        $email['settings']['validation_rules']['email'] = [
-            'value' => true, 'message' => 'Introduce un correo electrónico válido.', 'global' => false,
-        ];
-        $subject = cadus_buzon_campo('input_text', 'asunto', 'Asunto', 1);
-        $subject['attributes']['type'] = 'text';
-        $type = cadus_buzon_campo('select', 'tipo', 'Tipo', 2);
-        $type['settings']['placeholder'] = 'Selecciona un tipo';
-        $type['settings']['advanced_options'] = [
-            ['label' => 'Consulta', 'value' => 'Consulta', 'calc_value' => ''],
-            ['label' => 'Reclamación académica', 'value' => 'Reclamación académica', 'calc_value' => ''],
-        ];
-        $description = cadus_buzon_campo('textarea', 'descripcion', 'Descripción', 3);
-        $description['attributes']['rows'] = 6;
-        $description['attributes']['cols'] = 2;
-        $consent = cadus_buzon_campo('input_checkbox', 'consentimiento', 'Consentimiento RGPD', 4);
-        $consent['attributes']['type'] = 'checkbox';
-        $consent['attributes']['value'] = [];
-        $consent['settings']['advanced_options'] = [[
-            'label' => 'Consiento el tratamiento de mis datos por el CADUS para gestionar esta consulta o reclamación, conforme al RGPD.',
-            'value' => 'acepto', 'calc_value' => '', 'image' => '',
-        ]];
-        $consent['settings']['validation_rules']['required']['message'] = 'Debes aceptar el tratamiento de tus datos.';
-        $fields = [
-            'fields' => [$email, $subject, $type, $description, $consent],
-            'submitButton' => [
-                'uniqElKey' => 'el_cadus_buzon_enviar', 'element' => 'button',
-                'attributes' => ['type' => 'submit', 'class' => ''],
-                'settings' => [
-                    'align' => 'left', 'button_style' => 'default', 'container_class' => '',
-                    'help_message' => '', 'background_color' => '#9b1735', 'button_size' => 'md',
-                    'color' => '#ffffff', 'button_ui' => ['type' => 'default', 'text' => 'Enviar al CADUS', 'img_url' => ''],
-                ],
-                'editor_options' => ['title' => 'Enviar al CADUS'],
-            ],
-        ];
+        $fields = cadus_buzon_campos_formulario();
         $settings = [
             'confirmation' => [
                 'redirectTo' => 'samePage', 'messageToShow' => 'Gracias por contactar con el CADUS.',
@@ -251,6 +371,7 @@ function cadus_buzon_crear_formulario(): int
             $wpdb->delete($wpdb->prefix . 'fluentform_forms', ['id' => $form_id], ['%d']);
             return 0;
         }
+        update_option('cadus_buzon_campos_version', '2', true); // nace ya con los datos mínimos (E3-08)
         return $form_id;
     } finally {
         cadus_buzon_unlock($lock);
@@ -260,7 +381,9 @@ function cadus_buzon_crear_formulario(): int
 /** Punto de entrada idempotente para la activación; no registra tipos ni hooks. */
 function cadus_buzon_setup(): int
 {
-    return cadus_buzon_crear_formulario();
+    $form_id = cadus_buzon_crear_formulario();
+    cadus_buzon_asegurar_campos();
+    return $form_id;
 }
 
 function cadus_buzon_es_formulario($form): bool
@@ -279,7 +402,7 @@ function cadus_buzon_validar($errors, $form_data, $form, $fields)
     // Se adapta su formato al lector común para conservar las barras escritas por el alumno.
     $data = is_array($form_data) ? wp_slash($form_data) : [];
     $errors = is_array($errors) ? $errors : [];
-    foreach (['email', 'asunto', 'descripcion', 'tipo', 'consentimiento'] as $key) {
+    foreach (['solicitante', 'email', 'centro', 'asunto', 'descripcion', 'tipo', 'consentimiento'] as $key) {
         if (isset($errors[$key]) && !is_array($errors[$key])) {
             $errors[$key] = (array) $errors[$key];
         }
@@ -288,10 +411,14 @@ function cadus_buzon_validar($errors, $form_data, $form, $fields)
     if (cadus_buzon_email($raw_email) === '') {
         $errors['email'][] = 'Utiliza un correo universitario válido terminado en @alum.us.es.';
     }
-    foreach (['asunto', 'descripcion'] as $key) {
+    foreach (['solicitante', 'asunto', 'descripcion'] as $key) {
         if (cadus_buzon_input($data, $key, $key === 'descripcion') === '') {
             $errors[$key][] = 'Este campo es obligatorio.';
         }
+    }
+    // Datos mínimos (E3-08): el centro tiene que ser uno de los del directorio.
+    if (!in_array(cadus_buzon_input($data, 'centro'), cadus_mediacion_centros(), true)) {
+        $errors['centro'][] = 'Selecciona tu Facultad o Escuela.';
     }
     if (!in_array(cadus_buzon_input($data, 'tipo'), cadus_buzon_tipos(), true)) {
         $errors['tipo'][] = 'Selecciona Consulta o Reclamación académica.';
@@ -349,11 +476,13 @@ function cadus_buzon_crear_ticket($insert_id, $form_data, $form): void
         $code = sprintf('CAD-%s-%05d-%s', substr($date, 0, 4), $post_id, strtoupper(bin2hex(random_bytes(16))));
         $meta = [
             '_cadus_codigo' => $code, '_cadus_email' => cadus_buzon_email(wp_unslash($form_data['email'])),
+            '_cadus_solicitante' => cadus_buzon_input($form_data, 'solicitante'),
+            '_cadus_centro' => cadus_buzon_input($form_data, 'centro'),
             '_cadus_tipo' => $type, '_cadus_estado' => 'abierto',
             '_cadus_confidencial' => $type === 'Reclamación académica' ? '1' : '0',
             '_cadus_entrada_ff' => (int) $insert_id,
             // La aceptación del tratamiento de datos se conserva con el ticket aunque se purgue la entrada de Fluent Forms.
-            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de octubre de 2026',
+            '_cadus_consentimiento' => 'aceptado el ' . $date . ' · aviso de privacidad de noviembre de 2026',
         ];
         foreach ($meta as $key => $value) {
             if (!add_post_meta($post_id, $key, wp_slash($value), true)) {
@@ -364,7 +493,11 @@ function cadus_buzon_crear_ticket($insert_id, $form_data, $form): void
         $updated = wp_update_post(wp_slash(['ID' => $post_id, 'post_title' => '[' . $code . '] ' . $subject]), true);
         if (is_wp_error($updated) || !$updated) {
             wp_delete_post($post_id, true);
+            return;
         }
+        // E3-08: el ticket ya está guardado; si el correo falla, el ticket sigue existiendo y queda anotado.
+        $sent = cadus_buzon_avisar_ejecutiva((int) $post_id);
+        add_post_meta($post_id, '_cadus_aviso_ejecutiva', $sent ? $date : 'error', true);
     } finally {
         cadus_buzon_unlock($lock);
     }
@@ -419,7 +552,8 @@ function cadus_buzon_shortcode(): string
     if (!$form_id) {
         return '<p>' . esc_html('El buzón no está disponible temporalmente. Disculpa las molestias.') . '</p>';
     }
-    return '<p>' . esc_html('Tus datos se tratarán conforme al RGPD para atender tu solicitud. Las reclamaciones solo son visibles para el remitente y la Ejecutiva del CADUS, con acceso técnico de administración. Guarda tu código y no lo compartas.')
+    cadus_buzon_asegurar_campos();
+    return '<p>' . esc_html('Tus datos se tratarán conforme al RGPD para atender tu solicitud. Todas las consultas y reclamaciones son privadas: solo las ven el remitente y la Ejecutiva del CADUS, con acceso técnico de administración. Guarda tu código y no lo compartas.')
         . ' <a href="' . esc_url(home_url('/aviso-de-privacidad/')) . '">' . esc_html('Consulta el aviso de privacidad') . '</a>.' . '</p>' . do_shortcode('[fluentform id="' . absint($form_id) . '"]');
 }
 
@@ -428,8 +562,33 @@ function cadus_buzon_metaboxes($post): void
     if (!current_user_can('read_private_cadus_tickets') || !current_user_can('edit_post', $post->ID)) {
         return;
     }
+    add_meta_box('cadus_ticket_datos', 'Datos del estudiante', 'cadus_buzon_datos_box', 'cadus_ticket', 'normal', 'high');
     add_meta_box('cadus_ticket_estado', 'Estado', 'cadus_buzon_estado_box', 'cadus_ticket', 'side');
     add_meta_box('cadus_ticket_respuestas', 'Respuestas', 'cadus_buzon_respuestas_box', 'cadus_ticket', 'normal');
+}
+
+/**
+ * Datos mínimos del estudiante (E3-08). Solo se ven aquí, en la ficha a la que entra la Ejecutiva:
+ * no salen en el listado, en la búsqueda ni en los avisos por correo (RN-03).
+ */
+function cadus_buzon_datos_box($post): void
+{
+    $filas = [
+        'Nombre y apellidos' => '_cadus_solicitante', 'Correo universitario' => '_cadus_email',
+        'Facultad o Escuela' => '_cadus_centro', 'Tipo' => '_cadus_tipo',
+    ];
+    echo '<ul>';
+    foreach ($filas as $etiqueta => $clave) {
+        $valor = (string) get_post_meta($post->ID, $clave, true);
+        echo '<li><strong>' . esc_html($etiqueta) . ':</strong> ' . esc_html($valor !== '' ? $valor : 'No consta') . '</li>';
+    }
+    echo '<li><strong>' . esc_html('Fecha de envío') . ':</strong> ' . esc_html(get_the_date('d/m/Y H:i', $post)) . '</li>';
+    $aviso = (string) get_post_meta($post->ID, '_cadus_aviso_ejecutiva', true);
+    if ($aviso !== '') {
+        echo '<li><strong>' . esc_html('Aviso a la Ejecutiva') . ':</strong> '
+            . esc_html($aviso === 'error' ? 'no se pudo enviar el correo' : 'enviado a ' . cadus_buzon_correo_avisos()) . '</li>';
+    }
+    echo '</ul>';
 }
 
 function cadus_buzon_estado_box($post): void
@@ -468,6 +627,31 @@ function cadus_buzon_respuestas_box($post): void
     echo '<p><label><input type="checkbox" name="cadus_ticket_avisar" value="1" checked> '
         . esc_html('Avisar al estudiante por correo') . '</label></p>';
     echo '<p>' . esc_html('Al actualizar el ticket se añadirá esta respuesta al seguimiento. El aviso solo incluye el código y el enlace de seguimiento, nunca el texto de la respuesta (RN-03).') . '</p>';
+}
+
+/**
+ * Aviso a la Ejecutiva de que ha entrado un ticket nuevo (E3-08): llega al correo de la cuenta del CADUS.
+ * Por RN-03 solo lleva el código, el tipo, la fecha y el enlace al panel. No incluye el nombre, el correo,
+ * el centro, el asunto ni la descripción: para leerlos hay que entrar en el panel con la cuenta del CADUS.
+ */
+function cadus_buzon_avisar_ejecutiva(int $post_id): bool
+{
+    $to = cadus_buzon_correo_avisos();
+    $code = (string) get_post_meta($post_id, '_cadus_codigo', true);
+    if ($to === '' || $code === '') {
+        return false;
+    }
+    $type = (string) get_post_meta($post_id, '_cadus_tipo', true);
+    $body = "Hola:\n\n"
+        . 'Ha entrado un ticket nuevo en el buzón del CADUS.' . "\n\n"
+        . 'Código: ' . $code . "\n"
+        . 'Tipo: ' . (in_array($type, cadus_buzon_tipos(), true) ? $type : 'Sin indicar') . "\n"
+        . 'Fecha: ' . get_the_date('d/m/Y H:i', $post_id) . "\n\n"
+        . "Para leerlo y responder, entra en el panel con la cuenta del CADUS:\n"
+        . admin_url('post.php?post=' . $post_id . '&action=edit') . "\n\n"
+        . "Por privacidad, este correo no incluye los datos del estudiante ni el contenido de la consulta.\n\n"
+        . "Portal del CADUS\n";
+    return (bool) wp_mail($to, 'CADUS: ticket nuevo en el buzón ' . $code, $body);
 }
 
 /**
@@ -722,13 +906,25 @@ function cadus_buzon_seguimiento_shortcode(): string
         $html = $result;
     }
     $id = wp_unique_id('cadus_seguimiento_');
-    $html .= '<form method="post" autocomplete="off">'
+    // HU-15b: el resultado va en un contenedor que recibe el foco al volver de la consulta, para que quien usa
+    // lector de pantalla o teclado empiece a leer por la respuesta y no desde el principio de la página.
+    if ($html !== '') {
+        $html = '<div id="' . esc_attr($id . '_resultado') . '" class="cadus-seguimiento-resultado" tabindex="-1">' . $html . '</div>'
+            . '<script>(function(){var r=document.getElementById(' . wp_json_encode($id . '_resultado') . ');if(r){r.focus();}})();</script>';
+    }
+    // Cada campo tiene su etiqueta visible y una ayuda enlazada con aria-describedby; no se depende del placeholder.
+    $html .= '<form method="post" action="#' . esc_attr($id . '_resultado') . '" autocomplete="off" aria-label="' . esc_attr('Consultar el estado de un ticket') . '">'
         . wp_nonce_field('cadus_seguimiento', 'cadus_seguimiento_nonce', false, false)
         . '<input type="hidden" name="cadus_seguimiento_enviar" value="1">'
+        . '<p>' . esc_html('Los dos campos son obligatorios.') . '</p>'
         . '<p><label for="' . esc_attr($id . '_codigo') . '">' . esc_html('Código de seguimiento') . '</label> '
-        . '<input class="cadus-campo" id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="62" placeholder="Código recibido al enviar" required></p>'
+        . '<input class="cadus-campo" id="' . esc_attr($id . '_codigo') . '" name="cadus_codigo" type="text" maxlength="62"'
+        . ' aria-describedby="' . esc_attr($id . '_codigo_ayuda') . '" aria-required="true" autocapitalize="characters" spellcheck="false" required> '
+        . '<small id="' . esc_attr($id . '_codigo_ayuda') . '">' . esc_html('Empieza por CAD- y lo recibiste al enviar tu consulta.') . '</small></p>'
         . '<p><label for="' . esc_attr($id . '_correo') . '">' . esc_html('Correo universitario') . '</label> '
-        . '<input class="cadus-campo" id="' . esc_attr($id . '_correo') . '" name="cadus_correo" type="email" maxlength="254" required></p>'
+        . '<input class="cadus-campo" id="' . esc_attr($id . '_correo') . '" name="cadus_correo" type="email" maxlength="254"'
+        . ' aria-describedby="' . esc_attr($id . '_correo_ayuda') . '" aria-required="true" required> '
+        . '<small id="' . esc_attr($id . '_correo_ayuda') . '">' . esc_html('El mismo correo @alum.us.es con el que enviaste la consulta.') . '</small></p>'
         . '<button type="submit">' . esc_html('Consultar seguimiento') . '</button></form>';
     return $html;
 }
@@ -746,5 +942,6 @@ add_action('manage_cadus_ticket_posts_custom_column', 'cadus_buzon_columna', 10,
 add_action('restrict_manage_posts', 'cadus_buzon_filtros', 10, 1);
 add_action('pre_get_posts', 'cadus_buzon_aplicar_filtros');
 add_action('template_redirect', 'cadus_buzon_privacidad_seguimiento');
+add_filter('fluentform/rendering_field_data_select', 'cadus_buzon_centros_al_dia', 10, 2);
 add_shortcode('cadus_buzon', 'cadus_buzon_shortcode');
 add_shortcode('cadus_seguimiento', 'cadus_buzon_seguimiento_shortcode');
