@@ -1,0 +1,76 @@
+{
+  "etiqueta": "despues",
+  "veces": 3,
+  "paginas": {
+    "Inicio": {
+      "FCP (ms)": 2407.739,
+      "LCP (ms)": 3913.501,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 2407.739,
+      "Respuesta del servidor (ms)": 1.404,
+      "Peso total (bytes)": 541056,
+      "Rendimiento (0-100)": 85,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 11
+    },
+    "Noticias": {
+      "FCP (ms)": 2555.813,
+      "LCP (ms)": 4055.813,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 2555.813,
+      "Respuesta del servidor (ms)": 1.88,
+      "Peso total (bytes)": 525972,
+      "Rendimiento (0-100)": 83,
+      "Accesibilidad (0-100)": 95,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 11
+    },
+    "Delegaciones": {
+      "FCP (ms)": 2256.56,
+      "LCP (ms)": 3083.375,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 2256.56,
+      "Respuesta del servidor (ms)": 2.108,
+      "Peso total (bytes)": 1322871,
+      "Rendimiento (0-100)": 90,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 32
+    },
+    "Actas y normativa": {
+      "FCP (ms)": 2554.812,
+      "LCP (ms)": 2854.812,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 2554.812,
+      "Respuesta del servidor (ms)": 3.242,
+      "Peso total (bytes)": 525566,
+      "Rendimiento (0-100)": 92,
+      "Accesibilidad (0-100)": 97,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 11
+    },
+    "Buzón": {
+      "FCP (ms)": 3808.967,
+      "LCP (ms)": 3969.802,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 7332.966,
+      "Respuesta del servidor (ms)": 3955.471,
+      "Peso total (bytes)": 761367,
+      "Rendimiento (0-100)": 73,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 58,
+      "Peticiones": 19
+    }
+  }
+}

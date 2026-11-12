@@ -1,0 +1,34 @@
+{
+  "etiqueta": "sincombinar",
+  "veces": 3,
+  "paginas": {
+    "Inicio": {
+      "FCP (ms)": 2562.118,
+      "LCP (ms)": 4057.307,
+      "TBT (ms)": 67,
+      "CLS": 0,
+      "Speed Index (ms)": 2562.118,
+      "Respuesta del servidor (ms)": 1.996,
+      "Peso total (bytes)": 541586,
+      "Rendimiento (0-100)": 84,
+      "Accesibilidad (0-100)": 96,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 14
+    },
+    "Noticias": {
+      "FCP (ms)": 2705.659,
+      "LCP (ms)": 3013.325,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 2705.659,
+      "Respuesta del servidor (ms)": 1.789,
+      "Peso total (bytes)": 526819,
+      "Rendimiento (0-100)": 90,
+      "Accesibilidad (0-100)": 95,
+      "Buenas prácticas (0-100)": 100,
+      "SEO (0-100)": 92,
+      "Peticiones": 15
+    }
+  }
+}
