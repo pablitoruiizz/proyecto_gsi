@@ -171,3 +171,17 @@ La portada reproduce lo principal de la web oficial, con el estilo propio del po
 | `[cadus_contacto]` | Cierre: dirección, teléfono, correo, Instagram y enlaces | fijo; enlaces a la web oficial marcados como tales |
 
 Marcado y datos: Codex (`includes/portada_extra.php`). Estilo y JS: Claude (`assets/cadus.css`, `assets/cadus.js`). La portada se reescribe sola (migración v2 en `inicio.php`) si no la ha editado el equipo. El JS añade el filtrado (con un aviso `role="status"` del número de noticias) y los botones del carrusel; sin JS la lista se desplaza en horizontal y se ve completa. Contrastes comprobados: todos los textos cumplen WCAG AA (mínimo 5,4:1). La revisión cruzada de Codex sobre el CSS y el JS quedó pendiente por límite de uso de Codex.
+
+## Acceso y gestión desde el portal (HU-24)
+
+`includes/gestion.php` añade el apartado **Acceder** al menú (`/acceso/`) y la página **Gestión** (`/gestion/`). Cada rol ve solo lo que puede hacer:
+
+- **Ejecutiva y administrador (cuenta `cadus`):** nueva noticia, nuevo evento (aparece en el calendario), nueva acta o normativa con su PDF y gestión de las delegaciones (datos, delegado y enlace al relevo de la cuenta).
+- **Delegación:** edita solo la ficha de su propia delegación (RN-04).
+- **Visitantes y estudiantes:** no tienen tareas de gestión.
+
+Comprueba en el servidor las capacidades de WordPress de cada tarea (crear, publicar, editar las de otros y subir archivos), de modo que una cuenta con menos permisos que la Ejecutiva no puede hacer en el portal lo que el panel le negaría. Pruebas: `php scripts/pruebas/gestion.php`.
+
+## Directorio de delegaciones y escudos
+
+`includes/delegaciones.php` carga las 27 delegaciones de www.cadus.us.es/delegaciones/ desde `data/delegaciones.json` (miembros, correo, teléfono, Instagram) y sus escudos desde `assets/escudos/` (reducidos a 320 px). Es idempotente: crea las fichas que faltan y solo rellena campos vacíos, nunca pisa lo que una delegación haya editado. Se ejecuta al activar el plugin o con `php scripts/entrega/cargar_delegaciones.php`. El directorio muestra una tarjeta con escudo por delegación y tiene buscador (centro, siglas, correo o miembro).

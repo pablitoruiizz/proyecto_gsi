@@ -61,7 +61,7 @@ Modelo conceptual de datos mínimo que debe soportar el CMS (los mismos códigos
 
 Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no una entidad aparte.
 
-## 3 bis. Requisitos de interfaz (UI-01 a UI-08) y casos de uso (UC-01 a UC-04)
+## 3 bis. Requisitos de interfaz (UI-01 a UI-10) y casos de uso (UC-01 a UC-04)
 
 | ID | Requisito de interfaz | Historias |
 |---|---|---|
@@ -73,6 +73,8 @@ Las categorías de noticias y de documentos son un atributo de IR-03 e IR-04, no
 | UI-06 | Calendario de asambleas y eventos (mes y lista) y convocatorias de votación con apertura y cierre, vinculadas a su asamblea | HU-10 · HU-11 |
 | UI-07 | Solicitud de mediación con consentimiento RGPD y confirmación con la referencia MED-AAAA-NNNNN, sin repetir los datos | HU-12 |
 | UI-08 | Panel de administración con solo los menús de cada rol y un escritorio con accesos directos | HU-19a · HU-19b |
+| UI-09 | Acceso al portal: apartado «Acceder» en el menú que lleva a un inicio de sesión dentro del portal y, una vez dentro, «Gestión» y «Salir» según el rol | HU-24 · RF-14 |
+| UI-10 | Gestión desde el portal: formularios sencillos para crear noticias, eventos del calendario, actas y normativas con su PDF y gestionar las delegaciones; cada delegación edita solo su ficha | HU-24 · RF-15 |
 
 | Caso de uso | Actor principal | Resumen |
 |---|---|---|

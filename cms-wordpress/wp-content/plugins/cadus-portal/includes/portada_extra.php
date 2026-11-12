@@ -239,28 +239,43 @@ function cadus_shortcode_contacto(): string
         return '';
     }
     $GLOBALS['cadus_contacto_mostrado'] = true;
-    $enlaces = [
-        ['CADUS', cadus_inicio_url('que-es-el-cadus'), false],
-        ['MIC', 'https://www.cadus.us.es/manual-basico-de-identidad-visual-corporativa/', true],
-        ['Glosario', 'https://www.cadus.us.es/glosario/', true],
-        ['Finger Rules', 'https://www.cadus.us.es/finger-rules/', true],
-        ['Política de datos', 'https://www.cadus.us.es/politica-de-proteccion-y-tratamiento-de-datos/', true],
-        ['Incidencias', cadus_inicio_url('atencion-al-estudiante/buzon-de-consultas'), false],
+    $portal = [
+        ['Qué es el CADUS', cadus_inicio_url('que-es-el-cadus')],
+        ['Delegaciones', cadus_inicio_url('delegaciones')],
+        ['Actas y normativa', cadus_inicio_url('actas-y-normativa')],
+        ['Buzón de consultas', cadus_inicio_url('atencion-al-estudiante/buzon-de-consultas')],
+        ['Aviso de privacidad', cadus_inicio_url('aviso-de-privacidad')],
     ];
+    $oficial = [
+        ['Manual de identidad (MIC)', 'https://www.cadus.us.es/manual-basico-de-identidad-visual-corporativa/'],
+        ['Glosario', 'https://www.cadus.us.es/glosario/'],
+        ['Finger Rules', 'https://www.cadus.us.es/finger-rules/'],
+        ['Protección de datos', 'https://www.cadus.us.es/politica-de-proteccion-y-tratamiento-de-datos/'],
+    ];
+    $lista = static function (array $filas, bool $externo): string {
+        $h = '';
+        foreach ($filas as [$texto, $url]) {
+            $h .= '<li><a href="' . esc_url($url) . '"' . ($externo ? ' rel="noopener"' : '') . '>' . esc_html($texto)
+                . ($externo ? '<span class="cadus-contacto__ext" aria-hidden="true">&nbsp;&#8599;&#xFE0E;</span><span class="screen-reader-text"> (web oficial del CADUS, se abre en la misma ventana)</span>' : '') . '</a></li>';
+        }
+        return $h;
+    };
+    // Icono de Instagram en línea (decorativo): el enlace ya lleva su nombre en texto.
+    $icono = '<svg class="cadus-contacto__icono" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg>';
     $html = '<section class="cadus-seccion cadus-seccion--contacto" aria-labelledby="cadus-contacto-titulo">'
         . '<p class="cadus-contacto__marca" aria-hidden="true">' . esc_html('CADUS') . '</p>'
         . '<h2 id="cadus-contacto-titulo" class="cadus-seccion__titulo">' . esc_html('Consejo de Alumnos de la Universidad de Sevilla') . '</h2>'
-        . '<div class="cadus-contacto"><address class="cadus-contacto__datos">'
-        . '<span class="cadus-contacto__linea">' . esc_html('Av. de Chile s/n, 41013 Sevilla') . '</span>'
+        . '<div class="cadus-contacto">'
+        . '<div class="cadus-contacto__col"><h3 class="cadus-contacto__cab">Contacto</h3><address class="cadus-contacto__datos">'
+        . '<span>' . esc_html('Pabellón de Uruguay, Av. de Chile s/n') . '<br>' . esc_html('41013 Sevilla') . '</span>'
         . '<a href="' . esc_url('tel:954486022') . '">' . esc_html('954 48 60 22') . '</a>'
         . '<a href="' . esc_url('mailto:dcadus@us.es') . '">' . esc_html('dcadus@us.es') . '</a>'
-        . '<a href="' . esc_url('https://www.instagram.com/igcadus/') . '" rel="noopener">' . esc_html('Instagram @igcadus') . '</a>'
-        . '</address><ul class="cadus-contacto__enlaces">';
-    foreach ($enlaces as [$texto, $url, $externo]) {
-        $html .= '<li><a href="' . esc_url($url) . '"' . ($externo ? ' rel="noopener"' : '') . '>'
-            . esc_html($texto . ($externo ? ' (web oficial del CADUS)' : '')) . '</a></li>';
-    }
+        . '</address><a class="cadus-contacto__social" href="' . esc_url('https://www.instagram.com/igcadus/') . '" rel="noopener">' . $icono
+        . '<span>' . esc_html('@igcadus') . '</span><span class="screen-reader-text"> en Instagram (se abre en la misma ventana)</span></a></div>'
+        . '<nav class="cadus-contacto__col" aria-label="Enlaces del portal"><h3 class="cadus-contacto__cab">El portal</h3><ul class="cadus-contacto__enlaces">' . $lista($portal, false) . '</ul></nav>'
+        . '<nav class="cadus-contacto__col" aria-label="Web oficial del CADUS"><h3 class="cadus-contacto__cab">Web oficial</h3><ul class="cadus-contacto__enlaces">' . $lista($oficial, true) . '</ul></nav>'
+        . '</div>';
     // Blocksy coloca main-container antes de su cabecera: destino real, incluso sin JavaScript.
-    return $html . '</ul></div><p class="cadus-contacto__legal">' . esc_html('© ' . wp_date('Y') . ' CADUS')
-        . ' <a class="cadus-contacto__subir" href="#main-container">' . esc_html('Subir ↑') . '</a></p></section>';
+    return $html . '<p class="cadus-contacto__legal"><span>' . esc_html('© ' . wp_date('Y') . ' CADUS · Consejo de Alumnos de la Universidad de Sevilla') . '</span>'
+        . ' <a class="cadus-contacto__subir" href="#main-container">' . esc_html('Volver arriba ↑') . '</a></p></section>';
 }

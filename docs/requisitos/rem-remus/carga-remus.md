@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/cadus_data.json. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.2, 2026-11-11. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.3, 2026-11-11. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
@@ -69,6 +69,8 @@ Contenido del proyecto [CADUS.rem](CADUS.rem) (REMUS), versión 2.2, 2026-11-11.
 | UI-06 | Calendario y votaciones | mostrar el calendario de asambleas y eventos (vista de mes y de lista) y las convocatorias de votación con su apertura y cierre, cada una vinculada a su asamblea | HU-10 · HU-11 |
 | UI-07 | Solicitud de mediación | ofrecer un formulario de solicitud de mediación con consentimiento RGPD y una confirmación que entregue la referencia MED-AAAA-NNNNN sin mostrar los datos de la solicitud | HU-12 |
 | UI-08 | Panel de administración por rol | mostrar a cada rol solo sus menús de administración y un escritorio con accesos directos a las tareas de su rol | HU-19a · HU-19b |
+| UI-09 | Acceso al portal | mostrar un apartado «Acceder» en el menú que lleve a un inicio de sesión dentro del portal y, una vez dentro, los apartados «Gestión» y «Salir» según el rol, sin tener que conocer la dirección del panel de administración | HU-24 · RF-14 |
+| UI-10 | Gestión desde el portal | ofrecer a la Ejecutiva un apartado de gestión con formularios sencillos para crear noticias, eventos del calendario, actas y normativas con su PDF y gestionar las delegaciones, y a cada delegación solo la edición de su ficha, sin entrar en el panel de administración | HU-24 · RF-15 |
 
 ## 7. Requisitos funcionales
 

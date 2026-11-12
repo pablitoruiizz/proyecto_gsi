@@ -3,7 +3,7 @@
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla). **Contacto con el cliente:** Miguel Ángel Camacho Martín, que forma parte del CADUS.
 **Periodo:** 26/10/2026 – 15/11/2026 (un único sprint de tres semanas, como acordó el equipo con el profesor)
-**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23)
+**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
 
 ## Objetivo del Sprint
 
@@ -126,7 +126,7 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | E3-05 | Revisar el REM y la trazabilidad con los cambios del sprint y regenerar `CADUS.rem` con `scripts/remus/build_rem.ps1`: ampliar RN-03 a todas las consultas y RN-01 a todo el contenido, cerrar el plazo de conservación (2 años), añadir RF-14 con el relevo de delegados y los criterios de accesibilidad (DUA) y la regla de las tres operaciones en menos de un minuto. | — |
 | E3-08 | Tickets: aviso al correo de `dcadus` y datos mínimos del estudiante (nombre y apellidos, facultad y correo US). Plazo de respuesta aclarado con Miguel Ángel el 09/11: **máximo 4 días hábiles, contados desde que la Ejecutiva revisa el ticket**. Publicarlo en el buzón con el texto «Te responderemos en un máximo de 4 días hábiles desde que revisemos tu consulta». | — |
 
-**Capacidad total comprometida del Sprint:** 36 SP, más las tareas `E3-xx`.
+**Capacidad total comprometida del Sprint:** 36 SP iniciales (la línea ideal del burndown parte de 36), más 8 SP de HU-24 añadidos el 12/11 y las tareas `E3-xx`.
 
 ## Pendiente del Sprint 2
 
@@ -191,7 +191,9 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 | HU-15b etiquetas, encabezados y ARIA en Atención al estudiante (3 SP) | Marcos | 12/11 | `hu15b_accesibilidad.py` (59 correctas, 0 fallos) |
 | E3-03, E3-05, E3-07 y E3-08 (sin puntos) | Miguel Ángel y Marcos | 09–11/11 | `scripts/pruebas/SPRINT3_BUZON.md`, calendario con «Asambleas» y «Cursos», REM v2.2 |
 
-**SP pendientes: 25 de 36** (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
+**Cambio de alcance (12/11): HU-24, acceso y gestión desde el portal (8 SP, Pablo).** Pedida por el cliente en la entrevista (portal fácil de usar para personas con pocos conocimientos informáticos) y por Pablo al probar la cuenta del CADUS: apartado «Acceder» en el menú, página de acceso dentro del portal y página «Gestión» donde cada rol ve solo lo que puede hacer (la Ejecutiva crea noticias, eventos del calendario, actas y normativas con su PDF y gestiona las delegaciones; cada delegación edita solo su ficha). Módulo `includes/gestion.php`; pruebas en `scripts/pruebas/gestion.php` (93 correctas, 0 fallos, con peticiones HTTP reales a los formularios y a la API REST). El compromiso del sprint pasa de 36 a 44 SP.
+
+**SP pendientes: 25 de 44** (11 hechos más los 8 de HU-24, que están hechos pero sin prueba cruzada; el resto del sprint sigue igual) (11 hechos). El hito del 08/11 (10 SP pendientes) no se alcanzó. Sin empezar según el repositorio: HU-14a, HU-14b, HU-14c, HU-15a, HU-15c, HU-16a, HU-17b, HU-20a, HU-20b y HU-23.
 
 **Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP.
 

@@ -461,16 +461,25 @@ html, html body.cadus-portada { overflow-x: clip; }
 .cadus-lista .cadus-boton { align-self: flex-start; margin-top: auto; }
 .cadus-lista:nth-child(2) .cadus-boton, .cadus-lista:nth-child(4) .cadus-boton { background: var(--granate); color: var(--papel) !important; }
 
-/* ------------------------------------------------------------------ contacto: el nombre enorme y los datos */
-.cadus-seccion--contacto { background: var(--granate); color: var(--papel); padding-bottom: clamp(28px, 4vw, 48px); overflow: hidden; }
-.cadus-contacto__marca { margin: 0 0 clamp(-24px, -2vw, -8px); font: 900 clamp(6rem, 25vw, 23rem)/0.8 var(--fuente); letter-spacing: -0.07em; color: var(--granate-os); white-space: nowrap; }
-.cadus-seccion--contacto .cadus-seccion__titulo { color: var(--papel); max-width: 20ch; }
-.cadus-contacto { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 80px); margin-bottom: clamp(32px, 5vw, 64px); }
-.cadus-contacto__datos { display: grid; gap: 10px; font-style: normal; font-size: 1.2rem; line-height: 1.4; }
-.cadus-contacto a, .cadus-contacto a:hover, .cadus-contacto a:visited { color: var(--papel); text-decoration: underline; text-underline-offset: 0.2em; }
-.cadus-contacto__enlaces { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 24px; margin: 0; padding: 0; list-style: none; font-size: 1.1rem; font-weight: 700; }
+/* ------------------------------------------------------------------ pie: el nombre enorme, tres columnas y barra legal */
+.cadus-seccion--contacto { background: var(--granate); color: var(--papel); padding-bottom: clamp(24px, 3vw, 40px); overflow: hidden; }
+.cadus-contacto__marca { margin: 0 0 clamp(-20px, -1.6vw, -6px); font: 900 clamp(4.5rem, 21vw, 21rem)/0.8 var(--fuente); letter-spacing: -0.07em; color: var(--granate-os); white-space: nowrap; user-select: none; }
+.cadus-seccion--contacto .cadus-seccion__titulo { color: var(--papel); max-width: 22ch; margin-bottom: clamp(28px, 4vw, 52px); }
+.cadus-contacto { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: clamp(28px, 4vw, 64px); max-width: 1240px; margin: 0 auto clamp(32px, 4vw, 56px); padding-top: clamp(24px, 3vw, 36px); border-top: 2px solid rgba(255, 255, 255, 0.28); }
+.cadus-contacto__col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.cadus-contacto .cadus-contacto__cab { margin: 0; font: 800 0.95rem/1.2 var(--fuente); letter-spacing: 0.12em; text-transform: uppercase; color: var(--oro); }
+.cadus-contacto__datos { display: grid; gap: 8px; font-style: normal; font-size: 1.1rem; line-height: 1.45; }
+.cadus-contacto a, .cadus-contacto a:visited { color: var(--papel); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size 220ms var(--ease-out, ease-out); }
+.cadus-contacto a:hover { color: var(--papel); background-size: 100% 2px; }
+.cadus-contacto__datos a { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+.cadus-contacto__enlaces { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; font-size: 1.1rem; font-weight: 600; }
+.cadus-contacto__enlaces a { display: inline-flex; align-items: center; min-height: 36px; }
+.cadus-contacto .cadus-contacto__social, .cadus-contacto .cadus-contacto__social:visited { display: inline-flex; align-items: center; align-self: flex-start; gap: 10px; min-height: 48px; padding: 0 20px 0 16px; border-radius: 999px; background: var(--oro); color: var(--granate-os); font-weight: 800; font-size: 1.05rem; transition: transform 160ms var(--ease-out, ease-out); }
+.cadus-contacto .cadus-contacto__social:hover { color: var(--granate-os); background: var(--papel); }
+.cadus-contacto__social:active { transform: scale(0.97); }
 .cadus-contacto a:focus-visible, .cadus-contacto__subir:focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; }
-.cadus-contacto__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; max-width: 1240px; margin: 0 auto; font-size: 1rem; }
+.cadus-contacto .cadus-contacto__social:focus-visible { outline-color: var(--oro); outline-offset: 4px; }
+.cadus-contacto__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; max-width: 1240px; margin: 0 auto; font-size: 0.95rem; color: rgba(255, 255, 255, 0.92); }
 .cadus-contacto__subir, .cadus-contacto__subir:hover, .cadus-contacto__subir:visited { color: var(--oro); font-weight: 800; text-decoration: none; }
 
 /* ------------------------------------------------------------------ hover con puntero fino (secciones nuevas) */
@@ -484,6 +493,8 @@ html, html body.cadus-portada { overflow-x: clip; }
 
 /* ------------------------------------------------------------------ pantallas medias y móvil (secciones nuevas) */
 @media (max-width: 1000px) {
+  .cadus-contacto { grid-template-columns: 1fr 1fr; }
+  .cadus-contacto__col:first-child { grid-column: 1 / -1; }
   .cadus-eventos { grid-template-columns: repeat(2, 1fr); }
   .cadus-intro { grid-template-columns: 1fr; row-gap: 8px; }
   .cadus-intro__numero { font-size: clamp(8rem, 42vw, 15rem); }

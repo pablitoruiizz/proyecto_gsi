@@ -2,7 +2,7 @@
   "date": "2026-11-11",
   "version": [
     2,
-    2
+    3
   ],
   "cName": "Documento de Requisitos del Portal CADUS",
   "dName": "Documento de Análisis del Portal CADUS",
@@ -464,6 +464,28 @@
         "Pablo Ruiz Vidal",
         "Miguel Angel Camacho Martin",
         "Alvaro Martinez Ocaña"
+      ]
+    },
+    {
+      "id": "UI-09",
+      "name": "Acceso al portal",
+      "description": "mostrar un apartado «Acceder» en el menú que lleve a un inicio de sesión dentro del portal y, una vez dentro, los apartados «Gestión» y «Salir» según el rol, sin tener que conocer la dirección del panel de administración",
+      "comments": "HU-24 · RF-14",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "UI-10",
+      "name": "Gestión desde el portal",
+      "description": "ofrecer a la Ejecutiva un apartado de gestión con formularios sencillos para crear noticias, eventos del calendario, actas y normativas con su PDF y gestionar las delegaciones, y a cada delegación solo la edición de su ficha, sin entrar en el panel de administración",
+      "comments": "HU-24 · RF-15",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
       ]
     }
   ],

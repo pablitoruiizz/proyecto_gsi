@@ -45,6 +45,7 @@
 | HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Cancelada | — | `[Nombre]` |
 | HU-22 | Como Delegado, quiero pasar la cuenta de mi delegación a mi sucesor cuando me doy de baja, para que la delegación no se quede sin acceso. | RF-14, RN-04 | Media | 3 | Hecho | Sprint-03 | `[Nombre]` |
 | HU-23 | Como miembro de la Ejecutiva, quiero que los tickets y las mediaciones se borren o anonimicen a los 2 años de resolverse, para cumplir el plazo de conservación. | RNF-08, RN-03 | Media | 2 | Pendiente | Sprint-03 | `[Nombre]` |
+| HU-24 | Como miembro de la Ejecutiva o delegado, quiero iniciar sesión en el portal y encontrar un apartado de gestión sencillo (nueva noticia, nuevo evento, nueva acta y delegaciones) sin entrar en el panel de administración. | RF-14, RF-15, UI-09, UI-10 | Alta | 8 | Hecho (falta prueba cruzada) | Sprint-03 | `[Nombre]` |
 
 ## Roadmap por versiones
 
@@ -55,7 +56,7 @@
 
 ### V2 — Participación, optimización, seguridad y entrega
 - **Sprint-02** (gestión avanzada de contenidos y participación estudiantil; **completado el 24/10/2026**, 29 de 29 SP): HU-09, HU-10, HU-11, HU-12, HU-19
-- **Sprint-03** (26/10 – 15/11/2026, un único sprint de tres semanas; móvil, accesibilidad, filtros, seguridad, rendimiento, relevo de delegados, borrado a los 2 años, despliegue, pruebas de aceptación y documentación final): HU-14, HU-15, HU-16, HU-17, HU-20, HU-22, HU-23 (36 SP). **HU-21 cancelada** tras la entrevista del 26/10: las votaciones son presenciales y no se publican resultados
+- **Sprint-03** (26/10 – 15/11/2026, un único sprint de tres semanas; móvil, accesibilidad, filtros, seguridad, rendimiento, relevo de delegados, borrado a los 2 años, despliegue, pruebas de aceptación y documentación final): HU-14, HU-15, HU-16, HU-17, HU-20, HU-22, HU-23 (36 SP) y, añadida el 12/11, HU-24 (8 SP). **HU-21 cancelada** tras la entrevista del 26/10: las votaciones son presenciales y no se publican resultados
 
 ## Reglas mínimas
 - Priorizar por valor para cliente y riesgo.
