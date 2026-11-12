@@ -1,4 +1,8 @@
-﻿"""Monta el zip de la entrega del 08/11 (CMS + DMS) en docs/dms/entrega/paquete/. Uso: python scripts/dms/empaquetar_dms.py"""
+﻿"""Monta el zip de la versión definitiva del DMS en docs/dms/entrega/paquete/.
+Uso: python scripts/dms/empaquetar_dms.py            (solo el DMS)
+     python scripts/dms/empaquetar_dms.py --con-cms  (añade la parte del CMS, como en la entrega del 08/11)
+Antes: python scripts/dms/build_doc_dms.py y scripts/dms/exportar_pdf.ps1. Comprueba el contenido frente a la lista del profesor."""
+import json
 import os
 import shutil
 import sys
@@ -8,11 +12,16 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DMS = os.path.join(RAIZ, "docs", "dms")
 ENT = os.path.join(DMS, "entrega")
 PAQ = os.path.join(ENT, "paquete")
-NOMBRE = "Entrega-08-11-CADUS-CMS-DMS"
+CON_CMS = "--con-cms" in sys.argv
+D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
+VERSION = ".".join(str(n) for n in D["version"])
+FECHA = "15-11"  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
+NOMBRE = f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
 RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
+TIPOS = ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion")
 
 # (origen relativo a RAIZ, destino dentro del paquete)
-ARCHIVOS = [
+CMS = [
     ("docs/entrega/Entrega2-CMS-CADUS.docx", "CMS/Entrega2-CMS-CADUS.docx"),
     ("docs/entrega/entrega2/Entrega2-CMS-CADUS.pdf", "CMS/Entrega2-CMS-CADUS.pdf"),
     ("docs/requisitos/rem-remus/REM-CADUS-v2.1.pdf", "CMS/REM-CADUS-v2.1.pdf"),
@@ -22,12 +31,14 @@ ARCHIVOS = [
     ("docs/scrum/sprints/sprint-03.md", "CMS/seguimiento/sprint-03.md"),
     ("docs/scrum/burndown/sprint-03.csv", "CMS/seguimiento/burndown-sprint-03.csv"),
     ("docs/scrum/backlog/product-backlog.md", "CMS/seguimiento/product-backlog.md"),
+]
+ARCHIVOS = [
     ("docs/dms/entrega/Entrevista-CADUS.docx", "Entrevista-CADUS.docx"),
     ("docs/dms/entrega/Entrevista-CADUS.pdf", "Entrevista-CADUS.pdf"),
     ("docs/dms/entrega/Entrega-DMS-CADUS.docx", "DMS/Entrega-DMS-CADUS.docx"),
     ("docs/dms/entrega/Entrega-DMS-CADUS.pdf", "DMS/Entrega-DMS-CADUS.pdf"),
     ("docs/dms/rem-remus/DMS.rem", "DMS/1-Requisitos/DMS.rem"),
-    ("docs/dms/rem-remus/REM-DMS-v1.0.pdf", "DMS/1-Requisitos/REM-DMS-v1.0.pdf"),
+    (f"docs/dms/rem-remus/REM-DMS-v{VERSION}.pdf", f"DMS/1-Requisitos/REM-DMS-v{VERSION}.pdf"),
     ("docs/dms/rem-remus/carga-remus.md", "DMS/1-Requisitos/carga-remus.md"),
     ("docs/dms/REM-DMS.md", "DMS/1-Requisitos/REM-DMS.md"),
     ("docs/dms/img/uml-dms-analisis.png", "DMS/2-Analisis/uml-dms-analisis.png"),
@@ -37,40 +48,54 @@ ARCHIVOS = [
     ("docs/dms/sprints/sprint-01.md", "DMS/seguimiento/sprint-01-dms.md"),
     ("docs/dms/burndown/sprint-01.csv", "DMS/seguimiento/burndown-sprint-01-dms.csv"),
     ("docs/dms/img/burndown-dms.png", "DMS/seguimiento/burndown-dms.png"),
+    ("docs/dms/sprints/sprint-02.md", "DMS/seguimiento/sprint-02-dms.md"),
+    ("docs/dms/burndown/sprint-02.csv", "DMS/seguimiento/burndown-sprint-02-dms.csv"),
+    ("docs/dms/img/burndown-dms-sprint-02.png", "DMS/seguimiento/burndown-dms-sprint-02.png"),
 ]
-for t in ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion"):
+for t in TIPOS:
     ARCHIVOS += [(f"docs/dms/entrega/casos-de-uso/{t}.docx", f"DMS/4-Casos-de-uso/{t}.docx"), (f"docs/dms/entrega/casos-de-uso/{t}.pdf", f"DMS/4-Casos-de-uso/{t}.pdf")]
 for f in sorted(os.listdir(os.path.join(DMS, "capturas"))):
     ARCHIVOS.append((f"docs/dms/capturas/{f}", f"DMS/5-Implementacion-SharePoint/{f}"))
+if CON_CMS:
+    ARCHIVOS = CMS + ARCHIVOS
 
-LEEME = """# Entrega del 08/11/2026 — CADUS (CMS + DMS)
+# Lista del profesor (Lab 4): carpeta del zip y mínimo de archivos que debe tener.
+LISTA = [
+    ("Requisitos (REM y proyecto REMUS)", "DMS/1-Requisitos", 3),
+    ("Documentos de análisis (UML)", "DMS/2-Analisis", 2),
+    ("Documentos de diseño (UML)", "DMS/3-Diseno", 1),
+    ("Documentos de casos de uso: 4, por secciones, con 2 casos cada uno (docx y pdf)", "DMS/4-Casos-de-uso", 8),
+    ("Documentos de implementación (capturas de SharePoint)", "DMS/5-Implementacion-SharePoint", 14),
+    ("Seguimiento SCRUM del DMS", "DMS/seguimiento", 5),
+]
+
+LEEME_CMS = """
+## CMS (portal WordPress)
+- `Entrega2-CMS-CADUS.docx` / `.pdf`: documento de la entrega 2, sin cambios.
+- `REM-CADUS-v2.1.pdf` y `CADUS.rem`: REM del CMS exportado desde REMUS.
+- `Adenda-CMS-Sprint3.docx` / `.pdf`: cambios de requisitos tras la entrevista, backlog, sprint backlog y burndown del Sprint 3.
+- `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
+"""
+
+LEEME = f"""# Versión definitiva del DMS — CADUS
 
 Equipo: Pablo Ruiz Vidal, Joaquín Luna Canela, Miguel Ángel Camacho Martín, Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez.
 
-## Entrevista con el cliente
-- `Entrevista-CADUS.docx` / `.pdf`: entrevista con el CADUS (26/10/2026), de la que salen los requisitos del DMS y los cambios del CMS.
+Cambio pedido por el profesor sobre la entrega del 08/11: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Ahora hay 4 documentos de casos de uso, uno por sección, con 2 casos cada uno (8 en total, con los nuevos CU-D07 y CU-D08), y el REM pasa a la versión {VERSION}.
 
-## CMS (portal WordPress)
-El proyecto es el mismo que en la entrega anterior, así que se vuelve a adjuntar el documento de la entrega 2 (propuesta de temática, comparativas de hosting, comunicación, SCRUM, control de versiones y plugins, análisis, diseño, mockups y capturas) y se añade una adenda con lo que cambia:
-- `Entrega2-CMS-CADUS.docx` / `.pdf`: documento de la entrega 2, sin cambios (sus gráficos de burndown son los de los sprints anteriores; el burndown de esta entrega es el del Sprint 3, en la adenda).
-- `REM-CADUS-v2.1.pdf` y `CADUS.rem`: REM del CMS (versión 2.1), exportado desde REMUS, con las respuestas de la entrevista.
-- `Adenda-CMS-Sprint3.docx` / `.pdf`: cambios de requisitos tras la entrevista, product backlog actualizado, sprint backlog y burndown del Sprint 3.
-- `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
+## Entrevista con el cliente
+- `Entrevista-CADUS.docx` / `.pdf`: entrevista con el CADUS (26/10/2026), de la que salen los requisitos del DMS.
 
 ## DMS (SharePoint de la Universidad de Sevilla)
-- `Entrega-DMS-CADUS.docx` / `.pdf`: documento principal (requisitos, análisis, diseño, casos de uso, implementación y seguimiento SCRUM).
-- `1-Requisitos`: `DMS.rem` (proyecto REMUS) y `REM-DMS-v1.0.pdf` (su exportación), hoja `carga-remus.md` y `REM-DMS.md`.
-- `2-Analisis`: UML de análisis y diagrama de casos de uso.
+- `Entrega-DMS-CADUS.docx` / `.pdf`: documento principal (requisitos, análisis, diseño, casos de uso, implementación, trazabilidad y seguimiento SCRUM).
+- `1-Requisitos`: `DMS.rem` (proyecto REMUS), `REM-DMS-v{VERSION}.pdf` (su exportación), hoja `carga-remus.md` y `REM-DMS.md`.
+- `2-Analisis`: UML de análisis y diagrama de casos de uso con los 8 casos y los roles.
 - `3-Diseno`: UML de diseño (del análisis a SharePoint).
-- `4-Casos-de-uso`: 4 documentos de casos de uso (acta y expediente con 2 casos de uso cada uno).
-- `5-Implementacion-SharePoint`: capturas del entorno real (`uses0.sharepoint.com`).
-- `seguimiento`: product backlog, sprint backlog y burndown del DMS (independientes de los del CMS).
+- `4-Casos-de-uso`: CU-Acta (CU-D01, CU-D02), CU-Normativa (CU-D03, CU-D07), CU-Expediente (CU-D04, CU-D05) y CU-Votacion (CU-D06, CU-D08).
+- `5-Implementacion-SharePoint`: capturas del entorno real (`uses0.sharepoint.com`), explicadas en cada documento de casos de uso.
+- `seguimiento`: product backlog, sprint backlog y burndown de los dos sprints del DMS.
 
 Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, `cadus-organos-de-gobierno` y `cadus-atencion-al-estudiante`.
-
-## Estado a 12/11/2026
-- **CMS:** en el Sprint 3 se han cerrado 11 de los 36 SP (HU-22 relevo de la cuenta de la delegación; HU-17a, HU-16b y HU-15b del buzón) y las tareas E3-03, E3-05, E3-07 y E3-08. Quedan 25 SP; el hito del 08/11 no se alcanzó. El despliegue en el servidor de la US (E3-09) está bloqueado porque ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior. Detalle en `Adenda-CMS-Sprint3`.
-- **DMS:** configurado y observado con la cuenta de Pablo; las pruebas cruzadas con cuentas de delegado y de estudiante siguen pendientes.
 """
 
 
@@ -87,8 +112,21 @@ def main():
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
     if faltan:
-        sys.exit("faltan archivos: " + ", ".join(faltan))
-    open(os.path.join(RAIZ_ZIP, "LEEME.md"), "w", encoding="utf-8").write(LEEME)
+        sys.exit("faltan archivos:\n  - " + "\n  - ".join(faltan))
+    open(os.path.join(RAIZ_ZIP, "LEEME.md"), "w", encoding="utf-8").write(LEEME + (LEEME_CMS if CON_CMS else ""))
+    print("Comprobación frente a la lista del profesor:")
+    mal = 0
+    for que, carpeta, minimo in LISTA:
+        ruta = os.path.join(RAIZ_ZIP, carpeta)
+        n = len(os.listdir(ruta)) if os.path.isdir(ruta) else 0
+        ok = n >= minimo
+        mal += not ok
+        print(f"  [{'ok' if ok else 'FALTA'}] {que}: {n} archivos (mínimo {minimo})")
+    n_cu = len(D["usecases"])
+    print(f"  [{'ok' if n_cu >= 8 else 'FALTA'}] REM {VERSION} con los 8 casos de uso: {n_cu} en dms_data.json")
+    mal += n_cu < 8
+    if mal:
+        sys.exit(f"{mal} apartados de la lista no se cumplen: no se genera el zip")
     zip_ruta = os.path.join(PAQ, NOMBRE + ".zip")
     with zipfile.ZipFile(zip_ruta, "w", zipfile.ZIP_DEFLATED) as z:
         for base, _, fs in os.walk(RAIZ_ZIP):
