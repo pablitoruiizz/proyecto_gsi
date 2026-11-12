@@ -17,6 +17,7 @@ audit.HELPER = Path(__file__).with_suffix('.php')
 check, php, request = audit.check, audit.php, audit.request
 SECRET, SUBJECT, NAME, EMAIL = 'S3-BUZON-SECRETO', 'S3-BUZON-ASUNTO', 'S3-BUZON-NOMBRE', 'prueba@alum.us.es'
 PAGE = '/atencion-al-estudiante/buzon-de-consultas/'
+PLAZO = 'Te responderemos en un máximo de 4 días hábiles desde que revisemos tu consulta.'
 LIST = '/wp-admin/edit.php?post_type=cadus_ticket'
 
 
@@ -64,6 +65,7 @@ def main():
         match = re.search(r'name="' + nonce_name + r'"[^>]*value="([^"]+)"', body)
         check('El formulario lleva nonce y campo trampa oculto', bool(match) and f'name="{honey_name}"' in body)
         check('El formulario pide nombre y apellidos y Facultad o Escuela', 'name="solicitante"' in body and 'name="centro"' in body)
+        check('El buzón indica el plazo de respuesta (4 días hábiles)', PLAZO in body)
         data = {'solicitante': NAME, 'email': EMAIL, 'centro': state['centro'], 'asunto': SUBJECT, 'tipo': 'Consulta',
                 'descripcion': SECRET, 'consentimiento[]': 'acepto', nonce_name: match.group(1) if match else '', honey_name: ''}
 
@@ -90,6 +92,7 @@ def main():
             response = {}
         nuevo = re.search(r'CAD-\d{4}-\d{5,20}-[A-F0-9]{32}', body)
         check('HTTP: un envío correcto crea el ticket y entrega el código', status == 200 and response.get('success') is True and nuevo is not None, f'HTTP {status}')
+        check('HTTP: la confirmación recuerda el plazo de respuesta', PLAZO in json.dumps(response, ensure_ascii=False))
         check('HTTP: la confirmación no repite nombre, correo ni descripción', not any(s in body for s in (SECRET, NAME, EMAIL)))
         check('HTTP: la confirmación no es cacheable', 'no-store' in headers.get('Cache-Control', ''))
         counts = php('status')

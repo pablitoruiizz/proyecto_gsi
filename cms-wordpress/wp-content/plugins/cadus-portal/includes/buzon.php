@@ -40,6 +40,15 @@ function cadus_buzon_tipos(): array
 }
 
 /**
+ * Plazo de respuesta del buzón (E3-08), aclarado con el CADUS el 09/11/2026: como máximo 4 días hábiles,
+ * contados desde que la Ejecutiva revisa el ticket. Se muestra en el formulario, en la confirmación y en la FAQ.
+ */
+function cadus_buzon_texto_plazo(): string
+{
+    return 'Te responderemos en un máximo de 4 días hábiles desde que revisemos tu consulta.';
+}
+
+/**
  * Correo de la Ejecutiva que recibe el aviso de cada ticket nuevo (E3-08): la cuenta del CADUS.
  * Se puede cambiar con la opción «cadus_buzon_correo_avisos» o con el filtro del mismo nombre.
  */
@@ -537,7 +546,8 @@ function cadus_buzon_mensaje_confirmacion($message, $insert_id, $form_data, $for
     }
     return '<p>' . esc_html('Gracias por contactar con el CADUS. Tu código de seguimiento es:')
         . ' <strong>' . esc_html($code) . '</strong>.</p><p>'
-        . esc_html('Guarda este código. Podrás consultar el estado y las respuestas con él y tu correo universitario.') . '</p>';
+        . esc_html('Guarda este código. Podrás consultar el estado y las respuestas con él y tu correo universitario.') . '</p><p>'
+        . esc_html(cadus_buzon_texto_plazo()) . '</p>';
 }
 
 function cadus_buzon_shortcode(): string
@@ -554,6 +564,7 @@ function cadus_buzon_shortcode(): string
     }
     cadus_buzon_asegurar_campos();
     return '<p>' . esc_html('Tus datos se tratarán conforme al RGPD para atender tu solicitud. Todas las consultas y reclamaciones son privadas: solo las ven el remitente y la Ejecutiva del CADUS, con acceso técnico de administración. Guarda tu código y no lo compartas.')
+        . ' ' . esc_html(cadus_buzon_texto_plazo())
         . ' <a href="' . esc_url(home_url('/aviso-de-privacidad/')) . '">' . esc_html('Consulta el aviso de privacidad') . '</a>.' . '</p>' . do_shortcode('[fluentform id="' . absint($form_id) . '"]');
 }
 
@@ -647,6 +658,7 @@ function cadus_buzon_avisar_ejecutiva(int $post_id): bool
         . 'Código: ' . $code . "\n"
         . 'Tipo: ' . (in_array($type, cadus_buzon_tipos(), true) ? $type : 'Sin indicar') . "\n"
         . 'Fecha: ' . get_the_date('d/m/Y H:i', $post_id) . "\n\n"
+        . "Plazo: el estudiante tiene que recibir respuesta en un máximo de 4 días hábiles desde que se revise el ticket.\n\n"
         . "Para leerlo y responder, entra en el panel con la cuenta del CADUS:\n"
         . admin_url('post.php?post=' . $post_id . '&action=edit') . "\n\n"
         . "Por privacidad, este correo no incluye los datos del estudiante ni el contenido de la consulta.\n\n"

@@ -156,6 +156,7 @@ function cadus_contenido_faq(): string
         . '<details><summary><strong>¿Quién puede usar el buzón?</strong></summary><p>Cualquier estudiante de la Universidad de Sevilla con correo institucional @alum.us.es. Las solicitudes enviadas desde otras direcciones se rechazan para garantizar que solo escriben estudiantes de la US.</p></details>'
         . '<details><summary><strong>¿Qué diferencia hay entre una consulta y una reclamación académica?</strong></summary><p>Una consulta es una duda o petición de información (becas, matrícula, normativa, representación). Una reclamación académica es un problema con una asignatura, un examen, una calificación o un servicio de la Universidad. Tanto las consultas como las reclamaciones se tratan con total privacidad.</p></details>'
         . '<details><summary><strong>¿Cómo sé en qué estado está mi solicitud?</strong></summary><p>Al enviarla recibes un código de seguimiento que empieza por CAD-. Introdúcelo junto con tu correo universitario en la página Seguimiento de ticket. Verás el estado (Abierto, En proceso o Cerrado) y las respuestas del CADUS.</p></details>'
+        . '<details><summary><strong>¿Cuánto tardaréis en responderme?</strong></summary><p>Te responderemos en un máximo de 4 días hábiles desde que la Ejecutiva revise tu consulta. Puedes ver en cualquier momento si está abierta, en proceso o cerrada en la página Seguimiento de ticket.</p></details>'
         . '<details><summary><strong>¿Me avisaréis cuando haya una respuesta?</strong></summary><p>Sí. Cuando la Ejecutiva responde, recibes un correo en tu cuenta @alum.us.es. Por privacidad, el correo no incluye el contenido de la respuesta: solo el código y el enlace a la página de seguimiento.</p></details>'
         . '<details><summary><strong>He perdido mi código de seguimiento, ¿qué hago?</strong></summary><p>Por seguridad no podemos mostrar tickets sin el código. Escribe a dcadus@us.es desde tu correo universitario indicando el asunto y la fecha aproximada del envío y te ayudaremos a localizarlo.</p></details>'
         . '<details><summary><strong>¿Quién puede ver mi consulta o mi reclamación?</strong></summary><p>Solo tú (con tu código y tu correo) y la Ejecutiva del CADUS. Los delegados de centro y el resto de usuarios no tienen acceso, y ninguna consulta ni reclamación aparece en el buscador ni en la web pública. Consulta el aviso de privacidad para más detalles.</p></details>'
@@ -192,8 +193,9 @@ function cadus_contenido_aviso_privacidad(): string
  * Versión 3 (Sprint 3, entrevista del 26/10): plazo de conservación de dos años, datos mínimos (nombre y apellidos,
  * Facultad o Escuela y correo), privacidad de todas las consultas y los dos campos nuevos del formulario del buzón.
  * También añade a «Atención al estudiante» el encabezado h2 que faltaba sobre las tarjetas (HU-15b).
+ * Versión 4 (E3-08, 12/11): la FAQ añade el plazo de respuesta, 4 días hábiles desde que la Ejecutiva revisa el ticket.
  */
-define('CADUS_ATENCION_VERSION', '3');
+define('CADUS_ATENCION_VERSION', '4');
 add_action('init', function () {
     if (is_admin() && get_option('cadus_portal_version') && get_option('cadus_atencion_version') !== CADUS_ATENCION_VERSION) {
         cadus_actualizar_atencion();
@@ -220,9 +222,9 @@ function cadus_actualizar_atencion(): void
     }
     $faq = cadus_buscar_semilla('pagina:atencion-al-estudiante/preguntas-frecuentes', 'page')
         ?? get_page_by_path('atencion-al-estudiante/preguntas-frecuentes');
-    // Huellas de la FAQ de las versiones anteriores (cinco y nueve preguntas), sin espacios: si coincide, nadie la ha editado.
+    // Huellas de la FAQ de las versiones anteriores (cinco, nueve y diez preguntas), sin espacios: si coincide, nadie la ha editado.
     if ($faq && in_array(md5((string) preg_replace('/\s+/', '', $faq->post_content)),
-        ['03513f9f8c052cda00eef1e40f5eb21b', '0d8aaeb35572f9e4fd48e6449044ba96'], true)) {
+        ['03513f9f8c052cda00eef1e40f5eb21b', '0d8aaeb35572f9e4fd48e6449044ba96', '8afa51f24650cb0fa889e9dd8dd60c11'], true)) {
         wp_update_post(['ID' => $faq->ID, 'post_content' => cadus_contenido_faq()]);
     } elseif (!$faq) {
         cadus_pagina('preguntas-frecuentes', 'Preguntas frecuentes', cadus_contenido_faq(), (int) $atencion->ID);
