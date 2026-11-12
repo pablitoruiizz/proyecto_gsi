@@ -33,8 +33,21 @@ Revisión del plugin propio `cadus-portal` (`cms-wordpress/wp-content/plugins/ca
 | Media | El campo Instagram admitía cualquier dominio. | **Corregido:** solo `https://` y `instagram.com`. |
 | Baja | Ficha editada desde el portal no avisaba a WP Fastest Cache. | **Corregido.** |
 
+## Escaneo de Wordfence (12/11/2026, 21:15)
+Escaneo completo de 15.640 archivos, 11 plugins, 5 temas, 21 entradas y 419 URL en 13 min 38 s. **Sin hallazgos en**: cambios de archivos del núcleo, análisis de malware, seguridad del contenido, archivos públicos y análisis de vulnerabilidades (núcleo, plugins y tema al día tras las actualizaciones de hoy). Tres resultados:
+
+| Gravedad | Resultado | Qué es y qué se hace |
+|---|---|---|
+| **Crítica** | El usuario `root` (administrador) tiene una contraseña fácil. | **Cambiarla** (Usuarios ▸ Perfil ▸ Generar contraseña) y guardarla en un gestor de contraseñas. Es la cuenta técnica del equipo. Pendiente de Pablo. |
+| Alta | Un administrador llamado `Miguel` «se creó fuera de WordPress». | Es la cuenta de Miguel Ángel (alta del 19/10/2026, mismo rol que el resto del equipo) y se dio de alta sin pasar por el formulario de usuarios de WordPress, por eso Wordfence no vio el evento de creación. **Falso positivo a confirmar:** Miguel Ángel debe reconocer la cuenta y, si es suya, se marca como corregida/ignorada en Wordfence; conviene además que cambie su contraseña desde su perfil. |
+| Baja | 1 ruta omitida en el análisis de malware por los ajustes del escaneo. | Informativo: es una ruta excluida por configuración (no es una alerta). |
+
+Los avisos en amarillo del panel (Server State, Password Strength y User & Option Audit) corresponden a estos tres resultados; no hay más.
+
+**Mejora recomendada (mínimo privilegio):** hoy las cuentas `root`, `alvaro`, `joaquin`, `marcos`, `Miguel` y `cadus` son administradoras. Cuando acabe el Sprint 3, dejar como administradores solo `root` y la cuenta única del CADUS y pasar al equipo al rol de Ejecutiva/editor que necesite cada uno (HU-13).
+
 ## Pendiente
-1. **Escaneo de Wordfence** (cuenta de administración): ejecutar «Scan» desde Wordfence ▸ Scan, anotar el resultado y las alertas. No se puede hacer sin iniciar sesión.
+1. ~~Escaneo de Wordfence~~ hecho: queda cambiar la contraseña de `root` (crítica) y confirmar con Miguel Ángel su cuenta (alta).
 2. **Cambiar la contraseña de `root` de MySQL** del equipo local (aparece en listas filtradas) y la de la cuenta `cadus` antes de publicar.
 3. **Plugins de terceros** (Fluent Forms, The Events Calendar, ACF, Wordfence, WP Fastest Cache…): actualizados hoy; repetir el escaneo tras cada actualización.
 4. Pruebas de gestión que aún no existen: ausencia de `finfo`, tamaño límite del PDF e invalidación real de la caché pública.
