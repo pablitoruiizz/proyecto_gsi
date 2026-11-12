@@ -100,13 +100,14 @@ function cadus_shortcode_ultimas($atts): string
     return '<div class="cadus-tarjetas">' . implode('', array_map('cadus_tarjeta_noticia', $posts)) . '</div>';
 }
 
-/** [cadus_noticias]: listado con filtro por categoría, año y palabra clave (HU-02, RF-02). */
+/** [cadus_noticias]: listado con filtro por categoría, palabra clave y fechas (HU-02, HU-16a · RF-02). */
 function cadus_shortcode_noticias(): string
 {
     $q = isset($_GET['q']) ? sanitize_text_field(wp_unslash($_GET['q'])) : '';
     $cat = isset($_GET['cat']) ? absint($_GET['cat']) : 0;
     $anio = isset($_GET['anio']) ? absint($_GET['anio']) : 0;
     $pag = isset($_GET['pag']) ? max(1, absint($_GET['pag'])) : 1;
+    [$desde, $hasta] = cadus_filtro_fechas();
     $args = ['post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 6, 'paged' => $pag];
     if ($q !== '') {
         $args['s'] = $q;
@@ -115,7 +116,10 @@ function cadus_shortcode_noticias(): string
         $args['cat'] = $cat;
     }
     if ($anio) {
-        $args['year'] = $anio;
+        $args['year'] = $anio; // enlaces antiguos; el formulario ya no lo muestra
+    }
+    if ($desde !== '' || $hasta !== '') {
+        $args['date_query'] = [array_filter(['after' => $desde, 'before' => $hasta, 'inclusive' => true])];
     }
     $consulta = new WP_Query($args);
     $base = get_permalink();
@@ -123,14 +127,11 @@ function cadus_shortcode_noticias(): string
     foreach (get_categories(['hide_empty' => false]) as $c) {
         $opciones .= '<option value="' . (int) $c->term_id . '"' . selected($cat, $c->term_id, false) . '>' . esc_html($c->name) . '</option>';
     }
-    $anios = '<option value="0">Todos los años</option>';
-    for ($a = (int) gmdate('Y'); $a >= (int) gmdate('Y') - 5; $a--) {
-        $anios .= '<option value="' . $a . '"' . selected($anio, $a, false) . '>' . $a . '</option>';
-    }
     $html = '<form class="cadus-filtros-form" method="get" action="' . esc_url($base) . '" role="search" aria-label="Filtrar noticias">'
         . '<label>Palabra clave<input class="cadus-campo" type="search" name="q" value="' . esc_attr($q) . '"></label>'
         . '<label>Categoría<select class="cadus-campo" name="cat">' . $opciones . '</select></label>'
-        . '<label>Año<select class="cadus-campo" name="anio">' . $anios . '</select></label>'
+        . '<label>Desde<input class="cadus-campo" type="date" name="desde" value="' . esc_attr($desde) . '"></label>'
+        . '<label>Hasta<input class="cadus-campo" type="date" name="hasta" value="' . esc_attr($hasta) . '"></label>'
         . '<button type="submit" class="cadus-boton">Filtrar</button></form>';
     if (!$consulta->have_posts()) {
         return $html . '<p class="cadus-vacio">No hay comunicados que coincidan con el filtro.</p>';
@@ -142,7 +143,7 @@ function cadus_shortcode_noticias(): string
     $html .= '</div>';
     $paginas = paginate_links([
         'base' => esc_url_raw(add_query_arg('pag', '%#%', $base)), 'format' => '', 'current' => $pag, 'total' => max(1, (int) $consulta->max_num_pages),
-        'add_args' => array_filter(['q' => $q, 'cat' => $cat ?: null, 'anio' => $anio ?: null]),
+        'add_args' => array_filter(['q' => $q, 'cat' => $cat ?: null, 'anio' => $anio ?: null, 'desde' => $desde, 'hasta' => $hasta]),
     ]);
     return $html . cadus_paginacion($paginas);
 }
