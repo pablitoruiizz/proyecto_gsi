@@ -15,7 +15,8 @@
  *    apertura, cierre e ID de la encuesta de YOP Poll que sirve de papeleta.
  *  - RN-05: una votación no se publica sin una asamblea ya creada en el calendario (y un periodo válido); si se intenta,
  *    vuelve a borrador con un aviso. Se comprueba en save_post, por lo que también vale para la edición rápida o en lote.
- *  - La papeleta (shortcode [yop_poll id="N"]) solo se muestra mientras la votación está abierta según las fechas de
+ *  - HU-21 (votar desde el portal con YOP Poll) está CANCELADA: las votaciones son presenciales. La ficha ya no muestra ninguna papeleta ni
+ *    promete votar en el portal; el campo del ID de encuesta se conserva solo por compatibilidad con los datos existentes. Antes: la papeleta solo se mostraba mientras la votación está abierta según las fechas de
  *    la convocatoria; antes y después se informa de cuándo abre o de que ha cerrado.
  *  - Página pública «Votaciones» ([cadus_votaciones]), bloque de la portada tras «¡Últimos eventos!» y listado de las
  *    votaciones vinculadas en la ficha de cada asamblea del calendario.
@@ -649,14 +650,14 @@ function cadus_votaciones_en_contenido(string $contenido): string
     }
     $html .= $fila('Apertura', esc_html(cadus_votaciones_formato($datos['apertura']))) . $fila('Cierre', esc_html(cadus_votaciones_formato($datos['cierre']))) . '</dl>';
     if ($fase === 'proxima') {
-        $html .= '<div class="cadus-aviso">La votación todavía no está abierta. Podrás votar aquí a partir del ' . esc_html(cadus_votaciones_formato($datos['apertura'])) . '.</div>';
+        $html .= '<div class="cadus-aviso">Votación convocada a partir del ' . esc_html(cadus_votaciones_formato($datos['apertura'])) . '. Se celebra de forma presencial en la asamblea.</div>';
     } elseif ($fase === 'cerrada') {
         $html .= '<div class="cadus-aviso">La votación se cerró el ' . esc_html(cadus_votaciones_formato($datos['cierre'])) . '.</div>';
-    } elseif ($datos['poll'] > 0 && shortcode_exists('yop_poll')) {
-        $html .= '<div class="cadus-votacion__papeleta">' . do_shortcode('[yop_poll id="' . (int) $datos['poll'] . '"]') . '</div>';
     } else {
-        $html .= '<div class="cadus-aviso">La papeleta de esta votación todavía no está disponible. Vuelve a intentarlo en unos minutos.</div>';
+        $html .= '<div class="cadus-aviso">Votación en curso. Se vota de forma presencial en la asamblea.</div>';
     }
+    // Las votaciones son presenciales (entrevista del 26/10/2026): el portal solo anuncia la convocatoria, no recoge votos
+    // ni publica resultados (HU-21 cancelada).
     if (function_exists('cadus_inicio_url')) {
         $html .= '<p><a class="cadus-chip" href="' . esc_url(cadus_inicio_url('votaciones')) . '">← Volver a las votaciones</a></p>';
     }

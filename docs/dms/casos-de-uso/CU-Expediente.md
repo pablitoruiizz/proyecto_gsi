@@ -39,7 +39,7 @@ La vista plana **Caducados** muestra los expedientes cuya fecha de caducidad es 
 | Delegado (Visitantes, con la cuenta de su delegación) | Nada: la biblioteca tiene permisos exclusivos y no incluye el grupo Visitantes. |
 | Estudiante | Nada: solo es visitante del sitio Documentación pública. |
 
-La biblioteca rompe la herencia de permisos del sitio para cumplir RN-D02, igual que la privacidad de los tickets en el portal (RN-03).
+La biblioteca rompe la herencia de permisos del sitio (comprobado por la API el 13/11/2026) para cumplir RN-D02, igual que la privacidad de los tickets en el portal (RN-03). Es una excepción al modelo del Lab 4, que concede los permisos sobre el sitio: como el sitio Atención al estudiante no tiene visitantes, el efecto es el mismo y los permisos propios son un refuerzo.
 
 ## 4. Casos de uso
 
@@ -104,7 +104,7 @@ El expediente aparece en la papelera de reciclaje del sitio, eliminado el 12/11/
 
 ![CU-D05: papelera de segunda fase sin el expediente.](../capturas/12-cu-d05-papelera-segunda-fase.jpg)
 
-En la «Papelera de reciclaje de segundo nivel» la Ejecutiva elimina el expediente de forma permanente; SharePoint avisa de que ya no se podrá restaurar. Después la vista «Caducados» queda vacía. Paso 4 de CU-D05 y postcondición (RN-D03, RNF-D04).
+En la «Papelera de reciclaje de segundo nivel» la Ejecutiva elimina el expediente de forma permanente; SharePoint avisa de que ya no se podrá restaurar. La captura muestra ese diálogo de confirmación, no el estado final. El resultado final (vista «Caducados» vacía) se anotó en la prueba del 12/11 y no tiene captura. Paso 4 de CU-D05 y postcondición (RN-D03, RNF-D04).
 
 ## 6. Pruebas
 

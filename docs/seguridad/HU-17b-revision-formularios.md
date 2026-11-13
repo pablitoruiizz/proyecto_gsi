@@ -18,7 +18,8 @@ Revisión del plugin propio `cadus-portal` (`cms-wordpress/wp-content/plugins/ca
 ## Comprobaciones generales
 - **SQL:** las 13 consultas directas con `$wpdb` usan `prepare()`; el resto va por `WP_Query` o las API de WordPress.
 - **Salida:** no hay `echo` de variables sin escapar (la única, `escritorio.php:180`, se escapa al montar el HTML y lo dice en el comentario).
-- **Subida de archivos:** solo existe en el panel de gestión (PDF de actas) y pasa por `media_handle_sideload`; se rechaza si el servidor no puede comprobar el tipo real.
+- **Subida de archivos:** el formulario del portal solo admite el PDF de las actas y pasa por `media_handle_sideload`; se rechaza si el servidor no puede comprobar el tipo real. Hay además otras vías de subida que esta revisión no cubría: la mediateca de WordPress, a la que acceden la Ejecutiva y los delegados con sus permisos de edición, y los campos de archivo e imagen de ACF (PDF del acta, escudo de la delegación). Su límite son las capacidades de cada rol, no un filtro propio.
+- **Instagram:** el formulario del portal valida la dirección, pero el campo equivalente del editor de WordPress (ACF) es una URL genérica sin esa validación; el delegado solo llega a él desde el editor.
 - **Datos privados (RN-03):** tickets y mediaciones no salen por REST, búsqueda, feeds ni mediateca; tienen prueba automática. `/acceso/` y `/gestion/` llevan `noindex` y cabeceras sin caché.
 
 ## Hallazgos y correcciones de hoy

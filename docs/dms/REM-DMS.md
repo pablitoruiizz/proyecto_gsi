@@ -16,7 +16,7 @@ El portal web del CADUS (CMS) informa a los estudiantes; el DMS guarda y organiz
 | Delegado | Representa a una de las 27 delegaciones; la cuenta es de la delegación, no de la persona, y entra con el correo institucional de su delegación (decisión del CADUS del 09/11) | **Visitante** (solo lectura) |
 | Estudiante | Estudiante de la US | **Visitante**, solo de la normativa pública |
 
-El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indicó que todos los ejecutivos comparten la cuenta del CADUS. Se deja prevista para cuando haya cuentas personales.
+El rol **Integrante** (lee y escribe) lo usa el equipo del proyecto, en los cuatro sitios y solo con datos de ejemplo. Para la Ejecutiva queda sin uso: el cliente indicó que todos los ejecutivos comparten la cuenta del CADUS. Se deja prevista para cuando haya cuentas personales.
 
 ## 3. Objetivos
 
@@ -46,7 +46,7 @@ El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indic�
 | RF-D02 | Todo documento lleva obligatoriamente el metadato **Tipo de documento** (Acta, Normativa, Expediente o Votación), además de los propios de su tipo. | todos |
 | RF-D03 | Las actas usan la **aprobación de contenido** de la biblioteca: un acta en borrador solo la ven su autor y los aprobadores (la Ejecutiva); los delegados solo ven las aprobadas. | CU-D01, CU-D02 |
 | RF-D04 | Búsqueda genérica por nombre y por contenido del documento. | CU-D02, CU-D03 |
-| RF-D05 | Búsqueda por metadatos: en cada biblioteca, una **vista plana** sin carpetas a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint. | CU-D02, CU-D03 |
+| RF-D05 | Búsqueda por metadatos: en cada biblioteca, una **vista plana** sin carpetas a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint. | CU-D02, CU-D03, CU-D07, CU-D08 |
 | RF-D06 | Permisos por sitio y carpeta con los grupos Propietario, Integrante y Visitante. | todos |
 | RF-D07 | La **fecha de caducidad** de un expediente es un metadato calculado: fecha de resolución más 2 años. | CU-D04, CU-D05 |
 | RF-D08 | Vista de expedientes caducados (caducidad anterior a hoy) para retirarlos. | CU-D05 |
@@ -67,7 +67,7 @@ El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indic�
 | RNF-D01 | **Privacidad:** los expedientes y los registros de votación cumplen RGPD y LOPDGDD y no se guardan datos que no sean necesarios. |
 | RNF-D02 | **Facilidad de uso:** una persona sin conocimientos informáticos debe poder subir un documento y rellenar sus metadatos con una guía de pocos pasos. |
 | RNF-D03 | **Mantenibilidad:** la estructura de sitios, columnas y permisos queda documentada para el relevo entre cursos. |
-| RNF-D04 | **Conservación:** los expedientes se conservan 2 años desde su resolución (entrevista, respuesta 10) y se retiran en la primera revisión mensual posterior; el plazo máximo real es de 2 años y un mes (excepción aceptada por la periodicidad mensual). |
+| RNF-D04 | **Conservación:** los expedientes se conservan 2 años desde su resolución (entrevista, respuesta 10) y se retiran en la primera revisión mensual posterior; el plazo máximo real es de 2 años y un mes (decisión técnica del equipo por la periodicidad mensual; el CADUS todavía no la ha confirmado). |
 | RNF-D05 | **Disponibilidad:** los documentos son accesibles durante las asambleas. |
 
 ## 7. Reglas de negocio

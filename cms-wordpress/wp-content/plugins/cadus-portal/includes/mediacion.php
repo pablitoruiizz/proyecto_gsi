@@ -442,8 +442,21 @@ function cadus_mediacion_guardar($post_id, $post, $update): void
         return;
     }
     $state = cadus_buzon_input($_POST, 'cadus_mediacion_estado');
-    if (isset(cadus_mediacion_estados()[$state]) && get_post_meta($post_id, '_cadus_estado', true) !== $state) {
-        update_post_meta($post_id, '_cadus_estado', $state);
+    // Mismo bloqueo que usa la retención (HU-23) para que no anonimice a la vez que se edita.
+    $lock = cadus_buzon_lock('editar_' . (int) $post_id);
+    if ($lock === '') {
+        wp_die(esc_html('No se ha guardado el estado. Vuelve atrás e inténtalo de nuevo.'));
+    }
+    try {
+        wp_cache_delete($post_id, 'post_meta');
+        if (get_post_meta($post_id, '_cadus_anonimizado', true) !== '') {
+            return; // anonimizada por conservación de datos: ya no se modifica
+        }
+        if (isset(cadus_mediacion_estados()[$state]) && get_post_meta($post_id, '_cadus_estado', true) !== $state) {
+            update_post_meta($post_id, '_cadus_estado', $state);
+        }
+    } finally {
+        cadus_buzon_unlock($lock);
     }
 }
 

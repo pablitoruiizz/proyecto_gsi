@@ -74,8 +74,8 @@ def diseno():
              ("<<Role>> Visitante", "Delegados (cuenta de su delegación) y estudiantes (@alum.us.es)", NARANJA)]
     for i, (n, quien, c) in enumerate(roles):
         caja(ax, 40 + i * 610, 740, 570, 70, n, quien, fc="white", ec=c, subcolor="#333")
-    caja(ax, 160, 880, 700, 64, "<<Permission>> Read/write", "leer y escribir · Propietario e Integrante · sobre el sitio o la carpeta", fc="#fff7ea", ec=NARANJA, subcolor="#333")
-    caja(ax, 1010, 880, 700, 64, "<<Permission>> Read", "solo lectura · Visitante · sobre el sitio (Votaciones y Atención al estudiante no tienen visitantes)", fc="#fff7ea", ec=NARANJA, subcolor="#333")
+    caja(ax, 160, 880, 700, 64, "<<Permission>> Read/write", "leer y escribir · Propietario e Integrante · concedido sobre cada <<Site>>", fc="#fff7ea", ec=NARANJA, subcolor="#333")
+    caja(ax, 1010, 880, 700, 64, "<<Permission>> Read", "solo lectura · Visitante · concedido sobre el <<Site>> (Votaciones y Atención: sin visitantes)", fc="#fff7ea", ec=NARANJA, subcolor="#333")
     ax.plot([325, 510], [810, 880], color="#555", lw=1.3, zorder=1)
     ax.plot([935, 510], [810, 880], color="#555", lw=1.3, zorder=1)
     ax.plot([1545, 1360], [810, 880], color="#555", lw=1.3, zorder=1)
@@ -83,13 +83,13 @@ def diseno():
     visit = ["Documentación pública: estudiantes y delegados (lectura de la normativa vigente)",
              "Órganos de gobierno: delegados (solo actas aprobadas)",
              "Votaciones: nadie (solo la Ejecutiva, RN-D04); sitio propio para no romper la herencia de permisos de una biblioteca",
-             "Atención al estudiante: nadie (solo la Ejecutiva, RN-D02)"]
+             "Atención al estudiante: nadie (solo la Ejecutiva, RN-D02); la biblioteca Expedientes conserva además permisos propios"]
     for i, t in enumerate(visit):
         ax.text(60, 1000 + 22 * i, "• " + t, fontsize=9.5)
     # tabla análisis -> diseño (diapositiva 2 del Lab 4)
     ax.text(40, 1112, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
     mapa = ["<<Document>> → <<Document>> (con columnas de metadatos)", "<<Folder>> → <<Site>> / <<Folder>> (los sitios asignan permisos de golpe)", "<<Role>> → <<Role>> (Propietario, Integrante, Visitante)",
-            "<<Search>> → búsqueda genérica + <<Filter>> por metadatos en una vista plana", "Metadato → columna de la carpeta", "<<Permission>> → Read/write o Read sobre el sitio, por grupo"]
+            "<<Search>> → búsqueda genérica + <<Filter>> por metadatos en una vista plana", "Metadato → columna de la biblioteca (el Lab 4 las asocia al Site; en SharePoint viven en cada biblioteca)", "<<Permission>> → Read/write o Read sobre el sitio, por grupo"]
     for i in range(3):
         ax.text(60, 1140 + 24 * i, "   ·   ".join(mapa[2 * i:2 * i + 2]), fontsize=9.5)
     guardar(fig, "uml-dms-diseno.png")

@@ -85,7 +85,7 @@ Contenido del proyecto [DMS-Expediente.rem](DMS-Expediente.rem) (REMUS), versió
 
 | Código | Nombre | El sistema deberá | Importancia |
 |---|---|---|---|
-| RNF-D04 | Conservación | conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (excepción aceptada por la periodicidad mensual de la revisión) | Vital |
+| RNF-D04 | Conservación | conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (decisión técnica del equipo por la periodicidad mensual de la revisión, pendiente de que el CADUS la confirme) | Vital |
 
 ## 10. Reglas de negocio
 
@@ -98,7 +98,7 @@ Contenido del proyecto [DMS-Expediente.rem](DMS-Expediente.rem) (REMUS), versió
 
 | Código | Nombre | Descripción |
 |---|---|---|
-| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros. |
+| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los cuatro (grupo Integrantes). |
 | RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 

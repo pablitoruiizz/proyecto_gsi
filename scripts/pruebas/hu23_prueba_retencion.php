@@ -106,6 +106,14 @@ foreach ($casos as $letra => [$tipo, $estado, $dias, $estado_post, $modif]) {
 update_post_meta($ids['I'], '_cadus_estado', 'en_proceso'); // reabrir: el plugin borra la fecha de resolución
 $adjunto = wp_insert_attachment(['post_title' => 'adjunto-PRUEBA-HU23', 'post_mime_type' => 'text/plain', 'post_status' => 'inherit'], false, $ids['A']);
 
+// Carrera: un ticket elegido como candidato se reabre antes de anonimizarlo; la anonimización debe omitirlo (revalida bajo bloqueo).
+$ids['J'] = hu23_crear('cadus_ticket', 'J', 'cerrado', 3 * 365);
+$era_candidato = in_array($ids['J'], array_map('intval', array_column(cadus_retencion_candidatos(1000, time()), 'ID')), true);
+update_post_meta($ids['J'], '_cadus_estado', 'en_proceso');
+$resultado_j = cadus_retencion_anonimizar($ids['J'], 'cadus_ticket', time());
+$ok_j = $era_candidato && $resultado_j === 'omitido' && get_post_meta($ids['J'], '_cadus_anonimizado', true) === ''
+    && strpos((string) get_post_field('post_content', $ids['J']), 'teléfono') !== false && get_post_meta($ids['J'], '_cadus_email', true) !== '';
+
 $simulado = cadus_retencion_ejecutar(null, true);
 echo "Simulación (no cambia nada): {$simulado['cadus_ticket']} tickets y {$simulado['cadus_mediacion']} mediaciones.\n";
 $real = cadus_retencion_ejecutar();
@@ -132,10 +140,41 @@ foreach ($casos as $letra => [$tipo, $estado, $dias, $estado_post, $modif, $debe
     $fallos += $ok ? 0 : 1;
     printf("%s  %-53s %-14s %s\n", $letra, $descripcion, $debe ? 'anonimizar' : 'conservar', $ok ? 'OK' : 'FALLO');
 }
+// Slug: no puede conservar el asunto escrito por el estudiante.
+$titulo_a = (string) get_post_field('post_title', $ids['A']);
+$ok_slug = get_post_field('post_name', $ids['A']) === 'anonimizado-' . $ids['A'] && stripos((string) get_post_field('post_name', $ids['A']), 'asunto') === false
+    && strpos($titulo_a, 'Asunto con datos') === false;
+
+// Un ticket anonimizado es inmutable: el guardado del buzón se rechaza y reabrirlo no cambia su fecha de resolución.
+$resuelto_antes = get_post_meta($ids['A'], '_cadus_resuelto', true);
+update_post_meta($ids['A'], '_cadus_estado', 'abierto');
+$ok_inmutable_fecha = get_post_meta($ids['A'], '_cadus_resuelto', true) === $resuelto_antes;
+update_post_meta($ids['A'], '_cadus_estado', $cerrado);
+$admin = get_users(['role' => 'administrator', 'number' => 1])[0] ?? null;
+$ok_inmutable = false;
+if ($admin) {
+    wp_set_current_user($admin->ID);
+    $_POST = ['cadus_ticket_nonce' => wp_create_nonce('cadus_ticket_guardar_' . $ids['A']), 'cadus_ticket_estado' => 'abierto', 'cadus_ticket_respuesta' => 'Respuesta nueva'];
+    add_filter('wp_die_handler', static fn() => static function ($mensaje) { throw new RuntimeException((string) $mensaje); });
+    $rechazado = false;
+    try {
+        cadus_buzon_guardar_ticket($ids['A'], get_post($ids['A']), true);
+    } catch (RuntimeException $e) {
+        $rechazado = true;
+    }
+    $ok_inmutable = $rechazado && get_post_meta($ids['A'], '_cadus_respuestas', true) === '' && get_post_meta($ids['A'], '_cadus_estado', true) === $cerrado;
+    $_POST = [];
+    wp_set_current_user(0);
+}
+
 $ok_total = $simulado['cadus_ticket'] === 3 && $simulado['cadus_mediacion'] === 1 && $real['cadus_ticket'] === 3
     && $real['cadus_mediacion'] === 1 && $real['errores'] === 0;
 printf("\nRecuento de la simulación y de la ejecución (3 tickets y 1 mediación): %s\n", $ok_total ? 'OK' : 'FALLO');
 printf("Segunda ejecución sin cambios (idempotente): %s\n", $repetida === 0 ? 'OK' : 'FALLO');
-$fallos += ($ok_total ? 0 : 1) + ($repetida === 0 ? 0 : 1);
+printf("Reabierto entre la selección y la anonimización: se omite y no se toca nada: %s\n", $ok_j ? 'OK' : 'FALLO');
+printf("La dirección (slug) y el título no conservan el asunto del estudiante: %s\n", $ok_slug ? 'OK' : 'FALLO');
+printf("Ticket anonimizado: reabrirlo no cambia su fecha de resolución: %s\n", $ok_inmutable_fecha ? 'OK' : 'FALLO');
+printf("Ticket anonimizado: el guardado del buzón se rechaza (no admite respuestas ni estados): %s\n", $ok_inmutable ? 'OK' : ($admin ? 'FALLO' : 'OMITIDA (no hay administrador)'));
+$fallos += ($ok_total ? 0 : 1) + ($repetida === 0 ? 0 : 1) + ($ok_j ? 0 : 1) + ($ok_slug ? 0 : 1) + ($ok_inmutable_fecha ? 0 : 1) + (($ok_inmutable || !$admin) ? 0 : 1);
 echo "\nPara ver el resultado en el panel, abre Tickets y Mediaciones con la Ejecutiva; después ejecuta el script con «limpiar».\n";
 exit($fallos === 0 ? 0 : 1);

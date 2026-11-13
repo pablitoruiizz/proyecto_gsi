@@ -1,0 +1,20 @@
+# Revisión pedida a Codex: versión definitiva del DMS (13/11/2026)
+
+Revisión de SOLO LECTURA (no edites archivos, no hagas commit ni push). Responde en español, con hallazgos ordenados por gravedad (alta, media, baja), citando archivo y línea, y al final qué cambiarías. Si no puedes comprobar algo, dilo en vez de suponerlo.
+
+## Contexto
+Proyecto GSI (Universidad de Sevilla): portal del CADUS en WordPress (CMS) y un DMS en SharePoint de la US (Lab 4). La versión definitiva del DMS se entrega el domingo 15/11/2026. El profesor pidió sobre la entrega del 08/11: dividir los casos de uso por roles o secciones, añadir dos casos de uso en cada documento y, normalmente, más de un `.rem` para el DMS. El enunciado está en `docs/Lab 4 - DMS - v2.pptx` (texto de las diapositivas): análisis (Document, Folder, Role, Search, Metadata, Permission) y diseño (Document, Site/Folder, Role, Filter sobre vista plana, Column, Permission sobre Site con los grupos Propietario/Integrante/Visitante), estereotipos <<Document>>, <<Folder>>, <<Site>>, <<Role>>, <<Permission>>, <<Search>>, <<Filter>>; 3 o 4 documentos con al menos 1 CU (no RF) cada uno y al menos uno con más de 1 CU; documentación independiente de la del CMS.
+
+El 13/11 se hizo: cuarto sitio `cadus-votaciones` (la biblioteca Votaciones salió de Órganos de gobierno), columnas Norma y Versión en Normativa, ejecución de CU-D07 y CU-D08 (por Pablo con ayuda de Claude, SIN prueba cruzada), `CU-Normativa.md` escrito por Pablo en lugar de Joaquín, y un `.rem` por sección además de `DMS.rem`.
+
+## Qué revisar
+1. Los 4 documentos de casos de uso (`docs/dms/casos-de-uso/*.md` y sus `docs/dms/entrega/casos-de-uso/*.docx|pdf`): ¿cada uno tiene 2 casos de uso bien formados (actor, escenario, precondición, postcondición, pasos)? ¿Los pasos coinciden con `scripts/remus/dms_data.json`? ¿Afirman algo que no se haya probado (permisos de visitante, delegado, estudiante)? ¿Es honesta la sección «Pruebas»?
+2. `docs/dms/REM-DMS.md`, `scripts/remus/dms_data.json` y `docs/dms/rem-remus/carga-remus.md`: coherencia entre los tres, códigos y trazas (objetivo, caso de uso, RF, RN, IR, UI); requisitos sin caso de uso o casos de uso sin requisito; texto que aún diga «tres sitios» o describa Votaciones como biblioteca con permisos exclusivos en Órganos de gobierno.
+3. Los `.rem` por sección (`docs/dms/rem-remus/secciones/`, generados por `scripts/dms/dividir_rem.py`) y sus datos (`scripts/remus/secciones/*.json`): ¿cada sección contiene sus 2 casos y lo que esos casos citan? ¿Hay trazas rotas o elementos huérfanos? ¿Sirve esa división para lo que pidió el profesor?
+4. Diagramas (`docs/dms/img/uml-dms-analisis.png`, `uml-dms-diseno.png`, `casos-de-uso-dms.png`, de `scripts/dms/diagramas_dms.py`): ¿respetan los estereotipos y la correspondencia análisis→diseño de las diapositivas del Lab 4? ¿Están los 8 casos de uso, los 4 sitios y los roles?
+5. `docs/dms/entrega/Entrega-DMS-CADUS.docx` (de `scripts/dms/build_doc_dms.py`): coherencia entre secciones, afirmaciones no sostenidas por las capturas (`docs/dms/capturas/`) o por el estado declarado, trazabilidad (sección 7), SCRUM (sección 8).
+6. `docs/dms/entorno-sharepoint.md`, `docs/dms/sprints/sprint-02.md`, `docs/dms/backlog/product-backlog.md` y `docs/dms/burndown/sprint-02.csv`: ¿es honesto el estado (HU-08 y HU-09 ejecutadas pero sin prueba cruzada, burndown en 4 SP)? ¿Hay contradicciones con los documentos de casos de uso?
+7. El zip (`scripts/dms/empaquetar_dms.py`, `docs/dms/entrega/paquete/Entrega-15-11-CADUS-DMS-definitiva.zip`, el paquete no está en git): ¿falta o sobra algo respecto a la lista del profesor? ¿Está `DMS.rem` actualizado respecto a `dms_data.json`?
+8. Seguridad y privacidad: RN-D04 (sin DNI, voto secreto separado), RN-D05 (un voto por delegación), RN-D02 (expedientes privados), RN-D03 (conservación de 2 años). ¿Los documentos de ejemplo o las capturas contienen datos personales reales (correos, nombres) que no deberían ir en una entrega?
+
+No toques `cms-wordpress/.htaccess` ni los `.sql`.

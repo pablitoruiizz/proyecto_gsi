@@ -29,6 +29,7 @@ $usuarios = [];
 $posts = [];
 $terminos = [];
 $archivos = [];
+$restaurar_der = null; // ficha real de Derecho que la prueba modifica: se restaura siempre, también si la prueba falla
 
 function crear_usuario(string $rol, string $sufijo): WP_User
 {
@@ -94,7 +95,7 @@ try {
     $cat_ev = get_term_by('slug', 'asambleas', 'tribe_events_cat');
     comprobar('existe la categoría «Asambleas» del calendario', (bool) $cat_ev);
     $manana = (new DateTimeImmutable('tomorrow', wp_timezone()))->format('Y-m-d');
-    $datos = ['titulo' => 'Asamblea de prueba ' . $sufijo, 'categoria' => $cat_ev->term_id, 'fecha' => $manana, 'hora' => '17:30', 'lugar' => 'Salón de actos de prueba', 'descripcion' => 'Orden del día.'];
+    $datos = ['titulo' => 'Asamblea de prueba ' . $sufijo, 'categoria' => $cat_ev->term_id, 'fecha' => $manana, 'hora' => '17:30', 'lugar' => 'Salón de actos de prueba ' . $sufijo, 'descripcion' => 'Orden del día.'];
     $r = cadus_gestion_crear_evento($datos, $ejecutiva);
     comprobar('la Ejecutiva crea un evento publicado', is_array($r) && get_post_status($r['id']) === 'publish', is_wp_error($r) ? $r->get_error_message() : '');
     if (is_array($r)) {
@@ -103,7 +104,7 @@ try {
         comprobar('el evento empieza el día y la hora indicados', tribe_get_start_date($r['id'], true, 'Y-m-d H:i') === $manana . ' 17:30', tribe_get_start_date($r['id'], true, 'Y-m-d H:i'));
         comprobar('el evento termina una hora después por defecto', tribe_get_end_date($r['id'], true, 'Y-m-d H:i') === $manana . ' 18:30', tribe_get_end_date($r['id'], true, 'Y-m-d H:i'));
         comprobar('el evento tiene la categoría «Asambleas»', has_term($cat_ev->term_id, 'tribe_events_cat', $r['id']));
-        comprobar('el evento tiene el lugar indicado', html_entity_decode((string) tribe_get_venue($r['id'])) === 'Salón de actos de prueba', (string) tribe_get_venue($r['id']));
+        comprobar('el evento tiene el lugar indicado', html_entity_decode((string) tribe_get_venue($r['id'])) === 'Salón de actos de prueba ' . $sufijo, (string) tribe_get_venue($r['id']));
         delete_transient('cadus_portada_datos');
         $proximos = array_column(cadus_calendario_eventos(50), 'titulo');
         comprobar('el evento aparece en los próximos eventos de la portada', in_array('Asamblea de prueba ' . $sufijo, $proximos, true));
@@ -222,12 +223,14 @@ try {
     if ($deleg_der) {
         $guardado = cadus_campo('miembros', $deleg_der->ID);
         $correo_g = cadus_campo('correo', $deleg_der->ID);
+        $centros_der_orig = array_map('intval', wp_get_post_terms($deleg_der->ID, 'cadus_centro', ['fields' => 'ids']));
+        $restaurar_der = ['id' => (int) $deleg_der->ID, 'miembros' => $guardado, 'centros' => $centros_der_orig];
         cadus_gestion_campo('field_cadus_deleg_miembros', 'miembros', '', $deleg_der->ID);
         wp_set_object_terms($deleg_der->ID, [], 'cadus_centro');
         cadus_delegaciones_cargar();
         comprobar('lo que se vacía a propósito no se repone al recargar', cadus_campo('miembros', $deleg_der->ID) === '' && !wp_get_post_terms($deleg_der->ID, 'cadus_centro', ['fields' => 'ids']));
         cadus_gestion_campo('field_cadus_deleg_miembros', 'miembros', $guardado, $deleg_der->ID);
-        wp_set_object_terms($deleg_der->ID, 'Facultad de Derecho', 'cadus_centro');
+        wp_set_object_terms($deleg_der->ID, $centros_der_orig, 'cadus_centro');
         comprobar('las fichas importadas tienen escudo (salvo Doctorado y Odontología)', count(array_filter($json, fn($x) => $x['escudo'] !== '')) === 25 && (int) cadus_campo('escudo', $deleg_der->ID) > 0);
     }
 
@@ -264,6 +267,16 @@ try {
         return str_contains((string) file_get_contents($jar), 'wordpress_logged_in_') ? $jar : '';
     };
     $nonce_de = fn(string $html, string $tarea): string => preg_match('/name="cadus_tarea" value="' . $tarea . '"><input type="hidden" name="cadus_nonce" value="([a-f0-9]+)"/', $html, $m) ? $m[1] : '';
+    // Acceso tal como lo envía el formulario del portal (campos cadus_acceso y redirect_to), no solo wp-login.php a secas.
+    $campos_portal = ['cadus_acceso' => '1', 'redirect_to' => cadus_gestion_url_pagina('gestion')]; // exactamente los campos del formulario [cadus_acceso]
+    $jar_mal = tempnam(sys_get_temp_dir(), 'jar');
+    $archivos[] = $jar_mal;
+    $mal = $peticion('POST', $base . '/wp-login.php', ['log' => $ejecutiva->user_login, 'pwd' => 'clave-incorrecta-' . $sufijo] + $campos_portal, $jar_mal);
+    comprobar('con una contraseña mala el acceso desde el portal vuelve a la página de acceso con el aviso', $mal['codigo'] === 302 && str_contains($mal['cab'], 'acceso=error') && !str_contains((string) file_get_contents($jar_mal), 'wordpress_logged_in_'), $mal['codigo'] . ' ' . substr($mal['cab'], 0, 200));
+    $jar_bien = tempnam(sys_get_temp_dir(), 'jar');
+    $archivos[] = $jar_bien;
+    $bien = $peticion('POST', $base . '/wp-login.php', ['log' => $ejecutiva->user_login, 'pwd' => $clave_e] + $campos_portal, $jar_bien);
+    comprobar('con las credenciales correctas el acceso desde el portal lleva a /gestion/ con la sesión abierta', $bien['codigo'] === 302 && str_contains($bien['cab'], '/gestion/') && str_contains((string) file_get_contents($jar_bien), 'wordpress_logged_in_'), $bien['codigo'] . ' ' . substr($bien['cab'], 0, 200));
     $jar_e = $entrar($ejecutiva->user_login, $clave_e);
     $jar_d = $entrar($delegado2->user_login, $clave_d);
     if ($jar_e === '' || $jar_d === '') {
@@ -294,6 +307,14 @@ try {
         comprobar('un error de validación redirige a /gestion/', $r['codigo'] === 302 && str_contains($r['cab'], '/gestion/'), (string) $r['codigo']);
         $despues = $peticion('GET', $base . '/gestion/', [], $jar_e);
         comprobar('el error sale con role="alert" y se conserva lo escrito', str_contains($despues['cuerpo'], 'role="alert"') && str_contains($despues['cuerpo'], 'value="Ab"'));
+        // Creación válida por HTTP (no solo llamando a la función): redirige a /gestion/ con el aviso de éxito y publica la noticia
+        $n_ok = $nonce_de($peticion('GET', $base . '/gestion/', [], $jar_e)['cuerpo'], 'noticia');
+        $cat_http = get_term_by('name', 'Becas', 'category') ?: get_terms(['taxonomy' => 'category', 'hide_empty' => false])[0];
+        $antes_http = $cuantas();
+        $r = $peticion('POST', $envio, ['action' => 'cadus_gestion', 'cadus_tarea' => 'noticia', 'cadus_nonce' => $n_ok, 'titulo' => 'Noticia por HTTP ' . $sufijo, 'categoria' => (string) $cat_http->term_id, 'texto' => 'Texto de prueba por HTTP.'], $jar_e);
+        wp_cache_flush(); // la petición HTTP escribió en otro proceso: se descarta la caché de consultas de este
+        $creada = get_posts(['post_type' => 'post', 'post_status' => 'any', 'numberposts' => 1, 's' => 'Noticia por HTTP ' . $sufijo]);
+        comprobar('una noticia válida enviada por HTTP se crea publicada y redirige a /gestion/', $r['codigo'] === 302 && str_contains($r['cab'], '/gestion/') && $cuantas() === $antes_http + 1 && $creada && $creada[0]->post_status === 'publish', $r['codigo'] . ' antes=' . $antes_http . ' ahora=' . $cuantas() . ' estado=' . ($creada ? $creada[0]->post_status : 'sin crear') . ' ' . substr($r['cab'], 0, 160));
         $otra_sesion = $entrar($ejecutiva->user_login, $clave_e);
         if ($otra_sesion !== '') {
             $archivos[] = $otra_sesion;
@@ -340,9 +361,11 @@ try {
             clean_post_cache($mi);
             comprobar('el delegado no cambia por REST el título, el centro ni el estado de su ficha', get_the_title($mi) === $titulo_mi && wp_get_post_terms($mi, 'cadus_centro', ['fields' => 'ids']) === $centros_mi && get_post_status($mi) === 'publish', $a['codigo'] . '/' . $b['codigo'] . '/' . $c['codigo']);
             comprobar('…y la API responde 403', $a['codigo'] === 403 && $b['codigo'] === 403 && $c['codigo'] === 403, $a['codigo'] . '/' . $b['codigo'] . '/' . $c['codigo']);
+            $contenido_mi = (string) get_post_field('post_content', $mi);
             $d_ = $peticion('POST', $rest, [], $jar_d, [], $cab, json_encode(['content' => 'Texto editado por su delegado ' . $sufijo]));
+            $e_ = $peticion('POST', $rest, [], $jar_d, [], $cab, json_encode(['excerpt' => 'Extracto editado por su delegado ' . $sufijo]));
             clean_post_cache($mi);
-            comprobar('…pero sí puede editar lo que le corresponde por REST', $d_['codigo'] === 200 && str_contains((string) get_post_field('post_content', $mi), 'editado por su delegado'), (string) $d_['codigo']);
+            comprobar('RN-04: el delegado tampoco cambia por REST el texto libre (contenido ni extracto) de su ficha', $d_['codigo'] === 403 && $e_['codigo'] === 403 && (string) get_post_field('post_content', $mi) === $contenido_mi, $d_['codigo'] . '/' . $e_['codigo']);
         } else {
             comprobar('se obtiene el nonce de la API REST para probar las restricciones', false, 'nonce=' . $nonce_rest);
         }
@@ -370,13 +393,17 @@ try {
 } finally {
     echo "== Limpieza\n";
     wp_set_current_user(0);
+    if ($restaurar_der) {
+        cadus_gestion_campo('field_cadus_deleg_miembros', 'miembros', $restaurar_der['miembros'], $restaurar_der['id']);
+        wp_set_object_terms($restaurar_der['id'], $restaurar_der['centros'], 'cadus_centro');
+    }
     foreach (array_unique(array_filter($posts)) as $id) {
         wp_delete_post((int) $id, true);
     }
     foreach (get_posts(['post_type' => ['post', 'tribe_events', 'cadus_acta', 'cadus_delegacion', 'attachment'], 'post_status' => 'any', 'numberposts' => -1, 's' => $sufijo]) as $p) {
         wp_delete_post($p->ID, true);
     }
-    foreach (get_posts(['post_type' => 'tribe_venue', 'post_status' => 'any', 'numberposts' => -1, 's' => 'Salón de actos de prueba']) as $p) {
+    foreach (get_posts(['post_type' => 'tribe_venue', 'post_status' => 'any', 'numberposts' => -1, 's' => 'Salón de actos de prueba ' . $sufijo]) as $p) {
         wp_delete_post($p->ID, true);
     }
     foreach ($terminos as [$id, $tax]) {
@@ -390,7 +417,7 @@ try {
         @unlink($a);
     }
     delete_transient('cadus_portada_datos');
-    $restos = count(get_users(['search' => 'prueba_*_' . $sufijo . '*', 'search_columns' => ['user_login']]))
+    $restos = count(get_users(['search' => '*' . $sufijo . '*', 'search_columns' => ['user_login']]))
         + count(get_posts(['post_type' => 'any', 'post_status' => 'any', 's' => $sufijo, 'numberposts' => -1]));
     comprobar('no queda ninguna cuenta ni contenido de prueba', $restos === 0, (string) $restos);
 }

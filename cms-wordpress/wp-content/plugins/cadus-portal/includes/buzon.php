@@ -702,6 +702,13 @@ function cadus_buzon_guardar_ticket($post_id, $post, $update): void
     }
     $failed = false;
     try {
+        // Un ticket anonimizado por conservación de datos (HU-23) ya no admite cambios ni respuestas.
+        wp_cache_delete($post_id, 'post_meta');
+        if (get_post_meta($post_id, '_cadus_anonimizado', true) !== '') {
+            cadus_buzon_unlock($lock);
+            $lock = '';
+            wp_die(esc_html('Este ticket se anonimizó por el plazo de conservación de datos y ya no se puede modificar.'));
+        }
         // Evita sobrescribir respuestas añadidas mientras esta petición esperaba el bloqueo.
         wp_cache_delete($post_id, 'post_meta');
         if (isset(cadus_buzon_estados()[$state])) {

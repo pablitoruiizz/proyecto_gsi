@@ -78,8 +78,10 @@ function cadus_registrar_contenidos(): void
 }
 
 /**
- * Quien solo edita su propia delegación no puede cambiar el título, el autor ni el estado de la ficha, edite donde edite
+ * Quien solo edita su propia delegación no puede cambiar el título, el autor, el estado ni el texto libre (contenido y extracto)
+ * de la ficha, edite donde edite
  * (panel del portal, editor de WordPress o API REST /wp/v2/cadus_delegacion). El centro lo protege la capacidad assign_terms.
+ * RN-04: la delegación solo cambia contacto, horario, redes, enlaces y miembros (campos de la ficha), no el texto libre.
  */
 add_filter('wp_insert_post_data', function (array $datos, array $original) {
     $id = (int) ($original['ID'] ?? 0);
@@ -88,7 +90,7 @@ add_filter('wp_insert_post_data', function (array $datos, array $original) {
     }
     $actual = get_post($id);
     if ($actual instanceof WP_Post) {
-        foreach (['post_title', 'post_author', 'post_status', 'post_name'] as $campo) {
+        foreach (['post_title', 'post_author', 'post_status', 'post_name', 'post_content', 'post_excerpt'] as $campo) {
             $datos[$campo] = $actual->$campo;
         }
     }
@@ -96,8 +98,9 @@ add_filter('wp_insert_post_data', function (array $datos, array $original) {
 }, 10, 2);
 add_filter('rest_pre_insert_cadus_delegacion', function ($post, WP_REST_Request $peticion) {
     if (is_user_logged_in() && !current_user_can('edit_others_cadus_delegacions')
-        && ($peticion->has_param('cadus_centro') || $peticion->has_param('author') || $peticion->has_param('title') || $peticion->has_param('status'))) {
-        return new WP_Error('cadus_sin_permiso', 'Solo la Ejecutiva puede cambiar el nombre, el centro o el estado de una delegación.', ['status' => 403]);
+        && ($peticion->has_param('cadus_centro') || $peticion->has_param('author') || $peticion->has_param('title') || $peticion->has_param('status')
+            || $peticion->has_param('content') || $peticion->has_param('excerpt'))) {
+        return new WP_Error('cadus_sin_permiso', 'Solo la Ejecutiva puede cambiar el nombre, el centro, el estado o el texto de una delegación.', ['status' => 403]);
     }
     return $post;
 }, 10, 2);

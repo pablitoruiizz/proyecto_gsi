@@ -47,11 +47,13 @@ Contenido del proyecto [DMS-Normativa.rem](DMS-Normativa.rem) (REMUS), versión 
 
 | Código | Nombre | El sistema deberá | Historias |
 |---|---|---|---|
+| UI-D02 | Vistas predefinidas | ofrecer vistas planas ya filtradas: normativa vigente, actas aprobadas, votaciones y expedientes caducados | RF-D05 |
 
 ## 7. Requisitos funcionales
 
 | Código | Nombre | El sistema deberá | Historias | Importancia |
 |---|---|---|---|---|
+| RF-D01 | Organización en sitios y carpetas | organizar los documentos en cuatro sitios (Documentación pública, Órganos de gobierno, Votaciones y Atención al estudiante) con una biblioteca por tipo de documento | DMS-HU-01 | Vital |
 | RF-D02 | Tipo de documento obligatorio | exigir en todo documento el metadato Tipo de documento (Acta, Normativa, Expediente o Votación), además de los propios de su tipo | DMS-HU-02 | Vital |
 | RF-D04 | Búsqueda genérica | buscar por el nombre y por el contenido de los documentos | DMS-HU-03 | Vital |
 | RF-D05 | Búsqueda por metadatos | ofrecer en cada biblioteca una vista plana, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint | DMS-HU-03 · DMS-HU-05 | Vital |
@@ -100,7 +102,7 @@ Contenido del proyecto [DMS-Normativa.rem](DMS-Normativa.rem) (REMUS), versión 
 
 | Código | Nombre | Descripción |
 |---|---|---|
-| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros. |
+| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los cuatro (grupo Integrantes). |
 | RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 
@@ -108,7 +110,7 @@ Contenido del proyecto [DMS-Normativa.rem](DMS-Normativa.rem) (REMUS), versión 
 
 | Origen | Destinos |
 |---|---|
-| OBJ-D01 | RF-D06, IR-D03 |
-| OBJ-D02 | RF-D02, RF-D04, RF-D05, RN-D06, RN-D07 |
-| CU-D03 | RF-D04, RF-D05, RF-D06, IR-D03, ACT-D03, ACT-D02 |
-| CU-D07 | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03, ACT-D01 |
+| OBJ-D01 | RF-D01, RF-D06, IR-D03 |
+| OBJ-D02 | RF-D02, RF-D04, RF-D05, UI-D02, RN-D06, RN-D07 |
+| CU-D03 | RF-D04, RF-D05, RF-D06, IR-D03, UI-D02, ACT-D03, ACT-D02 |
+| CU-D07 | RF-D01, RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03, ACT-D01 |

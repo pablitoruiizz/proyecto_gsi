@@ -60,7 +60,7 @@ La biblioteca usa la **aprobación de contenido** con la opción «Solo los usua
 5. La Ejecutiva del CADUS aprueba el acta.
 6. El sistema publica el acta aprobada para los delegados.
 
-**Requisitos relacionados:** RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, IR-D02 y ACT-D01.
+**Requisitos relacionados:** RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, RN-D06, IR-D02 y ACT-D01.
 
 ### CU-D02 Consultar las actas aprobadas
 
@@ -80,7 +80,7 @@ La biblioteca usa la **aprobación de contenido** con la opción «Solo los usua
 4. El sistema muestra las actas que cumplen los filtros.
 5. El delegado abre el acta.
 
-**Requisitos relacionados:** RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02 y ACT-D02.
+**Requisitos relacionados:** RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02, UI-D02 y ACT-D02.
 
 La cuenta es de la delegación y no de la persona: cuando cambia el equipo de una delegación, la cuenta pasa al equipo nuevo con una contraseña nueva y sigue teniendo el mismo acceso a las actas (la misma decisión que en el portal, HU-22).
 

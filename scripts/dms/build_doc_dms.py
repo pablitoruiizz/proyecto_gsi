@@ -121,7 +121,11 @@ def tabla(doc, cabecera, filas, anchos=None, titulo=None, tam=9):
         r = celda.paragraphs[0].add_run(c); r.bold = True; r.font.size = Pt(tam); r.font.color.rgb = RGBColor(255, 255, 255)
         sombrear(celda, "1F3A5F")
     for f in filas:
-        cel = t.add_row().cells
+        fila = t.add_row()
+        trpr = fila._tr.get_or_add_trPr()
+        no_partir = OxmlElement("w:cantSplit")
+        trpr.append(no_partir)
+        cel = fila.cells
         for i, v in enumerate(f):
             cel[i].text = ""
             r = cel[i].paragraphs[0].add_run(str(v).replace("`", "").replace("**", "")); r.font.size = Pt(tam)
@@ -168,8 +172,8 @@ def burndown(n=1, titulo="Burndown del Sprint 1 del DMS (26/10 – 08/11/2026)")
 
 # ------------------------------------------------------------------ datos de los 4 tipos de documento
 CAPS = {
-    "01": ("01-sitios-y-bibliotecas.jpg", "Los sitios de grupo del DMS y sus bibliotecas en SharePoint de la US (sección «Compilar», «De su propiedad»).",
-           "Se crearon los sitios «CADUS Documentación pública», «CADUS Órganos de gobierno», «CADUS Votaciones» (desde el 13/11/2026) y «CADUS Atención al estudiante», cada uno con su biblioteca de documentos (Normativa, Actas, Votaciones, Expedientes). Los registros de votación tienen un sitio propio para que sus permisos se concedan sobre el sitio, como pide el Lab 4, y no rompiendo la herencia de una biblioteca. Cada sitio de grupo trae los grupos Propietarios, Integrantes y Visitantes que pide el Lab 4 y tiene 5 miembros: Pablo como propietario y los otros cuatro integrantes del equipo. Responde a RF-D01 y RF-D06 (DMS-HU-01)."),
+    "01": ("01-sitios-y-bibliotecas.jpg", "Los sitios de grupo del DMS y sus bibliotecas en SharePoint de la US (sección «Compilar», «De su propiedad»), captura del 30/10/2026.",
+           "Se crearon los sitios «CADUS Documentación pública», «CADUS Órganos de gobierno», «CADUS Votaciones» (desde el 13/11/2026) y «CADUS Atención al estudiante», cada uno con su biblioteca de documentos (Normativa, Actas, Votaciones, Expedientes). Los registros de votación tienen un sitio propio para que sus permisos se concedan sobre el sitio, como pide el Lab 4, y no rompiendo la herencia de una biblioteca. La captura es del 30/10 y muestra los tres sitios de entonces, con la biblioteca Votaciones todavía dentro de Órganos de gobierno; el 13/11 pasó a su propio sitio (capturas 06 y 07). Esa lista de SharePoint no muestra todavía el cuarto sitio, creado por la API, y no se rehízo. Cada sitio de grupo trae los grupos Propietarios, Integrantes y Visitantes que pide el Lab 4 y tiene 5 miembros: Pablo como propietario y los otros cuatro integrantes del equipo. Responde a RF-D01 y RF-D06 (DMS-HU-01)."),
     "02": ("02-normativa.jpg", "Biblioteca Normativa con sus columnas de metadatos.",
            "La biblioteca guarda la normativa del CADUS. Además del nombre, cada documento tiene las columnas Tipo de documento (obligatoria, con valor Normativa por defecto), Fecha, Curso académico y Estado (Vigente o Derogada). La captura es anterior a CU-D07: se ve un reglamento derogado junto a dos vigentes, entre ellos el Reglamento de votaciones en su única versión. Las columnas Norma y Versión se añaden después, para CU-D07 (captura 13). Responde a RF-D02 y RN-D06 (DMS-HU-02)."),
     "03": ("03-normativa-vigente.jpg", "Vista plana «Vigente» de la biblioteca Normativa.",
@@ -192,7 +196,7 @@ CAPS = {
     "11": ("11-cu-d05-papelera.jpg", "CU-D05: papelera de reciclaje del sitio Atención al estudiante.",
            "El expediente eliminado pasa a la papelera del sitio y se elimina también de ella. Paso 3 de CU-D05 (RN-D03)."),
     "12": ("12-cu-d05-papelera-segunda-fase.jpg", "CU-D05: papelera de segunda fase sin el expediente.",
-           "SharePoint guarda lo que se borra de la papelera del sitio en la papelera de segunda fase. Se vacía también, y la vista «Caducados» queda sin expedientes: ya no se conserva ninguna copia (paso 4 y postcondición de CU-D05, RN-D03 y RNF-D04)."),
+           "SharePoint guarda lo que se borra de la papelera del sitio en la papelera de segunda fase. La captura muestra el diálogo de confirmación para eliminarlo de forma permanente (paso 4 de CU-D05, RN-D03 y RNF-D04); el resultado final, con «Caducados» sin ese expediente y sin copia, lo anotó Marcos en su prueba del 12/11 y no hay captura de ese estado."),
     "13": ("13-cu-d07-nueva-version.jpg", "CU-D07: nueva versión de una norma y la anterior derogada.",
            "Resultado de CU-D07 en la biblioteca Normativa, con las columnas Norma y Versión: el Reglamento de votaciones v2 está vigente y la v1 ha pasado a derogada, sin borrarla (CU-D07, RN-D07). La regla de una sola versión vigente por norma la cumple la Ejecutiva a mano: SharePoint no la comprueba."),
     "14": ("14-votaciones-consulta.jpg", "CU-D08: registros de votación filtrados por asamblea y tipo de voto.",
@@ -233,7 +237,7 @@ TRAZA = {
     "CU-D02": ("DMS-HU-03, 04", "Vista plana Aprobadas", "5", "Configurado; falta probar con un visitante"),
     "CU-D03": ("DMS-HU-03, 05", "Vista plana Vigente de Normativa", "3", "Configurado y observado"),
     "CU-D04": ("DMS-HU-06", "Biblioteca Expedientes (permisos exclusivos)", "8", "Configurado y observado"),
-    "CU-D05": ("DMS-HU-06", "Vista plana Caducados, columna calculada y papeleras", "9-12", "Configurado; pendiente la ejecución del 13/11"),
+    "CU-D05": ("DMS-HU-06", "Vista plana Caducados, columna calculada y papeleras", "9-12", "Ejecutado el 12/11 (Marcos); falta la prueba cruzada"),
     "CU-D06": ("DMS-HU-07", "Sitio CADUS Votaciones (grupos predefinidos) y plantilla de votación", "6, 7", "Configurado y observado"),
     "CU-D07": ("DMS-HU-08", "Columnas Norma y Versión en Normativa y vista Vigente", "13, 16", "Ejecutado el 13/11 (Pablo con Claude); falta la prueba cruzada"),
     "CU-D08": ("DMS-HU-09", "Votaciones con Asamblea y Número de votación obligatorias; filtros", "14, 15", "Ejecutado el 13/11 (Pablo con Claude); falta la prueba cruzada"),
@@ -463,7 +467,7 @@ def entrega():
         ["Documento", "Documento de una biblioteca, con columnas de metadatos"],
         ["Carpeta", "Sitio de grupo y biblioteca de documentos"],
         ["Rol (Ejecutiva, Delegado, Estudiante)", "Grupo de permisos: Propietarios, Integrantes y Visitantes"],
-        ["Permiso", "Permiso del grupo sobre el sitio (Read/write o Read), sin romper la herencia en las bibliotecas"],
+        ["Permiso", "Permiso del grupo sobre el sitio (Read/write o Read), sin romper la herencia en las bibliotecas, salvo Expedientes, que conserva permisos propios como refuerzo de RN-D02"],
         ["Búsqueda", "Búsqueda de SharePoint por nombre y contenido"],
         ["Metadato", "Columna de la biblioteca (elección, fecha, texto, número o calculada)"],
         ["Filtro", "Vista plana de la biblioteca con filtro por metadatos (Vigente, Aprobadas, Caducados)"]], [6.5, 10.5], tam=9, titulo="Del análisis al diseño")
@@ -513,7 +517,7 @@ def entrega():
     doc.add_heading("8.3 Burndown del sprint", 2)
     figura(doc, burndown(), "Burndown chart del Sprint 1 del DMS: puntos pendientes por día frente a la línea ideal.", 14)
     doc.add_heading("8.4 Sprint 2 del DMS: versión definitiva", 2)
-    par(doc, "Lo que pidió el profesor sobre lo entregado: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Se añaden CU-D07 (nueva versión de una norma) y CU-D08 (consultar votaciones anteriores) y cada documento queda con dos casos. Cada caso lo prueba otra persona, salvo CU-Normativa: lo escribió y ejecutó Pablo el 13/11 en lugar de Joaquín y su prueba cruzada queda pendiente.")
+    par(doc, "Lo que pidió el profesor sobre lo entregado: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Se añaden CU-D07 (nueva versión de una norma) y CU-D08 (consultar votaciones anteriores) y cada documento queda con dos casos. Ninguno de los ocho casos tiene todavía prueba cruzada hecha. Además, CU-Normativa lo escribió Pablo el 13/11 en lugar de Joaquín, y CU-D07 y CU-D08 los ejecutó Pablo con ayuda de Claude: la prueba cruzada de CU-Normativa pasa a Joaquín y la de CU-D08 sigue pendiente.")
     tabla(doc, ["Integrante", "Trabajo del Sprint 2 del DMS"], [
         ["Pablo", "D-09 (fecha y alcance con el profesor), REM 1.1 y DMS.rem, un .rem por sección, cuarto sitio CADUS Votaciones, CU-Normativa (en lugar de Joaquín) y ejecución de CU-D07 y CU-D08"],
         ["Joaquín", "Backlog y burndown, prueba cruzada de CU-Normativa (CU-D07, DMS-HU-08) y de CU-Votacion"],
@@ -522,7 +526,7 @@ def entrega():
         ["Marcos", "CU-Expediente y ejecución de CU-D05, generador y zip (D-08), prueba de CU-Acta, revisión del REM"]], [3.5, 13.5], tam=9)
     if os.path.exists(os.path.join(DMS, "burndown", "sprint-02.csv")):
         figura(doc, burndown(2, "Burndown del Sprint 2 del DMS (13/11 – 15/11/2026)"), "Burndown chart del Sprint 2 del DMS.", 12)
-    par(doc, "La configuración de las siete historias se hizo en bloque el 30/10 y el burndown no se actualizó los días anteriores: repite la lección de los sprints del CMS. Según la definición de hecho del sprint (caso de uso ejecutado por otra persona y permisos comprobados con cada rol), ninguna historia está todavía cerrada: seis están configuradas a la espera de la prueba cruzada y DMS-HU-04 espera además una cuenta de delegado. Por eso el burndown sigue en 24 SP; bajará cuando el equipo cierre las pruebas.")
+    par(doc, "Sprint 1 del DMS: la configuración de las siete historias se hizo en bloque el 30/10 y el burndown no se actualizó los días anteriores: repite la lección de los sprints del CMS. Según la definición de hecho del sprint (caso de uso ejecutado por otra persona y permisos comprobados con cada rol), ninguna historia está todavía cerrada: seis están configuradas a la espera de la prueba cruzada y DMS-HU-04 espera además una cuenta de delegado. Por eso el burndown del Sprint 1 sigue en 24 SP; bajará cuando el equipo cierre las pruebas.")
 
     doc.add_heading("9. Pendiente y limitaciones", 1)
     for t in ("Probar los permisos con una cuenta real de delegación: sin ella, la prueba se hace con un integrante pasado a Visitantes y se anota que no es una cuenta de delegación real.",

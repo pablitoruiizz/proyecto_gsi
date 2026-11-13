@@ -159,7 +159,7 @@ Siguen abiertas en el GitHub Project las tareas de contenido y cliente del Sprin
 ## Definición de Hecho (DoD) — Sprint 3
 
 - [ ] HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23 implementadas, probadas por otra persona e integradas en `main`.
-- [ ] Portal probado en móvil y tablet reales, sin pérdida de funcionalidad (HU-14).
+- [ ] Portal probado en móvil y tablet sin pérdida de funcionalidad (HU-14). **Cambio de criterio decidido por el equipo el 12/11:** se prueba en emulación (`scripts/pruebas/movil.py`, 28 comprobaciones) y no en dispositivos reales; queda anotado como limitación y no cumple la redacción original («reales»).
 - [ ] Informe de Lighthouse y axe sin fallos críticos de accesibilidad, revisado para daltonismo y lector de pantalla (HU-15).
 - [ ] Batería de pruebas de privacidad y de seguridad sin fallos (RN-03, HU-17, HU-23).
 - [ ] Medición de rendimiento antes y después de la caché y de las imágenes (HU-20).
@@ -203,7 +203,7 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 | HU-20b caché y minificación con Lighthouse (3 SP) | Pablo | 12/11 | `docs/rendimiento/HU-20b-informe.md`: Rendimiento 91 → 99 (Inicio), 90 → 99 (Noticias), 79 → 97 (Delegaciones) y 83 → 99 (Actas); peso −40 % con Gzip |
 | HU-14c móvil y tablet (2 SP) | Pablo | 12/11 | `docs/pruebas/HU-14c-movil-tablet.md`, `scripts/pruebas/movil.py` (28 de 28 comprobaciones). **Solo en emulación:** el equipo decidió no probar en dispositivos reales |
 | HU-16a filtros por palabra clave y fecha (3 SP) | Álvaro | 12/11 | PR #72. Comprobada por HTTP el 12/11 por Pablo: en noticias, «becas» deja 2 de 5 y un texto inexistente muestra el aviso de vacío; en actas, «pleno» y los filtros «desde» y «hasta» filtran bien y los valores se escapan. Falta la prueba en navegador de los casos H16-1 a H16-6 |
-| HU-23 anonimización de tickets y mediaciones a los 2 años (2 SP) | Álvaro | 12/11 | PR #73; `scripts/pruebas/hu23_prueba_retencion.php` correcta (simulación y ejecución, segunda ejecución idempotente) |
+| HU-23 anonimización de tickets y mediaciones a los 2 años (2 SP) | Álvaro | 12/11 | PR #73; `scripts/pruebas/hu23_prueba_retencion.php` correcta (simulación y ejecución, segunda ejecución idempotente). **Revisión cruzada con Codex el 13/11:** corregidos el título y la dirección (slug) que conservaban el asunto del estudiante, la anonimización de un ticket reabierto entre la selección y el borrado (ahora se revalida bajo el mismo bloqueo del buzón), la limpieza dada por buena aunque fallase un borrado y la edición de tickets ya anonimizados |
 | E3-08 plazo de respuesta publicado (sin puntos) | Marcos | 12/11 | PR #69; REM del CMS 2.3 |
 
 **Decisión X7 (12/11):** la Ejecutiva puede editar las delegaciones de otros autores. RN-04 queda como «la cuenta de la delegación o la cuenta del CADUS (Ejecutiva y administrador)»; la delegación solo cambia los datos de contacto, el horario, las redes, los enlaces y los miembros de su propia ficha, y un delegado no puede cambiar el título, el centro ni el estado de la ficha ni por la API REST.

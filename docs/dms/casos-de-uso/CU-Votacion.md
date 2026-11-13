@@ -81,7 +81,7 @@ Desde el 13/11/2026 las votaciones tienen un **sitio propio**, en vez de una bib
 4. El sistema muestra los registros que cumplen los filtros, identificados por su asamblea y su número de votación.
 5. La Ejecutiva del CADUS abre el registro.
 
-**Requisitos relacionados:** RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01 y ACT-D01.
+**Requisitos relacionados:** RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, IR-D05, RNF-D01 y ACT-D01.
 
 ## 5. Implementación en SharePoint
 

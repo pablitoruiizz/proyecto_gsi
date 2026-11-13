@@ -1,6 +1,6 @@
 # HU-20b · Caché y minificación con Lighthouse, antes y después (12/11/2026)
 
-Medición hecha por Pablo con Claude. Herramienta: Lighthouse 12.6.1 en Chrome sin interfaz, perfil móvil de Lighthouse (emulación de móvil y red 4G lenta simulada), con el sitio local del equipo (WampServer, `http://localhost/proyecto_gsi/cms-wordpress`). Script: `scripts/pruebas/lighthouse.py`; resultados en bruto (mediana de 3 o 5 ejecuciones por página) en `docs/rendimiento/lighthouse-*.json`.
+Medición hecha por Pablo con Claude. Herramienta: Lighthouse 12.6.1 en Chrome sin interfaz, perfil móvil de Lighthouse (emulación de móvil y red 4G lenta simulada), con el sitio local del equipo (WampServer, `http://localhost/proyecto_gsi/cms-wordpress`). Script: `scripts/pruebas/lighthouse.py`; resultados en bruto (mediana de 3 o 5 ejecuciones por página) en `docs/rendimiento/lighthouse-*.json`. Esos archivos guardan las medianas, no las ejecuciones individuales ni los informes completos de Lighthouse; la cifra del buzón procede de `lighthouse-final.json`, porque la fase `gzip` no la incluye. Estas mejoras no demuestran por sí solas RNF-01: las páginas sin caché siguen respondiendo en 3,7–4,4 s en este equipo y falta medir en el servidor de destino.
 
 ## Qué se cambió en WP Fastest Cache
 | Ajuste | Antes | Después |

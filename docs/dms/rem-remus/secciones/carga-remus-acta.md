@@ -48,6 +48,7 @@ Contenido del proyecto [DMS-Acta.rem](DMS-Acta.rem) (REMUS), versión 1.1, 2026-
 
 | Código | Nombre | El sistema deberá | Historias |
 |---|---|---|---|
+| UI-D02 | Vistas predefinidas | ofrecer vistas planas ya filtradas: normativa vigente, actas aprobadas, votaciones y expedientes caducados | RF-D05 |
 
 ## 7. Requisitos funcionales
 
@@ -99,12 +100,13 @@ Contenido del proyecto [DMS-Acta.rem](DMS-Acta.rem) (REMUS), versión 1.1, 2026-
 | Código | Nombre | Regla |
 |---|---|---|
 | RN-D01 | Actas aprobadas | Un acta solo es visible para los delegados cuando un miembro de la Ejecutiva la ha aprobado (coherente con RN-01 del portal). |
+| RN-D06 | Tipo de documento | Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos. |
 
 ## 11. Entorno de trabajo del equipo (restricciones)
 
 | Código | Nombre | Descripción |
 |---|---|---|
-| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros. |
+| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los cuatro (grupo Integrantes). |
 | RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 
@@ -113,8 +115,8 @@ Contenido del proyecto [DMS-Acta.rem](DMS-Acta.rem) (REMUS), versión 1.1, 2026-
 | Origen | Destinos |
 |---|---|
 | OBJ-D01 | RF-D01, RF-D06, RF-D09, IR-D02 |
-| OBJ-D02 | RF-D02, RF-D04, RF-D05 |
+| OBJ-D02 | RF-D02, RF-D04, RF-D05, UI-D02, RN-D06 |
 | OBJ-D03 | RF-D03, RN-D01 |
 | OBJ-D04 | RF-D09 |
-| CU-D01 | RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, IR-D02, ACT-D01 |
-| CU-D02 | RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02, ACT-D02 |
+| CU-D01 | RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, RN-D06, IR-D02, ACT-D01 |
+| CU-D02 | RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02, UI-D02, ACT-D02 |

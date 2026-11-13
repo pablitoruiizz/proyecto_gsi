@@ -1,12 +1,12 @@
 # HU-14c · Pruebas en móvil y tablet (12/11/2026)
 
-Estado: **hecha la parte que se puede automatizar con emulación; falta probar en dispositivos reales** (lista al final). Script reproducible: `python scripts/pruebas/movil.py` (Chrome emulado con Playwright, con el sitio local arrancado).
+Estado: **hecha la parte que se puede automatizar con emulación; falta probar en dispositivos reales** (lista al final). Son 28 inspecciones de páginas cargadas (14 páginas × 2 tamaños): no abren menús, no envían formularios y no incluyen `/gestion/` con la sesión iniciada. Script reproducible: `python scripts/pruebas/movil.py` (Chrome emulado con Playwright, con el sitio local arrancado).
 
 ## Qué se comprueba
 En 14 páginas (portada, noticias, delegaciones, una ficha de delegación, actas y normativa, calendario, Atención al estudiante, buzón, seguimiento de ticket, mediación, preguntas frecuentes, votaciones, acceso y contacto) y con dos tamaños: **móvil 375 × 812** y **tablet 768 × 1024**, con pantalla táctil y densidad 2×:
 
-- que no haya desplazamiento horizontal de la página ni elementos que se salgan por la derecha (se excluyen los carruseles con su propio desplazamiento);
-- que los botones, enlaces, casillas y campos midan al menos 40 px para tocarlos con el dedo (el mínimo de WCAG 2.2 es 24 px; Apple y Google recomiendan 44–48 px);
+- que no haya desplazamiento horizontal de la página ni elementos que se salgan por la derecha (se excluye todo elemento que esté dentro de un contenedor con `overflow` automático, de desplazamiento, oculto o recortado: los carruseles, pero también cualquier contenedor que recorte su contenido, que por tanto no se revisa);
+- que los botones, enlaces, casillas y campos midan al menos 40 px para tocarlos con el dedo (el mínimo de WCAG 2.2 es 24 px; Apple y Google recomiendan 44–48 px). El script admite dos excepciones, que bajan el mínimo a 24 px: los enlaces de más de 12 caracteres dentro de un párrafo o una lista y las casillas de verificación;
 - que los campos de formulario tengan letra de 16 px o más (en iOS, con menos, la página se amplía al tocar el campo);
 - que la página responda 200.
 

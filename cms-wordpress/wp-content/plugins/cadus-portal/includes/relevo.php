@@ -214,6 +214,10 @@ function cadus_relevo_procesar(): void
     }
     // Efecto inmediato: fuera todas las sesiones de la cuenta, en cualquier navegador o dispositivo.
     WP_Session_Tokens::get_instance($cuenta->ID)->destroy_all();
+    // Y las contraseñas de aplicación (acceso por API REST/XML-RPC) que el equipo anterior pudiera haber creado.
+    if (class_exists('WP_Application_Passwords')) {
+        WP_Application_Passwords::delete_all_application_passwords($cuenta->ID);
+    }
 
     $historial = array_slice(array_filter((array) get_user_meta($cuenta->ID, 'cadus_relevos', true), 'is_array'), -19);
     $historial[] = ['fecha' => time(), 'modo' => $modo, 'por' => $actor->ID === $cuenta->ID ? 'la propia delegación' : $actor->user_login];

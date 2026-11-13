@@ -179,7 +179,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.1, 2026-11-12. Cad
 | RNF-D01 | Privacidad | cumplir el RGPD y la LOPDGDD en los expedientes y los registros de votación, sin guardar datos que no sean necesarios | Vital |
 | RNF-D02 | Facilidad de uso | permitir que una persona sin conocimientos informáticos suba un documento y rellene sus metadatos con una guía de pocos pasos | Vital |
 | RNF-D03 | Mantenibilidad | dejar documentada la estructura de sitios, columnas y permisos para el relevo entre cursos | Importante |
-| RNF-D04 | Conservación | conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (excepción aceptada por la periodicidad mensual de la revisión) | Vital |
+| RNF-D04 | Conservación | conservar los expedientes 2 años desde su resolución y retirarlos en la primera revisión mensual posterior, de modo que el plazo máximo real es de 2 años y un mes (decisión técnica del equipo por la periodicidad mensual de la revisión, pendiente de que el CADUS la confirme) | Vital |
 | RNF-D05 | Disponibilidad | mantener los documentos accesibles durante las asambleas | Importante |
 
 ## 10. Reglas de negocio
@@ -198,7 +198,7 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.1, 2026-11-12. Cad
 
 | Código | Nombre | Descripción |
 |---|---|---|
-| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros. |
+| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los cuatro (grupo Integrantes). |
 | RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 
@@ -210,13 +210,13 @@ Contenido del proyecto [DMS.rem](DMS.rem) (REMUS), versión 1.1, 2026-11-12. Cad
 | OBJ-D02 | RF-D02, RF-D04, RF-D05, IR-D06, UI-D02, RN-D06, RN-D07 |
 | OBJ-D03 | RF-D03, RF-D07, RF-D08, RNF-D01, RNF-D04, RN-D01, RN-D02, RN-D03 |
 | OBJ-D04 | RN-D04, RN-D05, IR-D05, RF-D09 |
-| CU-D01 | RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, IR-D02, ACT-D01 |
-| CU-D02 | RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02, ACT-D02 |
-| CU-D03 | RF-D04, RF-D05, RF-D06, IR-D03, ACT-D03, ACT-D02 |
+| CU-D01 | RF-D01, RF-D02, RF-D03, RF-D09, RN-D01, RN-D06, IR-D02, ACT-D01 |
+| CU-D02 | RF-D03, RF-D04, RF-D05, RF-D06, RF-D10, RN-D01, IR-D02, UI-D02, ACT-D02 |
+| CU-D03 | RF-D04, RF-D05, RF-D06, IR-D03, UI-D02, ACT-D03, ACT-D02 |
 | CU-D04 | RF-D01, RF-D02, RF-D07, RN-D02, IR-D04, ACT-D01 |
 | CU-D05 | RF-D07, RF-D08, RN-D03, RNF-D04, ACT-D01 |
 | CU-D06 | RF-D01, RF-D02, RF-D09, RN-D04, RN-D05, IR-D05, ACT-D01 |
-| CU-D07 | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03, ACT-D01 |
+| CU-D07 | RF-D01, RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03, ACT-D01 |
 | CU-D08 | RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01, IR-D05, ACT-D01 |
 | UI-D01 | RNF-D02, RF-D02 |
 | RNF-D01 | RN-D02, RN-D04 |

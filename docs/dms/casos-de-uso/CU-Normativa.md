@@ -60,7 +60,7 @@ Los permisos se conceden sobre el sitio Documentación pública con los grupos p
 5. El sistema muestra las normas que cumplen la búsqueda.
 6. El estudiante abre la norma.
 
-**Requisitos relacionados:** RF-D04, RF-D05, RF-D06, IR-D03, ACT-D02 y ACT-D03.
+**Requisitos relacionados:** RF-D04, RF-D05, RF-D06, IR-D03, UI-D02, ACT-D02 y ACT-D03.
 
 ### CU-D07 Publicar una nueva versión de una norma y derogar la anterior
 
@@ -80,7 +80,7 @@ Los permisos se conceden sobre el sitio Documentación pública con los grupos p
 4. La Ejecutiva del CADUS abre la versión anterior de esa norma y cambia su estado a Derogada.
 5. El sistema muestra en la vista de normativa vigente solo la versión nueva y conserva la derogada, sin borrarla.
 
-**Requisitos relacionados:** RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03 y ACT-D01.
+**Requisitos relacionados:** RF-D01, RF-D02, RF-D05, RF-D06, RN-D06, RN-D07, IR-D03 y ACT-D01.
 
 SharePoint no comprueba por sí solo que haya una única versión vigente por norma: el paso 4 lo hace la Ejecutiva a mano. Si se olvida, la vista «Vigente» mostraría las dos versiones.
 

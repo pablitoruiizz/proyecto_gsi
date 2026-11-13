@@ -184,8 +184,31 @@
       ]
     }
   ],
-  "ui": [],
+  "ui": [
+    {
+      "id": "UI-D02",
+      "name": "Vistas predefinidas",
+      "description": "ofrecer vistas planas ya filtradas: normativa vigente, actas aprobadas, votaciones y expedientes caducados",
+      "comments": "RF-D05",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
   "functional": [
+    {
+      "id": "RF-D01",
+      "name": "Organización en sitios y carpetas",
+      "description": "organizar los documentos en cuatro sitios (Documentación pública, Órganos de gobierno, Votaciones y Atención al estudiante) con una biblioteca por tipo de documento",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
     {
       "id": "RF-D02",
       "name": "Tipo de documento obligatorio",
@@ -332,7 +355,7 @@
     {
       "id": "RC-D01",
       "name": "SharePoint de la Universidad de Sevilla",
-      "description": "El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros.",
+      "description": "El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los cuatro (grupo Integrantes).",
       "authors": [
         "Pablo Ruiz Vidal"
       ]
@@ -358,6 +381,7 @@
     [
       "OBJ-D01",
       [
+        "RF-D01",
         "RF-D06",
         "IR-D03"
       ]
@@ -368,6 +392,7 @@
         "RF-D02",
         "RF-D04",
         "RF-D05",
+        "UI-D02",
         "RN-D06",
         "RN-D07"
       ]
@@ -379,6 +404,7 @@
         "RF-D05",
         "RF-D06",
         "IR-D03",
+        "UI-D02",
         "ACT-D03",
         "ACT-D02"
       ]
@@ -386,6 +412,7 @@
     [
       "CU-D07",
       [
+        "RF-D01",
         "RF-D02",
         "RF-D05",
         "RF-D06",
