@@ -38,47 +38,61 @@ def analisis():
 
 
 def diseno():
-    fig, ax = lienzo(1900, 950)
+    """UML de diseño con los estereotipos de la diapositiva 3 del Lab 4: <<Site>>, <<Folder>>, <<Document>>, <<Role>>, <<Permission>>
+    y <<Filter>> (la búsqueda del análisis pasa a ser un filtro de metadatos sobre una vista plana)."""
+    fig, ax = lienzo(1900, 1250)
     ax.text(950, 24, "UML de diseño del DMS en SharePoint — del análisis al diseño", ha="center", fontsize=13, fontweight="bold", color=AZUL)
     # sitios
-    sitios = [(40, "CADUS Documentación pública", "cadus-documentacion-publica · RF-D01"),
-              (700, "CADUS Órganos de gobierno", "cadus-organos-de-gobierno · RF-D01"),
-              (1440, "CADUS Atención al estudiante", "cadus-atencion-al-estudiante · RF-D01 · RN-D02")]
+    sitios = [(40, "Documentación pública", "cadus-documentacion-publica · RF-D01"),
+              (700, "Órganos de gobierno", "cadus-organos-de-gobierno · RF-D01"),
+              (1440, "Atención al estudiante", "cadus-atencion-al-estudiante · RF-D01 · RN-D02")]
     anchos = [560, 700, 430]
     for (x, n, t), w in zip(sitios, anchos):
         caja(ax, x, 70, w, 70, "<<Site>> " + n, t, fc=AZUL, ec=AZUL, subcolor="#ffd2cf", titcolor="white")
-    cols_comunes = ["Tipo de documento (elección)", "Fecha (fecha)", "Curso académico (elección)"]
-    norm = clase(ax, 40, 230, 560, "<<Library>> Normativa", "IR-D03 · CU-D03 · CU-D07 · RF-D05", cols_comunes + ["Norma (texto: identifica la norma)", "Versión (número)", "Estado (vigente|derogada)", "Vista plana «Vigente»: Estado = vigente", "Una versión vigente por norma (RN-D07)"])
-    actas = clase(ax, 700, 230, 330, "<<Library>> Actas", "IR-D02 · CU-D01 · CU-D02 · RF-D03", cols_comunes + ["Asamblea (texto)", "Estado de aprobación (nativo)", "Resumen (generado, deseable)", "Vista plana «Aprobadas»", "Aprobación de contenido: activada"])
-    votac = clase(ax, 1070, 230, 330, "<<Library>> Votaciones", "IR-D05 · CU-D06 · CU-D08 · RN-D04 · RN-D05", cols_comunes + ["Asamblea (texto, obligatoria)", "Número de votación (obligatorio)", "Tipo de voto (nominal|secreto)", "Resultado (aprobada|rechazada)", "Plantilla: 27 filas por delegación", "Permisos propios: sin visitantes"])
-    exp = clase(ax, 1440, 230, 430, "<<Library>> Expedientes", "IR-D04 · CU-D04 · CU-D05 · RF-D07 · RF-D08", cols_comunes + ["Código (texto: CAD-… | MED-…)", "Facultad (elección)", "Fecha de resolución (obligatoria)", "Fecha de caducidad (calculada: +2 años)", "Vista plana «Caducados»: caducidad < hoy", "Sin acceso para visitantes"], NARANJA)
-    for (x, _, _), (lib, w) in zip(sitios, ((norm, 0), (actas, 0), (exp, 0))):
-        pass
+    cols_comunes = ["<<Document>> con estas columnas:", "Tipo de documento (elección)", "Fecha (fecha)", "Curso académico (elección)"]
+    norm = clase(ax, 40, 230, 560, "<<Folder>> Normativa", "IR-D03 · CU-D03 · CU-D07 · RF-D05", cols_comunes + ["Norma (texto: identifica la norma)", "Versión (número)", "Estado (vigente|derogada)", "Una versión vigente por norma (RN-D07)"])
+    actas = clase(ax, 700, 230, 330, "<<Folder>> Actas", "IR-D02 · CU-D01 · CU-D02 · RF-D03", cols_comunes + ["Asamblea (texto)", "Estado de aprobación (nativo)", "Resumen (generado, deseable)", "Aprobación de contenido: activada"])
+    votac = clase(ax, 1070, 230, 330, "<<Folder>> Votaciones", "IR-D05 · CU-D06 · CU-D08 · RN-D04 · RN-D05", cols_comunes + ["Asamblea (texto, obligatoria)", "Número de votación (obligatorio)", "Tipo de voto (nominal|secreto)", "Resultado (aprobada|rechazada)", "Plantilla: 27 filas por delegación"])
+    exp = clase(ax, 1440, 230, 430, "<<Folder>> Expedientes", "IR-D04 · CU-D04 · CU-D05 · RF-D07 · RF-D08", cols_comunes + ["Código (texto: CAD-… | MED-…)", "Facultad (elección)", "Fecha de resolución (obligatoria)", "Fecha de caducidad (calculada: +2 años)"], NARANJA)
     ax.plot([320, 320], [140, 230], color="#555", lw=1.3, zorder=1)
     ax.plot([865, 865], [140, 230], color="#555", lw=1.3, zorder=1)
-    ax.plot([1235, 1235], [140, 150], color="#555", lw=1.3, zorder=1)
     ax.plot([1235, 1235], [150, 230], color="#555", lw=1.3, zorder=1)
     ax.plot([865, 1235], [150, 150], color="#555", lw=1.3, zorder=1)
     ax.plot([1655, 1655], [140, 230], color="#555", lw=1.3, zorder=1)
-    # grupos de permisos
-    ax.text(40, 525, "Grupos de permisos de cada sitio (RF-D06) y a quién se asignan", fontsize=11.5, fontweight="bold", color=AZUL)
-    grupos = [("<<Group>> Propietarios", "control total (r/w)", "Cuenta única del CADUS (dcadus@us.es) y Pablo", AZUL),
-              ("<<Group>> Integrantes", "leer y escribir (r/w)", "Equipo del proyecto (4 integrantes), solo con datos de ejemplo", VERDE),
-              ("<<Group>> Visitantes", "solo lectura (r)", "Delegados (cuenta de su delegación) y estudiantes (@alum.us.es)", NARANJA)]
-    for i, (n, nivel, quien, c) in enumerate(grupos):
-        x = 40 + i * 610
-        caja(ax, x, 555, 570, 110, n + " — " + nivel, quien, fc="white", ec=c, subcolor="#333")
-    ax.text(40, 705, "Visitantes por sitio:", fontsize=10, fontweight="bold")
+    # filtros: la búsqueda por metadatos son vistas planas con filtros (diapositivas 2 y 4 del Lab 4)
+    ax.text(40, 545, "Búsqueda por metadatos: vista plana de la carpeta con filtros (tipo de documento y otro metadato)", fontsize=11.5, fontweight="bold", color=AZUL)
+    filtros = [(40, 560, "<<Filter>> Vigente", "Normativa · Estado = Vigente · RF-D05 · UI-D02", norm),
+               (700, 330, "<<Filter>> Aprobadas", "Acta · Aprobación = Aprobado · RF-D05", actas),
+               (1070, 330, "<<Filter>> Asamblea y voto", "Votación · CU-D08", votac),
+               (1440, 430, "<<Filter>> Caducados", "Expediente · Fecha de caducidad < hoy · RF-D08", exp)]
+    for x, w, tit, sub, carpeta in filtros:
+        caja(ax, x, 580, w, 62, tit, sub, fc="#eef7ee", ec=VERDE, subcolor="#333")
+        rel(ax, carpeta, "abj", (x, 580, w, 62), "arr", "", dy=0)
+    ax.text(40, 668, "Búsqueda genérica (RF-D04): la de SharePoint, por nombre y por contenido del archivo, sobre todo el sitio.", fontsize=9.5, color="#333")
+    # roles y permisos: grupos predefinidos de SharePoint
+    ax.text(40, 715, "Roles y permisos (RF-D06): grupos predefinidos de SharePoint, concedidos sobre el sitio", fontsize=11.5, fontweight="bold", color=AZUL)
+    roles = [("<<Role>> Propietario", "Cuenta única del CADUS (dcadus@us.es) y Pablo", AZUL),
+             ("<<Role>> Integrante", "Equipo del proyecto (4 integrantes), solo con datos de ejemplo", VERDE),
+             ("<<Role>> Visitante", "Delegados (cuenta de su delegación) y estudiantes (@alum.us.es)", NARANJA)]
+    for i, (n, quien, c) in enumerate(roles):
+        caja(ax, 40 + i * 610, 740, 570, 70, n, quien, fc="white", ec=c, subcolor="#333")
+    caja(ax, 160, 880, 700, 64, "<<Permission>> Read/write", "leer y escribir · Propietario e Integrante · sobre el sitio o la carpeta", fc="#fff7ea", ec=NARANJA, subcolor="#333")
+    caja(ax, 1010, 880, 700, 64, "<<Permission>> Read", "solo lectura · Visitante · sobre el sitio (Votaciones y Expedientes con permisos propios: sin visitantes)", fc="#fff7ea", ec=NARANJA, subcolor="#333")
+    ax.plot([325, 510], [810, 880], color="#555", lw=1.3, zorder=1)
+    ax.plot([935, 510], [810, 880], color="#555", lw=1.3, zorder=1)
+    ax.plot([1545, 1360], [810, 880], color="#555", lw=1.3, zorder=1)
+    ax.text(40, 975, "Visitantes por sitio:", fontsize=10, fontweight="bold")
     visit = ["Documentación pública: estudiantes y delegados (lectura de la normativa vigente)",
-             "Órganos de gobierno: delegados (solo actas aprobadas; la biblioteca Votaciones tiene permisos propios y no la ven)",
+             "Órganos de gobierno: delegados (solo actas aprobadas; la carpeta Votaciones tiene permisos propios y no la ven)",
              "Atención al estudiante: nadie (solo la Ejecutiva, RN-D02)"]
     for i, t in enumerate(visit):
-        ax.text(60, 730 + 22 * i, "• " + t, fontsize=9.5)
-    # tabla análisis -> diseño
-    ax.text(40, 830, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
-    mapa = ["Documento → documento con columnas", "Carpeta → sitio o biblioteca", "Rol → grupo de permisos", "Búsqueda y metadatos → búsqueda + vista plana con filtros", "Permiso → permiso del grupo sobre el sitio o la biblioteca"]
-    ax.text(60, 857, "   ·   ".join(mapa[:3]), fontsize=9.5)
-    ax.text(60, 881, "   ·   ".join(mapa[3:]), fontsize=9.5)
+        ax.text(60, 1000 + 22 * i, "• " + t, fontsize=9.5)
+    # tabla análisis -> diseño (diapositiva 2 del Lab 4)
+    ax.text(40, 1090, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
+    mapa = ["<<Document>> → <<Document>> (con columnas de metadatos)", "<<Folder>> → <<Site>> / <<Folder>> (los sitios asignan permisos de golpe)", "<<Role>> → <<Role>> (Propietario, Integrante, Visitante)",
+            "<<Search>> → búsqueda genérica + <<Filter>> por metadatos en una vista plana", "Metadato → columna de la carpeta", "<<Permission>> → Read/write o Read sobre el sitio, por grupo"]
+    ax.text(60, 1118, "   ·   ".join(mapa[:3]), fontsize=9.5)
+    ax.text(60, 1142, "   ·   ".join(mapa[3:]), fontsize=9.5)
     guardar(fig, "uml-dms-diseno.png")
 
 
