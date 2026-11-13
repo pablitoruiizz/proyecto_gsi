@@ -13,8 +13,8 @@ Seguimiento SCRUM del DMS, independiente del del CMS ([`docs/scrum/`](../../scru
 | DMS-HU-05 | Como Estudiante, quiero consultar la normativa vigente y que la derogada no aparezca. | RF-D01, RF-D05 | Media | 2 | Configurada el 30/10 (falta prueba cruzada) | Sprint-01 | Joaquín |
 | DMS-HU-06 | Como miembro de la Ejecutiva, quiero archivar expedientes con su fecha de caducidad calculada y ver los caducados para retirarlos. | RF-D07, RF-D08, RN-D03 | Alta | 3 | Configurada el 30/10 (falta prueba cruzada) | Sprint-01 | Marcos |
 | DMS-HU-07 | Como miembro de la Ejecutiva, quiero registrar el resultado de una votación por delegación sin guardar el DNI y, si es secreta, sin guardar el voto de cada delegación. | RF-D09, RN-D04, RN-D05 | Media | 3 | Configurada el 30/10 (falta prueba cruzada) | Sprint-01 | Miguel Ángel |
-| DMS-HU-08 | Como miembro de la Ejecutiva, quiero publicar una nueva versión de una norma y derogar la anterior, para que solo haya una versión vigente (CU-D07). | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07 | Media | 2 | Pendiente | Sprint-02 | Joaquín |
-| DMS-HU-09 | Como miembro de la Ejecutiva, quiero consultar los registros de votaciones anteriores filtrándolos por asamblea y tipo de voto (CU-D08). | RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01 | Media | 2 | Pendiente | Sprint-02 | Álvaro |
+| DMS-HU-08 | Como miembro de la Ejecutiva, quiero publicar una nueva versión de una norma y derogar la anterior, para que solo haya una versión vigente (CU-D07). | RF-D02, RF-D05, RF-D06, RN-D06, RN-D07 | Media | 2 | Ejecutada el 13/11 (Pablo con Claude); falta la prueba cruzada | Sprint-02 | Joaquín |
+| DMS-HU-09 | Como miembro de la Ejecutiva, quiero consultar los registros de votaciones anteriores filtrándolos por asamblea y tipo de voto (CU-D08). | RF-D05, RF-D06, RN-D04, RN-D05, RN-D06, RNF-D01 | Media | 2 | Ejecutada el 13/11 (Pablo con Claude); falta la prueba cruzada | Sprint-02 | Álvaro |
 
 **Total: 28 SP** (24 del Sprint 1 y 4 del Sprint 2, la versión definitiva). El requisito deseable RF-D10 (resumen automático del acta) no tiene historia: se hará solo si sobra tiempo.
 

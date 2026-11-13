@@ -168,20 +168,20 @@ def burndown(n=1, titulo="Burndown del Sprint 1 del DMS (26/10 – 08/11/2026)")
 
 # ------------------------------------------------------------------ datos de los 4 tipos de documento
 CAPS = {
-    "01": ("01-sitios-y-bibliotecas.jpg", "Los tres sitios de grupo del DMS y sus bibliotecas en SharePoint de la US (sección «Compilar», «De su propiedad»).",
-           "Se crearon los sitios «CADUS Documentación pública», «CADUS Órganos de gobierno» y «CADUS Atención al estudiante», cada uno con su biblioteca de documentos (Normativa, Actas y Votaciones, Expedientes). Cada sitio de grupo trae los grupos Propietarios, Integrantes y Visitantes que pide el Lab 4 y tiene 5 miembros: Pablo como propietario y los otros cuatro integrantes del equipo. Responde a RF-D01 y RF-D06 (DMS-HU-01)."),
+    "01": ("01-sitios-y-bibliotecas.jpg", "Los sitios de grupo del DMS y sus bibliotecas en SharePoint de la US (sección «Compilar», «De su propiedad»).",
+           "Se crearon los sitios «CADUS Documentación pública», «CADUS Órganos de gobierno», «CADUS Votaciones» (desde el 13/11/2026) y «CADUS Atención al estudiante», cada uno con su biblioteca de documentos (Normativa, Actas, Votaciones, Expedientes). Los registros de votación tienen un sitio propio para que sus permisos se concedan sobre el sitio, como pide el Lab 4, y no rompiendo la herencia de una biblioteca. Cada sitio de grupo trae los grupos Propietarios, Integrantes y Visitantes que pide el Lab 4 y tiene 5 miembros: Pablo como propietario y los otros cuatro integrantes del equipo. Responde a RF-D01 y RF-D06 (DMS-HU-01)."),
     "02": ("02-normativa.jpg", "Biblioteca Normativa con sus columnas de metadatos.",
-           "La biblioteca guarda la normativa del CADUS. Además del nombre, cada documento tiene las columnas Tipo de documento (obligatoria, con valor Normativa por defecto), Fecha, Curso académico y Estado (Vigente o Derogada). En la captura se ve un reglamento derogado junto a dos vigentes. Responde a RF-D02 y RN-D06 (DMS-HU-02)."),
+           "La biblioteca guarda la normativa del CADUS. Además del nombre, cada documento tiene las columnas Tipo de documento (obligatoria, con valor Normativa por defecto), Fecha, Curso académico y Estado (Vigente o Derogada). La captura es anterior a CU-D07: se ve un reglamento derogado junto a dos vigentes, entre ellos el Reglamento de votaciones en su única versión. Las columnas Norma y Versión se añaden después, para CU-D07 (captura 13). Responde a RF-D02 y RN-D06 (DMS-HU-02)."),
     "03": ("03-normativa-vigente.jpg", "Vista plana «Vigente» de la biblioteca Normativa.",
-           "La vista «Vigente» recorre la biblioteca sin carpetas y filtra por Estado = Vigente, así que el reglamento derogado desaparece. Es el filtro por metadatos de CU-D03 y de RF-D05 (DMS-HU-03 y DMS-HU-05)."),
+           "La vista «Vigente» recorre la biblioteca sin carpetas y filtra por Estado = Vigente, así que el reglamento derogado desaparece (captura anterior a CU-D07). Es el filtro por metadatos de CU-D03 y de RF-D05 (DMS-HU-03 y DMS-HU-05)."),
     "04": ("04-actas.jpg", "Biblioteca Actas vista por la Ejecutiva (propietario): borrador y acta aprobada.",
            "La biblioteca Actas tiene activada la aprobación de contenido y la visibilidad de borradores solo para autor y aprobadores. La Ejecutiva ve a la vez el acta aprobada del pleno del 12/10 y el borrador de la asamblea del 26/10, con sus columnas Tipo de documento, Fecha, Curso académico y Asamblea. Responde a RF-D03 y RN-D01 (DMS-HU-04)."),
     "05": ("05-actas-aprobadas.jpg", "Vista plana «Aprobadas» de la biblioteca Actas.",
            "La vista «Aprobadas» filtra por estado de aprobación y solo muestra el acta aprobada, que es lo que debe ver un delegado en CU-D02. El borrador de la asamblea del 26/10 no aparece. Responde a RF-D03, RF-D05 y RN-D01."),
     "06": ("06-votaciones.jpg", "Biblioteca Votaciones con las columnas propias del registro de votación.",
-           "La biblioteca Votaciones añade las columnas Número de votación, Tipo de voto (Nominal o Secreto) y Resultado. Los dos registros de ejemplo son de la misma asamblea: la votación 1 nominal y la 2 secreta. Los documentos no contienen números de DNI y, en la secreta, solo el recuento total. Responde a CU-D06, RN-D04 y RN-D05 (DMS-HU-07). En la biblioteca «Plantillas» del mismo sitio hay una plantilla de acta y otra de registro de votación con una fila por cada una de las 27 delegaciones (RF-D09)."),
-    "07": ("07-permisos-votaciones.jpg", "Permisos exclusivos de la biblioteca Votaciones.",
-           "La biblioteca Votaciones rompe la herencia de permisos del sitio: «Esta biblioteca tiene permisos exclusivos». Solo conserva Propietarios (control total) e Integrantes (editar); se ha quitado el grupo Visitantes, en el que irán los delegados, para que no vean los registros de votación. Responde a RF-D06 y RN-D04."),
+           "La biblioteca Votaciones, ahora en el sitio propio CADUS Votaciones, añade las columnas Asamblea, Número de votación, Tipo de voto (Nominal o Secreto) y Resultado. Los dos registros de ejemplo son de la misma asamblea: la votación 1 nominal y la 2 secreta. Los documentos no contienen números de DNI y, en la secreta, solo el recuento total. Responde a CU-D06, RN-D04 y RN-D05 (DMS-HU-07). En la biblioteca «Plantillas» del mismo sitio está la plantilla de registro de votación, con una fila por cada una de las 27 delegaciones (RF-D09)."),
+    "07": ("07-permisos-votaciones.jpg", "Permisos del sitio CADUS Votaciones.",
+           "El sitio CADUS Votaciones usa los tres grupos predefinidos de SharePoint: Propietarios (control total), Integrantes (editar) y Visitantes (leer). El grupo Visitantes se deja vacío, de modo que ningún delegado ni estudiante ve los registros de votación. Responde a RF-D06 y RN-D04."),
     "08": ("08-expedientes.jpg", "Biblioteca Expedientes del sitio Atención al estudiante.",
            "La biblioteca guarda los expedientes de reclamaciones y mediaciones resueltos, con las columnas Tipo de documento, Fecha, Curso académico, Código (CAD-… o MED-…), Facultad, Estado y Fecha de resolución, más la fecha de caducidad calculada. Tiene también permisos exclusivos, sin el grupo Visitantes (RN-D02). Responde a CU-D04 y RF-D01 (DMS-HU-06)."),
     "09": ("09-expedientes-caducados.jpg", "Vista plana «Caducados» de la biblioteca Expedientes.",
@@ -194,9 +194,13 @@ CAPS = {
     "12": ("12-cu-d05-papelera-segunda-fase.jpg", "CU-D05: papelera de segunda fase sin el expediente.",
            "SharePoint guarda lo que se borra de la papelera del sitio en la papelera de segunda fase. Se vacía también, y la vista «Caducados» queda sin expedientes: ya no se conserva ninguna copia (paso 4 y postcondición de CU-D05, RN-D03 y RNF-D04)."),
     "13": ("13-cu-d07-nueva-version.jpg", "CU-D07: nueva versión de una norma y la anterior derogada.",
-           "La biblioteca Normativa con las columnas Norma y Versión: la versión nueva está vigente y la anterior ha pasado a derogada; la vista «Vigente» solo muestra la nueva (CU-D07, RN-D07)."),
+           "Resultado de CU-D07 en la biblioteca Normativa, con las columnas Norma y Versión: el Reglamento de votaciones v2 está vigente y la v1 ha pasado a derogada, sin borrarla (CU-D07, RN-D07). La regla de una sola versión vigente por norma la cumple la Ejecutiva a mano: SharePoint no la comprueba."),
     "14": ("14-votaciones-consulta.jpg", "CU-D08: registros de votación filtrados por asamblea y tipo de voto.",
            "La Ejecutiva filtra los registros de la biblioteca Votaciones por asamblea y tipo de voto; Asamblea y Número de votación son obligatorias para poder distinguirlos (CU-D08, RN-D04, RN-D05)."),
+    "15": ("15-votaciones-prueba-apertura.jpg", "CU-D08 paso 5: el registro de la votación 1 abierto en Word en línea.",
+           "El registro encontrado con los filtros se abre en Word en línea: asamblea, fecha, tipo de voto, resultado y una fila por delegación, sin ningún DNI (CU-D08, RN-D04)."),
+    "16": ("16-cu-d07-vista-vigente.jpg", "CU-D07: vista «Vigente» de Normativa tras publicar la versión nueva.",
+           "La vista «Vigente» solo muestra la versión vigente de cada norma: el Reglamento de votaciones v2 y los Estatutos. La v1 derogada se conserva en «Todos los documentos» (CU-D07, CU-D03, RN-D07, RF-D05)."),
 }
 
 TIPOS = [
@@ -207,19 +211,19 @@ TIPOS = [
      "caps": ["04", "05"], "reglas": ["RN-D01"], "ejemplo": "Acta del pleno del 12-10-2026 (ejemplo).docx (aprobada) y Acta de la asamblea del 26-10-2026 (ejemplo, borrador).docx"},
     {"archivo": "CU-Normativa", "nombre": "Normativa y estatutos", "cus": ["CU-D03", "CU-D07"], "sitio": "CADUS Documentación pública", "biblioteca": "Normativa",
      "desc": "Normas, reglamentos y estatutos del CADUS. De cada norma solo hay una versión vigente; al publicar una nueva, la anterior pasa a derogada y se conserva como referencia.",
-     "meta": [["Tipo de documento", "Elección (Normativa)", "Sí"], ["Fecha", "Fecha", "Sí"], ["Curso académico", "Elección", "No"], ["Norma", "Texto (identifica la misma norma entre versiones)", "Sí"], ["Versión", "Número", "Sí"], ["Estado", "Elección (Vigente, Derogada)", "Sí"]],
+     "meta": [["Tipo de documento", "Elección (Normativa)", "Sí"], ["Fecha", "Fecha", "No"], ["Curso académico", "Elección", "No"], ["Norma", "Texto (identifica la misma norma entre versiones)", "Sí"], ["Versión", "Número", "Sí"], ["Estado", "Elección (Vigente, Derogada)", "Sí"]],
      "permisos": "Propietarios: leer y escribir. Visitantes (estudiantes con su correo @alum.us.es y delegados con la cuenta de su delegación): solo lectura.",
-     "caps": ["02", "03", "13"], "reglas": ["RN-D06", "RN-D07"], "ejemplo": "Estatutos del CADUS (ejemplo).docx, Reglamento de votaciones (ejemplo).docx y un reglamento derogado"},
+     "caps": ["02", "03", "13", "16"], "reglas": ["RN-D06", "RN-D07"], "ejemplo": "Estatutos del CADUS (ejemplo).docx, Reglamento de votaciones (ejemplo).docx (v1, derogada), Reglamento de votaciones v2 (ejemplo).docx (vigente) y un reglamento derogado"},
     {"archivo": "CU-Expediente", "nombre": "Expediente de reclamación o mediación", "cus": ["CU-D04", "CU-D05"], "sitio": "CADUS Atención al estudiante", "biblioteca": "Expedientes",
      "desc": "Expediente de una reclamación o mediación ya resuelta. Se conserva 2 años desde su resolución como prueba y luego se retira. Solo lo ve la Ejecutiva.",
      "meta": [["Tipo de documento", "Elección (Expediente)", "Sí"], ["Fecha", "Fecha", "Sí"], ["Curso académico", "Elección", "No"], ["Código", "Texto (CAD-… o MED-…)", "No"], ["Facultad", "Elección", "No"], ["Estado", "Elección (Resuelto)", "Sí"], ["Fecha de resolución", "Fecha (obligatoria: de ella depende la caducidad)", "Sí"], ["Fecha de caducidad", "Calculada: resolución + 2 años", "Automático"]],
      "permisos": "Permisos exclusivos: Propietarios (control total) e Integrantes (editar, solo el equipo con datos de ejemplo). Sin el grupo Visitantes.",
      "caps": ["08", "09", "10", "11", "12"], "reglas": ["RN-D02", "RN-D03"], "ejemplo": "CAD-2026-0001 (ejemplo).docx y MED-2024-0002 (ejemplo, caducado).docx"},
-    {"archivo": "CU-Votacion", "nombre": "Registro de votación", "cus": ["CU-D06", "CU-D08"], "sitio": "CADUS Órganos de gobierno", "biblioteca": "Votaciones",
+    {"archivo": "CU-Votacion", "nombre": "Registro de votación", "cus": ["CU-D06", "CU-D08"], "sitio": "CADUS Votaciones", "biblioteca": "Votaciones",
      "desc": "Resultado de una votación presencial de asamblea, con un voto por delegación (27 delegaciones). No guarda el DNI y, si la votación es secreta, solo el recuento total.",
      "meta": [["Tipo de documento", "Elección (Votación)", "Sí"], ["Fecha", "Fecha", "Sí"], ["Curso académico", "Elección", "No"], ["Asamblea", "Texto", "Sí"], ["Número de votación", "Número", "Sí"], ["Tipo de voto", "Elección (Nominal, Secreto)", "Sí"], ["Resultado", "Elección (Aprobada, Rechazada)", "No"]],
-     "permisos": "Permisos exclusivos: Propietarios (control total) e Integrantes (editar, el equipo del proyecto). Sin el grupo Visitantes: los delegados no ven los registros.",
-     "caps": ["06", "07", "14"], "reglas": ["RN-D04", "RN-D05"], "ejemplo": "Votación 1 (nominal, ejemplo).docx y Votación 2 (secreta, ejemplo).docx"},
+     "permisos": "Sitio propio con los grupos predefinidos: Propietarios (control total) e Integrantes (editar, el equipo del proyecto). El grupo Visitantes queda vacío: los delegados no ven los registros.",
+     "caps": ["06", "07", "14", "15"], "reglas": ["RN-D04", "RN-D05"], "ejemplo": "Votación 1 (nominal, ejemplo).docx y Votación 2 (secreta, ejemplo).docx"},
 ]
 CU = {u["id"]: u for u in D["usecases"]}
 DOC_DE = {c: t for t in TIPOS for c in t["cus"]}
@@ -230,9 +234,9 @@ TRAZA = {
     "CU-D03": ("DMS-HU-03, 05", "Vista plana Vigente de Normativa", "3", "Configurado y observado"),
     "CU-D04": ("DMS-HU-06", "Biblioteca Expedientes (permisos exclusivos)", "8", "Configurado y observado"),
     "CU-D05": ("DMS-HU-06", "Vista plana Caducados, columna calculada y papeleras", "9-12", "Configurado; pendiente la ejecución del 13/11"),
-    "CU-D06": ("DMS-HU-07", "Biblioteca Votaciones (permisos exclusivos) y plantilla de votación", "6, 7", "Configurado y observado"),
-    "CU-D07": ("DMS-HU-08", "Columnas Norma y Versión en Normativa y vista Vigente", "13", "Pendiente (Sprint 2 del DMS)"),
-    "CU-D08": ("DMS-HU-09", "Votaciones con Asamblea y Número de votación obligatorias; filtros", "14", "Pendiente (Sprint 2 del DMS)"),
+    "CU-D06": ("DMS-HU-07", "Sitio CADUS Votaciones (grupos predefinidos) y plantilla de votación", "6, 7", "Configurado y observado"),
+    "CU-D07": ("DMS-HU-08", "Columnas Norma y Versión en Normativa y vista Vigente", "13, 16", "Ejecutado el 13/11 (Pablo con Claude); falta la prueba cruzada"),
+    "CU-D08": ("DMS-HU-09", "Votaciones con Asamblea y Número de votación obligatorias; filtros", "14, 15", "Ejecutado el 13/11 (Pablo con Claude); falta la prueba cruzada"),
 }
 ACT = {a["id"]: a["name"] for a in D["actors"]}
 RF = {r["id"]: r for r in D["functional"]}
@@ -459,15 +463,15 @@ def entrega():
         ["Documento", "Documento de una biblioteca, con columnas de metadatos"],
         ["Carpeta", "Sitio de grupo y biblioteca de documentos"],
         ["Rol (Ejecutiva, Delegado, Estudiante)", "Grupo de permisos: Propietarios, Integrantes y Visitantes"],
-        ["Permiso", "Permiso del grupo sobre el sitio o la biblioteca (permisos exclusivos en Votaciones y Expedientes)"],
+        ["Permiso", "Permiso del grupo sobre el sitio (Read/write o Read), sin romper la herencia en las bibliotecas"],
         ["Búsqueda", "Búsqueda de SharePoint por nombre y contenido"],
         ["Metadato", "Columna de la biblioteca (elección, fecha, texto, número o calculada)"],
         ["Filtro", "Vista plana de la biblioteca con filtro por metadatos (Vigente, Aprobadas, Caducados)"]], [6.5, 10.5], tam=9, titulo="Del análisis al diseño")
     doc.add_heading("4.1 Metadatos y vistas por biblioteca", 2)
     tabla(doc, ["Sitio", "Biblioteca", "Columnas propias", "Vista plana"], [
-        ["Documentación pública", "Normativa", "Tipo de documento, Fecha, Curso académico, Estado", "Vigente (Estado = Vigente)"],
+        ["Documentación pública", "Normativa", "Tipo de documento, Fecha, Curso académico, Norma, Versión, Estado", "Vigente (Estado = Vigente)"],
         ["Órganos de gobierno", "Actas", "Tipo de documento, Fecha, Curso académico, Asamblea; aprobación de contenido", "Aprobadas (estado de aprobación = Aprobado)"],
-        ["Órganos de gobierno", "Votaciones", "Tipo de documento, Fecha, Curso académico, Asamblea, Número de votación, Tipo de voto, Resultado", "Todas las votaciones"],
+        ["Votaciones", "Votaciones", "Tipo de documento, Fecha, Curso académico, Asamblea, Número de votación, Tipo de voto, Resultado", "Todas las votaciones"],
         ["Atención al estudiante", "Expedientes", "Tipo de documento, Fecha, Curso académico, Código, Facultad, Estado, Fecha de resolución, Fecha de caducidad (calculada)", "Caducados (caducidad anterior a hoy)"]], [3.3, 2.7, 7.3, 3.7], tam=8.5, titulo="Bibliotecas, columnas y vistas")
 
     doc.add_heading("5. Documentos de casos de uso", 1)
@@ -509,10 +513,10 @@ def entrega():
     doc.add_heading("8.3 Burndown del sprint", 2)
     figura(doc, burndown(), "Burndown chart del Sprint 1 del DMS: puntos pendientes por día frente a la línea ideal.", 14)
     doc.add_heading("8.4 Sprint 2 del DMS: versión definitiva", 2)
-    par(doc, "Lo que pidió el profesor sobre lo entregado: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Se añaden CU-D07 (nueva versión de una norma) y CU-D08 (consultar votaciones anteriores) y cada documento queda con dos casos. Nadie prueba lo que escribió.")
+    par(doc, "Lo que pidió el profesor sobre lo entregado: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Se añaden CU-D07 (nueva versión de una norma) y CU-D08 (consultar votaciones anteriores) y cada documento queda con dos casos. Cada caso lo prueba otra persona, salvo CU-Normativa: lo escribió y ejecutó Pablo el 13/11 en lugar de Joaquín y su prueba cruzada queda pendiente.")
     tabla(doc, ["Integrante", "Trabajo del Sprint 2 del DMS"], [
-        ["Pablo", "D-09 (fecha y alcance con el profesor), REM 1.1 y DMS.rem, prueba de CU-Normativa"],
-        ["Joaquín", "CU-Normativa con CU-D07 (DMS-HU-08, 2 SP), backlog y burndown, prueba de CU-Votacion"],
+        ["Pablo", "D-09 (fecha y alcance con el profesor), REM 1.1 y DMS.rem, un .rem por sección, cuarto sitio CADUS Votaciones, CU-Normativa (en lugar de Joaquín) y ejecución de CU-D07 y CU-D08"],
+        ["Joaquín", "Backlog y burndown, prueba cruzada de CU-Normativa (CU-D07, DMS-HU-08) y de CU-Votacion"],
         ["Miguel Ángel", "CU-Acta, validación de CU-D07 y CU-D08 con el CADUS, prueba con un visitante"],
         ["Álvaro", "CU-Votacion con CU-D08 (DMS-HU-09, 2 SP), UML y diagrama de casos de uso, prueba de CU-Expediente y del rol estudiante"],
         ["Marcos", "CU-Expediente y ejecución de CU-D05, generador y zip (D-08), prueba de CU-Acta, revisión del REM"]], [3.5, 13.5], tam=9)
@@ -522,7 +526,7 @@ def entrega():
 
     doc.add_heading("9. Pendiente y limitaciones", 1)
     for t in ("Probar los permisos con una cuenta real de delegación: sin ella, la prueba se hace con un integrante pasado a Visitantes y se anota que no es una cuenta de delegación real.",
-              "Añadir la cuenta del CADUS (dcadus@us.es) como propietaria de los tres sitios.",
+              "Añadir la cuenta del CADUS (dcadus@us.es) como propietaria de los cuatro sitios.",
               "Anotar el resultado de cada prueba cruzada (fecha, persona y resultado) en el documento de casos de uso correspondiente.",
               "RF-D10 (resumen automático del acta) es deseable y no se ha implementado.",
               "Los documentos de ejemplo son ficticios; los datos reales los aporta el CADUS.",

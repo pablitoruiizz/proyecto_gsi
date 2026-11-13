@@ -52,6 +52,9 @@ ARCHIVOS = [
     ("docs/dms/burndown/sprint-02.csv", "DMS/seguimiento/burndown-sprint-02-dms.csv"),
     ("docs/dms/img/burndown-dms-sprint-02.png", "DMS/seguimiento/burndown-dms-sprint-02.png"),
 ]
+for sec in ("Acta", "Normativa", "Expediente", "Votacion"):
+    ARCHIVOS += [(f"docs/dms/rem-remus/secciones/DMS-{sec}.rem", f"DMS/1-Requisitos/secciones/DMS-{sec}.rem"),
+                 (f"docs/dms/rem-remus/secciones/carga-remus-{sec.lower()}.md", f"DMS/1-Requisitos/secciones/carga-remus-{sec.lower()}.md")]
 for t in TIPOS:
     ARCHIVOS += [(f"docs/dms/entrega/casos-de-uso/{t}.docx", f"DMS/4-Casos-de-uso/{t}.docx"), (f"docs/dms/entrega/casos-de-uso/{t}.pdf", f"DMS/4-Casos-de-uso/{t}.pdf")]
 for f in sorted(os.listdir(os.path.join(DMS, "capturas"))):
@@ -61,7 +64,7 @@ if CON_CMS:
 
 # Lista del profesor (Lab 4): carpeta del zip y mínimo de archivos que debe tener.
 LISTA = [
-    ("Requisitos (REM y proyecto REMUS)", "DMS/1-Requisitos", 3),
+    ("Requisitos (REM y proyectos REMUS: DMS.rem y un .rem por sección)", "DMS/1-Requisitos", 5),
     ("Documentos de análisis (UML)", "DMS/2-Analisis", 2),
     ("Documentos de diseño (UML)", "DMS/3-Diseno", 1),
     ("Documentos de casos de uso: 4, por secciones, con 2 casos cada uno (docx y pdf)", "DMS/4-Casos-de-uso", 8),
@@ -88,14 +91,14 @@ Cambio pedido por el profesor sobre la entrega del 08/11: dividir los casos de u
 
 ## DMS (SharePoint de la Universidad de Sevilla)
 - `Entrega-DMS-CADUS.docx` / `.pdf`: documento principal (requisitos, análisis, diseño, casos de uso, implementación, trazabilidad y seguimiento SCRUM).
-- `1-Requisitos`: `DMS.rem` (proyecto REMUS), `REM-DMS-v{VERSION}.pdf` (su exportación), hoja `carga-remus.md` y `REM-DMS.md`.
+- `1-Requisitos`: `DMS.rem` (proyecto REMUS completo, con los 8 casos), `REM-DMS-v{VERSION}.pdf` (su exportación), hoja `carga-remus.md` y `REM-DMS.md`; en `secciones/`, un `.rem` por sección (Acta, Normativa, Expediente y Votación, con sus dos casos de uso cada uno) y su hoja legible.
 - `2-Analisis`: UML de análisis y diagrama de casos de uso con los 8 casos y los roles.
 - `3-Diseno`: UML de diseño (del análisis a SharePoint).
 - `4-Casos-de-uso`: CU-Acta (CU-D01, CU-D02), CU-Normativa (CU-D03, CU-D07), CU-Expediente (CU-D04, CU-D05) y CU-Votacion (CU-D06, CU-D08).
 - `5-Implementacion-SharePoint`: capturas del entorno real (`uses0.sharepoint.com`), explicadas en cada documento de casos de uso.
 - `seguimiento`: product backlog, sprint backlog y burndown de los dos sprints del DMS.
 
-Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, `cadus-organos-de-gobierno` y `cadus-atencion-al-estudiante`.
+Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, `cadus-organos-de-gobierno`, `cadus-votaciones` y `cadus-atencion-al-estudiante`.
 """
 
 

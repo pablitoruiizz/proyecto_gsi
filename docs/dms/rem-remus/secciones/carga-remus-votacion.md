@@ -52,7 +52,7 @@ Contenido del proyecto [DMS-Votacion.rem](DMS-Votacion.rem) (REMUS), versión 1.
 
 | Código | Nombre | El sistema deberá | Historias | Importancia |
 |---|---|---|---|---|
-| RF-D01 | Organización en sitios y carpetas | organizar los documentos en tres sitios (Documentación pública, Órganos de gobierno y Atención al estudiante) con una biblioteca por tipo de documento | DMS-HU-01 | Vital |
+| RF-D01 | Organización en sitios y carpetas | organizar los documentos en cuatro sitios (Documentación pública, Órganos de gobierno, Votaciones y Atención al estudiante) con una biblioteca por tipo de documento | DMS-HU-01 | Vital |
 | RF-D02 | Tipo de documento obligatorio | exigir en todo documento el metadato Tipo de documento (Acta, Normativa, Expediente o Votación), además de los propios de su tipo | DMS-HU-02 | Vital |
 | RF-D05 | Búsqueda por metadatos | ofrecer en cada biblioteca una vista plana, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint | DMS-HU-03 · DMS-HU-05 | Vital |
 | RF-D06 | Permisos por rol | asignar permisos por sitio y biblioteca con los grupos Propietario, Integrante y Visitante | DMS-HU-01 | Vital |
@@ -103,7 +103,7 @@ Contenido del proyecto [DMS-Votacion.rem](DMS-Votacion.rem) (REMUS), versión 1.
 
 | Código | Nombre | Descripción |
 |---|---|---|
-| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros. |
+| RC-D01 | SharePoint de la Universidad de Sevilla | El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los cuatro sitios (cadus-documentacion-publica, cadus-organos-de-gobierno, cadus-votaciones y cadus-atencion-al-estudiante) los creó Pablo; los otros cuatro integrantes son miembros de los tres primeros. |
 | RC-D02 | Acceso con correo corporativo | Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es). |
 | RC-D03 | Documentación independiente | La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord. |
 

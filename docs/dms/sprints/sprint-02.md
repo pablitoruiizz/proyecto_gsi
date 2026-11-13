@@ -27,13 +27,20 @@ Un único editor por archivo: `dms_data.json` y `REM-DMS.md` los edita Pablo, `d
 | Qué | Quién | Con qué cuenta |
 |---|---|---|
 | CU-Acta (CU-D01, CU-D02), incluido que un visitante no ve borradores | Marcos | propietario y visitante |
-| CU-Normativa (CU-D03, CU-D07) | Pablo | propietario y visitante |
+| CU-Normativa (CU-D03, CU-D07) | Joaquín (antes Pablo; ver «Seguimiento del 13/11») | propietario y visitante |
 | CU-Expediente (CU-D04, CU-D05) | Álvaro | propietario; repetir CU-D05 con un expediente caducado nuevo |
-| CU-Votacion (CU-D06, CU-D08) | Joaquín | propietario; comprobar que un visitante no ve la biblioteca |
-| Permisos de Votaciones y Expedientes con un visitante, incluidos enlaces directos | Miguel Ángel | visitante |
+| CU-Votacion (CU-D06, CU-D08) | Joaquín | propietario; comprobar que un visitante no ve el sitio Votaciones |
+| Permisos del sitio Votaciones y de Expedientes con un visitante, incluidos enlaces directos | Miguel Ángel | visitante |
 | Rol estudiante (visitante solo de Documentación pública) | Álvaro | visitante |
 
 Cada prueba se anota con fecha, nombre y resultado, y con ellas se actualiza el burndown.
+
+## Seguimiento del 13/11/2026
+
+- **Hecho por Pablo (con Claude):** cuarto sitio de SharePoint `cadus-votaciones` (la biblioteca Votaciones sale de Órganos de gobierno para que los permisos se concedan sobre el sitio, como pide el Lab 4; la antigua y su plantilla están en la papelera); columnas Norma y Versión en Normativa; CU-D07 y CU-D08 ejecutados y con captura; `CU-Normativa.md` escrito en lugar de Joaquín; un `.rem` por sección además de `DMS.rem` (`scripts/dms/dividir_rem.py`); diagrama de diseño con los estereotipos de la diapositiva 3 y los cuatro sitios; documentos Word y PDF regenerados y `empaquetar_dms.py` con los `.rem` de sección.
+- **Cambio en el reparto de pruebas:** Pablo escribió y ejecutó CU-Normativa, así que la prueba cruzada de CU-Normativa (que figuraba a su nombre) pasa a Joaquín. CU-D08 y CU-D07 están ejecutados por Pablo, no por otra persona: no cuentan todavía como probados.
+- **Pendiente de Pablo:** exportar `DMS.rem` (y, si da tiempo, los cuatro `.rem` de sección) a HTML desde REMUS y pasar `scripts/dms/rem_a_pdf.py`; después `python scripts/dms/empaquetar_dms.py`.
+- **Burndown:** sigue en 4 SP: DMS-HU-08 y DMS-HU-09 están ejecutadas pero, con la definición de hecho de este sprint, no se cierran sin la prueba cruzada.
 
 ## Definición de hecho
 

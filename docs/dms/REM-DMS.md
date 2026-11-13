@@ -42,7 +42,7 @@ El rol **Integrante** (lee y escribe) queda sin uso por ahora: el cliente indic�
 
 | ID | Descripción | CU |
 |---|---|---|
-| RF-D01 | Organizar los documentos en sitios y carpetas por tipo: Documentación pública, Órganos de gobierno y Atención al estudiante. | todos |
+| RF-D01 | Organizar los documentos en sitios y carpetas por tipo: Documentación pública, Órganos de gobierno, Votaciones y Atención al estudiante. | todos |
 | RF-D02 | Todo documento lleva obligatoriamente el metadato **Tipo de documento** (Acta, Normativa, Expediente o Votación), además de los propios de su tipo. | todos |
 | RF-D03 | Las actas usan la **aprobación de contenido** de la biblioteca: un acta en borrador solo la ven su autor y los aprobadores (la Ejecutiva); los delegados solo ven las aprobadas. | CU-D01, CU-D02 |
 | RF-D04 | Búsqueda genérica por nombre y por contenido del documento. | CU-D02, CU-D03 |
@@ -125,7 +125,7 @@ Los casos de uso se dividen por secciones (acta, normativa, expediente y votaci�
 | Estado | Elección (Borrador, Aprobada, Vigente, Derogada, Resuelto) | Acta, Normativa, Expediente |
 | Asamblea | Texto (obligatorio en Votación) | Acta, Votación |
 | Norma | Texto (identifica la misma norma entre versiones) | Normativa |
-| Versión | Texto (por ejemplo, v1 o v2) | Normativa |
+| Versión | Número (1, 2, 3…) | Normativa |
 | Número de votación | Número (obligatorio) | Votación |
 | Tipo de voto | Elección (Nominal, Secreto) | Votación |
 | Resultado | Elección (Aprobada, Rechazada) | Votación |
@@ -142,7 +142,7 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 |---|---|---|---|---|
 | Documentación pública | Normativa | Normativa | Fecha, Curso académico, Norma, Versión, Estado | Vigente (plana, filtrada por Estado) |
 | Órganos de gobierno | Actas | Acta | Fecha, Curso académico, Asamblea, Estado de aprobación, Resumen | Aprobadas (plana) |
-| Órganos de gobierno | Votaciones | Votación | Fecha, Curso académico, Asamblea, Número de votación, Tipo de voto, Resultado | Todas (plana) |
+| Votaciones | Votaciones | Votación | Fecha, Curso académico, Asamblea, Número de votación, Tipo de voto, Resultado | Todas (plana) |
 | Atención al estudiante | Expedientes | Expediente | Facultad, Fecha de resolución, Fecha de caducidad (calculada), Estado | Caducados (plana, caducidad anterior a hoy) |
 
 ## 11. Roles y permisos
@@ -151,7 +151,7 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 |---|---|---|---|
 | Documentación pública | Normativa | lee y escribe | Estudiantes y delegados: lectura |
 | Órganos de gobierno | Biblioteca **Actas** (con aprobación de contenido) | lee y escribe | Delegados: lectura de las actas aprobadas |
-| Órganos de gobierno | Biblioteca **Votaciones** (permisos propios) | lee y escribe | nadie (solo la Ejecutiva) |
+| Votaciones | Votaciones (sitio propio, grupo Visitantes vacío) | lee y escribe | nadie (solo la Ejecutiva) |
 | Atención al estudiante | Expedientes | lee y escribe | nadie |
 
 ## 12. Restricciones del entorno

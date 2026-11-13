@@ -10,8 +10,13 @@ from playwright.sync_api import sync_playwright
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 TRABAJOS = [
     (os.path.join(RAIZ, "docs", "requisitos", "rem-remus", "CADUS__CRS.html"), os.path.join(RAIZ, "docs", "requisitos", "rem-remus", "REM-CADUS-v2.1.pdf")),
-    (os.path.join(RAIZ, "docs", "dms", "rem-remus", "DMS__CRS.html"), os.path.join(RAIZ, "docs", "dms", "rem-remus", "REM-DMS-v1.0.pdf")),
+    (os.path.join(RAIZ, "docs", "dms", "rem-remus", "DMS__CRS.html"), os.path.join(RAIZ, "docs", "dms", "rem-remus", "REM-DMS-v1.1.pdf")),
 ]
+# un REM por sección (opcional): si REMUS exportó DMS-<Seccion>__CRS.html en docs/dms/rem-remus/secciones, también se pasa a PDF
+for _sec in ("Acta", "Normativa", "Expediente", "Votacion"):
+    _h = os.path.join(RAIZ, "docs", "dms", "rem-remus", "secciones", f"DMS-{_sec}__CRS.html")
+    if os.path.exists(_h):
+        TRABAJOS.append((_h, os.path.join(RAIZ, "docs", "dms", "rem-remus", "secciones", f"REM-DMS-{_sec}-v1.1.pdf")))
 
 # la función que convierte los enlaces del índice en enlaces directos y añade marcadores es la de build_html.py
 fuente = open(os.path.join(RAIZ, "scripts", "entrega", "build_html.py"), encoding="utf-8").read()

@@ -86,6 +86,12 @@ ARCHIVOS = {
         + p("Artículo 3. Constancia", True) + p("Se registra la asistencia y si se comprobó la identidad del delegado, sin guardar su DNI."),
     "Normativa/Reglamento de régimen interno 2019 (ejemplo, derogado).docx": p("Reglamento de régimen interno (2019)", True, 36) + p("DEROGADO", True, 28, color="C00000") + AVISO
         + p("Este reglamento fue sustituido por una versión posterior y se conserva solo como histórico. Su estado en el DMS es Derogada y no aparece en la vista de normativa vigente."),
+    "Normativa/Reglamento de votaciones v2 (ejemplo).docx": p("Reglamento de votaciones", True, 36) + p("Versión 2 (13 de noviembre de 2026)", True, 24) + AVISO
+        + p("Esta versión sustituye a la versión 1, que queda derogada y se conserva como histórico.")
+        + p("Artículo 1. Un voto por delegación", True) + p("En cada votación cuenta un voto por delegación, que representa a sus estudiantes. Solo votan los delegados.")
+        + p("Artículo 2. Tipos de voto", True) + p("La votación puede ser nominal o secreta. En la secreta solo se recoge el recuento total, sin relacionar el voto con la delegación.")
+        + p("Artículo 3. Constancia", True) + p("Se registra la asistencia y si se comprobó la identidad del delegado, sin guardar su DNI.")
+        + p("Artículo 4. Votaciones numeradas (novedad de la versión 2)", True) + p("Cada asamblea puede tener varias votaciones y cada una lleva su número, que junto con la asamblea permite encontrar el registro."),
     "Actas/Acta del pleno del 12-10-2026 (ejemplo).docx": p("Acta del pleno del 12 de octubre de 2026", True, 36) + AVISO
         + p("Orden del día", True) + p("1. Aprobación del acta anterior. 2. Calendario de asambleas. 3. Ruegos y preguntas.")
         + p("Acuerdos", True) + p("Se aprueba el acta anterior por asentimiento. Se fija la asamblea ordinaria para el 26 de octubre de 2026.")
@@ -94,7 +100,7 @@ ARCHIVOS = {
         + p("Orden del día", True) + p("1. Votación de los presupuestos. 2. Votación de la reforma del reglamento.")
         + p("Este borrador solo lo ven su autor y la Ejecutiva hasta que se apruebe."),
     "Votaciones/Votación 1 de la asamblea del 26-10-2026 (nominal, ejemplo).docx": votacion(1, "Asamblea del 26-10-2026", "26/10/2026", "Nominal", "Aprobada", 261001),
-    "Votaciones/Votación 2 de la asamblea del 26-10-2026 (secreta, ejemplo).docx": votacion(2, "Asamblea del 26-10-2026", "26/10/2026", "Secreto", "Rechazada", 261002),
+    "Votaciones/Votación 2 de la asamblea del 26-10-2026 (secreta, ejemplo).docx": votacion(2, "Asamblea del 26-10-2026", "26/10/2026", "Secreto", "Aprobada", 261002),
     "Expedientes/CAD-2026-0001 (ejemplo).docx": p("Expediente CAD-2026-0001", True, 36) + AVISO
         + p("Tipo: reclamación académica (ejemplo).") + p("Facultad: Escuela Técnica Superior de Ingeniería Informática.") + p("Fecha de resolución: 20/10/2026. Caducidad: 20/10/2028 (resolución más 2 años).")
         + p("Resumen", True) + p("Reclamación ficticia sobre el calendario de una convocatoria de examen, resuelta a favor del estudiante. Sin datos personales."),
