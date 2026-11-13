@@ -528,3 +528,36 @@ html, html body.cadus-portada { overflow-x: clip; }
   text-decoration-thickness: 2px;
   text-underline-offset: 0.45em;
 }
+
+/* ------------------------------------------------------------------ tablet y móvil (HU-14a) */
+/* Hero: desde 761 px los arcos ocupan la derecha. Contadores y botones se quedan a su izquierda para que el texto
+   no se superponga con ellos (blanco sobre el arco blanco, dorado sobre el dorado). El límite es el borde izquierdo
+   del arco dorado (--arco: su «right» más su ancho) más un respiro de 24 px; en pantallas anchas el contenido está
+   centrado y el margen real es mayor que --margen. */
+@media (min-width: 761px) {
+  .cadus-hero__datos,
+  .cadus-hero__acciones {
+    --arco: calc(clamp(150px, 31vw, 520px) + clamp(110px, 15vw, 230px));
+    max-width: max(280px, calc(100% - var(--arco) + max(var(--margen), (100vw - 1240px) / 2) - 24px));
+  }
+}
+
+/* Buscador: el campo puede encogerse (a 320 px el ancho base de 320 px lo sacaba de la pantalla). */
+.cadus-buscador input[type="search"] { min-width: 0; }
+
+/* Tablet: «Nuestro trabajo» en dos columnas iguales (el reparto 8/4 dejaba «Vida Universitaria» muy estrecha)
+   y el campo del buscador en una fila propia, para que no se corte el texto de ayuda. */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .cadus-lista:nth-child(n) { grid-column: span 6; }
+  .cadus-buscador input[type="search"] { flex: 1 1 100%; }
+}
+
+/* Zonas táctiles de al menos 44 × 44 px (WCAG 2.5.5): enlace de cada noticia y «Subir» del pie. */
+.cadus-noticia__enlace { display: flex; align-items: center; min-height: 44px; }
+.cadus-contacto__subir { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Menú plegable de Blocksy (cabecera en móvil y tablet): elementos más altos, botones táctiles y en negrita como el menú de escritorio. */
+.ct-header-trigger { min-width: 44px; min-height: 44px; }
+#offcanvas .mobile-menu { --items-vertical-spacing: 12px; }
+#offcanvas .mobile-menu .ct-menu-link { min-height: 48px; font-weight: 800; }
+#offcanvas .ct-toggle-close { min-width: 44px; min-height: 44px; }

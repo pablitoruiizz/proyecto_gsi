@@ -1,0 +1,55 @@
+/*
+ * CADUS Portal: accesibilidad (HU-15a · RNF-03, WCAG 2.1 AA).
+ * Contraste, foco visible, teclado y enlace «Saltar al contenido». Se carga después de cadus.css y cadus-interior.css
+ * (ver includes/accesibilidad.php) y solo corrige lo que la auditoría de contraste y foco encontró; no cambia el diseño.
+ * Los tokens (--granate, --oro, --tinta, --papel, --gris, --radio, --fuente) vienen de cadus.css.
+ */
+
+/* ------------------------------------------------------------------ enlace «Saltar al contenido» (WCAG 2.4.1) */
+/* Lo pone Blocksy y es el primer elemento que recibe el foco. Al recibirlo se ve con la identidad del CADUS:
+   blanco sobre granate (9,45:1) y anillo oscuro con halo blanco, visible sobre cualquier fondo. */
+.skip-link.screen-reader-text:focus {
+  position: fixed !important; /* WordPress fija «absolute !important» en .screen-reader-text */
+  top: 12px;
+  left: 12px;
+  padding: 14px 22px;
+  border-radius: var(--radio, 14px);
+  background: var(--granate, #8d0739);
+  color: var(--papel, #fff);
+  font: 800 1rem/1.2 var(--fuente, inherit);
+  text-decoration: none;
+  outline: 3px solid var(--tinta, #212529);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--papel, #fff);
+}
+/* El <main> recibe el foco por script al usar el enlace; no es un control y no necesita anillo. */
+#main:focus { outline: 0; }
+
+/* ------------------------------------------------------------------ foco visible (WCAG 2.4.7 y 1.4.11) */
+/* Base para todo lo que no tenga estilo propio: anillo oscuro de 3 px con halo blanco de 3 px. El halo hace que el
+   anillo se vea también sobre granate, tinta o dorado. :where() no suma especificidad: las reglas propias siguen mandando. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--tinta, #212529);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--papel, #fff);
+}
+
+/* «Nuestro trabajo»: el botón de la tarjeta granate llevaba un anillo oscuro sobre granate (1,63:1). */
+.cadus-lista:nth-child(1) .cadus-boton:focus-visible { outline-color: var(--papel, #fff); }
+
+/* Los enlaces dentro del resultado del seguimiento (fondo granate) eran granate sobre granate. */
+.cadus-interior .entry-content .cadus-resultado a { color: var(--papel, #fff); }
+
+/* ------------------------------------------------------------------ campos de texto (WCAG 1.4.11) */
+/* El borde de un campo debe contrastar 3:1 con lo que tiene al lado. Blanco sobre dorado (buscador de la portada) son
+   1,74:1 y gris claro sobre blanco, 1,1:1; con 2 px de tinta son 8,9:1 y 15,4:1. */
+.cadus-buscador input[type="search"],
+.cadus-buscador select,
+.cadus-campo,
+.cadus-interior .entry-content :is(input[type="text"], input[type="email"], input[type="search"], select, textarea),
+.cadus-interior .entry-content .fluentform .ff-el-form-control { border: 2px solid var(--tinta, #212529); }
+
+/* ------------------------------------------------------------------ Windows de alto contraste */
+@media (forced-colors: active) {
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline-color: Highlight; box-shadow: none; }
+}

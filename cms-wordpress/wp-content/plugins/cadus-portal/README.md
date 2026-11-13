@@ -14,9 +14,10 @@ Plugin de WordPress del equipo que implementa las historias de usuario del Sprin
 | `includes/setup.php` | Páginas, menú, noticias de ejemplo, tema Blocksy, paleta y logotipo provisional | HU-01, HU-02, HU-18 · RF-01, RF-02 · UI-01, UI-02 |
 | `includes/calendario.php` | Integración con The Events Calendar: próximos eventos en la portada, «Calendario» en el menú y en los accesos, permisos de eventos para el Ejecutivo, su menú de administración y las categorías «Asambleas» y «Cursos» (se crean solas una vez) | HU-10 · RF-11 · UI-02 · E3-07 |
 | `includes/escritorio.php` | Panel «Accesos rápidos del CADUS» en el Escritorio, con tarjetas según los permisos de cada rol (actas pendientes, delegaciones propias, cifras de tickets sin datos personales) | HU-19b · RF-15 · RN-01, RN-03, RN-04 |
-| `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), la ficha avisa de que la votación es presencial (HU-21, la papeleta de YOP Poll, cancelada), página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
+| `includes/votaciones.php` | Convocatorias de votación vinculadas a una asamblea del calendario (RN-05 comprobada en el servidor), papeleta de YOP Poll solo con la votación abierta, página «Votaciones», bloque en la portada y listado en la ficha de cada asamblea | HU-11 · RF-12 · IR-07 · RN-05 · UI-02 |
 | `includes/relevo.php` | «Delegaciones › Relevo de la cuenta»: el delegado saliente (solo su cuenta) o la Ejecutiva (cualquier cuenta de delegación) pasan la cuenta al equipo entrante con una contraseña nueva o un enlace al correo de la delegación; se cierran todas sus sesiones al momento y queda un historial sin datos personales | HU-22 · RF-14 · RN-04 |
 | `includes/imagenes.php` | Imágenes subidas: máximo 1920 px (el original grande no se sirve), tamaños intermedios en WebP si el servidor lo admite, calidad 82, sin el tamaño 2048 px y límite de 8 MB por imagen. En webs ya instaladas cambia una vez los escudos y el logotipo de la biblioteca por los optimizados | HU-20a |
+| `includes/accesibilidad.php` | Estilos y script de accesibilidad (`assets/cadus-accesibilidad.css` y `.js`): foco visible sobre cualquier fondo, borde de los campos de texto, enlace «Saltar al contenido» con el foco en `<main>` y textos del menú plegable de Blocksy en español | HU-15a · RNF-03 |
 | `assets/` | Logotipo provisional y PDF de ejemplo | — |
 
 ## Roles y permisos (probados en el servidor)
@@ -98,6 +99,17 @@ Reparto: **Codex** escribió el marcado y los datos (`includes/inicio.php`: hero
 - **Fotos** (`assets/fotos/`, HU-20a: recortadas a 3:4 en 360 y 720 px, en WebP con JPEG de reserva, generadas con `scripts/imagenes/optimizar_imagenes.py` desde `docs/recursos/imagenes-originales/`): proceden de cadus.us.es y son del CADUS. Confirmar con el cliente su uso y la autorización de las personas que aparecen. Los originales descargados (152 archivos, 216 MB) están en `docs/recursos/fotos-cadus-original/`, fuera de Git.
 - **Caché:** WP Fastest Cache guarda HTML con la versión antigua de los archivos. Tras cambiar `cadus.css` o `cadus.js`, vaciar la caché (Ajustes de WP Fastest Cache → Delete Cache).
 - **Logotipo y colores:** logotipo oficial y paleta (granate `#8d0739`, dorado `#faba09`) tomados de cadus.us.es. La migración de diseño (`cadus_aplicar_diseno`) solo se ejecuta desde el panel, con Blocksy activo, y no pisa una paleta o un logotipo que el equipo haya cambiado.
+
+## Móvil, tablet y accesibilidad de la portada (HU-14a, HU-15a · Sprint 3)
+
+Se midió la portada y las páginas interiores en un navegador (Chromium) con el mismo marcado y los mismos CSS y JS, de 320 a 1280 px (el hero, hasta 2600 px), y se corrigió solo lo que fallaba. El método y los resultados están en `tests/HU-14a-HU-15a-portada.md`.
+
+- **Hero (HU-14a):** desde 761 px el texto de los contadores («3 actas…, 27 delegaciones…, 4 comunicados…») y los botones se solapaban con los arcos (blanco sobre blanco, dorado sobre dorado). Ahora se quedan a la izquierda del arco dorado (`--arco` en `assets/cadus.css`).
+- **Tablet (HU-14a):** «Nuestro trabajo» en dos columnas iguales entre 761 y 1000 px; el campo del buscador ocupa su propia fila y puede encogerse (a 320 px se salía de la pantalla).
+- **Zonas táctiles (HU-14a):** el enlace de cada noticia, «Subir» del pie y los botones del menú plegable de Blocksy miden al menos 44 px. El menú plegable en sí lo da Blocksy (ubicación `menu_mobile`, asignada en `setup.php`).
+- **Contraste (HU-15a):** todos los textos cumplen AA (el mínimo es 5,4:1). Fallaban componentes: el anillo de foco oscuro sobre la tarjeta granate de «Nuestro trabajo» (1,63:1), el anillo recortado de «Descargar PDF» en móvil y los campos de texto sin borde (blanco sobre dorado, 1,74:1). `assets/cadus-accesibilidad.css` los corrige sin tocar `cadus-interior.css`: anillo oscuro con halo blanco y borde de 2 px en los campos.
+- **Teclado (HU-15a):** orden de tabulación igual al visual, sin trampas; «Saltar al contenido» es el primer foco, se ve con la identidad del CADUS y pasa el foco a `<main>` (`assets/cadus-accesibilidad.js`).
+- **Caché:** tras actualizar estos archivos, vaciar la caché de WP Fastest Cache.
 
 ## Privacidad de los tickets y las solicitudes de mediación (RN-03 / HU-12)
 
