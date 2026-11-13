@@ -5,6 +5,7 @@ Sistema de gestión documental del CADUS (Lab 4). Es independiente del CMS: tien
 | Contenido | Dónde |
 |---|---|
 | Requisitos, casos de uso, metadatos y permisos | [`REM-DMS.md`](REM-DMS.md) |
+| REM en REMUS: `DMS.rem` (completo) y un `.rem` por sección | [`rem-remus/`](rem-remus/) y [`rem-remus/secciones/`](rem-remus/secciones/) (se generan con `scripts/dms/dividir_rem.py`) |
 | Product backlog | [`backlog/product-backlog.md`](backlog/product-backlog.md) |
 | Sprint 1 del DMS (26/10 – 08/11) | [`sprints/sprint-01.md`](sprints/sprint-01.md) |
 | Versión definitiva: qué hace cada uno | [`reparto-version-definitiva.md`](reparto-version-definitiva.md) |

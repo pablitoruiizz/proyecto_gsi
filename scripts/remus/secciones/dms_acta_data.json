@@ -1,0 +1,462 @@
+{
+  "date": "2026-11-12",
+  "version": [
+    1,
+    1
+  ],
+  "cName": "DMS del CADUS · Acta",
+  "dName": "DMS del CADUS · Acta",
+  "organizations": [
+    {
+      "oid": 13,
+      "name": "CADUS - Consejo de Alumnos de la Universidad de Sevilla",
+      "address": "Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla",
+      "telephone": "PD",
+      "fax": "PD"
+    },
+    {
+      "oid": 14,
+      "name": "Equipo de proyecto GSI",
+      "address": "Universidad de Sevilla - Gestión de Sistemas de Información (GSI)",
+      "telephone": "PD",
+      "fax": "PD"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Delegación General del CADUS",
+      "role": "Cliente y usuario (Ejecutiva del CADUS)",
+      "customer": true,
+      "developer": false,
+      "user": true,
+      "org": 13
+    },
+    {
+      "name": "Pablo Ruiz Vidal",
+      "role": "Product Owner y Dev Infraestructura",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Joaquin Luna Canela",
+      "role": "Scrum Master y Dev Portada",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Miguel Angel Camacho Martin",
+      "role": "Dev Sección Institucional y Normativa",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Alvaro Martinez Ocaña",
+      "role": "Dev Directorio de Delegaciones",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Marcos-Paban Delgado Rodriguez",
+      "role": "Dev Atención al Estudiante y Buzón",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    }
+  ],
+  "owner": "Pablo Ruiz Vidal",
+  "client": "Delegación General del CADUS",
+  "paragraphs": {
+    "intro": "Este documento es la parte «Acta» del REM del DMS del CADUS: recoge los dos casos de uso de esa sección (CU-D01, CU-D02) y los requisitos, reglas y actores que los afectan. El REM completo, con los ocho casos de uso, está en DMS.rem. Este documento presenta los requisitos del sistema de gestión documental (DMS) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El DMS guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal. La versión 1.1 (12/11/2026) divide los casos de uso por secciones, con dos casos en cada una (ocho en total), añade la regla de una sola versión vigente por norma y recoge que cada delegado accede con la cuenta de su delegación.",
+    "current": "Este documento no analiza en detalle cómo gestiona hoy el CADUS sus documentos internos. Recoge los documentos que el DMS debe organizar, quién puede verlos y cómo se buscan.",
+    "environment": "El equipo de cinco integrantes crea y configura el DMS en SharePoint de la Universidad de Sevilla con sus cuentas de alumno. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria se realiza en Discord. Las siguientes restricciones recogen estas decisiones.",
+    "glossary": [
+      {
+        "name": "DMS",
+        "text": "Sistema de gestión documental: almacena documentos, los organiza en sitios y carpetas, los describe con metadatos y controla quién puede verlos."
+      },
+      {
+        "name": "Sitio",
+        "text": "Espacio de SharePoint con sus bibliotecas y sus grupos de permisos (Propietarios, Integrantes y Visitantes). Permite asignar permisos de golpe a muchos documentos."
+      },
+      {
+        "name": "Biblioteca",
+        "text": "Lista de documentos de un sitio. Las columnas de metadatos y las vistas se definen en cada biblioteca."
+      },
+      {
+        "name": "Metadato",
+        "text": "Dato que describe un documento (tipo, fecha, estado…) y se guarda como columna de la biblioteca. Permite filtrar sin abrir los documentos."
+      },
+      {
+        "name": "Vista plana",
+        "text": "Vista de una biblioteca que muestra todos sus documentos sin carpetas, para poder aplicarles filtros por metadatos."
+      },
+      {
+        "name": "Aprobación de contenido",
+        "text": "Opción de SharePoint por la que un documento en borrador solo lo ven su autor y los aprobadores hasta que se aprueba."
+      },
+      {
+        "name": "Acta",
+        "text": "Documento que recoge lo tratado y acordado en un pleno o una asamblea. Solo se ve fuera de la Ejecutiva cuando está aprobada."
+      },
+      {
+        "name": "Expediente",
+        "text": "Documento que recoge una reclamación o una mediación ya resuelta. Se conserva 2 años desde su resolución y solo lo ve la Ejecutiva."
+      },
+      {
+        "name": "Registro de votación",
+        "text": "Documento con el resultado de una votación presencial de asamblea: un voto por delegación (sí, no o abstención), sin guardar el DNI y, si la votación es secreta, sin vincular el voto a la delegación."
+      },
+      {
+        "name": "Delegación",
+        "text": "Representación estudiantil de una Facultad o Escuela. Hay 27; cada una vota con un único voto que representa a sus estudiantes."
+      },
+      {
+        "name": "Ejecutiva del CADUS",
+        "text": "Grupo de miembros del CADUS que gestiona el DMS con la cuenta única del CADUS (dcadus@us.es)."
+      },
+      {
+        "name": "Norma y versión",
+        "text": "Una norma es un texto normativo del CADUS que se identifica por su nombre; cada revisión suya es una versión. Solo una versión de cada norma está vigente; las anteriores quedan derogadas y se conservan."
+      }
+    ]
+  },
+  "actors": [
+    {
+      "id": "ACT-D01",
+      "name": "Ejecutiva del CADUS",
+      "role": "a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios de los sitios (leen y escriben)"
+    },
+    {
+      "id": "ACT-D02",
+      "name": "Delegado",
+      "role": "a los delegados de las 27 delegaciones, que acceden con la cuenta de su delegación (correo institucional de la delegación; una cuenta por delegación, no por persona) y solo leen"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "OBJ-D01",
+      "name": "Documentación reunida",
+      "description": "reunir en un único sitio los documentos internos del CADUS, organizados por tipo y con permisos por rol",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D02",
+      "name": "Búsqueda por metadatos",
+      "description": "localizar un documento por sus metadatos (tipo, fecha, estado, curso, facultad) o con una búsqueda genérica",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D03",
+      "name": "Privacidad y conservación",
+      "description": "proteger los expedientes de reclamaciones y mediaciones y conservarlos solo los 2 años que pide el cliente",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D04",
+      "name": "Constancia de votaciones",
+      "description": "dejar constancia de las votaciones presenciales por delegación sin guardar datos personales innecesarios",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "information": [
+    {
+      "id": "IR-D02",
+      "name": "Acta",
+      "concept": "a un acta de pleno o de asamblea, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Pleno o asamblea",
+        "Fecha",
+        "Estado de aprobación (borrador o aprobada)",
+        "Curso académico",
+        "Resumen del contenido (deseable)"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "ui": [],
+  "functional": [
+    {
+      "id": "RF-D01",
+      "name": "Organización en sitios y carpetas",
+      "description": "organizar los documentos en tres sitios (Documentación pública, Órganos de gobierno y Atención al estudiante) con una biblioteca por tipo de documento",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RF-D02",
+      "name": "Tipo de documento obligatorio",
+      "description": "exigir en todo documento el metadato Tipo de documento (Acta, Normativa, Expediente o Votación), además de los propios de su tipo",
+      "comments": "DMS-HU-02",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D03",
+      "name": "Aprobación de actas",
+      "description": "usar la aprobación de contenido para que un acta en borrador solo la vean su autor y la Ejecutiva, y los delegados solo vean las aprobadas",
+      "comments": "DMS-HU-04",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Miguel Angel Camacho Martin"
+      ]
+    },
+    {
+      "id": "RF-D04",
+      "name": "Búsqueda genérica",
+      "description": "buscar por el nombre y por el contenido de los documentos",
+      "comments": "DMS-HU-03",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña"
+      ]
+    },
+    {
+      "id": "RF-D05",
+      "name": "Búsqueda por metadatos",
+      "description": "ofrecer en cada biblioteca una vista plana, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint",
+      "comments": "DMS-HU-03 · DMS-HU-05",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña",
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D06",
+      "name": "Permisos por rol",
+      "description": "asignar permisos por sitio y biblioteca con los grupos Propietario, Integrante y Visitante",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RF-D09",
+      "name": "Plantillas",
+      "description": "ofrecer plantillas de acta y de registro de votación para que todos los documentos tengan la misma estructura",
+      "comments": "DMS-HU-04 · DMS-HU-07",
+      "importance": 2,
+      "urgency": 3,
+      "authors": [
+        "Miguel Angel Camacho Martin"
+      ]
+    },
+    {
+      "id": "RF-D10",
+      "name": "Resumen automático del acta",
+      "description": "generar automáticamente un resumen del contenido del acta como metadato (deseable; solo si sobra tiempo)",
+      "comments": "Sin historia en este sprint",
+      "importance": 3,
+      "urgency": 3,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "usecases": [
+    {
+      "id": "CU-D01",
+      "name": "Redactar, aprobar y archivar un acta",
+      "trigger": "después de cada pleno o asamblea del CADUS",
+      "pre": "La Ejecutiva dispone de la plantilla de acta y del acta redactada",
+      "post": "El acta está aprobada y es visible para los delegados",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "crea el acta a partir de la plantilla en la biblioteca Actas",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "guarda el acta como borrador visible solo para su autor y la Ejecutiva"
+        },
+        {
+          "who": "system",
+          "text": "solicita el tipo de documento, la fecha, el curso académico y la asamblea"
+        },
+        {
+          "who": "actor",
+          "text": "rellena los metadatos y envía el acta a aprobación",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "actor",
+          "text": "aprueba el acta",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "publica el acta aprobada para los delegados"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D02",
+      "name": "Consultar las actas aprobadas",
+      "trigger": "antes de cada asamblea, para repasar lo acordado",
+      "pre": "El delegado ha iniciado sesión con la cuenta de su delegación",
+      "post": "El delegado ha abierto el acta que buscaba",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "abre la vista plana de actas aprobadas",
+          "actor": "ACT-D02"
+        },
+        {
+          "who": "system",
+          "text": "muestra solo las actas aprobadas, sin los borradores"
+        },
+        {
+          "who": "actor",
+          "text": "filtra por fecha, curso o palabra clave",
+          "actor": "ACT-D02"
+        },
+        {
+          "who": "system",
+          "text": "muestra las actas que cumplen los filtros"
+        },
+        {
+          "who": "actor",
+          "text": "abre el acta",
+          "actor": "ACT-D02"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "nonfunctional": [],
+  "rules": [
+    {
+      "id": "RN-D01",
+      "name": "Actas aprobadas",
+      "description": "Un acta solo es visible para los delegados cuando un miembro de la Ejecutiva la ha aprobado (coherente con RN-01 del portal).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "id": "RC-D01",
+      "name": "SharePoint de la Universidad de Sevilla",
+      "description": "El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D02",
+      "name": "Acceso con correo corporativo",
+      "description": "Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D03",
+      "name": "Documentación independiente",
+      "description": "La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "traces": [
+    [
+      "OBJ-D01",
+      [
+        "RF-D01",
+        "RF-D06",
+        "RF-D09",
+        "IR-D02"
+      ]
+    ],
+    [
+      "OBJ-D02",
+      [
+        "RF-D02",
+        "RF-D04",
+        "RF-D05"
+      ]
+    ],
+    [
+      "OBJ-D03",
+      [
+        "RF-D03",
+        "RN-D01"
+      ]
+    ],
+    [
+      "OBJ-D04",
+      [
+        "RF-D09"
+      ]
+    ],
+    [
+      "CU-D01",
+      [
+        "RF-D01",
+        "RF-D02",
+        "RF-D03",
+        "RF-D09",
+        "RN-D01",
+        "IR-D02",
+        "ACT-D01"
+      ]
+    ],
+    [
+      "CU-D02",
+      [
+        "RF-D03",
+        "RF-D04",
+        "RF-D05",
+        "RF-D06",
+        "RF-D10",
+        "RN-D01",
+        "IR-D02",
+        "ACT-D02"
+      ]
+    ]
+  ]
+}

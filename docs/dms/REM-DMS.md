@@ -196,3 +196,17 @@ Las columnas viven en cada **biblioteca de documentos**, no en el sitio, y cada 
 | RN-D07 | DMS-HU-08 (versión vigente única por norma) |
 | RNF-D02, RNF-D03 | Documentación del DMS (D-04, D-06) |
 | RNF-D05 | Prueba de acceso durante la asamblea (D-04) |
+
+## 15. El REM en varios archivos de REMUS
+
+El profesor pidió dividir los casos de uso por secciones o roles, con dos casos en cada una, y comentó que lo normal es que el DMS salga con más de un `.rem`. Por eso el REM está en **cinco proyectos de REMUS** que salen de la misma fuente (`scripts/remus/dms_data.json`):
+
+| Archivo | Contenido |
+|---|---|
+| `DMS.rem` | REM completo del DMS: los 8 casos de uso, todos los requisitos, reglas, actores y la trazabilidad global. |
+| `secciones/DMS-Acta.rem` | Sección Acta: CU-D01 y CU-D02. |
+| `secciones/DMS-Normativa.rem` | Sección Normativa: CU-D03 y CU-D07. |
+| `secciones/DMS-Expediente.rem` | Sección Expediente: CU-D04 y CU-D05. |
+| `secciones/DMS-Votacion.rem` | Sección Votación: CU-D06 y CU-D08. |
+
+Cada `.rem` de sección lleva solo los dos casos de uso de su documento y los requisitos de información, funcionales, no funcionales, de interfaz, reglas, actores y objetivos que esos casos citan, con su trazabilidad; el entorno de trabajo y el glosario son comunes. Los códigos son los mismos que en `DMS.rem`, así que un requisito se identifica igual en todos los archivos. Se regeneran con `python scripts/dms/dividir_rem.py` (junto con `DMS.rem`, que genera `build_rem.ps1`); cada uno tiene su hoja legible en `docs/dms/rem-remus/secciones/carga-remus-<seccion>.md`.

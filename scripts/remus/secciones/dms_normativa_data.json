@@ -1,0 +1,399 @@
+{
+  "date": "2026-11-12",
+  "version": [
+    1,
+    1
+  ],
+  "cName": "DMS del CADUS · Normativa",
+  "dName": "DMS del CADUS · Normativa",
+  "organizations": [
+    {
+      "oid": 13,
+      "name": "CADUS - Consejo de Alumnos de la Universidad de Sevilla",
+      "address": "Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla",
+      "telephone": "PD",
+      "fax": "PD"
+    },
+    {
+      "oid": 14,
+      "name": "Equipo de proyecto GSI",
+      "address": "Universidad de Sevilla - Gestión de Sistemas de Información (GSI)",
+      "telephone": "PD",
+      "fax": "PD"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Delegación General del CADUS",
+      "role": "Cliente y usuario (Ejecutiva del CADUS)",
+      "customer": true,
+      "developer": false,
+      "user": true,
+      "org": 13
+    },
+    {
+      "name": "Pablo Ruiz Vidal",
+      "role": "Product Owner y Dev Infraestructura",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Joaquin Luna Canela",
+      "role": "Scrum Master y Dev Portada",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Miguel Angel Camacho Martin",
+      "role": "Dev Sección Institucional y Normativa",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Alvaro Martinez Ocaña",
+      "role": "Dev Directorio de Delegaciones",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    },
+    {
+      "name": "Marcos-Paban Delgado Rodriguez",
+      "role": "Dev Atención al Estudiante y Buzón",
+      "customer": false,
+      "developer": true,
+      "user": false,
+      "org": 14
+    }
+  ],
+  "owner": "Pablo Ruiz Vidal",
+  "client": "Delegación General del CADUS",
+  "paragraphs": {
+    "intro": "Este documento es la parte «Normativa» del REM del DMS del CADUS: recoge los dos casos de uso de esa sección (CU-D03, CU-D07) y los requisitos, reglas y actores que los afectan. El REM completo, con los ocho casos de uso, está en DMS.rem. Este documento presenta los requisitos del sistema de gestión documental (DMS) del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI). El DMS guarda y organiza los documentos internos de gestión del CADUS (actas, normativa, expedientes de reclamaciones y registros de votación) sobre SharePoint de Microsoft 365 de la Universidad de Sevilla. Es independiente del portal web (CMS): tiene sus propios requisitos, análisis, diseño, implementación y seguimiento SCRUM. Los requisitos proceden de la entrevista con el CADUS del 26/10/2026 y del REM del portal. La versión 1.1 (12/11/2026) divide los casos de uso por secciones, con dos casos en cada una (ocho en total), añade la regla de una sola versión vigente por norma y recoge que cada delegado accede con la cuenta de su delegación.",
+    "current": "Este documento no analiza en detalle cómo gestiona hoy el CADUS sus documentos internos. Recoge los documentos que el DMS debe organizar, quién puede verlos y cómo se buscan.",
+    "environment": "El equipo de cinco integrantes crea y configura el DMS en SharePoint de la Universidad de Sevilla con sus cuentas de alumno. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria se realiza en Discord. Las siguientes restricciones recogen estas decisiones.",
+    "glossary": [
+      {
+        "name": "DMS",
+        "text": "Sistema de gestión documental: almacena documentos, los organiza en sitios y carpetas, los describe con metadatos y controla quién puede verlos."
+      },
+      {
+        "name": "Sitio",
+        "text": "Espacio de SharePoint con sus bibliotecas y sus grupos de permisos (Propietarios, Integrantes y Visitantes). Permite asignar permisos de golpe a muchos documentos."
+      },
+      {
+        "name": "Biblioteca",
+        "text": "Lista de documentos de un sitio. Las columnas de metadatos y las vistas se definen en cada biblioteca."
+      },
+      {
+        "name": "Metadato",
+        "text": "Dato que describe un documento (tipo, fecha, estado…) y se guarda como columna de la biblioteca. Permite filtrar sin abrir los documentos."
+      },
+      {
+        "name": "Vista plana",
+        "text": "Vista de una biblioteca que muestra todos sus documentos sin carpetas, para poder aplicarles filtros por metadatos."
+      },
+      {
+        "name": "Aprobación de contenido",
+        "text": "Opción de SharePoint por la que un documento en borrador solo lo ven su autor y los aprobadores hasta que se aprueba."
+      },
+      {
+        "name": "Acta",
+        "text": "Documento que recoge lo tratado y acordado en un pleno o una asamblea. Solo se ve fuera de la Ejecutiva cuando está aprobada."
+      },
+      {
+        "name": "Expediente",
+        "text": "Documento que recoge una reclamación o una mediación ya resuelta. Se conserva 2 años desde su resolución y solo lo ve la Ejecutiva."
+      },
+      {
+        "name": "Registro de votación",
+        "text": "Documento con el resultado de una votación presencial de asamblea: un voto por delegación (sí, no o abstención), sin guardar el DNI y, si la votación es secreta, sin vincular el voto a la delegación."
+      },
+      {
+        "name": "Delegación",
+        "text": "Representación estudiantil de una Facultad o Escuela. Hay 27; cada una vota con un único voto que representa a sus estudiantes."
+      },
+      {
+        "name": "Ejecutiva del CADUS",
+        "text": "Grupo de miembros del CADUS que gestiona el DMS con la cuenta única del CADUS (dcadus@us.es)."
+      },
+      {
+        "name": "Norma y versión",
+        "text": "Una norma es un texto normativo del CADUS que se identifica por su nombre; cada revisión suya es una versión. Solo una versión de cada norma está vigente; las anteriores quedan derogadas y se conservan."
+      }
+    ]
+  },
+  "actors": [
+    {
+      "id": "ACT-D01",
+      "name": "Ejecutiva del CADUS",
+      "role": "a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios de los sitios (leen y escriben)"
+    },
+    {
+      "id": "ACT-D02",
+      "name": "Delegado",
+      "role": "a los delegados de las 27 delegaciones, que acceden con la cuenta de su delegación (correo institucional de la delegación; una cuenta por delegación, no por persona) y solo leen"
+    },
+    {
+      "id": "ACT-D03",
+      "name": "Estudiante",
+      "role": "a los estudiantes de la Universidad de Sevilla, que solo leen la normativa vigente"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "OBJ-D01",
+      "name": "Documentación reunida",
+      "description": "reunir en un único sitio los documentos internos del CADUS, organizados por tipo y con permisos por rol",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "OBJ-D02",
+      "name": "Búsqueda por metadatos",
+      "description": "localizar un documento por sus metadatos (tipo, fecha, estado, curso, facultad) o con una búsqueda genérica",
+      "importance": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "information": [
+    {
+      "id": "IR-D03",
+      "name": "Normativa",
+      "concept": "a una norma o estatuto del CADUS, con estos datos:",
+      "importance": 2,
+      "data": [
+        "Título",
+        "Norma (identifica la misma norma entre sus versiones)",
+        "Versión",
+        "Año",
+        "Estado (vigente o derogada)"
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "ui": [],
+  "functional": [
+    {
+      "id": "RF-D02",
+      "name": "Tipo de documento obligatorio",
+      "description": "exigir en todo documento el metadato Tipo de documento (Acta, Normativa, Expediente o Votación), además de los propios de su tipo",
+      "comments": "DMS-HU-02",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D04",
+      "name": "Búsqueda genérica",
+      "description": "buscar por el nombre y por el contenido de los documentos",
+      "comments": "DMS-HU-03",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña"
+      ]
+    },
+    {
+      "id": "RF-D05",
+      "name": "Búsqueda por metadatos",
+      "description": "ofrecer en cada biblioteca una vista plana, sin carpetas, a la que se aplican filtros combinados (por ejemplo, tipo de documento y fecha); para buscar en todo un sitio se usa la búsqueda de SharePoint",
+      "comments": "DMS-HU-03 · DMS-HU-05",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Alvaro Martinez Ocaña",
+        "Joaquin Luna Canela"
+      ]
+    },
+    {
+      "id": "RF-D06",
+      "name": "Permisos por rol",
+      "description": "asignar permisos por sitio y biblioteca con los grupos Propietario, Integrante y Visitante",
+      "comments": "DMS-HU-01",
+      "importance": 2,
+      "urgency": 2,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "usecases": [
+    {
+      "id": "CU-D03",
+      "name": "Consultar la normativa vigente",
+      "trigger": "cuando tienen una duda sobre sus derechos o el funcionamiento del CADUS",
+      "pre": "El usuario puede acceder al sitio Documentación pública",
+      "post": "El usuario ha leído la norma que buscaba",
+      "steps": [
+        {
+          "who": "actor",
+          "actor": "ACT-D02",
+          "text": "o el estudiante entra en el sitio Documentación pública; el delegado accede con la cuenta de su delegación y el estudiante con su correo @alum.us.es"
+        },
+        {
+          "who": "actor",
+          "text": "abre la vista de normativa vigente",
+          "actor": "ACT-D03"
+        },
+        {
+          "who": "system",
+          "text": "muestra las normas con estado vigente y oculta las derogadas"
+        },
+        {
+          "who": "actor",
+          "text": "busca por palabra clave o filtra por año",
+          "actor": "ACT-D03"
+        },
+        {
+          "who": "system",
+          "text": "muestra las normas que cumplen la búsqueda"
+        },
+        {
+          "who": "actor",
+          "text": "abre la norma",
+          "actor": "ACT-D03"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "CU-D07",
+      "name": "Publicar una nueva versión de una norma y derogar la anterior",
+      "trigger": "cuando la Ejecutiva aprueba la revisión de una norma ya publicada",
+      "pre": "La norma anterior está en la biblioteca Normativa con estado Vigente y la Ejecutiva dispone del documento de la versión nueva",
+      "post": "La versión nueva es la única vigente de su norma y la anterior queda derogada y conservada",
+      "steps": [
+        {
+          "who": "actor",
+          "text": "sube el documento de la versión nueva a la biblioteca Normativa",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "solicita el tipo de documento, la norma, la versión, la fecha, el curso académico y el estado"
+        },
+        {
+          "who": "actor",
+          "text": "rellena los metadatos con la misma norma, la versión nueva y el estado Vigente",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "actor",
+          "text": "abre la versión anterior de esa norma y cambia su estado a Derogada",
+          "actor": "ACT-D01"
+        },
+        {
+          "who": "system",
+          "text": "muestra en la vista de normativa vigente solo la versión nueva y conserva la derogada, sin borrarla"
+        }
+      ],
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "nonfunctional": [],
+  "rules": [
+    {
+      "id": "RN-D06",
+      "name": "Tipo de documento",
+      "description": "Para buscar por metadatos hay que haber rellenado el tipo de documento en todos los documentos.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RN-D07",
+      "name": "Una versión vigente por norma",
+      "description": "Por cada norma solo puede haber una versión vigente (puede haber varias normas distintas vigentes a la vez). Al publicar una versión nueva, la anterior pasa a Derogada y se conserva: no se borra.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "environment": [
+    {
+      "id": "RC-D01",
+      "name": "SharePoint de la Universidad de Sevilla",
+      "description": "El DMS se construye en SharePoint de Microsoft 365 de la Universidad de Sevilla (uses0.sharepoint.com), con sitios, bibliotecas, columnas de metadatos, vistas y los grupos Propietarios, Integrantes y Visitantes. Los tres sitios (cadus-documentacion-publica, cadus-organos-de-gobierno y cadus-atencion-al-estudiante) los creó Pablo y los otros cuatro integrantes son miembros.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D02",
+      "name": "Acceso con correo corporativo",
+      "description": "Los estudiantes acceden con su correo corporativo @alum.us.es; cada delegado, con la cuenta de su delegación (correo institucional de la delegación, decisión del CADUS del 09/11/2026); la Ejecutiva, con la cuenta única del CADUS (dcadus@us.es).",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RC-D03",
+      "name": "Documentación independiente",
+      "description": "La documentación del DMS (requisitos, análisis, diseño, implementación y seguimiento SCRUM) es independiente de la del portal web. Se guarda en docs/dms del repositorio de GitHub y la coordinación diaria se hace en Discord.",
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    }
+  ],
+  "traces": [
+    [
+      "OBJ-D01",
+      [
+        "RF-D06",
+        "IR-D03"
+      ]
+    ],
+    [
+      "OBJ-D02",
+      [
+        "RF-D02",
+        "RF-D04",
+        "RF-D05",
+        "RN-D06",
+        "RN-D07"
+      ]
+    ],
+    [
+      "CU-D03",
+      [
+        "RF-D04",
+        "RF-D05",
+        "RF-D06",
+        "IR-D03",
+        "ACT-D03",
+        "ACT-D02"
+      ]
+    ],
+    [
+      "CU-D07",
+      [
+        "RF-D02",
+        "RF-D05",
+        "RF-D06",
+        "RN-D06",
+        "RN-D07",
+        "IR-D03",
+        "ACT-D01"
+      ]
+    ]
+  ]
+}
