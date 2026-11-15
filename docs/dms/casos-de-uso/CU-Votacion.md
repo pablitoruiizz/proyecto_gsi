@@ -120,7 +120,8 @@ El registro se abre en Word en línea: título, asamblea, fecha, tipo de voto, r
 | 13/11/2026 | Pablo, con Claude | Los `.docx` de ejemplo se regeneran como Word válidos y la biblioteca se traslada al sitio propio CADUS Votaciones (se vuelven a crear las columnas, la vista y la plantilla). Se rehacen las capturas 06, 07, 13a, 13b, 14, 14b y 15. | OK. Los dos registros conservan sus metadatos tras el traslado. |
 | 13/11/2026 | Pablo, con Claude | CU-D08 completo en el sitio nuevo: filtro «Asamblea de octubre» y «Tipo de voto: Nominal» y apertura del registro | OK. Quedan 2 registros con el primer filtro y 1 con los dos; el registro se abre en Word en línea (capturas 14, 14b y 15). El fallo abierto del 12/11 queda cerrado. |
 | 13/11/2026 | Pablo | Columnas obligatorias en el sitio nuevo | OK (capturas 13a y 13b). |
-| Pendiente | Otra persona del equipo | CU-D08 completo con otra cuenta (prueba cruzada) | PENDIENTE |
+| 15/11/2026 | Álvaro, con Claude | CU-D08 paso 5 con la cuenta de Álvaro (otra persona distinta de quien probó el 13/11): abrir «Votación 1 de la asamblea del 26-10-2026 (nominal, ejemplo)» en el sitio CADUS Votaciones | OK. El registro se abre en Word en línea y muestra asamblea, fecha, tipo de voto, resultado y una tabla con Delegación, Asistencia, Identidad comprobada y Voto, sin columna de DNI. Es una prueba cruzada solo del paso 5; los pasos 1 a 4 con los filtros no se repitieron. |
+| Pendiente | Otra persona del equipo | CU-D08 pasos 1 a 4 (filtros por asamblea y tipo de voto) con otra cuenta | PENDIENTE |
 | Pendiente | Equipo | CU-D06: crear un registro desde la plantilla y comprobar que no guarda DNI y que en el voto secreto no hay voto por delegación | PENDIENTE: no se ha ejecutado de principio a fin. |
 | Pendiente | Álvaro | Rol estudiante y rol delegado: no ven el sitio Votaciones ni por enlace directo | PENDIENTE: falta la cuenta de visitante. |
 
