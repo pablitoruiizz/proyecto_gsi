@@ -24,14 +24,17 @@ TIPOS = ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion")
 CMS = [
     ("docs/entrega/Entrega2-CMS-CADUS.docx", "CMS/Entrega2-CMS-CADUS.docx"),
     ("docs/entrega/entrega2/Entrega2-CMS-CADUS.pdf", "CMS/Entrega2-CMS-CADUS.pdf"),
-    ("docs/requisitos/rem-remus/REM-CADUS-v2.1.pdf", "CMS/REM-CADUS-v2.1.pdf"),
+    ("docs/requisitos/rem-remus/REM-CADUS-v2.3.pdf", "CMS/REM-CADUS-v2.3.pdf"),
     ("docs/requisitos/rem-remus/CADUS.rem", "CMS/CADUS.rem"),
     ("docs/dms/entrega/cms/Adenda-CMS-Sprint3.docx", "CMS/Adenda-CMS-Sprint3.docx"),
     ("docs/dms/entrega/cms/Adenda-CMS-Sprint3.pdf", "CMS/Adenda-CMS-Sprint3.pdf"),
     ("docs/scrum/sprints/sprint-03.md", "CMS/seguimiento/sprint-03.md"),
     ("docs/scrum/burndown/sprint-03.csv", "CMS/seguimiento/burndown-sprint-03.csv"),
     ("docs/scrum/backlog/product-backlog.md", "CMS/seguimiento/product-backlog.md"),
+    ("docs/entrega/capturas-sprint3-miguel.md", "CMS/capturas-sprint3/capturas-sprint3.md"),
 ]
+for _f in sorted(os.listdir(os.path.join(DMS, "..", "entrega", "img", "capturas3"))):
+    CMS.append((f"docs/entrega/img/capturas3/{_f}", f"CMS/capturas-sprint3/{_f}"))
 ARCHIVOS = [
     ("docs/dms/entrega/Entrevista-CADUS.docx", "Entrevista-CADUS.docx"),
     ("docs/dms/entrega/Entrevista-CADUS.pdf", "Entrevista-CADUS.pdf"),
@@ -75,7 +78,8 @@ LISTA = [
 LEEME_CMS = """
 ## CMS (portal WordPress)
 - `Entrega2-CMS-CADUS.docx` / `.pdf`: documento de la entrega 2, sin cambios.
-- `REM-CADUS-v2.1.pdf` y `CADUS.rem`: REM del CMS exportado desde REMUS.
+- `REM-CADUS-v2.3.pdf` y `CADUS.rem`: REM del CMS (versión 2.3) exportado desde REMUS.
+- `capturas-sprint3`: capturas del Sprint 3 (relevo de la cuenta, calendario, páginas institucionales y accesibilidad) con su tabla explicativa.
 - `Adenda-CMS-Sprint3.docx` / `.pdf`: cambios de requisitos tras la entrevista, backlog, sprint backlog y burndown del Sprint 3.
 - `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
 """
@@ -103,8 +107,11 @@ Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, 
 
 
 def main():
-    if os.path.isdir(PAQ):
-        shutil.rmtree(PAQ)
+    # solo se borra lo de esta variante (el zip del DMS y el zip con CMS conviven en la misma carpeta)
+    if os.path.isdir(RAIZ_ZIP):
+        shutil.rmtree(RAIZ_ZIP)
+    if os.path.exists(RAIZ_ZIP + ".zip"):
+        os.remove(RAIZ_ZIP + ".zip")
     faltan = []
     for o, d in ARCHIVOS:
         src = os.path.join(RAIZ, o)

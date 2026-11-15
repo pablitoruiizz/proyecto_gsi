@@ -214,9 +214,24 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 **Sin prueba cruzada:** las pruebas anteriores las ejecutó quien hizo cada subtarea; falta que otra persona las repita (T-01).
 
+## Estado a 15/11/2026 (cierre)
+
+| Subtarea | Quién | Fecha | Evidencia |
+|---|---|---|---|
+| HU-14a menús y portada en móvil y tablet (3 SP) y HU-15a contraste, foco, teclado y «saltar al contenido» (3 SP) | Joaquín | 13/11 | `tests/HU-14a-HU-15a-portada.md`, commit `788f1fb`. **Medidas sobre una réplica estática** de la portada y las interiores (Chromium) con los mismos CSS y JS del plugin: no incluyen la cabecera real del tema, ni dispositivos reales, ni lector de pantalla |
+| HU-14b directorio, tablas y fichas en móvil y tablet (3 SP) | Álvaro | 14–15/11 | `tests/HU-14b-movil-tablet.md`, PR #77 fusionado el 15/11. Medido en una maqueta y en el WordPress local en emulación (390 y 768 px); la ficha de Derecho está «pendiente de completar», así que no se probaron filas con textos largos |
+| E3-04 pruebas de aceptación | Álvaro | 15/11 | `tests/E3-04-pruebas-de-aceptacion.md`: guion con resultados parciales (H16-1 a H16-6 por peticiones anónimas); T1, T2 y T3 quedan pendientes porque el WordPress local no tiene Fluent Forms con el formulario ni The Events Calendar |
+| Revisión cruzada con Codex (CMS y DMS) | Pablo | 13/11 | `docs/scrum/codex_revision_cms_sprint3_final.md`; correcciones de HU-23, RN-04, HU-21 y HU-22 en el commit `763353e` |
+
+**Resultado: 0 SP pendientes de 44 el 15/11**, contando como hecha una subtarea cuando está integrada en `main`.
+
 ## Resultado del Sprint 3
 
-*(se completará al cerrar el sprint)*
+- **Puntos:** 36 SP planificados y 8 SP de HU-24 añadidos el 12/11: 44 SP, todos integrados en `main` el 15/11. HU-21 (votar desde el portal) se canceló tras la entrevista del 26/10.
+- **Cómo se llegó:** no se cerró ningún punto hasta el 08/11 (hitos de 18 y 10 SP no alcanzados); 33 SP pendientes el 09/11, 25 el 11/11, 9 el 12/11, 3 el 13/11 y 0 el 15/11. Se repite el cierre de última hora de los sprints anteriores.
+- **Lo que «hecho» no significa todavía:** casi todas las pruebas las ejecutó quien implementó la subtarea; la prueba cruzada (T-01), la prueba en dispositivos reales (cambio de criterio de la DoD, decidido el 12/11) y la prueba con cuentas reales de cada rol siguen pendientes, y E3-04 está a medias.
+- **Sin cerrar:** E3-09 (despliegue en el servidor de la US, bloqueado por PHP 7.2/7.3), E3-06 (documento final del CMS) y E3-02 (volcado de la base de datos y cuentas de los delegados), que dependen de que el CADUS decida quedarse con el portal.
+- **Pendiente de Pablo:** cambiar las contraseñas de `root` y `cadus` (Wordfence, crítica) y confirmar la cuenta de Miguel Ángel.
 
 ## Sprint Review y retrospectiva
 
