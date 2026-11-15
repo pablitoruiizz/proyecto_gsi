@@ -23,7 +23,7 @@
 | HU-16b Búsqueda en tickets sin exponer datos | Marcos | Sí (14/11) |
 | HU-17a/b Spam e inyección | Marcos, Pablo | Sí (14/11) |
 | HU-20a/b Rendimiento | Miguel Ángel, Pablo | Sí (14/11) |
-| HU-22 Alta del sucesor | Miguel Ángel | Sí (14/11) |
+| HU-22 Relevo de la cuenta de la delegación | Miguel Ángel | Sí (14/11) |
 | HU-23 Anonimización a los 2 años | Álvaro | Sí (14/11) |
 
 ## 1. Las tres operaciones en menos de un minuto (criterio del cliente)
@@ -82,17 +82,19 @@ Se cronometra con una persona que no conoce el portal, desde la portada y en el 
 | # | Prueba | Resultado esperado | Resultado |
 |---|---|---|---|
 | H20-1 | Lighthouse de rendimiento en la portada (móvil). | Mejora respecto a la medición anterior (anotar antes y después). | |
-| H20-2 | Imágenes con carga diferida y tamaño ajustado. | Ninguna imagen supera el tamaño acordado. | Parcial (15/11). En la portada, 6 imágenes, la mayor de 46 KB; todas con carga diferida salvo el logotipo. No se comprobó el resto de páginas ni el tamaño acordado. |
+| H20-2 | Imágenes con carga diferida y tamaño ajustado. | Ninguna imagen supera el tamaño acordado (HU-20a): fotos de la galería de 720 px como máximo y en WebP, escudos en WebP a su tamaño, y una imagen subida de más de 1920 px se reduce a 1920 px (una de más de 8 MB se rechaza). | Parcial (15/11). En la portada, 6 imágenes, la mayor de 46 KB; todas con carga diferida salvo el logotipo. No se comprobó el resto de páginas ni el tamaño acordado. |
 
-### HU-22 · Alta del sucesor (RN-04)
+### HU-22 · Relevo de la cuenta de la delegación (RN-04, RF-14)
+
+Modelo decidido con el CADUS el 09/11: **una cuenta por delegación**, con el correo institucional de la delegación. En el relevo no se crea otra cuenta: la misma pasa al equipo entrante con una contraseña nueva (**Delegaciones › Relevo de la cuenta**). Se prueba con dos navegadores (o uno en privado) para ver que la sesión del equipo anterior se cierra.
 
 | # | Prueba | Resultado esperado | Resultado |
 |---|---|---|---|
-| H22-1 | Delegado: dar de alta a su sucesor. | Se crea la cuenta nueva y la ficha pasa a ella. | |
-| H22-2 | Tras el alta, el delegado anterior intenta entrar. | Acceso revocado. | |
-| H22-3 | Delegado: intentar dar de alta a un sucesor de otra delegación. | No puede. | |
-| H22-4 | Ejecutiva: dar de alta a un sucesor. | Puede (criterio de HU-22). | |
-| H22-5 | Comprobar que cada delegación queda con una sola cuenta activa. | Exactamente una. | |
+| H22-1 | Delegado: en «Relevo de la cuenta», elegir «Contraseña nueva», marcar la confirmación y hacer el relevo. | Sale a la pantalla de acceso con el aviso «Relevo hecho» y entra con la contraseña nueva; la ficha sigue en la misma cuenta. | |
+| H22-2 | Tras el relevo, el equipo anterior intenta seguir: con la sesión abierta en otro navegador y con la contraseña antigua. | La otra sesión queda cerrada y la contraseña antigua no sirve. | |
+| H22-3 | Delegado: cambiar en el formulario (herramientas del navegador) el campo `cuenta` por el número de otra delegación y enviarlo. | No puede: «Solo puedes hacer el relevo de la cuenta de tu propia delegación» (403). | |
+| H22-4 | Ejecutiva: hacer el relevo de otra delegación. | Puede; la lista solo ofrece cuentas de delegación (ninguna de administrador) y la tabla muestra el último relevo. | |
+| H22-5 | Comprobar que cada delegación queda con una sola cuenta activa: en la tabla de la Ejecutiva, y con `php scripts/roles/aplicar_usuarios.php` probando una segunda cuenta para la misma delegación. | Una sola cuenta por ficha; el script rechaza la segunda («para el relevo cambia su contraseña, no crees otra»). | |
 
 ### HU-23 · Anonimización a los 2 años (RN-03)
 

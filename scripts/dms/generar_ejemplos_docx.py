@@ -8,7 +8,8 @@ Uso:  python scripts/dms/generar_ejemplos_docx.py <carpeta de salida>
 import base64, io, json, os, random, sys, zipfile
 from xml.sax.saxutils import escape
 
-import docx  # python-docx, solo para comprobar que los archivos se abren
+import docx  # python-docx: crea el paquete Word completo y comprueba que se abre
+import docx.shared
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DELEGACIONES = [d["centro"] for d in json.load(open(os.path.join(RAIZ, "cms-wordpress", "wp-content", "plugins", "cadus-portal", "data", "delegaciones.json"), encoding="utf-8"))]
@@ -34,26 +35,29 @@ def tabla(cabecera, filas, anchos):
 
 
 def docx_bytes(cuerpo_xml, titulo):
-    doc = (f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="{W}"><w:body>{cuerpo_xml}'
-           '<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>')
-    tipos = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
-             '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>'
-             '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>'
-             '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>')
-    rels = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-            '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>'
-            '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>')
-    core = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" '
-            'xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-            f'<dc:title>{escape(titulo)}</dc:title><dc:creator>CADUS (documento de ejemplo)</dc:creator></cp:coreProperties>')
-    b = io.BytesIO()
-    with zipfile.ZipFile(b, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
-        z.writestr("[Content_Types].xml", tipos)
-        z.writestr("_rels/.rels", rels)
-        z.writestr("word/document.xml", doc)
-        z.writestr("docProps/core.xml", core)
-    return b.getvalue()
+    """Paquete Word completo a partir de la plantilla de python-docx (estilos, ajustes, temas y word/_rels/document.xml.rels).
 
+    El paquete mínimo de antes (solo [Content_Types].xml, _rels/.rels, word/document.xml y docProps/core.xml) es válido para
+    python-docx, pero Word en línea no abrió «Votación 2 … (secreta, ejemplo)» el 15/11/2026: le faltaba word/_rels/document.xml.rels.
+    Con la plantilla de python-docx el archivo tiene todas las partes que crea Word y se abre en Word en línea y en la vista previa.
+    """
+    from docx.oxml import parse_xml
+    documento = docx.Document()
+    cuerpo = documento.element.body
+    seccion = cuerpo.sectPr
+    for hijo in list(cuerpo):
+        if hijo is not seccion:
+            cuerpo.remove(hijo)
+    for hijo in parse_xml(f'<w:body xmlns:w="{W}">{cuerpo_xml}</w:body>'):
+        seccion.addprevious(hijo)
+    seccion.pgSz.w, seccion.pgSz.h = docx.shared.Twips(11906), docx.shared.Twips(16838)
+    for lado in ("top_margin", "bottom_margin", "left_margin", "right_margin"):
+        setattr(documento.sections[0], lado, docx.shared.Twips(1134))
+    documento.core_properties.title = titulo
+    documento.core_properties.author = "CADUS (documento de ejemplo)"
+    b = io.BytesIO()
+    documento.save(b)
+    return b.getvalue()
 
 AVISO = p("Documento ficticio de ejemplo para probar el DMS del CADUS. No contiene datos reales ni personales.", tam=18, color="7F7F7F")
 
@@ -114,6 +118,8 @@ if __name__ == "__main__":
         datos = docx_bytes(cuerpo, os.path.basename(ruta)[:-5])
         d = docx.Document(io.BytesIO(datos))  # si no se abre, esto falla
         assert len(d.paragraphs) > 0
+        partes = zipfile.ZipFile(io.BytesIO(datos)).namelist()
+        assert "word/_rels/document.xml.rels" in partes and "word/styles.xml" in partes, partes
         paquete[ruta] = base64.b64encode(datos).decode("ascii")
         open(os.path.join(salida, os.path.basename(ruta)), "wb").write(datos)
         print(f"{ruta}: {len(datos)} bytes, {len(d.paragraphs)} párrafos, {len(d.tables)} tablas")
