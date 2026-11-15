@@ -230,6 +230,11 @@
   .cadus-interior .cadus-tabla tr { margin-bottom: 8px; border-radius: var(--radio); background: var(--gris); overflow: hidden; }
   .cadus-interior .cadus-tabla td, .cadus-interior .cadus-tabla td:first-child, .cadus-interior .cadus-tabla td:last-child { display: flex; justify-content: space-between; gap: 16px; border-radius: 0; background: transparent; }
   .cadus-interior .cadus-tabla td::before { content: attr(data-label); font-weight: 800; color: var(--granate); }
+  /* HU-14b: con el relleno de las celdas, width:100% sin border-box desbordaba la tarjeta y cortaba fecha, tipo y PDF. */
+  .cadus-interior .cadus-tabla, .cadus-interior .cadus-tabla tr, .cadus-interior .cadus-tabla td { box-sizing: border-box; }
+  .cadus-interior .cadus-tabla td { min-width: 0; overflow-wrap: anywhere; }
+  .cadus-interior .cadus-tabla td::before { flex: none; overflow-wrap: normal; }
+  .cadus-interior .cadus-tabla td > * { min-width: 0; text-align: right; }
 }
 @media (prefers-reduced-motion: reduce) {
   .cadus-interior .hero-section::before, .cadus-interior .hero-section::after { animation: cadus-fundido 200ms ease both; }
