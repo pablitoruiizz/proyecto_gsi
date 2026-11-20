@@ -2,13 +2,13 @@
 
 Estado a 16/11/2026. Lo hecho por Pablo (con Claude) en el tenant de la US, con la cuenta de Pablo:
 
-| Equipo | Privacidad | Propietario | Miembros invitados |
-|---|---|---|---|
-| CADUS · Ejecutiva | privado | Pablo Ruiz Vidal | Marcos (`mardelrod2@alum.us.es`), Joaquín (`joaluncan@alum.us.es`), Álvaro (`alvmaroca@alum.us.es`) |
-| CADUS · Delegaciones | privado | Pablo Ruiz Vidal | los mismos tres |
-| CADUS · Asamblea | privado | Pablo Ruiz Vidal | los mismos tres |
+| Equipo | Privacidad | Propietarios (desde el 20/11) |
+|---|---|---|
+| CADUS · Ejecutiva | privado | Pablo Ruiz Vidal, Marcos (`mardelrod2@alum.us.es`), Joaquín (`joaluncan@alum.us.es`) y Álvaro (`alvmaroca@alum.us.es`) |
+| CADUS · Delegaciones | privado | los mismos cuatro |
+| CADUS · Asamblea | privado | los mismos cuatro |
 
-Los tres invitados hacen de **cuentas de delegación de ejemplo** en el piloto (RN-R04): el CADUS real no tiene aún cuentas de delegación en Teams. Cada equipo se creó con la plantilla «Equipo básico» (solo el canal General) y no tiene más configuración todavía.
+Los tres se invitaron el 16/11 como miembros y el 20/11 se pasaron a **propietarios**, para que los cuatro puedan configurar los equipos. Ninguno es ya «solo miembro»: la prueba de que una delegación solo ve su canal (RN-R02) necesita una cuenta que sea solo miembro (por ejemplo, volver a poner a uno como miembro durante la prueba, o una cuenta de ejemplo). El CADUS real no tiene aún cuentas de delegación en Teams. Cada equipo se creó con la plantilla «Equipo básico» (solo el canal General) y no tiene más configuración todavía.
 
 ## Qué falta (R-05, Marcos y Pablo) y qué debe verse al final
 

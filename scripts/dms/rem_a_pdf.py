@@ -18,6 +18,11 @@ for _sec in ("Acta", "Normativa", "Expediente", "Votacion"):
     if os.path.exists(_h):
         TRABAJOS.append((_h, os.path.join(RAIZ, "docs", "dms", "rem-remus", "secciones", f"REM-DMS-{_sec}-v1.1.pdf")))
 
+# REM de la red social (Lab 5): si REMUS exportó RSI__CRS.html en docs/redsocial/rem-remus, también se pasa a PDF
+_rsi_html = os.path.join(RAIZ, "docs", "redsocial", "rem-remus", "RSI__CRS.html")
+if os.path.exists(_rsi_html):
+    TRABAJOS.append((_rsi_html, os.path.join(RAIZ, "docs", "redsocial", "rem-remus", "REM-RSI-v1.0.pdf")))
+
 # El REM del CMS solo se convierte si el HTML exportado es de la versión actual (2.3): un HTML antiguo daría un PDF engañoso.
 _cms_html = TRABAJOS[0][0]
 if not os.path.exists(_cms_html) or not re.search(r"Versi.n\s*2\.3", open(_cms_html, encoding="latin-1").read()):

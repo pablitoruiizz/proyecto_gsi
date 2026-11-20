@@ -12,11 +12,12 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DMS = os.path.join(RAIZ, "docs", "dms")
 ENT = os.path.join(DMS, "entrega")
 PAQ = os.path.join(ENT, "paquete")
-CON_CMS = "--con-cms" in sys.argv
+CON_RSI = "--con-rsi" in sys.argv
+CON_CMS = "--con-cms" in sys.argv or CON_RSI
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])
-FECHA = "15-11"  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
-NOMBRE = f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
+FECHA = "22-11" if CON_RSI else "15-11"  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
+NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
 RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
 TIPOS = ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion")
 
@@ -65,6 +66,30 @@ for f in sorted(os.listdir(os.path.join(DMS, "capturas"))):
 if CON_CMS:
     ARCHIVOS = CMS + ARCHIVOS
 
+# Red social interna (Lab 5): lo que falte (capturas, seguimiento de Joaquín) se avisa, pero no impide generar el zip
+RSI_FILES = [
+    ("docs/redsocial/entrega/Entrega-RSI-CADUS.docx", "RSI/Entrega-RSI-CADUS.docx"),
+    ("docs/redsocial/entrega/Entrega-RSI-CADUS.pdf", "RSI/Entrega-RSI-CADUS.pdf"),
+    ("docs/redsocial/rem-remus/RSI.rem", "RSI/1-Requisitos-REM/RSI.rem"),
+    ("docs/redsocial/rem-remus/REM-RSI-v1.0.pdf", "RSI/1-Requisitos-REM/REM-RSI-v1.0.pdf"),
+    ("docs/redsocial/rem-remus/carga-remus.md", "RSI/1-Requisitos-REM/carga-remus.md"),
+    ("docs/redsocial/glosario.md", "RSI/1-Requisitos-REM/glosario-de-terminos.md"),
+    ("docs/redsocial/entrega/Business-Case-RSI.docx", "RSI/2-Caso-de-negocio/Business-Case-RSI.docx"),
+    ("docs/redsocial/entrega/Business-Case-RSI.pdf", "RSI/2-Caso-de-negocio/Business-Case-RSI.pdf"),
+    ("docs/redsocial/img/uml-rsi-analisis.png", "RSI/3-Analisis-UML/uml-rsi-analisis.png"),
+    ("docs/redsocial/img/uml-rsi-diseno.png", "RSI/4-Diseno-UML/uml-rsi-diseno.png"),
+    ("docs/redsocial/configuracion-teams.md", "RSI/5-Implementacion-Teams/configuracion-teams.md"),
+    ("docs/redsocial/plan-lab5.md", "RSI/seguimiento/plan-lab5.md"),
+]
+_cap = os.path.join(RAIZ, "docs", "redsocial", "capturas")
+if os.path.isdir(_cap):
+    RSI_FILES += [(f"docs/redsocial/capturas/{f}", f"RSI/5-Implementacion-Teams/{f}") for f in sorted(os.listdir(_cap))]
+_scrum = os.path.join(RAIZ, "docs", "redsocial", "scrum")
+if os.path.isdir(_scrum):
+    RSI_FILES += [(f"docs/redsocial/scrum/{f}", f"RSI/seguimiento/{f}") for f in sorted(os.listdir(_scrum))]
+if CON_RSI:
+    ARCHIVOS = ARCHIVOS + RSI_FILES
+
 # Lista del profesor (Lab 4): carpeta del zip y mínimo de archivos que debe tener.
 LISTA = [
     ("Requisitos (REM y proyectos REMUS: DMS.rem y un .rem por sección)", "DMS/1-Requisitos", 5),
@@ -74,6 +99,25 @@ LISTA = [
     ("Documentos de implementación (capturas de SharePoint)", "DMS/5-Implementacion-SharePoint", 14),
     ("Seguimiento SCRUM del DMS", "DMS/seguimiento", 5),
 ]
+if CON_RSI:
+    LISTA += [
+        ("RSI · Requisitos (REM), requisitos del sistema software y glosario de términos", "RSI/1-Requisitos-REM", 4),
+        ("RSI · Caso de negocio (Word y PDF)", "RSI/2-Caso-de-negocio", 2),
+        ("RSI · Nuevo UML de análisis", "RSI/3-Analisis-UML", 1),
+        ("RSI · Nuevo UML de diseño", "RSI/4-Diseno-UML", 1),
+        ("RSI · Implementación explicada de Teams con capturas (guía y al menos 6 capturas)", "RSI/5-Implementacion-Teams", 7),
+        ("RSI · Seguimiento SCRUM de la red social", "RSI/seguimiento", 3),
+    ]
+
+LEEME_RSI = """
+## Red social interna (Microsoft Teams, Lab 5)
+- `Entrega-RSI-CADUS.docx` / `.pdf`: documento principal (caso de negocio, requisitos, glosario, análisis, diseño, implementación, trazabilidad y SCRUM).
+- `1-Requisitos-REM`: `RSI.rem` (proyecto REMUS), `REM-RSI-v1.0.pdf` (su exportación), hoja `carga-remus.md` y `glosario-de-terminos.md`.
+- `2-Caso-de-negocio`: `Business-Case-RSI` (Word y PDF).
+- `3-Analisis-UML` y `4-Diseno-UML`: UML de análisis (Role, Group, Subgroups, Tool y Permission) y UML de diseño en Teams.
+- `5-Implementacion-Teams`: capturas de Teams (tenant de la Universidad de Sevilla) y guía de configuración.
+- `seguimiento`: plan y seguimiento SCRUM de la red social.
+"""
 
 LEEME_CMS = """
 ## CMS (portal WordPress)
@@ -116,6 +160,9 @@ def main():
     for o, d in ARCHIVOS:
         src = os.path.join(RAIZ, o)
         if not os.path.exists(src):
+            if o.startswith("docs/redsocial/"):
+                print("AVISO (red social, no se aborta): falta", o)
+                continue
             faltan.append(o)
             continue
         dst = os.path.join(RAIZ_ZIP, d)
@@ -123,7 +170,7 @@ def main():
         shutil.copy2(src, dst)
     if faltan:
         sys.exit("faltan archivos:\n  - " + "\n  - ".join(faltan))
-    open(os.path.join(RAIZ_ZIP, "LEEME.md"), "w", encoding="utf-8").write(LEEME + (LEEME_CMS if CON_CMS else ""))
+    open(os.path.join(RAIZ_ZIP, "LEEME.md"), "w", encoding="utf-8").write(LEEME + (LEEME_CMS if CON_CMS else "") + (LEEME_RSI if CON_RSI else ""))
     print("Comprobación frente a la lista del profesor:")
     mal = 0
     for que, carpeta, minimo in LISTA:

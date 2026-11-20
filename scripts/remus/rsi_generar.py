@@ -187,4 +187,7 @@ d = {
 
 ruta = os.path.join(RAIZ, "scripts", "remus", "rsi_data.json")
 json.dump(d, open(ruta, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+glos = ["# Glosario de términos · Red Social Interna del CADUS", "", "Generado desde `scripts/remus/rsi_data.json`; es el mismo glosario que lleva `RSI.rem`.", "", "| Término | Significado |", "|---|---|"]
+glos += [f"| {g['name']} | {g['text']} |" for g in d["paragraphs"]["glossary"]]
+open(os.path.join(RAIZ, "docs", "redsocial", "glosario.md"), "w", encoding="utf-8").write("\n".join(glos) + "\n")
 print("generado", os.path.relpath(ruta, RAIZ), "·", len(d["functional"]), "RF,", len(d["usecases"]), "CU,", len(d["rules"]), "RN,", len(d["traces"]), "trazas")

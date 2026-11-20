@@ -24,7 +24,7 @@ Business Case (con la estructura vista en clase) · grupos principales y piloto 
 | R-02 | REM en REMUS: actores, roles, grupos y subgrupos, herramientas y permisos. **Hecho el 16/11** (scripts/remus/rsi_data.json, docs/redsocial/rem-remus/RSI.rem: 12 RF, 5 CU, 5 RN) | Pablo | R-01 |
 | R-03 | UML de análisis con los estereotipos de la diapositiva 13. **Borrador hecho el 16/11** (docs/redsocial/img/uml-rsi-analisis.png); falta que Álvaro lo revise | Álvaro | R-02 |
 | R-04 | UML de diseño: del análisis a equipos, canales, roles de Teams y planes de Planner. **Borrador hecho el 16/11** (uml-rsi-diseno.png): tres equipos, no uno, por el límite de canales privados; falta que Álvaro lo revise | Álvaro | R-03 |
-| R-05 | Crear y configurar los equipos y los grupos en Teams (el piloto). **Creados el 16/11** los tres equipos privados (Ejecutiva, Delegaciones y Asamblea) con Pablo como propietario y Marcos, Joaquín y Álvaro como miembros. Falta la configuración de canales, moderación y canales privados: guía en `configuracion-teams.md` | Pablo (crea) y Marcos (configura y prueba) | R-04 |
+| R-05 | Crear y configurar los equipos y los grupos en Teams (el piloto). **Creados el 16/11** los tres equipos privados (Ejecutiva, Delegaciones y Asamblea) con Pablo, Marcos, Joaquín y Álvaro como propietarios (invitados como miembros el 16/11 y pasados a propietarios el 20/11). Falta la configuración de canales, moderación y canales privados: guía en `configuracion-teams.md` | Pablo (crea) y Marcos (configura y prueba) | R-04 |
 | R-06 | Planner: un plan por grupo con sus buckets y tareas | Joaquín | R-05 |
 | R-07 | Capturas explicadas de Teams y Planner | Marcos | R-05, R-06 |
 | R-08 | Seguimiento SCRUM: backlog, sprint y burndown de la red social | Joaquín | — |
