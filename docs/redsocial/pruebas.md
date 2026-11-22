@@ -15,9 +15,9 @@ Registro de la configuración del piloto y de las pruebas con cuentas distintas.
 | 8 | CADUS · Asamblea | Pestaña «Calendario del canal» en General y evento «Asamblea Noviembre» el 26/11/2026 de 17:00 a 18:00 | OK | 06-asamblea-calendario.jpg | RF-R08 · CU-R02 |
 | 9 | CADUS · Asamblea | Pestaña de SharePoint en General que abre el sitio del DMS «CADUS Órganos de gobierno» (actas y plantilla de acta) | OK: los documentos se abren desde el DMS, no se copian a Teams | 07-archivos-dms.jpg | RF-R07 · RN-R03 · CU-R03 |
 
-## Pruebas con otra cuenta (pendientes)
+## Pruebas con otra cuenta
 
 | Fecha | Quién | Qué | Resultado |
 |---|---|---|---|
 | 21/11/2026 | Joaquín, con su cuenta | En CADUS · Delegaciones solo ve «Avisos» y su propio canal privado, no los de las otras delegaciones (captura 05-vista-miembro.jpg) | OK: ve «Avisos» y «Delegación · Biología»; no aparecen «Delegación · ETSII» ni «Delegación · Derecho». Joaquín es propietario del equipo, pero un canal privado solo lo ven sus miembros, así que la prueba vale para RN-R02. |
-| | Una cuenta que sea solo miembro | No puede iniciar una conversación en «Avisos» | PENDIENTE (en curso el 22/11): los cuatro integrantes eran propietarios desde el 20/11; por orden de Pablo se bajó a Álvaro a «Miembro» en CADUS · Delegaciones el 22/11 para que haga la prueba con su cuenta. **Hay que volver a ponerlo como Propietario al terminar.** Resultado: por rellenar por Álvaro |
+| 22/11/2026 | Álvaro, con su cuenta de la US como **Miembro** (no propietario) de CADUS · Delegaciones; se le bajó de Propietario para la prueba (por orden de Pablo, desde Teams) y se le volvió a subir al terminar | 1) No puede iniciar una conversación en «Avisos». 2) Solo ve «Avisos» y el canal privado del que es miembro, no los de las otras delegaciones (capturas 05b y 05c) | OK: 1) en «Avisos» no puede publicar y Teams muestra «Solo los moderadores del canal pueden publicar en este canal.» (RN-R01, captura 05b). 2) En la lista de canales solo ve «Avisos» y «Delegación · ETSII» (del que es miembro); no ve «Delegación · Derecho» ni «Delegación · Biología» (RN-R02, captura 05c). Las capturas no muestran el rol: la prueba se hizo con el rol de Miembro, como consta en esta fila. Álvaro vuelve a ser Propietario (comprobado en Teams el 22/11). |

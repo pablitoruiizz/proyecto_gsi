@@ -33,23 +33,25 @@ CAPS = {
     "11-delegaciones-avisos-renombrado.jpg": ("Canal de avisos renombrado.", "Teams permite renombrar el canal General como «Avisos», que es el nombre que usa el diseño. La captura es de la cuenta de Marcos.", "RF-R05"),
     "04-delegaciones-canales-privados.jpg": ("Canales privados de las delegaciones.", "Lista de canales de CADUS · Delegaciones: «Avisos» y tres canales privados con candado, «Delegación · Biología», «Delegación · Derecho» y «Delegación · ETSII» (tres de ejemplo; el patrón se repite para las 27). La captura es de la cuenta de Marcos.", "RF-R03 · CU-R05"),
     "05-vista-miembro.jpg": ("Lo que ve una delegación.", "Con la cuenta de Joaquín, que representa a la delegación de Biología, la lista del equipo solo muestra «Avisos» y «Delegación · Biología»: no aparecen los canales de ETSII ni de Derecho. Joaquín es propietario del equipo, pero un canal privado solo lo ven sus miembros, así que la prueba vale para el aislamiento entre delegaciones.", "RN-R02 · CU-R04"),
+    "05b-avisos-solo-miembro.jpg": ("«Avisos» visto por un miembro.", "Con la cuenta de Álvaro como Miembro (no propietario; se le bajó de Propietario para la prueba el 22/11, por orden de Pablo, y se le volvió a subir), el canal «Avisos» no deja publicar: Teams muestra «Solo los moderadores del canal pueden publicar en este canal.» La captura no muestra el rol.", "RF-R05 · RN-R01"),
+    "05c-canales-solo-miembro.jpg": ("Canales que ve un miembro.", "La misma cuenta, como Miembro de CADUS · Delegaciones, solo ve «Avisos» y «Delegación · ETSII» (del que es miembro): no ve los canales privados de Derecho ni de Biología. La captura no muestra el rol.", "RF-R03 · RN-R02"),
     "06-asamblea-calendario.jpg": ("Equipo de la asamblea con su calendario.", "En el canal General de CADUS · Asamblea, la pestaña «Calendario del canal» muestra el evento «Asamblea Noviembre» el jueves 26/11/2026 de 17:00 a 18:00; el equipo tiene además el canal Cursos. La captura es de la cuenta de Marcos.", "RF-R04 · RF-R08 · CU-R02"),
     "07-archivos-dms.jpg": ("Pestaña del canal que muestra el DMS.", "El canal General de CADUS · Asamblea tiene una pestaña «DMS · Órganos de gobierno» que enseña el sitio de SharePoint del DMS, con las actas y la plantilla de acta: los documentos oficiales se leen desde su sitio y no se copian a Teams. La captura es de la cuenta de Joaquín.", "RF-R07 · RN-R03 · CU-R03"),
     "07b-archivos-dms-marcos.jpg": ("La misma pestaña del DMS, vista por Marcos.", "La misma pestaña, antes de renombrarla, con la cuenta de Marcos: los documentos del DMS se abren desde su sitio.", "RF-R07 · RN-R03"),
-    "08-planner.jpg": ("Plan de tareas en Planner.", "Plan «Preparación de la Asamblea» en el equipo CADUS · Asamblea, con los cubos Por hacer (2), En curso (1) y Hecho (1) y cuatro tareas de ejemplo asignadas a distintas personas y con fecha límite. La captura es de la cuenta de Joaquín.", "RF-R09 · CU-R02"),
+    "08-planner.jpg": ("Plan de tareas en Planner.", "Plan «Preparación de la Asamblea» en el equipo CADUS · Asamblea, con los cubos Por hacer (2), En curso (1) y Hecho (1) y cuatro tareas de ejemplo asignadas a distintas personas y con fecha límite. La captura es de la cuenta de Joaquín y es anterior a un ajuste: la tarea «Preparar la plantilla del acta» vence ahí el 27/11 y el 22/11 se cambió al 25/11, porque la asamblea es el 26/11.", "RF-R09 · CU-R02"),
     "09-forms.jpg": ("Formulario de confirmación de asistencia.", "Formulario de Forms «Confirmación de asistencia», anclado como pestaña del canal General de CADUS · Asamblea, con dos preguntas: si asistirá la delegación y de qué delegación se trata. La captura es de la cuenta de Joaquín.", "RF-R10"),
 }
 # capturas que necesita cada caso de uso para considerarse observado
-CAP_CU = {"CU-R01": ["03-delegaciones-avisos.jpg", "11-delegaciones-avisos-renombrado.jpg"], "CU-R02": ["06-asamblea-calendario.jpg", "08-planner.jpg"],
-          "CU-R03": ["07-archivos-dms.jpg", "04-delegaciones-canales-privados.jpg"], "CU-R04": ["05-vista-miembro.jpg"],
+CAP_CU = {"CU-R01": ["03-delegaciones-avisos.jpg", "11-delegaciones-avisos-renombrado.jpg", "05b-avisos-solo-miembro.jpg"], "CU-R02": ["06-asamblea-calendario.jpg", "08-planner.jpg"],
+          "CU-R03": ["07-archivos-dms.jpg", "04-delegaciones-canales-privados.jpg"], "CU-R04": ["05-vista-miembro.jpg", "05c-canales-solo-miembro.jpg"],
           "CU-R05": ["04-delegaciones-canales-privados.jpg"]}
 # estado de las tareas del plan a la fecha del documento (actualizar al regenerar)
-ESTADO = {"R-01": "Hecho con el índice del Lab 5; falta la revisión de otra persona", "R-02": "Hecho (REM en REMUS); falta la exportación a PDF",
+ESTADO = {"R-01": "Hecho con el índice del Lab 5; falta la revisión de otra persona", "R-02": "Hecho (REM en REMUS y PDF exportado el 22/11)",
           "R-03": "Hecho y revisado por Álvaro (UML en main)", "R-04": "Hecho y revisado por Álvaro (UML de diseño con los planes de Planner)",
           "R-05": "Hecho: tres equipos, cuatro propietarios, Avisos con moderación, canal Cursos, tres canales privados y calendario (capturas 01 a 06, 10 y 11)",
           "R-06": "Hecho: pestañas de Planner de los tres equipos (Coordinación de la Ejecutiva, Seguimiento de las delegaciones y Preparación de la Asamblea), Forms y pestaña del DMS; solo el plan de la Asamblea tiene captura (08)",
-          "R-07": "Hecho: capturas 01 a 11; la prueba con una cuenta solo miembro sigue pendiente",
-          "R-08": "Hecho el 22/11 por Pablo con Claude (puntos estimados a posteriori)", "R-09": "En curso (Pablo)", "R-10": "Revisión con Codex hecha el 22/11 y corregida; prueba cruzada humana parcial (Joaquín probó el aislamiento de canales)"}
+          "R-07": "Hecho: 14 capturas (01 a 11, 05b, 05c y 07b); la prueba con una cuenta solo miembro se hizo el 22/11 (capturas 05b y 05c)",
+          "R-08": "Hecho el 22/11 por Pablo con Claude (puntos estimados a posteriori)", "R-09": "Hecho el 22/11 con el commit de cierre; falta solo enviarlo (Pablo)", "R-10": "Revisión con Codex hecha el 22/11 y corregida; prueba cruzada humana parcial (Joaquín y Álvaro probaron el aislamiento de canales; Álvaro revisó los UML)"}
 
 
 def existe(nombre):
@@ -200,7 +202,7 @@ def principal():
         req = [r for r in req if r.startswith(("RF-", "RN-", "RNF-"))]
         caps = CAP_CU.get(u["id"], [])
         ok = caps and all(existe(c) for c in caps)
-        filas_t.append([u["id"], ", ".join(req), ", ".join(c[:2] for c in caps) or "—", "Con capturas de apoyo (sección 6)" if ok else "Sin captura todavía"])
+        filas_t.append([u["id"], ", ".join(req), ", ".join(c.split("-")[0] for c in caps) or "—", "Con capturas de apoyo (sección 6)" if ok else "Sin captura todavía"])
     B.tabla(doc, ["Caso de uso", "Requisitos", "Capturas", "Estado"], filas_t, [2, 7, 2.5, 5.5], tam=8.5, titulo="Casos de uso, requisitos y capturas")
     B.par(doc, "Las capturas apoyan algunos pasos de cada caso de uso, no todos: no muestran, por ejemplo, la baja de una delegación (CU-R05) ni una respuesta enviada al formulario. La prueba completa de cada caso la hace otra persona y se anota en `docs/redsocial/pruebas.md`.")
     n_trazas = sum(len(t[1]) for t in D["traces"])
@@ -222,18 +224,17 @@ def principal():
     png = os.path.join(carpeta, "burndown-sprint-01-rsi.png")
     if os.path.exists(png):
         B.figura(doc, png, "Burndown del Sprint 1 de la red social: línea ideal y puntos pendientes reales.", 14)
-        B.par(doc, "El burndown cuenta como hecha una historia cuando está integrada en `main`: 22 SP hasta el 19/11, 16 desde el 20/11 (RSI-HU-01 y RSI-HU-03) y 3 el 22/11, con RSI-HU-06 (el documento y el zip) pendiente hasta entregar. La Sprint Review y la retrospectiva están en `scrum/review-sprint-01-rsi.md`, escritas a partir de los datos del sprint y no de una reunión.")
+        B.par(doc, "El burndown cuenta como hecha una historia cuando está integrada en `main`: 22 SP hasta el 19/11, 16 desde el 20/11 (RSI-HU-01 y RSI-HU-03) 3 durante el 22/11 y 0 con el commit de cierre de ese día, que integra RSI-HU-06 (el documento y el zip); el zip se envía esa noche. La Sprint Review y la retrospectiva están en `scrum/review-sprint-01-rsi.md`, escritas a partir de los datos del sprint y no de una reunión.")
     else:
         AVISOS.append("falta docs/redsocial/scrum/burndown-sprint-01-rsi.png (python scripts/redsocial/scrum_rsi.py)")
 
     doc.add_heading("9. Pendiente y limitaciones", 1)
-    for t in ("Probar con una cuenta que sea solo miembro (y no propietaria) que no puede iniciar una conversación en «Avisos»: los cuatro integrantes son propietarios de los tres equipos, así que falta bajar a uno a miembro durante la prueba (`docs/redsocial/pruebas.md`).",
-              "El aislamiento entre delegaciones (RN-R02) lo probó Joaquín con su cuenta (captura 05) y funciona; falta repetirlo con una cuenta que no sea propietaria de ningún equipo.",
+    for t in ("El aislamiento (RN-R01 y RN-R02) se probó con dos cuentas distintas: Joaquín el 21/11 (captura 05; propietario del equipo pero miembro de un solo canal privado) y Álvaro el 22/11 como Miembro del equipo (capturas 05b y 05c). Falta probarlo con una delegación real, que aún no existe en Teams.",
               "Las pestañas de Planner de los tres equipos existen; solo el plan de la Asamblea tiene captura (08), así que el contenido de los otros dos no está documentado con imagen.",
               "Power Automate y PowerApps (RF-R11 y RF-R12) son de la entrega del 29/11. Álvaro comprobó que las páginas de creación cargan en el tenant, pero no que se pueda guardar y ejecutar un flujo o una aplicación (`docs/redsocial/powerapps-especificacion.md`).",
               "No hay contacto con el CADUS en el equipo desde el 16/11: las decisiones que dependen del CADUS son suposiciones del caso de negocio.",
               "No se ha comprobado el límite de canales del tenant (la documentación de Microsoft lo sitúa por encima de lo que necesita el piloto): se crearon tres canales privados.",
-              "Los datos del piloto son de ejemplo; las cuentas de delegación reales no existen en Teams todavía, y las capturas son de las cuentas de Pablo, Joaquín y Marcos."):
+              "Los datos del piloto son de ejemplo; las cuentas de delegación reales no existen en Teams todavía, y las capturas son de las cuentas de Pablo, Joaquín, Marcos y Álvaro."):
         B.vineta(doc, t)
     sal = os.path.join(ENT, "Entrega-RSI-CADUS.docx")
     doc.save(sal)

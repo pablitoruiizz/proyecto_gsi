@@ -33,6 +33,8 @@ CMS = [
     ("docs/scrum/burndown/sprint-03.csv", "CMS/seguimiento/burndown-sprint-03.csv"),
     ("docs/scrum/backlog/product-backlog.md", "CMS/seguimiento/product-backlog.md"),
     ("docs/entrega/capturas-sprint3-miguel.md", "CMS/capturas-sprint3/capturas-sprint3.md"),
+    ("docs/entrega/actualizacion-cms-22-11.md", "CMS/ACTUALIZACION-22-11-estado-del-cms.md"),
+    ("tests/E3-04-pruebas-de-aceptacion.md", "CMS/seguimiento/E3-04-pruebas-de-aceptacion.md"),
 ]
 for _f in sorted(os.listdir(os.path.join(DMS, "..", "entrega", "img", "capturas3"))):
     CMS.append((f"docs/entrega/img/capturas3/{_f}", f"CMS/capturas-sprint3/{_f}"))

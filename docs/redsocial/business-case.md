@@ -86,7 +86,7 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 | El CADUS no lo adopta | Piloto pequeño y probado, con guía corta de uso |
 | No se pueden crear equipos o usar Power Automate y PowerApps en el tenant | Se comprueba y, si no se puede, se documenta y se propone una alternativa dentro de Teams; los equipos y Planner ya funcionan en el piloto |
 | Las cuentas de delegación pueden no tener Teams habilitado ni licencia (por confirmar) | Comprobarlo con la Universidad antes de poner en marcha las 27 delegaciones |
-| En el piloto los cuatro integrantes son propietarios de los tres equipos, así que no hay una cuenta «solo miembro» con la que probar el aislamiento | Usar una cuenta de ejemplo o bajar temporalmente a un integrante a miembro durante la prueba |
+| En el piloto los cuatro integrantes son propietarios de los tres equipos, así que no hay una cuenta «solo miembro» fija con la que probar el aislamiento | El 22/11 se bajó temporalmente a Álvaro a miembro para probarlo y se volvió a subir; con las delegaciones reales habrá cuentas solo miembro |
 | No hay contacto con el CADUS en el equipo desde el 16/11/2026 | Las decisiones que dependen del CADUS se marcan «por confirmar» |
 
 ## 1.7 Participantes del proyecto

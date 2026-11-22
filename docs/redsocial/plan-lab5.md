@@ -1,5 +1,7 @@
 # Red Social Interna (Lab 5, MS Teams) · plan de trabajo
 
+> **Nota del 22/11/2026:** este es el plan inicial del 16/11 y está superado en varios puntos: el caso de negocio sí tiene estructura en el Lab 5 (diapositiva 11) y se rehízo con ella; la separación en tres equipos ya no se justifica por un límite de canales (no comprobado) sino por separación de miembros, permisos y herramientas; y los UML están revisados. El estado vigente está en `scrum/` y en `entrega/Entrega-RSI-CADUS.docx`.
+
 Equipo de 4 desde el 16/11/2026: Pablo (Product Owner), Joaquín (Scrum Master), Álvaro y Marcos. Miguel Ángel ya no participa y no se cuenta en el reparto.
 
 ## Fechas (calendario de la asignatura; las entregas son el domingo a las 23:59)
