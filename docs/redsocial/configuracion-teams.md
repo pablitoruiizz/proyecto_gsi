@@ -22,7 +22,7 @@ Cada paso lleva el requisito del REM (`docs/redsocial/rem-remus/carga-remus.md`)
 3. **Avisos:** en el canal General, «Administrar canal» (`···`) > «Moderación» > activar la moderación y dejar que **solo los propietarios** publiquen y respondan. *Se ve:* un miembro no puede iniciar una conversación en General. *Captura:* ajuste de moderación y la vista de un miembro.
 4. Renombrar el canal General a **«Avisos»** si Teams lo permite (si no, anotarlo en el documento: General hace de Avisos).
 5. Crear tres **canales privados** de ejemplo, uno por delegación: **«Delegación · ETSII»** (con Álvaro), **«Delegación · Derecho»** (con Marcos) y **«Delegación · Biología»** (con Joaquín). Pablo es propietario de los tres. *Se ve:* cada miembro solo ve su canal privado y el canal General; los otros canales privados no aparecen en su lista. *Captura:* la vista de un miembro (para esta prueba hace falta iniciar sesión con esa cuenta o pedírsela a esa persona).
-6. Anotar en el documento que el patrón se repite para las 27 delegaciones (no se crean las 27 en el piloto) y comprobar el límite de canales privados por equipo que muestre Teams (documentación de Microsoft: 30 por equipo), que es el motivo de usar tres equipos.
+6. Anotar en el documento que el patrón se repite para las 27 delegaciones (no se crean las 27 en el piloto). Los tres equipos no se justifican por un límite de canales (no comprobado en el tenant) sino por la separación de miembros, permisos y herramientas.
 
 ### CADUS · Asamblea (RF-R04, RF-R08, RF-R09)
 7. Añadir el canal estándar **«Cursos»**. *Se ve:* General y Cursos.

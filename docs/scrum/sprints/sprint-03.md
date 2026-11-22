@@ -3,7 +3,7 @@
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla). **Contacto con el cliente:** Miguel Ángel Camacho Martín, que forma parte del CADUS.
 **Periodo:** 26/10/2026 – 15/11/2026 (un único sprint de tres semanas, como acordó el equipo con el profesor)
-**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
+**Estado:** Cerrado el 15/11/2026 (con pendientes: ver «Resultado del Sprint 3»). Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
 
 ## Objetivo del Sprint
 
@@ -235,4 +235,19 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 ## Sprint Review y retrospectiva
 
-*(15/11/2026)*
+> Redactada el 22/11/2026 por Pablo, con Claude, a partir de los datos del sprint (commits, burndown, pruebas y revisiones). No sale de una reunión del equipo: si el equipo hace la retrospectiva en grupo, se añaden aquí sus conclusiones.
+
+### Review (15/11/2026)
+
+- **Entregado:** 44 SP integrados en `main` (36 planificados y 8 de HU-24): móvil y tablet (HU-14), accesibilidad (HU-15), búsqueda y filtros (HU-16), protección de formularios (HU-17), rendimiento (HU-20), relevo de delegados (HU-22), conservación a los 2 años (HU-23) y acceso y gestión desde el portal (HU-24). HU-21 se canceló tras la entrevista.
+- **Calidad:** 96 comprobaciones propias en la gestión del portal, baterías de privacidad del buzón y la mediación en verde, y una revisión cruzada con Codex el 13/11 que encontró fallos reales en HU-23, RN-04 y el relevo, ya corregidos.
+- **Sin cerrar:** E3-09 (despliegue en la US, bloqueado por PHP 7.2/7.3), E3-02 (volcado de la base de datos y cuentas de los delegados, que dependen del CADUS) y E3-06 (documento final del CMS, para la entrega del 07/12).
+
+### Retrospectiva
+
+| Qué fue bien | Qué no | Qué cambiamos |
+|---|---|---|
+| Las baterías automáticas y la revisión con Codex encontraron fallos antes de entregar | El burndown estuvo plano hasta el 08/11 (los hitos de 18 y 10 SP no se alcanzaron) y el trabajo se cerró entre el 09 y el 15/11 | Actualizar el burndown cada día y fijar hitos intermedios con alguien que los vigile |
+| La decisión X7 y los cambios de alcance (HU-24) se documentaron en el momento | Casi todas las pruebas las hizo quien implementó cada subtarea; la prueba cruzada humana no se hizo | Reservar un día antes de cada entrega para pruebas cruzadas, con registro de fecha, persona y resultado |
+| Los informes (HU-14c, HU-17b, HU-20b) dicen lo que miden y lo que no | Móvil y tablet solo en emulación, sin dispositivos reales | Probar en un dispositivo real antes de la entrega final del 07/12 |
+| El CMS, el DMS y la red social llevan documentación separada | Se perdió el contacto con el CADUS (Miguel Ángel dejó el trabajo el 16/11) y las tareas que dependían del cliente quedaron abiertas | Marcar «por confirmar» lo que dependa del CADUS y no planificar tareas que dependan de un contacto que ya no está |

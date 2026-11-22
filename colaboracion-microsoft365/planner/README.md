@@ -12,7 +12,7 @@ Documentación del artefacto de Planner de la Red Social Interna del CADUS (Lab 
 | Casos de uso | CU-R02 Preparar una asamblea con tareas y CU-R04 Consultar avisos, calendario y tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-planner.md`](../../docs/redsocial/configuracion-planner.md) |
 | Captura | `docs/redsocial/capturas/08-planner.jpg` |
-| Estado | **Diseñado el 21/11/2026. Creación en Teams y captura: pendientes.** Al crear los planes, cambiar esta fila y la columna «Estado» de las tablas de tareas |
+| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vence el 27/11, después de la asamblea; falta ajustar esa fecha en Planner |
 
 ## Planes
 

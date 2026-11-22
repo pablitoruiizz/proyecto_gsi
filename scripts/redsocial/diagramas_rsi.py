@@ -48,7 +48,7 @@ def analisis():
 
 
 def diseno():
-    fig, ax = lienzo(1700, 1370)
+    fig, ax = lienzo(1700, 1420)
     ax.text(850, 24, "UML de diseño de la Red Social Interna en Microsoft Teams — del análisis al diseño", ha="center", fontsize=13, fontweight="bold", color=AZUL)
     caja(ax, 40, 60, 1620, 60, "<<Tenant>> Microsoft 365 de la Universidad de Sevilla (uses0)", "Teams, SharePoint, Planner, Forms, Power Automate y PowerApps · RC-R01 · RC-R02", fc=AZUL, ec=AZUL, subcolor="#ffd2cf", titcolor="white")
     eje = clase(ax, 40, 190, 520, "<<Team>> CADUS · Ejecutiva", "privado · RF-R01 · RF-R02 · OBJ-R01",
@@ -87,8 +87,10 @@ def diseno():
              ("DocumentoDMS", "→", "no se copia: es un enlace al sitio de SharePoint del DMS")]
     for i, (a, f, b) in enumerate(filas):
         ax.text(60, 1083 + 30 * i, f"{a}   {f}   {b}", fontsize=10)
-    ax.text(40, 1307, "Por qué tres equipos y no uno: Teams limita el número de canales privados por equipo (a comprobar en el tenant) y 27 delegaciones más la Ejecutiva casi lo agotarían.", fontsize=9.5, color="#333")
+    ax.text(40, 1307, "Por qué tres equipos y no uno: cada grupo tiene miembros, permisos y herramientas distintos, y los canales privados de las 27 delegaciones quedan en un solo equipo.", fontsize=9.5, color="#333")
     ax.text(40, 1332, "Cada delegación usa una sola cuenta a nombre de la delegación (RN-R04), como en el portal y en el DMS.", fontsize=9.5, color="#333")
+    ax.text(40, 1362, "Relaciones: Tenant 1—* Equipo · Equipo 1—* Canal (los canales privados son los subgrupos) · Equipo *—* Rol (propietario o miembro) · Canal 1—* Pestaña (herramienta)", fontsize=9.5, color="#333")
+    ax.text(40, 1387, "Permiso: «quién publica» y «quién ve» se aplican a un Canal; Plan de Planner 1—1 Equipo, con muchas Tareas · Pestaña Archivos → sitio de SharePoint del DMS (enlace, sin copia).", fontsize=9.5, color="#333")
     guardar(fig, "uml-rsi-diseno.png")
 
 

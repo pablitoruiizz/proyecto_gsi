@@ -36,11 +36,13 @@ d = {
                   "elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) para el Lab 5. La red social se construye en "
                   "Microsoft Teams, dentro de la cuenta de la Universidad, y reúne la comunicación, las tareas, el calendario y los archivos de la "
                   "Ejecutiva, las delegaciones de centro y las asambleas. Es independiente del portal web (CMS) y del gestor documental (DMS), "
-                  "con los que se relaciona: los documentos oficiales siguen en el DMS y la red social los enlaza. Se recogen el Business Case y los "
-                  "requisitos de los grupos y de las herramientas."),
+                  "con los que se relaciona: los documentos oficiales siguen en el DMS y la red social los enlaza. Se recogen el caso de negocio y los "
+                  "requisitos de los grupos y de las herramientas. Misión: ofrecer a la Ejecutiva y a las delegaciones un espacio privado y ordenado para comunicarse, "
+                  "repartir tareas, compartir archivos y preparar las asambleas, dentro de la cuenta de la Universidad. Visión: que la coordinación interna del CADUS "
+                  "viva en un único espacio que dure de un curso al siguiente, con permisos claros y sin duplicar los documentos que ya custodia el DMS."),
         "current": ("BUSINESS CASE. Situación: el CADUS ya tiene un portal web para el público y un gestor documental para sus documentos internos, pero "
                     "su coordinación diaria (quién prepara qué para la asamblea, dónde se habla con cada delegación, cómo se comparten borradores y "
-                    "avisos) no tiene un espacio propio. Oportunidad: reunir esa coordinación en un único espacio privado, dentro de la cuenta de la "
+                    "avisos) no consta que tenga un espacio propio y documentado (por confirmar con el CADUS). Oportunidad: reunir esa coordinación en un único espacio privado, dentro de la cuenta de la "
                     "Universidad que ya usan la Ejecutiva y las 27 delegaciones. Decisión: se elige Microsoft Teams frente a Discord y a la mensajería "
                     "personal porque no tiene coste de licencias, usa las cuentas institucionales, se integra con SharePoint (ya usado en el DMS), "
                     "controla miembros y permisos por equipo y canal y ofrece tareas, calendario y automatización (Planner, Power Automate y PowerApps). "
@@ -92,12 +94,12 @@ d = {
         {"id": "UI-R02", "name": "Herramientas ancladas en cada canal", "description": "anclar en cada canal, como pestañas, las herramientas que se usan allí (archivos, tareas y calendario)", "comments": "RNF-R02", "importance": 2, "urgency": 2, "authors": A},
     ],
     "functional": [
-        {"id": "RF-R01", "name": "Equipos del CADUS", "description": "crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque Teams limita los canales privados por equipo y las 27 delegaciones más la Ejecutiva casi lo agotarían", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
+        {"id": "RF-R01", "name": "Equipos del CADUS", "description": "crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque cada grupo tiene miembros, permisos y herramientas distintos y así los canales privados de las 27 delegaciones quedan en un solo equipo, sin mezclarlos con la Ejecutiva ni con la asamblea", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R02", "name": "Grupo Ejecutiva", "description": "ofrecer a la Ejecutiva el equipo «CADUS · Ejecutiva», en el que solo están sus miembros, para coordinarse y preparar lo que luego se publica", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R03", "name": "Grupo Delegaciones", "description": "ofrecer a cada delegación de centro (27) un subgrupo, que es un canal privado del equipo «CADUS · Delegaciones», visible solo para la Ejecutiva y para esa delegación", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R04", "name": "Grupo Asamblea", "description": "ofrecer el equipo «CADUS · Asamblea» para preparar y hacer el seguimiento de las asambleas y de los cursos, con la Ejecutiva como propietaria y las delegaciones como miembros", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R05", "name": "Canal de avisos", "description": "ofrecer un canal de avisos (el canal General del equipo «CADUS · Delegaciones») donde solo publica la Ejecutiva y todas las delegaciones leen", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
-        {"id": "RF-R06", "name": "Roles y permisos", "description": "aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (equipo del proyecto en pruebas, sin acceso a canales con datos personales)", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
+        {"id": "RF-R06", "name": "Roles y permisos", "description": "aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del equipo del proyecto son propietarios de los tres equipos", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R07", "name": "Archivos enlazados al DMS", "description": "ofrecer en los canales una pestaña de archivos que apunte a los sitios de SharePoint del DMS, de modo que los documentos oficiales no se copien a Teams", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R08", "name": "Calendario compartido", "description": "mostrar a todo el equipo un calendario con las asambleas y los cursos, que mantiene la Ejecutiva", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R09", "name": "Planes de tareas", "description": "ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
@@ -120,6 +122,8 @@ d = {
              {"who": "actor", "text": "crea el evento de la asamblea en el calendario compartido", "actor": "ACT-R01"},
              {"who": "actor", "text": "crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones", "actor": "ACT-R01"},
              {"who": "system", "text": "muestra el evento a todo el equipo y las tareas a sus responsables"},
+             {"who": "actor", "text": "envía a las delegaciones un formulario de confirmación de asistencia", "actor": "ACT-R01"},
+             {"who": "actor", "text": "responde al formulario de asistencia", "actor": "ACT-R02"},
              {"who": "actor", "text": "actualiza el estado de sus tareas", "actor": "ACT-R02"},
              {"who": "system", "text": "refleja el avance del plan para la Ejecutiva"}],
          "authors": A},
@@ -172,16 +176,19 @@ d = {
         ["OBJ-R03", ["RF-R05", "RF-R08", "UI-R02", "RN-R01", "CU-R01", "CU-R04"]],
         ["OBJ-R04", ["RF-R07", "RN-R03", "CU-R03"]],
         ["OBJ-R05", ["RF-R06", "IR-R04", "RNF-R01", "RN-R02", "RN-R05"]],
-        ["CU-R01", ["RF-R05", "RF-R06", "RN-R01", "IR-R02", "ACT-R01"]],
-        ["CU-R02", ["RF-R04", "RF-R08", "RF-R09", "IR-R05", "ACT-R01", "ACT-R02"]],
+        ["CU-R01", ["RF-R02", "RF-R05", "RF-R06", "RN-R01", "IR-R02", "ACT-R01"]],
+        ["CU-R02", ["RF-R04", "RF-R08", "RF-R09", "RF-R10", "IR-R05", "ACT-R01", "ACT-R02"]],
         ["CU-R03", ["RF-R03", "RF-R07", "RN-R02", "RN-R03", "IR-R02", "ACT-R01", "ACT-R02"]],
         ["CU-R04", ["RF-R05", "RF-R08", "RF-R09", "RN-R02", "ACT-R02"]],
-        ["CU-R05", ["RF-R03", "RF-R06", "RN-R04", "IR-R01", "IR-R04", "ACT-R03"]],
+        ["CU-R05", ["RF-R01", "RF-R03", "RF-R06", "RN-R04", "IR-R01", "IR-R04", "ACT-R03"]],
         ["RF-R01", ["IR-R01", "IR-R02", "RC-R01", "RC-R02"]],
         ["RF-R06", ["IR-R04", "RN-R05"]],
         ["RF-R11", ["RC-R02", "IR-R03"]],
         ["RF-R12", ["RC-R02", "IR-R03"]],
         ["RNF-R03", ["RF-R01", "RF-R06"]],
+        ["RNF-R02", ["UI-R01", "UI-R02"]],
+        ["RNF-R04", ["RC-R01"]],
+        ["RC-R03", ["RC-R01"]],
     ],
 }
 

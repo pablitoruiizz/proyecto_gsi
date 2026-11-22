@@ -1,6 +1,6 @@
 # Configuración de Planner en la red social (piloto) · guía para Joaquín (R-06)
 
-Estado a 21/11/2026. Los tres equipos privados existen (ver [`configuracion-teams.md`](configuracion-teams.md)) y los cuatro integrantes son propietarios de los tres. Esta guía crea **un plan de Planner por equipo** (RF-R09). El diseño completo (planes, cubos, tareas, responsables, fechas y permisos) está en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md); aquí solo está cómo hacerlo, qué capturar y cómo probarlo.
+Estado a 21/11/2026 (las pestañas de los tres planes existen a 22/11; solo el plan de la Asamblea tiene captura). Los tres equipos privados existen (ver [`configuracion-teams.md`](configuracion-teams.md)) y los cuatro integrantes son propietarios de los tres. Esta guía crea **un plan de Planner por equipo** (RF-R09). El diseño completo (planes, cubos, tareas, responsables, fechas y permisos) está en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md); aquí solo está cómo hacerlo, qué capturar y cómo probarlo.
 
 Hazlo con tu cuenta (`joaluncan@alum.us.es`), que es propietaria. Los nombres exactos de los menús dependen de la versión de Teams: si algo no se parece a lo que dice esta guía, anota lo que ves en pantalla en lugar de adivinar, porque RC-R02 prevé que el tenant limite cosas y eso es contenido válido de la entrega.
 

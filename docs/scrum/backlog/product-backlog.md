@@ -11,8 +11,8 @@
 |---|---|---|---|---:|---|---|---|---|
 | PB-001 | Definir estructura base del repositorio | Requisitos/SCRUM | Alta | 3 | Hecho | Sprint-00 | Ninguna | `[Nombre]` |
 | PB-002 | Configurar CMS local WordPress en servidor local (WampServer) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-001 | `[Nombre]` |
-| PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Pendiente | Fase 2 (DMS) | PB-001 | `[Nombre]` |
-| PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Pendiente | Fase 3 (Teams) | PB-001 | `[Nombre]` |
+| PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Hecho | Fase 2 (DMS) | PB-001 | `[Nombre]` |
+| PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Hecho | Fase 3 (Teams) | PB-001 | `[Nombre]` |
 | PB-005 | Montar entorno compartido: WordPress + MySQL en WampServer accesible por Tailscale, y GitHub para el resto de archivos (RC-01, RC-02) | CMS/Entorno | Alta | 5 | Hecho | Sprint-01 | PB-002 | `[Nombre]` |
 | PB-006 | Crear el servidor de Discord del equipo con categorías INFO, SCRUM, DESARROLLO y VOZ (RC-03) | Colaboración | Media | 3 | Hecho | Sprint-01 | PB-005 | `[Nombre]` |
 | PB-007 | Seleccionar, instalar y configurar los plugins obligatorios (seguridad, caché, analítica, SEO) y de apoyo (formularios, campos, roles) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-002 | `[Nombre]` |

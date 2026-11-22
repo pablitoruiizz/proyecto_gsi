@@ -10,7 +10,7 @@ Registro de la configuración del piloto y de las pruebas con cuentas distintas.
 | 3 | CADUS · Delegaciones | Moderación del canal General: «Solo los propietarios pueden publicar mensajes» | OK | 03-delegaciones-avisos.jpg | RF-R05 · RN-R01 |
 | 4 | CADUS · Delegaciones | Renombrar el canal General a «Avisos» | OK: Teams permite cambiar el nombre (no ofrece descripción en esa ventana) | 11-delegaciones-avisos-renombrado.jpg | RF-R05 |
 | 5 | CADUS · Delegaciones | Canales privados «Delegación · ETSII» (con Álvaro), «Delegación · Derecho» (con Marcos) y «Delegación · Biología» (con Joaquín) | OK: los tres aparecen con candado | 04-delegaciones-canales-privados.jpg | RF-R03 · CU-R05 |
-| 6 | CADUS · Delegaciones | Patrón para las 27 delegaciones | Se crean 3 de ejemplo; el límite de canales privados por equipo es el motivo de usar tres equipos | — | RC-R02 |
+| 6 | CADUS · Delegaciones | Patrón para las 27 delegaciones | Se crean 3 de ejemplo; los tres equipos se justifican por la separación de miembros, permisos y herramientas (el límite de canales del tenant no se ha comprobado; revisado por Pablo el 22/11) | — | RC-R02 |
 | 7 | CADUS · Asamblea | Canal estándar «Cursos» | OK | 06-asamblea-calendario.jpg | RF-R04 |
 | 8 | CADUS · Asamblea | Pestaña «Calendario del canal» en General y evento «Asamblea Noviembre» el 26/11/2026 de 17:00 a 18:00 | OK | 06-asamblea-calendario.jpg | RF-R08 · CU-R02 |
 | 9 | CADUS · Asamblea | Pestaña de SharePoint en General que abre el sitio del DMS «CADUS Órganos de gobierno» (actas y plantilla de acta) | OK: los documentos se abren desde el DMS, no se copian a Teams | 07-archivos-dms.jpg | RF-R07 · RN-R03 · CU-R03 |
