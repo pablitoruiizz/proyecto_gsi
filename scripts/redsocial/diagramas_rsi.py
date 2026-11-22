@@ -48,7 +48,7 @@ def analisis():
 
 
 def diseno():
-    fig, ax = lienzo(1700, 1320)
+    fig, ax = lienzo(1700, 1370)
     ax.text(850, 24, "UML de diseño de la Red Social Interna en Microsoft Teams — del análisis al diseño", ha="center", fontsize=13, fontweight="bold", color=AZUL)
     caja(ax, 40, 60, 1620, 60, "<<Tenant>> Microsoft 365 de la Universidad de Sevilla (uses0)", "Teams, SharePoint, Planner, Forms, Power Automate y PowerApps · RC-R01 · RC-R02", fc=AZUL, ec=AZUL, subcolor="#ffd2cf", titcolor="white")
     eje = clase(ax, 40, 190, 520, "<<Team>> CADUS · Ejecutiva", "privado · RF-R01 · RF-R02 · OBJ-R01",
@@ -72,11 +72,12 @@ def diseno():
     for t, s, x in herr:
         caja(ax, x, 720, 280 if x < 1240 else 420, 66, t, s, fc="#eef7ee", ec=VERDE, subcolor="#333")
     ax.text(40, 820, "Planes de Planner (IR-R05 · RF-R09 · CU-R02) — pestaña Planner de cada equipo", fontsize=11.5, fontweight="bold", color=AZUL)
-    caja(ax, 40, 845, 780, 86, "<<Plan>> «Preparación de la asamblea» (CADUS · Asamblea)", "cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    caja(ax, 880, 845, 780, 86, "<<Task>> Tarea del plan", "responsable · fecha límite · estado · la Ejecutiva reparte", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    ax.text(40, 952, "Los planes de Ejecutiva y Delegaciones siguen el mismo patrón; sus nombres y tareas los fija Joaquín (R-06) y no están configurados todavía.", fontsize=9.5, color="#333")
-    ax.text(40, 965, "", fontsize=1)
-    ax.text(40, 1005, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
+    caja(ax, 40, 845, 520, 64, "<<Plan>> «Coordinación de la Ejecutiva»", "equipo Ejecutiva · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
+    caja(ax, 590, 845, 540, 64, "<<Plan>> «Seguimiento de las delegaciones»", "equipo Delegaciones · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
+    caja(ax, 1160, 845, 500, 64, "<<Plan>> «Preparación de la asamblea»", "equipo Asamblea · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
+    caja(ax, 40, 925, 1620, 64, "<<Task>> Tarea del plan (IR-R05)", "título · cubo · responsable (persona) · fecha límite · estado · la Ejecutiva reparte, la delegación actualiza · datos de ejemplo", fc="#eef2fb", ec=AZUL, subcolor="#333")
+    ax.text(40, 1012, "Diseño de Joaquín (R-06): un plan por equipo. Todos los miembros ven y editan todas las tareas del plan: Planner no tiene permisos por tarea.", fontsize=9.5, color="#333")
+    ax.text(40, 1050, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
     filas = [("<<Group>> Grupo", "→", "<<Team>> equipo privado de Teams (tres: Ejecutiva, Delegaciones y Asamblea)"),
              ("<<Subgroups>> Subgrupo", "→", "canal privado del equipo Delegaciones, uno por centro (27; el piloto crea tres)"),
              ("<<Role>> Rol", "→", "rol de Teams: propietario, miembro o invitado (cuentas de grupo, no personales)"),
@@ -85,9 +86,9 @@ def diseno():
              ("Tarea", "→", "tarea de Planner dentro de un cubo del plan del equipo"),
              ("DocumentoDMS", "→", "no se copia: es un enlace al sitio de SharePoint del DMS")]
     for i, (a, f, b) in enumerate(filas):
-        ax.text(60, 1038 + 30 * i, f"{a}   {f}   {b}", fontsize=10)
-    ax.text(40, 1262, "Por qué tres equipos y no uno: Teams limita el número de canales privados por equipo (a comprobar en el tenant) y 27 delegaciones más la Ejecutiva casi lo agotarían.", fontsize=9.5, color="#333")
-    ax.text(40, 1287, "Cada delegación usa una sola cuenta a nombre de la delegación (RN-R04), como en el portal y en el DMS.", fontsize=9.5, color="#333")
+        ax.text(60, 1083 + 30 * i, f"{a}   {f}   {b}", fontsize=10)
+    ax.text(40, 1307, "Por qué tres equipos y no uno: Teams limita el número de canales privados por equipo (a comprobar en el tenant) y 27 delegaciones más la Ejecutiva casi lo agotarían.", fontsize=9.5, color="#333")
+    ax.text(40, 1332, "Cada delegación usa una sola cuenta a nombre de la delegación (RN-R04), como en el portal y en el DMS.", fontsize=9.5, color="#333")
     guardar(fig, "uml-rsi-diseno.png")
 
 
