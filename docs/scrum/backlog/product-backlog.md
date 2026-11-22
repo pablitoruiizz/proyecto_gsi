@@ -35,8 +35,8 @@
 | HU-11 | Como miembro de la Ejecutiva, quiero publicar convocatorias de votación vinculadas a una asamblea del calendario. | RF-12, RN-05 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-12 | Como Estudiante, quiero solicitar mediación estudiantil mediante un formulario. | RF-13 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-13 | Como Administrador, quiero gestionar roles y permisos de usuario (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | RF-14 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
-| HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Hecho (falta prueba cruzada y en dispositivos reales) | Sprint-03 | `[Nombre]` |
-| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | Hecho (falta prueba cruzada y en dispositivos reales) | Sprint-03 | `[Nombre]` |
+| HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | En curso (reabierta el 22/11: faltan los casos manuales) | Sprint-03 | `[Nombre]` |
+| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | En curso (reabierta el 22/11: faltan los casos manuales) | Sprint-03 | `[Nombre]` |
 | HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | Hecho (falta probar H16-1 a H16-6 en el navegador) | Sprint-03 | `[Nombre]` |
 | HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | Hecho | Sprint-03 | `[Nombre]` |
 | HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |

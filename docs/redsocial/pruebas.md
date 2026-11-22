@@ -20,4 +20,4 @@ Registro de la configuración del piloto y de las pruebas con cuentas distintas.
 | Fecha | Quién | Qué | Resultado |
 |---|---|---|---|
 | 21/11/2026 | Joaquín, con su cuenta | En CADUS · Delegaciones solo ve «Avisos» y su propio canal privado, no los de las otras delegaciones (captura 05-vista-miembro.jpg) | OK: ve «Avisos» y «Delegación · Biología»; no aparecen «Delegación · ETSII» ni «Delegación · Derecho». Joaquín es propietario del equipo, pero un canal privado solo lo ven sus miembros, así que la prueba vale para RN-R02. |
-| | Una cuenta que sea solo miembro | No puede iniciar una conversación en «Avisos» | PENDIENTE: los cuatro integrantes son propietarios desde el 20/11; hace falta pasar a uno a miembro durante la prueba |
+| | Una cuenta que sea solo miembro | No puede iniciar una conversación en «Avisos» | PENDIENTE (en curso el 22/11): los cuatro integrantes eran propietarios desde el 20/11; por orden de Pablo se bajó a Álvaro a «Miembro» en CADUS · Delegaciones el 22/11 para que haga la prueba con su cuenta. **Hay que volver a ponerlo como Propietario al terminar.** Resultado: por rellenar por Álvaro |

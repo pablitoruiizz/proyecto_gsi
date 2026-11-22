@@ -12,7 +12,7 @@ Documentación del artefacto de Planner de la Red Social Interna del CADUS (Lab 
 | Casos de uso | CU-R02 Preparar una asamblea con tareas y CU-R04 Consultar avisos, calendario y tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-planner.md`](../../docs/redsocial/configuracion-planner.md) |
 | Captura | `docs/redsocial/capturas/08-planner.jpg` |
-| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vence el 27/11, después de la asamblea; falta ajustar esa fecha en Planner |
+| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vencía el 27/11, después de la asamblea; el 22/11/2026 se cambió su vencimiento en Planner al 25/11 (el diseño inicial decía 27/11) |
 
 ## Planes
 
@@ -50,7 +50,7 @@ Son datos de ejemplo: ni nombres de delegados reales ni nada de reclamaciones, m
 | Cubo | Tarea | Responsable | Fecha límite | Estado |
 |---|---|---|---|---|
 | Por hacer | Enviar la convocatoria y el orden del día (ejemplo) | Pablo | 24/11/2026 | No iniciada |
-| Por hacer | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 27/11/2026 | No iniciada |
+| Por hacer | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 25/11/2026 (ajustada en Planner el 22/11; el diseño decía 27/11) | No iniciada |
 | En curso | Reservar la sala (ejemplo) | Marcos | 25/11/2026 | En curso |
 | Hecho | Crear el evento de la asamblea en el calendario (ejemplo) | Joaquín | 21/11/2026 | Completada |
 
