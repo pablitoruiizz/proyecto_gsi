@@ -116,7 +116,7 @@ Se prueba con `scripts/pruebas/hu23_prueba_retencion.php` (ver `tests/HU-23-rete
 | P2 | Anónimo: buscar la referencia de un ticket y de una mediación en el buscador. | Sin resultados. | Parcial (15/11). La búsqueda `?s=00061` (parte de la referencia de una mediación, que tiene la forma `MED-2026-00061-<código largo>`) no devuelve ninguna entrada. No se comprobó con la referencia completa ni con un ticket, porque no hay tickets en el entorno local. |
 | P3 | Estudiante y Delegado: abrir por URL directa `edit.php?post_type=cadus_ticket` y `cadus_mediacion`. | Sin permisos. | |
 | P4 | Estudiante con sesión: enviar un ticket y una mediación. | Solo recibe la referencia; no los ve en ninguna parte. | |
-| P5 | El aviso por correo de un ticket. | No incluye el contenido, solo código y enlace. | |
+| P5 | El aviso por correo de un ticket. | No incluye el contenido, solo código y enlace. | Parcial (23/11, Claude con Pablo). **Contenido OK:** con el filtro `pre_wp_mail` se capturaron los dos avisos del ticket 479 (a la Ejecutiva y al estudiante) sin enviarlos; ninguno incluye nombre, correo, centro, asunto ni descripción, solo código, tipo, fecha y enlace. **No probado el envío real:** el PC no tiene servidor de correo (nadie escucha en el puerto 25), así que `wp_mail()` devuelve `false` en local. Falta comprobar que llega a `dcadus@us.es` y al estudiante cuando el portal esté en un servidor con correo (E3-09). |
 | P6 | Las nuevas búsquedas y filtros (HU-16) con un texto presente solo en un ticket. | No aparece nada del ticket. | |
 
 ## 4. Aprobación de la Ejecutiva (RN-01)
