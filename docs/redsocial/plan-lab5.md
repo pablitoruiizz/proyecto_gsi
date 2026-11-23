@@ -11,7 +11,7 @@ Equipo de 4 desde el 16/11/2026: Pablo (Product Owner), Joaquín (Scrum Master),
 | 16/11 | Laboratorio 7: configuración de cada grupo (I), estructura de Teams y Planner | 22/11: Red Social Interna + REM + SCRUM review |
 | 23/11 | Laboratorio 8: configuración (II), Power Automate y PowerApps | 29/11: Red Social Interna + REM + SCRUM review |
 | 30/11 | Laboratorio 9: repaso de trabajos | — |
-| 07/12 | — | Entrega FINAL de todos los sistemas |
+| 07/12 → **29/11** | — | Entrega FINAL de todos los sistemas (cambiada el 23/11: pasa al domingo 29/11, junto con la versión 2 de la red social) |
 | 14/12 | Examen de prácticas | — |
 
 ## Qué pide el Lab 5

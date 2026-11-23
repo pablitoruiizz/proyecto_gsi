@@ -2,7 +2,7 @@
   1. Asigna en GitHub a las personas del campo «Responsable» de las issues que no tenían asignado (Marcos es Federomai).
   2. Cierra como hechas las tareas que tienen evidencia en el repositorio, con un comentario que la cita.
   3. Cancela (etiqueta «cancelada», cerrada como no planificada) las que dependían de que el CADUS entregase contenido.
-Lo que depende del cliente o de la entrega del 07/12 (E2-01, E3-02, E3-06 y E3-09) se deja abierto a propósito.
+Lo que depende del cliente o de la entrega final (antes el 07/12, desde el 23/11 el 29/11) (E2-01, E3-02, E3-06 y E3-09) se deja abierto a propósito.
 Uso: python scripts/scrum/cerrar_pendientes.py [--dry-run]   (se puede relanzar: no repite comentarios ni cierres)"""
 import json
 import subprocess

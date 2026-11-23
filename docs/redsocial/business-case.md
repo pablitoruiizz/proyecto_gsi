@@ -63,7 +63,7 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 | Coste cero | El CADUS no tiene presupuesto de herramientas (por confirmar) |
 | Continuidad entre cursos | Las delegaciones cambian de equipo cada año y la cuenta de la delegación se traspasa |
 | Facilidad de uso | La Ejecutiva y las delegaciones no son personal informático; el portal ya se diseñó para que lo use cualquiera |
-| Plazos de la asignatura | Estructura de Teams y Planner el 22/11, Power Automate y PowerApps el 29/11, entrega final el 07/12/2026 |
+| Plazos de la asignatura | Estructura de Teams y Planner el 22/11, Power Automate y PowerApps (versión 2 de la red social) y entrega final de todos los sistemas el 29/11/2026 (el 23/11 la final se adelantó desde el 07/12) |
 
 ## 1.5 Objetivos de negocio
 

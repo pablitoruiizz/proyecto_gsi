@@ -13,11 +13,12 @@ DMS = os.path.join(RAIZ, "docs", "dms")
 ENT = os.path.join(DMS, "entrega")
 PAQ = os.path.join(ENT, "paquete")
 CON_RSI = "--con-rsi" in sys.argv
+FINAL = "--final" in sys.argv  # entrega final del 29/11/2026: CMS + DMS + red social v2
 CON_CMS = "--con-cms" in sys.argv or CON_RSI
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])
-FECHA = "22-11" if CON_RSI else "15-11"  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
-NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
+FECHA = "29-11" if FINAL else ("22-11" if CON_RSI else "15-11")  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
+NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" + ("-v2" if FINAL else "") if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
 RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
 TIPOS = ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion")
 
@@ -84,6 +85,7 @@ RSI_FILES = [
     ("docs/redsocial/configuracion-planner.md", "RSI/5-Implementacion-Teams/configuracion-planner.md"),
     ("docs/redsocial/pruebas.md", "RSI/5-Implementacion-Teams/pruebas.md"),
     ("docs/redsocial/powerapps-especificacion.md", "RSI/5-Implementacion-Teams/powerapps-especificacion.md"),
+    ("docs/redsocial/diseno-tableros-planner.md", "RSI/5-Implementacion-Teams/diseno-tableros-planner.md"),  # Lab 6
     ("colaboracion-microsoft365/planner/README.md", "RSI/5-Implementacion-Teams/planner-diseno.md"),
     ("docs/redsocial/plan-lab5.md", "RSI/seguimiento/plan-lab5.md"),
 ]

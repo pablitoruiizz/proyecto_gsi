@@ -1,10 +1,12 @@
 # Mensajes para enviar (Pablo): CADUS y US
 
+**Decisión de Pablo del 23/11: no se van a enviar.** Solo queda anotado, en E3-09, que está pendiente hablar con la US sobre el despliegue.
+
 Borradores del 23/11/2026 para cerrar E2-01, E2-12 (datos reales de las delegaciones) y E3-09 (despliegue). Los envía Pablo; cada respuesta se anota en `docs/scrum/sprints/sprint-02.md` o `sprint-03.md` con su fecha.
 
 ## 1. Al CADUS (E2-01 y E2-12)
 
-**Asunto:** Portal del CADUS: datos que necesitamos para dejarlo listo (antes del 04/12)
+**Asunto:** Portal del CADUS: datos que necesitamos para dejarlo listo (antes del 26/11)
 
 Hola:
 
@@ -20,7 +22,7 @@ El portal ya funciona con 27 delegaciones publicadas, pero las fichas llevan dat
 
 Por privacidad, no hace falta mandar contraseñas: las crea el sistema y se entregan en el relevo de cada cuenta.
 
-¿Podéis mandárnoslo antes del **04/12**? La entrega final es el 07/12 y necesitamos unos días para cargarlo y probarlo.
+¿Podéis mandárnoslo antes del **jueves 26/11**? La entrega final es el domingo 29/11 y necesitamos un par de días para cargarlo y probarlo. Si no llega a tiempo, entregamos con los datos que ya tenemos de vuestra web y lo dejamos indicado.
 
 Gracias,
 Pablo (Product Owner)
@@ -46,7 +48,7 @@ Preguntas:
 2. Si no lo es, ¿qué alternativa recomendáis?
 3. ¿Quién sería nuestro contacto para el despliegue y con qué plazos?
 
-Nuestra entrega final es el 07/12/2026. Sin respuesta, entregaremos el portal funcionando en local con el volcado de la base de datos y las instrucciones de instalación.
+Nuestra entrega final es el domingo 29/11/2026, así que os agradeceríamos una respuesta antes del jueves 26/11. Sin respuesta, entregaremos el portal funcionando en local con el volcado de la base de datos y las instrucciones de instalación.
 
 Gracias,
 Pablo (Product Owner)

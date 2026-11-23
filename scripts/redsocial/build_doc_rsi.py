@@ -209,7 +209,7 @@ def principal():
     B.par(doc, f"Los objetivos, los requisitos de información y las reglas están enlazados con los requisitos y los casos de uso en las trazas de `RSI.rem` ({n_trazas} trazas declaradas; REMUS añade las inversas).")
 
     doc.add_heading("8. Seguimiento SCRUM", 1)
-    B.par(doc, "La red social tiene su propio seguimiento, independiente del CMS y del DMS. Equipo de cuatro personas desde el 16/11/2026 (Sprint 1 de la red social: 16/11 – 22/11). Entrega del 22/11: estructura de Teams y Planner; entrega del 29/11: Power Automate y PowerApps; entrega final: 07/12/2026.")
+    B.par(doc, "La red social tiene su propio seguimiento, independiente del CMS y del DMS. Equipo de cuatro personas desde el 16/11/2026 (Sprint 1 de la red social: 16/11 – 22/11). Entrega del 22/11: estructura de Teams y Planner; entrega del 29/11: Power Automate y PowerApps (versión 2) y entrega final de todos los sistemas, que el 23/11 se adelantó desde el 07/12 al domingo 29/11.")
     B.tabla(doc, ["ID", "Tarea", "Quién", f"Estado a {FECHA}"], [[i, t, q, ESTADO.get(i, "—")] for i, t, q in tareas_plan()], [1.3, 8.2, 3.2, 4.3], tam=8.5, titulo="Backlog de la entrega del 22/11")
     carpeta = os.path.join(RSI, "scrum")
     bl = os.path.join(carpeta, "product-backlog-rsi.md")
