@@ -7,7 +7,7 @@ Genera, a partir de los datos del repositorio, el documento de la entrega (Word 
 - `build_doc.py`: contenido del documento (requisitos de `scripts/remus/cadus_data.json`, backlogs de `docs/scrum`, comparativas de `docs/entrega/datos/*.json`, capturas) y versión Word (`Entrega2-CMS-CADUS.docx`).
 - `build_html.py`: **PDF final en estilo REMUS** (`Entrega2-CMS-CADUS-REMUS.pdf`): mismo CSS que REMUS (`estilo_remus/`), con el documento que exporta REMUS (`docs/requisitos/rem-remus/CADUS__CRS.html`) incrustado como capítulo 3. También genera `docs/entrega/paquete/CADUS-REM-v2.pdf`.
 - `capturas_publicas.py` y `capturas_admin.py`: capturas del portal (páginas públicas a página completa y pantallas de administración por rol con cuentas temporales de prueba; `PHP_EXE` indica la ruta de `php.exe` si no es la de Wamp).
-- `cargar_eventos_ejemplo.php`: dos eventos y una convocatoria de votación de ejemplo para la demostración (`--quitar` los retira).
+- `cargar_eventos_ejemplo.php`: calendario de la demostración: cinco actividades reales del CADUS ya celebradas (con enlace a su web), dos eventos futuros inventados marcados «(ejemplo)» y una votación de ejemplo vinculada a la asamblea (`--quitar` lo retira todo; se puede repetir sin duplicar).
 - `volcado_bd.php`: volcado de la base de datos con PHP (`mysqldump` no conecta con `caching_sha2_password`); el fichero no se sube a GitHub.
 - `empaquetar_entrega2.py`: monta `docs/entrega/entrega2/` y termina con error si falta algo.
 - `actualizar_indice.ps1`: abre el Word con Microsoft Word, actualiza el índice y exporta un PDF (alternativa al PDF de `build_html.py`).

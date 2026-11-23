@@ -279,6 +279,76 @@ function cadus_buscar_semilla(string $clave, string $tipo, string $titulo = ''):
     return null;
 }
 
+/**
+ * Carga las noticias reales de data/noticias.json (artículos de www.cadus.us.es, con su fecha original y un enlace a
+ * la fuente). No duplica: cada una lleva la marca _cadus_semilla = noticia:cadus-<id de la web original>.
+ */
+function cadus_noticias_cargar(): void
+{
+    $ruta = CADUS_PORTAL_DIR . 'data/noticias.json';
+    $datos = is_readable($ruta) ? json_decode((string) file_get_contents($ruta), true) : null;
+    if (!is_array($datos)) {
+        return;
+    }
+    foreach ($datos as $n) {
+        $clave = 'noticia:cadus-' . (int) $n['id'];
+        if (cadus_buscar_semilla($clave, 'post', (string) $n['titulo'])) {
+            continue;
+        }
+        $term = term_exists($n['categoria'], 'category') ?: wp_insert_term($n['categoria'], 'category');
+        $html = '';
+        foreach ($n['bloques'] as [$tag, $texto]) {
+            $html .= $tag === 'p' ? cadus_b_p($texto)
+                : (in_array($tag, ['h2', 'h3', 'h4'], true) ? cadus_b_h($texto, (int) substr($tag, 1)) : cadus_b_html("<$tag>$texto</$tag>"));
+        }
+        $html .= cadus_b_p('Fuente: <a href="' . esc_url($n['fuente']) . '">publicado originalmente en www.cadus.us.es</a>.');
+        $id = wp_insert_post([
+            'post_type' => 'post', 'post_status' => 'publish', 'post_title' => (string) $n['titulo'], 'post_author' => 1,
+            'post_content' => wp_kses_post($html), 'post_date' => $n['fecha'] . ' 10:00:00',
+            'post_category' => is_array($term) ? [(int) $term['term_id']] : [],
+        ]);
+        if ($id && !is_wp_error($id)) {
+            update_post_meta($id, '_cadus_semilla', $clave);
+        }
+    }
+}
+
+/**
+ * Carga las actas y la normativa reales de data/documentos.json (PDF publicados en www.cadus.us.es, guardados en
+ * data/actas y data/normativa). No duplica: cada una lleva la marca _cadus_semilla = acta:cadus-<nombre del archivo>.
+ */
+function cadus_documentos_cargar(): void
+{
+    $ruta = CADUS_PORTAL_DIR . 'data/documentos.json';
+    $datos = is_readable($ruta) ? json_decode((string) file_get_contents($ruta), true) : null;
+    if (!is_array($datos)) {
+        return;
+    }
+    foreach ($datos as $d) {
+        $clave = 'acta:cadus-' . sanitize_title(pathinfo((string) $d['archivo'], PATHINFO_FILENAME));
+        if (cadus_buscar_semilla($clave, 'cadus_acta', (string) $d['titulo'])) {
+            continue;
+        }
+        $pdf = cadus_adjuntar((string) $d['archivo'], (string) $d['titulo']);
+        $id = wp_insert_post([
+            'post_type' => 'cadus_acta', 'post_status' => 'publish', 'post_title' => (string) $d['titulo'], 'post_author' => 1,
+            'post_content' => cadus_b_p('Fuente: <a href="' . esc_url($d['fuente']) . '">publicado originalmente en www.cadus.us.es</a>.'),
+        ]);
+        if ($id && !is_wp_error($id)) {
+            update_post_meta($id, '_cadus_semilla', $clave);
+            wp_set_object_terms($id, (string) $d['tipo'], 'cadus_tipo_documento');
+            update_post_meta($id, 'fecha', (string) $d['fecha']);
+            update_post_meta($id, '_fecha', 'field_cadus_acta_fecha');
+            update_post_meta($id, 'pleno', (string) $d['pleno']);
+            update_post_meta($id, '_pleno', 'field_cadus_acta_pleno');
+            if ($pdf) {
+                update_post_meta($id, 'archivo_pdf', $pdf);
+                update_post_meta($id, '_archivo_pdf', 'field_cadus_acta_pdf');
+            }
+        }
+    }
+}
+
 /** Crea una página si no existe (por ruta) y devuelve su ID. No sobrescribe páginas existentes. */
 function cadus_pagina(string $slug, string $titulo, string $contenido, int $padre = 0): int
 {
@@ -421,27 +491,8 @@ function cadus_portal_configurar(): void
         . cadus_b_p('Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla')
         . cadus_b_p('Correo: <a href="mailto:dcadus@us.es">dcadus@us.es</a>'));
 
-    // Noticias de ejemplo (HU-01): se marcan como ejemplo para sustituirlas por comunicados reales
-    $ejemplos = [
-        ['Comunicado de ejemplo sobre becas', 'Becas', 'Texto de ejemplo para comprobar la plantilla de comunicados de la categoría Becas.'],
-        ['Comunicado de ejemplo sobre movilidad', 'Movilidad', 'Texto de ejemplo para comprobar la plantilla de comunicados de la categoría Movilidad.'],
-        ['Comunicado de ejemplo sobre normativa', 'Normativa', 'Texto de ejemplo para comprobar la plantilla de comunicados de la categoría Normativa.'],
-        ['Comunicado de ejemplo sobre eventos', 'Eventos', 'Texto de ejemplo para comprobar la plantilla de comunicados de la categoría Eventos.'],
-    ];
-    foreach ($ejemplos as $i => [$titulo, $categoria, $texto]) {
-        if (cadus_buscar_semilla('noticia:' . sanitize_title($categoria), 'post', $titulo)) {
-            continue;
-        }
-        $term = get_term_by('name', $categoria, 'category');
-        $nuevo = wp_insert_post([
-            'post_type' => 'post', 'post_status' => 'publish', 'post_title' => $titulo, 'post_author' => 1,
-            'post_content' => cadus_b_p($texto . ' Sustituir por el comunicado real.'), 'post_category' => $term ? [(int) $term->term_id] : [],
-            'post_date' => gmdate('Y-m-d H:i:s', time() - ($i + 1) * DAY_IN_SECONDS),
-        ]);
-        if ($nuevo && !is_wp_error($nuevo)) {
-            update_post_meta($nuevo, '_cadus_semilla', 'noticia:' . sanitize_title($categoria));
-        }
-    }
+    // Noticias (HU-01): artículos reales de www.cadus.us.es con su fecha y su fuente (data/noticias.json)
+    cadus_noticias_cargar();
     foreach ($primera ? ['hola-mundo' => 'post', 'pagina-ejemplo' => 'page'] : [] as $slug => $tipo) {
         $viejo = get_page_by_path($slug, OBJECT, $tipo);
         if ($viejo) {
@@ -449,11 +500,10 @@ function cadus_portal_configurar(): void
         }
     }
 
-    // Actas y normativas de ejemplo (HU-03, HU-04)
+    // Actas y normativa (HU-03, HU-04): documentos reales de www.cadus.us.es (data/documentos.json) y un acta pendiente de ejemplo
+    cadus_documentos_cargar();
     $pdf = cadus_adjuntar('assets/documento-ejemplo.pdf', 'Documento PDF de ejemplo');
     $docs = [
-        ['Acta del pleno ordinario (ejemplo)', 'Acta', '20261015', 'Pleno ordinario', 'publish'],
-        ['Reglamento interno (ejemplo)', 'Normativa', '20260920', 'Pleno ordinario', 'publish'],
         ['Acta pendiente de aprobación (ejemplo)', 'Acta', '20261016', 'Pleno extraordinario', 'pending'],
     ];
     foreach ($docs as [$titulo, $tipo, $fecha, $pleno, $estado]) {
