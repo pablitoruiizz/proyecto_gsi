@@ -12,8 +12,8 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DMS = os.path.join(RAIZ, "docs", "dms")
 ENT = os.path.join(DMS, "entrega")
 PAQ = os.path.join(ENT, "paquete")
-CON_RSI = "--con-rsi" in sys.argv
-FINAL = "--final" in sys.argv  # entrega final del 29/11/2026: CMS + DMS + red social v2
+FINAL = "--final" in sys.argv  # entrega final del 29/11/2026: implica CMS + DMS + red social v2
+CON_RSI = "--con-rsi" in sys.argv or FINAL
 CON_CMS = "--con-cms" in sys.argv or CON_RSI
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])

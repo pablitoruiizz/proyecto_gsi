@@ -1,4 +1,4 @@
-"""Añade las historias de la red social interna (RSI-HU-01 a RSI-HU-08, docs/redsocial/scrum/product-backlog-rsi.md) al GitHub Project
+"""Añade las historias de la red social interna (RSI-HU-01 a RSI-HU-09, docs/redsocial/scrum/product-backlog-rsi.md) al GitHub Project
 «CADUS · Scrum»: una issue por historia con sus campos (SP, Requisitos, Responsable, Prioridad, Estado y Cierre).
 El campo Sprint (iteración) no se toca: sus iteraciones son las del CMS (Sprint 1 a 3) y reescribirlas podría soltar la asignación de
 las demás tareas; el sprint de la red social va en la etiqueta y en el cuerpo de cada issue.
@@ -23,6 +23,7 @@ H = [
     ("RSI-HU-06", "Como equipo, queremos el documento de la entrega, el REM exportado y el zip con la lista del profesor.", "Todos", 3, "Pablo", "Done", "2026-11-22", "Sprint 1 de la red social (16/11 – 22/11)", "Hecho en main el 22/11 con el commit de cierre: documento, PDF del REM y zip; el envío se hace esa noche."),
     ("RSI-HU-07", "Como Ejecutiva, quiero avisos automáticos cuando se asigna una tarea o vence su fecha.", "RF-R11, RC-R02", 3, "Joaquín", "Todo", "", "Sprint 2 de la red social (23/11 – 29/11)", "Pendiente (Lab 8)."),
     ("RSI-HU-08", "Como Ejecutiva, quiero una aplicación sencilla con la lista de delegaciones y su estado, si el tenant lo permite.", "RF-R12, RC-R02", 3, "Álvaro", "Todo", "", "Sprint 2 de la red social (23/11 – 29/11)", "Borrador de especificación de Álvaro (powerapps-especificacion.md); no se ha comprobado que se pueda crear y guardar una aplicación."),
+    ("RSI-HU-09", "Como Ejecutiva y delegación, queremos que cada tablero de Planner siga un patrón de diseño explícito, para entender cada plan sin explicación (Lab 6).", "RF-R09, RNF-R02", 2, "Joaquín", "Todo", "", "Sprint 2 de la red social (23/11 – 29/11)", "Análisis redactado en docs/redsocial/diseno-tableros-planner.md; falta decidir si el plan de la asamblea pasa a «Proceso de tareas», rehacerlo en Planner con su captura y reflejarlo en el UML."),
 ]
 
 

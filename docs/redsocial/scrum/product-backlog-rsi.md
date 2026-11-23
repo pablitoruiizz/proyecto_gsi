@@ -14,8 +14,9 @@
 | RSI-HU-06 | Como equipo, queremos el documento de la entrega, el REM exportado y el zip con la lista del profesor. | Todos | 3 | Hecho en `main` el 22/11 con el commit de cierre (documento con el índice del Lab 5, PDF del REM y zip con la lista del profesor); el envío del zip se hace esa noche | Sprint 1 | Pablo |
 | RSI-HU-07 | Como Ejecutiva, quiero avisos automáticos cuando se asigna una tarea o vence su fecha. | RF-R11, RC-R02 | 3 | Pendiente (Lab 8) | Sprint 2 | Joaquín |
 | RSI-HU-08 | Como Ejecutiva, quiero una aplicación sencilla con la lista de delegaciones y su estado, si el tenant lo permite. | RF-R12, RC-R02 | 3 | Pendiente (Lab 8); no se ha comprobado que el tenant ofrezca PowerApps | Sprint 2 | Álvaro |
+| RSI-HU-09 | Como Ejecutiva y delegación, queremos que cada tablero de Planner siga un patrón de diseño explícito, para entender cada plan sin explicación (Lab 6). | RF-R09, RNF-R02 | 2 | Pendiente: análisis redactado (`docs/redsocial/diseno-tableros-planner.md`); falta decidir si el plan de la asamblea pasa a «Proceso de tareas», rehacerlo en Planner con su captura y reflejarlo en el UML | Sprint 2 | Joaquín |
 
-**Total del Sprint 1: 22 SP.** Sprint 2 (23/11 a 29/11): 6 SP más lo que quede del Sprint 1.
+**Total del Sprint 1: 22 SP.** Sprint 2 (23/11 a 29/11): 8 SP más lo que quede del Sprint 1.
 
 ## Definición de hecho (red social)
 
