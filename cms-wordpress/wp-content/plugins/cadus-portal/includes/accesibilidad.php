@@ -6,7 +6,8 @@
  *  - Carga assets/cadus-accesibilidad.css, después de cadus.css y cadus-interior.css, con las correcciones que dio la
  *    auditoría de contraste y foco (anillos de foco sobre fondos de color, campos de texto sin borde, enlaces del
  *    resultado del seguimiento) y el estilo del enlace «Saltar al contenido».
- *  - Carga assets/cadus-accesibilidad.js: al usar ese enlace el foco pasa al <main>.
+ *  - Carga assets/cadus-accesibilidad.js: al usar ese enlace el foco pasa al <main> y, en los formularios de Fluent Forms
+ *    (buzón y mediación), cada error se enlaza a su campo con aria-describedby y el foco va al primer error (HU-15, H15-3).
  *  - Traduce los textos accesibles de la cabecera y del menú plegable de Blocksy que el lector de pantalla leería en
  *    inglés (falta el paquete de idioma del tema; estilo.php cubre otros textos y este filtro no los repite).
  *
