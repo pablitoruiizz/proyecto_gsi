@@ -68,10 +68,11 @@ def diseno():
             ("<<Tool>> Calendario", "asambleas y cursos · RF-R08", 340),
             ("<<Tool>> Planner", "tareas por equipo · RF-R09", 640),
             ("<<Tool>> Forms", "asistencia y encuestas · RF-R10", 940),
-            ("<<Tool>> Flujo y aplicación", "Power Automate y PowerApps (Lab 8) · RF-R11 · RF-R12", 1240)]
+            ("<<Tool>> PowerApps y flujos", "RF-R12 probada · RF-R11 sin probar", 1240)]
     for t, s, x in herr:
         caja(ax, x, 720, 280 if x < 1240 else 420, 66, t, s, fc="#eef7ee", ec=VERDE, subcolor="#333")
-    ax.text(40, 820, "Planes de Planner (IR-R05 · RF-R09 · CU-R02) — pestaña Planner de cada equipo", fontsize=11.5, fontweight="bold", color=AZUL)
+    ax.text(40, 800, "PowerApps (R-13): lista «Delegaciones CADUS» y app «Estado de las delegaciones», ejecutada en vista previa el 25/11. Power Automate (R-12): sin probar.", fontsize=9, color="#333")
+    ax.text(40, 832, "Planes de Planner (IR-R05 · RF-R09 · CU-R02) — pestaña Planner de cada equipo", fontsize=11.5, fontweight="bold", color=AZUL)
     caja(ax, 40, 845, 520, 64, "<<Plan>> «Coordinación de la Ejecutiva»", "equipo Ejecutiva · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
     caja(ax, 590, 845, 540, 64, "<<Plan>> «Seguimiento de las delegaciones»", "equipo Delegaciones · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
     caja(ax, 1160, 845, 500, 64, "<<Plan>> «Preparación de la asamblea»", "equipo Asamblea · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")

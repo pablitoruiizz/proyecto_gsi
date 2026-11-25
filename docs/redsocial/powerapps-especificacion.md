@@ -1,32 +1,33 @@
-# PowerApps de la red social (R-13) · borrador de especificación
+# PowerApps de la red social (R-13) · aplicación «Estado de las delegaciones»
 
-Borrador del 21/11/2026 de Álvaro para la entrega del 29/11 (RF-R12). Es una propuesta: no hay ninguna aplicación creada ni probada.
+Prueba de Álvaro del 25/11/2026 para la entrega del 29/11 (RF-R12). Es una aplicación de prueba con datos de ejemplo, en el espacio personal de Álvaro; no está publicada ni compartida.
 
-## Qué se comprobó del tenant (21/11/2026, cuenta de Álvaro)
+## Qué se hizo y se comprobó (25/11/2026, cuenta de la US de Álvaro, entorno «Productividad Personal US (default)»)
 
-- make.powerapps.com carga en el entorno «Productividad Personal US (default)» y ofrece crear aplicaciones (sin ninguna creada todavía).
-- make.powerautomate.com carga y ofrece la plantilla «Notificar a un canal cuando se crea una nueva tarea de Planner», que pide conexiones de Planner, Office 365 Users y Microsoft Teams.
-- **No comprobado:** que se pueda guardar y ejecutar una aplicación o un flujo, ni que los conectores de SharePoint, Planner y Teams no estén restringidos (RC-R02).
+1. **Lista de SharePoint «Delegaciones CADUS»** en «Mis listas» de Álvaro, con las columnas Título, Centro y Estado (texto) y tres filas de ejemplo: Delegación de ETSII (Al día), Delegación de Derecho (Pendiente de reunión) y Delegación de Biología (Sin contacto). Sin datos personales (RNF-R01). Captura: `capturas/R13-01-lista-delegaciones-sharepoint.jpg`.
+2. **Aplicación de lienzo «Estado de las delegaciones»**, generada desde la lista (Integrar > Power Apps > Crear una aplicación) y **guardada** en Power Apps Studio. Captura: `capturas/R13-02-app-guardada-power-apps-studio.jpg`.
+3. **Ejecución en vista previa** dentro de Power Apps Studio: la aplicación lee la lista y muestra las tres delegaciones con su centro y estado. Captura: `capturas/R13-03-app-ejecutada-vista-previa.jpg`.
 
-## Propuesta de aplicación (RF-R12)
+Conclusión: el tenant permite crear una lista de SharePoint, crear y guardar una aplicación de lienzo y ejecutarla en vista previa (RC-R02, en lo que respecta al conector de SharePoint).
 
-Una aplicación de lienzo sencilla, «Estado de las delegaciones», sobre una lista de SharePoint del sitio del DMS o de un sitio propio de la red social.
+## Qué NO se ha comprobado
 
-| Pantalla | Qué hace | Requisito |
-|---|---|---|
-| Lista de delegaciones | Muestra las delegaciones con su estado (por ejemplo, «con canal», «sin canal», «baja») | RF-R12 · RF-R03 |
-| Ficha de una delegación | Muestra su canal, su cuenta (solo el nombre de la delegación) y sus tareas pendientes | RF-R12 · RN-R04 |
-| Alta o baja | Cambia el estado de una delegación; solo la Ejecutiva | CU-R05 · RN-R01 |
+- Publicar la aplicación (no se pulsó «Publicar») ni compartirla con otra cuenta.
+- Ejecutarla desde una cuenta distinta de la de Álvaro, o desde la pestaña de Teams.
+- Los conectores de Planner y Teams, y cualquier flujo de Power Automate: en la cuenta de Álvaro no hay flujos, propios ni compartidos; el flujo de R-12 (Joaquín) no se ha podido probar desde su cuenta.
+- Las pantallas de la propuesta original (ficha con canal y tareas, alta y baja solo para la Ejecutiva, CU-R05 · RN-R01): la aplicación generada es la plantilla de tres pantallas de PowerApps (lista, detalle y formulario) sin personalizar ni restringir por rol.
 
-Datos: solo de ejemplo (RNF-R01). No se guardan datos de reclamaciones, mediaciones ni votaciones.
+## Diferencias con el borrador del 21/11
 
-## Alternativa si el tenant no permite PowerApps
+- La lista tiene solo tres columnas (el borrador hablaba de canal, cuenta y tareas pendientes). Son suficientes para RF-R12 como demostración; ampliarla queda como mejora.
+- La lista no está en el sitio del DMS ni en uno propio de la red social, sino en el espacio personal de Álvaro. Si se quiere en un sitio del CADUS, hay que crearla allí y volver a conectar la aplicación.
 
-Documentar el mensaje de error con captura (RC-R02) y sustituir la aplicación por una vista de lista de SharePoint o por una pestaña de Planner con el estado en los cubos.
+## Para el documento de la entrega
 
-## Pasos y quién
+Explicar las tres capturas una a una (lista, aplicación guardada, aplicación en ejecución), decir que es una prueba con datos de ejemplo y repetir la lista de «no comprobado» de arriba.
 
-1. Comprobar que se puede crear y guardar una aplicación de prueba (Álvaro, tras el Lab 8 del 23/11).
-2. Crear la lista de ejemplo de delegaciones y la aplicación (Álvaro).
-3. Capturas explicadas y UML actualizado (Álvaro y Joaquín, R-14).
-4. Prueba cruzada por otra persona (Marcos o Pablo).
+## Pendiente
+
+1. Prueba cruzada por otra persona (Marcos o Pablo): abrir la aplicación con otra cuenta (hay que compartirla antes).
+2. UML actualizado con PowerApps y Power Automate (R-14, con Joaquín).
+3. Flujo de Power Automate (R-12): lo prueba Joaquín o lo comparte con Álvaro.
