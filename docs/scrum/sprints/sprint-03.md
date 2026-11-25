@@ -254,7 +254,6 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 | La decisión X7 y los cambios de alcance (HU-24) se documentaron en el momento | Casi todas las pruebas las hizo quien implementó cada subtarea; la prueba cruzada humana no se hizo | Reservar un día antes de cada entrega para pruebas cruzadas, con registro de fecha, persona y resultado |
 | Los informes (HU-14c, HU-17b, HU-20b) dicen lo que miden y lo que no | Móvil y tablet solo en emulación, sin dispositivos reales | Hecho: móvil real el 22/11 y tablet el 23/11, comprobados según Pablo |
 | El CMS, el DMS y la red social llevan documentación separada | Se perdió el contacto con el CADUS (Miguel Ángel dejó el trabajo el 16/11) y las tareas que dependían del cliente quedaron abiertas | Marcar «por confirmar» lo que dependa del CADUS y no planificar tareas que dependan de un contacto que ya no está |
-<<<<<<< HEAD
 
 ### Retrospectiva en grupo (reunión de 30 minutos)
 
@@ -282,5 +281,3 @@ El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se aco
 | Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigila Joaquín | Cada prueba de `tests/` está firmada por alguien distinto de quien la implementó |
 | Burndown actualizado cada día y un hito intermedio que alguien vigile | Joaquín | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
 | **[COMPLETAR en la reunión]** | **[COMPLETAR]** | **[COMPLETAR]** |
-=======
->>>>>>> c553ae7616ea0f9251a77863bd27c7823df4cd88
