@@ -35,3 +35,15 @@ Hecha el 25/11/2026 por Marcos, con su cuenta de la US, sobre los dos flujos de 
 | 5 | Marcos figura como propietario de los dos flujos | OK: el flujo 1 aparece en «Compartido conmigo» (captura hecha antes de que Joaquín compartiera el flujo 2, el 25/11 durante la prueba) y en la página del flujo 2 figura como copropietario junto a Joaquín (JC y MR); puede abrir los dos y ver su historial (pruebas 2 y 3) | 12k-r12c-flujos-compartidos.jpg · 12l-r12c-copropietarios-flujo2.jpg |
 
 Al terminar se borró la tarea de prueba, así que el plan queda como está documentado.
+
+## Prueba de PowerApps por otra persona (R-13 · RF-R12)
+
+Hecha el 25/11/2026 por Marcos, con su cuenta de la US, después de que Álvaro le compartiera la aplicación «Estado de las delegaciones» ([`powerapps-especificacion.md`](powerapps-especificacion.md)).
+
+| # | Prueba | Resultado | Captura |
+|---|---|---|---|
+| 1 | La aplicación aparece en la cuenta de Marcos | OK: en make.powerapps.com, Aplicaciones, «Compartidos conmigo», sale «Estado de las delegaciones», propietario Álvaro, tipo Lienzo | R13-04-app-compartida-con-marcos.jpg |
+| 2 | Abrir la aplicación en modo de reproducción (apps.powerapps.com) con otra cuenta | OK: se abre fuera de Power Apps Studio. La primera vez pide permiso para la conexión de SharePoint con la cuenta de Marcos (leer y escribir registros); Marcos lo concedió (en la captura se ha tapado su correo) | R13-05-permiso-sharepoint-marcos.jpg |
+| 3 | La aplicación lee la lista «Delegaciones CADUS» | OK: muestra las tres delegaciones de ejemplo (ETSII · Al día, Derecho · Pendiente de reunión, Biología · Sin contacto), y al elegir una sale su ficha con Título, Centro y Estado | R13-06-app-ejecutada-marcos.jpg · R13-07-detalle-derecho-marcos.jpg |
+
+No se probó crear, editar ni borrar delegaciones, para no cambiar los datos de ejemplo. Tampoco se probó desde la pestaña de Teams.
