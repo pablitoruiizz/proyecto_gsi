@@ -12,12 +12,13 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DMS = os.path.join(RAIZ, "docs", "dms")
 ENT = os.path.join(DMS, "entrega")
 PAQ = os.path.join(ENT, "paquete")
-CON_RSI = "--con-rsi" in sys.argv
+FINAL = "--final" in sys.argv  # entrega final del 29/11/2026: implica CMS + DMS + red social v2
+CON_RSI = "--con-rsi" in sys.argv or FINAL
 CON_CMS = "--con-cms" in sys.argv or CON_RSI
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])
-FECHA = "22-11" if CON_RSI else "15-11"  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
-NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
+FECHA = "29-11" if FINAL else ("22-11" if CON_RSI else "15-11")  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
+NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" + ("-v2" if FINAL else "") if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
 RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
 TIPOS = ("CU-Acta", "CU-Normativa", "CU-Expediente", "CU-Votacion")
 
@@ -33,6 +34,8 @@ CMS = [
     ("docs/scrum/burndown/sprint-03.csv", "CMS/seguimiento/burndown-sprint-03.csv"),
     ("docs/scrum/backlog/product-backlog.md", "CMS/seguimiento/product-backlog.md"),
     ("docs/entrega/capturas-sprint3-miguel.md", "CMS/capturas-sprint3/capturas-sprint3.md"),
+    ("docs/entrega/actualizacion-cms-22-11.md", "CMS/ACTUALIZACION-22-11-estado-del-cms.md"),
+    ("tests/E3-04-pruebas-de-aceptacion.md", "CMS/seguimiento/E3-04-pruebas-de-aceptacion.md"),
 ]
 for _f in sorted(os.listdir(os.path.join(DMS, "..", "entrega", "img", "capturas3"))):
     CMS.append((f"docs/entrega/img/capturas3/{_f}", f"CMS/capturas-sprint3/{_f}"))
@@ -79,6 +82,11 @@ RSI_FILES = [
     ("docs/redsocial/img/uml-rsi-analisis.png", "RSI/3-Analisis-UML/uml-rsi-analisis.png"),
     ("docs/redsocial/img/uml-rsi-diseno.png", "RSI/4-Diseno-UML/uml-rsi-diseno.png"),
     ("docs/redsocial/configuracion-teams.md", "RSI/5-Implementacion-Teams/configuracion-teams.md"),
+    ("docs/redsocial/configuracion-planner.md", "RSI/5-Implementacion-Teams/configuracion-planner.md"),
+    ("docs/redsocial/pruebas.md", "RSI/5-Implementacion-Teams/pruebas.md"),
+    ("docs/redsocial/powerapps-especificacion.md", "RSI/5-Implementacion-Teams/powerapps-especificacion.md"),
+    ("docs/redsocial/diseno-tableros-planner.md", "RSI/5-Implementacion-Teams/diseno-tableros-planner.md"),  # Lab 6
+    ("colaboracion-microsoft365/planner/README.md", "RSI/5-Implementacion-Teams/planner-diseno.md"),
     ("docs/redsocial/plan-lab5.md", "RSI/seguimiento/plan-lab5.md"),
 ]
 _cap = os.path.join(RAIZ, "docs", "redsocial", "capturas")
@@ -112,7 +120,7 @@ if CON_RSI:
 LEEME_RSI = """
 ## Red social interna (Microsoft Teams, Lab 5)
 - `Entrega-RSI-CADUS.docx` / `.pdf`: documento principal (caso de negocio, requisitos, glosario, análisis, diseño, implementación, trazabilidad y SCRUM).
-- `1-Requisitos-REM`: `RSI.rem` (proyecto REMUS), `REM-RSI-v1.0.pdf` (su exportación), hoja `carga-remus.md` y `glosario-de-terminos.md`.
+- `1-Requisitos-REM`: `RSI.rem` (proyecto REMUS), `REM-RSI-v1.0.pdf` (su exportación, con el índice propio de REMUS), hoja `carga-remus.md` y `glosario-de-terminos.md`. El índice del Lab 5 (caso de negocio, requisitos del sistema software y glosario) está en `Entrega-RSI-CADUS` y en `2-Caso-de-negocio`.
 - `2-Caso-de-negocio`: `Business-Case-RSI` (Word y PDF).
 - `3-Analisis-UML` y `4-Diseno-UML`: UML de análisis (Role, Group, Subgroups, Tool y Permission) y UML de diseño en Teams.
 - `5-Implementacion-Teams`: capturas de Teams (tenant de la Universidad de Sevilla) y guía de configuración.

@@ -67,8 +67,8 @@
   "owner": "Pablo Ruiz Vidal",
   "client": "Delegación General del CADUS",
   "paragraphs": {
-    "intro": "Este documento presenta los requisitos de la red social interna del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) para el Lab 5. La red social se construye en Microsoft Teams, dentro de la cuenta de la Universidad, y reúne la comunicación, las tareas, el calendario y los archivos de la Ejecutiva, las delegaciones de centro y las asambleas. Es independiente del portal web (CMS) y del gestor documental (DMS), con los que se relaciona: los documentos oficiales siguen en el DMS y la red social los enlaza. Se recogen el Business Case y los requisitos de los grupos y de las herramientas.",
-    "current": "BUSINESS CASE. Situación: el CADUS ya tiene un portal web para el público y un gestor documental para sus documentos internos, pero su coordinación diaria (quién prepara qué para la asamblea, dónde se habla con cada delegación, cómo se comparten borradores y avisos) no tiene un espacio propio. Oportunidad: reunir esa coordinación en un único espacio privado, dentro de la cuenta de la Universidad que ya usan la Ejecutiva y las 27 delegaciones. Decisión: se elige Microsoft Teams frente a Discord y a la mensajería personal porque no tiene coste de licencias, usa las cuentas institucionales, se integra con SharePoint (ya usado en el DMS), controla miembros y permisos por equipo y canal y ofrece tareas, calendario y automatización (Planner, Power Automate y PowerApps). Alcance del piloto: tres equipos (Ejecutiva, Delegaciones, con un subgrupo por centro, y Asamblea). Fuera de alcance: cambiar el portal o el DMS, migrar conversaciones previas y poner en marcha las 27 delegaciones. Riesgos principales: la Ejecutiva comparte una sola cuenta, hay datos personales de estudiantes y delegados, y puede que el CADUS no lo adopte. Costes: sin licencias nuevas; el esfuerzo del equipo de cuatro personas. El detalle está en docs/redsocial/business-case.md.",
+    "intro": "Este documento presenta los requisitos de la red social interna del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el equipo de la asignatura Gestión de Sistemas de Información (GSI) para el Lab 5. La red social se construye en Microsoft Teams, dentro de la cuenta de la Universidad, y reúne la comunicación, las tareas, el calendario y los archivos de la Ejecutiva, las delegaciones de centro y las asambleas. Es independiente del portal web (CMS) y del gestor documental (DMS), con los que se relaciona: los documentos oficiales siguen en el DMS y la red social los enlaza. Se recogen el caso de negocio y los requisitos de los grupos y de las herramientas. Misión: ofrecer a la Ejecutiva y a las delegaciones un espacio privado y ordenado para comunicarse, repartir tareas, compartir archivos y preparar las asambleas, dentro de la cuenta de la Universidad. Visión: que la coordinación interna del CADUS viva en un único espacio que dure de un curso al siguiente, con permisos claros y sin duplicar los documentos que ya custodia el DMS.",
+    "current": "BUSINESS CASE. Situación: el CADUS ya tiene un portal web para el público y un gestor documental para sus documentos internos, pero su coordinación diaria (quién prepara qué para la asamblea, dónde se habla con cada delegación, cómo se comparten borradores y avisos) no consta que tenga un espacio propio y documentado (por confirmar con el CADUS). Oportunidad: reunir esa coordinación en un único espacio privado, dentro de la cuenta de la Universidad que ya usan la Ejecutiva y las 27 delegaciones. Decisión: se elige Microsoft Teams frente a Discord y a la mensajería personal porque no tiene coste de licencias, usa las cuentas institucionales, se integra con SharePoint (ya usado en el DMS), controla miembros y permisos por equipo y canal y ofrece tareas, calendario y automatización (Planner, Power Automate y PowerApps). Alcance del piloto: tres equipos (Ejecutiva, Delegaciones, con un subgrupo por centro, y Asamblea). Fuera de alcance: cambiar el portal o el DMS, migrar conversaciones previas y poner en marcha las 27 delegaciones. Riesgos principales: la Ejecutiva comparte una sola cuenta, hay datos personales de estudiantes y delegados, y puede que el CADUS no lo adopte. Costes: sin licencias nuevas; el esfuerzo del equipo de cuatro personas. El detalle está en docs/redsocial/business-case.md.",
     "environment": "El equipo de cuatro integrantes crea y configura la red social en Microsoft Teams con sus cuentas de alumno de la Universidad de Sevilla. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria del equipo se realiza en Discord. Las siguientes restricciones recogen estas decisiones.",
     "glossary": [
       {
@@ -281,7 +281,7 @@
     {
       "id": "RF-R01",
       "name": "Equipos del CADUS",
-      "description": "crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque Teams limita los canales privados por equipo y las 27 delegaciones más la Ejecutiva casi lo agotarían",
+      "description": "crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque cada grupo tiene miembros, permisos y herramientas distintos y así los canales privados de las 27 delegaciones quedan en un solo equipo, sin mezclarlos con la Ejecutiva ni con la asamblea",
       "comments": "Entrega del 22/11",
       "importance": 2,
       "urgency": 2,
@@ -336,7 +336,7 @@
     {
       "id": "RF-R06",
       "name": "Roles y permisos",
-      "description": "aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (equipo del proyecto en pruebas, sin acceso a canales con datos personales)",
+      "description": "aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del equipo del proyecto son propietarios de los tres equipos",
       "comments": "Entrega del 22/11",
       "importance": 2,
       "urgency": 2,
@@ -462,6 +462,16 @@
         {
           "who": "system",
           "text": "muestra el evento a todo el equipo y las tareas a sus responsables"
+        },
+        {
+          "who": "actor",
+          "text": "envía a las delegaciones un formulario de confirmación de asistencia",
+          "actor": "ACT-R01"
+        },
+        {
+          "who": "actor",
+          "text": "responde al formulario de asistencia",
+          "actor": "ACT-R02"
         },
         {
           "who": "actor",
@@ -741,6 +751,7 @@
     [
       "CU-R01",
       [
+        "RF-R02",
         "RF-R05",
         "RF-R06",
         "RN-R01",
@@ -754,6 +765,7 @@
         "RF-R04",
         "RF-R08",
         "RF-R09",
+        "RF-R10",
         "IR-R05",
         "ACT-R01",
         "ACT-R02"
@@ -784,6 +796,7 @@
     [
       "CU-R05",
       [
+        "RF-R01",
         "RF-R03",
         "RF-R06",
         "RN-R04",
@@ -827,6 +840,25 @@
       [
         "RF-R01",
         "RF-R06"
+      ]
+    ],
+    [
+      "RNF-R02",
+      [
+        "UI-R01",
+        "UI-R02"
+      ]
+    ],
+    [
+      "RNF-R04",
+      [
+        "RC-R01"
+      ]
+    ],
+    [
+      "RC-R03",
+      [
+        "RC-R01"
       ]
     ]
   ]

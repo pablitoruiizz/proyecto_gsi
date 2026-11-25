@@ -98,7 +98,7 @@ La vista «Aprobadas» filtra por estado de aprobación y solo muestra el acta d
 
 | Fecha | Quién | Qué | Resultado |
 |---|---|---|---|
-| 14/11/2026 | Marcos | CU-D01 de principio a fin con un acta nueva de ejemplo (cuenta propietaria): crear desde la plantilla, rellenar metadatos, enviar a aprobación y aprobar | PENDIENTE |
-| 14/11/2026 | Marcos | CU-D02 con un visitante: ve el acta aprobada en «Aprobadas» y no ve el borrador del 26/10, ni en la biblioteca ni con su enlace directo | PENDIENTE |
+| 14/11/2026 | Marcos | CU-D01 de principio a fin con un acta nueva de ejemplo (cuenta propietaria): crear desde la plantilla, rellenar metadatos, enviar a aprobación y aprobar | Correcto. «Acta de prueba de Marcos (ejemplo).docx» se crea a partir de la plantilla de la biblioteca Plantillas, toma Tipo de documento «Acta» y Curso «2026-2027», se completan Fecha (14/11/2026) y Asamblea, y se aprueba con «Aprobar o rechazar». Aparece en la vista «Aprobadas» junto al acta del 12/10, y el borrador del 26/10 sigue sin aparecer. |
+| 14/11/2026 | Marcos | CU-D02 con un visitante: ve el acta aprobada en «Aprobadas» y no ve el borrador del 26/10, ni en la biblioteca ni con su enlace directo | PENDIENTE: hace falta una cuenta del grupo Visitantes; con la cuenta propietaria se ven también los borradores. |
 
 Si no hay una cuenta de delegación real, la prueba de CU-D02 se hace con un integrante del equipo movido temporalmente al grupo Visitantes. Se anota así, porque no demuestra que funcione la cuenta de una delegación concreta.

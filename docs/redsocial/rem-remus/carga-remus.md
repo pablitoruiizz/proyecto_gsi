@@ -60,12 +60,12 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 
 | Código | Nombre | El sistema deberá | Historias | Importancia |
 |---|---|---|---|---|
-| RF-R01 | Equipos del CADUS | crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque Teams limita los canales privados por equipo y las 27 delegaciones más la Ejecutiva casi lo agotarían | Entrega del 22/11 | Vital |
+| RF-R01 | Equipos del CADUS | crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque cada grupo tiene miembros, permisos y herramientas distintos y así los canales privados de las 27 delegaciones quedan en un solo equipo, sin mezclarlos con la Ejecutiva ni con la asamblea | Entrega del 22/11 | Vital |
 | RF-R02 | Grupo Ejecutiva | ofrecer a la Ejecutiva el equipo «CADUS · Ejecutiva», en el que solo están sus miembros, para coordinarse y preparar lo que luego se publica | Entrega del 22/11 | Vital |
 | RF-R03 | Grupo Delegaciones | ofrecer a cada delegación de centro (27) un subgrupo, que es un canal privado del equipo «CADUS · Delegaciones», visible solo para la Ejecutiva y para esa delegación | Entrega del 22/11 | Vital |
 | RF-R04 | Grupo Asamblea | ofrecer el equipo «CADUS · Asamblea» para preparar y hacer el seguimiento de las asambleas y de los cursos, con la Ejecutiva como propietaria y las delegaciones como miembros | Entrega del 22/11 | Vital |
 | RF-R05 | Canal de avisos | ofrecer un canal de avisos (el canal General del equipo «CADUS · Delegaciones») donde solo publica la Ejecutiva y todas las delegaciones leen | Entrega del 22/11 | Vital |
-| RF-R06 | Roles y permisos | aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (equipo del proyecto en pruebas, sin acceso a canales con datos personales) | Entrega del 22/11 | Vital |
+| RF-R06 | Roles y permisos | aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del equipo del proyecto son propietarios de los tres equipos | Entrega del 22/11 | Vital |
 | RF-R07 | Archivos enlazados al DMS | ofrecer en los canales una pestaña de archivos que apunte a los sitios de SharePoint del DMS, de modo que los documentos oficiales no se copien a Teams | Entrega del 22/11 | Vital |
 | RF-R08 | Calendario compartido | mostrar a todo el equipo un calendario con las asambleas y los cursos, que mantiene la Ejecutiva | Entrega del 22/11 | Vital |
 | RF-R09 | Planes de tareas | ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite | Entrega del 22/11 | Vital |
@@ -95,8 +95,10 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
   1. Ejecutiva del CADUS crea el evento de la asamblea en el calendario compartido
   2. Ejecutiva del CADUS crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones
   3. El sistema muestra el evento a todo el equipo y las tareas a sus responsables
-  4. Delegación de centro actualiza el estado de sus tareas
-  5. El sistema refleja el avance del plan para la Ejecutiva
+  4. Ejecutiva del CADUS envía a las delegaciones un formulario de confirmación de asistencia
+  5. Delegación de centro responde al formulario de asistencia
+  6. Delegación de centro actualiza el estado de sus tareas
+  7. El sistema refleja el avance del plan para la Ejecutiva
 
 ### CU-R03 - Compartir un documento con una delegación
 
@@ -167,13 +169,16 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 | OBJ-R03 | RF-R05, RF-R08, UI-R02, RN-R01, CU-R01, CU-R04 |
 | OBJ-R04 | RF-R07, RN-R03, CU-R03 |
 | OBJ-R05 | RF-R06, IR-R04, RNF-R01, RN-R02, RN-R05 |
-| CU-R01 | RF-R05, RF-R06, RN-R01, IR-R02, ACT-R01 |
-| CU-R02 | RF-R04, RF-R08, RF-R09, IR-R05, ACT-R01, ACT-R02 |
+| CU-R01 | RF-R02, RF-R05, RF-R06, RN-R01, IR-R02, ACT-R01 |
+| CU-R02 | RF-R04, RF-R08, RF-R09, RF-R10, IR-R05, ACT-R01, ACT-R02 |
 | CU-R03 | RF-R03, RF-R07, RN-R02, RN-R03, IR-R02, ACT-R01, ACT-R02 |
 | CU-R04 | RF-R05, RF-R08, RF-R09, RN-R02, ACT-R02 |
-| CU-R05 | RF-R03, RF-R06, RN-R04, IR-R01, IR-R04, ACT-R03 |
+| CU-R05 | RF-R01, RF-R03, RF-R06, RN-R04, IR-R01, IR-R04, ACT-R03 |
 | RF-R01 | IR-R01, IR-R02, RC-R01, RC-R02 |
 | RF-R06 | IR-R04, RN-R05 |
 | RF-R11 | RC-R02, IR-R03 |
 | RF-R12 | RC-R02, IR-R03 |
 | RNF-R03 | RF-R01, RF-R06 |
+| RNF-R02 | UI-R01, UI-R02 |
+| RNF-R04 | RC-R01 |
+| RC-R03 | RC-R01 |

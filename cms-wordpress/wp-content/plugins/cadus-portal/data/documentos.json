@@ -1,0 +1,82 @@
+[
+ {
+  "titulo": "Acta del Pleno Extraordinario del 17 de junio de 2026",
+  "tipo": "Acta",
+  "fecha": "20260617",
+  "pleno": "Pleno extraordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Extraordinario-del-17-de-junio-de-2026.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2026/06/Acta-del-Pleno-Extraordinario-del-17-de-junio-de-2026.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 15 de mayo de 2026",
+  "tipo": "Acta",
+  "fecha": "20260515",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-15-de-mayo-de-2026.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2026/05/Acta-del-Pleno-Ordinario-del-15-de-mayo-de-2026.pdf"
+ },
+ {
+  "titulo": "Normativa de participación en eventos del CADUS",
+  "tipo": "Normativa",
+  "fecha": "20260515",
+  "pleno": "Pleno ordinario (acuerdo 4, 15/05/2026)",
+  "archivo": "data/normativa/Normativa-de-participacion-en-eventos-del-CADUS.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Normativa/Normativa-de-participacion-en-eventos-del-CADUS.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 30 de abril de 2026",
+  "tipo": "Acta",
+  "fecha": "20260430",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-30-de-abril-de-2026.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2026/04/Acta-del-Pleno-Ordinario-del-30-de-abril-de-2026.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 26 de marzo de 2026",
+  "tipo": "Acta",
+  "fecha": "20260326",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-26-de-marzo-de-2026.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2026/03/Acta-del-Pleno-Ordinario-del-26-de-marzo-de-2026.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 24 de febrero de 2026",
+  "tipo": "Acta",
+  "fecha": "20260224",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-24-de-febrero-de-2026.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2026/02/Acta-del-Pleno-Ordinario-del-24-de-febrero-de-2026.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 19 de diciembre de 2025",
+  "tipo": "Acta",
+  "fecha": "20251219",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-19-de-diciembre-de-2025.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2025/12/Acta-del-Pleno-Ordinario-del-19-de-diciembre-de-2025.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 27 de noviembre de 2025",
+  "tipo": "Acta",
+  "fecha": "20251127",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-27-de-noviembre-de-2025.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2025/11/Acta-del-Pleno-Ordinario-del-27-de-noviembre-de-2025.pdf"
+ },
+ {
+  "titulo": "Acta del Pleno Ordinario del 31 de octubre de 2025",
+  "tipo": "Acta",
+  "fecha": "20251031",
+  "pleno": "Pleno ordinario",
+  "archivo": "data/actas/Acta-del-Pleno-Ordinario-del-31-de-octubre-de-2025.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Plenos/2025/10/Acta-del-Pleno-Ordinario-del-31-de-octubre-de-2025.pdf"
+ },
+ {
+  "titulo": "Normativa reguladora de los Premios CADUS",
+  "tipo": "Normativa",
+  "fecha": "20240321",
+  "pleno": "Pleno del 21 de marzo de 2024 (modificada el 15/05/2025)",
+  "archivo": "data/normativa/Normativa-Reguladora-de-los-Premios-CADUS.pdf",
+  "fuente": "https://www.cadus.us.es/Documents/Normativa/Normativa-Reguladora-de-los-Premios-CADUS.pdf"
+ }
+]

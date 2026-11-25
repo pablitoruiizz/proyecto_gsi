@@ -11,8 +11,8 @@
 |---|---|---|---|---:|---|---|---|---|
 | PB-001 | Definir estructura base del repositorio | Requisitos/SCRUM | Alta | 3 | Hecho | Sprint-00 | Ninguna | `[Nombre]` |
 | PB-002 | Configurar CMS local WordPress en servidor local (WampServer) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-001 | `[Nombre]` |
-| PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Pendiente | Fase 2 (DMS) | PB-001 | `[Nombre]` |
-| PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Pendiente | Fase 3 (Teams) | PB-001 | `[Nombre]` |
+| PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Hecho | Fase 2 (DMS) | PB-001 | `[Nombre]` |
+| PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Hecho | Fase 3 (Teams) | PB-001 | `[Nombre]` |
 | PB-005 | Montar entorno compartido: WordPress + MySQL en WampServer accesible por Tailscale, y GitHub para el resto de archivos (RC-01, RC-02) | CMS/Entorno | Alta | 5 | Hecho | Sprint-01 | PB-002 | `[Nombre]` |
 | PB-006 | Crear el servidor de Discord del equipo con categorías INFO, SCRUM, DESARROLLO y VOZ (RC-03) | Colaboración | Media | 3 | Hecho | Sprint-01 | PB-005 | `[Nombre]` |
 | PB-007 | Seleccionar, instalar y configurar los plugins obligatorios (seguridad, caché, analítica, SEO) y de apoyo (formularios, campos, roles) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-002 | `[Nombre]` |
@@ -35,9 +35,9 @@
 | HU-11 | Como miembro de la Ejecutiva, quiero publicar convocatorias de votación vinculadas a una asamblea del calendario. | RF-12, RN-05 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-12 | Como Estudiante, quiero solicitar mediación estudiantil mediante un formulario. | RF-13 | Media | 5 | Hecho | Sprint-02 | `[Nombre]` |
 | HU-13 | Como Administrador, quiero gestionar roles y permisos de usuario (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | RF-14 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
-| HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Hecho (falta prueba cruzada y en dispositivos reales) | Sprint-03 | `[Nombre]` |
-| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | Hecho (falta prueba cruzada y en dispositivos reales) | Sprint-03 | `[Nombre]` |
-| HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | Hecho (falta probar H16-1 a H16-6 en el navegador) | Sprint-03 | `[Nombre]` |
+| HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Hecho (móvil real el 22/11 y tablet el 23/11, comprobados según Pablo) | Sprint-03 | `[Nombre]` |
+| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | En curso (reabierta el 22/11; el 23/11 Marcos cerró teclado, Lighthouse 97/96/96 y daltonismo; falta el lector de pantalla real y dos arreglos menores) | Sprint-03 | `[Nombre]` |
+| HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | Hecho (H16-1 a H16-6 probados con clics el 22/11; H16-7, la búsqueda en el panel de tickets, también el 22/11 con la cuenta `test-ejecutivo`, ejecutada por Claude en nombre de Pablo: no es prueba cruzada) | Sprint-03 | `[Nombre]` |
 | HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | Hecho | Sprint-03 | `[Nombre]` |
 | HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | `[Nombre]` |
 | HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | `[Nombre]` |

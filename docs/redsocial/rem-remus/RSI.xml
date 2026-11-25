@@ -1,0 +1,2287 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE rem:requirementsProject SYSTEM "https://cdn.jsdelivr.net/gh/amador-duran-toro/remus/xml/remus.dtd">
+<rem:requirementsProject xmlns:rem="http://rem.lsi.us.es">
+<rem:name>RSI</rem:name>
+<rem:c_requirementsSpecification oid = "CRS-0001">
+<rem:name>Red Social Interna del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:preparedFor organizations = "ORG-0001 "/>
+<rem:preparedBy organizations = "ORG-0002 "/>
+<rem:section oid="SEC-0001">
+<rem:name>Introducción</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>1 </rem:number>
+<rem:paragraph oid="PRG-0001">
+<rem:name>Introducción</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Este documento presenta los requisitos de la red social interna del Consejo de Alumnos de la Universidad de Sevilla (CADUS), elaborados por el <rem:ref oid="GLO-0004">equipo</rem:ref> de la asignatura Gestión de Sistemas de Información (GSI) para el Lab 5. La red social se construye en Microsoft Teams, dentro de la cuenta de la Universidad, y reúne la comunicación, las tareas, el calendario y los archivos de la Ejecutiva, las delegaciones de centro y las asambleas. Es independiente del portal web (CMS) y del gestor documental (DMS), con los que se relaciona: los documentos oficiales siguen en el DMS y la red social los enlaza. Se recogen el caso de negocio y los requisitos de los grupos y de las herramientas. Misión: ofrecer a la Ejecutiva y a las delegaciones un espacio privado y ordenado para comunicarse, repartir tareas, compartir archivos y preparar las asambleas, dentro de la cuenta de la Universidad. Visión: que la coordinación interna del CADUS viva en un único espacio que dure de un curso al siguiente, con permisos claros y sin duplicar los documentos que ya custodia el DMS.</rem:text>
+</rem:paragraph>
+</rem:section>
+<rem:section oid="SEC-0002">
+<rem:name>Participantes en el Proyecto</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>2 </rem:number>
+<rem:section oid="SEC-0003">
+<rem:name>Organizaciones</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>2.1 </rem:number>
+<rem:organization
+ oid="ORG-0001">
+<rem:name>CADUS - Consejo de Alumnos de la Universidad de Sevilla</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:address>Pabellón de Uruguay, Av. de Chile, s/n, 41013 Sevilla</rem:address>
+<rem:telephone><rem:tbd/></rem:telephone>
+<rem:fax><rem:tbd/></rem:fax>
+</rem:organization>
+<rem:organization
+ oid="ORG-0002">
+<rem:name>Equipo de proyecto GSI</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:address>Universidad de Sevilla - Gestión de Sistemas de Información (GSI)</rem:address>
+<rem:telephone><rem:tbd/></rem:telephone>
+<rem:fax><rem:tbd/></rem:fax>
+</rem:organization>
+</rem:section>
+<rem:section oid="SEC-0004">
+<rem:name>Personas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>2.2 </rem:number>
+<rem:stakeholder oid="STK-0001">
+<rem:name>Delegación General del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Cliente y usuario (Ejecutiva del CADUS)</rem:stakeholderRole>
+<rem:isCustomer/>
+<rem:isUser/>
+<rem:worksFor organization = "ORG-0001"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0002">
+<rem:name>Pablo Ruiz Vidal</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Product Owner, Business Case y REM</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0003">
+<rem:name>Joaquin Luna Canela</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Scrum Master y <rem:ref oid="GLO-0010">Planner</rem:ref></rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0004">
+<rem:name>Alvaro Martinez Ocaña</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Dev UML de análisis y de diseño</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+<rem:stakeholder oid="STK-0005">
+<rem:name>Marcos-Paban Delgado Rodriguez</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:stakeholderRole>Dev configuración de Teams y capturas</rem:stakeholderRole>
+<rem:isDeveloper/>
+<rem:worksFor organization = "ORG-0002"/>
+</rem:stakeholder>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0005">
+<rem:name>Descripción del Sistema Actual</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>3 </rem:number>
+<rem:paragraph oid="PRG-0002">
+<rem:name>Sistema Actual</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>BUSINESS CASE. Situación: el CADUS ya tiene un portal web para el público y un gestor documental para sus documentos internos, pero su coordinación diaria (quién prepara qué para la asamblea, dónde se habla con cada delegación, cómo se comparten borradores y avisos) no consta que tenga un espacio propio y documentado (por confirmar con el CADUS). Oportunidad: reunir esa coordinación en un único espacio privado, dentro de la cuenta de la Universidad que ya usan la Ejecutiva y las 27 delegaciones. Decisión: se elige Microsoft Teams frente a Discord y a la mensajería personal porque no tiene coste de licencias, usa las cuentas institucionales, se integra con SharePoint (ya usado en el DMS), controla miembros y permisos por <rem:ref oid="GLO-0004">equipo</rem:ref> y <rem:ref oid="GLO-0006">canal</rem:ref> y ofrece tareas, calendario y automatización (<rem:ref oid="GLO-0010">Planner</rem:ref>, <rem:ref oid="GLO-0011">Power Automate</rem:ref> y <rem:ref oid="GLO-0012">PowerApps</rem:ref>). Alcance del piloto: tres equipos (Ejecutiva, Delegaciones, con un subgrupo por centro, y Asamblea). Fuera de alcance: cambiar el portal o el DMS, migrar conversaciones previas y poner en marcha las 27 delegaciones. Riesgos principales: la Ejecutiva comparte una sola cuenta, hay datos personales de estudiantes y delegados, y puede que el CADUS no lo adopte. Costes: sin licencias nuevas; el esfuerzo del <rem:ref oid="GLO-0004">equipo</rem:ref> de cuatro personas. El detalle está en docs/redsocial/business-case.md.</rem:text>
+</rem:paragraph>
+</rem:section>
+<rem:section oid="SEC-0006">
+<rem:name>Objetivos del Sistema</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>4 </rem:number>
+<rem:objective oid="OBJ-0001">
+<rem:name>OBJ-R01 - Espacio propio por grupo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>que la Ejecutiva y cada delegación tengan un lugar propio y privado donde hablar y compartir archivos</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0002">
+<rem:name>OBJ-R02 - Tareas a la vista</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>que las tareas de preparación de las asambleas y de los cursos estén a la vista y asignadas a quien corresponde</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0003">
+<rem:name>OBJ-R03 - Avisos y calendario unificados</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>que los avisos y el calendario del CADUS estén en un solo sitio</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0004">
+<rem:name>OBJ-R04 - Documentos sin duplicar</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>que los documentos internos sigan en el gestor documental (DMS) y se enlacen desde la red social, sin copias</rem:description>
+</rem:objective>
+<rem:objective oid="OBJ-0005">
+<rem:name>OBJ-R05 - Lo interno, solo para quien corresponde</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>que lo interno no se mezcle con lo que ve cualquier estudiante: los grupos son privados y solo entran las cuentas autorizadas</rem:description>
+</rem:objective>
+</rem:section>
+<rem:section oid="SEC-0007">
+<rem:name>Catálogo de Requisitos del Sistema</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>5 </rem:number>
+<rem:section oid="SEC-0008">
+<rem:name>Requisitos de Información</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.1 </rem:number>
+<rem:informationRequirement oid="IRQ-0001">
+<rem:name>IR-R01 - Grupo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada grupo o subgrupo del <rem:ref oid="GLO-0004">equipo</rem:ref>, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1028">
+<rem:description>Nombre</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1029">
+<rem:description>Tipo (Ejecutiva, Delegaciones, subgrupo de centro o Asamblea)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1030">
+<rem:description>Descripción</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1031">
+<rem:description>Propietarios</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1032">
+<rem:description>Miembros</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0002">
+<rem:name>IR-R02 - Canal</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada <rem:ref oid="GLO-0006">canal</rem:ref> de un grupo, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1034">
+<rem:description>Nombre</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1035">
+<rem:description>Grupo al que pertenece</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1036">
+<rem:description>Tipo (estándar o privado)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1037">
+<rem:description>Quién puede publicar</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1038">
+<rem:description>Herramientas ancladas</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0003">
+<rem:name>IR-R03 - Herramienta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada <rem:ref oid="GLO-0007">herramienta</rem:ref> del <rem:ref oid="GLO-0004">equipo</rem:ref>, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1040">
+<rem:description>Nombre (Archivos, Calendario, <rem:ref oid="GLO-0010">Planner</rem:ref>, Forms, <rem:ref oid="GLO-0011">Power Automate</rem:ref> o <rem:ref oid="GLO-0012">PowerApps</rem:ref>)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1041">
+<rem:description>Para qué se usa</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1042">
+<rem:description>Grupo o <rem:ref oid="GLO-0006">canal</rem:ref> donde está</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1043">
+<rem:description>Quién la gestiona</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0004">
+<rem:name>IR-R04 - Rol y permiso</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada <rem:ref oid="GLO-0008">rol</rem:ref> del <rem:ref oid="GLO-0004">equipo</rem:ref>, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1045">
+<rem:description><rem:ref oid="GLO-0008">Rol</rem:ref> (propietario, miembro o invitado)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1046">
+<rem:description>Acciones permitidas (leer, publicar, gestionar canales, administrar miembros)</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1047">
+<rem:description>Grupo o <rem:ref oid="GLO-0006">canal</rem:ref> sobre el que se aplica</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+<rem:informationRequirement oid="IRQ-0005">
+<rem:name>IR-R05 - Plan y tarea</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:relevantConcept>a cada plan de tareas y a sus tareas, con estos datos:</rem:relevantConcept>
+<rem:averageLifeTime>
+<rem:tbd/>
+</rem:averageLifeTime>
+<rem:maximumLifeTime>
+<rem:tbd/>
+</rem:maximumLifeTime>
+<rem:averageOcurrences>
+<rem:tbd/>
+</rem:averageOcurrences>
+<rem:maximumOcurrences>
+<rem:tbd/>
+</rem:maximumOcurrences>
+<rem:specificData oid = "DAT-1049">
+<rem:description>Plan y grupo al que pertenece</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1050">
+<rem:description>Cubo</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1051">
+<rem:description>Tarea</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1052">
+<rem:description>Responsable</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1053">
+<rem:description>Fecha límite</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+<rem:specificData oid = "DAT-1054">
+<rem:description>Estado</rem:description>
+<rem:comments>Ninguno</rem:comments>
+</rem:specificData>
+</rem:informationRequirement>
+</rem:section>
+<rem:section oid="SEC-0009">
+<rem:name>Requisitos de Interfaz de Usuario y Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.2 </rem:number>
+<rem:section oid="SEC-0010">
+<rem:name>Actores</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.1 </rem:number>
+<rem:actor oid="ACT-0001">
+<rem:name>Ejecutiva del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a los miembros de la Ejecutiva, que usan la cuenta única del CADUS y son propietarios del <rem:ref oid="GLO-0004">equipo</rem:ref> (administran miembros y canales, publican avisos y reparten tareas)</rem:actorRole>
+</rem:actor>
+<rem:actor oid="ACT-0002">
+<rem:name>Delegación de centro</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a cada una de las 27 delegaciones, que acceden con la cuenta de su delegación (una cuenta por delegación, no por persona) y son miembros: leen los avisos, participan en su <rem:ref oid="GLO-0006">canal</rem:ref> y gestionan sus tareas</rem:actorRole>
+</rem:actor>
+<rem:actor oid="ACT-0003">
+<rem:name>Administrador del equipo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:actorRole>a la persona del <rem:ref oid="GLO-0004">equipo</rem:ref> del proyecto que crea el <rem:ref oid="GLO-0004">equipo</rem:ref> en Teams y lo configura (Pablo Ruiz Vidal); al terminar el proyecto lo traspasa a la Ejecutiva</rem:actorRole>
+</rem:actor>
+</rem:section>
+<rem:section oid="SEC-0011">
+<rem:name>Requisitos de Interfaz de Usuario</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.2 </rem:number>
+<rem:functionalRequirement oid="FRQ-0001">
+<rem:name>UI-R01 - Grupos y canales con nombres claros</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>RNF-R02</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ordenar el <rem:ref oid="GLO-0004">equipo</rem:ref> por grupos y canales con nombres que se entiendan sin explicación (por ejemplo, «Delegaciones · ETSII»), para que una persona sin experiencia en Teams encuentre su <rem:ref oid="GLO-0006">canal</rem:ref></rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0002">
+<rem:name>UI-R02 - Herramientas ancladas en cada canal</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>RNF-R02</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>anclar en cada <rem:ref oid="GLO-0006">canal</rem:ref>, como pestañas, las herramientas que se usan allí (archivos, tareas y calendario)</rem:description>
+</rem:functionalRequirement>
+</rem:section>
+<rem:section oid="SEC-0012">
+<rem:name>Requisitos Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>3</rem:level>
+<rem:number>5.2.3 </rem:number>
+<rem:functionalRequirement oid="FRQ-0003">
+<rem:name>RF-R01 - Equipos del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>crear tres equipos privados, que son los grupos principales: «CADUS · Ejecutiva», «CADUS · Delegaciones» y «CADUS · Asamblea». Se usan tres equipos, y no uno con todos los canales, porque cada grupo tiene miembros, permisos y herramientas distintos y así los canales privados de las 27 delegaciones quedan en un solo <rem:ref oid="GLO-0004">equipo</rem:ref>, sin mezclarlos con la Ejecutiva ni con la asamblea</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0004">
+<rem:name>RF-R02 - Grupo Ejecutiva</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer a la Ejecutiva el <rem:ref oid="GLO-0004">equipo</rem:ref> «CADUS · Ejecutiva», en el que solo están sus miembros, para coordinarse y preparar lo que luego se publica</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0005">
+<rem:name>RF-R03 - Grupo Delegaciones</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer a cada delegación de centro (27) un subgrupo, que es un <rem:ref oid="GLO-0006">canal</rem:ref> privado del <rem:ref oid="GLO-0004">equipo</rem:ref> «CADUS · Delegaciones», visible solo para la Ejecutiva y para esa delegación</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0006">
+<rem:name>RF-R04 - Grupo Asamblea</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer el <rem:ref oid="GLO-0004">equipo</rem:ref> «CADUS · Asamblea» para preparar y hacer el seguimiento de las asambleas y de los cursos, con la Ejecutiva como propietaria y las delegaciones como miembros</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0007">
+<rem:name>RF-R05 - Canal de avisos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer un <rem:ref oid="GLO-0006">canal</rem:ref> de avisos (el <rem:ref oid="GLO-0006">canal</rem:ref> General del <rem:ref oid="GLO-0004">equipo</rem:ref> «CADUS · Delegaciones») donde solo publica la Ejecutiva y todas las delegaciones leen</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0008">
+<rem:name>RF-R06 - Roles y permisos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>aplicar tres roles: propietario (Ejecutiva y administrador del <rem:ref oid="GLO-0004">equipo</rem:ref>), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del <rem:ref oid="GLO-0004">equipo</rem:ref> del proyecto son propietarios de los tres equipos</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0009">
+<rem:name>RF-R07 - Archivos enlazados al DMS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer en los canales una pestaña de archivos que apunte a los sitios de SharePoint del DMS, de modo que los documentos oficiales no se copien a Teams</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0010">
+<rem:name>RF-R08 - Calendario compartido</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>mostrar a todo el <rem:ref oid="GLO-0004">equipo</rem:ref> un calendario con las asambleas y los cursos, que mantiene la Ejecutiva</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0011">
+<rem:name>RF-R09 - Planes de tareas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer en cada grupo un plan de <rem:ref oid="GLO-0010">Planner</rem:ref> con cubos y tareas asignadas a una persona o delegación y con fecha límite</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0012">
+<rem:name>RF-R10 - Formularios</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 22/11</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer Forms para recoger confirmaciones de asistencia y pequeñas encuestas a las delegaciones</rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0013">
+<rem:name>RF-R11 - Flujos automáticos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 29/11 (Lab 8)</rem:comments>
+<rem:importance value = "IMV-0003"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>avisar en el <rem:ref oid="GLO-0006">canal</rem:ref> correspondiente cuando se asigna una tarea o vence su fecha, con flujos de <rem:ref oid="GLO-0011">Power Automate</rem:ref></rem:description>
+</rem:functionalRequirement>
+<rem:functionalRequirement oid="FRQ-0014">
+<rem:name>RF-R12 - Aplicación de PowerApps</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Entrega del 29/11 (Lab 8); depende de que el tenant la ofrezca</rem:comments>
+<rem:importance value = "IMV-0003"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>ofrecer, si el tenant de la Universidad lo permite, una aplicación sencilla de <rem:ref oid="GLO-0012">PowerApps</rem:ref> sobre los datos del <rem:ref oid="GLO-0004">equipo</rem:ref> (por ejemplo, la lista de delegaciones y su estado)</rem:description>
+</rem:functionalRequirement>
+<rem:useCase oid="UC-0001">
+<rem:name>CU-R01 - Publicar un aviso del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cuando la Ejecutiva tiene algo que comunicar a todas las delegaciones</rem:triggeringEvent>
+<rem:precondition>La Ejecutiva ha iniciado sesión en Teams con la cuenta del CADUS</rem:precondition>
+<rem:postcondition>El aviso está publicado y todas las delegaciones pueden leerlo</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1070">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>abre el <rem:ref oid="GLO-0006">canal</rem:ref> de avisos del <rem:ref oid="GLO-0004">equipo</rem:ref></rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1071">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>redacta y publica el aviso, con un archivo adjunto si hace falta</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1072">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>muestra el aviso en el <rem:ref oid="GLO-0006">canal</rem:ref> y lo notifica a los miembros</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1073">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>impide que una delegación publique nuevos avisos en ese <rem:ref oid="GLO-0006">canal</rem:ref></rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0002">
+<rem:name>CU-R02 - Preparar una asamblea con tareas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cuando se convoca una asamblea o un curso</rem:triggeringEvent>
+<rem:precondition>El grupo Asamblea existe y las delegaciones son miembros</rem:precondition>
+<rem:postcondition>La asamblea está en el calendario y sus tareas están asignadas con fecha</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1075">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>crea el evento de la asamblea en el calendario compartido</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1076">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1077">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>muestra el evento a todo el <rem:ref oid="GLO-0004">equipo</rem:ref> y las tareas a sus responsables</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1078">
+<rem:number>4</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>envía a las delegaciones un formulario de confirmación de asistencia</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1079">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>responde al formulario de asistencia</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1080">
+<rem:number>6</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>actualiza el estado de sus tareas</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1081">
+<rem:number>7</rem:number>
+<rem:systemAction>
+<rem:description>refleja el avance del plan para la Ejecutiva</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0003">
+<rem:name>CU-R03 - Compartir un documento con una delegación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cuando la Ejecutiva necesita que una delegación vea o complete un documento</rem:triggeringEvent>
+<rem:precondition>El documento está en el DMS y la delegación tiene su <rem:ref oid="GLO-0006">canal</rem:ref></rem:precondition>
+<rem:postcondition>La delegación puede abrir el documento desde su <rem:ref oid="GLO-0006">canal</rem:ref></rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1083">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>abre el <rem:ref oid="GLO-0006">canal</rem:ref> privado de la delegación</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1084">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>enlaza en la pestaña de archivos el documento del sitio de SharePoint del DMS</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1085">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>muestra el enlace solo a la Ejecutiva y a esa delegación</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1086">
+<rem:number>4</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>abre el documento desde su <rem:ref oid="GLO-0006">canal</rem:ref></rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0004">
+<rem:name>CU-R04 - Consultar avisos, calendario y tareas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>al empezar a trabajar o antes de una asamblea</rem:triggeringEvent>
+<rem:precondition>La delegación ha iniciado sesión en Teams con la cuenta de su delegación</rem:precondition>
+<rem:postcondition>La delegación sabe qué se ha avisado, cuándo es la próxima asamblea y qué tiene pendiente</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1088">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>abre el <rem:ref oid="GLO-0004">equipo</rem:ref> y lee los avisos nuevos</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1089">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>muestra los avisos, sin canales de otras delegaciones</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1090">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0002">
+<rem:description>consulta el calendario y sus tareas del plan</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1091">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>muestra los próximos eventos y las tareas asignadas a esa delegación</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase oid="UC-0005">
+<rem:name>CU-R05 - Dar de alta o de baja una delegación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:triggeringEvent>cuando una delegación se crea o desaparece</rem:triggeringEvent>
+<rem:precondition>El <rem:ref oid="GLO-0004">equipo</rem:ref> existe y el administrador tiene permisos de propietario</rem:precondition>
+<rem:postcondition>La delegación tiene su <rem:ref oid="GLO-0006">canal</rem:ref> privado y sus permisos, o su <rem:ref oid="GLO-0006">canal</rem:ref> queda archivado</rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-1093">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>crea un <rem:ref oid="GLO-0006">canal</rem:ref> privado para la delegación dentro del grupo Delegaciones</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1094">
+<rem:number>2</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>añade a ese <rem:ref oid="GLO-0006">canal</rem:ref> a la cuenta de la delegación y a la Ejecutiva</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1095">
+<rem:number>3</rem:number>
+<rem:systemAction>
+<rem:description>aplica el <rem:ref oid="GLO-0008">rol</rem:ref> de miembro a la delegación y de propietaria a la Ejecutiva</rem:description>
+</rem:systemAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-1096">
+<rem:number>4</rem:number>
+<rem:actorAction actor = "ACT-0003">
+<rem:description>al dar de baja una delegación, archiva su <rem:ref oid="GLO-0006">canal</rem:ref> sin borrar lo publicado</rem:description>
+</rem:actorAction>
+<rem:comments>Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0013">
+<rem:name>Requisitos No Funcionales</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.3 </rem:number>
+<rem:nonFunctionalRequirement oid="NFR-0001">
+<rem:name>RNF-R01 - Privacidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>cumplir el RGPD y la LOPDGDD: grupos y canales privados, sin canales abiertos, y sin trasladar a Teams los datos de reclamaciones, mediaciones ni votaciones, que siguen en el DMS con sus permisos</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0002">
+<rem:name>RNF-R02 - Facilidad de uso</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>una persona sin experiencia en Teams debe poder encontrar su <rem:ref oid="GLO-0006">canal</rem:ref>, leer los avisos y completar una tarea con una guía corta</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0003">
+<rem:name>RNF-R03 - Mantenibilidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>la estructura del <rem:ref oid="GLO-0004">equipo</rem:ref> (grupos, canales, roles y permisos) queda documentada para que otra persona pueda mantenerla y traspasarla a la Ejecutiva</rem:description>
+</rem:nonFunctionalRequirement>
+<rem:nonFunctionalRequirement oid="NFR-0004">
+<rem:name>RNF-R04 - Disponibilidad</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0003"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>estar disponible desde cualquier navegador o aplicación de Teams con la cuenta de la Universidad, también desde el móvil</rem:description>
+</rem:nonFunctionalRequirement>
+</rem:section>
+<rem:section oid="SEC-0014">
+<rem:name>Reglas de Negocio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>2</rem:level>
+<rem:number>5.4 </rem:number>
+<rem:constraintRequirement
+ oid="CRQ-0001">
+<rem:name>RN-R01 - Solo la Ejecutiva publica avisos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>En el <rem:ref oid="GLO-0006">canal</rem:ref> de avisos solo publica la Ejecutiva; las delegaciones leen y pueden reaccionar (coherente con RN-01 del portal: todo pasa por la Ejecutiva).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0002">
+<rem:name>RN-R02 - Cada delegación ve solo lo suyo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Una delegación solo ve su propio <rem:ref oid="GLO-0006">canal</rem:ref>, los avisos y los grupos comunes; no ve los canales de otras delegaciones.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0003">
+<rem:name>RN-R03 - Los documentos oficiales viven en el DMS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Las actas, la normativa, los expedientes y las votaciones se guardan en el DMS; la red social solo los enlaza y no guarda copias.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0004">
+<rem:name>RN-R04 - Una cuenta por delegación</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Cada delegación usa una sola cuenta, a nombre de la delegación y no de la persona, que pasa al <rem:ref oid="GLO-0004">equipo</rem:ref> siguiente cuando cambia el delegado (igual que en el portal, RN-04).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0005">
+<rem:name>RN-R05 - Sin acceso para estudiantes</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0001 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Los estudiantes no son miembros ni invitados: la red social es solo para la Ejecutiva y las delegaciones.</rem:description>
+</rem:constraintRequirement>
+</rem:section>
+</rem:section>
+<rem:section oid="SEC-0016">
+<rem:name>Entorno de Trabajo del Equipo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>6 </rem:number>
+<rem:paragraph oid="PRG-0003">
+<rem:name>Entorno de trabajo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>El <rem:ref oid="GLO-0004">equipo</rem:ref> de cuatro integrantes crea y configura la red social en Microsoft Teams con sus cuentas de alumno de la Universidad de Sevilla. Los archivos del proyecto y la documentación se gestionan con GitHub y la coordinación diaria del <rem:ref oid="GLO-0004">equipo</rem:ref> se realiza en Discord. Las siguientes restricciones recogen estas decisiones.</rem:text>
+</rem:paragraph>
+<rem:constraintRequirement
+ oid="CRQ-0006">
+<rem:name>RC-R01 - Microsoft Teams de la Universidad de Sevilla</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>La red social se construye en Microsoft Teams del tenant de la Universidad de Sevilla, con equipos, canales, roles y las herramientas de Microsoft 365 que el tenant ofrezca (archivos, calendario, <rem:ref oid="GLO-0010">Planner</rem:ref>, Forms y, si están disponibles, <rem:ref oid="GLO-0011">Power Automate</rem:ref> y <rem:ref oid="GLO-0012">PowerApps</rem:ref>).</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0007">
+<rem:name>RC-R02 - Límites del tenant</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>Los alumnos no administran el tenant: lo que no permita la configuración de la Universidad (por ejemplo, crear equipos o usar <rem:ref oid="GLO-0011">Power Automate</rem:ref> y <rem:ref oid="GLO-0012">PowerApps</rem:ref>) se documenta y no se puede cambiar.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid="CRQ-0008">
+<rem:name>RC-R03 - Documentación independiente</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders="STK-0002 "/>
+<rem:sources stakeholders="STK-0002 "/>
+<rem:comments>Ninguno</rem:comments>
+<rem:importance value = "IMV-0002"/>
+<rem:urgency value = "URV-0002"/>
+<rem:status value = "STV-0002"/>
+<rem:stability value = "SBV-0003"/>
+<rem:description>La red social tiene su propio REM, análisis, diseño, implementación y seguimiento SCRUM, independientes de los del CMS y del DMS.</rem:description>
+</rem:constraintRequirement>
+</rem:section>
+<rem:section oid="SEC-0015">
+<rem:name>Glosario de términos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:level>1</rem:level>
+<rem:number>7 </rem:number>
+<rem:glossaryItem oid="GLO-0004">
+<rem:name>Equipo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>En Microsoft Teams, el espacio de trabajo de un grupo de personas, con sus canales, archivos y herramientas.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0005">
+<rem:name>Grupo y subgrupo</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Conjunto de personas del CADUS con un mismo papel (Ejecutiva, Delegaciones, Asamblea). Un subgrupo es una parte de un grupo (por ejemplo, la delegación de un centro). En Teams, cada grupo es un <rem:ref oid="GLO-0004">equipo</rem:ref> y cada subgrupo es un <rem:ref oid="GLO-0006">canal</rem:ref> privado de ese <rem:ref oid="GLO-0004">equipo</rem:ref>.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0006">
+<rem:name>Canal</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Conversación temática dentro de un <rem:ref oid="GLO-0004">equipo</rem:ref>. Puede ser estándar (lo ve todo el <rem:ref oid="GLO-0004">equipo</rem:ref>) o privado (solo las personas invitadas).</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0007">
+<rem:name>Herramienta</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Aplicación que se ancla a un <rem:ref oid="GLO-0006">canal</rem:ref>: Archivos (SharePoint), Calendario, <rem:ref oid="GLO-0010">Planner</rem:ref>, Forms, y automatizaciones de <rem:ref oid="GLO-0011">Power Automate</rem:ref> o aplicaciones de <rem:ref oid="GLO-0012">PowerApps</rem:ref>.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0008">
+<rem:name>Rol</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Papel de una persona en el <rem:ref oid="GLO-0004">equipo</rem:ref>: propietario (administra), miembro (participa) o invitado (acceso limitado).</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0009">
+<rem:name>Permiso</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text>Acción que un <rem:ref oid="GLO-0008">rol</rem:ref> puede hacer sobre un grupo o un <rem:ref oid="GLO-0006">canal</rem:ref>: leer, publicar, gestionar canales o administrar miembros.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0010">
+<rem:name>Planner</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text><rem:ref oid="GLO-0007">Herramienta</rem:ref> de Microsoft 365 para repartir tareas en planes con cubos, responsables y fechas.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0011">
+<rem:name>Power Automate</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text><rem:ref oid="GLO-0007">Herramienta</rem:ref> de Microsoft 365 para crear flujos automáticos, por ejemplo avisos cuando se asigna una tarea.</rem:text>
+</rem:glossaryItem>
+<rem:glossaryItem oid="GLO-0012">
+<rem:name>PowerApps</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+<rem:text><rem:ref oid="GLO-0007">Herramienta</rem:ref> de Microsoft 365 para crear aplicaciones sencillas sobre los datos del <rem:ref oid="GLO-0004">equipo</rem:ref>.</rem:text>
+</rem:glossaryItem>
+</rem:section>
+</rem:c_requirementsSpecification>
+<rem:d_requirementsSpecification oid = "DRS-0002">
+<rem:name>Red Social Interna del CADUS</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2026</rem:year>
+<rem:month>11</rem:month>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:d_requirementsSpecification>
+<rem:defectsSpecification oid = "DFS-0003">
+<rem:name>Registro de Conflictos y Defectos</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2018</rem:year>
+<rem:month>10</rem:month>
+<rem:day>3</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:defectsSpecification>
+<rem:changeRequestsSpecification oid = "CHS-0004">
+<rem:name>Registro de Peticiones de Cambio</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2018</rem:year>
+<rem:month>10</rem:month>
+<rem:day>3</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Ninguno</rem:comments>
+</rem:changeRequestsSpecification>
+<rem:trace source="OBJ-0001"  target="FRQ-0006" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="CRQ-0004" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0012" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0013" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="FRQ-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0014" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0001"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="ACT-0002" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0006" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="CRQ-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="CRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="OBJ-0005"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="IRQ-0005" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="ACT-0002" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="CRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="OBJ-0005"  target="IRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="FRQ-0011" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="FRQ-0009" >
+</rem:trace>
+<rem:trace source="OBJ-0005"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0005"  target="NFR-0001" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0001"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="OBJ-0004"  target="UC-0003" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="ACT-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0005"  target="CRQ-0005" >
+</rem:trace>
+<rem:trace source="UC-0002"  target="FRQ-0012" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="FRQ-0005" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="FRQ-0009" >
+</rem:trace>
+<rem:trace source="UC-0003"  target="CRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="UC-0001" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="IRQ-0003" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="UC-0004" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0007" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="IRQ-0005" >
+</rem:trace>
+<rem:trace source="OBJ-0002"  target="UC-0002" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="FRQ-0010" >
+</rem:trace>
+<rem:trace source="OBJ-0003"  target="CRQ-0001" >
+</rem:trace>
+<rem:trace source="FRQ-0013"  target="CRQ-0007" >
+</rem:trace>
+<rem:trace source="FRQ-0003"  target="CRQ-0007" >
+</rem:trace>
+<rem:trace source="FRQ-0014"  target="IRQ-0003" >
+</rem:trace>
+<rem:trace source="NFR-0002"  target="FRQ-0001" >
+</rem:trace>
+<rem:trace source="FRQ-0003"  target="IRQ-0002" >
+</rem:trace>
+<rem:trace source="FRQ-0013"  target="IRQ-0003" >
+</rem:trace>
+<rem:trace source="FRQ-0008"  target="CRQ-0005" >
+</rem:trace>
+<rem:trace source="FRQ-0014"  target="CRQ-0007" >
+</rem:trace>
+<rem:trace source="NFR-0003"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="NFR-0002"  target="FRQ-0002" >
+</rem:trace>
+<rem:trace source="FRQ-0008"  target="IRQ-0004" >
+</rem:trace>
+<rem:trace source="NFR-0004"  target="CRQ-0006" >
+</rem:trace>
+<rem:trace source="NFR-0003"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="FRQ-0003"  target="CRQ-0006" >
+</rem:trace>
+<rem:trace source="CRQ-0008"  target="CRQ-0006" >
+</rem:trace>
+<rem:trace source="FRQ-0003"  target="IRQ-0001" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="FRQ-0008" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="CRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0004"  target="ACT-0002" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="FRQ-0003" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="IRQ-0001" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="IRQ-0004" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="ACT-0003" >
+</rem:trace>
+<rem:trace source="UC-0005"  target="FRQ-0005" >
+</rem:trace>
+<rem:predefinedValueTypes>
+<rem:predefinedValueType oid="PVT-0003">
+<rem:name>Natural</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Natural numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0005">
+<rem:name>Date</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type (non-standard)</rem:comments>
+<rem:description>Dates</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0006">
+<rem:name>Time</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type (non-standard)</rem:comments>
+<rem:description>Hour:minutes:seconds</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0004">
+<rem:name>String</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Alphanumeric strings</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0001">
+<rem:name>Real</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Real numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+<rem:predefinedValueType oid="PVT-0002">
+<rem:name>Integer</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2000</rem:year>
+<rem:month>10</rem:month>
+<rem:day>30</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>Predefined OCL type</rem:comments>
+<rem:description>Integer numbers</rem:description>
+<rem:definition>(null)</rem:definition>
+</rem:predefinedValueType>
+</rem:predefinedValueTypes>
+<rem:predefinedValues>
+<rem:changeRequestStatusValue oid = "CRV-0001">
+<rem:name>PD</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0002">
+<rem:name>pendiente de análisis</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0003">
+<rem:name>pendiente de aprobar/rechazar</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0005">
+<rem:name>verificado</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0004">
+<rem:name>pendiente de realización</rem:name>
+</rem:changeRequestStatusValue>
+<rem:changeRequestStatusValue oid = "CRV-0006">
+<rem:name>rechazado</rem:name>
+</rem:changeRequestStatusValue>
+<rem:conflictStatusValue oid = "CSV-0001">
+<rem:name>PD</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0004">
+<rem:name>resuelto</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0003">
+<rem:name>en proceso de negociación</rem:name>
+</rem:conflictStatusValue>
+<rem:conflictStatusValue oid = "CSV-0002">
+<rem:name>no resuelto</rem:name>
+</rem:conflictStatusValue>
+<rem:defectStatusValue oid = "DSV-0001">
+<rem:name>PD</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0002">
+<rem:name>no eliminado</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0004">
+<rem:name>eliminado</rem:name>
+</rem:defectStatusValue>
+<rem:defectStatusValue oid = "DSV-0003">
+<rem:name>en proceso de negociación</rem:name>
+</rem:defectStatusValue>
+<rem:defectTypeValue oid = "DTV-0016">
+<rem:name>No rastreabilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están trazados hacia sus orígenes, bien requisitos de nivel superior (objetivos), bien clientes y usuarios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0023">
+<rem:name>Otro</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos presentan otro tipo de defecto]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0017">
+<rem:name>Organización incorrecta</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están organizados correctamente según la normativa aplicada o el documento no contiene las secciones obligatorias]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0015">
+<rem:name>Nivel incorrecto de detalle</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no están expresados con el nivel adecuado de detalle, es decir, son demasiado abstractos o demasiado detallados]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0008">
+<rem:name>Verbosidad excesiva</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos pueden expresarse de forma más concisa sin alterar su significado]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0003">
+<rem:name>No necesidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no son necesarios porque no contribuyen a satisfacer ninguna necesidad de clientes o usuarios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0001">
+<rem:name>PD</rem:name>
+<rem:description>
+<![CDATA[Por Determinar]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0007">
+<rem:name>No implementabilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no pueden ser implementados con la tecnología actual o dentro de un coste razonable]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0013">
+<rem:name>Prioridad no establecida</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no tienen establecida su prioridad, es decir, su importancia y su urgencia]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0014">
+<rem:name>Estabilidad no establecida</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no tienen estimada su estabilidad]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0004">
+<rem:name>Incomprensibilidad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no pueden ser entendidos por algún lector]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0002">
+<rem:name>Ambigüedad</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos, aunque comprensibles, tienen más de una interpretación posible]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0005">
+<rem:name>No verificabilidad</rem:name>
+<rem:description>
+<![CDATA[No se puede comprobar que el sistema satisface el requisito o requisitos]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0010">
+<rem:name>Redundancia</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos son redundantes o contienen elementos redundantes]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0012">
+<rem:name>Incompleción</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no describen todo lo que el sistema se supone que deberá hacer, no describen las respuestas del sistema a todas las posibles situaciones o incluyen elementos por determinar (PD)]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0011">
+<rem:name>Imprecisión</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no se expresan de forma precisa, es decir, usando cantidades numéricas siempre que sea posible con el nivel adecuado de precisión]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0009">
+<rem:name>Dependiente del diseño</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos incluyen elementos dependientes del diseño del sistema]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:defectTypeValue oid = "DTV-0006">
+<rem:name>Inconsistencia</rem:name>
+<rem:description>
+<![CDATA[El requisito o requisitos no son consistentes, es decir, presentan contradicciones internas o entre varios]]>
+</rem:description>
+</rem:defectTypeValue>
+<rem:importanceValue oid = "IMV-0001">
+<rem:name>PD</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0003">
+<rem:name>importante</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0002">
+<rem:name>vital</rem:name>
+</rem:importanceValue>
+<rem:importanceValue oid = "IMV-0004">
+<rem:name>quedaría bien</rem:name>
+</rem:importanceValue>
+<rem:stabilityValue oid = "SBV-0003">
+<rem:name>media</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0001">
+<rem:name>PD</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0004">
+<rem:name>alta</rem:name>
+</rem:stabilityValue>
+<rem:stabilityValue oid = "SBV-0002">
+<rem:name>baja</rem:name>
+</rem:stabilityValue>
+<rem:statusValue oid = "STV-0001">
+<rem:name>PD</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0002">
+<rem:name>en construcción</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0003">
+<rem:name>pendiente de verificación</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0005">
+<rem:name>validado</rem:name>
+</rem:statusValue>
+<rem:statusValue oid = "STV-0004">
+<rem:name>pendiente de validación</rem:name>
+</rem:statusValue>
+<rem:terminationValue oid = "TEV-0001">
+<rem:name>PD</rem:name>
+</rem:terminationValue>
+<rem:terminationValue oid = "TEV-0003">
+<rem:name>queda sin efecto</rem:name>
+</rem:terminationValue>
+<rem:terminationValue oid = "TEV-0002">
+<rem:name>continúa</rem:name>
+</rem:terminationValue>
+<rem:timeUnitValue oid = "TUV-0002">
+<rem:name>año(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0001">
+<rem:name>PD</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0005">
+<rem:name>mes(es)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0014">
+<rem:name>milisegundo(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0011">
+<rem:name>segundo(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0007">
+<rem:name>semana(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0008">
+<rem:name>día(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0010">
+<rem:name>minuto(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0009">
+<rem:name>hora(s)</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0012">
+<rem:name>décima(s) de segundo</rem:name>
+</rem:timeUnitValue>
+<rem:timeUnitValue oid = "TUV-0013">
+<rem:name>centésima(s) de segundo</rem:name>
+</rem:timeUnitValue>
+<rem:urgencyValue oid = "URV-0002">
+<rem:name>inmediatamente</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0001">
+<rem:name>PD</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0004">
+<rem:name>puede esperar</rem:name>
+</rem:urgencyValue>
+<rem:urgencyValue oid = "URV-0003">
+<rem:name>hay presión</rem:name>
+</rem:urgencyValue>
+</rem:predefinedValues>
+</rem:requirementsProject>
