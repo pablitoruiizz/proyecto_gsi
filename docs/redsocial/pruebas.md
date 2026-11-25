@@ -21,3 +21,17 @@ Registro de la configuración del piloto y de las pruebas con cuentas distintas.
 |---|---|---|---|
 | 21/11/2026 | Joaquín, con su cuenta | En CADUS · Delegaciones solo ve «Avisos» y su propio canal privado, no los de las otras delegaciones (captura 05-vista-miembro.jpg) | OK: ve «Avisos» y «Delegación · Biología»; no aparecen «Delegación · ETSII» ni «Delegación · Derecho». Joaquín es propietario del equipo, pero un canal privado solo lo ven sus miembros, así que la prueba vale para RN-R02. |
 | 22/11/2026 | Álvaro, con su cuenta de la US como **Miembro** (no propietario) de CADUS · Delegaciones; se le bajó de Propietario para la prueba (por orden de Pablo, desde Teams) y se le volvió a subir al terminar | 1) No puede iniciar una conversación en «Avisos». 2) Solo ve «Avisos» y el canal privado del que es miembro, no los de las otras delegaciones (capturas 05b y 05c) | OK: 1) en «Avisos» no puede publicar y Teams muestra «Solo los moderadores del canal pueden publicar en este canal.» (RN-R01, captura 05b). 2) En la lista de canales solo ve «Avisos» y «Delegación · ETSII» (del que es miembro); no ve «Delegación · Derecho» ni «Delegación · Biología» (RN-R02, captura 05c). Las capturas no muestran el rol: la prueba se hizo con el rol de Miembro, como consta en esta fila. Álvaro vuelve a ser Propietario (comprobado en Teams el 22/11). |
+
+## Prueba de Power Automate por otra persona (R-12c · RSI-HU-07)
+
+Hecha el 25/11/2026 por Marcos, con su cuenta de la US, sobre los dos flujos de Joaquín y el plan «Preparación de la Asamblea». Pruebas de la tabla de [`configuracion-power-automate.md`](configuracion-power-automate.md).
+
+| # | Prueba | Resultado | Captura |
+|---|---|---|---|
+| 1 | Crear en el plan una tarea nueva con responsable y fecha | OK: tarea «Prueba de Marcos del flujo (ejemplo)», con vencimiento el 26/11/2026, creada a las 22:34; el aviso con su título y su fecha sale en General de CADUS · Asamblea a las 22:39 (5 minutos) | 12e-r12c-tarea-creada.jpg · 12f-r12c-aviso-en-general.jpg |
+| 2 | Historial de ejecuciones del flujo 1 | OK: la ejecución de las 22:39 aparece como Correcto | 12g-r12c-historial-flujo1.jpg |
+| 3 | Ejecutar a mano el flujo 2 con esa tarea sin completar, que vence mañana | OK: ejecución de las 22:49 Correcto; el mensaje «Tareas que vencen hoy o mañana…» en General incluye «Prueba de Marcos del flujo (ejemplo) · 26/11/2026» | 12h-r12c-historial-flujo2.jpg · 12i-r12c-tabla-con-tarea.jpg |
+| 4 | Completar la tarea y volver a ejecutar el flujo 2 | OK: tarea marcada como completada en Planner; el mensaje nuevo de las 22:53 lista las otras 5 tareas pendientes y ya no incluye la de prueba | 12j-r12c-tabla-sin-tarea.jpg |
+| 5 | Marcos figura como propietario de los dos flujos | OK: el flujo 1 aparece en «Compartido conmigo» (captura hecha antes de que Joaquín compartiera el flujo 2, el 25/11 durante la prueba) y en la página del flujo 2 figura como copropietario junto a Joaquín (JC y MR); puede abrir los dos y ver su historial (pruebas 2 y 3) | 12k-r12c-flujos-compartidos.jpg · 12l-r12c-copropietarios-flujo2.jpg |
+
+Al terminar se borró la tarea de prueba, así que el plan queda como está documentado.
