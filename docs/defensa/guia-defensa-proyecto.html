@@ -1,0 +1,505 @@
+<title>Guía de defensa CADUS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* Concepto: hoja de estudio en una sola columna ancha. Una columna vertebral (el código del requisito) recorre el cuadro de arriba,
+   las tarjetas por sistema y la cadena de trazabilidad. Identidad: granate y dorado del CADUS sobre neutros con matiz violeta. */
+:root {
+  --bg: #f6f4f7; --card: #ffffff; --ink: #1d1a20; --muted: #5e5864; --line: #dcd7e0;
+  --granate: #8d0739; --granate-suave: #f6e3ea; --oro: #faba09; --oro-suave: #fff4cf;
+  --verde: #1f6f4a; --verde-suave: #e0f1e8; --azul: #234b86; --azul-suave: #e3ebf7;
+  --fuente-titulo: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --fuente-texto: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16121a; --card: #201a26; --ink: #f1ecf3; --muted: #b3abbb; --line: #3a3142;
+    --granate: #ff7aa5; --granate-suave: #3a1c2a; --oro: #faba09; --oro-suave: #3a3114;
+    --verde: #6fd3a0; --verde-suave: #1b3328; --azul: #8fb4f0; --azul-suave: #1d2b45; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16121a; --card: #201a26; --ink: #f1ecf3; --muted: #b3abbb; --line: #3a3142;
+  --granate: #ff7aa5; --granate-suave: #3a1c2a; --oro: #faba09; --oro-suave: #3a3114;
+  --verde: #6fd3a0; --verde-suave: #1b3328; --azul: #8fb4f0; --azul-suave: #1d2b45; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--fuente-texto); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 56px; }
+.wrap { max-width: 1060px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--fuente-titulo); line-height: 1.15; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); margin-bottom: 6px; }
+h3 { font-size: 1.15rem; margin-bottom: 8px; }
+p { margin: 0 0 10px; max-width: 70ch; }
+a { color: var(--granate); }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .88em; background: var(--granate-suave); color: var(--granate); padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+.etiqueta { font-size: .72rem; letter-spacing: .09em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+
+/* cabecera */
+.cab { padding-block: 40px 28px; }
+.cab h1 { font-size: clamp(2rem, 6vw, 3.4rem); max-width: 18ch; }
+.cab h1 span { color: var(--granate); }
+.cab .tesis { font-size: 1.15rem; max-width: 62ch; margin-top: 14px; color: var(--ink); }
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 8px max(16px, env(safe-area-inset-left, 0px)); display: flex; gap: 6px; overflow-x: auto; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.nav a { white-space: nowrap; text-decoration: none; color: var(--ink); font-size: .86rem; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); }
+.nav a:hover { border-color: var(--granate); color: var(--granate); }
+section { padding-block: 40px 8px; scroll-margin-top: 60px; }
+.sub { color: var(--muted); max-width: 68ch; margin-bottom: 20px; }
+
+/* tubería */
+.tuberia { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; margin-top: 8px; }
+.paso { background: var(--card); border: 1px solid var(--line); padding: 14px 14px 16px; position: relative; min-width: 0; }
+.paso:first-child { border-radius: 10px 0 0 10px; } .paso:last-child { border-radius: 0 10px 10px 0; }
+.paso + .paso { border-left: none; }
+.paso b { font-family: var(--fuente-titulo); font-size: 1.02rem; display: block; margin-bottom: 4px; }
+.paso span { font-size: .87rem; color: var(--muted); display: block; }
+.paso.cl { background: var(--granate); border-color: var(--granate); } .paso.cl b, .paso.cl span { color: #fff; }
+.hilo { margin-top: 10px; display: flex; align-items: center; gap: 10px; background: var(--oro-suave); border: 1px solid var(--oro); border-radius: 10px; padding: 10px 14px; font-size: .93rem; }
+.hilo code { background: var(--card); }
+
+/* tarjetas */
+.dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 18px 14px; min-width: 0; }
+.card ul { margin: 6px 0 0; padding-left: 18px; } .card li { margin-bottom: 4px; }
+.card.destaca { border-color: var(--granate); }
+.pregunta { font-family: var(--fuente-titulo); font-size: 1.25rem; color: var(--granate); margin-bottom: 8px; }
+
+/* tablas */
+.tabla { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--bg); font-weight: 600; }
+tr:last-child td { border-bottom: none; }
+td:first-child { font-weight: 600; }
+
+/* sistemas */
+.sist { background: var(--card); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 22px; overflow: hidden; }
+.sist > header { padding: 16px 22px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; color: #fff; }
+.sist.cms > header { background: var(--granate); } .sist.dms > header { background: var(--azul); } .sist.rsi > header { background: var(--verde); }
+:root[data-theme="dark"] .sist > header, :root:not([data-theme="light"]) .sist > header { color: #0f0c12; }
+.sist > header h3 { margin: 0; font-size: 1.4rem; } .sist > header span { opacity: .92; font-size: .93rem; }
+.cuerpo { padding: 20px 22px 6px; display: grid; gap: 20px; }
+.cifras { display: flex; flex-wrap: wrap; gap: 8px; }
+.cifra { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; font-size: .86rem; }
+.cifra b { font-family: var(--fuente-titulo); font-size: 1.05rem; margin-right: 4px; font-variant-numeric: tabular-nums; }
+.imgs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px; }
+figure { margin: 0; min-width: 0; } figure a { display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+figure img { display: block; width: 100%; height: auto; } figcaption { font-size: .82rem; color: var(--muted); margin-top: 6px; }
+.mapa { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1.4fr); gap: 6px 10px; align-items: center; font-size: .93rem; }
+.mapa .a { background: var(--granate-suave); border-radius: 6px; padding: 6px 10px; font-weight: 600; }
+.mapa .d { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+.mapa .f { text-align: center; color: var(--muted); }
+
+/* cadena de trazabilidad */
+.cadena { display: grid; gap: 0; margin-top: 8px; }
+.cadena .e { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 14px; padding: 12px 0; border-top: 1px dashed var(--line); }
+.cadena .e:first-child { border-top: none; }
+.cadena .e b { font-family: var(--fuente-titulo); color: var(--granate); }
+.cadena-caja { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
+
+/* preguntas */
+details { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0; margin-bottom: 8px; }
+summary { cursor: pointer; padding: 12px 16px; font-weight: 600; font-family: var(--fuente-titulo); list-style: none; display: flex; gap: 10px; }
+summary::before { content: "+"; color: var(--granate); font-weight: 700; width: 14px; flex: none; }
+details[open] summary::before { content: "−"; }
+.grupo { margin: 22px 0 10px; font-size: 1rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+details .r { padding: 0 16px 14px 40px; } details .r p { margin-bottom: 8px; }
+.barra { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+button { font: inherit; font-weight: 600; font-size: .88rem; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--granate); background: var(--card); color: var(--granate); cursor: pointer; }
+button:hover { background: var(--granate); color: #fff; } button:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--oro); outline-offset: 2px; }
+.aviso { background: var(--oro-suave); border: 1px solid var(--oro); border-radius: 12px; padding: 14px 18px; }
+.pie { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .tuberia { grid-template-columns: 1fr; }
+  .paso:first-child { border-radius: 10px 10px 0 0; } .paso:last-child { border-radius: 0 0 10px 10px; }
+  .paso + .paso { border-left: 1px solid var(--line); border-top: none; }
+  .dos, .tres { grid-template-columns: 1fr; }
+  .mapa { grid-template-columns: minmax(0, 1fr) 20px minmax(0, 1.3fr); }
+  .cadena .e { grid-template-columns: 1fr; gap: 2px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<div class="wrap">
+<header class="cab">
+  <div class="etiqueta">Defensa del proyecto CADUS · CMS, DMS y red social</div>
+  <h1>Todo el proyecto, <span>qué hicimos y por qué</span></h1>
+  <p class="tesis">Tres sistemas para el mismo cliente, el CADUS, con el mismo método: escribir lo que necesita (requisitos), dibujar qué hay (UML de análisis), decidir con qué se hace (UML de diseño), construir y probar. Cada paso lleva el código del requisito y por eso se puede seguir de punta a punta. Esta guía recoge lo que más probablemente te pueden preguntar, con respuestas que puedes respaldar con nuestros documentos.</p>
+</header>
+<nav class="nav" aria-label="Secciones">
+  <a href="#proyecto">El proyecto</a><a href="#cliente">Cliente</a><a href="#scrum">SCRUM</a><a href="#idea">UML</a><a href="#cms">Sistemas</a><a href="#tecnico">Decisiones</a><a href="#calidad">Calidad</a><a href="#equipo">Equipo</a><a href="#autocritica">Autocrítica</a><a href="#preguntas">Preguntas</a><a href="#pendiente">Lo que falta</a><a href="#datos">Datos</a>
+</nav>
+
+
+<section id="proyecto">
+  <div class="etiqueta">El proyecto en dos minutos</div>
+  <h2>Qué es, para quién y cómo lo hicimos</h2>
+  <p class="sub">Si te piden que lo cuentes todo en un minuto, usa este bloque.</p>
+  <div class="card destaca"><p style="margin:0;max-width:none">El cliente es el <b>CADUS</b>, el Consejo de Alumnos de la Universidad de Sevilla. Le hemos construido <b>tres sistemas</b>: un <b>portal web</b> en WordPress (CMS) para informar a los estudiantes y atenderlos, un <b>gestor de documentos</b> en SharePoint (DMS) para sus documentos internos y una <b>red social interna</b> en Teams para coordinar a la Ejecutiva y a las 27 delegaciones. En los tres seguimos el mismo método: requisitos en un REM, UML de análisis y de diseño, implementación con capturas y pruebas, todo gestionado con SCRUM en GitHub.</p></div>
+  <div class="tabla" style="margin-top:16px"><table>
+    <thead><tr><th>Sistema</th><th>Para qué sirve</th><th>Herramienta</th><th>Objetivos del REM</th></tr></thead>
+    <tbody>
+      <tr><td>CMS</td><td>Informar al estudiante y atenderlo</td><td>WordPress con plugin propio</td><td>Portal moderno y accesible, noticias por áreas, actas y normativa aprobadas, directorio de delegaciones, buzón y mediación, calendario y votaciones</td></tr>
+      <tr><td>DMS</td><td>Guardar y encontrar los documentos internos</td><td>SharePoint de Microsoft 365 de la US</td><td>Documentación reunida, búsqueda por metadatos, privacidad y conservación (2 años) y constancia de votaciones</td></tr>
+      <tr><td>Red social</td><td>Coordinar la Ejecutiva, las delegaciones y las asambleas</td><td>Microsoft Teams, con Planner, Power Automate y PowerApps</td><td>Espacio propio por grupo, tareas a la vista, avisos y calendario unificados, documentos sin duplicar y lo interno solo para quien corresponde</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="cliente">
+  <div class="etiqueta">Cliente y requisitos</div>
+  <h2>Qué pidió el cliente y cómo lo escribimos</h2>
+  <p class="sub">Los requisitos están en un REM (documento de requisitos) que mantenemos en REMUS. Cada requisito tiene un código y sale de lo que pidió el cliente.</p>
+  <div class="dos">
+    <div class="card"><h3>La entrevista con el CADUS (26/10/2026)</h3><p>Cambió el alcance del portal. Lo más importante:</p><ul>
+      <li>Las votaciones son <b>presenciales</b> y solo votan los delegados: se canceló la papeleta online (HU-21) y el portal solo anuncia la votación.</li>
+      <li>El delegado puede dar de alta a su sucesor: HU-22, el relevo de la cuenta de la delegación.</li>
+      <li>Tickets y mediaciones se conservan <b>2 años</b>: HU-23, borrado o anonimización.</li>
+      <li>Todas las consultas se tratan con total <b>privacidad</b> (RN-03).</li>
+      <li>Calendario con asambleas y cursos; móvil, tablet y ordenador; accesibilidad para personas ciegas o daltónicas.</li></ul></div>
+    <div class="card"><h3>Las reglas de negocio del CMS</h3><ul>
+      <li><b>RN-01:</b> todo contenido pasa por la Ejecutiva antes de publicarse.</li>
+      <li><b>RN-02:</b> solo se aceptan consultas desde un correo <code>@alum.us.es</code>.</li>
+      <li><b>RN-03:</b> tickets, reclamaciones y mediaciones son privados: solo los ven su remitente y la Ejecutiva.</li>
+      <li><b>RN-04:</b> cada ficha de delegación la edita solo su cuenta o la Ejecutiva.</li>
+      <li><b>RN-05:</b> toda votación publicada está vinculada a una asamblea.</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>Requisitos no funcionales que se comprueban</h3><p style="max-width:none;margin:0">Rendimiento (página en menos de 3 s), móvil y tablet, accesibilidad WCAG 2.1 nivel AA, seguridad de los formularios, privacidad según el RGPD, mantenibilidad para el relevo entre cursos y facilidad de uso (crear un ticket, consultar el calendario o ver una noticia en menos de un minuto). Con ellos justificamos las pruebas de la sección de calidad.</p></div>
+</section>
+
+<section id="scrum">
+  <div class="etiqueta">SCRUM</div>
+  <h2>Cómo organizamos el trabajo</h2>
+  <p class="sub">El backlog y los sprints viven en el GitHub Project «CADUS · Scrum»; los artefactos están versionados en el repositorio.</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Sprint</th><th>Fechas</th><th>Puntos</th><th>Qué pasó</th></tr></thead>
+    <tbody>
+      <tr><td>CMS · Sprint 1</td><td>28/09 – 18/10</td><td>70 SP</td><td>Portal base. El 86 % de los puntos se cerró el último día</td></tr>
+      <tr><td>CMS · Sprint 2</td><td>19/10 – 25/10</td><td>29 SP</td><td>Calendario, votaciones, mediación y buzón. El 79 % se cerró en los dos últimos días</td></tr>
+      <tr><td>CMS · Sprint 3</td><td>26/10 – 15/11</td><td>36 SP (44 con HU-24)</td><td>Móvil, accesibilidad, filtros, seguridad, rendimiento, relevo y conservación. Burndown plano hasta el 08/11</td></tr>
+      <tr><td>Red social · Sprint 1</td><td>16/11 – 22/11</td><td>22 SP</td><td>Teams, Planner, caso de negocio, REM y UML</td></tr>
+      <tr><td>Red social · Sprint 2</td><td>23/11 – 29/11</td><td>8 SP</td><td>Power Automate, PowerApps y patrones de Planner (Lab 6)</td></tr>
+    </tbody></table></div>
+  <div class="dos" style="margin-top:16px">
+    <div class="card"><h3>Cómo lo usamos</h3><ul><li><b>Product backlog</b> con historias de usuario, requisitos, prioridad y puntos (escala Fibonacci).</li><li><b>Sprint backlog</b> con subtareas por persona y <b>burndown</b> generado a partir de los puntos.</li><li><b>Definición de hecho:</b> en <code>main</code>, con captura o resultado anotado y probado por otra persona.</li><li>Cada sprint cierra con <b>review y retrospectiva</b>.</li></ul></div>
+    <div class="card"><h3>Qué aprendimos (y repetimos)</h3><ul><li>El trabajo se concentró al final en los tres sprints. Siempre acordamos actualizar el burndown cada día y no lo cumplimos.</li><li>Una rama hecha sobre una copia antigua del plugin habría borrado la portada y los menús: lo evitamos integrando solo su módulo.</li><li>El contenido real y la entrevista con el cliente llegaron tarde.</li><li>En la red social usamos un script que actualiza el burndown con un comando.</li></ul></div>
+  </div>
+</section>
+
+<section id="idea">
+  <div class="etiqueta">UML · el camino de un requisito</div>
+  <h2>El camino que sigue cada requisito</h2>
+  <p class="sub">Esto es lo único que tienes que tener claro para los tres sistemas. Todo lo demás son ejemplos de este camino.</p>
+  <div class="tuberia">
+    <div class="paso"><b>1 · Requisitos</b><span>Qué necesita el cliente. Se escriben en el REM, con REMUS. Cada uno tiene un código.</span></div>
+    <div class="paso cl"><b>2 · UML de análisis</b><span>Qué conceptos hay y cómo se relacionan, en el idioma del problema.</span></div>
+    <div class="paso cl"><b>3 · UML de diseño</b><span>Con qué herramienta se construye cada concepto: plugins, SharePoint o Teams.</span></div>
+    <div class="paso"><b>4 · Implementación</b><span>Se construye y se hacen capturas explicadas.</span></div>
+    <div class="paso"><b>5 · Pruebas</b><span>Se comprueba, requisito a requisito, que se cumple.</span></div>
+  </div>
+  <div class="hilo"><span><b>El hilo que lo une:</b> el código del requisito (<code>RF-09</code>, <code>RN-03</code>, <code>IR-06</code>…) se repite en el REM, en las etiquetas rojas de los UML, en las capturas y en las pruebas. Eso es la trazabilidad.</span></div>
+</section>
+
+<section id="diferencia">
+  <div class="etiqueta">UML · análisis y diseño</div>
+  <h2>Análisis y diseño</h2>
+  <p class="sub">Si te piden la diferencia en una frase: el análisis dice <i>qué hay</i> y el diseño dice <i>con qué se hace</i>.</p>
+  <div class="dos">
+    <div class="card destaca"><div class="pregunta">UML de análisis · ¿Qué hay?</div>
+      <ul><li>Habla el idioma del cliente: noticia, ticket, documento, rol, grupo.</li><li>Son clases con atributos y relaciones con multiplicidad (<code>1</code>, <code>*</code>).</li><li>Prioriza los conceptos del problema. Nuestros diagramas incluyen alguna referencia a tecnologías ya elegidas (por ejemplo, Planner); el diseño es el que concreta cómo se configuran.</li><li>Cada clase lleva en rojo los códigos de requisito que la justifican.</li></ul></div>
+    <div class="card destaca"><div class="pregunta">UML de diseño · ¿Con qué se hace?</div>
+      <ul><li>Los conceptos del análisis pasan a elementos concretos de la herramienta elegida; las necesidades transversales (seguridad, caché…) se resuelven con plugins.</li><li>Se justifica con una comparativa y métricas (plugins, temas).</li><li>Aquí aparecen las limitaciones reales de la herramienta.</li><li>Debe mantener las etiquetas de requisito del análisis. En la red social, RF-R13 está en el análisis y falta reflejarlo en el diseño.</li></ul></div>
+  </div>
+  <div class="tabla" style="margin-top:16px"><table>
+    <thead><tr><th>Sistema</th><th>Análisis (qué hay)</th><th>Diseño (con qué)</th></tr></thead>
+    <tbody>
+      <tr><td>CMS</td><td>Estructura del sitio (7 secciones) y diagrama de clases: Noticia, Evento, Ticket, Delegación…</td><td>Arquitectura de plugins: qué plugin responde a cada requisito</td></tr>
+      <tr><td>DMS</td><td>9 clases: Carpeta, Permiso, Rol, Documento, Búsqueda y los 4 tipos de documento (Acta, Normativa, Expediente y Registro de votación)</td><td>Los conceptos pasan a elementos de SharePoint</td></tr>
+      <tr><td>Red social</td><td>Rol, Grupo, Subgrupo, Permiso, Herramienta, Plan, Tarea</td><td>Los conceptos pasan a elementos de Teams</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="origen">
+  <div class="etiqueta">UML · de dónde salen</div>
+  <h2>No inventamos clases: salen de requisitos y de los laboratorios</h2>
+  <p class="sub">La respuesta corta si te preguntan «¿por qué estas clases?»: porque cada una sale de un requisito de información o se deduce de uno funcional, y en el DMS y la red social los conceptos vienen de los laboratorios.</p>
+  <div class="tres">
+    <div class="card"><h3>CMS</h3><p>Sin conceptos dados. El modelo de información <b>se deriva de los requisitos de información</b> (IR-03 a IR-09).</p><ul><li>Cada clase lleva en rojo los códigos que la justifican (por ejemplo, Evento viene de IR-07 y Solicitud de mediación de IR-08).</li><li>Algunas se apoyan en requisitos funcionales (la respuesta a un ticket, en RF-10). Los colores del diagrama no siempre distinguen el origen: no los uses como explicación.</li></ul></div>
+    <div class="card"><h3>DMS · Lab 4</h3><p>El laboratorio da el marco: documento, carpeta, rol, permiso, búsqueda y metadatos.</p><ul><li>Los cuatro tipos (Acta, Normativa, Expediente y Registro de votación) los elegimos nosotros a partir de los requisitos del CADUS (IR-D02 a IR-D05).</li><li>El laboratorio pide de 3 a 4 documentos de casos de uso; el profesor pidió después dividirlos por sección con dos casos en cada uno.</li></ul></div>
+    <div class="card"><h3>Red social · Lab 5 y Lab 6</h3><p>El Lab 5 da los estereotipos <code>&lt;&lt;Role&gt;&gt;</code>, <code>&lt;&lt;Group&gt;&gt;</code> / <code>&lt;&lt;Subgroups&gt;&gt;</code>, <code>&lt;&lt;Tool&gt;&gt;</code> y <code>&lt;&lt;Permission&gt;&gt;</code>.</p><ul><li>El Lab 6 explica patrones de tableros de Planner. Al aplicarlo, el equipo añadió la clase <b>Plan</b> al UML y el requisito RF-R13 al REM, y eligió el patrón de cada plan.</li></ul></div>
+  </div>
+  <div class="card" style="margin-top:16px"><h3>El método, en seis pasos</h3>
+    <ol style="margin:6px 0 0;padding-left:20px"><li>Elicitar requisitos con el cliente (la entrevista con el CADUS fue el 26/10) y escribirlos en REMUS.</li><li>Sacar de los requisitos de información los conceptos del problema: eso son las clases.</li><li>Relacionarlas con multiplicidades (una delegación tiene muchos miembros, un ticket tiene varias respuestas…).</li><li>Para cada clase, elegir la herramienta que la hace realidad, comparando alternativas con métricas.</li><li>Etiquetar clases y herramientas con los códigos de requisito y comprobar las trazas del REM.</li><li>Rehacer lo que cambie: tras la entrevista, tras una entrega o con el Lab 6.</li></ol></div>
+</section>
+
+<section id="sistemas">
+  <div class="etiqueta">UML · aplicado a cada sistema</div>
+  <h2>CMS, DMS y red social</h2>
+  <p class="sub">Los tres siguen el mismo camino. Cambia la herramienta y, por tanto, el diseño.</p>
+
+  <article class="sist cms" id="cms">
+    <header><h3>CMS · portal WordPress del CADUS</h3><span>REM versión 2.3</span></header>
+    <div class="cuerpo">
+      <div class="cifras"><div class="cifra"><b>9</b>requisitos de información</div><div class="cifra"><b>10</b>de interfaz</div><div class="cifra"><b>15</b>funcionales</div><div class="cifra"><b>9</b>no funcionales</div><div class="cifra"><b>5</b>reglas de negocio</div><div class="cifra"><b>4</b>casos de uso</div><div class="cifra"><b>5</b>actores</div></div>
+      <div class="imgs">
+        <figure><a href="img/uml-analisis-estructura-web.png" target="_blank" rel="noopener"><img src="img/uml-analisis-estructura-web.png" alt="UML de la estructura del sitio web" loading="lazy"></a><figcaption>Análisis: estructura del sitio, 7 secciones de primer nivel colgando de la portada. Imagen anterior al acceso y gestión desde el portal (UI-09 y UI-10), que no aparecen.</figcaption></figure>
+        <figure><a href="img/uml-analisis-clases.png" target="_blank" rel="noopener"><img src="img/uml-analisis-clases.png" alt="UML de clases del CMS" loading="lazy"></a><figcaption>Análisis: clases (Noticia, Evento, Ticket, Delegación…).</figcaption></figure>
+        <figure><a href="img/uml-diseno-plugins.png" target="_blank" rel="noopener"><img src="img/uml-diseno-plugins.png" alt="UML de arquitectura de plugins" loading="lazy"></a><figcaption>Diseño: qué plugin da respuesta a cada requisito. La etiqueta «YOP Poll (opcional, pendiente)» está desactualizada: no se instaló.</figcaption></figure>
+      </div>
+      <div><h3>Del análisis al diseño (ejemplos)</h3><div class="mapa">
+        <div class="a">Ticket y Solicitud de mediación</div><div class="f">→</div><div class="d">Módulo propio del buzón en el plugin <code>cadus-portal</code>, con formularios de Fluent Forms</div>
+        <div class="a">Evento del calendario</div><div class="f">→</div><div class="d">The Events Calendar</div>
+        <div class="a">Necesidad transversal: seguridad, caché, analítica y SEO</div><div class="f">→</div><div class="d">Obligatorios: Wordfence, WP Fastest Cache, WP Statistics y Yoast SEO</div>
+        <div class="a">Necesidad transversal: identidad visual</div><div class="f">→</div><div class="d">Tema Blocksy, elegido entre tres temáticas con métricas de contraste y valoraciones</div></div></div>
+      <div class="dos">
+        <div><h3>Qué cambió respecto a la entrega 1</h3><ul style="margin:0;padding-left:18px"><li>Se añadió la rama «Contacto y legal» a la estructura.</li><li>The Events Calendar se instaló; SupportCandy se descartó a favor del módulo propio del buzón; YOP Poll no se instaló (la papeleta online, HU-21, se canceló tras la entrevista).</li></ul></div>
+        <div><h3>Frase para la defensa</h3><p>«El modelo de información sale de los requisitos IR-03 a IR-09; lo azul tiene requisito propio y lo verde se deduce. En el diseño, cada requisito tiene su plugin o su módulo propio, y lo comparamos con métricas.»</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="sist dms" id="dms">
+    <header><h3>DMS · gestor de documentos en SharePoint</h3><span>REM versión 1.1</span></header>
+    <div class="cuerpo">
+      <div class="cifras"><div class="cifra"><b>6</b>requisitos de información</div><div class="cifra"><b>2</b>de interfaz</div><div class="cifra"><b>10</b>funcionales</div><div class="cifra"><b>5</b>no funcionales</div><div class="cifra"><b>7</b>reglas de negocio</div><div class="cifra"><b>8</b>casos de uso</div><div class="cifra"><b>3</b>actores</div></div>
+      <div class="imgs">
+        <figure><a href="img/uml-dms-analisis.png" target="_blank" rel="noopener"><img src="img/uml-dms-analisis.png" alt="UML de análisis del DMS" loading="lazy"></a><figcaption>Análisis: Carpeta, Permiso, Rol, Documento (con sus cuatro tipos) y Búsqueda.</figcaption></figure>
+        <figure><a href="img/uml-dms-diseno.png" target="_blank" rel="noopener"><img src="img/uml-dms-diseno.png" alt="UML de diseño del DMS en SharePoint" loading="lazy"></a><figcaption>Diseño: sitios, bibliotecas, columnas y vistas de SharePoint.</figcaption></figure>
+      </div>
+      <div><h3>Del análisis al diseño (ejemplos)</h3><div class="mapa">
+        <div class="a">Documento</div><div class="f">→</div><div class="d">Documento de una biblioteca, con columnas de metadatos</div>
+        <div class="a">Carpeta</div><div class="f">→</div><div class="d">Sitio de grupo y biblioteca de documentos</div>
+        <div class="a">Rol (Ejecutiva, Delegado, Estudiante)</div><div class="f">→</div><div class="d">Grupos de permisos: Propietarios (cuenta del CADUS), Visitantes (delegados, con la cuenta de su delegación) e Integrantes (el equipo del proyecto, en las pruebas)</div>
+        <div class="a">Permiso</div><div class="f">→</div><div class="d">Permiso del grupo sobre el sitio; Expedientes conserva permisos propios (RN-D02)</div>
+        <div class="a">Búsqueda · metadatos (atributos)</div><div class="f">→</div><div class="d">Búsqueda de SharePoint por nombre y contenido, más columnas de la biblioteca y vistas planas con filtro (Vigente, Aprobadas, Caducados)</div></div></div>
+      <div class="dos">
+        <div><h3>Por qué 8 casos de uso en 4 documentos</h3><p>El profesor pidió dividirlos por secciones, una por tipo de documento (Acta, Normativa, Expediente y Votación), con dos casos en cada documento.</p></div>
+        <div><h3>Frase para la defensa</h3><p>«Cada concepto del análisis tiene su elemento en SharePoint: la carpeta es un sitio con biblioteca, el rol es un grupo de permisos y el metadato es una columna.»</p></div>
+      </div>
+    </div>
+  </article>
+
+  <article class="sist rsi" id="rsi">
+    <header><h3>Red social interna · Microsoft Teams</h3><span>REM versión 1.1</span></header>
+    <div class="cuerpo">
+      <div class="cifras"><div class="cifra"><b>5</b>requisitos de información</div><div class="cifra"><b>2</b>de interfaz</div><div class="cifra"><b>13</b>funcionales</div><div class="cifra"><b>4</b>no funcionales</div><div class="cifra"><b>5</b>reglas de negocio</div><div class="cifra"><b>5</b>casos de uso</div><div class="cifra"><b>3</b>actores</div></div>
+      <div class="imgs">
+        <figure><a href="img/uml-rsi-analisis.png" target="_blank" rel="noopener"><img src="img/uml-rsi-analisis.png" alt="UML de análisis de la red social" loading="lazy"></a><figcaption>Análisis: Rol, Grupo, Subgrupo, Permiso, Herramienta, Documento del DMS (externo), Tarea y Plan (nueva, por el Lab 6).</figcaption></figure>
+        <figure><a href="img/uml-rsi-diseno.png" target="_blank" rel="noopener"><img src="img/uml-rsi-diseno.png" alt="UML de diseño de la red social en Teams" loading="lazy"></a><figcaption>Diseño en Teams. Desactualizada en un punto: el plan de la asamblea sigue con los cubos antiguos (Por hacer, En curso y Hecho) hasta que se rehaga.</figcaption></figure>
+      </div>
+      <div><h3>Del análisis al diseño (ejemplos)</h3><div class="mapa">
+        <div class="a">Grupo</div><div class="f">→</div><div class="d">Equipo privado: CADUS · Ejecutiva, CADUS · Delegaciones y CADUS · Asamblea</div>
+        <div class="a">Subgrupo</div><div class="f">→</div><div class="d">Canal privado del equipo Delegaciones, uno por centro (27 previstos; el piloto tiene 3 de ejemplo)</div>
+        <div class="a">Rol</div><div class="f">→</div><div class="d">Propietario, miembro o invitado; cuentas de grupo (la del CADUS y una por delegación)</div>
+        <div class="a">Permiso</div><div class="f">→</div><div class="d">Quién publica (avisos solo para propietarios) y quién ve cada canal</div>
+        <div class="a">Herramienta</div><div class="f">→</div><div class="d">Pestañas del canal: Archivos (enlace al DMS), Calendario, Planner, Forms; después Power Automate y PowerApps</div>
+        <div class="a">Plan</div><div class="f">→</div><div class="d">Plan de Planner con un patrón de tablero (Lab 6)</div></div></div>
+      <div class="dos">
+        <div class="card"><h3>Lab 6: cada plan sigue un patrón</h3><p>Se elige respondiendo cinco preguntas: qué gestionar, a qué nivel, con qué criterio de clasificación, si ese criterio está ordenado y si las tarjetas cambian de cubo.</p><ul><li><b>Ejecutiva y Delegaciones:</b> ciclo de vida de tareas (Por hacer, En curso, Hecho), porque importa el avance.</li><li><b>Asamblea:</b> proceso de tareas (un cubo por etapa: Convocatoria, Preparación, Día de la asamblea y Después): las tareas se quedan en su etapa y se completan allí, mientras que en el ciclo de vida pasan de un estado a otro. Decidido el 24/11; falta rehacer el plan en Planner.</li><li><b>Descartado:</b> un cubo por delegación. Son 27 y Planner no tiene permisos por tarea.</li></ul></div>
+        <div class="card"><h3>Por qué Teams y por qué tres equipos</h3><ul><li><b>Teams frente a Discord:</b> no requiere licencias nuevas para el piloto (usa las cuentas de la Universidad), se integra con SharePoint (ya usado en el DMS) y controla miembros y permisos por equipo y canal.</li><li><b>Tres equipos y no uno:</b> cada grupo tiene miembros, permisos y herramientas distintos, y así los canales privados de las delegaciones (27 previstos) quedan en un solo equipo sin mezclarse con la Ejecutiva ni la asamblea.</li><li><b>El DMS no se copia:</b> la red social solo lo enlaza.</li></ul></div>
+      </div>
+      <div><h3>Frase para la defensa</h3><p>«El análisis usa los estereotipos del Lab 5. En el diseño, el grupo es un equipo y el subgrupo un canal privado. Con el Lab 6 añadimos la clase Plan y elegimos un patrón de tablero para cada plan de Planner.»</p></div>
+    </div>
+  </article>
+
+  <div class="tabla"><table>
+    <thead><tr><th>Pregunta</th><th>CMS</th><th>DMS</th><th>Red social</th></tr></thead>
+    <tbody>
+      <tr><td>¿Qué es?</td><td>Portal web público y panel de gestión</td><td>Gestor de documentos internos</td><td>Espacio de coordinación de la Ejecutiva y las delegaciones</td></tr>
+      <tr><td>¿De dónde salen los conceptos?</td><td>Requisitos de información</td><td>Lab 4</td><td>Lab 5 y Lab 6</td></tr>
+      <tr><td>Análisis</td><td>Estructura web y clases</td><td>Clases y casos de uso</td><td>Clases con estereotipos</td></tr>
+      <tr><td>Diseño</td><td>Plugins de WordPress</td><td>SharePoint</td><td>Teams</td></tr>
+      <tr><td>Relación entre ellos</td><td colspan="2">CMS y DMS son independientes: cada uno tiene su REM, UML y seguimiento.</td><td>Enlaza al DMS desde una pestaña de Archivos, sin copiar documentos.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section id="cadena">
+  <div class="etiqueta">Trazabilidad</div>
+  <h2>Cómo se sigue un requisito de punta a punta</h2>
+  <p class="sub">Si te piden «un ejemplo de trazabilidad», usa uno de estos dos.</p>
+  <div class="dos">
+    <div class="cadena-caja"><h3>Red social: tareas a la vista (estado a 25/11)</h3><div class="cadena">
+      <div class="e"><b>Objetivo</b><span><code>OBJ-R02</code> Tareas a la vista y asignadas a quien corresponde. Hecho.</span></div>
+      <div class="e"><b>Requisitos</b><span><code>RF-R09</code> planes de tareas y <code>RF-R13</code> patrón de los tableros, en el REM 1.1. Hecho.</span></div>
+      <div class="e"><b>UML de análisis</b><span>Clases Plan y Tarea con las etiquetas <code>RF-R09</code>, <code>RF-R13</code> e <code>IR-R05</code>. Hecho.</span></div>
+      <div class="e"><b>UML de diseño</b><span>Un plan de Planner por equipo. <b>Pendiente</b> de reflejar los cubos nuevos del plan de la asamblea.</span></div>
+      <div class="e"><b>Implementación</b><span>Patrón decidido (proceso de tareas). <b>Pendiente</b> rehacer el plan en Planner y repetir la captura.</span></div>
+      <div class="e"><b>Prueba</b><span><code>CU-R02</code> es el caso de uso (preparar una asamblea con tareas). Su prueba completa y la del plan nuevo están <b>pendientes</b>.</span></div></div></div>
+    <div class="cadena-caja"><h3>CMS: privacidad de las consultas</h3><div class="cadena">
+      <div class="e"><b>Regla</b><span><code>RN-03</code> Las consultas se tratan con total privacidad.</span></div>
+      <div class="e"><b>UML de análisis</b><span>Las clases Ticket y Solicitud de mediación llevan la etiqueta <code>RN-03</code>.</span></div>
+      <div class="e"><b>UML de diseño</b><span>Buzón y mediación en el módulo propio, con Fluent Forms.</span></div>
+      <div class="e"><b>Implementación</b><span>El aviso a la Ejecutiva lleva código, tipo, fecha y enlace; el aviso al estudiante, código, estado y enlace. La búsqueda del panel no mira nombre, correo ni descripción.</span></div>
+      <div class="e"><b>Prueba</b><span><code>H16-7</code> (búsqueda sin datos del estudiante; ejecutada, no por otra persona) y <code>P5</code> (aviso por correo): <b>parcial</b>, se comprobó el contenido pero no el envío real.</span></div></div></div>
+  </div>
+</section>
+
+
+<section id="tecnico">
+  <div class="etiqueta">Decisiones técnicas</div>
+  <h2>Por qué elegimos cada herramienta</h2>
+  <p class="sub">En todas comparamos alternativas con criterios. La respuesta tipo es: «comparamos al menos tres, con estas métricas, y elegimos por este motivo».</p>
+  <div class="tabla"><table>
+    <thead><tr><th>Decisión</th><th>Elegimos</th><th>Por qué</th></tr></thead>
+    <tbody>
+      <tr><td>Hosting del CMS</td><td>Servidor local WampServer, compartido por Tailscale</td><td>La guía exige servidor local con PHP y MySQL; no cuesta nada, permite instalar cualquier plugin y todos trabajamos sobre la misma instancia. Tailscale evita abrir puertos. Inconveniente asumido: la disponibilidad</td></tr>
+      <tr><td>Comunicación del equipo</td><td>Discord</td><td>Categorías (INFO, SCRUM, DESARROLLO, VOZ), salas de voz abiertas y recibe los commits de GitHub. Teams se reservó para la red social</td></tr>
+      <tr><td>Gestión de SCRUM</td><td>GitHub Projects</td><td>Menor fricción: ya trabajamos en GitHub. Le falta burndown nativo, que generamos desde el backlog</td></tr>
+      <tr><td>Control de versiones</td><td>Git y GitHub</td><td>Lo exige la guía; ramas <code>main</code> y de trabajo y pull requests por historia</td></tr>
+      <tr><td>Tema</td><td>Blocksy, tras comparar 3 temáticas</td><td>Única que usa la paleta, logotipo y tipografía oficiales del CADUS; contrastes por encima de AA; etiqueta «Accessibility ready»</td></tr>
+      <tr><td>Seguridad</td><td>Wordfence</td><td>El más instalado; cortafuegos, escáner y protección del inicio de sesión</td></tr>
+      <tr><td>Caché</td><td>WP Fastest Cache</td><td>Mejor valorado del grupo; se configura con casillas y funciona con Apache</td></tr>
+      <tr><td>Analítica</td><td>WP Statistics</td><td>Guarda los datos en nuestra base, sin cookies de terceros: encaja con el RGPD</td></tr>
+      <tr><td>SEO</td><td>Yoast SEO</td><td>Estándar del mercado</td></tr>
+      <tr><td>Formularios</td><td>Fluent Forms</td><td>Guarda las entradas en la base en su versión gratuita, imprescindible para los tickets</td></tr>
+      <tr><td>Calendario</td><td>The Events Calendar</td><td>Vistas de lista, mes y día ya hechas</td></tr>
+      <tr><td>Tickets</td><td>Módulo propio, no SupportCandy</td><td>SupportCandy guardaba los tickets en sus tablas y obligaba a rehacer la integración, el código de seguimiento y la privacidad (RN-03) que el módulo propio ya cumplía</td></tr>
+      <tr><td>Roles</td><td>Members</td><td>Crea los roles Ejecutiva, Delegado y Estudiante con permisos a medida</td></tr>
+    </tbody></table></div>
+  <p class="sub" style="margin-top:12px">Los cuatro plugins obligatorios de la asignatura son seguridad, caché, analítica y SEO. Además hay un <b>plugin propio</b>, <code>cadus-portal</code>, que reúne el buzón, la mediación, las votaciones, el relevo de cuentas, el panel de gestión y las cargas de contenido.</p>
+</section>
+
+<section id="calidad">
+  <div class="etiqueta">Calidad</div>
+  <h2>Seguridad, accesibilidad, rendimiento y pruebas</h2>
+  <p class="sub">Para cada requisito no funcional hay una medida. Estos son los números que puedes citar.</p>
+  <div class="tres">
+    <div class="card"><h3>Seguridad (RNF-04)</h3><ul><li>Los formularios que guardan datos llevan <b>nonce</b>; las entradas se sanean y la salida se escapa.</li><li>Las consultas a la base usan <code>prepare()</code>.</li><li>El buzón y la mediación tienen <b>campo trampa</b> y un límite de <b>10 envíos por IP cada 15 minutos</b>.</li><li>Una revisión encontró un fallo grave: un delegado podía cambiar el título de su ficha por la API REST. Se corrigió y se probó.</li><li>Wordfence no encontró malware ni vulnerabilidades.</li></ul></div>
+    <div class="card"><h3>Accesibilidad (RNF-03)</h3><ul><li>Objetivo: <b>WCAG 2.1 nivel AA</b> y pautas DUA.</li><li>Enlace «Saltar al contenido», foco visible y formularios con etiquetas; errores enlazados con su campo.</li><li>Lighthouse de accesibilidad: <b>97, 96 y 96</b> (portada, buzón y directorio).</li><li>Teclado completo, simulación de daltonismo y lectura con el Narrador de Windows.</li><li>Falta probar con NVDA.</li></ul></div>
+    <div class="card"><h3>Rendimiento (RNF-01)</h3><ul><li>Con WP Fastest Cache, minificación y Gzip, la portada pasó de <b>91 a 99</b> en Lighthouse y la respuesta del servidor de <b>517 ms a 8 ms</b>.</li><li>El peso de la portada bajó de 537 a 311 KB (unos 40 % menos).</li><li>El buzón <b>no</b> se cachea a propósito, por privacidad (RN-03), y por eso es la página más lenta.</li></ul></div>
+  </div>
+  <div class="dos" style="margin-top:16px">
+    <div class="card"><h3>Privacidad (RNF-08, RN-03)</h3><ul><li>Tickets y mediaciones son privados: no salen por la API REST, la búsqueda, los feeds ni la mediateca.</li><li>Los avisos por correo no llevan el contenido de la consulta: el de la Ejecutiva trae código, tipo, fecha y enlace, y el del estudiante, código, estado y enlace. El envío real no se pudo probar sin servidor de correo.</li><li>La búsqueda del panel solo mira la referencia y el asunto (o el centro), nunca nombre, correo ni descripción.</li><li>Conservación de <b>2 años</b> y anonimización automática (HU-23).</li></ul></div>
+    <div class="card"><h3>Pruebas de aceptación (E3-04)</h3><ul><li>43 casos. A 25/11: <b>23 OK</b>, 7 parciales y 13 sin ejecutar.</li><li>Cada caso dice quién lo hizo, cuándo y cómo. «Parcial» significa que se comprobó lo funcional pero no todo el criterio.</li><li>Móvil real el 22/11 y tablet el 23/11, comprobados según Pablo.</li><li>Las pruebas que ejecutó Claude en nombre de Pablo constan así, no como prueba de otra persona.</li></ul></div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="etiqueta">Equipo y forma de trabajar</div>
+  <h2>Quién hizo qué y cómo nos revisamos</h2>
+  <div class="dos">
+    <div class="card"><h3>Roles</h3><ul><li><b>Pablo:</b> Product Owner. REM, documentos, infraestructura, seguridad y rendimiento.</li><li><b>Joaquín:</b> Scrum Master. Portada, Planner, Power Automate y seguimiento SCRUM.</li><li><b>Álvaro:</b> UML del DMS, directorio y filtros, conservación a los 2 años y PowerApps.</li><li><b>Marcos:</b> accesibilidad, búsqueda del panel, protección de formularios y Teams.</li><li>El equipo fue de cinco hasta el 16/11 y de cuatro después, cuando Miguel Ángel (que era el enlace con el cliente) dejó el trabajo.</li></ul></div>
+    <div class="card"><h3>Cómo nos revisamos</h3><ul><li>Pull requests pequeñas por historia y pruebas cruzadas entre personas.</li><li>Usamos IA y lo decimos claro: <b>Claude</b> para programar y documentar y <b>Codex</b> para revisar. Cada revisión está en <code>docs/scrum/codex_revision_*.md</code>, con sus hallazgos y su corrección.</li><li>Las revisiones encontraron fallos reales antes de entregar (por ejemplo, en la conservación a los 2 años).</li></ul></div>
+  </div>
+</section>
+
+<section id="autocritica">
+  <div class="etiqueta">Autocrítica</div>
+  <h2>Qué fue mal y qué haríamos distinto</h2>
+  <p class="sub">Una buena defensa incluye lo que aprendimos. Todo esto consta en nuestros documentos.</p>
+  <div class="tres">
+    <div class="card"><h3>Repartir mejor el trabajo</h3><p>Cerramos casi todo al final de cada sprint. Haríamos burndown diario y un hito semanal vigilado por alguien.</p></div>
+    <div class="card"><h3>Pruebas cruzadas antes</h3><p>Muchas pruebas las hizo quien implementó. Reservaríamos un día antes de cada entrega para pruebas hechas por otra persona.</p></div>
+    <div class="card"><h3>Cliente desde el principio</h3><p>La entrevista y el contenido real llegaron tarde y se perdió el contacto con el CADUS el 16/11. Pediríamos el contenido al empezar cada sprint.</p></div>
+  </div>
+</section>
+
+<section id="preguntas">
+  <div class="etiqueta">Para estar preparado para todo</div>
+  <h2>Preguntas que pueden hacerte</h2>
+  <p class="sub">Agrupadas por tema, con respuesta corta y con lo que de verdad hicimos. Para practicar, oculta las respuestas y contesta en voz alta.</p>
+  <div class="barra"><button type="button" id="alternar">Ocultar respuestas (modo repaso)</button><span id="estado" class="etiqueta">Respuestas visibles</span></div>
+  <div id="lista">
+  <h3 class="grupo">El proyecto en general</h3>
+  <details open><summary>Cuéntanos el proyecto en un minuto.</summary><div class="r"><p>Construimos tres sistemas para el CADUS: un portal web en WordPress para informar y atender al estudiante, un gestor de documentos internos en SharePoint y una red social interna en Teams para coordinar a la Ejecutiva y a las 27 delegaciones. En los tres escribimos los requisitos en un REM, hicimos UML de análisis y de diseño, implementamos con capturas y probamos, todo con SCRUM en GitHub.</p></div></details>
+  <details open><summary>¿Qué es lo más difícil que os encontrasteis?</summary><div class="r"><p>Combinar tres sistemas con un equipo pequeño, y que la privacidad se mantuviera en todos: los tickets son privados en el portal, los expedientes en el DMS y los canales de cada delegación en Teams. También que el cliente dejara de estar localizable a mitad de camino.</p></div></details>
+  <details open><summary>¿Cómo se relacionan los tres sistemas?</summary><div class="r"><p>El CMS y el DMS son independientes y cada uno tiene su REM, UML, implementación y seguimiento. La red social enlaza a los documentos del DMS desde una pestaña de Archivos, sin copiarlos. Comparten las mismas ideas de privacidad: lo interno solo lo ve quien corresponde.</p></div></details>
+  <h3 class="grupo">Cliente y requisitos</h3>
+  <details open><summary>¿Cómo conseguisteis los requisitos?</summary><div class="r"><p>Con una entrevista al CADUS el 26/10 y con la guía de la asignatura. Los escribimos en REMUS, cada uno con su código, y cuando el cliente cambió algo se actualizó el REM (el del CMS está en la versión 2.3).</p></div></details>
+  <details open><summary>¿Qué cambió tras la entrevista?</summary><div class="r"><p>Las votaciones son presenciales, así que se canceló la papeleta online y el portal solo las anuncia. Se añadió el relevo de la cuenta de la delegación (HU-22) y la conservación a los 2 años (HU-23), y la privacidad se amplió a todas las consultas.</p></div></details>
+  <details open><summary>¿Qué reglas de negocio tiene el portal?</summary><div class="r"><p>RN-01 todo contenido pasa por la Ejecutiva; RN-02 solo correos @alum.us.es; RN-03 privacidad de tickets y mediaciones; RN-04 cada delegación edita solo su ficha; RN-05 toda votación vinculada a una asamblea.</p></div></details>
+  <h3 class="grupo">SCRUM</h3>
+  <details open><summary>¿Cómo aplicasteis SCRUM?</summary><div class="r"><p>Product backlog con historias y puntos en el GitHub Project, sprints con su sprint backlog, burndown, review y retrospectiva. Una historia está hecha cuando está en main, con captura o resultado anotado y probada por otra persona. Los UML son tareas del sprint con su responsable.</p></div></details>
+  <details open><summary>¿Qué problema tuvisteis con los sprints?</summary><div class="r"><p>Cerramos el trabajo al final en los tres sprints (86 % de los puntos el último día en el primero, 79 % en los dos últimos días del segundo). Acordamos actualizar el burndown cada día y no lo cumplimos. En la red social ya usamos un script que lo actualiza con un comando.</p></div></details>
+  <details open><summary>¿Por qué GitHub Projects y no Jira o Trello?</summary><div class="r"><p>Porque ya trabajábamos en GitHub y cada historia se enlaza con sus commits y pull requests. Le falta el burndown nativo, que generamos desde el backlog.</p></div></details>
+  <h3 class="grupo">UML y requisitos</h3>
+  <details open><summary>¿Qué diferencia hay entre el UML de análisis y el de diseño?</summary><div class="r"><p>El de análisis dice qué conceptos existen en el problema y cómo se relacionan, sin hablar de tecnología. El de diseño dice con qué herramienta se construye cada uno: plugins en el CMS, elementos de SharePoint en el DMS y elementos de Teams en la red social.</p></div></details>
+  <details open><summary>¿Qué significan las etiquetas rojas de los UML?</summary><div class="r"><p>Son los códigos de los requisitos del REM que justifican cada clase o herramienta (por ejemplo <code>RF-R09</code> o <code>RN-03</code>). Permiten rastrear qué requisito justifica cada clase o herramienta.</p></div></details>
+  <details open><summary>¿Cómo sabéis que los requisitos están cubiertos?</summary><div class="r"><p>No podemos asegurar que no falte ninguno. Cada REM tiene una tabla de trazas y comprobamos la integridad de las referencias (en la red social todos los identificadores están conectados y no hay referencias rotas), pero la cobertura también depende de la implementación, las pruebas y la validación con el cliente. Hay lagunas documentadas: por ejemplo, UI-09 y UI-10 del CMS no aparecen en las trazas ni en los UML.</p></div></details>
+  <details open><summary>En el CMS, ¿de dónde salen las clases?</summary><div class="r"><p>Del modelo de información, que se deriva de los requisitos de información IR-03 a IR-09 y de algunos funcionales. Por ejemplo, Evento viene de IR-07, Solicitud de mediación de IR-08, la facultad descompone IR-05 y la respuesta a un ticket se apoya en RF-10. Cada clase lleva en rojo sus códigos. Los colores del diagrama no sirven para explicar el origen.</p></div></details>
+  <details open><summary>¿Cómo aplicasteis el Lab 6 sobre patrones de Planner?</summary><div class="r"><p>Respondimos las cinco preguntas del método para cada plan. Los de la Ejecutiva y las delegaciones usan el ciclo de vida de tareas, donde las tarjetas pasan de un estado a otro. El de la asamblea pasa a proceso de tareas, con un cubo por etapa, porque las tareas se quedan en su etapa y se completan allí. Descartamos un cubo por delegación porque son 27 y Planner no tiene permisos por tarea. Añadimos la clase Plan al UML y el requisito RF-R13 al REM. Comprueba si el plan de la asamblea ya está rehecho en Planner antes de la defensa.</p></div></details>
+  <details open><summary>¿Qué es la multiplicidad en un diagrama de clases?</summary><div class="r"><p>Cuántos objetos de una clase se relacionan con los de otra: <code>1</code> es exactamente uno, <code>*</code> cero o más y <code>0..1</code> opcional. Por ejemplo, un grupo se divide en muchos subgrupos, y una herramienta reparte muchas tareas.</p></div></details>
+  <details open><summary>¿Qué diferencia hay entre una asociación y una especialización?</summary><div class="r"><p>Una asociación relaciona dos clases («un grupo se divide en subgrupos»). Una especialización dice que una clase es un tipo de otra: en el DMS, Acta, Normativa, Expediente y Registro de votación son tipos de Documento.</p></div></details>
+  <h3 class="grupo">CMS: decisiones técnicas</h3>
+  <details open><summary>¿Por qué un servidor local y no un hosting?</summary><div class="r"><p>La guía exige un servidor local verificado, no cuesta nada y permite instalar cualquier plugin. Con Tailscale lo compartimos sin abrir puertos. Lo malo es la disponibilidad, que mitigamos avisando por Discord y guardando copias de la base de datos. El servidor de la Universidad que ofreció el CADUS no valía: tenía PHP 7.2/7.3 y WordPress necesita 7.4 o más.</p></div></details>
+  <details open><summary>¿Cómo elegisteis los plugins?</summary><div class="r"><p>Para cada tipo comparamos al menos tres alternativas con la fecha de la última actualización, las instalaciones activas, la valoración y el número de valoraciones, y el encaje con los requisitos. Hay cuatro obligatorios (seguridad, caché, analítica y SEO) y otros funcionales, además de un plugin propio.</p></div></details>
+  <details open><summary>¿Por qué no usasteis SupportCandy para los tickets?</summary><div class="r"><p>Lo seleccionamos al principio, pero guardaba los tickets en sus propias tablas y habría obligado a rehacer la integración con los formularios, el código de seguimiento y la privacidad. El módulo propio ya cumplía RN-03, así que lo ampliamos.</p></div></details>
+  <details open><summary>¿Por qué un plugin propio?</summary><div class="r"><p>Para que la lógica del cliente (buzón, mediación, votaciones, relevo, privacidad) viaje con el repositorio, no dependa de plugins de terceros y sea fácil de mantener en el relevo entre cursos.</p></div></details>
+  <h3 class="grupo">Calidad</h3>
+  <details open><summary>¿Cómo protegéis los formularios?</summary><div class="r"><p>Los formularios que guardan datos llevan nonce, toda entrada se sanea y toda salida se escapa, y las consultas usan prepare(). El buzón y la mediación tienen campo trampa y un límite de 10 envíos por IP cada 15 minutos. Probamos que el texto con etiquetas o con SQL se guarda como texto.</p></div></details>
+  <details open><summary>¿Cómo garantizáis la privacidad de los tickets?</summary><div class="r"><p>Son privados: no salen por la API REST, la búsqueda ni los feeds. Los avisos por correo no llevan el contenido de la consulta: el de la Ejecutiva trae código, tipo, fecha y enlace, y el del estudiante, código, estado y enlace. La búsqueda del panel solo mira la referencia y el asunto. Se conservan 2 años y después se anonimizan.</p></div></details>
+  <details open><summary>¿Qué accesibilidad cumple el portal y cómo lo sabéis?</summary><div class="r"><p>El objetivo es WCAG 2.1 nivel AA. Medimos con Lighthouse (97, 96 y 96), recorrimos todo con teclado, simulamos daltonismo y leímos el buzón con el Narrador. Falta probar con NVDA.</p></div></details>
+  <details open><summary>¿Cómo mejorasteis el rendimiento?</summary><div class="r"><p>Con caché de páginas servida como archivo estático, minificación y compresión. La portada pasó de 91 a 99 en Lighthouse y la respuesta del servidor de 517 ms a 8 ms. El buzón no se cachea por privacidad.</p></div></details>
+  <details open><summary>¿Cómo probasteis el portal?</summary><div class="r"><p>Con un registro de 43 casos de aceptación y pruebas automáticas por historia. Cada caso dice quién lo hizo y cómo, y los que no están completos constan como parciales o sin ejecutar, con el motivo.</p></div></details>
+  <h3 class="grupo">DMS y red social</h3>
+  <details open><summary>¿Por qué SharePoint para el DMS?</summary><div class="r"><p>Es parte de Microsoft 365 de la Universidad de Sevilla, que ya usan el CADUS y las delegaciones, y ofrece sitios, bibliotecas con metadatos, permisos por grupo y búsqueda, justo lo que piden los conceptos del análisis.</p></div></details>
+  <details open><summary>¿Qué reglas tiene el DMS?</summary><div class="r"><p>Un acta solo la ven los delegados cuando la Ejecutiva la aprueba; los expedientes los ve solo la Ejecutiva; se conservan 2 años; el registro de votación no guarda el DNI; cuenta un voto por delegación y solo hay una versión vigente de cada norma.</p></div></details>
+  <details open><summary>¿Por qué Teams para la red social y no Discord u otra?</summary><div class="r"><p>No requiere licencias nuevas para el piloto, usa las cuentas institucionales de la Universidad, se integra con SharePoint, controla miembros y permisos por equipo y canal y ofrece tareas, calendario y automatización. Discord lo usamos para el equipo de desarrollo.</p></div></details>
+  <details open><summary>¿Por qué tres equipos de Teams y no uno?</summary><div class="r"><p>Porque la Ejecutiva, las delegaciones y la asamblea tienen miembros, permisos y herramientas distintos. Con tres equipos, los canales privados de las delegaciones (27 previstos; el piloto tiene tres de ejemplo) quedan juntos en uno solo y no se mezclan con los otros dos.</p></div></details>
+  <details open><summary>¿Qué automatizáis con Power Automate y PowerApps?</summary><div class="r"><p>Power Automate avisa en el canal cuando se asigna una tarea o vence su fecha. PowerApps ofrece una aplicación sencilla con la lista de delegaciones y su estado. Ambas dependen de lo que permita el tenant de la Universidad; si algo no se puede, lo documentamos con el mensaje de error. Comprueba el estado actual antes de la defensa.</p></div></details>
+  <h3 class="grupo">Equipo y autocrítica</h3>
+  <details open><summary>¿Quién hizo qué?</summary><div class="r"><p>Somos cuatro. Pablo es Product Owner y lleva los REM, los documentos y la infraestructura; Joaquín es Scrum Master y lleva Planner, los flujos y el seguimiento; Álvaro hizo los UML del DMS y revisó los de la red social, el directorio y la conservación a los 2 años; Marcos hizo la accesibilidad, la búsqueda del panel, la protección de formularios y Teams.</p></div></details>
+  <details open><summary>¿Habéis usado inteligencia artificial?</summary><div class="r"><p>Sí, y lo decimos con claridad: Claude para programar y documentar y Codex para revisar. Cada revisión de Codex está en el repositorio con sus hallazgos y cómo se corrigieron, y las pruebas que ejecutó Claude en nombre de una persona constan así en el registro.</p></div></details>
+  <details open><summary>¿Qué haríais distinto?</summary><div class="r"><p>Repartir el trabajo durante el sprint y actualizar el burndown cada día, reservar un día de pruebas cruzadas antes de cada entrega y conseguir antes la entrevista y el contenido real del cliente.</p></div></details>
+  <details open><summary>¿Qué no habéis conseguido?</summary><div class="r"><p>Desplegar el portal en la Universidad (el servidor no cumplía los requisitos) y probar el envío real del correo del buzón. Además, no todas las pruebas las ha repetido otra persona. Lo decimos tal cual y consta en el documento final.</p></div></details>
+  </div>
+</section>
+
+<section id="pendiente">
+  <div class="etiqueta">Honestidad</div>
+  <h2>Lo que no está terminado</h2>
+  <p class="sub">Si te preguntan, dilo tal cual y con el motivo. Hay cuatro tipos de pendiente y conviene no mezclarlos.</p>
+  <div class="dos">
+    <div class="aviso"><h3>Sin implementar o descartado</h3><ul style="margin:0;padding-left:18px">
+      <li><b>Despliegue en la Universidad:</b> el servidor ofrecido tenía PHP 7.2/7.3 y WordPress necesita 7.4 o más. El portal funciona en el servidor local y se entrega con su volcado.</li>
+      <li><b>Cuentas reales del CADUS (E2-01):</b> dependen del cliente; se entrega con las cuentas actuales.</li>
+      <li><b>DMS:</b> el resumen automático del acta (RF-D10) es deseable y no se hizo.</li>
+      <li><b>Datos de las delegaciones:</b> faltan el horario (la web no lo publica), 7 teléfonos y 1 correo.</li></ul></div>
+    <div class="aviso"><h3>Hecho en parte</h3><ul style="margin:0;padding-left:18px">
+      <li><b>Red social:</b> el piloto de Teams tiene 3 canales de ejemplo; las 27 delegaciones quedan previstas en el diseño, no puestas en marcha.</li>
+      <li><b>Planner:</b> la decisión del Lab 6 está tomada y el requisito y el UML de análisis actualizados; el plan, el diseño y la captura están en proceso.</li>
+      <li><b>PowerApps:</b> creada, guardada y ejecutada en vista previa; sin publicar ni compartir.</li>
+      <li><b>Power Automate:</b> diseño y guía hechos; comprueba si los flujos están creados y probados.</li></ul></div>
+    <div class="aviso"><h3>Sin resultado de prueba</h3><ul style="margin:0;padding-left:18px">
+      <li><b>CMS:</b> H20-1 (Lighthouse de rendimiento) y H22-1 a H22-5 (relevo de la cuenta) sin resultado; Lighthouse de accesibilidad por repetir con el código actual.</li>
+      <li><b>Correo del buzón:</b> el contenido está comprobado, el envío real no.</li>
+      <li><b>DMS:</b> permisos con una cuenta de delegación real; hoy se probó con un integrante pasado a Visitante.</li></ul></div>
+    <div class="aviso"><h3>Sin revisión independiente</h3><ul style="margin:0;padding-left:18px">
+      <li>No todas las pruebas las ha repetido otra persona: el registro dice quién hizo cada una y cómo.</li>
+      <li>El caso de negocio de la red social está pendiente de revisión por otra persona.</li>
+      <li>El REM 1.1 de la red social falta exportarlo a PDF desde REMUS.</li></ul></div>
+  </div>
+</section>
+
+<section id="datos">
+  <div class="etiqueta">A mano</div>
+  <h2>Datos clave</h2>
+  <div class="tabla"><table>
+    <thead><tr><th>Dato</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Versiones del REM</td><td>CMS 2.3 · DMS 1.1 · Red social 1.1</td></tr>
+      <tr><td>Entrega final</td><td>Domingo 29/11/2026, un zip con CMS, DMS y red social</td></tr>
+      <tr><td>Herramientas del equipo</td><td>REMUS (requisitos), GitHub Projects (SCRUM), Git y GitHub (versiones), Discord (comunicación)</td></tr>
+      <tr><td>Hosting del CMS</td><td>Servidor local con WampServer compartido por Tailscale</td></tr>
+      <tr><td>Delegaciones</td><td>27. El diseño prevé una cuenta y un canal privado por delegación; el piloto de Teams implementa 3 canales de ejemplo</td></tr>
+      <tr><td>Equipo</td><td>Cuatro personas desde el 16/11 (cinco antes): Pablo (Product Owner), Joaquín (Scrum Master), Álvaro y Marcos</td></tr>
+    </tbody></table></div>
+  <p class="pie">Hecha el 25/11/2026 a partir de los documentos del proyecto (REM, UML, documentos de entrega, informes de seguridad y rendimiento, seguimiento SCRUM y registro de pruebas). Los UML son los generados hasta hoy y algunos están desactualizados, como se indica en cada figura: la etiqueta de YOP Poll en el CMS y los cubos del plan de la asamblea en el diseño de la red social. Pulsa cualquier imagen para verla grande.</p>
+</section>
+</div>
+
+<script>
+(function () {
+  var boton = document.getElementById('alternar');
+  var estado = document.getElementById('estado');
+  var visibles = true;
+  boton.addEventListener('click', function () {
+    visibles = !visibles;
+    document.querySelectorAll('#lista details').forEach(function (d) { d.open = visibles; });
+    boton.textContent = visibles ? 'Ocultar respuestas (modo repaso)' : 'Mostrar respuestas';
+    estado.textContent = visibles ? 'Respuestas visibles' : 'Modo repaso: abre cada pregunta para ver la respuesta';
+  });
+})();
+</script>
