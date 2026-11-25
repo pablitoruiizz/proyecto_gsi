@@ -12,7 +12,7 @@ Documentación del artefacto de Planner de la Red Social Interna del CADUS (Lab 
 | Casos de uso | CU-R02 Preparar una asamblea con tareas y CU-R04 Consultar avisos, calendario y tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-planner.md`](../../docs/redsocial/configuracion-planner.md) |
 | Captura | `docs/redsocial/capturas/08-planner.jpg` |
-| Estado | **Diseñado el 21/11/2026. Creación en Teams y captura: pendientes.** Al crear los planes, cambiar esta fila y la columna «Estado» de las tablas de tareas |
+| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vencía el 27/11, después de la asamblea; el 22/11/2026 se cambió su vencimiento en Planner al 25/11 (el diseño inicial decía 27/11). **El 24/11 se decidió rehacer el plan de la Asamblea como proceso de tareas** (RSI-HU-09, razones y diseño nuevo en [`diseno-tableros-planner.md`](../../docs/redsocial/diseno-tableros-planner.md)); hasta que se rehaga en Planner, este documento describe lo que hay |
 
 ## Planes
 
@@ -50,7 +50,7 @@ Son datos de ejemplo: ni nombres de delegados reales ni nada de reclamaciones, m
 | Cubo | Tarea | Responsable | Fecha límite | Estado |
 |---|---|---|---|---|
 | Por hacer | Enviar la convocatoria y el orden del día (ejemplo) | Pablo | 24/11/2026 | No iniciada |
-| Por hacer | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 27/11/2026 | No iniciada |
+| Por hacer | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 25/11/2026 (ajustada en Planner el 22/11; el diseño decía 27/11) | No iniciada |
 | En curso | Reservar la sala (ejemplo) | Marcos | 25/11/2026 | En curso |
 | Hecho | Crear el evento de la asamblea en el calendario (ejemplo) | Joaquín | 21/11/2026 | Completada |
 
@@ -71,5 +71,5 @@ Un plan de Planner pertenece al grupo de Microsoft 365 del equipo y hereda sus r
 
 - **Todos los miembros ven y pueden editar todas las tareas del plan.** Planner no tiene permisos por tarea. Por eso el plan de Delegaciones no contiene nada que una delegación no deba ver de otra, y no se guardan en Planner datos personales (RNF-R01, RN-R02).
 - **Planner en canales privados.** Si el tenant no deja añadir la pestaña a un canal privado, se añade en el canal General del equipo y se anota el mensaje de error (RC-R02).
-- **Avisos automáticos** de tareas asignadas o vencidas (RF-R11) son del Sprint 2, con Power Automate, y dependen de que el tenant lo ofrezca.
+- **Avisos automáticos** de tareas asignadas o vencidas (RF-R11): son del Sprint 2 y los dan dos flujos de Power Automate sobre el plan de la asamblea ([`../power-automate/README.md`](../power-automate/README.md)); dependen de que el tenant lo ofrezca.
 - **Traspaso.** Al terminar el proyecto, los planes pasan a la Ejecutiva con el equipo (RNF-R03).

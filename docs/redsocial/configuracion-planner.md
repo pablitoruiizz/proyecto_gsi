@@ -1,12 +1,12 @@
 # Configuración de Planner en la red social (piloto) · guía para Joaquín (R-06)
 
-Estado a 21/11/2026. Los tres equipos privados existen (ver [`configuracion-teams.md`](configuracion-teams.md)) y los cuatro integrantes son propietarios de los tres. Esta guía crea **un plan de Planner por equipo** (RF-R09). El diseño completo (planes, cubos, tareas, responsables, fechas y permisos) está en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md); aquí solo está cómo hacerlo, qué capturar y cómo probarlo.
+Estado a 21/11/2026 (las pestañas de los tres planes existen a 22/11; solo el plan de la Asamblea tiene captura). Los tres equipos privados existen (ver [`configuracion-teams.md`](configuracion-teams.md)) y los cuatro integrantes son propietarios de los tres. Esta guía crea **un plan de Planner por equipo** (RF-R09). El diseño completo (planes, cubos, tareas, responsables, fechas y permisos) está en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md); aquí solo está cómo hacerlo, qué capturar y cómo probarlo.
 
 Hazlo con tu cuenta (`joaluncan@alum.us.es`), que es propietaria. Los nombres exactos de los menús dependen de la versión de Teams: si algo no se parece a lo que dice esta guía, anota lo que ves en pantalla en lugar de adivinar, porque RC-R02 prevé que el tenant limite cosas y eso es contenido válido de la entrega.
 
 ## Orden de trabajo
 
-Empieza por el equipo de la Asamblea, que es el de la captura obligatoria (`08-planner.jpg`). Con los tres planes hechos son unos 20 o 30 minutos.
+Empieza por el equipo de la Asamblea, que es el de la captura obligatoria (`08-planner.jpg`). (El plan de la Asamblea se rehízo después como proceso de tareas: ver el último apartado.) Con los tres planes hechos son unos 20 o 30 minutos.
 
 | Orden | Equipo | Plan | Captura |
 |---|---|---|---|
@@ -57,6 +57,41 @@ Tras las pruebas, devuelve las tareas a los estados de la tabla del README para 
 2. Sube las capturas a `docs/redsocial/capturas/`.
 3. Avisa a Pablo: el estado de R-06 en `build_doc_rsi.py` dice «Pendiente (Joaquín)» y lo cambia él, que es el único editor de ese archivo.
 4. Todo lo que no se haya podido hacer o probar se dice en el documento; lo no probado por otra persona, también.
+
+## Rehacer el plan de la asamblea como proceso de tareas (RSI-HU-09)
+
+Decidido el 24/11/2026 (razones en [`diseno-tableros-planner.md`](diseno-tableros-planner.md#decisión-sobre-el-plan-de-la-asamblea-rsi-hu-09)): el plan «Preparación de la Asamblea» pasa de «Por hacer, En curso y Hecho» a cuatro cubos por etapa. Se hace **sobre el mismo plan** (no se crea otro), para que los flujos de Power Automate que lo vigilan sigan funcionando. Son unos 20 minutos. En Teams los cubos se llaman **depósitos**.
+
+Si vas a crear también el flujo 1 de [`configuracion-power-automate.md`](configuracion-power-automate.md), hazlo **antes** de crear las dos tareas nuevas de este apartado: así cada una dispara un aviso y tienes la prueba del flujo hecha.
+
+1. Abre el equipo CADUS · Asamblea, canal General, y la pestaña del plan en la vista **Panel**.
+2. **Renombra** los depósitos (pulsa su nombre, o los tres puntos del depósito y *Cambiar nombre*):
+   - **Por hacer** pasa a **1 · Convocatoria**
+   - **En curso** pasa a **2 · Preparación**
+   - **Hecho** pasa a **3 · Día de la asamblea**
+3. Pulsa **Agregar nuevo depósito**, llámalo **4 · Después (acta)** y colócalo el último. Los cuatro deben quedar de izquierda a derecha en orden del 1 al 4 (arrastra los depósitos si hace falta).
+4. **Mueve** las cuatro tareas que ya existen arrastrándolas a su etapa:
+   - Crear el evento de la asamblea en el calendario (ejemplo) a **1 · Convocatoria**
+   - Enviar la convocatoria y el orden del día (ejemplo) a **1 · Convocatoria**
+   - Reservar la sala (ejemplo) a **2 · Preparación**
+   - Preparar la plantilla del acta en el DMS (ejemplo) a **2 · Preparación**
+5. **Crea las dos tareas nuevas**, con responsable, fecha y progreso «No iniciada»:
+   - En **3 · Día de la asamblea**: *Pasar lista y abrir la sesión (ejemplo)*, Pablo, 26/11/2026
+   - En **4 · Después (acta)**: *Subir el acta aprobada al DMS (ejemplo)*, Álvaro, 28/11/2026
+6. **Comprueba** que el Panel enseña cuatro columnas con tareas, que **Gráficos** sigue mostrando el avance por estado y por persona y que **Programación** pone las fechas antes y después del 26/11.
+7. **Captura:** vuelve a hacer `08-planner.jpg` con el Panel completo (las cuatro columnas, y en cada tarea su responsable y su fecha) y sustituye la que hay en `docs/redsocial/capturas/`. Conviene también `08b-planner-graficos.jpg` con Gráficos.
+8. **Actualiza la documentación:** las dos frases del apartado «Estado» de [`diseno-tableros-planner.md`](diseno-tableros-planner.md) y la fila «Estado» y la tabla de la asamblea de [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md), con los cubos y las tareas nuevas.
+9. **Avisa:** a Álvaro, para que refleje los cuatro cubos en el UML de diseño (R-14a), y a Pablo, para el documento. Este texto sirve para el apartado de Planner:
+   > El plan «Preparación de la Asamblea» sigue el patrón Proceso de tareas del Laboratorio 6: sus cuatro cubos son las etapas de la asamblea (1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta)) y cada tarea, con su responsable y su fecha límite, se completa en la etapa a la que pertenece. Los planes de la Ejecutiva y de las delegaciones usan el ciclo de vida de tareas (Por hacer, En curso y Hecho).
+10. **Cierra la historia** en el burndown solo cuando esté en `main` con su captura y la haya probado otra persona: `python scripts/redsocial/scrum_rsi_sprint.py --hecho RSI-HU-09`.
+
+### Prueba de otra persona
+
+| # | Prueba | Resultado esperado | Resultado |
+|---|---|---|---|
+| 1 | Abrir el plan con su cuenta y mirar el Panel | Ve cuatro cubos en orden (1 · Convocatoria a 4 · Después (acta)) y seis tareas con responsable y fecha | |
+| 2 | Pasar una de sus tareas a «En curso» y luego a «Completada» | El progreso cambia en la tarjeta y en Gráficos; la tarea se queda en su cubo | |
+| 3 | Abrir la vista Programación | Las tareas aparecen en sus fechas, las de «1» y «2» antes del 26/11 y la de «4» después | |
 
 ## Reglas para hacerlo
 

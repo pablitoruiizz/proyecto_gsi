@@ -3,7 +3,7 @@
 **Equipo:** 5 integrantes
 **Cliente:** CADUS (Consejo de Alumnos de la Universidad de Sevilla). **Contacto con el cliente:** Miguel Ángel Camacho Martín, que forma parte del CADUS.
 **Periodo:** 26/10/2026 – 15/11/2026 (un único sprint de tres semanas, como acordó el equipo con el profesor)
-**Estado:** En curso. Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
+**Estado:** Cerrado el 15/11/2026 (con pendientes: ver «Resultado del Sprint 3»). Compromiso: 36 SP (HU-14, HU-15, HU-16, HU-17, HU-20, HU-22 y HU-23) más 8 SP de HU-24 añadidos el 12/11 (44 SP; ver «Cambio de alcance»)
 
 ## Objetivo del Sprint
 
@@ -105,7 +105,7 @@ La diferencia entre el que más y el que menos es de 2 SP, la misma que en el Sp
 | HU-20a | Optimizar las imágenes (tamaño, formato y carga diferida). **Hecho (12/11):** fotos de la galería en WebP de 360 y 720 px con `srcset` (de 1 MB a 0,15 MB en ordenador), logotipo de 47 a 17 KB, los 25 escudos de 1,6 a 0,3 MB, y para las imágenes que se suban: máximo 1920 px, tamaños intermedios en WebP y límite de 8 MB (`includes/imagenes.php`). | 2 |
 | E3-03 | Preguntar a la US qué ofrece el servidor SFTP (PHP, MySQL, límites) y cómo se despliega, antes del 30/10. **Respondido por el CADUS (09/11), sin escribir a la US:** acceso por SFTP, HTTPS activo, PHP 7.2/7.3 con MySQL, sin correo saliente ni cron; acceso a la base de datos sin confirmar. | — |
 | E3-07 | Añadir la categoría «Cursos» al calendario (asambleas y cursos). **Hecho (09/11):** `cadus-portal` crea una vez las categorías «Asambleas» y «Cursos» en The Events Calendar (reutiliza «asamblea» o «curso» si ya existen). Al crear un evento, la Ejecutiva marca su categoría; las votaciones solo ofrecen eventos de «Asambleas» (RN-05). | — |
-| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. | — |
+| E3-09 | Desplegar en el servidor de la US cuando E3-03 confirme qué ofrece: migración, correo, tarea programada de HU-23, pruebas en destino y copia de seguridad. **Bloqueada (09/11) y movida al siguiente sprint:** WordPress 7.1 necesita PHP 7.4 o superior y `cadus-portal` y `cadus-eventos` piden PHP 8.0. Hace falta que la US suba PHP a 8.1 o superior (con `mysqli`, `mbstring` y `zip`) y diga cómo se accede a la base de datos. El correo se resolverá con SMTP a través de `dcadus@us.es` y la tarea de HU-23 con WP-Cron, que se lanza con las visitas. La entrega del Sprint 3 se hace en el servidor del equipo. **Decisión del 22/11/2026:** no se sabe si se va a desplegar en la US, así que no se persigue; queda anotado como pendiente «hablar con la US sobre el despliegue web» (qué ofrece, PHP y base de datos) y la tarea no cuenta para cerrar los sprints. | — |
 
 ### Álvaro Martínez Ocaña — Dev Directorio de Delegaciones (8 SP)
 
@@ -201,8 +201,8 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 |---|---|---|---|
 | HU-17b revisión de saneado, nonces y escape; Wordfence (2 SP) | Pablo | 12/11 | `docs/seguridad/HU-17b-revision-formularios.md`; escaneo de Wordfence sin malware ni vulnerabilidades. **Pendiente de Pablo:** cambiar la contraseña de `root` (hallazgo crítico) y confirmar con Miguel Ángel su cuenta (aviso «creada fuera de WordPress») |
 | HU-20b caché y minificación con Lighthouse (3 SP) | Pablo | 12/11 | `docs/rendimiento/HU-20b-informe.md`: Rendimiento 91 → 99 (Inicio), 90 → 99 (Noticias), 79 → 97 (Delegaciones) y 83 → 99 (Actas); peso −40 % con Gzip |
-| HU-14c móvil y tablet (2 SP) | Pablo | 12/11 | `docs/pruebas/HU-14c-movil-tablet.md`, `scripts/pruebas/movil.py` (28 de 28 comprobaciones). **Solo en emulación:** el equipo decidió no probar en dispositivos reales |
-| HU-16a filtros por palabra clave y fecha (3 SP) | Álvaro | 12/11 | PR #72. Comprobada por HTTP el 12/11 por Pablo: en noticias, «becas» deja 2 de 5 y un texto inexistente muestra el aviso de vacío; en actas, «pleno» y los filtros «desde» y «hasta» filtran bien y los valores se escapan. Falta la prueba en navegador de los casos H16-1 a H16-6 |
+| HU-14c móvil y tablet (2 SP) | Pablo | 12/11 | `docs/pruebas/HU-14c-movil-tablet.md`, `scripts/pruebas/movil.py` (28 de 28 comprobaciones). En emulación el 12/11; el 22/11 Pablo probó su móvil real y el 23/11 da por comprobada y buena la tablet |
+| HU-16a filtros por palabra clave y fecha (3 SP) | Álvaro | 12/11 | PR #72. Comprobada por HTTP el 12/11 por Pablo: en noticias, «becas» deja 2 de 5 y un texto inexistente muestra el aviso de vacío; en actas, «pleno» y los filtros «desde» y «hasta» filtran bien y los valores se escapan. La prueba en navegador de H16-1 a H16-6 se hizo con clics el 22/11/2026 (todos OK, `tests/E3-04-pruebas-de-aceptacion.md`); H16-7 (búsqueda en el panel de tickets) se ejecutó también el 22/11 con la cuenta `test-ejecutivo`, por Claude en nombre de Pablo: no es prueba cruzada |
 | HU-23 anonimización de tickets y mediaciones a los 2 años (2 SP) | Álvaro | 12/11 | PR #73; `scripts/pruebas/hu23_prueba_retencion.php` correcta (simulación y ejecución, segunda ejecución idempotente). **Revisión cruzada con Codex el 13/11:** corregidos el título y la dirección (slug) que conservaban el asunto del estudiante, la anonimización de un ticket reabierto entre la selección y el borrado (ahora se revalida bajo el mismo bloqueo del buzón), la limpieza dada por buena aunque fallase un borrado y la edición de tickets ya anonimizados |
 | E3-08 plazo de respuesta publicado (sin puntos) | Marcos | 12/11 | PR #69; REM del CMS 2.3 |
 
@@ -210,7 +210,7 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 **Actualización del 12/11 por la tarde (Miguel Ángel):** HU-15c y HU-20a están hechas (4 SP), con lo que Miguel Ángel termina sus 7 SP. HU-20a atiende además la recomendación del informe de HU-20b: los 25 escudos pasan de 1,6 MB a 0,3 MB y se sirven en WebP a su tamaño.
 
-**Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP.
+**Bloqueada (09/11):** E3-09, el despliegue en el servidor de la US. El servidor ofrece PHP 7.2/7.3 y WordPress 7.1 necesita 7.4 o superior (el plugin propio, 8.0). Pasa al siguiente sprint hasta que la US actualice PHP. El 22/11/2026 se decidió no perseguirlo: queda pendiente hablar con la US sobre el despliegue web, sin saber si se hará.
 
 **Sin prueba cruzada:** las pruebas anteriores las ejecutó quien hizo cada subtarea; falta que otra persona las repita (T-01).
 
@@ -230,9 +230,54 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 - **Puntos:** 36 SP planificados y 8 SP de HU-24 añadidos el 12/11: 44 SP, todos integrados en `main` el 15/11. HU-21 (votar desde el portal) se canceló tras la entrevista del 26/10.
 - **Cómo se llegó:** no se cerró ningún punto hasta el 08/11 (hitos de 18 y 10 SP no alcanzados); 33 SP pendientes el 09/11, 25 el 11/11, 9 el 12/11, 3 el 13/11 y 0 el 15/11. Se repite el cierre de última hora de los sprints anteriores.
 - **Lo que «hecho» no significa todavía:** casi todas las pruebas las ejecutó quien implementó la subtarea; la prueba cruzada (T-01), la prueba en dispositivos reales (cambio de criterio de la DoD, decidido el 12/11) y la prueba con cuentas reales de cada rol siguen pendientes, y E3-04 está a medias.
+- **Pruebas del 22/11/2026 en WampServer:** H16-1 a H16-6, T1 (buzón: ticket creado) y T2 (calendario con eventos) pasan; H14-2 a H14-4 pasan en emulación a 390 y 768 px; H15-1 y H15-3 solo parciales. Siguen sin hacerse: dispositivos reales (H14-5), lector de pantalla, cuentas por rol y la prueba cruzada por otra persona.
+- **Reapertura del 22/11/2026:** el equipo reabrió HU-14 (#23) y HU-15 (#24) en GitHub (estado «In Progress») para terminarlas: faltan los casos manuales (tablet y móvil reales, menús, buzón, calendario y `/gestion/`; teclado, lector de pantalla y formulario real del buzón). El 22/11 Pablo probó HU-14 entera en su móvil real (se ve bien tras vaciar la caché del WordPress local): HU-14 vuelve a «Hecha», con una tablet real y la prueba cruzada pendientes (Pablo programó HU-14c). HU-15 sigue en curso: faltan el lector de pantalla real y el recorrido completo con teclado.
+- **Pruebas del 23/11/2026 (Marcos, con Claude; `tests/pruebas-marcos-23-11.md`):** HU-15 con teclado (H15-1), Lighthouse 97 / 96 / 96 (H15-2) y daltonismo (H15-4) correctos; H15-3 parcial (falta Narrador o NVDA). Pruebas cruzadas: H14-1 (HU-14a, emulación), H17-3 (HU-17b, con el panel visto después) y H23-1, H23-4 y H23-5 (HU-23). Quedan dos arreglos menores: el contraste de `p.cadus-contacto__marca` en el pie y enlazar con `aria-describedby` los errores del formulario con su campo, llevando el foco al primer error.
 - **Sin cerrar:** E3-09 (despliegue en el servidor de la US, bloqueado por PHP 7.2/7.3), E3-06 (documento final del CMS) y E3-02 (volcado de la base de datos y cuentas de los delegados), que dependen de que el CADUS decida quedarse con el portal.
 - **Pendiente de Pablo:** cambiar las contraseñas de `root` y `cadus` (Wordfence, crítica) y confirmar la cuenta de Miguel Ángel.
 
 ## Sprint Review y retrospectiva
 
-*(15/11/2026)*
+> Redactada el 22/11/2026 por Pablo, con Claude, a partir de los datos del sprint (commits, burndown, pruebas y revisiones). No sale de una reunión del equipo: si el equipo hace la retrospectiva en grupo, se añaden aquí sus conclusiones.
+
+### Review (15/11/2026)
+
+- **Entregado:** 44 SP integrados en `main` (36 planificados y 8 de HU-24): móvil y tablet (HU-14), accesibilidad (HU-15), búsqueda y filtros (HU-16), protección de formularios (HU-17), rendimiento (HU-20), relevo de delegados (HU-22), conservación a los 2 años (HU-23) y acceso y gestión desde el portal (HU-24). HU-21 se canceló tras la entrevista.
+- **Calidad:** 96 comprobaciones propias en la gestión del portal, baterías de privacidad del buzón y la mediación en verde, y una revisión cruzada con Codex el 13/11 que encontró fallos reales en HU-23, RN-04 y el relevo, ya corregidos.
+- **Sin cerrar:** E3-09 (despliegue en la US, bloqueado por PHP 7.2/7.3), E3-02 (volcado de la base de datos y cuentas de los delegados, que dependen del CADUS) y E3-06 (documento final del CMS, para la entrega final del domingo 29/11, adelantada el 23/11 desde el 07/12).
+
+### Retrospectiva
+
+| Qué fue bien | Qué no | Qué cambiamos |
+|---|---|---|
+| Las baterías automáticas y la revisión con Codex encontraron fallos antes de entregar | El burndown estuvo plano hasta el 08/11 (los hitos de 18 y 10 SP no se alcanzaron) y el trabajo se cerró entre el 09 y el 15/11 | Actualizar el burndown cada día y fijar hitos intermedios con alguien que los vigile |
+| La decisión X7 y los cambios de alcance (HU-24) se documentaron en el momento | Casi todas las pruebas las hizo quien implementó cada subtarea; la prueba cruzada humana no se hizo | Reservar un día antes de cada entrega para pruebas cruzadas, con registro de fecha, persona y resultado |
+| Los informes (HU-14c, HU-17b, HU-20b) dicen lo que miden y lo que no | Móvil y tablet solo en emulación, sin dispositivos reales | Hecho: móvil real el 22/11 y tablet el 23/11, comprobados según Pablo |
+| El CMS, el DMS y la red social llevan documentación separada | Se perdió el contacto con el CADUS (Miguel Ángel dejó el trabajo el 16/11) y las tareas que dependían del cliente quedaron abiertas | Marcar «por confirmar» lo que dependa del CADUS y no planificar tareas que dependan de un contacto que ya no está |
+
+### Retrospectiva en grupo (reunión de 30 minutos)
+
+> **[COMPLETAR al terminar la reunión: fecha y asistentes. Borrar esta línea.]** Facilita Joaquín, como Scrum Master. La tabla anterior es la propuesta que se llevó escrita a la reunión; aquí se anota lo que el grupo confirmó, cambió o añadió. Los datos salen de `docs/scrum/burndown/sprint-03.csv` y de los Sprints 1 y 2 del CMS.
+
+**Datos que se enseñaron al grupo**
+
+| Indicador | Sprint 1 | Sprint 2 | Sprint 3 |
+|---|---|---|---|
+| Puntos comprometidos | 70 | 29 | 36 (44 con los 8 de HU-24) |
+| Cuándo se cerraron | 60 SP (86 %) el último día | 23 SP (79 %) los dos últimos días | 0 SP en las dos primeras semanas (26/10 a 08/11); 24 SP (55 %) el 12/11 y 33 SP (75 %) del 12 al 15/11 |
+
+El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se acordó actualizar el burndown cada día. La red social ya usa un script que lo hace en un comando (`scripts/redsocial/scrum_rsi_sprint.py`).
+
+**Lo que dijo el grupo**
+
+| Qué fue bien | Qué no | Qué cambiamos |
+|---|---|---|
+| **[COMPLETAR en la reunión]** | **[COMPLETAR en la reunión]** | **[COMPLETAR en la reunión]** |
+
+**Acciones acordadas** (como máximo tres; las dos primeras son propuestas del Scrum Master para confirmar o sustituir en la reunión)
+
+| Acción | Responsable | Cómo se comprueba |
+|---|---|---|
+| Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigila Joaquín | Cada prueba de `tests/` está firmada por alguien distinto de quien la implementó |
+| Burndown actualizado cada día y un hito intermedio que alguien vigile | Joaquín | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
+| **[COMPLETAR en la reunión]** | **[COMPLETAR]** | **[COMPLETAR]** |
