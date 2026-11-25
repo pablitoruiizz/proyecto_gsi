@@ -14,8 +14,8 @@ RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 A = ["Pablo Ruiz Vidal"]
 
 d = {
-    "date": "2026-11-16",
-    "version": [1, 0],
+    "date": "2026-11-25",
+    "version": [1, 1],
     "cName": "Red Social Interna del CADUS",
     "dName": "Red Social Interna del CADUS",
     "organizations": [
@@ -61,6 +61,10 @@ d = {
             {"name": "Rol", "text": "Papel de una persona en el equipo: propietario (administra), miembro (participa) o invitado (acceso limitado)."},
             {"name": "Permiso", "text": "Acción que un rol puede hacer sobre un grupo o un canal: leer, publicar, gestionar canales o administrar miembros."},
             {"name": "Planner", "text": "Herramienta de Microsoft 365 para repartir tareas en planes con cubos, responsables y fechas."},
+            {"name": "Tablero y cubo", "text": "En Planner, el tablero es la vista de un plan; cada columna es un cubo y cada tarjeta, una tarea."},
+            {"name": "Patrón de diseño de tablero", "text": "Solución probada para decidir qué representan las tarjetas y los cubos de un tablero (Laboratorio 6). Se elige respondiendo cinco preguntas: qué gestionar, a qué nivel, con qué criterio de clasificación, si ese criterio está ordenado (precedencia semántica) y si las tarjetas cambian de cubo (flujo de tarjetas)."},
+            {"name": "Ciclo de vida de tareas", "text": "Patrón de tablero en el que los cubos son los estados de una tarea (en la red social, Por hacer, En curso y Hecho) y las tarjetas pasan de un cubo al siguiente."},
+            {"name": "Proceso de tareas", "text": "Patrón de tablero en el que los cubos son las etapas ordenadas de un proceso (en la red social, las de la asamblea) y cada tarea se completa en la etapa a la que pertenece, sin cambiar de cubo."},
             {"name": "Power Automate", "text": "Herramienta de Microsoft 365 para crear flujos automáticos, por ejemplo avisos cuando se asigna una tarea."},
             {"name": "PowerApps", "text": "Herramienta de Microsoft 365 para crear aplicaciones sencillas sobre los datos del equipo."},
         ],
@@ -87,7 +91,7 @@ d = {
         {"id": "IR-R04", "name": "Rol y permiso", "concept": "a cada rol del equipo, con estos datos:", "importance": 2,
          "data": ["Rol (propietario, miembro o invitado)", "Acciones permitidas (leer, publicar, gestionar canales, administrar miembros)", "Grupo o canal sobre el que se aplica"], "authors": A},
         {"id": "IR-R05", "name": "Plan y tarea", "concept": "a cada plan de tareas y a sus tareas, con estos datos:", "importance": 2,
-         "data": ["Plan y grupo al que pertenece", "Cubo", "Tarea", "Responsable", "Fecha límite", "Estado"], "authors": A},
+         "data": ["Plan y grupo al que pertenece", "Cubo (estado o etapa, según el patrón del plan)", "Tarea", "Responsable", "Fecha límite", "Estado"], "authors": A},
     ],
     "ui": [
         {"id": "UI-R01", "name": "Grupos y canales con nombres claros", "description": "ordenar el equipo por grupos y canales con nombres que se entiendan sin explicación (por ejemplo, «Delegaciones · ETSII»), para que una persona sin experiencia en Teams encuentre su canal", "comments": "RNF-R02", "importance": 2, "urgency": 2, "authors": A},
@@ -102,10 +106,11 @@ d = {
         {"id": "RF-R06", "name": "Roles y permisos", "description": "aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del equipo del proyecto son propietarios de los tres equipos", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R07", "name": "Archivos enlazados al DMS", "description": "ofrecer en los canales una pestaña de archivos que apunte a los sitios de SharePoint del DMS, de modo que los documentos oficiales no se copien a Teams", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R08", "name": "Calendario compartido", "description": "mostrar a todo el equipo un calendario con las asambleas y los cursos, que mantiene la Ejecutiva", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
-        {"id": "RF-R09", "name": "Planes de tareas", "description": "ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite", "comments": "Entrega del 22/11", "importance": 2, "urgency": 2, "authors": A},
+        {"id": "RF-R09", "name": "Planes de tareas", "description": "ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite, donde los planes de la Ejecutiva y de las delegaciones siguen el patrón ciclo de vida de tareas (cubos Por hacer, En curso y Hecho) y el plan de la asamblea sigue el patrón proceso de tareas (un cubo por etapa: 1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta))", "comments": "Entrega del 22/11; los patrones son del Laboratorio 6 (versión 1.1 del REM)", "importance": 2, "urgency": 2, "authors": A},
         {"id": "RF-R10", "name": "Formularios", "description": "ofrecer Forms para recoger confirmaciones de asistencia y pequeñas encuestas a las delegaciones", "comments": "Entrega del 22/11", "importance": 2, "urgency": 3, "authors": A},
         {"id": "RF-R11", "name": "Flujos automáticos", "description": "avisar en el canal correspondiente cuando se asigna una tarea o vence su fecha, con flujos de Power Automate", "comments": "Entrega del 29/11 (Lab 8)", "importance": 3, "urgency": 3, "authors": A},
         {"id": "RF-R12", "name": "Aplicación de PowerApps", "description": "ofrecer, si el tenant de la Universidad lo permite, una aplicación sencilla de PowerApps sobre los datos del equipo (por ejemplo, la lista de delegaciones y su estado)", "comments": "Entrega del 29/11 (Lab 8); depende de que el tenant la ofrezca", "importance": 3, "urgency": 3, "authors": A},
+        {"id": "RF-R13", "name": "Patrón de los tableros", "description": "elegir para cada plan de Planner un patrón de diseño de tablero y dejar documentadas las cinco decisiones que lo justifican (qué gestionar, nivel de abstracción, criterio de clasificación, precedencia semántica y flujo de tarjetas)", "comments": "Entrega del 29/11 (Laboratorio 6)", "importance": 2, "urgency": 2, "authors": A},
     ],
     "usecases": [
         {"id": "CU-R01", "name": "Publicar un aviso del CADUS", "trigger": "cuando la Ejecutiva tiene algo que comunicar a todas las delegaciones",
@@ -120,7 +125,7 @@ d = {
          "pre": "El grupo Asamblea existe y las delegaciones son miembros", "post": "La asamblea está en el calendario y sus tareas están asignadas con fecha",
          "steps": [
              {"who": "actor", "text": "crea el evento de la asamblea en el calendario compartido", "actor": "ACT-R01"},
-             {"who": "actor", "text": "crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones", "actor": "ACT-R01"},
+             {"who": "actor", "text": "crea en el plan del grupo Asamblea las tareas de preparación, cada una en el cubo de su etapa, y las asigna a personas o delegaciones", "actor": "ACT-R01"},
              {"who": "system", "text": "muestra el evento a todo el equipo y las tareas a sus responsables"},
              {"who": "actor", "text": "envía a las delegaciones un formulario de confirmación de asistencia", "actor": "ACT-R01"},
              {"who": "actor", "text": "responde al formulario de asistencia", "actor": "ACT-R02"},
@@ -172,7 +177,7 @@ d = {
     ],
     "traces": [
         ["OBJ-R01", ["RF-R01", "RF-R02", "RF-R03", "RF-R04", "RF-R06", "IR-R01", "IR-R02", "UI-R01", "RN-R02", "RN-R04"]],
-        ["OBJ-R02", ["RF-R08", "RF-R09", "RF-R10", "RF-R11", "RF-R12", "IR-R03", "IR-R05", "CU-R02"]],
+        ["OBJ-R02", ["RF-R08", "RF-R09", "RF-R10", "RF-R11", "RF-R12", "RF-R13", "IR-R03", "IR-R05", "CU-R02"]],
         ["OBJ-R03", ["RF-R05", "RF-R08", "UI-R02", "RN-R01", "CU-R01", "CU-R04"]],
         ["OBJ-R04", ["RF-R07", "RN-R03", "CU-R03"]],
         ["OBJ-R05", ["RF-R06", "IR-R04", "RNF-R01", "RN-R02", "RN-R05"]],
@@ -183,6 +188,7 @@ d = {
         ["CU-R05", ["RF-R01", "RF-R03", "RF-R06", "RN-R04", "IR-R01", "IR-R04", "ACT-R03"]],
         ["RF-R01", ["IR-R01", "IR-R02", "RC-R01", "RC-R02"]],
         ["RF-R06", ["IR-R04", "RN-R05"]],
+        ["RF-R13", ["RF-R09", "IR-R05", "RNF-R02"]],
         ["RF-R11", ["RC-R02", "IR-R03"]],
         ["RF-R12", ["RC-R02", "IR-R03"]],
         ["RNF-R03", ["RF-R01", "RF-R06"]],

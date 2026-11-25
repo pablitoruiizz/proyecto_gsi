@@ -2,7 +2,7 @@
 
 > Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/rsi_data.json. No editar a mano: modificar el JSON y regenerar.
 
-Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
+Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.1, 2026-11-25. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
 ## 1. Organizaciones
 
@@ -39,7 +39,7 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 | IR-R02 | Canal | a cada canal de un grupo, con estos datos: | Nombre; Grupo al que pertenece; Tipo (estándar o privado); Quién puede publicar; Herramientas ancladas |
 | IR-R03 | Herramienta | a cada herramienta del equipo, con estos datos: | Nombre (Archivos, Calendario, Planner, Forms, Power Automate o PowerApps); Para qué se usa; Grupo o canal donde está; Quién la gestiona |
 | IR-R04 | Rol y permiso | a cada rol del equipo, con estos datos: | Rol (propietario, miembro o invitado); Acciones permitidas (leer, publicar, gestionar canales, administrar miembros); Grupo o canal sobre el que se aplica |
-| IR-R05 | Plan y tarea | a cada plan de tareas y a sus tareas, con estos datos: | Plan y grupo al que pertenece; Cubo; Tarea; Responsable; Fecha límite; Estado |
+| IR-R05 | Plan y tarea | a cada plan de tareas y a sus tareas, con estos datos: | Plan y grupo al que pertenece; Cubo (estado o etapa, según el patrón del plan); Tarea; Responsable; Fecha límite; Estado |
 
 ## 5. Actores
 
@@ -68,10 +68,11 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 | RF-R06 | Roles y permisos | aplicar tres roles: propietario (Ejecutiva y administrador del equipo), miembro (delegaciones) e invitado (acceso limitado, sin canales con datos personales). En el piloto, los cuatro integrantes del equipo del proyecto son propietarios de los tres equipos | Entrega del 22/11 | Vital |
 | RF-R07 | Archivos enlazados al DMS | ofrecer en los canales una pestaña de archivos que apunte a los sitios de SharePoint del DMS, de modo que los documentos oficiales no se copien a Teams | Entrega del 22/11 | Vital |
 | RF-R08 | Calendario compartido | mostrar a todo el equipo un calendario con las asambleas y los cursos, que mantiene la Ejecutiva | Entrega del 22/11 | Vital |
-| RF-R09 | Planes de tareas | ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite | Entrega del 22/11 | Vital |
+| RF-R09 | Planes de tareas | ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite, donde los planes de la Ejecutiva y de las delegaciones siguen el patrón ciclo de vida de tareas (cubos Por hacer, En curso y Hecho) y el plan de la asamblea sigue el patrón proceso de tareas (un cubo por etapa: 1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta)) | Entrega del 22/11; los patrones son del Laboratorio 6 (versión 1.1 del REM) | Vital |
 | RF-R10 | Formularios | ofrecer Forms para recoger confirmaciones de asistencia y pequeñas encuestas a las delegaciones | Entrega del 22/11 | Vital |
 | RF-R11 | Flujos automáticos | avisar en el canal correspondiente cuando se asigna una tarea o vence su fecha, con flujos de Power Automate | Entrega del 29/11 (Lab 8) | Importante |
 | RF-R12 | Aplicación de PowerApps | ofrecer, si el tenant de la Universidad lo permite, una aplicación sencilla de PowerApps sobre los datos del equipo (por ejemplo, la lista de delegaciones y su estado) | Entrega del 29/11 (Lab 8); depende de que el tenant la ofrezca | Importante |
+| RF-R13 | Patrón de los tableros | elegir para cada plan de Planner un patrón de diseño de tablero y dejar documentadas las cinco decisiones que lo justifican (qué gestionar, nivel de abstracción, criterio de clasificación, precedencia semántica y flujo de tarjetas) | Entrega del 29/11 (Laboratorio 6) | Vital |
 
 ## 8. Casos de uso
 
@@ -93,7 +94,7 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 - **Postcondición:** La asamblea está en el calendario y sus tareas están asignadas con fecha
 - **Pasos:**
   1. Ejecutiva del CADUS crea el evento de la asamblea en el calendario compartido
-  2. Ejecutiva del CADUS crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones
+  2. Ejecutiva del CADUS crea en el plan del grupo Asamblea las tareas de preparación, cada una en el cubo de su etapa, y las asigna a personas o delegaciones
   3. El sistema muestra el evento a todo el equipo y las tareas a sus responsables
   4. Ejecutiva del CADUS envía a las delegaciones un formulario de confirmación de asistencia
   5. Delegación de centro responde al formulario de asistencia
@@ -165,7 +166,7 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 | Origen | Destinos |
 |---|---|
 | OBJ-R01 | RF-R01, RF-R02, RF-R03, RF-R04, RF-R06, IR-R01, IR-R02, UI-R01, RN-R02, RN-R04 |
-| OBJ-R02 | RF-R08, RF-R09, RF-R10, RF-R11, RF-R12, IR-R03, IR-R05, CU-R02 |
+| OBJ-R02 | RF-R08, RF-R09, RF-R10, RF-R11, RF-R12, RF-R13, IR-R03, IR-R05, CU-R02 |
 | OBJ-R03 | RF-R05, RF-R08, UI-R02, RN-R01, CU-R01, CU-R04 |
 | OBJ-R04 | RF-R07, RN-R03, CU-R03 |
 | OBJ-R05 | RF-R06, IR-R04, RNF-R01, RN-R02, RN-R05 |
@@ -176,6 +177,7 @@ Contenido del proyecto [RSI.rem](RSI.rem) (REMUS), versión 1.0, 2026-11-16. Cad
 | CU-R05 | RF-R01, RF-R03, RF-R06, RN-R04, IR-R01, IR-R04, ACT-R03 |
 | RF-R01 | IR-R01, IR-R02, RC-R01, RC-R02 |
 | RF-R06 | IR-R04, RN-R05 |
+| RF-R13 | RF-R09, IR-R05, RNF-R02 |
 | RF-R11 | RC-R02, IR-R03 |
 | RF-R12 | RC-R02, IR-R03 |
 | RNF-R03 | RF-R01, RF-R06 |

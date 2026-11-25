@@ -50,23 +50,7 @@ def historias():
     return filas
 
 
-def main():
-    doc = B.nuevo()
-    doc.add_heading("CMS del CADUS — Adenda de la entrega del 08/11/2026", 0)
-    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · Sprint 3 del CMS (26/10 – 15/11/2026) · cierre a 15/11/2026", cursiva=True)
-    doc.add_heading("1. Qué se adjunta y qué cambia", 1)
-    B.par(doc, "El proyecto del CMS es el mismo, así que se **reutiliza el documento de la entrega 2** (`Entrega2-CMS-CADUS`) para la propuesta de temática, las comparativas (hosting, comunicación, SCRUM, control de versiones y plugins), el análisis, el diseño, los mockups y las capturas. Esta adenda recoge solo lo que cambia desde entonces.")
-    B.tabla(doc, ["Contenido pedido para el CMS", "Qué se adjunta"], [
-        ["Propuesta de temática y comparativas", "Documento de la entrega 2. Solo cambia la comparativa de hosting (el servidor de la US que ofrece el CADUS): sección 8"],
-        ["Product backlog", "Mismo proyecto; actualizado en la sección 3 de esta adenda"],
-        ["Sprint backlog (sprint de estas semanas)", "Sprint 3: sección 4"],
-        ["Burndown chart (solo el sprint actual)", "Sprint 3: sección 5"],
-        ["Requisitos (REM)", "REM del CMS en la versión 2.3 (CADUS.rem y REM-CADUS-v2.3.pdf), con las respuestas de la entrevista, HU-22, HU-23, HU-24 y la decisión X7; cambios en la sección 2"],
-        ["Entrevista con el cliente", "Documento «Entrevista-CADUS» (adjunto)"],
-        ["Análisis, diseño y mockups", "Sin cambios: documento de la entrega 2"],
-        ["Implementación", "Capturas de la entrega 2 y carpeta capturas-sprint3; sección 6 de esta adenda"]], [7, 10], tam=9)
-
-    doc.add_heading("2. Cambios en los requisitos tras la entrevista con el CADUS (26/10/2026)", 1)
+def cambios_requisitos(doc):
     B.par(doc, "La entrevista con el cliente (documento «Entrevista-CADUS», adjunto) cambia el alcance del portal. El REM se actualizó en la tarea E3-05 del Sprint 3 (versión 2.3); estos son los cambios acordados:")
     B.tabla(doc, ["Respuesta del cliente", "Cambio en el CMS", "Requisitos"], [
         ["Las votaciones son presenciales; solo votan los delegados (un voto por delegación, con DNI) y no se publican resultados", "HU-21 (papeleta online) cancelada. El portal solo anuncia la votación (HU-11); el registro de la votación pasa al DMS", "RF-12, RN-05"],
@@ -80,11 +64,9 @@ def main():
         ["Accesibilidad para personas ciegas o daltónicas y pautas DUA", "HU-15 añade daltonismo, lector de pantalla y DUA", "RNF-03"],
         ["Servidor SFTP de la US y poco mantenimiento", "E3-03 respondida el 09/11: SFTP con PHP 7.2/7.3 y MySQL, sin correo saliente ni cron. WordPress 7.1 necesita PHP 7.4 o superior, así que E3-09 (desplegar) queda bloqueada hasta que la US actualice PHP", "RNF-05, RNF-07"]], [5.7, 8.3, 3], tam=8.5, titulo="Cambios tras la entrevista")
 
-    doc.add_heading("3. Product backlog", 1)
-    B.par(doc, "El product backlog sigue siendo el mismo (mismo proyecto). Cambios: HU-20 pasa al Sprint 3, el antiguo Sprint 4 desaparece (un único sprint de tres semanas), HU-21 queda cancelada y se añaden HU-22 y HU-23 y, el 12/11, HU-24 (acceso y gestión desde el portal).")
-    B.tabla(doc, ["ID", "Historia", "Requisitos", "Prioridad", "SP", "Estado", "Sprint"], historias(), [1.4, 6.3, 2.2, 1.5, 0.8, 2.2, 2.0], tam=7.5)
 
-    doc.add_heading("4. Sprint backlog del Sprint 3", 1)
+
+def sprint_backlog(doc):
     B.par(doc, "**Sprint 3 (26/10 – 15/11/2026): 36 SP planificados y 44 SP al añadirse HU-24 (8 SP) el 12/11.** Objetivo: dejar el portal terminado e implementado para el 15/11, como pidió el cliente: móvil y tablet, accesibilidad, formularios protegidos, buscar y filtrar en el panel, rendimiento, relevo de delegados y borrado a los 2 años.")
     B.tabla(doc, ["Subtarea", "Qué incluye", "SP", "Quién"], [
         ["HU-14a", "Menús y portada en móvil y tablet", 3, "Joaquín"],
@@ -121,9 +103,42 @@ def main():
         ["02/11 – 08/11", "HU-15 (8 SP) y entrega del DMS", "10 SP"],
         ["09/11 – 15/11", "HU-16, HU-20, despliegue, pruebas de aceptación y documentación final (10 SP)", "0 SP"]], [3, 10, 4], tam=9, titulo="Puntos de control semanales")
 
-    doc.add_heading("5. Burndown chart del Sprint 3", 1)
+
+
+def burndown(doc):
     B.figura(doc, burndown_cms(), "Burndown del Sprint 3 del CMS: línea ideal, hitos semanales y puntos pendientes reales.", 15)
     B.par(doc, "Al cierre, el 15/11, no queda ningún punto pendiente de los 44 contando como hecha una subtarea cuando está integrada en main. El recorrido real: ningún punto cerrado hasta el 08/11 (los hitos de 18 y 10 SP no se alcanzaron), 33 pendientes el 09/11, 25 el 11/11, 9 el 12/11 (con HU-24, +8 SP), 3 el 13/11 y 0 el 15/11. Es el cierre de última hora de los sprints anteriores. «Hecho» no incluye todavía la prueba cruzada, las pruebas en dispositivos reales ni con cuentas reales de cada rol, que siguen pendientes. La línea ideal es lineal; los hitos semanales son el compromiso del equipo. El burndown se mantiene en `docs/scrum/burndown/sprint-03.csv`.")
+
+
+
+def main():
+    doc = B.nuevo()
+    doc.add_heading("CMS del CADUS — Adenda de la entrega del 08/11/2026", 0)
+    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · Sprint 3 del CMS (26/10 – 15/11/2026) · cierre a 15/11/2026", cursiva=True)
+    doc.add_heading("1. Qué se adjunta y qué cambia", 1)
+    B.par(doc, "El proyecto del CMS es el mismo, así que se **reutiliza el documento de la entrega 2** (`Entrega2-CMS-CADUS`) para la propuesta de temática, las comparativas (hosting, comunicación, SCRUM, control de versiones y plugins), el análisis, el diseño, los mockups y las capturas. Esta adenda recoge solo lo que cambia desde entonces.")
+    B.tabla(doc, ["Contenido pedido para el CMS", "Qué se adjunta"], [
+        ["Propuesta de temática y comparativas", "Documento de la entrega 2. Solo cambia la comparativa de hosting (el servidor de la US que ofrece el CADUS): sección 8"],
+        ["Product backlog", "Mismo proyecto; actualizado en la sección 3 de esta adenda"],
+        ["Sprint backlog (sprint de estas semanas)", "Sprint 3: sección 4"],
+        ["Burndown chart (solo el sprint actual)", "Sprint 3: sección 5"],
+        ["Requisitos (REM)", "REM del CMS en la versión 2.3 (CADUS.rem y REM-CADUS-v2.3.pdf), con las respuestas de la entrevista, HU-22, HU-23, HU-24 y la decisión X7; cambios en la sección 2"],
+        ["Entrevista con el cliente", "Documento «Entrevista-CADUS» (adjunto)"],
+        ["Análisis, diseño y mockups", "Sin cambios: documento de la entrega 2"],
+        ["Implementación", "Capturas de la entrega 2 y carpeta capturas-sprint3; sección 6 de esta adenda"]], [7, 10], tam=9)
+
+    doc.add_heading("2. Cambios en los requisitos tras la entrevista con el CADUS (26/10/2026)", 1)
+    cambios_requisitos(doc)
+
+    doc.add_heading("3. Product backlog", 1)
+    B.par(doc, "El product backlog sigue siendo el mismo (mismo proyecto). Cambios: HU-20 pasa al Sprint 3, el antiguo Sprint 4 desaparece (un único sprint de tres semanas), HU-21 queda cancelada y se añaden HU-22 y HU-23 y, el 12/11, HU-24 (acceso y gestión desde el portal).")
+    B.tabla(doc, ["ID", "Historia", "Requisitos", "Prioridad", "SP", "Estado", "Sprint"], historias(), [1.4, 6.3, 2.2, 1.5, 0.8, 2.2, 2.0], tam=7.5)
+
+    doc.add_heading("4. Sprint backlog del Sprint 3", 1)
+    sprint_backlog(doc)
+
+    doc.add_heading("5. Burndown chart del Sprint 3", 1)
+    burndown(doc)
 
     doc.add_heading("6. Implementación", 1)
     B.par(doc, "Las capturas del portal son las de la entrega 2. Lo hecho en el Sprint 3 es el relevo de la cuenta de la delegación (HU-22), las categorías «Asambleas» y «Cursos» del calendario (E3-07), y en Atención al estudiante la protección del formulario con campo trampa y límite de envíos (HU-17a), la búsqueda de tickets sin exponer datos (HU-16b), los datos mínimos y el aviso a la cuenta del CADUS (E3-08), y la accesibilidad de las siete páginas, con un encabezado h2 que evita el salto de h1 a h3 (HU-15b). Las pruebas del equipo (ver `scripts/pruebas/SPRINT3_BUZON.md`) dan 59, 81, 43, 254 y 316 comprobaciones correctas y ningún fallo, y un feed de entradas privadas que confirmaba que existía un ticket ahora responde 404 (RN-03). Las capturas del Sprint 3 (relevo de la cuenta, categorías del calendario, «Qué es el CADUS» y «Gobierno y estatutos» en ordenador, tablet y móvil, galería en WebP y estado de menú y filtro sin depender del color) se adjuntan en la carpeta `capturas-sprint3` con su tabla explicativa. Después se añadieron la gestión desde el portal (HU-24), las 27 delegaciones con escudo, la revisión de seguridad (HU-17b), el informe de rendimiento (HU-20b), las pruebas de móvil y tablet (HU-14a/b/c) y la accesibilidad de la portada (HU-15a).")

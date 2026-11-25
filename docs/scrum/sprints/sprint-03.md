@@ -199,7 +199,7 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 | Subtarea | Quién | Fecha | Evidencia |
 |---|---|---|---|
-| HU-17b revisión de saneado, nonces y escape; Wordfence (2 SP) | Pablo | 12/11 | `docs/seguridad/HU-17b-revision-formularios.md`; escaneo de Wordfence sin malware ni vulnerabilidades. **Pendiente de Pablo:** cambiar la contraseña de `root` (hallazgo crítico) y confirmar con Miguel Ángel su cuenta (aviso «creada fuera de WordPress») |
+| HU-17b revisión de saneado, nonces y escape; Wordfence (2 SP) | Pablo | 12/11 | `docs/seguridad/HU-17b-revision-formularios.md`; escaneo de Wordfence sin malware ni vulnerabilidades. **Pendiente de Pablo (cambiadas según él el 23/11; ver la actualización del 25/11):** cambiar la contraseña de `root` (hallazgo crítico) y confirmar con Miguel Ángel su cuenta (aviso «creada fuera de WordPress») |
 | HU-20b caché y minificación con Lighthouse (3 SP) | Pablo | 12/11 | `docs/rendimiento/HU-20b-informe.md`: Rendimiento 91 → 99 (Inicio), 90 → 99 (Noticias), 79 → 97 (Delegaciones) y 83 → 99 (Actas); peso −40 % con Gzip |
 | HU-14c móvil y tablet (2 SP) | Pablo | 12/11 | `docs/pruebas/HU-14c-movil-tablet.md`, `scripts/pruebas/movil.py` (28 de 28 comprobaciones). En emulación el 12/11; el 22/11 Pablo probó su móvil real y el 23/11 da por comprobada y buena la tablet |
 | HU-16a filtros por palabra clave y fecha (3 SP) | Álvaro | 12/11 | PR #72. Comprobada por HTTP el 12/11 por Pablo: en noticias, «becas» deja 2 de 5 y un texto inexistente muestra el aviso de vacío; en actas, «pleno» y los filtros «desde» y «hasta» filtran bien y los valores se escapan. La prueba en navegador de H16-1 a H16-6 se hizo con clics el 22/11/2026 (todos OK, `tests/E3-04-pruebas-de-aceptacion.md`); H16-7 (búsqueda en el panel de tickets) se ejecutó también el 22/11 con la cuenta `test-ejecutivo`, por Claude en nombre de Pablo: no es prueba cruzada |
@@ -281,3 +281,17 @@ El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se aco
 | Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigila Joaquín | Cada prueba de `tests/` está firmada por alguien distinto de quien la implementó |
 | Burndown actualizado cada día y un hito intermedio que alguien vigile | Joaquín | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
 | **[COMPLETAR en la reunión]** | **[COMPLETAR]** | **[COMPLETAR]** |
+
+## Actualización del 25/11/2026 (cierre de las tareas abiertas)
+
+Este apartado prevalece sobre los estados anteriores de este documento, que se conservan como historial de lo ocurrido hasta el 15/11.
+
+| Tarea | Estado a 25/11/2026 |
+|---|---|
+| E2-01 cuentas reales del CADUS (#36) | **Descartada y cerrada:** depende del CADUS y el contacto se perdió el 16/11; se entrega con las cuentas actuales |
+| E2-12 fichas reales de delegaciones (#47) | **Cerrada:** 27 fichas con los datos de la web del CADUS y edición restringida comprobada (`tests/E2-12-fichas-y-edicion.md`). Faltan el correo en 1 ficha, el teléfono en 7 y el horario en las 27: la web no los publica |
+| E3-09 despliegue en la US (#67) | **Descartada y cerrada:** queda pendiente hablar con la US sobre el despliegue web |
+| Contraseñas de `root` y `cadus` | Cambiadas el 23/11 según Pablo (sin constancia en el repositorio, por seguridad) |
+| HU-14 móvil y tablet | Hecha: móvil real el 22/11 y tablet el 23/11, comprobados según Pablo |
+| HU-15 accesibilidad | En curso: teclado, Lighthouse de accesibilidad, daltonismo y Narrador hechos (Marcos, 23/11) y arreglo de los errores de los formularios fusionado (PR #96, 25/11); falta repetir Lighthouse con el código actual |
+| E3-01 retrospectiva en grupo (#57), E3-02 volcado y limpieza (#58), E3-06 documento final (#62) | Abiertas, con dueño y límite jueves 26/11 22:00 (`docs/scrum/plan-23-11.md`) |

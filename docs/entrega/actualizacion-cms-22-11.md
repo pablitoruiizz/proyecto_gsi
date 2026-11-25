@@ -12,3 +12,15 @@ Este documento prevalece sobre la adenda del Sprint 3 (`Adenda-CMS-Sprint3`, fec
 | Pendientes de los sprints 1 a 3 | — | Lector de pantalla, cuentas por rol y prueba cruzada; datos reales de delegaciones (E2-01, E2-12); retrospectiva en grupo (E3-01); cuentas de delegado y volcado final (E3-02); documento final del CMS (E3-06). Nota del 23/11: la entrega final pasó del 07/12 al domingo 29/11 |
 
 Las capturas de HU-22 (`capturas-sprint3/m01` a `m03`) tienen tapada la contraseña propuesta que mostraba el formulario.
+
+## Actualización del 25/11/2026
+
+Esta sección prevalece sobre la tabla anterior donde se contradigan; el estado vigente completo está en `Entrega-final-CMS-CADUS` (entrega final del 29/11).
+
+| Elemento | Estado a 25/11 |
+|---|---|
+| E2-01 cuentas reales del CADUS | Descartada: depende del CADUS; se entrega con las cuentas actuales |
+| E2-12 fichas reales | Cerrada: 27 fichas con los datos de la web del CADUS y edición restringida comprobada; faltan el teléfono en 7, el correo en 1 y el horario en las 27 |
+| E3-09 despliegue en la US | Descartada: queda pendiente hablar con la US sobre el despliegue |
+| HU-15 accesibilidad | Teclado, Lighthouse de accesibilidad y daltonismo (Marcos, 23/11), Narrador y arreglo de los errores de los formularios (PR #96, 25/11); falta repetir Lighthouse con el código actual y NVDA |
+| Datos de prueba | Se borran antes del volcado (E3-02); no forman parte de la entrega |

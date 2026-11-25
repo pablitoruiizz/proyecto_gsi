@@ -1,8 +1,8 @@
 {
-  "date": "2026-11-16",
+  "date": "2026-11-25",
   "version": [
     1,
-    0
+    1
   ],
   "cName": "Red Social Interna del CADUS",
   "dName": "Red Social Interna del CADUS",
@@ -98,6 +98,22 @@
       {
         "name": "Planner",
         "text": "Herramienta de Microsoft 365 para repartir tareas en planes con cubos, responsables y fechas."
+      },
+      {
+        "name": "Tablero y cubo",
+        "text": "En Planner, el tablero es la vista de un plan; cada columna es un cubo y cada tarjeta, una tarea."
+      },
+      {
+        "name": "Patrón de diseño de tablero",
+        "text": "Solución probada para decidir qué representan las tarjetas y los cubos de un tablero (Laboratorio 6). Se elige respondiendo cinco preguntas: qué gestionar, a qué nivel, con qué criterio de clasificación, si ese criterio está ordenado (precedencia semántica) y si las tarjetas cambian de cubo (flujo de tarjetas)."
+      },
+      {
+        "name": "Ciclo de vida de tareas",
+        "text": "Patrón de tablero en el que los cubos son los estados de una tarea (en la red social, Por hacer, En curso y Hecho) y las tarjetas pasan de un cubo al siguiente."
+      },
+      {
+        "name": "Proceso de tareas",
+        "text": "Patrón de tablero en el que los cubos son las etapas ordenadas de un proceso (en la red social, las de la asamblea) y cada tarea se completa en la etapa a la que pertenece, sin cambiar de cubo."
       },
       {
         "name": "Power Automate",
@@ -242,7 +258,7 @@
       "importance": 2,
       "data": [
         "Plan y grupo al que pertenece",
-        "Cubo",
+        "Cubo (estado o etapa, según el patrón del plan)",
         "Tarea",
         "Responsable",
         "Fecha límite",
@@ -369,8 +385,8 @@
     {
       "id": "RF-R09",
       "name": "Planes de tareas",
-      "description": "ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite",
-      "comments": "Entrega del 22/11",
+      "description": "ofrecer en cada grupo un plan de Planner con cubos y tareas asignadas a una persona o delegación y con fecha límite, donde los planes de la Ejecutiva y de las delegaciones siguen el patrón ciclo de vida de tareas (cubos Por hacer, En curso y Hecho) y el plan de la asamblea sigue el patrón proceso de tareas (un cubo por etapa: 1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta))",
+      "comments": "Entrega del 22/11; los patrones son del Laboratorio 6 (versión 1.1 del REM)",
       "importance": 2,
       "urgency": 2,
       "authors": [
@@ -406,6 +422,17 @@
       "comments": "Entrega del 29/11 (Lab 8); depende de que el tenant la ofrezca",
       "importance": 3,
       "urgency": 3,
+      "authors": [
+        "Pablo Ruiz Vidal"
+      ]
+    },
+    {
+      "id": "RF-R13",
+      "name": "Patrón de los tableros",
+      "description": "elegir para cada plan de Planner un patrón de diseño de tablero y dejar documentadas las cinco decisiones que lo justifican (qué gestionar, nivel de abstracción, criterio de clasificación, precedencia semántica y flujo de tarjetas)",
+      "comments": "Entrega del 29/11 (Laboratorio 6)",
+      "importance": 2,
+      "urgency": 2,
       "authors": [
         "Pablo Ruiz Vidal"
       ]
@@ -456,7 +483,7 @@
         },
         {
           "who": "actor",
-          "text": "crea en el plan del grupo Asamblea las tareas de preparación y las asigna a personas o delegaciones",
+          "text": "crea en el plan del grupo Asamblea las tareas de preparación, cada una en el cubo de su etapa, y las asigna a personas o delegaciones",
           "actor": "ACT-R01"
         },
         {
@@ -714,6 +741,7 @@
         "RF-R10",
         "RF-R11",
         "RF-R12",
+        "RF-R13",
         "IR-R03",
         "IR-R05",
         "CU-R02"
@@ -819,6 +847,14 @@
       [
         "IR-R04",
         "RN-R05"
+      ]
+    ],
+    [
+      "RF-R13",
+      [
+        "RF-R09",
+        "IR-R05",
+        "RNF-R02"
       ]
     ],
     [

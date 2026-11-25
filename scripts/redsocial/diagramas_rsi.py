@@ -30,6 +30,8 @@ def analisis():
                  ["nombre (Archivos | Calendario | Planner |", "   Forms | Flujo | Aplicación)", "uso y quién la gestiona"], ROJO)
     doc = clase(ax, 1400, 430, 380, "DocumentoDMS", "<<Document>> externo · RF-R07 · RN-R03 · OBJ-R04",
                 ["vive en el DMS (SharePoint)", "la red social solo lo enlaza"])
+    plan = clase(ax, 1400, 740, 380, "Plan", "<<Plan>> · RF-R09 · RF-R13 · IR-R05 · OBJ-R02",
+                 ["equipo · patrón (ciclo de vida | proceso)", "cubos: estados o etapas en orden"], ROJO)
     tarea = clase(ax, 720, 740, 450, "Tarea", "IR-R05 · RF-R09 · CU-R02 · OBJ-R02",
                   ["plan, cubo, responsable", "fechaLimite, estado"])
     rel(ax, rol, "der", grupo, "izq", "es miembro de", "*", "*", dy=-12)
@@ -39,7 +41,8 @@ def analisis():
     rel(ax, grupo, "abj", herr, "arr", "usa", "1", "*", dx=36, dy=0)
     rel(ax, herr, "der", doc, "izq", "enlaza", "*", "*", dy=-12)
     rel(ax, herr, "abj", tarea, "arr", "Planner reparte", "1", "*", dx=44, dy=0)
-    pie = ["Casos de uso sobre este modelo: CU-R01 publicar un aviso (Rol, Permiso, Grupo) · CU-R02 preparar una asamblea (Herramienta, Tarea) · CU-R03 compartir un documento (Herramienta, DocumentoDMS, Subgrupo)",
+    rel(ax, plan, "izq", tarea, "der", "contiene", "1", "*", dy=-12)
+    pie = ["Casos de uso sobre este modelo: CU-R01 publicar un aviso (Rol, Permiso, Grupo) · CU-R02 preparar una asamblea (Plan, Tarea) · CU-R03 compartir un documento (Herramienta, DocumentoDMS, Subgrupo)",
            "CU-R04 consultar avisos, calendario y tareas (Rol, Grupo, Herramienta) · CU-R05 alta o baja de una delegación (Subgrupo, Permiso). Reglas y casos de uso completos: REM (RSI.rem).",
            "Una delegación es un subgrupo (canal privado) del grupo Delegaciones; la Ejecutiva es propietaria de los tres grupos."]
     for k, t in enumerate(pie):

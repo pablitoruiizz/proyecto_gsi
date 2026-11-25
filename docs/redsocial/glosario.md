@@ -11,5 +11,9 @@ Generado desde `scripts/remus/rsi_data.json`; es el mismo glosario que lleva `RS
 | Rol | Papel de una persona en el equipo: propietario (administra), miembro (participa) o invitado (acceso limitado). |
 | Permiso | Acción que un rol puede hacer sobre un grupo o un canal: leer, publicar, gestionar canales o administrar miembros. |
 | Planner | Herramienta de Microsoft 365 para repartir tareas en planes con cubos, responsables y fechas. |
+| Tablero y cubo | En Planner, el tablero es la vista de un plan; cada columna es un cubo y cada tarjeta, una tarea. |
+| Patrón de diseño de tablero | Solución probada para decidir qué representan las tarjetas y los cubos de un tablero (Laboratorio 6). Se elige respondiendo cinco preguntas: qué gestionar, a qué nivel, con qué criterio de clasificación, si ese criterio está ordenado (precedencia semántica) y si las tarjetas cambian de cubo (flujo de tarjetas). |
+| Ciclo de vida de tareas | Patrón de tablero en el que los cubos son los estados de una tarea (en la red social, Por hacer, En curso y Hecho) y las tarjetas pasan de un cubo al siguiente. |
+| Proceso de tareas | Patrón de tablero en el que los cubos son las etapas ordenadas de un proceso (en la red social, las de la asamblea) y cada tarea se completa en la etapa a la que pertenece, sin cambiar de cubo. |
 | Power Automate | Herramienta de Microsoft 365 para crear flujos automáticos, por ejemplo avisos cuando se asigna una tarea. |
 | PowerApps | Herramienta de Microsoft 365 para crear aplicaciones sencillas sobre los datos del equipo. |

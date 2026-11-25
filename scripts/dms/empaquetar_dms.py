@@ -17,6 +17,7 @@ CON_RSI = "--con-rsi" in sys.argv or FINAL
 CON_CMS = "--con-cms" in sys.argv or CON_RSI
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "dms_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])
+RSI_VER = ".".join(str(n) for n in json.load(open(os.path.join(RAIZ, "scripts", "remus", "rsi_data.json"), encoding="utf-8-sig"))["version"])
 FECHA = "29-11" if FINAL else ("22-11" if CON_RSI else "15-11")  # fecha de entrega de la versión definitiva, pendiente de confirmar con el profesor (D-09)
 NOMBRE = f"Entrega-{FECHA}-CADUS-CMS-DMS-RSI" + ("-v2" if FINAL else "") if CON_RSI else f"Entrega-{FECHA}-CADUS-DMS-definitiva" + ("-con-CMS" if CON_CMS else "")
 RAIZ_ZIP = os.path.join(PAQ, NOMBRE)
@@ -37,6 +38,14 @@ CMS = [
     ("docs/entrega/actualizacion-cms-22-11.md", "CMS/ACTUALIZACION-22-11-estado-del-cms.md"),
     ("tests/E3-04-pruebas-de-aceptacion.md", "CMS/seguimiento/E3-04-pruebas-de-aceptacion.md"),
 ]
+if FINAL:
+    CMS += [
+        ("docs/dms/entrega/cms/Entrega-final-CMS-CADUS.docx", "CMS/Entrega-final-CMS-CADUS.docx"),
+        ("docs/dms/entrega/cms/Entrega-final-CMS-CADUS.pdf", "CMS/Entrega-final-CMS-CADUS.pdf"),
+        ("cms-wordpress/backup-db/bd_cadus_v1_sprint3.sql", "CMS/bd_cadus_v1_sprint3.sql"),
+    ]
+    _cap4 = os.path.join(RAIZ, "docs", "entrega", "img", "capturas4")
+    CMS += [(f"docs/entrega/img/capturas4/{_f}", f"CMS/capturas-final/{_f}") for _f in sorted(os.listdir(_cap4))] if os.path.isdir(_cap4) else []
 for _f in sorted(os.listdir(os.path.join(DMS, "..", "entrega", "img", "capturas3"))):
     CMS.append((f"docs/entrega/img/capturas3/{_f}", f"CMS/capturas-sprint3/{_f}"))
 ARCHIVOS = [
@@ -74,7 +83,7 @@ RSI_FILES = [
     ("docs/redsocial/entrega/Entrega-RSI-CADUS.docx", "RSI/Entrega-RSI-CADUS.docx"),
     ("docs/redsocial/entrega/Entrega-RSI-CADUS.pdf", "RSI/Entrega-RSI-CADUS.pdf"),
     ("docs/redsocial/rem-remus/RSI.rem", "RSI/1-Requisitos-REM/RSI.rem"),
-    ("docs/redsocial/rem-remus/REM-RSI-v1.0.pdf", "RSI/1-Requisitos-REM/REM-RSI-v1.0.pdf"),
+    (f"docs/redsocial/rem-remus/REM-RSI-v{RSI_VER}.pdf", f"RSI/1-Requisitos-REM/REM-RSI-v{RSI_VER}.pdf"),
     ("docs/redsocial/rem-remus/carga-remus.md", "RSI/1-Requisitos-REM/carga-remus.md"),
     ("docs/redsocial/glosario.md", "RSI/1-Requisitos-REM/glosario-de-terminos.md"),
     ("docs/redsocial/entrega/Business-Case-RSI.docx", "RSI/2-Caso-de-negocio/Business-Case-RSI.docx"),
@@ -86,6 +95,8 @@ RSI_FILES = [
     ("docs/redsocial/pruebas.md", "RSI/5-Implementacion-Teams/pruebas.md"),
     ("docs/redsocial/powerapps-especificacion.md", "RSI/5-Implementacion-Teams/powerapps-especificacion.md"),
     ("docs/redsocial/diseno-tableros-planner.md", "RSI/5-Implementacion-Teams/diseno-tableros-planner.md"),  # Lab 6
+    ("docs/redsocial/configuracion-power-automate.md", "RSI/5-Implementacion-Teams/configuracion-power-automate.md"),  # Lab 8
+    ("colaboracion-microsoft365/power-automate/README.md", "RSI/5-Implementacion-Teams/power-automate-diseno.md"),  # Lab 8
     ("colaboracion-microsoft365/planner/README.md", "RSI/5-Implementacion-Teams/planner-diseno.md"),
     ("docs/redsocial/plan-lab5.md", "RSI/seguimiento/plan-lab5.md"),
 ]
@@ -127,6 +138,8 @@ LEEME_RSI = """
 - `seguimiento`: plan y seguimiento SCRUM de la red social.
 """
 
+LEEME_RSI = LEEME_RSI.replace("REM-RSI-v1.0.pdf", f"REM-RSI-v{RSI_VER}.pdf")
+
 LEEME_CMS = """
 ## CMS (portal WordPress)
 - `Entrega2-CMS-CADUS.docx` / `.pdf`: documento de la entrega 2, sin cambios.
@@ -135,6 +148,12 @@ LEEME_CMS = """
 - `Adenda-CMS-Sprint3.docx` / `.pdf`: cambios de requisitos tras la entrevista, backlog, sprint backlog y burndown del Sprint 3.
 - `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
 """
+if FINAL:
+    LEEME_CMS += """- `Entrega-final-CMS-CADUS.docx` / `.pdf`: **documento con el estado vigente del CMS a 29/11/2026** (backlog, Sprint 3, burndown, implementación con contenido real, pruebas y pendientes). Prevalece sobre `ACTUALIZACION-22-11-estado-del-cms.md` y sobre la adenda del Sprint 3 donde se contradigan.
+- `capturas-final`: capturas del portal con el contenido real (noticias, actas, normativa y calendario).
+- `bd_cadus_v1_sprint3.sql`: volcado de la base de datos del portal (sin cuentas ni tickets de prueba).
+"""
+
 
 LEEME = f"""# Versión definitiva del DMS — CADUS
 
@@ -158,40 +177,103 @@ Sitios de SharePoint: `uses0.sharepoint.com/sites/cadus-documentacion-publica`, 
 """
 
 
+# Controles de la entrega final: (archivo, texto, debe aparecer). Evitan un zip «final» con contenido antiguo.
+CONTROLES_FINAL = [
+    ("docs/redsocial/glosario.md", "Proceso de tareas", True),  # Lab 6 en el glosario
+    ("docs/redsocial/rem-remus/carga-remus.md", "RF-R13", True),  # Lab 6 en el REM
+    ("docs/redsocial/diseno-tableros-planner.md", "A 24/11/2026 no se ha cambiado nada en Planner", False),  # el plan de la asamblea se rehizo
+    ("docs/redsocial/powerapps-especificacion.md", "R13-03-app-ejecutada-vista-previa", True),  # evidencia de PowerApps
+]
+
+
+# (PDF relativo a RAIZ, textos que debe contener, textos que no debe contener)
+CONTROLES_PDF = [
+    ("docs/redsocial/rem-remus/REM-RSI-v{RSI_VER}.pdf", ["RF-R13", "Proceso de tareas"], []),
+    ("docs/redsocial/entrega/Entrega-RSI-CADUS.pdf", ["RF-R13", "Proceso de tareas", "29/11"], ["entrega final: 07/12/2026"]),
+    ("docs/redsocial/entrega/Business-Case-RSI.pdf", ["Proceso de tareas"], []),
+    ("docs/dms/entrega/cms/Entrega-final-CMS-CADUS.pdf", ["29/11/2026", "Pruebas de aceptación"], []),
+]
+
+
+def contenido_pdf(ruta):
+    """Texto de un PDF (para comprobar su contenido antes de empaquetarlo)."""
+    import pymupdf
+    return "\n".join(pagina.get_text() for pagina in pymupdf.open(ruta))
+
+
 def main():
-    # solo se borra lo de esta variante (el zip del DMS y el zip con CMS conviven en la misma carpeta)
-    if os.path.isdir(RAIZ_ZIP):
-        shutil.rmtree(RAIZ_ZIP)
-    if os.path.exists(RAIZ_ZIP + ".zip"):
-        os.remove(RAIZ_ZIP + ".zip")
+    # se construye en una carpeta temporal y el paquete anterior solo se sustituye si todas las comprobaciones pasan
+    destino = RAIZ_ZIP + ".tmp"
+    if os.path.isdir(destino):
+        shutil.rmtree(destino)
     faltan = []
     for o, d in ARCHIVOS:
         src = os.path.join(RAIZ, o)
         if not os.path.exists(src):
-            if o.startswith("docs/redsocial/"):
+            if o.startswith("docs/redsocial/") and not FINAL:
                 print("AVISO (red social, no se aborta): falta", o)
                 continue
             faltan.append(o)
             continue
-        dst = os.path.join(RAIZ_ZIP, d)
+        dst = os.path.join(destino, d)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         shutil.copy2(src, dst)
     if faltan:
+        shutil.rmtree(destino, ignore_errors=True)
         sys.exit("faltan archivos:\n  - " + "\n  - ".join(faltan))
-    open(os.path.join(RAIZ_ZIP, "LEEME.md"), "w", encoding="utf-8").write(LEEME + (LEEME_CMS if CON_CMS else "") + (LEEME_RSI if CON_RSI else ""))
+    if FINAL:
+        mal_c = 0
+        for archivo, texto, debe in CONTROLES_FINAL:
+            ruta_c = os.path.join(RAIZ, archivo)
+            t = open(ruta_c, encoding="utf-8").read() if os.path.exists(ruta_c) else ""
+            ok_c = (texto in t) == debe
+            mal_c += not ok_c
+            print(f"  [{'ok' if ok_c else 'FALTA'}] {archivo}: {'debe contener' if debe else 'no debe contener'} «{texto}»")
+        for rel, debe_tener, no_debe in CONTROLES_PDF:
+            ruta_p = os.path.join(RAIZ, rel.replace("{RSI_VER}", RSI_VER))
+            t = contenido_pdf(ruta_p) if os.path.exists(ruta_p) else ""
+            for texto in debe_tener:
+                ok_p = texto.replace("{RSI_VER}", RSI_VER) in t
+                mal_c += not ok_p
+                print(f"  [{'ok' if ok_p else 'FALTA'}] {os.path.basename(ruta_p)}: debe contener «{texto}»")
+            for texto in no_debe:
+                ok_p = texto not in t
+                mal_c += not ok_p
+                print(f"  [{'ok' if ok_p else 'FALTA'}] {os.path.basename(ruta_p)}: no debe contener «{texto}»")
+        if mal_c:
+            shutil.rmtree(destino, ignore_errors=True)
+            sys.exit(f"{mal_c} controles de coherencia de la entrega final no se cumplen: no se genera el zip")
+    open(os.path.join(destino, "LEEME.md"), "w", encoding="utf-8").write(LEEME + (LEEME_CMS if CON_CMS else "") + (LEEME_RSI if CON_RSI else ""))
     print("Comprobación frente a la lista del profesor:")
     mal = 0
     for que, carpeta, minimo in LISTA:
-        ruta = os.path.join(RAIZ_ZIP, carpeta)
+        ruta = os.path.join(destino, carpeta)
         n = len(os.listdir(ruta)) if os.path.isdir(ruta) else 0
         ok = n >= minimo
         mal += not ok
         print(f"  [{'ok' if ok else 'FALTA'}] {que}: {n} archivos (mínimo {minimo})")
+    if CON_RSI:
+        ruta_t = os.path.join(destino, "RSI", "5-Implementacion-Teams")
+        n_img = len([f for f in os.listdir(ruta_t) if f.lower().endswith((".jpg", ".jpeg", ".png"))]) if os.path.isdir(ruta_t) else 0
+        print(f"  [{'ok' if n_img >= 6 else 'FALTA'}] RSI · capturas de Teams (solo imágenes): {n_img} (mínimo 6)")
+        mal += n_img < 6
+    if FINAL:
+        ruta_c = os.path.join(destino, "CMS", "capturas-final")
+        n_c = len([f for f in os.listdir(ruta_c) if f.lower().endswith(".jpg")]) if os.path.isdir(ruta_c) else 0
+        print(f"  [{'ok' if n_c >= 6 else 'FALTA'}] CMS · capturas del portal con contenido real: {n_c} (mínimo 6)")
+        mal += n_c < 6
     n_cu = len(D["usecases"])
     print(f"  [{'ok' if n_cu >= 8 else 'FALTA'}] REM {VERSION} con los 8 casos de uso: {n_cu} en dms_data.json")
     mal += n_cu < 8
     if mal:
+        shutil.rmtree(destino, ignore_errors=True)
         sys.exit(f"{mal} apartados de la lista no se cumplen: no se genera el zip")
+    # todo correcto: ahora sí se sustituye el paquete anterior de esta variante
+    if os.path.isdir(RAIZ_ZIP):
+        shutil.rmtree(RAIZ_ZIP)
+    if os.path.exists(RAIZ_ZIP + ".zip"):
+        os.remove(RAIZ_ZIP + ".zip")
+    os.rename(destino, RAIZ_ZIP)
     zip_ruta = os.path.join(PAQ, NOMBRE + ".zip")
     with zipfile.ZipFile(zip_ruta, "w", zipfile.ZIP_DEFLATED) as z:
         for base, _, fs in os.walk(RAIZ_ZIP):

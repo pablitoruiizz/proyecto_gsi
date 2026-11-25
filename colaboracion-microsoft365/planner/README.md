@@ -12,11 +12,7 @@ Documentación del artefacto de Planner de la Red Social Interna del CADUS (Lab 
 | Casos de uso | CU-R02 Preparar una asamblea con tareas y CU-R04 Consultar avisos, calendario y tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-planner.md`](../../docs/redsocial/configuracion-planner.md) |
 | Captura | `docs/redsocial/capturas/08-planner.jpg` |
-<<<<<<< HEAD
 | Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vencía el 27/11, después de la asamblea; el 22/11/2026 se cambió su vencimiento en Planner al 25/11 (el diseño inicial decía 27/11). **El 24/11 se decidió rehacer el plan de la Asamblea como proceso de tareas** (RSI-HU-09, razones y diseño nuevo en [`diseno-tableros-planner.md`](../../docs/redsocial/diseno-tableros-planner.md)); hasta que se rehaga en Planner, este documento describe lo que hay |
-=======
-| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vencía el 27/11, después de la asamblea; el 22/11/2026 se cambió su vencimiento en Planner al 25/11 (el diseño inicial decía 27/11) |
->>>>>>> c553ae7616ea0f9251a77863bd27c7823df4cd88
 
 ## Planes
 

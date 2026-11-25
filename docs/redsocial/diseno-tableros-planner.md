@@ -54,7 +54,6 @@ La delegación a la que va cada tarea se indica en el título («· Delegación 
 | Gráficos | Avance por estado y por persona, para la reunión de la Ejecutiva (CU-R02) |
 | Programación (calendario) | Comprobar que las fechas de las tareas caen antes de la asamblea |
 
-<<<<<<< HEAD
 ## Decisión sobre el plan de la asamblea (RSI-HU-09)
 
 **Decidido el 24/11/2026 por Joaquín, responsable de Planner: el plan «Preparación de la Asamblea» pasa al patrón Proceso de tareas.** Los planes de la Ejecutiva y de las delegaciones se quedan con el ciclo de vida de tareas.
@@ -68,7 +67,7 @@ La delegación a la que va cada tarea se indica en el título («· Delegación 
 
 ### Qué se pierde y cómo se compensa
 
-La columna «Hecho» desaparece como tal: una tarea completada se queda en su etapa. Se sigue viendo en la tarjeta (marca de completada y progreso) y en Gráficos, y CU-R02 (pasos 4 y 5: actualizar el estado y ver el avance) funciona igual, porque el estado es el progreso de la tarea y no el cubo.
+La columna «Hecho» desaparece como tal: una tarea completada se queda en su etapa. Se sigue viendo en la tarjeta (marca de completada y progreso) y en Gráficos, y CU-R02 (pasos 6 y 7: actualizar el estado y ver el avance) funciona igual, porque el estado es el progreso de la tarea y no el cubo.
 
 ### Diseño nuevo del plan «Preparación de la Asamblea»
 
@@ -90,10 +89,3 @@ Las dos tareas nuevas existen para que ninguna etapa quede vacía: un proceso co
 - **A 24/11/2026 no se ha cambiado nada en Planner.** Falta rehacer el plan y repetir la captura `08-planner.jpg` (Joaquín), reflejar los cubos nuevos en el UML de diseño (Álvaro) y actualizar el texto del documento (Pablo).
 - **Al terminar,** cambiar en la tabla «Aplicación a los tres planes» la última columna del plan de la asamblea (ahora dice «el diseño actual usa el ciclo de vida») por «rehecho el DD/11/2026», y anotar lo mismo en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md).
 - **Si no se hace antes de la entrega,** el documento sigue describiendo lo que hay en Planner (ciclo de vida) y esta decisión se cita como trabajo futuro.
-=======
-## Estado y mejora pendiente
-
-- **Hoy:** los tres planes usan el ciclo de vida de tareas (cubos Por hacer, En curso y Hecho). Es coherente con RNF-R02 y está documentado y capturado.
-- **Mejora propuesta (la decide Joaquín, que es el responsable de Planner):** pasar el plan de la asamblea al patrón **Proceso de tareas**, con cubos por etapa: 1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta). Es el único plan que describe un proceso con etapas en orden. Costaría unos 20 minutos de Planner y repetir la captura `08-planner.jpg`; además habría que reflejar los cubos nuevos en el UML de diseño. Si no se hace antes de la entrega, el documento sigue describiendo lo que hay (ciclo de vida) y esta mejora se cita como trabajo futuro.
-- **No se ha cambiado nada en Planner** al redactar este documento.
->>>>>>> c553ae7616ea0f9251a77863bd27c7823df4cd88

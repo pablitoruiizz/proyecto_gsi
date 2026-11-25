@@ -19,9 +19,17 @@ for _sec in ("Acta", "Normativa", "Expediente", "Votacion"):
         TRABAJOS.append((_h, os.path.join(RAIZ, "docs", "dms", "rem-remus", "secciones", f"REM-DMS-{_sec}-v1.1.pdf")))
 
 # REM de la red social (Lab 5): si REMUS exportó RSI__CRS.html en docs/redsocial/rem-remus, también se pasa a PDF
+# La versión sale de rsi_data.json (la misma que usa el empaquetador) y el HTML solo se convierte si es de esa versión y lleva RF-R13:
+# un HTML antiguo (por ejemplo, el de la versión 1.0) daría un PDF con otro nombre y contenido antiguo.
+import json
+_rsi_ver = ".".join(str(n) for n in json.load(open(os.path.join(RAIZ, "scripts", "remus", "rsi_data.json"), encoding="utf-8-sig"))["version"])
 _rsi_html = os.path.join(RAIZ, "docs", "redsocial", "rem-remus", "RSI__CRS.html")
 if os.path.exists(_rsi_html):
-    TRABAJOS.append((_rsi_html, os.path.join(RAIZ, "docs", "redsocial", "rem-remus", "REM-RSI-v1.0.pdf")))
+    _t = open(_rsi_html, encoding="latin-1").read()
+    if re.search(r"Versi.n\s*" + re.escape(_rsi_ver), _t) and "RF-R13" in _t:
+        TRABAJOS.append((_rsi_html, os.path.join(RAIZ, "docs", "redsocial", "rem-remus", f"REM-RSI-v{_rsi_ver}.pdf")))
+    else:
+        print(f"AVISO: RSI__CRS.html no es la versión {_rsi_ver} del REM de la red social (o no lleva RF-R13): abre RSI.rem en REMUS, expórtalo a HTML y vuelve a ejecutar. No se genera REM-RSI-v{_rsi_ver}.pdf.")
 
 # El REM del CMS solo se convierte si el HTML exportado es de la versión actual (2.3): un HTML antiguo daría un PDF engañoso.
 _cms_html = TRABAJOS[0][0]
