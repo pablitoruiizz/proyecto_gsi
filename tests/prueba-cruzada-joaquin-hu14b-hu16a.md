@@ -9,7 +9,7 @@ Plan: [plan del 23/11](../docs/scrum/plan-23-11.md). Las dos historias son de Á
 1. Actualiza `main` (`git pull`) y comprueba en el pie de la portada que tienes la versión nueva.
 2. Entorno: el WordPress de WampServer, en `http://localhost/proyecto_gsi/cms-wordpress/` o, por Tailscale, en `http://100.106.47.100/proyecto_gsi/cms-wordpress/`. Si usas WP Fastest Cache, vacíala antes (Ajustes › WP Fastest Cache › Borrar la caché).
 3. Navegador: Chrome o Edge. **Modo dispositivo:** pulsa `F12`, luego `Ctrl + Mayús + M`, y en la barra de arriba elige **Dimensiones: Responsive** y escribe el ancho: **390** (móvil) o **768** (tablet).
-4. Datos de ejemplo: 27 delegaciones, 4 noticias del 14 al 17/10/2026 y 2 documentos en Actas y normativa. Si en tu sitio son otros, adapta las fechas manteniendo la idea y anótalo.
+4. Datos: 27 delegaciones, 8 noticias reales de www.cadus.us.es (de septiembre de 2022 a febrero de 2023) y 10 documentos reales en Actas y normativa (8 actas de pleno, de octubre de 2025 a junio de 2026, y 2 normativas). Si tu sitio todavía tiene los comunicados de ejemplo de octubre de 2026, actualiza `main`, actívalo de nuevo y vacía la caché; si aun así son otros, adapta las fechas manteniendo la idea y anótalo.
 5. **Comprobar que no hay scroll lateral:** en la consola del navegador (`F12 › Consola`) escribe `scrollTo(500,0); scrollX`. Si da `0`, la página no se desplaza hacia los lados. (No uses `scrollWidth`: con el recorte de la portada da valores mayores aunque no haya scroll.)
 
 ## HU-14b · Directorio y ficha en móvil y tablet
@@ -25,10 +25,10 @@ Se prueban **con clics en el formulario**, no con la dirección escrita a mano, 
 
 | ID | Qué hacer | Resultado esperado | Resultado |
 |---|---|---|---|
-| H16-1 | En `/noticias/` (Noticias y comunicados), escribe `becas` en «Palabra clave» y pulsa Filtrar | Solo sale el comunicado sobre becas (de 4) | |
-| H16-2 | En `/noticias/`, pon **Desde** 15/10/2026 y **Hasta** 16/10/2026 y pulsa Filtrar | Salen las noticias del 15 y del 16, con los dos extremos incluidos | |
-| H16-3 | En `/noticias/`, pon **Desde** 16/10/2026 y **Hasta** 14/10/2026 (al revés) y pulsa Filtrar | Sin error: se ordena el rango y salen las 3 noticias del 14 al 16 | |
-| H16-4 | En `/actas-y-normativa/`, escribe `pleno`, pon **Desde** 01/10/2026 y elige el tipo **Acta**; pulsa Filtrar. Luego pulsa el chip **Normativa** | Sale solo el acta del pleno. Al pulsar «Normativa» se conservan la palabra y la fecha y sale «No hay documentos publicados para este filtro» | |
+| H16-1 | En `/noticias/` (Noticias y comunicados), escribe `humo` en «Palabra clave» y pulsa Filtrar | Solo sale «El Pabellón de Uruguay será espacio libre de humo» (de 8) | |
+| H16-2 | En `/noticias/`, pon **Desde** 31/10/2022 y **Hasta** 05/11/2022 y pulsa Filtrar | Salen las dos noticias de esos días (Congreso de Derecho, 31/10, y Congreso de Química, 05/11), con los dos extremos incluidos | |
+| H16-3 | En `/noticias/`, pon **Desde** 05/11/2022 y **Hasta** 31/10/2022 (al revés) y pulsa Filtrar | Sin error: se ordena el rango y salen las mismas dos noticias | |
+| H16-4 | En `/actas-y-normativa/`, escribe `Ordinario`, pon **Desde** 01/03/2026 y elige el tipo **Acta**; pulsa Filtrar. Luego pulsa el chip **Normativa** | Salen 4 actas: las de los plenos ordinarios del 26/03, 30/04 y 15/05 de 2026 y la del extraordinario del 17/06 (la palabra busca por trozo, y «Extraordinario» contiene «ordinario»). Al pulsar «Normativa» se conservan la palabra y la fecha y sale «No hay documentos publicados para este filtro» | |
 | H16-5 | En `/actas-y-normativa/`, pon **Desde** 01/01/2027 y **Hasta** 31/12/2027 con tipo **Acta** y pulsa Filtrar | Mensaje «No hay documentos publicados para este filtro» | |
 | H16-6 | En `/actas-y-normativa/`, con un filtro puesto y el tipo **Acta** elegido, pulsa **Quitar filtros** | Vuelve el listado completo y se mantiene el tipo (la dirección acaba en `?tipo=acta`) | |
 
