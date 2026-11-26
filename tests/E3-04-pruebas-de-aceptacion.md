@@ -138,7 +138,7 @@ Se prueba con `scripts/pruebas/hu23_prueba_retencion.php` (ver `tests/HU-23-rete
 
 ## Comprobaciones finales
 
-- Usuarios de prueba y datos de ejemplo borrados al terminar.
+- Usuarios de prueba y datos de ejemplo borrados al terminar (26/11/2026, E3-02): cuentas `test-estudiante`, `test-delegado` y `test-ejecutivo`, tickets 479, 480, 542 y 543, borradores automáticos y sus intentos de acceso en los registros de Wordfence; la ficha de la ETSII Informática (32) vuelve a su autor original (`root`). El volcado `bd_cadus_v1_sprint3.sql` se generó después y no contiene ninguno.
 - Avisos de PHP (26/11): `WP_DEBUG` está desactivado y no hay `debug.log`; en el `php_error.log` de WampServer no hay ningún aviso de `cadus-portal`. Solo constan uno de Wordfence («Constant WFWAF_OPERATIONAL already defined», 22/11) y los de scripts de línea de comandos sin `HTTP_HOST` (25/11).
 
 ## Trazabilidad
