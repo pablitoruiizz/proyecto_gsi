@@ -1,6 +1,6 @@
 # PowerApps de la red social (R-13) · aplicación «Estado de las delegaciones»
 
-Prueba de Álvaro del 25/11/2026 para la entrega del 29/11 (RF-R12). Es una aplicación de prueba con datos de ejemplo, en el espacio personal de Álvaro; no está publicada ni compartida.
+Prueba de Álvaro del 25/11/2026 para la entrega del 29/11 (RF-R12). Es una aplicación de prueba con datos de ejemplo, en el espacio personal de Álvaro; no está publicada. Álvaro la compartió con Marcos el 25/11/2026 para la prueba cruzada (Lab 8); la prueba de Marcos se anota en [`pruebas.md`](pruebas.md).
 
 ## Qué se hizo y se comprobó (25/11/2026, cuenta de la US de Álvaro, entorno «Productividad Personal US (default)»)
 
@@ -12,8 +12,8 @@ Conclusión: el tenant permite crear una lista de SharePoint, crear y guardar un
 
 ## Qué NO se ha comprobado
 
-- Publicar la aplicación (no se pulsó «Publicar») ni compartirla con otra cuenta.
-- Ejecutarla desde una cuenta distinta de la de Álvaro, o desde la pestaña de Teams.
+- Publicar la aplicación (no se pulsó «Publicar»).
+- Ejecutarla desde una cuenta distinta de la de Álvaro (está compartida con Marcos desde el 25/11; falta que Marcos la abra y anote el resultado), o desde la pestaña de Teams.
 - Los conectores de Planner y Teams, y cualquier flujo de Power Automate: en la cuenta de Álvaro no hay flujos, propios ni compartidos; el flujo de R-12 (Joaquín) no se ha podido probar desde su cuenta.
 - Las pantallas de la propuesta original (ficha con canal y tareas, alta y baja solo para la Ejecutiva, CU-R05 · RN-R01): la aplicación generada es la plantilla de tres pantallas de PowerApps (lista, detalle y formulario) sin personalizar ni restringir por rol.
 
@@ -28,6 +28,6 @@ Explicar las tres capturas una a una (lista, aplicación guardada, aplicación e
 
 ## Pendiente
 
-1. Prueba cruzada por otra persona (Marcos o Pablo): abrir la aplicación con otra cuenta (hay que compartirla antes).
-2. UML actualizado con PowerApps y Power Automate (R-14, con Joaquín).
+1. Prueba cruzada de Marcos: abrir la aplicación con su cuenta (ya compartida el 25/11) y anotar el resultado, con captura, en `pruebas.md`.
+2. UML de diseño: hecho el 26/11 (R-14a): la caja de herramientas ya recogía PowerApps, y los planes de Planner llevan su patrón y los cubos del plan de la asamblea como Proceso de tareas (`scripts/redsocial/diagramas_rsi.py`, `img/uml-rsi-diseno.png`).
 3. Flujo de Power Automate (R-12): lo prueba Joaquín o lo comparte con Álvaro.
