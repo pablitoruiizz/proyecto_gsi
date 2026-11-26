@@ -63,3 +63,15 @@ Hecha el 25/11/2026 por Marcos, con su cuenta de la US, después de que Álvaro 
 | 3 | La aplicación lee la lista «Delegaciones CADUS» | OK: muestra las tres delegaciones de ejemplo (ETSII · Al día, Derecho · Pendiente de reunión, Biología · Sin contacto), y al elegir una sale su ficha con Título, Centro y Estado | R13-06-app-ejecutada-marcos.jpg · R13-07-detalle-derecho-marcos.jpg |
 
 No se probó crear, editar ni borrar delegaciones, para no cambiar los datos de ejemplo. Tampoco se probó desde la pestaña de Teams.
+
+## Prueba del plan de la asamblea rehecho por otra persona (RSI-HU-09)
+
+Hecha el 26/11/2026 por Marcos, con su cuenta de la US, en Planner web sobre el plan «Preparación de la Asamblea» ya rehecho por Joaquín. Pruebas del apartado «Prueba de otra persona» de [`configuracion-planner.md`](configuracion-planner.md).
+
+| # | Prueba | Resultado | Captura |
+|---|---|---|---|
+| 1 | Abrir el plan con su cuenta y mirar el Panel | OK: cuatro cubos en orden, 1 · Convocatoria (2 tareas), 2 · Preparación (2), 3 · Día de la asamblea (1) y 4 · Después (acta) (1). Las seis tareas tienen responsable y fecha: crear el evento (Joaquín, 21/11), enviar la convocatoria (Pablo, 24/11), plantilla del acta (Álvaro, 25/11), reservar la sala (Marcos, 25/11), pasar lista (Pablo, 26/11) y subir el acta (Álvaro, 28/11) | R09-01a-panel-cubos-1-a-3.jpg · R09-01b-panel-cubo-4.jpg · R09-01c-cuadricula-seis-tareas.jpg |
+| 2 | Pasar una de sus tareas a «En curso» y luego a «Completada» | OK: «Reservar la sala (ejemplo)», de Marcos, ya estaba «En curso»; al pasarla a «Completado» la tarjeta sale tachada y se queda en 2 · Preparación, en «Tareas completadas». En Gráficos, las tareas restantes pasan de 6 a 5 y aparece «Completado». Al terminar se devolvió a «En curso», como estaba | R09-02a-graficos-antes.jpg · R09-02b-tarea-completada.jpg · R09-02c-se-queda-en-su-cubo.jpg · R09-02d-graficos-despues.jpg |
+| 3 | Abrir la vista de programación (en Planner web se llama «Calendario») | OK: cada tarea sale en su fecha; las de 1 y 2 entre el 21 y el 25/11, la de 3 el 26/11 y la de 4 el 28/11, después de la asamblea | R09-03-calendario.jpg |
+
+Detalle menor para Joaquín: la tarea de la etapa 3 se llama «Pasar lista y abrir la sesion(ejemplo)», sin tilde ni espacio antes del paréntesis; la guía la escribe «Pasar lista y abrir la sesión (ejemplo)».
