@@ -468,6 +468,8 @@ function cadus_votaciones_migrar(): void
             cadus_votaciones_menu($pagina);
         }
     }
+    // En una instalación que ya existía nadie regenera los enlaces permanentes: sin esto, «Ver votación» da 404 (issue #35).
+    flush_rewrite_rules(false);
     update_option('cadus_votaciones_version', CADUS_VOTACIONES_VERSION);
 }
 
