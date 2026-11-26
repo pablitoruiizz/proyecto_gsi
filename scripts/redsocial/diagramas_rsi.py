@@ -50,6 +50,14 @@ def analisis():
     guardar(fig, "uml-rsi-analisis.png")
 
 
+def plan_caja(ax, x, w, titulo, linea1, linea2, y=842, h=80):
+    """Caja de un plan de Planner con dos líneas de detalle (patrón y cubos)."""
+    caja(ax, x, y, w, h, "", fc="#eef2fb", ec=AZUL)
+    ax.text(x + w / 2, y + 20, titulo, ha="center", va="center", fontsize=9.5, fontweight="bold", zorder=3)
+    ax.text(x + w / 2, y + 43, linea1, ha="center", va="center", fontsize=8, color="#333", fontstyle="italic", zorder=3)
+    ax.text(x + w / 2, y + 62, linea2, ha="center", va="center", fontsize=8, color="#333", fontstyle="italic", zorder=3)
+
+
 def diseno():
     fig, ax = lienzo(1700, 1420)
     ax.text(850, 24, "UML de diseño de la Red Social Interna en Microsoft Teams — del análisis al diseño", ha="center", fontsize=13, fontweight="bold", color=AZUL)
@@ -71,16 +79,16 @@ def diseno():
             ("<<Tool>> Calendario", "asambleas y cursos · RF-R08", 340),
             ("<<Tool>> Planner", "tareas por equipo · RF-R09", 640),
             ("<<Tool>> Forms", "asistencia y encuestas · RF-R10", 940),
-            ("<<Tool>> PowerApps y flujos", "RF-R12 probada · RF-R11 sin probar", 1240)]
+            ("<<Tool>> PowerApps y flujos", "RF-R12 en vista previa · RF-R11 ejecutado", 1240)]
     for t, s, x in herr:
         caja(ax, x, 720, 280 if x < 1240 else 420, 66, t, s, fc="#eef7ee", ec=VERDE, subcolor="#333")
-    ax.text(40, 800, "PowerApps (R-13): lista «Delegaciones CADUS» y app «Estado de las delegaciones», ejecutada en vista previa el 25/11. Power Automate (R-12): sin probar.", fontsize=9, color="#333")
+    ax.text(40, 800, "PowerApps (R-13): lista «Delegaciones CADUS» y app «Estado de las delegaciones», ejecutada en vista previa el 25/11. Power Automate (R-12): dos flujos que avisan en Asamblea (capturas 12a a 12d).", fontsize=9, color="#333")
     ax.text(40, 832, "Planes de Planner (IR-R05 · RF-R09 · CU-R02) — pestaña Planner de cada equipo", fontsize=11.5, fontweight="bold", color=AZUL)
-    caja(ax, 40, 845, 520, 64, "<<Plan>> «Coordinación de la Ejecutiva»", "equipo Ejecutiva · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    caja(ax, 590, 845, 540, 64, "<<Plan>> «Seguimiento de las delegaciones»", "equipo Delegaciones · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    caja(ax, 1160, 845, 500, 64, "<<Plan>> «Preparación de la asamblea»", "equipo Asamblea · cubos: Por hacer · En curso · Hecho", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    caja(ax, 40, 925, 1620, 64, "<<Task>> Tarea del plan (IR-R05)", "título · cubo · responsable (persona) · fecha límite · estado · la Ejecutiva reparte, la delegación actualiza · datos de ejemplo", fc="#eef2fb", ec=AZUL, subcolor="#333")
-    ax.text(40, 1012, "Diseño de Joaquín (R-06): un plan por equipo. Todos los miembros ven y editan todas las tareas del plan: Planner no tiene permisos por tarea.", fontsize=9.5, color="#333")
+    plan_caja(ax, 40, 440, "<<Plan>> «Coordinación de la Ejecutiva»", "equipo Ejecutiva · patrón Ciclo de vida de tareas", "cubos: Por hacer · En curso · Hecho")
+    plan_caja(ax, 500, 460, "<<Plan>> «Seguimiento de las delegaciones»", "equipo Delegaciones · patrón Ciclo de vida de tareas", "cubos: Por hacer · En curso · Hecho")
+    plan_caja(ax, 980, 680, "<<Plan>> «Preparación de la asamblea»", "equipo Asamblea · patrón Proceso de tareas (RSI-HU-09)", "cubos: 1 Convocatoria · 2 Preparación · 3 Día de la asamblea · 4 Después (acta)")
+    caja(ax, 40, 934, 1620, 58, "<<Task>> Tarea del plan (IR-R05)", "título · cubo · responsable (persona) · fecha límite · estado · la Ejecutiva reparte, la delegación actualiza · datos de ejemplo", fc="#eef2fb", ec=AZUL, subcolor="#333")
+    ax.text(40, 1012, "Diseño de Joaquín (R-06 y RSI-HU-09, Lab 6): un plan por equipo. La Asamblea sigue Proceso de tareas (etapas en orden); los otros dos, Ciclo de vida. Planner no tiene permisos por tarea.", fontsize=9.5, color="#333")
     ax.text(40, 1050, "Del análisis al diseño", fontsize=11.5, fontweight="bold", color=AZUL)
     filas = [("<<Group>> Grupo", "→", "<<Team>> equipo privado de Teams (tres: Ejecutiva, Delegaciones y Asamblea)"),
              ("<<Subgroups>> Subgrupo", "→", "canal privado del equipo Delegaciones, uno por centro (27; el piloto crea tres)"),
