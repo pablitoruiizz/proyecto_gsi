@@ -24,3 +24,12 @@ Esta sección prevalece sobre la tabla anterior donde se contradigan; el estado 
 | E3-09 despliegue en la US | Descartada: queda pendiente hablar con la US sobre el despliegue |
 | HU-15 accesibilidad | Teclado, Lighthouse de accesibilidad y daltonismo (Marcos, 23/11), Narrador y arreglo de los errores de los formularios (PR #96, 25/11); falta repetir Lighthouse con el código actual y NVDA |
 | Datos de prueba | Se borran antes del volcado (E3-02); no forman parte de la entrega |
+
+## Actualización del 26/11/2026
+
+| Elemento | Estado a 26/11 |
+|---|---|
+| HU-15 accesibilidad | Lighthouse de accesibilidad repetido con el código actual: 100 / 100 / 100 (Marcos, PR #98). Queda sin probar NVDA |
+| HU-20 rendimiento | Portada en móvil: 98 (antes 91). Se corrigió el límite de 8 MB de imágenes, que no se aplicaba a las subidas del editor de bloques |
+| HU-22 relevo de la cuenta | H22-1 a H22-5 ejecutados con las cuentas de prueba (Pablo con Claude): todos OK |
+| Pruebas de aceptación | 43 casos: 39 OK y 4 parciales (T1 a T3, cronometrados con una persona externa, y el envío real del correo, P5) |

@@ -39,7 +39,7 @@ def pruebas():
 def main():
     doc = B.nuevo()
     doc.add_heading("CMS del CADUS — Documento final de la entrega del 29/11/2026", 0)
-    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · estado a 29/11/2026", cursiva=True)
+    B.par(doc, "Gestión de Sistemas de Información (GSI) · Universidad de Sevilla · estado a 26/11/2026", cursiva=True)
 
     doc.add_heading("1. Qué se adjunta", 1)
     B.par(doc, "El proyecto del CMS es el mismo desde la entrega 2, así que se **vuelve a adjuntar el documento de la entrega 2** (`Entrega2-CMS-CADUS`) para lo que no ha cambiado y este documento recoge el estado final. No hubo un Sprint 4 del CMS: el trabajo posterior al cierre del Sprint 3 (15/11) son tareas de cierre y la reapertura de HU-14 y HU-15, que constan en las secciones 2 y 9; por eso el sprint backlog y el burndown de referencia son los del Sprint 3, el último sprint del CMS.")
@@ -55,14 +55,15 @@ def main():
         ["Implementación: capturas", "Sección 8 de este documento (portal con el contenido real), carpeta `capturas-sprint3` y capturas de la entrega 2"],
         ["Pruebas, calidad y pendientes", "Secciones 9 y 10"]], [7, 10], tam=9)
 
-    doc.add_heading("2. Estado final del portal (29/11/2026)", 1)
+    doc.add_heading("2. Estado final del portal (a 26/11/2026)", 1)
     B.tabla(doc, ["Área", "Estado"], [
         ["Contenido", "Las noticias, las actas y la normativa de ejemplo se han sustituido por contenido real de www.cadus.us.es y el calendario lleva actividades reales ya celebradas (sección 8). Se conservan, identificados como ejemplo, dos eventos futuros inventados, su votación vinculada y un acta pendiente de aprobación. Las 27 delegaciones se cargaron de esa web con sus miembros; falta el correo en 1, el teléfono en 7 y el horario en las 27, que esa web no publica (`tests/E2-12-fichas-y-edicion.md`)"],
         ["HU-14 móvil y tablet", "Hecho. Móvil real el 22/11 (Pablo: portada, buzón, calendario, mediación y menú) y tablet el 23/11, comprobados según Pablo. Emulación a 390 y 768 px el 15/11, repetida por Marcos el 23/11"],
-        ["HU-15 accesibilidad", "Marcos (23/11): teclado completo, Lighthouse de accesibilidad 97 / 96 / 96 (con una copia anterior del plugin) y daltonismo correctos, y el Narrador lee los campos y los errores del buzón (también antes del arreglo). El PR #96 (errores de los formularios enlazados con su campo y foco al primer error) se fusionó el 25/11 y se comprobó con una ejecución en el navegador, no con un lector de pantalla. Pendiente: repetir Lighthouse con el código actual y probar con NVDA"],
+        ["HU-15 accesibilidad", "Hecha. Marcos (23/11): teclado completo y daltonismo correctos, y el Narrador lee los campos y los errores del buzón (también antes del arreglo). Lighthouse de accesibilidad: 97 / 96 / 96 el 23/11 (con una copia anterior del plugin) y **100 / 100 / 100** repetido por Marcos el 25/11 con el código actual (portada, buzón y directorio, PR #98). El PR #96 (errores de los formularios enlazados con su campo y foco al primer error) se fusionó el 25/11 y se comprobó con una ejecución en el navegador, no con un lector de pantalla. Queda sin probar NVDA"],
         ["HU-16 buscar y filtrar", "H16-1 a H16-6 probados con clics el 22/11 y repetidos el 25/11 con los datos reales mediante peticiones al servidor construidas desde los formularios (no con clics); búsqueda del panel (H16-7) probada en tickets y en mediaciones: solo encuentra por referencia, asunto o centro, nunca por datos del estudiante"],
         ["HU-17 seguridad de formularios", "Campo trampa, nonce y límite de envíos comprobados con peticiones al servidor; texto con etiquetas HTML y con SQL se guarda como texto. Wordfence bloquea `<script>` antes de llegar al portal"],
-        ["HU-22 y HU-23", "HU-22 (relevo de la cuenta de la delegación) está implementada, pero sus casos de aceptación H22-1 a H22-5 siguen sin ejecutar (los hace Álvaro). HU-23 (conservación a los 2 años): el script se repitió en otro equipo (Marcos, 23/11) sin errores"],
+        ["HU-20 rendimiento", "Lighthouse de rendimiento de la portada en móvil, mediana de 3 ejecuciones el 26/11: **98**, frente a 91 antes de la caché, el minificado y el Gzip (12/11); LCP de 2,9 a 1,98 s. Fotos de la galería en WebP de 720 px como máximo y escudos en WebP de 300 px, con carga diferida; una imagen de 3000 px se reduce a 1920. Al probarlo se encontró que el límite de 8 MB no se aplicaba a las subidas del editor de bloques (API REST); se corrigió el 26/11 y se repitió (`tests/E3-04-pruebas-de-aceptacion.md`, observación 4). Medido en el servidor local, no en el de la US"],
+        ["HU-22 y HU-23", "HU-22 (relevo de la cuenta de la delegación): H22-1 a H22-5 ejecutados el 26/11 con sesiones reales de las cuentas de prueba y todos OK (el delegado hace el relevo y pierde la sesión, la contraseña antigua no sirve, no puede hacer el de otra cuenta, la Ejecutiva lo hace y solo ve cuentas de delegación, y el script rechaza una segunda cuenta para la misma ficha). Los ejecutó Claude en nombre de Pablo, no otra persona del equipo. HU-23 (conservación a los 2 años): el script se repitió en otro equipo (Marcos, 23/11) sin errores"],
         ["Cuentas y contraseñas", "Según Pablo, las contraseñas de `root` y `cadus` se cambiaron el 23/11 (aviso crítico de Wordfence); no queda constancia en el repositorio, por seguridad"],
         ["Despliegue en la US (E3-09)", "No se ha hecho: el servidor ofrecido tenía PHP 7.2/7.3 y queda pendiente hablar con la US sobre el despliegue. El portal se entrega con su volcado de base de datos y funciona en el servidor local del equipo"]], [4, 13], tam=8.5)
 
@@ -71,7 +72,7 @@ def main():
     A.cambios_requisitos(doc)
 
     doc.add_heading("4. Product backlog", 1)
-    B.par(doc, "Mismo product backlog (mismo proyecto), con el estado a 29/11. HU-20 pasó al Sprint 3, el antiguo Sprint 4 desapareció (un único sprint de tres semanas), HU-21 quedó cancelada y se añadieron HU-22, HU-23 y, el 12/11, HU-24.")
+    B.par(doc, "Mismo product backlog (mismo proyecto), con el estado a 26/11. HU-20 pasó al Sprint 3, el antiguo Sprint 4 desapareció (un único sprint de tres semanas), HU-21 quedó cancelada y se añadieron HU-22, HU-23 y, el 12/11, HU-24.")
     B.tabla(doc, ["ID", "Historia", "Requisitos", "Prioridad", "SP", "Estado", "Sprint"], A.historias(), [1.4, 6.3, 2.2, 1.5, 0.8, 2.2, 2.0], tam=7.5)
 
     doc.add_heading("5. Sprint backlog del Sprint 3", 1)
@@ -82,7 +83,7 @@ def main():
     doc.add_heading("7. Calidad y revisión cruzada", 1)
     for t in ("Revisión con Codex de HU-23 el 13/11, con cuatro fallos corregidos (título y dirección del ticket anonimizado, ticket reabierto durante el borrado, limpieza dada por buena aunque fallase un borrado y edición de tickets anonimizados).",
               "Revisión con Codex de la entrega del 22/11 y, el 23/11, de la programación de la carga del contenido real y del calendario: siete hallazgos, todos corregidos y comprobados (`docs/scrum/codex_revision_programacion_23_11.md`). El 25/11 hubo otra revisión del cierre (`docs/scrum/codex_revision_cierre_25_11.md`).",
-              "Pruebas cruzadas hechas por otra persona: Marcos probó HU-14a, HU-17b y HU-23 (23/11) y Joaquín y Álvaro tienen asignadas HU-14b, HU-16a y HU-22. Las pruebas que ejecutó Claude en nombre de Pablo (HU-16b, HU-17a, HU-17b y el panel de tickets) constan así en el registro y no se cuentan como prueba de otra persona."):
+              "Pruebas cruzadas hechas por otra persona: Marcos probó HU-14a, HU-17b y HU-23 (23/11) y repitió Lighthouse de accesibilidad (25/11). Joaquín y Álvaro tenían asignadas HU-14b, HU-16a y HU-22, que no han registrado como propias. Las pruebas que ejecutó Claude en nombre de Pablo (HU-16a, HU-16b, HU-17a, HU-17b, HU-20, HU-22, HU-23 y el panel de tickets) constan así en el registro y no se cuentan como prueba de otra persona."):
         B.vineta(doc, t)
 
     doc.add_heading("8. Implementación: el portal con el contenido real", 1)
@@ -117,7 +118,7 @@ def main():
     for t in ("**Despliegue en la US (E3-09):** queda pendiente hablar con la US sobre el despliegue web; sin ello el portal sigue en el servidor local del equipo.",
               "**Correo del buzón:** el contenido de los avisos cumple RN-03 (solo código, tipo, fecha y enlace), pero no se pudo probar el envío real porque el equipo local no tiene servidor de correo.",
               "**Cuentas y fichas reales:** E2-01 (cuentas reales de la Ejecutiva y las delegaciones) se descartó el 25/11 porque depende del CADUS; E2-12 se cerró el 25/11 con las limitaciones de datos de la sección 2 (horario, 7 teléfonos y 1 correo), que solo puede dar el CADUS. Mientras tanto se usan las cuentas actuales y los datos de su web.",
-              "**Pruebas cruzadas y casos abiertos:** no todas las pruebas las ha repetido otra persona (sección 7) y la sección 9 lista los casos que no están completos (parciales, pendientes o sin ejecutar), entre ellos H22-1 a H22-5.",
+              "**Pruebas cruzadas y casos abiertos:** no todas las pruebas las ha repetido otra persona (sección 7) y la sección 9 lista los casos que no están completos (los cronometrados con una persona externa y el envío real del correo). Falta, por ejemplo, la prueba cruzada de HU-14b y HU-16a de Joaquín y la de HU-22 de Álvaro: sus casos los ejecutó Claude en nombre de Pablo.",
               "**Dispositivos reales:** móvil y tablet constan como comprobados según Pablo; no hay un registro de pruebas por dispositivo.",
               "**Accesibilidad:** se probó con el Narrador de Windows; NVDA no."):
         B.vineta(doc, t)
