@@ -38,7 +38,7 @@ add_filter('wp_image_editors', static function (array $editores): array {
     return array_map(static fn(string $e): string => $e === 'WP_Image_Editor_GD' ? 'Cadus_Image_Editor_GD' : $e, $editores);
 });
 add_filter('wp_handle_upload_prefilter', 'cadus_img_limite_subida');
-// Las subidas del editor de bloques van por la API REST, que usa «sideload» y no pasa por el filtro anterior.
+// La API REST con el archivo en el cuerpo de la petición (editor de bloques) usa «sideload» y no pasa por el filtro anterior.
 add_filter('wp_handle_sideload_prefilter', 'cadus_img_limite_subida');
 add_action('admin_init', function () {
     if (get_option('cadus_portal_version') && get_option('cadus_img_semillas_version') !== CADUS_IMG_SEMILLAS_VERSION) {

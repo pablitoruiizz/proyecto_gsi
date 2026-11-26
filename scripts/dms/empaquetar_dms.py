@@ -231,13 +231,13 @@ def main():
             print(f"  [{'ok' if ok_c else 'FALTA'}] {archivo}: {'debe contener' if debe else 'no debe contener'} «{texto}»")
         for rel, debe_tener, no_debe in CONTROLES_PDF:
             ruta_p = os.path.join(RAIZ, rel.replace("{RSI_VER}", RSI_VER))
-            t = contenido_pdf(ruta_p) if os.path.exists(ruta_p) else ""
+            t = " ".join(contenido_pdf(ruta_p).lower().split()) if os.path.exists(ruta_p) else ""  # sin mayúsculas ni saltos de línea
             for texto in debe_tener:
-                ok_p = texto.replace("{RSI_VER}", RSI_VER) in t
+                ok_p = " ".join(texto.replace("{RSI_VER}", RSI_VER).lower().split()) in t
                 mal_c += not ok_p
                 print(f"  [{'ok' if ok_p else 'FALTA'}] {os.path.basename(ruta_p)}: debe contener «{texto}»")
             for texto in no_debe:
-                ok_p = texto not in t
+                ok_p = " ".join(texto.lower().split()) not in t
                 mal_c += not ok_p
                 print(f"  [{'ok' if ok_p else 'FALTA'}] {os.path.basename(ruta_p)}: no debe contener «{texto}»")
         if mal_c:

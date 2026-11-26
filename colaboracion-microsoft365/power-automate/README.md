@@ -13,7 +13,7 @@ Documentación del artefacto de Power Automate de la Red Social Interna del CADU
 | Casos de uso | CU-R02 Preparar una asamblea con tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-power-automate.md`](../../docs/redsocial/configuracion-power-automate.md) |
 | Capturas | `12a` a `12d` en `docs/redsocial/capturas/` (nombres en la guía) |
-| Estado | **Diseñado el 24/11/2026. Creación en el tenant, capturas y prueba de otra persona: pendientes.** Se comprobó (21/11, cuenta de Álvaro) que make.powerautomate.com carga y ofrece la plantilla «Notificar a un canal cuando se crea una nueva tarea de Planner»; no se ha comprobado que se pueda guardar y ejecutar un flujo ni que los conectores de Planner, Teams y Office 365 Users no estén restringidos. Al crear los flujos, cambiar esta fila y la de la tabla «Flujos» |
+| Estado | **Hecho el 25/11/2026.** Los dos flujos están creados en el tenant de la US (Joaquín), con capturas `12a` a `12d`, compartidos con Marcos como copropietario y probados por él con su cuenta (capturas `12e` a `12l`, `docs/redsocial/pruebas.md`). No se esperó a la ejecución programada del flujo 2 (se lanzó a mano) ni se probó asignar después una tarea ya creada (ver «Limitaciones»). |
 
 ## Flujos
 

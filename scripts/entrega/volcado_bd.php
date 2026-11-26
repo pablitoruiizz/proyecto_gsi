@@ -31,6 +31,12 @@ foreach ($tablas as $tabla) {
     $paso = 200;
     while (true) {
         $filas = $wpdb->get_results("SELECT * FROM `$tabla` LIMIT $desde, $paso", ARRAY_N);
+        if ($wpdb->last_error) {
+            // Un error de lectura no puede pasar por «fin de las filas»: se aborta y no se deja un volcado a medias.
+            fclose($f);
+            unlink($destino);
+            exit("Error leyendo `$tabla`: {$wpdb->last_error}\n");
+        }
         if (!$filas) {
             break;
         }
@@ -42,7 +48,11 @@ foreach ($tablas as $tabla) {
             }
             $valores[] = '(' . implode(',', $celdas) . ')';
         }
-        fwrite($f, "INSERT INTO `$tabla` VALUES " . implode(",\n", $valores) . ";\n");
+        if (fwrite($f, "INSERT INTO `$tabla` VALUES " . implode(",\n", $valores) . ";\n") === false) {
+            fclose($f);
+            unlink($destino);
+            exit("Error escribiendo el volcado (¿disco lleno?)\n");
+        }
         $filas_total += count($filas);
         $desde += $paso;
     }

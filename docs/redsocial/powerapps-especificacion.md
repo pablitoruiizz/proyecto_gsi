@@ -13,7 +13,7 @@ Conclusión: el tenant permite crear una lista de SharePoint, crear y guardar un
 ## Qué NO se ha comprobado
 
 - Publicar la aplicación (no se pulsó «Publicar»).
-- Ejecutarla desde una cuenta distinta de la de Álvaro (está compartida con Marcos desde el 25/11; falta que Marcos la abra y anote el resultado), o desde la pestaña de Teams.
+- Ejecutarla desde la pestaña de Teams. Desde otra cuenta sí se hizo: Marcos la abrió con la suya el 25/11 (`pruebas.md`).
 - Los conectores de Planner y Teams, y cualquier flujo de Power Automate: en la cuenta de Álvaro no hay flujos, propios ni compartidos; el flujo de R-12 (Joaquín) no se ha podido probar desde su cuenta.
 - Las pantallas de la propuesta original (ficha con canal y tareas, alta y baja solo para la Ejecutiva, CU-R05 · RN-R01): la aplicación generada es la plantilla de tres pantallas de PowerApps (lista, detalle y formulario) sin personalizar ni restringir por rol.
 
@@ -28,6 +28,6 @@ Explicar las tres capturas una a una (lista, aplicación guardada, aplicación e
 
 ## Pendiente
 
-1. Prueba cruzada de Marcos: abrir la aplicación con su cuenta (ya compartida el 25/11) y anotar el resultado, con captura, en `pruebas.md`.
+1. Prueba cruzada de Marcos: hecha el 25/11 (abre la aplicación con su cuenta y lee la lista; capturas R13-04 a R13-07 en `pruebas.md`).
 2. UML de diseño: hecho el 26/11 (R-14a): la caja de herramientas ya recogía PowerApps, y los planes de Planner llevan su patrón y los cubos del plan de la asamblea como Proceso de tareas (`scripts/redsocial/diagramas_rsi.py`, `img/uml-rsi-diseno.png`).
-3. Flujo de Power Automate (R-12): lo prueba Joaquín o lo comparte con Álvaro.
+3. Flujo de Power Automate (R-12): hecho por Joaquín y probado por Marcos el 25/11; los conectores de Planner y Teams de la aplicación siguen sin probarse.
