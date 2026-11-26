@@ -35,7 +35,7 @@ Los tres planes comparten la herramienta (Planner como pestaña de un equipo de 
 |---|---|---|---|---|---|---|
 | Coordinación de la Ejecutiva | Tareas | Una tarjeta es una tarea de preparación (un aviso, una revisión) | Estado del trabajo: Por hacer, En curso, Hecho | Sí | Sí: la tarea pasa de un cubo al siguiente | **Ciclo de vida de tareas** |
 | Seguimiento de las delegaciones | Tareas | Una tarjeta es lo que debe hacer una delegación (confirmar asistencia, leer un aviso) | Estado del trabajo, igual que arriba | Sí | Sí | **Ciclo de vida de tareas** |
-| Preparación de la asamblea | Tareas | Una tarjeta es un paso de la preparación | Etapa del proyecto: antes, durante y después de la asamblea | Sí, sigue el calendario | No: una tarea pertenece a su etapa y se completa donde está | **Proceso de tareas** (el diseño actual usa el ciclo de vida) |
+| Preparación de la asamblea | Tareas | Una tarjeta es un paso de la preparación | Etapa del proyecto: antes, durante y después de la asamblea | Sí, sigue el calendario | No: una tarea pertenece a su etapa y se completa donde está | **Proceso de tareas** (rehecho el 25/11/2026) |
 
 ### Por qué no «Tareas asignadas» ni «Tareas categorizadas» en el plan de las delegaciones
 
@@ -86,6 +86,7 @@ Las dos tareas nuevas existen para que ninguna etapa quede vacía: un proceso co
 
 ### Estado
 
-- **A 24/11/2026 no se ha cambiado nada en Planner.** Falta rehacer el plan y repetir la captura `08-planner.jpg` (Joaquín), reflejar los cubos nuevos en el UML de diseño (Álvaro) y actualizar el texto del documento (Pablo).
-- **Al terminar,** cambiar en la tabla «Aplicación a los tres planes» la última columna del plan de la asamblea (ahora dice «el diseño actual usa el ciclo de vida») por «rehecho el DD/11/2026», y anotar lo mismo en [`colaboracion-microsoft365/planner/README.md`](../../colaboracion-microsoft365/planner/README.md).
-- **Si no se hace antes de la entrega,** el documento sigue describiendo lo que hay en Planner (ciclo de vida) y esta decisión se cita como trabajo futuro.
+- **Rehecho el 25/11/2026.** Joaquín renombró y reordenó los cubos del mismo plan «Preparación de la Asamblea» (en CADUS · Asamblea, canal General): 1 · Convocatoria, 2 · Preparación, 3 · Día de la asamblea y 4 · Después (acta), con las dos tareas nuevas. La captura `08-planner.jpg` es la del plan rehecho (25/11) y Marcos lo probó el 26/11 con su cuenta (`docs/redsocial/pruebas.md`, «Prueba del plan de la asamblea rehecho por otra persona»).
+- **UML de diseño:** Álvaro reflejó el patrón de cada plan en `uml-rsi-diseno.png` (R-14a, PR #100).
+- **Diferencias entre el diseño y lo que hay en Planner,** vistas en la captura y en la prueba de Marcos: en Planner ninguna tarea está completada (la de crear el evento figura como pendiente aunque su fecha, el 21/11, ya pasó) y a la tarea de la etapa 3 le falta un espacio y la tilde: «Pasar lista y abrir la sesion(ejemplo)». Son datos de ejemplo; no cambian el patrón.
+- **Los planes de la Ejecutiva y de las delegaciones** siguen como Ciclo de vida de tareas, por decisión del 24/11.

@@ -12,7 +12,7 @@ Documentación del artefacto de Planner de la Red Social Interna del CADUS (Lab 
 | Casos de uso | CU-R02 Preparar una asamblea con tareas y CU-R04 Consultar avisos, calendario y tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-planner.md`](../../docs/redsocial/configuracion-planner.md) |
 | Captura | `docs/redsocial/capturas/08-planner.jpg` |
-| Estado | **Diseñado el 21/11/2026. Estado a 22/11: las pestañas de Planner de los tres equipos existen; solo el plan «Preparación de la Asamblea» tiene captura (`08-planner.jpg`).** Las columnas «Estado» de las tablas de tareas son las del diseño y no se han actualizado con lo que haya en Planner. Nota: el evento del calendario cae el 26/11 y la tarea «Preparar la plantilla del acta» vencía el 27/11, después de la asamblea; el 22/11/2026 se cambió su vencimiento en Planner al 25/11 (el diseño inicial decía 27/11). **El 24/11 se decidió rehacer el plan de la Asamblea como proceso de tareas** (RSI-HU-09, razones y diseño nuevo en [`diseno-tableros-planner.md`](../../docs/redsocial/diseno-tableros-planner.md)); hasta que se rehaga en Planner, este documento describe lo que hay |
+| Estado | **Diseñado el 21/11/2026. Plan de la asamblea rehecho el 25/11/2026 como «Proceso de tareas» (cuatro cubos numerados), con captura `08-planner.jpg` y probado por Marcos el 26/11.** Los planes de la Ejecutiva y de las delegaciones siguen como «Ciclo de vida de tareas». Las columnas «Estado» de las tablas de tareas de esos dos planes son las del diseño y no se han actualizado con lo que haya hoy en Planner. |
 
 ## Planes
 
@@ -47,14 +47,18 @@ Son datos de ejemplo: ni nombres de delegados reales ni nada de reclamaciones, m
 
 ### Preparación de la asamblea
 
+Rehecho el 25/11/2026 como **Proceso de tareas** (decisión del 24/11, `docs/redsocial/diseno-tableros-planner.md`): los cubos son las etapas, en orden, y una tarea completada se queda en su etapa.
+
 | Cubo | Tarea | Responsable | Fecha límite | Estado |
 |---|---|---|---|---|
-| Por hacer | Enviar la convocatoria y el orden del día (ejemplo) | Pablo | 24/11/2026 | No iniciada |
-| Por hacer | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 25/11/2026 (ajustada en Planner el 22/11; el diseño decía 27/11) | No iniciada |
-| En curso | Reservar la sala (ejemplo) | Marcos | 25/11/2026 | En curso |
-| Hecho | Crear el evento de la asamblea en el calendario (ejemplo) | Joaquín | 21/11/2026 | Completada |
+| 1 · Convocatoria | Crear el evento de la asamblea en el calendario (ejemplo) | Joaquín | 21/11/2026 | No iniciada |
+| 1 · Convocatoria | Enviar la convocatoria y el orden del día (ejemplo) | Pablo | 24/11/2026 | No iniciada |
+| 2 · Preparación | Preparar la plantilla del acta en el DMS (ejemplo) | Álvaro | 25/11/2026 | No iniciada |
+| 2 · Preparación | Reservar la sala (ejemplo) | Marcos | 25/11/2026 | En curso |
+| 3 · Día de la asamblea | Pasar lista y abrir la sesión (ejemplo) | Pablo | 26/11/2026 | No iniciada |
+| 4 · Después (acta) | Subir el acta aprobada al DMS (ejemplo) | Álvaro | 28/11/2026 | No iniciada |
 
-Las tareas se reparten entre los cubos y los estados a propósito: así la captura y los gráficos de Planner enseñan el avance (CU-R02, pasos 4 y 5) y una delegación ve solo lo suyo al filtrar por su nombre (CU-R04, paso 3).
+Las tareas se reparten entre los cubos a propósito: así la captura y los gráficos de Planner enseñan el avance (CU-R02, pasos 4 y 5) y una delegación ve solo lo suyo al filtrar por su nombre (CU-R04, paso 3). En Planner la tarea de la etapa 3 se llama «Pasar lista y abrir la sesion(ejemplo)», sin tilde ni espacio (detalle menor).
 
 ## Permisos
 

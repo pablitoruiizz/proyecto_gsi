@@ -72,7 +72,7 @@ Es un flujo programado porque Planner no tiene un disparador «vence la fecha».
 - `12c-power-automate-flujo-vencimiento.jpg`: el flujo en el editor con todas sus acciones.
 - `12d-power-automate-aviso-vencimiento.jpg`: el mensaje con la tabla en el canal.
 
-Los nombres `12a` a `12d` son una propuesta para dejar el `13` a la aplicación de PowerApps de Álvaro; Pablo los confirma al montar el documento.
+Los nombres `12a` a `12d` dejan el `13` a la aplicación de PowerApps de Álvaro; confirmados por Pablo el 26/11/2026. Las capturas de la prueba de Marcos son `12e` a `12l`.
 
 ## Si el tenant no lo permite
 

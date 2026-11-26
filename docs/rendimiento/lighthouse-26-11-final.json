@@ -1,0 +1,20 @@
+{
+  "etiqueta": "26-11-final",
+  "veces": 3,
+  "paginas": {
+    "Inicio": {
+      "FCP (ms)": 1823.82,
+      "LCP (ms)": 1980.41,
+      "TBT (ms)": 0,
+      "CLS": 0,
+      "Speed Index (ms)": 1823.82,
+      "Respuesta del servidor (ms)": 9.367,
+      "Peso total (bytes)": 301391,
+      "Rendimiento (0-100)": 98,
+      "Accesibilidad (0-100)": 100,
+      "Buenas prácticas (0-100)": 82,
+      "SEO (0-100)": 92,
+      "Peticiones": 16
+    }
+  }
+}

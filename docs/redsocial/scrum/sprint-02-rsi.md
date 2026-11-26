@@ -22,26 +22,26 @@ Pablo y Marcos no tienen historias con puntos este sprint: Pablo actualiza el RE
 
 ## Sprint backlog
 
-| Tarea | Historia | Qué incluye | Quién | Estado a 24/11 |
+| Tarea | Historia | Qué incluye | Quién | Estado a 26/11 |
 |---|---|---|---|---|
-| R-11 | — | REM actualizado con los requisitos de automatización | Pablo | Pendiente |
-| R-12a | RSI-HU-07 | Flujo «Aviso de tarea nueva» (Planner a Teams) con capturas | Joaquín | Pendiente: diseño y guía listos (`docs/redsocial/configuracion-power-automate.md`) |
-| R-12b | RSI-HU-07 | Flujo «Aviso de tareas que vencen» (programado cada día) con capturas | Joaquín | Pendiente: diseño y guía listos |
-| R-12c | RSI-HU-07 | Prueba de los flujos por otra persona (Lab 8) | Marcos | Pendiente |
-| R-13 | RSI-HU-08 | Aplicación de PowerApps «Estado de las delegaciones», o la alternativa documentada si el tenant no la permite | Álvaro | Pendiente: borrador de especificación del 21/11 |
-| R-06c | RSI-HU-09 | Decidir el patrón del plan de la asamblea y rehacerlo en Planner con su captura | Joaquín | Decidido: «Proceso de tareas» (`diseno-tableros-planner.md`); falta rehacerlo y capturarlo |
-| R-14a | RSI-HU-09 | UML de diseño con los cubos nuevos del plan de la asamblea | Álvaro | Pendiente (depende de R-06c) |
-| R-14b | — | Capturas explicadas y documento de la entrega | Pablo | Pendiente |
-| R-14c | — | SCRUM del sprint: planning, burndown diario y review | Joaquín | En curso: este documento y el burndown desde el 23/11 |
-| R-10b | — | Pruebas cruzadas y revisión con Codex | Todos | Pendiente |
+| R-11 | — | REM actualizado con los requisitos de automatización | Pablo | Hecho: REM 1.1 con RF-R13 (Planner) y glosario; falta exportar el PDF desde REMUS |
+| R-12a | RSI-HU-07 | Flujo «Aviso de tarea nueva» (Planner a Teams) con capturas | Joaquín | Hecho el 25/11: flujo creado y capturas 12a y 12b |
+| R-12b | RSI-HU-07 | Flujo «Aviso de tareas que vencen» (programado cada día) con capturas | Joaquín | Hecho el 25/11: flujo creado y capturas 12c y 12d |
+| R-12c | RSI-HU-07 | Prueba de los flujos por otra persona (Lab 8) | Marcos | Hecho el 25/11: los dos flujos probados con su cuenta (capturas 12e a 12l, `pruebas.md`) |
+| R-13 | RSI-HU-08 | Aplicación de PowerApps «Estado de las delegaciones», o la alternativa documentada si el tenant no la permite | Álvaro | Hecho: aplicación guardada, ejecutada y compartida; probada por Marcos el 25/11 (capturas R13-01 a R13-07) |
+| R-06c | RSI-HU-09 | Decidir el patrón del plan de la asamblea y rehacerlo en Planner con su captura | Joaquín | Hecho el 25/11: plan rehecho con cuatro cubos, captura `08-planner.jpg` repetida y prueba de Marcos el 26/11 |
+| R-14a | RSI-HU-09 | UML de diseño con los cubos nuevos del plan de la asamblea | Álvaro | Hecho el 26/11: `uml-rsi-diseno.png` con el patrón de cada plan (PR #100) |
+| R-14b | — | Capturas explicadas y documento de la entrega | Pablo | En curso: documento y zip final del sábado 28/11 |
+| R-14c | — | SCRUM del sprint: planning, burndown diario y review | Joaquín | Hecho salvo la retrospectiva en grupo: planning, burndown al día y review (borrador del 26/11) |
+| R-10b | — | Pruebas cruzadas y revisión con Codex | Todos | En curso: pruebas de Marcos hechas; falta la revisión final con Codex |
 
 ## Heredado del Sprint 1
 
 | Pendiente | Quién |
 |---|---|
-| Revisión de otra persona del caso de negocio (RSI-HU-01) | Por asignar |
-| Solo el plan de la Asamblea tiene captura (`08-planner.jpg`); los de Ejecutiva y Delegaciones no | Joaquín (se recoge con RSI-HU-09) |
-| Prueba cruzada humana de las historias de Teams: solo se probó el aislamiento de canales | Todos (R-10b) |
+| Revisión de otra persona del caso de negocio (RSI-HU-01) | Hecha por Álvaro el 26/11 (`pruebas.md`) |
+| Solo el plan de la Asamblea tiene captura (`08-planner.jpg`); los de Ejecutiva y Delegaciones no | Joaquín: sin capturar; se entrega con la captura del plan de la asamblea y se dice en el documento |
+| Prueba cruzada humana de las historias de Teams: solo se probó el aislamiento de canales | Marcos probó los flujos, la aplicación y el plan nuevo; las historias de Teams del Sprint 1 siguen sin prueba cruzada |
 
 ## Calendario propuesto
 
@@ -77,3 +77,23 @@ Igual que en el Sprint 1 ([`product-backlog-rsi.md`](product-backlog-rsi.md)): e
 |---|---|
 | 23/11 | Inicio del sprint (Lab 8). Burndown: 8 SP pendientes |
 | 24/11 | Guía y diseño de los flujos de Power Automate, decisión y guía del rediseño del plan de la asamblea (RSI-HU-09), planning y script del burndown. Ninguna historia cerrada según la DoD: 8 SP pendientes |
+| 25/11 | Capturas de los dos flujos (Joaquín) y plan de la asamblea rehecho con su captura; Marcos prueba los flujos y la aplicación de Álvaro. Pendiente: 8 SP (aún no estaban en `main`) |
+| 26/11 | Pruebas de Marcos y UML de diseño de Álvaro en `main`: RSI-HU-07, 08 y 09 cerradas según la DoD. Pendiente: 0 SP |
+
+## Sprint Review y retrospectiva (borrador del 26/11/2026)
+
+> Redactada por Pablo, con Claude, a partir de los datos del sprint (commits, burndown y pruebas). No sale de una reunión del equipo: si el equipo la hace el 28 o el 29/11, se añaden aquí sus conclusiones.
+
+### Review
+
+- **Entregado (8 SP, el 26/11):** RSI-HU-07 (dos flujos de Power Automate, con los avisos de tarea nueva y de tareas que vencen), RSI-HU-08 (aplicación de PowerApps «Estado de las delegaciones», probada con otra cuenta) y RSI-HU-09 (plan de la asamblea como Proceso de tareas, con UML de diseño). Las tres, en `main`, con capturas explicadas y probadas por Marcos.
+- **Lo que no cubre:** la aplicación solo se probó con lectura (no se creó, editó ni borró nada) y no desde la pestaña de Teams; los planes de la Ejecutiva y de las delegaciones no tienen captura; las historias de Teams del Sprint 1 siguen sin prueba cruzada humana.
+- **Calidad:** primera vez en el proyecto que cada historia tiene una prueba de otra persona antes de cerrarse (Marcos).
+
+### Retrospectiva
+
+| Qué fue bien | Qué no | Qué cambiamos |
+|---|---|---|
+| Se cerró cada historia con la prueba de otra persona y las capturas en `main` | Las pruebas de Marcos llegaron a `main` el 26/11 y las historias no se cerraron hasta ese día, pese a estar hechas el 25/11 | Subir las pruebas a `main` el mismo día en que se hacen |
+| El burndown se actualizó con el script desde el primer día | Pablo y Marcos no tenían puntos y trabajaron en la integración y las pruebas, que el backlog no refleja | Dar puntos a las pruebas cruzadas y al documento en el próximo sprint |
+| Los cubos del plan de la asamblea se rehicieron sobre el mismo plan y los flujos siguieron funcionando | Dos tareas del plan quedaron con un error de escritura y los planes de la Ejecutiva y las delegaciones, sin captura | Capturar los tres planes cuando se rehaga uno |

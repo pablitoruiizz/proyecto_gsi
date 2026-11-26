@@ -1,6 +1,6 @@
 # Caso de negocio · Red Social Interna para el CADUS (MS Teams)
 
-Versión del 22/11/2026 · Autor: Pablo Ruiz Vidal (con Claude) · Revisión: pendiente de otra persona del equipo
+Versión del 26/11/2026 · Autor: Pablo Ruiz Vidal (con Claude) · Revisión: Álvaro Martínez Ocaña, 26/11/2026 (`pruebas.md`)
 
 > **Estructura:** sigue el índice del caso de negocio que muestra el Lab 5 (diapositiva 11, ejemplo de CEMEX): resumen ejecutivo con misión y visión, situación actual con DAFO, descripción del proyecto, drivers, objetivos de negocio, riesgos y participantes (personas y organizaciones). Los requisitos del sistema software (información, funcionales y reglas de negocio) y el glosario van en los apartados 2 y 3 del documento.
 > **Qué es:** un caso de negocio construido para la práctica, que justifica por qué se elige Teams. Lo que sale de la entrevista del 26/10/2026 y de los documentos del proyecto va sin marcar; lo que es una **suposición** va marcado «(por confirmar)». No se inventan datos del CADUS.
@@ -86,7 +86,7 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 | La Ejecutiva comparte una sola cuenta, mientras que Teams se apoya en personas con roles distintos | Se diseña para cuentas de grupo (Ejecutiva y una por delegación), como en el portal y el DMS; los roles personales quedan previstos para cuando haya cuentas individuales |
 | Datos personales de estudiantes y delegados | Equipos y canales privados, sin canales abiertos; no se pegan datos de reclamaciones; lo sensible sigue en el DMS con sus permisos |
 | El CADUS no lo adopta | Piloto pequeño y probado, con guía corta de uso |
-| No se pueden crear equipos o usar Power Automate y PowerApps en el tenant | Se comprueba y, si no se puede, se documenta y se propone una alternativa dentro de Teams; los equipos y Planner ya funcionan en el piloto |
+| No se pueden crear equipos o usar Power Automate y PowerApps en el tenant | Se comprueba y, si no se puede, se documenta y se propone una alternativa dentro de Teams; los equipos y Planner ya funcionan en el piloto. **Comprobado el 25/11/2026:** el tenant sí permite crear y ejecutar flujos de Power Automate y una aplicación de lienzo de PowerApps |
 | Las cuentas de delegación pueden no tener Teams habilitado ni licencia (por confirmar) | Comprobarlo con la Universidad antes de poner en marcha las 27 delegaciones |
 | En el piloto los cuatro integrantes son propietarios de los tres equipos, así que no hay una cuenta «solo miembro» fija con la que probar el aislamiento | El 22/11 se bajó temporalmente a Álvaro a miembro para probarlo y se volvió a subir; con las delegaciones reales habrá cuentas solo miembro |
 | No hay contacto con el CADUS en el equipo desde el 16/11/2026 | Las decisiones que dependen del CADUS se marcan «por confirmar» |
@@ -101,7 +101,7 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 | Delegaciones de centro (27) | Miembros: leen los avisos, participan en su canal y gestionan sus tareas |
 | Pablo Ruiz Vidal | Product Owner; caso de negocio, REM y creación de los equipos |
 | Joaquín Luna Canela | Scrum Master; Planner, Forms y pestaña del DMS |
-| Álvaro Martínez Ocaña | Revisión del UML de análisis y de diseño; especificación de PowerApps |
+| Álvaro Martínez Ocaña | UML de análisis y de diseño; aplicación de PowerApps |
 | Marcos-Paban Delgado Rodríguez | Configuración de canales, moderación, calendario y capturas |
 | Estudiantes | No participan: no tienen acceso a la red social |
 
@@ -119,4 +119,4 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 2. Si las cuentas de delegación tienen Teams habilitado y licencia.
 3. Si las delegaciones usarían la cuenta de su delegación en Teams.
 4. Quién crea y administra los equipos cuando el proyecto termine (por ahora, Pablo).
-5. Si el tenant de la US permite usar Power Automate y PowerApps (Álvaro comprobó que sus páginas de creación cargan; no que se pueda guardar y ejecutar).
+5. Si se puede publicar la aplicación de PowerApps en el tenant de la US: el 25/11/2026 se comprobó que el tenant permite guardar y ejecutar una aplicación de lienzo y flujos de Power Automate; la publicación no se ha comprobado.
