@@ -1,0 +1,8 @@
+fecha,ideal_sp,real_sp,hito_sp,tareas_completadas
+2026-11-16,22.0,22,,
+2026-11-17,18.3,22,,
+2026-11-18,14.7,22,,
+2026-11-19,11.0,22,,
+2026-11-20,7.3,16,,"RSI-HU-01 y RSI-HU-03 (Pablo; integradas en main el 20/11, sin revisión de otra persona). El UML de RSI-HU-02 estaba en main como borrador y no se cuenta hasta su revisión"
+2026-11-21,3.7,16,,"Marcos y Joaquín trabajan en ramas (capturas y configuración de Teams); no integrado en main"
+2026-11-22,0.0,0,0,"RSI-HU-02 (revisión de Álvaro, PR #89), RSI-HU-04 (Marcos) y RSI-HU-05 (Joaquín y Marcos) integradas en main el 22/11, y RSI-HU-06 (documento, PDF del REM y zip) con el commit de cierre del mismo día; el envío del zip se hace esa noche"

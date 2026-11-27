@@ -1,0 +1,64 @@
+# Product Backlog
+
+> **Herramienta SCRUM del equipo:** [GitHub Project «CADUS · Scrum»](https://github.com/users/pablitoruiizz/projects/1) (una issue por ítem, campos SP, Sprint, Responsable y Cierre). Este archivo es la copia de referencia para la documentación; el script `scripts/scrum/crear_proyecto_github.py` lo vuelca al proyecto.
+> Mantener este backlog priorizado y refinado en cada Sprint Planning.
+> Nomenclatura: `PB-XXX` para tareas técnicas/infraestructura, `HU-XXX` para historias de usuario (ver convenciones REM/REMUS (en el repositorio de GitHub: `docs/requisitos/rem-remus/readme.md`)). Estimación en Puntos de Historia, escala Fibonacci (1, 2, 3, 5, 8).
+> Trazabilidad de cada historia con su requisito funcional en REM-CADUS.md (en el repositorio de GitHub: `docs/requisitos/rem-remus/rem-cadus.md`).
+
+## Tareas de infraestructura (Sprint-00)
+
+| ID | Ítem | Sistema | Prioridad | SP | Estado | Sprint | Dependencias | Responsable |
+|---|---|---|---|---:|---|---|---|---|
+| PB-001 | Definir estructura base del repositorio | Requisitos/SCRUM | Alta | 3 | Hecho | Sprint-00 | Ninguna | Equipo (sin asignar por persona) |
+| PB-002 | Configurar CMS local WordPress en servidor local (WampServer) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-001 | Equipo (sin asignar por persona) |
+| PB-003 | Diseñar estructura documental inicial en SharePoint | DMS | Media | 5 | Hecho | Fase 2 (DMS) | PB-001 | Equipo (sin asignar por persona) |
+| PB-004 | Configurar equipo y canales en Teams | Colaboración | Media | 3 | Hecho | Fase 3 (Teams) | PB-001 | Equipo (sin asignar por persona) |
+| PB-005 | Montar entorno compartido: WordPress + MySQL en WampServer accesible por Tailscale, y GitHub para el resto de archivos (RC-01, RC-02) | CMS/Entorno | Alta | 5 | Hecho | Sprint-01 | PB-002 | Equipo (sin asignar por persona) |
+| PB-006 | Crear el servidor de Discord del equipo con categorías INFO, SCRUM, DESARROLLO y VOZ (RC-03) | Colaboración | Media | 3 | Hecho | Sprint-01 | PB-005 | Equipo (sin asignar por persona) |
+| PB-007 | Seleccionar, instalar y configurar los plugins obligatorios (seguridad, caché, analítica, SEO) y de apoyo (formularios, campos, roles) | CMS | Alta | 5 | Hecho | Sprint-01 | PB-002 | Equipo (sin asignar por persona) |
+| PB-008 | Elaborar el documento REM en REMUS (`CADUS.rem`) con trazabilidad | Requisitos | Alta | 5 | Hecho | Sprint-01 | PB-001 | Equipo (sin asignar por persona) |
+
+## Historias de usuario
+
+| ID | Historia de usuario | Requisito(s) | Prioridad | SP | Estado | Sprint | Responsable |
+|---|---|---|---|---:|---|---|---|
+| HU-01 | Como miembro de la Ejecutiva, quiero publicar noticias categorizadas (Becas, Movilidad, Normativa, Eventos) para informar a los estudiantes. | RF-01 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-02 | Como Estudiante, quiero filtrar y buscar noticias por categoría, fecha y palabra clave. | RF-02 | Media | 3 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-03 | Como miembro de la Ejecutiva, quiero subir actas de pleno en PDF y enviarlas a aprobación antes de publicarlas. | RF-03, RF-05, RN-01 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-04 | Como Estudiante, quiero descargar actas y normativas en PDF organizadas por fecha y tipo. | RF-03, RF-04 | Alta | 3 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-05 | Como Estudiante, quiero consultar el directorio de delegaciones por Facultad/Escuela. | RF-06 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-06 | Como Delegado, quiero mantener actualizada la ficha de contacto y horario de mi delegación. | RF-07, RN-04 | Media | 3 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-07 | Como Estudiante, quiero enviar una consulta o reclamación académica desde un buzón digital y recibir un código de ticket. | RF-08, RF-09, RN-02 | Alta | 8 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-08 | Como Estudiante, quiero hacer seguimiento del estado de mi consulta con el código de ticket. | RF-09 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-09 | Como miembro de la Ejecutiva, quiero gestionar y responder tickets desde un panel, respetando la privacidad de las reclamaciones. | RF-10, RN-03 | Alta | 8 | Hecho | Sprint-02 | Equipo (sin asignar por persona) |
+| HU-10 | Como Estudiante, quiero consultar el calendario de asambleas y eventos del CADUS. | RF-11 | Media | 3 | Hecho | Sprint-02 | Equipo (sin asignar por persona) |
+| HU-11 | Como miembro de la Ejecutiva, quiero publicar convocatorias de votación vinculadas a una asamblea del calendario. | RF-12, RN-05 | Media | 5 | Hecho | Sprint-02 | Equipo (sin asignar por persona) |
+| HU-12 | Como Estudiante, quiero solicitar mediación estudiantil mediante un formulario. | RF-13 | Media | 5 | Hecho | Sprint-02 | Equipo (sin asignar por persona) |
+| HU-13 | Como Administrador, quiero gestionar roles y permisos de usuario (Anónimo, Estudiante, Delegado, Ejecutiva, Administrador). | RF-14 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-14 | Como Usuario, quiero navegar el portal desde el móvil sin pérdida de funcionalidad. | RNF-02 | Alta | 8 | Hecho (móvil real el 22/11 y tablet el 23/11, comprobados según Pablo) | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-15 | Como Usuario, quiero que el sitio cumpla el nivel de accesibilidad WCAG 2.1 AA. | RNF-03 | Media | 8 | Hecho (reabierta el 22/11; el 23/11 Marcos cerró teclado, daltonismo y Narrador, el 25/11 se fusionó el arreglo de los errores de los formularios y Lighthouse de accesibilidad dio 100 / 100 / 100 con el código actual, repetido por Marcos; sin probar NVDA) | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-16 | Como Administrador, quiero buscar y filtrar contenido del panel por palabra clave y fecha. | RF-02, RF-15 | Media | 5 | Hecho (H16-1 a H16-6 probados con clics el 22/11; H16-7, la búsqueda en el panel de tickets, también el 22/11 con la cuenta `test-ejecutivo`, ejecutada por Claude en nombre de Pablo: no es prueba cruzada) | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-17 | Como Administrador, quiero que los formularios estén protegidos frente a spam e inyección de datos. | RNF-04, RNF-08 | Alta | 5 | Hecho | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-18 | Como Equipo, quiero configurar el tema base y la identidad visual institucional del CADUS. | RNF-02 | Alta | 5 | Hecho | Sprint-01 | Equipo (sin asignar por persona) |
+| HU-19 | Como Administrador, quiero un panel de administración de contenidos (CRUD noticias/actas/delegaciones) restringido por rol. | RF-15 | Alta | 8 | Hecho | Sprint-02 | Equipo (sin asignar por persona) |
+| HU-20 | Como Equipo, quiero optimizar el rendimiento (caché, imágenes) antes de la entrega final. | RNF-01, RNF-06 | Media | 5 | Hecho | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-21 | Como Estudiante, quiero votar desde el portal en una convocatoria abierta (papeleta con YOP Poll). | RF-12, RN-05 | Media | 3 | Cancelada | — | Equipo (sin asignar por persona) |
+| HU-22 | Como Delegado, quiero pasar la cuenta de mi delegación a mi sucesor cuando me doy de baja, para que la delegación no se quede sin acceso. | RF-14, RN-04 | Media | 3 | Hecho | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-23 | Como miembro de la Ejecutiva, quiero que los tickets y las mediaciones se borren o anonimicen a los 2 años de resolverse, para cumplir el plazo de conservación. | RNF-08, RN-03 | Media | 2 | Hecho (falta prueba cruzada) | Sprint-03 | Equipo (sin asignar por persona) |
+| HU-24 | Como miembro de la Ejecutiva o delegado, quiero iniciar sesión en el portal y encontrar un apartado de gestión sencillo (nueva noticia, nuevo evento, nueva acta y delegaciones) sin entrar en el panel de administración. | RF-14, RF-15, UI-09, UI-10 | Alta | 8 | Hecho (falta prueba cruzada) | Sprint-03 | Equipo (sin asignar por persona) |
+
+## Roadmap por versiones
+
+> El equipo (5 integrantes) concentró en el **Sprint 1** todo el alcance de base + gestión de contenidos + directorio + buzón de atención (ver detalle de reparto por integrante en sprint-01.md (en el repositorio de GitHub: `docs/scrum/sprints/sprint-01.md`)). Los sprints siguientes se han renumerado en consecuencia.
+
+### V1 — Despliegue base, identidad institucional y portal CADUS
+- **Sprint-01** (estructura base, tema, roles, contenidos, directorio y buzón; **completado el 18/10/2026**): PB-002, PB-005, PB-006, PB-007, PB-008, HU-01, HU-02, HU-03, HU-04, HU-05, HU-06, HU-07, HU-08, HU-13, HU-18
+
+### V2 — Participación, optimización, seguridad y entrega
+- **Sprint-02** (gestión avanzada de contenidos y participación estudiantil; **completado el 24/10/2026**, 29 de 29 SP): HU-09, HU-10, HU-11, HU-12, HU-19
+- **Sprint-03** (26/10 – 15/11/2026, un único sprint de tres semanas; móvil, accesibilidad, filtros, seguridad, rendimiento, relevo de delegados, borrado a los 2 años, despliegue, pruebas de aceptación y documentación final): HU-14, HU-15, HU-16, HU-17, HU-20, HU-22, HU-23 (36 SP) y, añadida el 12/11, HU-24 (8 SP). **HU-21 cancelada** tras la entrevista del 26/10: las votaciones son presenciales y no se publican resultados
+
+## Reglas mínimas
+- Priorizar por valor para cliente y riesgo.
+- Cada ítem debe vincularse a una issue y sprint.
+- Revisar estimaciones y estado en cada Daily/Review.

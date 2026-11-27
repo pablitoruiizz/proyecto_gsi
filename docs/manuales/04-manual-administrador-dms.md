@@ -117,7 +117,7 @@ Hay un error conocido que conviene conocer: los documentos de ejemplo subidos po
 | Asunto | Estado |
 |---|---|
 | Cuenta del CADUS (`dcadus@us.es`) como propietaria | **Pendiente** en los cuatro sitios; hoy el propietario es Pablo. Cuando se entregue el portal, añadirla también como propietaria de CADUS Votaciones |
-| Cuentas de delegado y de estudiante | Aún no existen en SharePoint. Hay que añadirlos como visitantes y **probar con ellos** que un delegado no ve borradores de actas, votaciones ni expedientes (el comportamiento de los permisos se comprobó con cuentas del equipo) |
+| Cuentas de delegado y de estudiante | Aún no existen en SharePoint: **pendiente de la respuesta de la Universidad de Sevilla**. Hay que añadirlos como visitantes y **probar con ellos** que un delegado no ve borradores de actas, votaciones ni expedientes (el comportamiento de los permisos se comprobó con cuentas del equipo) |
 | Prueba cruzada de cada caso de uso | Los documentos de casos de uso nombran a la persona que hizo la prueba cruzada de cada uno; con cuentas reales de delegado y de estudiante no se ha repetido |
 | Visibilidad | Los integrantes del equipo ven también Votaciones y Expedientes; mientras solo contengan documentos de ejemplo no hay datos personales reales |
 | Resumen automático de las actas (RF-D10) | Deseable; no implementado |

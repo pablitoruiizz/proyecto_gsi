@@ -176,7 +176,7 @@ Hay baterías automáticas en `scripts/pruebas/` (se lanzan desde la raíz del r
 
 | Asunto | Estado |
 |---|---|
-| Despliegue en la Universidad de Sevilla | No hecho: el servidor estudiado tenía PHP 7.2/7.3, insuficiente. Pendiente de hablar con la Universidad |
+| Despliegue en la Universidad de Sevilla | No hecho: el servidor estudiado tenía PHP 7.2/7.3, insuficiente. Pendiente de la respuesta de la Universidad |
 | Correo saliente | Los avisos se enviaron por SMTP a un servidor de pruebas local (Mailpit) con el contenido esperado, pero no se ha probado la entrega a una bandeja real; hace falta un SMTP con un remitente válido |
 | Tareas programadas | La anonimización a los dos años no se ha comprobado en el servidor del equipo; en el entorno de pruebas se verificó con datos de ejemplo |
 | Lector de pantalla | Probado con Narrador; NVDA sin probar |

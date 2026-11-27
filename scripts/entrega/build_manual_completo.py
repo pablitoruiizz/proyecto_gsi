@@ -289,12 +289,12 @@ def anexos(doc):
     titulo_con_ancla(doc, "Anexo D. Estado, pendientes y límites a 27/11/2026", 1, "anexoD")
     parrafo(doc, "Resumen de lo que **no** se ha podido comprobar o queda por hacer. El detalle está en el apartado de pendientes y límites de cada manual de administrador.")
     filas = [
-        ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de hablar con la Universidad"],
+        ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de la respuesta de la Universidad"],
         ["Portal web", "Correo saliente real", "Los avisos se enviaron por SMTP a un servidor de pruebas local con el contenido esperado; no se ha probado la entrega a una bandeja real (hace falta un SMTP con un remitente válido)"],
         ["Portal web", "Anonimización a los dos años", "Probada con datos de ejemplo; no comprobada en el servidor del equipo"],
         ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA sin probar"],
         ["DMS", "Cuenta del CADUS como propietaria", "Pendiente en los cuatro sitios"],
-        ["DMS", "Cuentas de delegado y de estudiante", "No existen; los permisos no se han probado con cuentas reales de esos roles"],
+        ["DMS", "Cuentas de delegado y de estudiante", "No existen; los permisos no se han probado con cuentas reales de esos roles. Pendiente de la respuesta de la Universidad de Sevilla"],
         ["Red social", "Aplicación de Power Apps", "Sin publicar; no integrada en Teams"],
         ["Red social", "Planes de la Ejecutiva y de las delegaciones", "Capturados el 27/11/2026; sin prueba de otra persona"],
         ["Red social", "Cuentas de delegación reales", "No existen en Teams: es un piloto con datos de ejemplo"]]
