@@ -16,6 +16,9 @@ if (!is_email($destino)) { exit("Indica una dirección de destino válida.\n"); 
 if (!defined('CADUS_SMTP_SERVIDOR')) { exit("Falta el SMTP: define CADUS_SMTP_SERVIDOR (y las demás CADUS_SMTP_*) en wp-config.php.\n"); }
 echo 'SMTP: ', CADUS_SMTP_SERVIDOR, ':', defined('CADUS_SMTP_PUERTO') ? CADUS_SMTP_PUERTO : 587, ' · remitente: ', cadus_correo_remitente(), "\n";
 
+// al cambiar el correo de test-estudiante WordPress avisa a la dirección vieja (un example.org que rebota): no se quiere ese envío
+add_filter('send_email_change_email', '__return_false');
+add_filter('send_password_change_email', '__return_false');
 add_action('wp_mail_failed', function ($e) { echo '  ERROR de envío: ', $e->get_error_message(), "\n"; });
 add_filter('cadus_buzon_correo_avisos', function () use ($destino) { return $destino; }); // el aviso «a la Ejecutiva» va también al destino de prueba
 

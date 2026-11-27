@@ -17,7 +17,7 @@ El portal es un **WordPress 7.1.4** con un plugin propio (`cadus-portal`) que im
 | Plugin propio | `cadus-portal` (única parte versionada en Git junto con el contenido del repositorio) |
 | Plugins de terceros activos | Advanced Custom Fields (ACF), Fluent Forms, Members, The Events Calendar, Yoast SEO, WP Fastest Cache, WP Statistics, Wordfence y Akismet |
 | Requisitos del servidor | `mod_rewrite` activo y el `.htaccess` de WordPress; ACF, Fluent Forms y Blocksy instalados |
-| Correo saliente | Necesario para los avisos de tickets y para los enlaces de «¿Has olvidado tu contraseña?» y de relevo. Los avisos se envían a `dcadus@us.es`. Hace falta un **remitente válido** (WordPress usa `wordpress@` más el dominio del sitio, y con `localhost` PHPMailer lo rechaza): fija uno con un plugin SMTP o con el filtro `wp_mail_from` |
+| Correo saliente | Necesario para los avisos de tickets y para los enlaces de «¿Has olvidado tu contraseña?» y de relevo. Los avisos se envían a `dcadus@us.es`. Hace falta un **remitente válido** (WordPress usa `wordpress@` más el dominio del sitio, y con `localhost` PHPMailer lo rechaza): el módulo `includes/correo.php` lo fija solo (el de `CADUS_SMTP_REMITENTE`, el de `CADUS_SMTP_USUARIO` o el correo de los avisos del buzón) y puede enviar por un SMTP que se configura en `wp-config.php` con las constantes `CADUS_SMTP_SERVIDOR`, `CADUS_SMTP_USUARIO` y `CADUS_SMTP_CLAVE` (con Gmail, una contraseña de aplicación; las credenciales no van en el repositorio) |
 
 Qué vive dónde: los contenidos y ajustes hechos desde el panel están en la base de datos; los archivos de plugins propios y la documentación están en el repositorio de GitHub; `wp-config.php`, `wp-content/uploads/` y las credenciales **solo** están en el equipo anfitrión y no se versionan.
 
@@ -177,7 +177,7 @@ Hay baterías automáticas en `scripts/pruebas/` (se lanzan desde la raíz del r
 | Asunto | Estado |
 |---|---|
 | Despliegue en la Universidad de Sevilla | No hecho: el servidor estudiado tenía PHP 7.2/7.3, insuficiente. Pendiente de la respuesta de la Universidad |
-| Correo saliente | Los avisos se enviaron por SMTP a un servidor de pruebas local (Mailpit) con el contenido esperado, pero no se ha probado la entrega a una bandeja real; hace falta un SMTP con un remitente válido |
+| Correo saliente | Los avisos salen por el SMTP de Gmail configurado en `wp-config.php` y un correo de prueba llegó a una bandeja de Gmail; los enviados a una dirección `@alum.us.es` no llegaron (ni a recibidos ni a no deseado) en los 15 minutos siguientes, pendiente de averiguar si el filtro de la Universidad los retiene |
 | Tareas programadas | La anonimización a los dos años no se ha comprobado en el servidor del equipo; en el entorno de pruebas se verificó con datos de ejemplo |
 | Lector de pantalla | Probado con Narrador; NVDA sin probar |
 | Pruebas con personas ajenas | Los tiempos de tareas (T1 a T3) se midieron de forma funcional, sin cronometrar con una persona externa |
