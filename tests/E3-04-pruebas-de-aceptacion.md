@@ -2,7 +2,7 @@
 
 **Historias:** HU-14 a HU-23 (menos HU-21, cancelada) · **Reglas:** RN-01, RN-03, RN-04 · **Requisitos:** RF-02, RF-04, RF-14, RNF-02, RNF-04, RNF-08
 **22/11/2026: se repitieron H16-1 a H16-6 con clics reales y se ejecutaron T1, T2, H14-2 a H14-4, H15-1 y H15-3 (estas dos, parciales) en el WordPress de WampServer (Apache, PHP 8.3, MySQL 8.4, base `bd_cadus`, con Fluent Forms y The Events Calendar), con el navegador integrado; los datos de ese sitio difieren de los del 15/11 (4 noticias del 14 al 17/10, 2 documentos en actas). No se han probado dispositivos reales, lector de pantalla ni las cuentas por rol.** **Pruebas H16-1 a H16-6 ejecutadas el 15/11/2026 en el WordPress local (peticiones anónimas desde el navegador integrado, datos de ejemplo; no se usó el formulario con clics, no se probó el panel de la Ejecutiva).** **Quién prueba:** el guion es de Álvaro; las ejecuciones son parciales: el 15/11 por peticiones anónimas y el 22/11 por Claude con Pablo (H14-5 la hizo Pablo con su móvil; H16-7 y H17-3 las ejecutó Claude en nombre de Pablo). **No hay prueba cruzada completa.** · **Fecha:** 15/11/2026 y 22/11/2026 · **Versión probada:** `main` con los cambios locales del 22/11
-**Estado del guion:** en ejecución. Los casos con la columna «Resultado» vacía **no se han ejecutado**; un caso que no se haya podido ejecutar se anota como «Pendiente» con el motivo.
+**Estado del guion a 27/11/2026:** ejecutado. Son 43 casos: 39 OK y 4 parciales (T1 a T3, sin cronometrar con una persona externa, y P5, sin envío real de correo). Este documento es a la vez el guion y el registro histórico de cada caso: las cuentas `test-estudiante`, `test-delegado` y `test-ejecutivo` que citan las instrucciones **se borraron el 26/11/2026** (véanse las «Comprobaciones finales») y las referencias a «Historias integradas» al 14/11 son el estado de entonces. Un caso que no se haya podido ejecutar se anota como «Pendiente» con el motivo.
 
 ## Cómo se usa este guion
 
@@ -16,7 +16,7 @@
 | Historia | Responsable | ¿En `main`? |
 |---|---|---|
 | HU-14a Menús y portada en móvil y tablet | Joaquín | Sí (14/11) |
-| HU-14b Directorio, tablas y fichas en móvil y tablet | Álvaro | No: en la rama `feature/hu-14b-directorio-movil`, sin PR a 14/11 |
+| HU-14b Directorio, tablas y fichas en móvil y tablet | Álvaro | No el 14/11 (rama `feature/hu-14b-directorio-movil`, sin PR); **fusionada en `main` el 15/11** (PR #77) |
 | HU-14c Buzón, calendario y mediación en móvil y tablet | Pablo | Sí (14/11) |
 | HU-15a/b/c Accesibilidad | Joaquín, Marcos, Miguel Ángel | Sí (14/11) |
 | HU-16a Filtros por palabra clave y fecha (noticias y actas) | Álvaro | Sí (14/11) |

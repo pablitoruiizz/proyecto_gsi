@@ -4,9 +4,11 @@ Uso: python scripts/dms/empaquetar_dms.py            (solo el DMS)
 Antes: python scripts/dms/build_doc_dms.py y scripts/dms/exportar_pdf.ps1. Comprueba el contenido frente a la lista del profesor."""
 import json
 import os
+import re
 import shutil
 import sys
 import zipfile
+from urllib.parse import unquote
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 DMS = os.path.join(RAIZ, "docs", "dms")
@@ -42,7 +44,12 @@ if FINAL:
     CMS += [
         ("docs/dms/entrega/cms/Entrega-final-CMS-CADUS.docx", "CMS/Entrega-final-CMS-CADUS.docx"),
         ("docs/dms/entrega/cms/Entrega-final-CMS-CADUS.pdf", "CMS/Entrega-final-CMS-CADUS.pdf"),
-        ("cms-wordpress/backup-db/bd_cadus_v1_sprint3.sql", "CMS/bd_cadus_v1_sprint3.sql"),
+        # copia SANEADA de la base (scripts/entrega/sanear_volcado.php): nunca el volcado completo, que lleva cuentas y registros reales
+        ("cms-wordpress/backup-db/bd_cadus_v1_sprint3_demo.sql", "CMS/bd_cadus_v1_sprint3.sql"),
+        ("cms-wordpress/backup-db/LEEME-volcado-demo.md", "CMS/LEEME-volcado.md"),
+        ("tests/E2-12-fichas-y-edicion.md", "CMS/seguimiento/E2-12-fichas-y-edicion.md"),
+        ("docs/scrum/codex_revision_programacion_23_11.md", "CMS/revisiones/codex_revision_programacion_23_11.md"),
+        ("docs/scrum/codex_revision_cierre_25_11.md", "CMS/revisiones/codex_revision_cierre_25_11.md"),
     ]
     _cap4 = os.path.join(RAIZ, "docs", "entrega", "img", "capturas4")
     CMS += [(f"docs/entrega/img/capturas4/{_f}", f"CMS/capturas-final/{_f}") for _f in sorted(os.listdir(_cap4))] if os.path.isdir(_cap4) else []
@@ -149,15 +156,25 @@ LEEME_CMS = """
 - `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
 """
 if FINAL:
-    LEEME_CMS += """- `Entrega-final-CMS-CADUS.docx` / `.pdf`: **documento con el estado vigente del CMS a 29/11/2026** (backlog, Sprint 3, burndown, implementación con contenido real, pruebas y pendientes). Prevalece sobre `ACTUALIZACION-22-11-estado-del-cms.md` y sobre la adenda del Sprint 3 donde se contradigan.
+    LEEME_CMS += """- `Entrega-final-CMS-CADUS.docx` / `.pdf`: **documento con el estado vigente del CMS a 26/11/2026** (backlog, Sprint 3, burndown, implementación con contenido real, pruebas y pendientes), para la entrega del 29/11/2026. Prevalece sobre `ACTUALIZACION-22-11-estado-del-cms.md` y sobre la adenda del Sprint 3 donde se contradigan.
 - `capturas-final`: capturas del portal con el contenido real (noticias, actas, normativa y calendario).
-- `bd_cadus_v1_sprint3.sql`: volcado de la base de datos del portal (sin cuentas ni tickets de prueba).
+- `bd_cadus_v1_sprint3.sql` y `LEEME-volcado.md`: **copia saneada** de la base de datos del portal, con tres cuentas de demostración (administración, Ejecutiva y delegación) y sin cuentas reales, sesiones, registros de Wordfence ni de estadísticas, tickets ni cuentas de prueba. El `LEEME-volcado.md` explica qué conserva, las cuentas de demostración y cómo restaurarla.
+- `seguimiento/E2-12-fichas-y-edicion.md` y `revisiones/`: pruebas de las fichas de delegaciones y encargos de las revisiones con Codex del 23 y 25/11 citadas en el documento final.
+- Los `.md` de seguimiento conservan algunos enlaces al repositorio de GitHub; los que no apuntan a un archivo del zip aparecen como texto con la ruta del repositorio.
 """
 
 
-LEEME = f"""# Versión definitiva del DMS — CADUS
+CABECERA = """# Entrega final del proyecto GSI — CADUS (CMS + DMS + red social v2)
+
+Entrega del domingo 29/11/2026. Los documentos describen el estado a 26/11/2026. Quedan **pendientes**, y así constan en ellos: la retrospectiva en grupo del Sprint 3, algunas pruebas cruzadas (HU-14b y HU-16a de Joaquín, HU-22 de Álvaro), los casos T1 a T3 y P5 de las pruebas de aceptación (parciales) y la prueba con NVDA.
+
+Equipo de la entrega: Pablo Ruiz Vidal (Product Owner), Joaquín Luna Canela (Scrum Master), Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez. Miguel Ángel Camacho Martín, miembro del CADUS, colaboró en el DMS y en el contacto con el cliente hasta el 16/11/2026.
+""" if FINAL else """# Versión definitiva del DMS — CADUS
 
 Equipo: Pablo Ruiz Vidal, Joaquín Luna Canela, Miguel Ángel Camacho Martín, Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez.
+"""
+
+LEEME = f"""{CABECERA}
 
 Cambio pedido por el profesor sobre la entrega del 08/11: dividir los casos de uso por roles o secciones y añadir dos casos en cada documento. Ahora hay 4 documentos de casos de uso, uno por sección, con 2 casos cada uno (8 en total, con los nuevos CU-D07 y CU-D08), y el REM pasa a la versión {VERSION}.
 
@@ -201,6 +218,60 @@ def contenido_pdf(ruta):
     return "\n".join(pagina.get_text() for pagina in pymupdf.open(ruta))
 
 
+ENLACE = re.compile(r'(!?)\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)')
+EXTERNO = re.compile(r"^(https?:|mailto:|#|data:)")
+
+
+def reescribir_enlaces(destino):
+    """Los .md del paquete conservan los enlaces del repositorio: se adaptan al árbol del zip y, si el destino no va en el zip,
+    el enlace pasa a texto con la ruta del repositorio. Devuelve (adaptados, pasados a texto)."""
+    origen_de = {d: os.path.normpath(os.path.join(RAIZ, o)) for o, d in ARCHIVOS}
+    destino_de = {os.path.normcase(v): k for k, v in origen_de.items()}
+    raiz_n = os.path.normcase(RAIZ)
+    cuenta = {"re": 0, "txt": 0}
+    for d, src in origen_de.items():
+        ruta = os.path.join(destino, d)
+        if not d.endswith(".md") or not os.path.exists(ruta):
+            continue
+        texto = open(ruta, encoding="utf-8").read()
+
+        def cambiar(m):
+            img, txt, objetivo = m.group(1), m.group(2), m.group(3)
+            if EXTERNO.match(objetivo):
+                return m.group(0)
+            base, _, ancla = unquote(objetivo).partition("#")
+            resuelto = os.path.normcase(os.path.normpath(os.path.join(os.path.dirname(src), base)))
+            if resuelto in destino_de:
+                nuevo = os.path.relpath(os.path.join(destino, destino_de[resuelto]), os.path.dirname(ruta)).replace(os.sep, "/")
+                cuenta["re"] += 1
+                return f"{img}[{txt}]({nuevo}{'#' + ancla if ancla else ''})"
+            en_repo = os.path.relpath(resuelto, raiz_n).replace(os.sep, "/") if resuelto.startswith(raiz_n) else base
+            cuenta["txt"] += 1
+            return f"*(imagen en el repositorio: `{en_repo}`)*" if img else f"{txt} (en el repositorio de GitHub: `{en_repo}`)"
+
+        nuevo_texto = ENLACE.sub(cambiar, texto)
+        if nuevo_texto != texto:
+            open(ruta, "w", encoding="utf-8", newline="").write(nuevo_texto)
+    return cuenta["re"], cuenta["txt"]
+
+
+def enlaces_rotos(destino):
+    """Enlaces relativos de los .md del paquete que no apuntan a un archivo del paquete."""
+    rotos = []
+    for base, _, fs in os.walk(destino):
+        for f in fs:
+            if not f.endswith(".md"):
+                continue
+            ruta = os.path.join(base, f)
+            for m in ENLACE.finditer(open(ruta, encoding="utf-8").read()):
+                objetivo = m.group(3)
+                if EXTERNO.match(objetivo):
+                    continue
+                if not os.path.exists(os.path.normpath(os.path.join(base, unquote(objetivo.partition("#")[0])))):
+                    rotos.append(f"{os.path.relpath(ruta, destino)} -> {objetivo}")
+    return rotos
+
+
 def main():
     # se construye en una carpeta temporal y el paquete anterior solo se sustituye si todas las comprobaciones pasan
     destino = RAIZ_ZIP + ".tmp"
@@ -221,8 +292,25 @@ def main():
     if faltan:
         shutil.rmtree(destino, ignore_errors=True)
         sys.exit("faltan archivos:\n  - " + "\n  - ".join(faltan))
+    n_re, n_txt = reescribir_enlaces(destino)
+    rotos = enlaces_rotos(destino)
+    print(f"  [{'ok' if not rotos else 'FALTA'}] enlaces de los .md: {n_re} adaptados al zip, {n_txt} pasados a texto, {len(rotos)} rotos")
+    for r in rotos[:10]:
+        print("      ", r)
+    if rotos:
+        shutil.rmtree(destino, ignore_errors=True)
+        sys.exit("hay enlaces relativos rotos en los .md del paquete: no se genera el zip")
     if FINAL:
         mal_c = 0
+        # el volcado de la entrega no puede llevar datos de las cuentas reales ni de Wordfence
+        sql = open(os.path.join(destino, "CMS", "bd_cadus_v1_sprint3.sql"), encoding="utf-8", errors="replace").read().lower()
+        for prohibido in ("@gmail.com", "@hotmail", "@outlook", "session_tokens", "apikey", "100.106.47.100", "onedrive", "ruizv"):
+            ok_s = prohibido not in sql
+            mal_c += not ok_s
+            print(f"  [{'ok' if ok_s else 'FALTA'}] bd_cadus_v1_sprint3.sql: no debe contener «{prohibido}»")
+        ok_u = "demo-admin" in sql and "insert into `wp_wflogins`" not in sql
+        mal_c += not ok_u
+        print(f"  [{'ok' if ok_u else 'FALTA'}] bd_cadus_v1_sprint3.sql: cuentas de demostración y sin registros de acceso de Wordfence")
         for archivo, texto, debe in CONTROLES_FINAL:
             ruta_c = os.path.join(RAIZ, archivo)
             t = open(ruta_c, encoding="utf-8").read() if os.path.exists(ruta_c) else ""

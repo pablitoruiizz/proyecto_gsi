@@ -24,16 +24,16 @@ Pablo y Marcos no tienen historias con puntos este sprint: Pablo actualiza el RE
 
 | Tarea | Historia | Qué incluye | Quién | Estado a 26/11 |
 |---|---|---|---|---|
-| R-11 | — | REM actualizado con los requisitos de automatización | Pablo | Hecho: REM 1.1 con RF-R13 (Planner) y glosario; falta exportar el PDF desde REMUS |
+| R-11 | — | REM actualizado con los requisitos de automatización | Pablo | Hecho: REM 1.1 con RF-R13 (Planner) y glosario; PDF exportado desde REMUS el 26/11/2026 (`REM-RSI-v1.1.pdf`) |
 | R-12a | RSI-HU-07 | Flujo «Aviso de tarea nueva» (Planner a Teams) con capturas | Joaquín | Hecho el 25/11: flujo creado y capturas 12a y 12b |
 | R-12b | RSI-HU-07 | Flujo «Aviso de tareas que vencen» (programado cada día) con capturas | Joaquín | Hecho el 25/11: flujo creado y capturas 12c y 12d |
 | R-12c | RSI-HU-07 | Prueba de los flujos por otra persona (Lab 8) | Marcos | Hecho el 25/11: los dos flujos probados con su cuenta (capturas 12e a 12l, `pruebas.md`) |
 | R-13 | RSI-HU-08 | Aplicación de PowerApps «Estado de las delegaciones», o la alternativa documentada si el tenant no la permite | Álvaro | Hecho: aplicación guardada, ejecutada y compartida; probada por Marcos el 25/11 (capturas R13-01 a R13-07) |
 | R-06c | RSI-HU-09 | Decidir el patrón del plan de la asamblea y rehacerlo en Planner con su captura | Joaquín | Hecho el 25/11: plan rehecho con cuatro cubos, captura `08-planner.jpg` repetida y prueba de Marcos el 26/11 |
 | R-14a | RSI-HU-09 | UML de diseño con los cubos nuevos del plan de la asamblea | Álvaro | Hecho el 26/11: `uml-rsi-diseno.png` con el patrón de cada plan (PR #100) |
-| R-14b | — | Capturas explicadas y documento de la entrega | Pablo | En curso: documento y zip final del sábado 28/11 |
+| R-14b | — | Capturas explicadas y documento de la entrega | Pablo | Hecho el 26/11/2026: documento (Word y PDF) y zip final generados; falta solo enviarlo antes del 29/11 |
 | R-14c | — | SCRUM del sprint: planning, burndown diario y review | Joaquín | Hecho salvo la retrospectiva en grupo: planning, burndown al día y review (borrador del 26/11) |
-| R-10b | — | Pruebas cruzadas y revisión con Codex | Todos | En curso: pruebas de Marcos hechas; falta la revisión final con Codex |
+| R-10b | — | Pruebas cruzadas y revisión con Codex | Todos | Hecho: pruebas de Marcos y revisiones con Codex del 26/11 y del zip final (27/11), con sus hallazgos corregidos |
 
 ## Heredado del Sprint 1
 

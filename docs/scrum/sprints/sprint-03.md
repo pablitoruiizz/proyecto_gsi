@@ -255,32 +255,25 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 | Los informes (HU-14c, HU-17b, HU-20b) dicen lo que miden y lo que no | Móvil y tablet solo en emulación, sin dispositivos reales | Hecho: móvil real el 22/11 y tablet el 23/11, comprobados según Pablo |
 | El CMS, el DMS y la red social llevan documentación separada | Se perdió el contacto con el CADUS (Miguel Ángel dejó el trabajo el 16/11) y las tareas que dependían del cliente quedaron abiertas | Marcar «por confirmar» lo que dependa del CADUS y no planificar tareas que dependan de un contacto que ya no está |
 
-### Retrospectiva en grupo (reunión de 30 minutos)
+### Retrospectiva en grupo (pendiente)
 
-> **[COMPLETAR al terminar la reunión: fecha y asistentes. Borrar esta línea.]** Facilita Joaquín, como Scrum Master. La tabla anterior es la propuesta que se llevó escrita a la reunión; aquí se anota lo que el grupo confirmó, cambió o añadió. Los datos salen de `docs/scrum/burndown/sprint-03.csv` y de los Sprints 1 y 2 del CMS.
+> **La retrospectiva en grupo del Sprint 3 no se ha celebrado** (a 27/11/2026). La facilitará Joaquín, como Scrum Master, cuando el equipo se reúna durante 30 minutos. Lo que sigue son los datos y las propuestas que se llevarían a esa reunión: **no recogen ningún acuerdo del grupo**. Los datos salen de `burndown-sprint-03.csv` y de los Sprints 1 y 2 del CMS.
 
-**Datos que se enseñaron al grupo**
+**Datos para la reunión**
 
 | Indicador | Sprint 1 | Sprint 2 | Sprint 3 |
 |---|---|---|---|
 | Puntos comprometidos | 70 | 29 | 36 (44 con los 8 de HU-24) |
 | Cuándo se cerraron | 60 SP (86 %) el último día | 23 SP (79 %) los dos últimos días | 0 SP en las dos primeras semanas (26/10 a 08/11); 24 SP (55 %) el 12/11 y 33 SP (75 %) del 12 al 15/11 |
 
-El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se acordó actualizar el burndown cada día. La red social ya usa un script que lo hace en un comando (`scripts/redsocial/scrum_rsi_sprint.py`).
+El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se acordó actualizar el burndown cada día. La red social ya usa un script que lo hace en un comando (`scrum_rsi_sprint.py`, en el repositorio).
 
-**Lo que dijo el grupo**
+**Acciones propuestas por el Scrum Master** (sin acordar; el grupo las confirmará o las sustituirá en la reunión, con un máximo de tres)
 
-| Qué fue bien | Qué no | Qué cambiamos |
+| Acción | Responsable propuesto | Cómo se comprobaría |
 |---|---|---|
-| **[COMPLETAR en la reunión]** | **[COMPLETAR en la reunión]** | **[COMPLETAR en la reunión]** |
-
-**Acciones acordadas** (como máximo tres; las dos primeras son propuestas del Scrum Master para confirmar o sustituir en la reunión)
-
-| Acción | Responsable | Cómo se comprueba |
-|---|---|---|
-| Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigila Joaquín | Cada prueba de `tests/` está firmada por alguien distinto de quien la implementó |
+| Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigilaría Joaquín | Cada prueba está firmada por alguien distinto de quien la implementó |
 | Burndown actualizado cada día y un hito intermedio que alguien vigile | Joaquín | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
-| **[COMPLETAR en la reunión]** | **[COMPLETAR]** | **[COMPLETAR]** |
 
 ## Actualización del 25/11/2026 (cierre de las tareas abiertas)
 
@@ -306,6 +299,6 @@ Este apartado prevalece sobre el del 25/11 donde se contradigan.
 | HU-20 rendimiento | Lighthouse de la portada en móvil, 98 con el contenido real (91 antes de optimizar y 99 después, 12/11) (H20-1); el límite de 8 MB de imágenes no se aplicaba a las subidas por la API REST del editor de bloques, corregido y repetido (H20-2) |
 | HU-22 relevo de la cuenta | H22-1 a H22-5 ejecutados el 26/11 por Pablo con Claude, con sesiones reales de las cuentas de prueba; todos OK. No son prueba de otra persona |
 | E3-04 pruebas de aceptación | 43 casos: 39 OK y 4 parciales (T1 a T3 y P5) |
-| E3-01 retrospectiva en grupo (#57) | **Cerrada el 26/11 como pendiente:** la retrospectiva en grupo no se ha hecho y los huecos «COMPLETAR» siguen en este documento; se rellenan cuando el equipo la haga |
+| E3-01 retrospectiva en grupo (#57) | **Cerrada el 26/11 como pendiente:** la retrospectiva en grupo no se ha hecho y el apartado de la retrospectiva queda como pendiente, con los datos y las propuestas que se llevarían a la reunión |
 | E3-02 volcado y limpieza (#58) | **Cerrada el 26/11:** ficha 32 devuelta a su autor, cuentas y tickets de prueba borrados y volcado `bd_cadus_v1_sprint3.sql` generado |
 | E3-06 documento final (#62) | **Cerrada el 26/11:** REM de la red social exportado desde REMUS (`REM-RSI-v1.1.pdf`) y zip final `Entrega-29-11-CADUS-CMS-DMS-RSI-v2.zip` generado con todos los controles en verde; falta solo enviarlo |

@@ -53,4 +53,4 @@ Business Case (con la estructura vista en clase) · grupos principales y piloto 
 
 1. ~~La estructura del Business Case de clase~~: en clase solo se dio el esquema de la pizarra (SCRUM review; REM con Business Case y requisitos de herramienta; UML de análisis y de diseño; implementación). No hay estructura de Business Case: se usa una estándar de siete apartados en `business-case.md`, que se reordenará si el profesor indica otra.
 2. Qué grupos son «los principales» para el piloto. Propuesta de partida: Ejecutiva, Delegaciones (con un subgrupo por centro) y Asamblea; herramientas: archivos, calendario, Planner y Forms.
-3. Si el tenant ofrece Power Automate y PowerApps (se comprueba antes del Lab 8).
+3. ~~Si el tenant ofrece Power Automate y PowerApps (se comprueba antes del Lab 8).~~ Respondido el 25/11/2026: sí. Joaquín creó dos flujos de Power Automate y Álvaro una aplicación de Power Apps, y Marcos los probó con su cuenta (`pruebas.md`); la aplicación no está publicada y la ejecución programada del segundo flujo no se ha observado.

@@ -148,3 +148,4 @@ __pycache__/
 
 # Configuración local de Claude Code (permisos personales)
 .claude/settings.local.json
+cms-wordpress/backup-db/LEEME-volcado-demo.md

@@ -8,6 +8,9 @@ if (PHP_SAPI !== 'cli') { http_response_code(403); exit('Solo desde la línea de
 $_SERVER['HTTP_HOST'] = 'localhost';
 require __DIR__ . '/../../cms-wordpress/wp-load.php';
 global $wpdb;
+if (getenv('CADUS_DB_NAME')) { // base COPIA (por ejemplo la saneada para entregar); no se usa en el volcado normal
+    $wpdb->select(getenv('CADUS_DB_NAME'));
+}
 
 $destino = $argv[1] ?? __DIR__ . '/../../cms-wordpress/backup-db/bd_cadus_v1_sprint2.sql';
 $f = fopen($destino, 'w');

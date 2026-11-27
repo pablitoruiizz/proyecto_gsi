@@ -39,7 +39,7 @@ Cada prueba se anota con fecha, nombre y resultado, y con ellas se actualiza el 
 
 - **Hecho por Pablo (con Claude):** cuarto sitio de SharePoint `cadus-votaciones` (la biblioteca Votaciones sale de Órganos de gobierno para que los permisos se concedan sobre el sitio, como pide el Lab 4; la antigua y su plantilla están en la papelera); columnas Norma y Versión en Normativa; CU-D07 y CU-D08 ejecutados y con captura; `CU-Normativa.md` escrito en lugar de Joaquín; un `.rem` por sección además de `DMS.rem` (`scripts/dms/dividir_rem.py`); diagrama de diseño con los estereotipos de la diapositiva 3 y los cuatro sitios; documentos Word y PDF regenerados y `empaquetar_dms.py` con los `.rem` de sección.
 - **Cambio en el reparto de pruebas:** Pablo escribió y ejecutó CU-Normativa, así que la prueba cruzada de CU-Normativa (que figuraba a su nombre) pasa a Joaquín. CU-D08 y CU-D07 están ejecutados por Pablo, no por otra persona: no cuentan todavía como probados.
-- **Pendiente de Pablo:** exportar `DMS.rem` (y, si da tiempo, los cuatro `.rem` de sección) a HTML desde REMUS y pasar `scripts/dms/rem_a_pdf.py`; después `python scripts/dms/empaquetar_dms.py`.
+- **Pendiente de Pablo (a 13/11):** exportar `DMS.rem` (y, si da tiempo, los cuatro `.rem` de sección) a HTML desde REMUS y pasar `scripts/dms/rem_a_pdf.py`; después `python scripts/dms/empaquetar_dms.py`. **Hecho después:** el REM se exportó (`REM-DMS-v1.1.pdf`) y el zip se generó con el empaquetador.
 - **Burndown:** sigue en 4 SP: DMS-HU-08 y DMS-HU-09 están ejecutadas pero, con la definición de hecho de este sprint, no se cierran sin la prueba cruzada.
 
 ## Definición de hecho
