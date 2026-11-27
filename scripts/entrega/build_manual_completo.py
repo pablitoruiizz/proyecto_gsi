@@ -37,12 +37,12 @@ NOMBRE = {"m1u": "Parte I, Manual de usuario del portal web", "m1a": "Parte I, M
 
 # referencias entre manuales: (texto de origen, ancla, texto que se muestra). Van de más específica a más general.
 REFS = [
-    ("(véase el manual de administrador, apartado 4)", "m3a", "(véase la Parte III, Manual de administrador de la red social, apartado 4)"),
+    ("(véase el manual de administrador, apartado 4)", "m3a_4", "(véase la Parte III, Manual de administrador de la red social, apartado 4)"),
     ("(véase el manual de administrador del DMS)", "m2a", "(véase la Parte II, Manual de administrador del DMS)"),
-    ("(véase el manual de administrador)", "m2a", "(véase la Parte II, Manual de administrador del DMS, apartado 7)"),
+    ("(véase el manual de administrador)", "m2a_7", "(véase la Parte II, Manual de administrador del DMS, apartado 7)"),
     ("(véase el manual de la red social)", "m3a", "(véase la Parte III, Manual de administrador de la red social)"),
-    ("(véase el manual de usuario, CU-D07)", "m2u", "(véase la Parte II, Manual de usuario del DMS, apartado 6)"),
-    ("Véase el manual de usuario", "m2u", "Véase la Parte II, Manual de usuario del DMS, apartados 5 y 7"),
+    ("(véase el manual de usuario, CU-D07)", "m2u_6", "(véase la Parte II, Manual de usuario del DMS, apartado 6)"),
+    ("Véase el manual de usuario", "m2u_5", "Véase la Parte II, Manual de usuario del DMS, apartados 5 y 7"),
     ("(Manual de administrador)", "m1a", "(Parte I, Manual de administrador del portal web)"),
     ("«Manual de administrador del portal»", "m1a", "Parte I, Manual de administrador del portal web"),
     ("«Manual de usuario del portal»", "m1u", "Parte I, Manual de usuario del portal web"),
@@ -152,7 +152,7 @@ def tabla_con_enlaces(doc, cabecera, filas, enlaces, anchos=None, titulo=None):
     return t
 
 
-def volcar(doc, ruta, base):
+def volcar(doc, ruta, base, ancla_m=None):
     """Vuelca un manual (sin título ni subtítulo) con sus apartados como títulos de nivel 3 y 4."""
     lineas = open(ruta, encoding="utf-8").read().splitlines()
     i = 1
@@ -171,7 +171,10 @@ def volcar(doc, ruta, base):
         elif l.startswith("### "):
             doc.add_heading(l[4:].strip(), 4)
         elif l.startswith("## "):
-            doc.add_heading(l[3:].strip(), 3)
+            h3 = doc.add_heading(l[3:].strip(), 3)
+            num = re.match(r"(\d+)\.", l[3:].strip())
+            if ancla_m and num:
+                marcar(h3, f"{ancla_m}_{num.group(1)}")
         elif img:
             pie, archivo = img.group(1), os.path.normpath(os.path.join(base, img.group(2)))
             if os.path.exists(archivo):
@@ -291,14 +294,16 @@ def anexos(doc):
     filas = [
         ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de la respuesta de la Universidad"],
         ["Portal web", "Correo saliente real", "Los avisos salen por SMTP y un correo de prueba llegó a una bandeja de Gmail; los cuatro avisos enviados a una dirección @alum.us.es llegaron con 65 a 70 minutos de retraso, por el filtro de la Universidad"],
+        ["Portal web", "Tiempos de tareas T1 a T3", "Los cronometró Pablo el 27/11 (50, 10 y 18 s, con el límite en 60 s); Pablo conoce el portal, así que falta medirlos con una persona externa y en móvil"],
+        ["Portal web", "Prueba cruzada del relevo de cuenta (HU-22)", "No la hizo otra persona: sus casos los ejecutó Claude en nombre de Pablo (26/11, repetidos el 27/11 con 13 comprobaciones OK)"],
         ["Portal web", "Anonimización a los dos años", "Probada con datos de ejemplo; no comprobada en el servidor del equipo"],
         ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA probado el 27/11 según Pablo, sin registro paso a paso"],
         ["DMS", "Cuenta del CADUS como propietaria", "Pendiente en los cuatro sitios"],
         ["DMS", "Cuentas de delegado y de estudiante", "No existen; los permisos no se han probado con cuentas reales de esos roles. Pendiente de la respuesta de la Universidad de Sevilla"],
-        ["Red social", "Aplicación de Power Apps", "Publicada según Álvaro (27/11), sin captura ni comprobación de otra persona; no consta que esté integrada en Teams"],
+        ["Red social", "Aplicación de Power Apps", "Publicada según Álvaro y confirmada de palabra por Marcos (27/11), sin captura; no consta que esté integrada en Teams"],
         ["Red social", "Planes de la Ejecutiva y de las delegaciones", "Capturados el 27/11/2026; sin prueba de otra persona"],
         ["Red social", "Cuentas de delegación reales", "No existen en Teams: es un piloto con datos de ejemplo"]]
-    enl = {(0, 0): "m1a", (1, 0): "m1a", (2, 0): "m1a", (3, 0): "m1a", (4, 0): "m2a", (5, 0): "m2a", (6, 0): "m3a", (7, 0): "m3a", (8, 0): "m3a"}
+    enl = {(0, 0): "m1a", (1, 0): "m1a", (2, 0): "m1a", (3, 0): "m1a", (4, 0): "m1a", (5, 0): "m1a", (6, 0): "m2a", (7, 0): "m2a", (8, 0): "m3a", (9, 0): "m3a", (10, 0): "m3a"}
     tabla_con_enlaces(doc, ["Sistema", "Asunto", "Estado"], filas, enl, [3, 5.5, 8.5])
 
     titulo_con_ancla(doc, "Anexo E. Glosario", 1, "anexoE")
@@ -334,7 +339,7 @@ def main():
         titulo_con_ancla(doc, f"{parte}. {titulo_p}", 1, ancla_p)
         for archivo, ancla_m, titulo_m in manuales:
             titulo_con_ancla(doc, titulo_m, 2, ancla_m)
-            volcar(doc, os.path.join(M.ORIGEN, archivo), M.ORIGEN)
+            volcar(doc, os.path.join(M.ORIGEN, archivo), M.ORIGEN, ancla_m)
         doc.add_page_break()
     anexos(doc)
     os.makedirs(os.path.dirname(SALIDA), exist_ok=True)

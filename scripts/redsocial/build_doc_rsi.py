@@ -21,7 +21,7 @@ CAP = os.path.join(RSI, "capturas")
 D = json.load(open(os.path.join(RAIZ, "scripts", "remus", "rsi_data.json"), encoding="utf-8-sig"))
 VERSION = ".".join(str(n) for n in D["version"])
 FECHA_ENTREGA = "29/11/2026"
-FECHA = "26/11/2026"  # fecha del estado que se describe; actualizar al regenerar
+FECHA = "27/11/2026"  # fecha del estado que se describe; actualizar al regenerar
 AVISOS = B.AVISOS
 
 # capturas previstas: archivo -> (pie, explicación, requisitos). Solo se incluyen las que existen en docs/redsocial/capturas.
@@ -73,7 +73,7 @@ CAP_GRUPOS = [  # (título de la sección, introducción, capturas)
      ["08-planner.jpg", "R09-01a-panel-cubos-1-a-3.jpg", "R09-01b-panel-cubo-4.jpg", "R09-02b-tarea-completada.jpg", "R09-02d-graficos-despues.jpg", "R09-03-calendario.jpg", "08c-planner-ejecutiva.jpg", "08d-planner-delegaciones.jpg"]),
     ("6.3 Power Automate: avisos automáticos (Lab 8, RF-R11)", "Dos flujos creados por Joaquín en el tenant de la US y probados por Marcos con su cuenta (25/11/2026); la ejecución programada del segundo se observó el 26 y el 27/11/2026.",
      ["12a-power-automate-flujo-tarea.jpg", "12b-power-automate-aviso-tarea.jpg", "12c-power-automate-flujo-vencimiento.jpg", "12d-power-automate-aviso-vencimiento.jpg", "12e-r12c-tarea-creada.jpg", "12f-r12c-aviso-en-general.jpg", "12i-r12c-tabla-con-tarea.jpg", "12j-r12c-tabla-sin-tarea.jpg", "12l-r12c-copropietarios-flujo2.jpg", "12n-power-automate-ejecucion-programada-26-11.jpg", "12m-power-automate-ejecucion-programada-27-11.jpg"]),
-    ("6.4 PowerApps: estado de las delegaciones (Lab 8, RF-R12)", "Aplicación de prueba con datos de ejemplo, en el espacio personal de Álvaro; Álvaro dice que ya está publicada (27/11, de palabra, sin captura). Lo que no se comprobó está en la sección 10.",
+    ("6.4 PowerApps: estado de las delegaciones (Lab 8, RF-R12)", "Aplicación de prueba con datos de ejemplo, en el espacio personal de Álvaro; Álvaro dice que ya está publicada y Marcos, de palabra, confirma que la tiene (27/11, sin captura). Lo que no se comprobó está en la sección 10.",
      ["R13-01-lista-delegaciones-sharepoint.jpg", "R13-02-app-guardada-power-apps-studio.jpg", "R13-03-app-ejecutada-vista-previa.jpg", "R13-06-app-ejecutada-marcos.jpg", "R13-07-detalle-derecho-marcos.jpg"]),
 ]
 # capturas que necesita cada caso de uso para considerarse observado
@@ -265,7 +265,7 @@ def principal():
     doc.add_heading("9. Seguimiento SCRUM", 1)
     B.par(doc, "La red social tiene su propio seguimiento, independiente del CMS y del DMS. Equipo de cuatro personas desde el 16/11/2026 (Sprint 1 de la red social: 16/11 – 22/11; Sprint 2: 23/11 – 29/11). Entrega del 22/11: estructura de Teams y Planner; entrega final del 29/11: patrones de Planner, Power Automate y PowerApps (versión 2), junto con la entrega final de los demás sistemas, que el 23/11 se adelantó desde el 07/12 al domingo 29/11.")
     doc.add_heading("9.1 Sprint 1 (16/11 – 22/11)", 2)
-    B.tabla(doc, ["ID", "Tarea", "Quién", "Estado a 26/11/2026"], [[i, t, q, ESTADO.get(i, "—")] for i, t, q in tareas_plan()], [1.3, 8.2, 3.2, 4.3], tam=8.5, titulo="Backlog de la entrega del 22/11 (Sprint 1)")
+    B.tabla(doc, ["ID", "Tarea", "Quién", "Estado a 27/11/2026"], [[i, t, q, ESTADO.get(i, "—")] for i, t, q in tareas_plan()], [1.3, 8.2, 3.2, 4.3], tam=8.5, titulo="Backlog de la entrega del 22/11 (Sprint 1)")
     carpeta = os.path.join(RSI, "scrum")
     bl = os.path.join(carpeta, "product-backlog-rsi.md")
     if os.path.exists(bl):
@@ -299,7 +299,7 @@ def principal():
               "Los planes de la Ejecutiva y de las delegaciones siguen el patrón «Ciclo de vida de tareas» en su diseño, y se capturaron el 27/11/2026 con la cuenta de Pablo (sección 6.2); a diferencia del plan de la asamblea, no los ha probado otra persona.",
               "En Planner, a la tarea de la etapa 3 le falta un espacio y la tilde («Pasar lista y abrir la sesion(ejemplo)») y ninguna tarea del plan figura como completada; son datos de ejemplo y no cambian el patrón.",
               "Power Automate (RF-R11): los dos flujos se ejecutan con las conexiones de la cuenta de Joaquín, propietario junto con Marcos; si esa cuenta se desactiva, dejan de ejecutarse y hay que reconstruirlos con la cuenta de la Ejecutiva. «Se asigna una tarea» solo se cumple si la asignación se hace al crearla: una tarea que se asigna después no genera aviso. Se probó crear una tarea, el aviso a los cinco minutos y la ejecución manual del flujo programado; la ejecución programada del segundo flujo se observó sola a las 08:00 del 26 y del 27/11 (capturas 12n y 12m).",
-              "PowerApps (RF-R12): es una prueba con datos de ejemplo, en el espacio personal de Álvaro; Álvaro dice que ya está publicada (27/11, de palabra, sin captura ni comprobación de otra persona). Marcos la abrió con su cuenta y comprobó la lectura de la lista; no se probó crear, editar ni borrar delegaciones, ni abrirla desde la pestaña de Teams, y no restringe por rol (la propuesta original, CU-R05 y RN-R01, queda como mejora).",
+              "PowerApps (RF-R12): es una prueba con datos de ejemplo, en el espacio personal de Álvaro; Álvaro dice que ya está publicada y Marcos, de palabra, confirma que la tiene (27/11, sin captura). Marcos la abrió con su cuenta y comprobó la lectura de la lista; no se probó crear, editar ni borrar delegaciones, ni abrirla desde la pestaña de Teams, y no restringe por rol (la propuesta original, CU-R05 y RN-R01, queda como mejora).",
               "Las historias de Teams del Sprint 1 solo tienen prueba de otra persona para el aislamiento de canales, y la retrospectiva de los dos sprints de la red social la redactó Pablo con Claude a partir de los datos, sin reunión del equipo.",
               "No hay contacto con el CADUS en el equipo desde el 16/11: las decisiones que dependen del CADUS son suposiciones del caso de negocio.",
               "No se ha comprobado el límite de canales del tenant (la documentación de Microsoft lo sitúa por encima de lo que necesita el piloto): se crearon tres canales privados.",

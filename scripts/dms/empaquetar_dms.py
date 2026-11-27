@@ -156,7 +156,7 @@ LEEME_CMS = """
 - `seguimiento/`: sprint backlog, burndown (csv) y product backlog en su formato original.
 """
 if FINAL:
-    LEEME_CMS += """- `Entrega-final-CMS-CADUS.docx` / `.pdf`: **documento con el estado vigente del CMS a 26/11/2026** (backlog, Sprint 3, burndown, implementación con contenido real, pruebas y pendientes), para la entrega del 29/11/2026. Prevalece sobre `ACTUALIZACION-22-11-estado-del-cms.md` y sobre la adenda del Sprint 3 donde se contradigan.
+    LEEME_CMS += """- `Entrega-final-CMS-CADUS.docx` / `.pdf`: **documento con el estado vigente del CMS a 27/11/2026** (backlog, Sprint 3, burndown, implementación con contenido real, pruebas y pendientes), para la entrega del 29/11/2026. Prevalece sobre `ACTUALIZACION-22-11-estado-del-cms.md` y sobre la adenda del Sprint 3 donde se contradigan.
 - `capturas-final`: capturas del portal con el contenido real (noticias, actas, normativa y calendario).
 - `bd_cadus_v1_sprint3.sql` y `LEEME-volcado.md`: **copia saneada** de la base de datos del portal, con tres cuentas de demostración (administración, Ejecutiva y delegación) y sin cuentas reales, sesiones, registros de Wordfence ni de estadísticas, tickets ni cuentas de prueba. El `LEEME-volcado.md` explica qué conserva, las cuentas de demostración y cómo restaurarla.
 - `seguimiento/E2-12-fichas-y-edicion.md` y `revisiones/`: pruebas de las fichas de delegaciones y encargos de las revisiones con Codex del 23 y 25/11 citadas en el documento final.
@@ -166,7 +166,7 @@ if FINAL:
 
 CABECERA = """# Entrega final del proyecto GSI — CADUS (CMS + DMS + red social v2)
 
-Entrega del domingo 29/11/2026. Los documentos describen el estado a 26/11/2026. Quedan **pendientes**, y así constan en ellos: la prueba cruzada de HU-22 de Álvaro. Los tiempos T1 a T3 los cronometró Pablo (conoce el portal), no una persona externa.
+Entrega del domingo 29/11/2026. Los documentos describen el estado a 27/11/2026. Constan como **no hechas por otra persona**: la prueba cruzada de HU-22 (la ejecutó Claude en nombre de Pablo) y la medición de T1 a T3 con una persona externa. Los tiempos T1 a T3 los cronometró Pablo (conoce el portal), no una persona externa.
 
 Equipo de la entrega: Pablo Ruiz Vidal (Product Owner), Joaquín Luna Canela (Scrum Master), Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez. Miguel Ángel Camacho Martín, miembro del CADUS, colaboró en el DMS y en el contacto con el cliente hasta el 16/11/2026.
 """ if FINAL else """# Versión definitiva del DMS — CADUS

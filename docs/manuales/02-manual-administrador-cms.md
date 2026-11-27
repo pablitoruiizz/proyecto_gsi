@@ -26,14 +26,14 @@ Qué vive dónde: los contenidos y ajustes hechos desde el panel están en la ba
 ## 3. Instalación en un servidor nuevo
 
 1. **Preparar el servidor** con Apache (con `mod_rewrite`), PHP 8.x y MySQL 8.x. El servidor de la Universidad de Sevilla que se estudió corría PHP 7.2 o 7.3, que **no** vale para este WordPress; el despliegue en la Universidad está sin hacer y queda pendiente de hablar con ella (apartado 9).
-2. **Copiar los archivos**: WordPress con la carpeta `wp-content` (tema Blocksy y plugins, incluido `cadus-portal`) y la carpeta `wp-content/uploads` que se entrega junto al volcado.
+2. **Copiar los archivos**: WordPress (se descarga de wordpress.org), el tema Blocksy y los plugins de terceros (se instalan desde el panel o con sus carpetas) y el plugin propio `cadus-portal`, que está en el repositorio de GitHub. **Las imágenes y los documentos subidos desde el panel (`wp-content/uploads`) no van en esta entrega**: se copian desde el equipo anfitrión; sin ellos el sitio funciona, pero faltan esas imágenes y documentos.
 3. **Crear la base de datos** `bd_cadus` con cotejamiento `utf8mb4_unicode_ci` e **importar** el volcado (`bd_cadus_v1_sprint3.sql`) desde phpMyAdmin (pestaña «Importar») o por línea de comandos.
-4. **Crear `wp-config.php`** a partir de `wp-config-sample.php` con los datos de la base de datos, las claves únicas de WordPress (generadas para ese servidor) y, si la dirección web cambia, la dirección del sitio (`siteurl` y `home`, en «Ajustes › Generales», o en la tabla `wp_options`).
+4. **Crear `wp-config.php`** a partir de `wp-config-sample.php` con los datos de la base de datos, las claves únicas de WordPress (generadas para ese servidor) y, si la dirección web cambia, la dirección del sitio (`siteurl` y `home`, en «Ajustes › Generales», o en la tabla `wp_options`). **Cambia además las direcciones guardadas dentro del contenido y de los ajustes**, con WP-CLI: `wp search-replace 'http://dirección-vieja' 'http://dirección-nueva' --all-tables` (respeta los datos serializados; no sustituyas el texto a mano en el `.sql`).
 5. **Comprobar** que la web carga, que se puede entrar en `wp-login.php` y que los enlaces permanentes funcionan («Ajustes › Enlaces permanentes › Guardar cambios» vuelve a generarlos si dan 404).
 6. **Vaciar la caché** de WP Fastest Cache.
 7. Pasar la lista de comprobación del apartado 8.
 
-El volcado entregado **no incluye cuentas de prueba, tickets ni datos reales de estudiantes**; contiene las cuentas de administración del equipo y su historial de Wordfence, y sus contraseñas están cifradas (apartado 6.3). Antes de pasarlo a un servidor público, revisa qué usuarios debe tener.
+El volcado entregado es una **copia saneada**: no incluye cuentas reales ni de prueba, tickets, sesiones, registros de Wordfence ni de estadísticas, ni datos de estudiantes. Contiene solo tres cuentas de demostración (`demo-admin`, `demo-ejecutiva` y `demo-delegado`), cuya contraseña está en el `LEEME-volcado.md` de la entrega y se cambia al restaurarlo. Los volcados internos de `cms-wordpress/backup-db/` (copias de seguridad del equipo) sí contienen las cuentas reales y el historial de Wordfence, y no se entregan. En un servidor público, cambia las contraseñas de demostración y crea las cuentas reales (apartado 6.3).
 
 ## 4. Cuentas y roles
 

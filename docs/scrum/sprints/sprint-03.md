@@ -292,11 +292,11 @@ Este apartado prevalece sobre los estados anteriores de este documento, que se c
 | HU-15 accesibilidad | En curso: teclado, Lighthouse de accesibilidad, daltonismo y Narrador hechos (Marcos, 23/11) y arreglo de los errores de los formularios fusionado (PR #96, 25/11); falta repetir Lighthouse con el código actual |
 | E3-01 retrospectiva en grupo (#57), E3-02 volcado y limpieza (#58), E3-06 documento final (#62) | Abiertas, con dueño y límite jueves 26/11 22:00 (`docs/scrum/plan-23-11.md`) |
 
-## Actualización del 26/11/2026 (cierre de las pruebas)
+## Actualización del 26 y 27/11/2026 (cierre de las pruebas)
 
 Este apartado prevalece sobre el del 25/11 donde se contradigan.
 
-| Tarea | Estado a 26/11/2026 |
+| Tarea | Estado a 27/11/2026 |
 |---|---|
 | HU-15 accesibilidad (#24) | **Cerrada:** Lighthouse de accesibilidad repetido con el código actual, 100 / 100 / 100 (Marcos, PR #98); NVDA probado el 27/11 según Pablo, sin registro paso a paso |
 | HU-20 rendimiento | Lighthouse de la portada en móvil, 98 con el contenido real (91 antes de optimizar y 99 después, 12/11) (H20-1); el límite de 8 MB de imágenes no se aplicaba a las subidas por la API REST del editor de bloques, corregido y repetido (H20-2) |

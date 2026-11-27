@@ -1,6 +1,6 @@
 # Actualización del estado del CMS a 22/11/2026
 
-> **Estado vigente:** este documento es del 22/11 y tiene añadidas las actualizaciones del 25 y 26/11. El estado completo y vigente del CMS es el de `Entrega-final-CMS-CADUS` (a 26/11/2026, para la entrega del 29/11), que prevalece sobre este documento donde se contradigan.
+> **Estado vigente:** este documento es del 22/11 y tiene añadidas las actualizaciones del 25, 26 y 27/11. El estado completo y vigente del CMS es el de `Entrega-final-CMS-CADUS` (a 27/11/2026, para la entrega del 29/11), que prevalece sobre este documento donde se contradigan.
 
 Este documento prevalece sobre la adenda del Sprint 3 (`Adenda-CMS-Sprint3`, fechada el 15/11/2026) y sobre el estado de `seguimiento/product-backlog.md` donde se contradigan. Las pruebas están en `seguimiento/E3-04-pruebas-de-aceptacion.md`.
 
@@ -27,9 +27,9 @@ Esta sección prevalece sobre la tabla anterior donde se contradigan; el estado 
 | HU-15 accesibilidad | Teclado, Lighthouse de accesibilidad y daltonismo (Marcos, 23/11), Narrador y arreglo de los errores de los formularios (PR #96, 25/11); falta repetir Lighthouse con el código actual y NVDA |
 | Datos de prueba | Se borran antes del volcado (E3-02); no forman parte de la entrega |
 
-## Actualización del 26/11/2026
+## Actualización del 26 y 27/11/2026
 
-| Elemento | Estado a 26/11 |
+| Elemento | Estado a 27/11 |
 |---|---|
 | HU-15 accesibilidad | Lighthouse de accesibilidad repetido con el código actual: 100 / 100 / 100 (Marcos, PR #98). NVDA probado el 27/11 según Pablo, sin registro paso a paso |
 | HU-20 rendimiento | Portada en móvil: 98 con el contenido real (91 antes de optimizar y 99 después, 12/11). Se corrigió el límite de 8 MB de imágenes, que no se aplicaba a las subidas del editor de bloques |

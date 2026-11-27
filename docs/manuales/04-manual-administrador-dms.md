@@ -30,7 +30,7 @@ Los permisos se conceden **sobre el sitio** con los tres grupos predefinidos del
 | Grupo | Quién | Qué puede |
 |---|---|---|
 | Propietarios | Hoy, Pablo. La cuenta del CADUS (`dcadus@us.es`, la Ejecutiva) debe añadirse (apartado 7) | Control total: crear, editar, aprobar y eliminar |
-| Integrantes | Los cuatro miembros del equipo del proyecto y Miguel Ángel Camacho Martín (CADUS) | Editar (solo mientras se trabaja con documentos de ejemplo) |
+| Integrantes | Los cuatro miembros del equipo del proyecto y una persona del CADUS, enlace con el cliente | Editar (solo mientras se trabaja con documentos de ejemplo) |
 | Visitantes | Delegados y estudiantes cuando existan sus cuentas | Leer |
 
 A fecha de este manual, en los cuatro sitios **Pablo es propietario** y los demás integrantes están en el grupo **Integrantes** con permiso de edición. En CADUS Votaciones los cuatro están en el grupo Integrantes de SharePoint (comprobado por la API el 13/11/2026); la cabecera del sitio puede seguir mostrando «1 miembro» porque cuenta el grupo de Microsoft 365, no el de SharePoint.

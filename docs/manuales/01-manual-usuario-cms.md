@@ -31,7 +31,7 @@ El menú principal está arriba (en el móvil se despliega con el botón de men�
 | Contacto | Datos de contacto del CADUS |
 | Acceder | Inicio de sesión de la Ejecutiva y de las delegaciones |
 
-![Portada del portal del CADUS.](../entrega/img/capturas2/p01-portada.jpg)
+![Parte superior de la portada del portal del CADUS.](../entrega/img/capturas2/p01-portada-arriba.jpg)
 
 El portal se adapta al móvil y a la tablet. Quien navega con teclado dispone, como primer elemento, de un enlace «Saltar al contenido», que lleva directamente al texto principal de la página.
 

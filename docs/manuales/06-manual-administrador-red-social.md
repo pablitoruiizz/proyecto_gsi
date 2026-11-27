@@ -172,7 +172,7 @@ Crea una tarea de prueba con responsable y fecha: en uno a cinco minutos debe sa
 
 ![Aplicación guardada en Power Apps Studio.](../redsocial/capturas/R13-02-app-guardada-power-apps-studio.jpg)
 
-**Limitaciones:** la lista y la aplicación están en el espacio personal de su creador, no en un sitio del CADUS (para moverlas, crear la lista en el sitio y volver a conectar la aplicación). La aplicación **no está publicada**, no se ha ejecutado desde una pestaña de Teams, no usa los conectores de Planner ni de Teams y no restringe el alta y la baja por rol (CU-R05 · RN-R01). Es una demostración con datos de ejemplo.
+**Limitaciones:** la lista y la aplicación están en el espacio personal de su creador, no en un sitio del CADUS (para moverlas, crear la lista en el sitio y volver a conectar la aplicación). Según Álvaro la aplicación **está publicada** (27/11/2026; Marcos lo confirma de palabra, sin captura); no se ha ejecutado desde una pestaña de Teams, no usa los conectores de Planner ni de Teams y no restringe el alta y la baja por rol (CU-R05 · RN-R01). Es una demostración con datos de ejemplo.
 
 ## 9. Traspaso a la Ejecutiva
 
@@ -194,6 +194,6 @@ Crea una tarea de prueba con responsable y fecha: en uno a cinco minutos debe sa
 |---|---|
 | Planes de la Ejecutiva y de las delegaciones | Capturados el 27/11; sin prueba de otra persona |
 | Ejecución programada del flujo 2 | Observada el 26 y el 27/11 a las 08:00 |
-| Publicación de la aplicación de Power Apps | Hecha según Álvaro (27/11); sin captura ni comprobación de otra persona |
+| Publicación de la aplicación de Power Apps | Hecha: Publicada según Álvaro y, de palabra, Marcos confirma que la tiene (27/11/2026); sin captura |
 | Cuentas de delegación reales | No existen en Teams |
 | Límite de canales del tenant | No comprobado |

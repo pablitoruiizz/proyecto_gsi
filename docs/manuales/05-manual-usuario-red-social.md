@@ -86,7 +86,7 @@ Dos flujos de Power Automate publican avisos en el canal General de **CADUS · A
 
 ### 3.7. Aplicación «Estado de las delegaciones»
 
-Es una aplicación de Power Apps de **prueba** que lee la lista «Delegaciones CADUS» (centro y estado de cada delegación) y la muestra en tres pantallas: lista, detalle y formulario. Para abrirla, la persona que la creó debe compartirla contigo y tener permiso en la lista; después la abres desde `apps.powerapps.com` con tu cuenta. **Aún no está publicada ni integrada en Teams** y no distingue permisos por rol.
+Es una aplicación de Power Apps de **prueba** que lee la lista «Delegaciones CADUS» (centro y estado de cada delegación) y la muestra en tres pantallas: lista, detalle y formulario. Para abrirla, la persona que la creó debe compartirla contigo y tener permiso en la lista; después la abres desde `apps.powerapps.com` con tu cuenta. Álvaro dice que está **publicada** (27/11/2026) y Marcos lo confirma de palabra, pero no hay captura y **no consta que esté integrada en Teams**; no distingue permisos por rol.
 
 ![La aplicación abierta por otra cuenta.](../redsocial/capturas/R13-06-app-ejecutada-marcos.jpg)
 
