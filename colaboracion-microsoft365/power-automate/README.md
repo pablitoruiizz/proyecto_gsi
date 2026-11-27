@@ -13,7 +13,7 @@ Documentación del artefacto de Power Automate de la Red Social Interna del CADU
 | Casos de uso | CU-R02 Preparar una asamblea con tareas |
 | Cómo se crea | [`docs/redsocial/configuracion-power-automate.md`](../../docs/redsocial/configuracion-power-automate.md) |
 | Capturas | `12a` a `12d` en `docs/redsocial/capturas/` (nombres en la guía) |
-| Estado | **Hecho el 25/11/2026.** Los dos flujos están creados en el tenant de la US (Joaquín), con capturas `12a` a `12d`, compartidos con Marcos como copropietario y probados por él con su cuenta (capturas `12e` a `12l`, `docs/redsocial/pruebas.md`). No se esperó a la ejecución programada del flujo 2 (se lanzó a mano) ni se probó asignar después una tarea ya creada (ver «Limitaciones»). |
+| Estado | **Hecho el 25/11/2026.** Los dos flujos están creados en el tenant de la US (Joaquín), con capturas `12a` a `12d`, compartidos con Marcos como copropietario y probados por él con su cuenta (capturas `12e` a `12l`, `docs/redsocial/pruebas.md`). La ejecución programada del flujo 2 se observó sola a las 08:00 del 26 y del 27/11 (capturas `12n` y `12m`, hechas el 27/11 con la cuenta de Pablo); no se probó asignar después una tarea ya creada (ver «Limitaciones»). |
 
 ## Flujos
 

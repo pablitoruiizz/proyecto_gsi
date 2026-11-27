@@ -110,7 +110,11 @@ Se hace **sobre el mismo plan** (no se crea otro), para que los flujos de Power 
 ### 6.4. Limitaciones
 
 - Planner **no tiene permisos por tarea**: todos los miembros ven todas las tareas del plan y pueden editar también las de los demás.
-- Los planes de la Ejecutiva y de las delegaciones existen como pestañas pero **no tienen captura** en la documentación; solo el de la asamblea está capturado y probado por otra persona (26/11/2026).
+- Los planes de la Ejecutiva y de las delegaciones están capturados (27/11/2026, con la cuenta de Pablo), pero no los ha probado otra persona; solo el de la asamblea tiene prueba de otra persona (26/11/2026).
+
+![Plan «Coordinación de la Ejecutiva».](../redsocial/capturas/08c-planner-ejecutiva.jpg)
+
+![Plan «Seguimiento de las delegaciones».](../redsocial/capturas/08d-planner-delegaciones.jpg)
 
 ## 7. Power Automate: los dos flujos (RF-R11)
 
@@ -150,11 +154,13 @@ Crea una tarea de prueba con responsable y fecha: en uno a cinco minutos debe sa
 
 - **Los flujos dependen de la cuenta que los creó** (usan sus conexiones). Si esa cuenta se desactiva, dejan de ejecutarse. Por eso tienen un segundo propietario, y **al pasar la red social a la Ejecutiva hay que reconstruirlos con la cuenta de la Ejecutiva** siguiendo el apartado 7.1 y 7.2.
 - «Se asigna una tarea» solo avisa si la tarea se **asigna al crearla**; si se crea sin responsable y se asigna después, el flujo 1 no avisa.
-- El flujo 2 consulta una vez al día, no al instante. Su ejecución programada de las 08:00 **no se ha observado**: se lanzó a mano.
+- El flujo 2 consulta una vez al día, no al instante. Su ejecución programada de las 08:00 **se observó** el 26 y el 27/11/2026 (mensajes del flujo en el canal General de la Asamblea); las pruebas manuales fueron el 25/11.
 - El canal General de la Asamblea no está moderado. En un canal moderado (como «Avisos») el mensaje solo saldría si lo publica un propietario.
 - Si el tenant no permite crear o ejecutar flujos, documenta el mensaje literal con captura (RC-R02).
 
 ![Flujos compartidos con un segundo propietario.](../redsocial/capturas/12k-r12c-flujos-compartidos.jpg)
+
+![Mensaje del flujo programado, a las 8:00 del 27/11.](../redsocial/capturas/12m-power-automate-ejecucion-programada-27-11.jpg)
 
 ## 8. Power Apps: «Estado de las delegaciones» (RF-R12)
 
@@ -186,8 +192,8 @@ Crea una tarea de prueba con responsable y fecha: en uno a cinco minutos debe sa
 
 | Asunto | Estado |
 |---|---|
-| Planes de la Ejecutiva y de las delegaciones | Existen como pestañas, sin captura ni prueba de otra persona |
-| Ejecución programada del flujo 2 | No observada; se lanzó a mano |
+| Planes de la Ejecutiva y de las delegaciones | Capturados el 27/11; sin prueba de otra persona |
+| Ejecución programada del flujo 2 | Observada el 26 y el 27/11 a las 08:00 |
 | Publicación de la aplicación de Power Apps | No hecha |
 | Cuentas de delegación reales | No existen en Teams |
 | Límite de canales del tenant | No comprobado |

@@ -52,6 +52,16 @@ Hecha el 25/11/2026 por Marcos, con su cuenta de la US, sobre los dos flujos de 
 
 Al terminar se borró la tarea de prueba, así que el plan queda como está documentado.
 
+## Observaciones del 27/11/2026 (Claude, con la sesión de Teams de Pablo)
+
+Solo lectura: no se creó ni se cambió nada. **No son una prueba de otra persona.**
+
+| Qué | Resultado | Captura |
+|---|---|---|
+| Plan «Coordinación de la Ejecutiva» (CADUS · Ejecutiva) | Tres cubos (Por hacer, En curso y Hecho) y tres tareas con responsable y fecha, una completada | 08c-planner-ejecutiva.jpg |
+| Plan «Seguimiento de las delegaciones» (CADUS · Delegaciones) | Dos tareas por hacer, una en curso y una completada | 08d-planner-delegaciones.jpg |
+| Ejecución programada del flujo «Aviso de tareas que vencen» | El mensaje con la tabla de tareas pendientes aparece en General de CADUS · Asamblea a las 8:00 del 26/11 y a las 8:00 del 27/11/2026, a la hora programada | 12n-power-automate-ejecucion-programada-26-11.jpg · 12m-power-automate-ejecucion-programada-27-11.jpg |
+
 ## Prueba de PowerApps por otra persona (R-13 · RF-R12)
 
 Hecha el 25/11/2026 por Marcos, con su cuenta de la US, después de que Álvaro le compartiera la aplicación «Estado de las delegaciones» ([`powerapps-especificacion.md`](powerapps-especificacion.md)).

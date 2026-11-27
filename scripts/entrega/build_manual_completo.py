@@ -290,16 +290,15 @@ def anexos(doc):
     parrafo(doc, "Resumen de lo que **no** se ha podido comprobar o queda por hacer. El detalle está en el apartado de pendientes y límites de cada manual de administrador.")
     filas = [
         ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de hablar con la Universidad"],
-        ["Portal web", "Correo saliente real", "El envío de los avisos y de «¿Has olvidado tu contraseña?» necesita servidor de correo; no se ha probado su entrega real"],
+        ["Portal web", "Correo saliente real", "Los avisos se enviaron por SMTP a un servidor de pruebas local con el contenido esperado; no se ha probado la entrega a una bandeja real (hace falta un SMTP con un remitente válido)"],
         ["Portal web", "Anonimización a los dos años", "Probada con datos de ejemplo; no comprobada en el servidor del equipo"],
         ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA sin probar"],
         ["DMS", "Cuenta del CADUS como propietaria", "Pendiente en los cuatro sitios"],
         ["DMS", "Cuentas de delegado y de estudiante", "No existen; los permisos no se han probado con cuentas reales de esos roles"],
         ["Red social", "Aplicación de Power Apps", "Sin publicar; no integrada en Teams"],
-        ["Red social", "Segundo flujo de Power Automate", "Su ejecución programada de las 08:00 no se ha observado"],
-        ["Red social", "Planes de la Ejecutiva y de las delegaciones", "Existen como pestañas, sin captura ni prueba de otra persona"],
+        ["Red social", "Planes de la Ejecutiva y de las delegaciones", "Capturados el 27/11/2026; sin prueba de otra persona"],
         ["Red social", "Cuentas de delegación reales", "No existen en Teams: es un piloto con datos de ejemplo"]]
-    enl = {(0, 0): "m1a", (1, 0): "m1a", (2, 0): "m1a", (3, 0): "m1a", (4, 0): "m2a", (5, 0): "m2a", (6, 0): "m3a", (7, 0): "m3a", (8, 0): "m3a", (9, 0): "m3a"}
+    enl = {(0, 0): "m1a", (1, 0): "m1a", (2, 0): "m1a", (3, 0): "m1a", (4, 0): "m2a", (5, 0): "m2a", (6, 0): "m3a", (7, 0): "m3a", (8, 0): "m3a"}
     tabla_con_enlaces(doc, ["Sistema", "Asunto", "Estado"], filas, enl, [3, 5.5, 8.5])
 
     titulo_con_ancla(doc, "Anexo E. Glosario", 1, "anexoE")

@@ -40,7 +40,7 @@ Pablo y Marcos no tienen historias con puntos este sprint: Pablo actualiza el RE
 | Pendiente | Quién |
 |---|---|
 | Revisión de otra persona del caso de negocio (RSI-HU-01) | Hecha por Álvaro el 26/11 (`pruebas.md`) |
-| Solo el plan de la Asamblea tiene captura (`08-planner.jpg`); los de Ejecutiva y Delegaciones no | Joaquín: sin capturar; se entrega con la captura del plan de la asamblea y se dice en el documento |
+| Solo el plan de la Asamblea tenía captura (`08-planner.jpg`); los de Ejecutiva y Delegaciones no | Capturados el 27/11/2026 con la cuenta de Pablo (`08c` y `08d`); no los ha probado otra persona |
 | Prueba cruzada humana de las historias de Teams: solo se probó el aislamiento de canales | Marcos probó los flujos, la aplicación y el plan nuevo; las historias de Teams del Sprint 1 siguen sin prueba cruzada |
 
 ## Calendario propuesto
@@ -87,7 +87,7 @@ Igual que en el Sprint 1 ([`product-backlog-rsi.md`](product-backlog-rsi.md)): e
 ### Review
 
 - **Entregado (8 SP, el 26/11):** RSI-HU-07 (dos flujos de Power Automate, con los avisos de tarea nueva y de tareas que vencen), RSI-HU-08 (aplicación de PowerApps «Estado de las delegaciones», probada con otra cuenta) y RSI-HU-09 (plan de la asamblea como Proceso de tareas, con UML de diseño). Las tres, en `main`, con capturas explicadas y probadas por Marcos.
-- **Lo que no cubre:** la aplicación solo se probó con lectura (no se creó, editó ni borró nada) y no desde la pestaña de Teams; los planes de la Ejecutiva y de las delegaciones no tienen captura; las historias de Teams del Sprint 1 siguen sin prueba cruzada humana.
+- **Lo que no cubre:** la aplicación solo se probó con lectura (no se creó, editó ni borró nada) y no desde la pestaña de Teams; los planes de la Ejecutiva y de las delegaciones se capturaron el 27/11 con la cuenta de Pablo, sin prueba de otra persona; las historias de Teams del Sprint 1 siguen sin prueba cruzada humana.
 - **Calidad:** primera vez en el proyecto que cada historia tiene una prueba de otra persona antes de cerrarse (Marcos).
 
 ### Retrospectiva
