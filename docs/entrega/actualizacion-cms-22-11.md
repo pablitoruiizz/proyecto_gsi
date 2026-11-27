@@ -31,7 +31,7 @@ Esta sección prevalece sobre la tabla anterior donde se contradigan; el estado 
 
 | Elemento | Estado a 26/11 |
 |---|---|
-| HU-15 accesibilidad | Lighthouse de accesibilidad repetido con el código actual: 100 / 100 / 100 (Marcos, PR #98). Queda sin probar NVDA |
+| HU-15 accesibilidad | Lighthouse de accesibilidad repetido con el código actual: 100 / 100 / 100 (Marcos, PR #98). NVDA probado el 27/11 según Pablo, sin registro paso a paso |
 | HU-20 rendimiento | Portada en móvil: 98 con el contenido real (91 antes de optimizar y 99 después, 12/11). Se corrigió el límite de 8 MB de imágenes, que no se aplicaba a las subidas del editor de bloques |
 | HU-22 relevo de la cuenta | H22-1 a H22-5 ejecutados con las cuentas de prueba (Pablo con Claude): todos OK |
-| Pruebas de aceptación | 43 casos: 40 OK y 3 parciales (T1 a T3, pendientes de cronometrar con una persona externa); el envío real del correo (P5) se probó el 27/11 y llegó con una hora de retraso |
+| Pruebas de aceptación | 43 casos, todos OK (T1 a T3 cronometrados por Pablo el 27/11: 50, 10 y 18 s, límite 60 s; Pablo conoce el portal, no es una persona externa); el envío real del correo (P5) se probó el 27/11 y llegó con una hora de retraso |

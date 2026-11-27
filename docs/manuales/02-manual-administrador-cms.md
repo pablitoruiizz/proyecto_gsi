@@ -179,8 +179,8 @@ Hay baterías automáticas en `scripts/pruebas/` (se lanzan desde la raíz del r
 | Despliegue en la Universidad de Sevilla | No hecho: el servidor estudiado tenía PHP 7.2/7.3, insuficiente. Pendiente de la respuesta de la Universidad |
 | Correo saliente | Los avisos salen por el SMTP de Gmail configurado en `wp-config.php` y un correo de prueba llegó a una bandeja de Gmail; los cuatro avisos enviados a una dirección `@alum.us.es` llegaron con 65 a 70 minutos de retraso (13:47 → 14:48 a 14:57), por el filtro de la Universidad |
 | Tareas programadas | La anonimización a los dos años no se ha comprobado en el servidor del equipo; en el entorno de pruebas se verificó con datos de ejemplo |
-| Lector de pantalla | Probado con Narrador; NVDA sin probar |
-| Pruebas con personas ajenas | Los tiempos de tareas (T1 a T3) se midieron de forma funcional, sin cronometrar con una persona externa |
+| Lector de pantalla | Probado con Narrador; NVDA probado el 27/11 según Pablo, sin registro paso a paso |
+| Pruebas con personas ajenas | Los tiempos de tareas (T1 a T3) los cronometró Pablo el 27/11 (50, 10 y 18 s, con el límite en 60 s); Pablo conoce el portal, así que falta medirlos con una persona externa y en móvil |
 | Datos de las fichas | Faltan el teléfono en 7 delegaciones, el correo en 1 y el horario en las 27 |
 | Verificación del correo | `@alum.us.es` valida el dominio, no que el correo pertenezca a quien escribe |
 | Imágenes de la portada | Proceden de cadus.us.es: confirmar con el cliente su uso y la autorización de las personas que aparecen |

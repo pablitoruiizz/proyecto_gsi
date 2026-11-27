@@ -12,7 +12,7 @@ Conclusión: el tenant permite crear una lista de SharePoint, crear y guardar un
 
 ## Qué NO se ha comprobado
 
-- Publicar la aplicación (no se pulsó «Publicar»).
+- Publicar la aplicación: el 25/11 no se pulsó «Publicar»; el 27/11 Álvaro dice que ya está publicada (de palabra, sin captura ni comprobación de otra persona).
 - Ejecutarla desde la pestaña de Teams. Desde otra cuenta sí se hizo: Marcos la abrió con la suya el 25/11 (`pruebas.md`).
 - Los conectores de Planner y Teams, y cualquier flujo de Power Automate: en la cuenta de Álvaro no hay flujos, propios ni compartidos; el flujo de R-12 (Joaquín) no se ha podido probar desde su cuenta.
 - Las pantallas de la propuesta original (ficha con canal y tareas, alta y baja solo para la Ejecutiva, CU-R05 · RN-R01): la aplicación generada es la plantilla de tres pantallas de PowerApps (lista, detalle y formulario) sin personalizar ni restringir por rol.

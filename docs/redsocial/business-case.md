@@ -119,4 +119,4 @@ El CADUS (Consejo de Alumnos de la Universidad de Sevilla) ya tiene un portal we
 2. Si las cuentas de delegación tienen Teams habilitado y licencia.
 3. Si las delegaciones usarían la cuenta de su delegación en Teams.
 4. Quién crea y administra los equipos cuando el proyecto termine (por ahora, Pablo).
-5. Si se puede publicar la aplicación de PowerApps en el tenant de la US: el 25/11/2026 se comprobó que el tenant permite guardar y ejecutar una aplicación de lienzo y flujos de Power Automate; la publicación no se ha comprobado.
+5. Si se puede publicar la aplicación de PowerApps en el tenant de la US: el 25/11/2026 se comprobó que el tenant permite guardar y ejecutar una aplicación de lienzo y flujos de Power Automate; Álvaro dice que la aplicación quedó publicada el 27/11 (de palabra, sin captura).

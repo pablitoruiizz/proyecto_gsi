@@ -1,6 +1,6 @@
 # Guion de la prueba con NVDA (HU-15 · H15-3)
 
-**Estado a 27/11/2026: sin ejecutar.** El 27/11 se descargó NVDA 2026.3.1 (firmado por NV Access) y se arrancó en una copia portable, y NVDA llegó a leer la ventana de Chrome; pero no se pudo recorrer la página con el teclado porque las herramientas que se usaron para manejar Chrome no entregan sus teclas a la ventana activa del sistema, que es la que NVDA escucha. Hace falta una persona con el teclado delante. Se desinstaló todo y no quedan restos en el equipo.
+**Estado a 27/11/2026: probado según Pablo, sin registro paso a paso** (lo comunicó de palabra; no se anotó lo que NVDA dijo). Lo que sigue es lo ocurrido antes, cuando se intentó desde aquí: El 27/11 se descargó NVDA 2026.3.1 (firmado por NV Access) y se arrancó en una copia portable, y NVDA llegó a leer la ventana de Chrome; pero no se pudo recorrer la página con el teclado porque las herramientas que se usaron para manejar Chrome no entregan sus teclas a la ventana activa del sistema, que es la que NVDA escucha. Hace falta una persona con el teclado delante. Se desinstaló todo y no quedan restos en el equipo.
 
 **Quién:** cualquier persona del equipo, unos 15 minutos. **Qué se anota:** lo que NVDA dice en cada paso (se puede copiar con el *Visor de voz*: menú NVDA › Herramientas › Visor de voz) y si es correcto, en la fila H15-3 de `E3-04-pruebas-de-aceptacion.md`, con fecha y nombre.
 

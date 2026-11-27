@@ -298,10 +298,10 @@ Este apartado prevalece sobre el del 25/11 donde se contradigan.
 
 | Tarea | Estado a 26/11/2026 |
 |---|---|
-| HU-15 accesibilidad (#24) | **Cerrada:** Lighthouse de accesibilidad repetido con el código actual, 100 / 100 / 100 (Marcos, PR #98); queda sin probar NVDA |
+| HU-15 accesibilidad (#24) | **Cerrada:** Lighthouse de accesibilidad repetido con el código actual, 100 / 100 / 100 (Marcos, PR #98); NVDA probado el 27/11 según Pablo, sin registro paso a paso |
 | HU-20 rendimiento | Lighthouse de la portada en móvil, 98 con el contenido real (91 antes de optimizar y 99 después, 12/11) (H20-1); el límite de 8 MB de imágenes no se aplicaba a las subidas por la API REST del editor de bloques, corregido y repetido (H20-2) |
 | HU-22 relevo de la cuenta | H22-1 a H22-5 ejecutados el 26/11 por Pablo con Claude, con sesiones reales de las cuentas de prueba; todos OK. No son prueba de otra persona |
-| E3-04 pruebas de aceptación | 43 casos: 40 OK y 3 parciales (T1 a T3); P5, el envío real del correo, quedó OK el 27/11 |
+| E3-04 pruebas de aceptación | 43 casos, todos OK (T1 a T3 cronometrados por Pablo el 27/11: 50, 10 y 18 s); P5, el envío real del correo, quedó OK el 27/11 |
 | E3-01 retrospectiva en grupo (#57) | **Hecha el 27/11/2026, según Pablo** (asistentes no registrados): tres acciones acordadas (pruebas cruzadas antes de cada entrega, burndown diario y «por confirmar» lo que dependa del CADUS), en el apartado «Retrospectiva en grupo» |
 | E3-02 volcado y limpieza (#58) | **Cerrada el 26/11:** ficha 32 devuelta a su autor, cuentas y tickets de prueba borrados y volcado `bd_cadus_v1_sprint3.sql` generado |
 | E3-06 documento final (#62) | **Cerrada el 26/11:** REM de la red social exportado desde REMUS (`REM-RSI-v1.1.pdf`) y zip final `Entrega-29-11-CADUS-CMS-DMS-RSI-v2.zip` generado con todos los controles en verde; falta solo enviarlo |

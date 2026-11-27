@@ -110,7 +110,7 @@ def main():
     cuenta = {}
     for _, _, est in filas:
         cuenta[est] = cuenta.get(est, 0) + 1
-    B.par(doc, "Registro completo en `seguimiento/E3-04-pruebas-de-aceptacion.md`, con el método, quién y cuándo de cada caso (el resumen cuenta solo el estado vigente de cada caso, no su historial). Resumen de " + str(len(filas)) + " casos: " + ", ".join(f"{n} {k}" for k, n in sorted(cuenta.items(), key=lambda x: -x[1])) + ". «Parcial» significa que se comprobó lo funcional pero no el criterio completo (por ejemplo, el cronometraje con una persona externa o la prueba en un servidor con correo real).")
+    B.par(doc, "Registro completo en `seguimiento/E3-04-pruebas-de-aceptacion.md`, con el método, quién y cuándo de cada caso (el resumen cuenta solo el estado vigente de cada caso, no su historial). Resumen de " + str(len(filas)) + " casos: " + ", ".join(f"{n} {k}" for k, n in sorted(cuenta.items(), key=lambda x: -x[1])) + ". Los tiempos T1 a T3 (50, 10 y 18 s, con el límite en 60 s) los cronometró Pablo el 27/11 en ventana privada y en ordenador; Pablo conoce el portal, y no se midieron con una persona externa ni en móvil.")
     abiertos = [(i, c[:90], e) for i, c, e in filas if e != "OK"]
     if abiertos:
         B.tabla(doc, ["Caso", "Qué se prueba", "Estado"], abiertos, [2, 12, 3], tam=8, titulo="Casos que no están completos")
@@ -119,9 +119,9 @@ def main():
     for t in ("**Despliegue en la US (E3-09):** queda pendiente de la respuesta de la US sobre el despliegue web; sin ello el portal sigue en el servidor local del equipo.",
               "**Correo del buzón:** el contenido de los avisos cumple RN-03 (solo código, tipo, fecha y enlace), y se comprobó el envío por SMTP (27/11): con el SMTP de Gmail los avisos salen y un correo de prueba llegó a una bandeja de Gmail, y los cuatro avisos enviados a una dirección @alum.us.es llegaron con 65 a 70 minutos de retraso (13:47 → 14:48 a 14:57, por el filtro de la Universidad), con el contenido esperado; la prueba P5 queda OK. Hallazgo: con el remitente por defecto de WordPress en local (`wordpress@localhost`) PHPMailer rechaza el envío; hay que fijar un remitente válido.",
               "**Cuentas y fichas reales:** E2-01 (cuentas reales de la Ejecutiva y las delegaciones) se descartó el 25/11 porque depende del CADUS; E2-12 se cerró el 25/11 con las limitaciones de datos de la sección 2 (horario, 7 teléfonos y 1 correo), que solo puede dar el CADUS. Mientras tanto se usan las cuentas actuales y los datos de su web.",
-              "**Pruebas cruzadas y casos abiertos:** no todas las pruebas las ha repetido otra persona (sección 7) y la sección 9 lista los casos que no están completos (los cronometrados con una persona externa y el envío real del correo). Falta la prueba cruzada de HU-22 de Álvaro: sus casos los ejecutó Claude en nombre de Pablo. La de HU-14b y HU-16a la hizo Joaquín el 27/11.",
+              "**Pruebas cruzadas y casos abiertos:** no todas las pruebas las ha repetido otra persona (sección 7) y la sección 9 lista los casos que no están completos (los tiempos de T1 a T3, que midió Pablo, quien conoce el portal, y no una persona externa). Falta la prueba cruzada de HU-22 de Álvaro: sus casos los ejecutó Claude en nombre de Pablo. La de HU-14b y HU-16a la hizo Joaquín el 27/11.",
               "**Dispositivos reales:** móvil y tablet constan como comprobados según Pablo; no hay un registro de pruebas por dispositivo.",
-              "**Accesibilidad:** se probó con el Narrador de Windows; NVDA no."):
+              "**Accesibilidad:** se probó con el Narrador de Windows (23/11, Marcos) y con NVDA (27/11, según Pablo, sin registro paso a paso)."):
         B.vineta(doc, t)
 
     sal = os.path.join(SAL, "Entrega-final-CMS-CADUS.docx")

@@ -194,6 +194,6 @@ Crea una tarea de prueba con responsable y fecha: en uno a cinco minutos debe sa
 |---|---|
 | Planes de la Ejecutiva y de las delegaciones | Capturados el 27/11; sin prueba de otra persona |
 | Ejecución programada del flujo 2 | Observada el 26 y el 27/11 a las 08:00 |
-| Publicación de la aplicación de Power Apps | No hecha |
+| Publicación de la aplicación de Power Apps | Hecha según Álvaro (27/11); sin captura ni comprobación de otra persona |
 | Cuentas de delegación reales | No existen en Teams |
 | Límite de canales del tenant | No comprobado |

@@ -292,10 +292,10 @@ def anexos(doc):
         ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de la respuesta de la Universidad"],
         ["Portal web", "Correo saliente real", "Los avisos salen por SMTP y un correo de prueba llegó a una bandeja de Gmail; los cuatro avisos enviados a una dirección @alum.us.es llegaron con 65 a 70 minutos de retraso, por el filtro de la Universidad"],
         ["Portal web", "Anonimización a los dos años", "Probada con datos de ejemplo; no comprobada en el servidor del equipo"],
-        ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA sin probar"],
+        ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA probado el 27/11 según Pablo, sin registro paso a paso"],
         ["DMS", "Cuenta del CADUS como propietaria", "Pendiente en los cuatro sitios"],
         ["DMS", "Cuentas de delegado y de estudiante", "No existen; los permisos no se han probado con cuentas reales de esos roles. Pendiente de la respuesta de la Universidad de Sevilla"],
-        ["Red social", "Aplicación de Power Apps", "Sin publicar; no integrada en Teams"],
+        ["Red social", "Aplicación de Power Apps", "Publicada según Álvaro (27/11), sin captura ni comprobación de otra persona; no consta que esté integrada en Teams"],
         ["Red social", "Planes de la Ejecutiva y de las delegaciones", "Capturados el 27/11/2026; sin prueba de otra persona"],
         ["Red social", "Cuentas de delegación reales", "No existen en Teams: es un piloto con datos de ejemplo"]]
     enl = {(0, 0): "m1a", (1, 0): "m1a", (2, 0): "m1a", (3, 0): "m1a", (4, 0): "m2a", (5, 0): "m2a", (6, 0): "m3a", (7, 0): "m3a", (8, 0): "m3a"}
