@@ -122,7 +122,7 @@ def main():
               "**Pruebas cruzadas y casos abiertos:** no todas las pruebas las ha repetido otra persona (sección 7) y la sección 9 lista los casos que no están completos (los cronometrados con una persona externa y el envío real del correo). Falta, por ejemplo, la prueba cruzada de HU-14b y HU-16a de Joaquín y la de HU-22 de Álvaro: sus casos los ejecutó Claude en nombre de Pablo.",
               "**Dispositivos reales:** móvil y tablet constan como comprobados según Pablo; no hay un registro de pruebas por dispositivo.",
               "**Accesibilidad:** se probó con el Narrador de Windows; NVDA no.",
-              "**Retrospectiva del Sprint 3 en grupo (E3-01):** no se ha celebrado. `seguimiento/sprint-03.md` recoge los datos y dos acciones propuestas por el Scrum Master, marcadas como «sin acordar»; el grupo las confirmará o las sustituirá cuando se reúna."):
+              "**Retrospectiva del Sprint 3 en grupo (E3-01):** no se ha celebrado. `seguimiento/sprint-03.md` recoge los datos y tres acciones (pruebas cruzadas antes de cada entrega, burndown diario y marcar «por confirmar» lo que dependa del CADUS) que eligió Pablo el 27/11/2026, marcadas como pendientes de confirmar por el grupo; no son un acuerdo de una reunión."):
         B.vineta(doc, t)
 
     sal = os.path.join(SAL, "Entrega-final-CMS-CADUS.docx")

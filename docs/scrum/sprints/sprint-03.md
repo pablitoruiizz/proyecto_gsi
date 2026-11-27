@@ -268,12 +268,13 @@ Según los commits de GitHub (ramas fusionadas en `main` el 12/11) y los resulta
 
 El patrón se repitió tres sprints seguidos aunque en cada retrospectiva se acordó actualizar el burndown cada día. La red social ya usa un script que lo hace en un comando (`scrum_rsi_sprint.py`, en el repositorio).
 
-**Acciones propuestas por el Scrum Master** (sin acordar; el grupo las confirmará o las sustituirá en la reunión, con un máximo de tres)
+**Acciones elegidas por Pablo (27/11/2026), pendientes de confirmar por el grupo.** Las eligió Pablo, como Product Owner, entre las propuestas del Scrum Master; **no son un acuerdo de una reunión del grupo**, que no se ha celebrado. Cuando el equipo se reúna, las confirmará, las cambiará o las sustituirá.
 
-| Acción | Responsable propuesto | Cómo se comprobaría |
+| Acción | Responsable | Cómo se comprueba |
 |---|---|---|
-| Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigilaría Joaquín | Cada prueba está firmada por alguien distinto de quien la implementó |
-| Burndown actualizado cada día y un hito intermedio que alguien vigile | Joaquín | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
+| A. Un día reservado antes de cada entrega para pruebas cruzadas humanas, con fecha, persona y resultado | Todos; lo vigila Joaquín | Cada prueba está firmada por alguien distinto de quien la implementó |
+| B. Burndown actualizado cada día y un hito intermedio que alguien vigile | Pablo | El CSV del sprint tiene una fila por día, sin saltos de más de un tercio del alcance |
+| C. Marcar «por confirmar» lo que dependa del CADUS y no planificar tareas que dependan de un contacto que ya no está | Pablo | Ninguna tarea del sprint depende de un contacto sin confirmar |
 
 ## Actualización del 25/11/2026 (cierre de las tareas abiertas)
 
@@ -299,6 +300,6 @@ Este apartado prevalece sobre el del 25/11 donde se contradigan.
 | HU-20 rendimiento | Lighthouse de la portada en móvil, 98 con el contenido real (91 antes de optimizar y 99 después, 12/11) (H20-1); el límite de 8 MB de imágenes no se aplicaba a las subidas por la API REST del editor de bloques, corregido y repetido (H20-2) |
 | HU-22 relevo de la cuenta | H22-1 a H22-5 ejecutados el 26/11 por Pablo con Claude, con sesiones reales de las cuentas de prueba; todos OK. No son prueba de otra persona |
 | E3-04 pruebas de aceptación | 43 casos: 39 OK y 4 parciales (T1 a T3 y P5) |
-| E3-01 retrospectiva en grupo (#57) | **Cerrada el 26/11 como pendiente:** la retrospectiva en grupo no se ha hecho y el apartado de la retrospectiva queda como pendiente, con los datos y las propuestas que se llevarían a la reunión |
+| E3-01 retrospectiva en grupo (#57) | **Cerrada el 26/11 como pendiente:** la retrospectiva en grupo no se ha hecho y el apartado de la retrospectiva queda como pendiente de confirmar por el grupo, con los datos y las tres acciones que eligió Pablo (27/11/2026) |
 | E3-02 volcado y limpieza (#58) | **Cerrada el 26/11:** ficha 32 devuelta a su autor, cuentas y tickets de prueba borrados y volcado `bd_cadus_v1_sprint3.sql` generado |
 | E3-06 documento final (#62) | **Cerrada el 26/11:** REM de la red social exportado desde REMUS (`REM-RSI-v1.1.pdf`) y zip final `Entrega-29-11-CADUS-CMS-DMS-RSI-v2.zip` generado con todos los controles en verde; falta solo enviarlo |
