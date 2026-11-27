@@ -290,7 +290,7 @@ def anexos(doc):
     parrafo(doc, "Resumen de lo que **no** se ha podido comprobar o queda por hacer. El detalle está en el apartado de pendientes y límites de cada manual de administrador.")
     filas = [
         ["Portal web", "Despliegue en la Universidad de Sevilla", "Sin hacer: el servidor estudiado tenía PHP 7.2/7.3. Pendiente de la respuesta de la Universidad"],
-        ["Portal web", "Correo saliente real", "Los avisos salen por SMTP y un correo de prueba llegó a una bandeja de Gmail; los enviados a una dirección @alum.us.es llegaron con cerca de una hora de retraso, por el filtro de la Universidad"],
+        ["Portal web", "Correo saliente real", "Los avisos salen por SMTP y un correo de prueba llegó a una bandeja de Gmail; los cuatro avisos enviados a una dirección @alum.us.es llegaron con 65 a 70 minutos de retraso, por el filtro de la Universidad"],
         ["Portal web", "Anonimización a los dos años", "Probada con datos de ejemplo; no comprobada en el servidor del equipo"],
         ["Portal web", "Accesibilidad con lector de pantalla", "Probado con el Narrador de Windows; NVDA sin probar"],
         ["DMS", "Cuenta del CADUS como propietaria", "Pendiente en los cuatro sitios"],

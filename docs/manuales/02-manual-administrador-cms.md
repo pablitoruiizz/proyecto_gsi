@@ -177,7 +177,7 @@ Hay baterías automáticas en `scripts/pruebas/` (se lanzan desde la raíz del r
 | Asunto | Estado |
 |---|---|
 | Despliegue en la Universidad de Sevilla | No hecho: el servidor estudiado tenía PHP 7.2/7.3, insuficiente. Pendiente de la respuesta de la Universidad |
-| Correo saliente | Los avisos salen por el SMTP de Gmail configurado en `wp-config.php` y un correo de prueba llegó a una bandeja de Gmail; los enviados a una dirección `@alum.us.es` llegaron con cerca de una hora de retraso (13:47 → 14:48), por el filtro de la Universidad; el aviso de respuesta al estudiante aún no se ha visto llegar |
+| Correo saliente | Los avisos salen por el SMTP de Gmail configurado en `wp-config.php` y un correo de prueba llegó a una bandeja de Gmail; los cuatro avisos enviados a una dirección `@alum.us.es` llegaron con 65 a 70 minutos de retraso (13:47 → 14:48 a 14:57), por el filtro de la Universidad |
 | Tareas programadas | La anonimización a los dos años no se ha comprobado en el servidor del equipo; en el entorno de pruebas se verificó con datos de ejemplo |
 | Lector de pantalla | Probado con Narrador; NVDA sin probar |
 | Pruebas con personas ajenas | Los tiempos de tareas (T1 a T3) se midieron de forma funcional, sin cronometrar con una persona externa |
