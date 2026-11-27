@@ -25,8 +25,8 @@ Hecha con el navegador integrado emulando 390 × 844 y 768 × 1024, sobre la ram
 
 | # | Prueba | Resultado esperado | Resultado |
 |---|---|---|---|
-| H14-2 | Directorio de delegaciones a 390 y 768 px. | Tarjetas legibles, sin textos cortados ni scroll horizontal. | OK. 6 tarjetas, una columna a 390 px y dos a 768 px, sin desbordamiento. No se probó el buscador con texto. |
-| H14-3 | Ficha de una delegación y «Volver al listado». | Datos visibles y botón funcional. | Parcial. La ficha de Facultad de Derecho solo dice «Ficha pendiente de completar», sin datos, así que no se probaron filas con textos largos. El botón «← Volver al listado» enlaza al directorio y mide 44 px de alto. |
+| H14-2 | Directorio de delegaciones a 390 y 768 px. | Tarjetas legibles, sin textos cortados ni scroll horizontal. | OK. 6 tarjetas, una columna a 390 px y dos a 768 px, sin desbordamiento. No se probó el buscador con texto. **Prueba cruzada (Joaquín, 27/11/2026):** OK (Edge a 390 y 768 px, con clics). |
+| H14-3 | Ficha de una delegación y «Volver al listado». | Datos visibles y botón funcional. | Parcial. La ficha de Facultad de Derecho solo dice «Ficha pendiente de completar», sin datos, así que no se probaron filas con textos largos. El botón «← Volver al listado» enlaza al directorio y mide 44 px de alto. **Prueba cruzada (Joaquín, 27/11/2026):** OK (Edge a 390 y 768 px, con clics; la parte de tablet, que faltaba, queda comprobada). |
 | H14-4 | Tabla de actas y normativa a 390 px. | Cada fila como tarjeta con Fecha, Documento, Tipo y PDF completos. | OK. 2 filas, todas las celdas dentro de la pantalla y botón «Descargar PDF» completo. |
 
 Pendiente: repetirlo con el modo dispositivo de Chrome o Edge (F12), probar el buscador del directorio y una ficha con todos los datos rellenos.

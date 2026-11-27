@@ -166,7 +166,7 @@ if FINAL:
 
 CABECERA = """# Entrega final del proyecto GSI — CADUS (CMS + DMS + red social v2)
 
-Entrega del domingo 29/11/2026. Los documentos describen el estado a 26/11/2026. Quedan **pendientes**, y así constan en ellos: algunas pruebas cruzadas (HU-14b y HU-16a de Joaquín, HU-22 de Álvaro), los casos T1 a T3 y P5 de las pruebas de aceptación (parciales) y la prueba con NVDA.
+Entrega del domingo 29/11/2026. Los documentos describen el estado a 26/11/2026. Quedan **pendientes**, y así constan en ellos: la prueba cruzada de HU-22 de Álvaro, los casos T1 a T3 y P5 de las pruebas de aceptación (parciales) y la prueba con NVDA.
 
 Equipo de la entrega: Pablo Ruiz Vidal (Product Owner), Joaquín Luna Canela (Scrum Master), Álvaro Martínez Ocaña y Marcos-Paban Delgado Rodríguez. Miguel Ángel Camacho Martín, miembro del CADUS, colaboró en el DMS y en el contacto con el cliente hasta el 16/11/2026.
 """ if FINAL else """# Versión definitiva del DMS — CADUS
