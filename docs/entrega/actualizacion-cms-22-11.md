@@ -1,5 +1,7 @@
 # Actualización del estado del CMS a 22/11/2026
 
+> **Estado vigente:** este documento es del 22/11 y tiene añadidas las actualizaciones del 25 y 26/11. El estado completo y vigente del CMS es el de `Entrega-final-CMS-CADUS` (a 26/11/2026, para la entrega del 29/11), que prevalece sobre este documento donde se contradigan.
+
 Este documento prevalece sobre la adenda del Sprint 3 (`Adenda-CMS-Sprint3`, fechada el 15/11/2026) y sobre el estado de `seguimiento/product-backlog.md` donde se contradigan. Las pruebas están en `seguimiento/E3-04-pruebas-de-aceptacion.md`.
 
 | Elemento | Estado a 15/11 (adenda) | Estado a 22/11 |

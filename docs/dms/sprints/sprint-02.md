@@ -1,6 +1,8 @@
 # Sprint 2 del DMS — Versión definitiva
 
-**Periodo:** 13/11/2026 – 15/11/2026 (la fecha de entrega se confirma con el profesor: tarea D-09)
+**Periodo:** 13/11/2026 – 15/11/2026 (a 13/11 la fecha de entrega se confirmaba con el profesor: tarea D-09; la entrega final de todo el proyecto es el 29/11/2026)
+
+> **Este documento es un historial.** Recoge la planificación del 13/11 y su seguimiento; cada punto se marca como hecho o pendiente donde corresponde, y lo que aparece como pendiente en una fecha puede constar como hecho en el seguimiento posterior (por ejemplo, la exportación del REM desde REMUS).
 **Compromiso:** DMS-HU-08 y DMS-HU-09 (4 SP) y las tareas D-07 a D-09, más cerrar lo que quedó del Sprint 1 del DMS: pruebas cruzadas y prueba con cuentas de visitante.
 
 ## Objetivo

@@ -240,12 +240,13 @@ def reescribir_enlaces(destino):
             if EXTERNO.match(objetivo):
                 return m.group(0)
             base, _, ancla = unquote(objetivo).partition("#")
-            resuelto = os.path.normcase(os.path.normpath(os.path.join(os.path.dirname(src), base)))
+            real = os.path.normpath(os.path.join(os.path.dirname(src), base))
+            resuelto = os.path.normcase(real)
             if resuelto in destino_de:
                 nuevo = os.path.relpath(os.path.join(destino, destino_de[resuelto]), os.path.dirname(ruta)).replace(os.sep, "/")
                 cuenta["re"] += 1
                 return f"{img}[{txt}]({nuevo}{'#' + ancla if ancla else ''})"
-            en_repo = os.path.relpath(resuelto, raiz_n).replace(os.sep, "/") if resuelto.startswith(raiz_n) else base
+            en_repo = os.path.relpath(real, RAIZ).replace(os.sep, "/") if resuelto.startswith(raiz_n) else base  # con las mayúsculas del repositorio
             cuenta["txt"] += 1
             return f"*(imagen en el repositorio: `{en_repo}`)*" if img else f"{txt} (en el repositorio de GitHub: `{en_repo}`)"
 
@@ -308,6 +309,9 @@ def main():
             ok_s = prohibido not in sql
             mal_c += not ok_s
             print(f"  [{'ok' if ok_s else 'FALTA'}] bd_cadus_v1_sprint3.sql: no debe contener «{prohibido}»")
+        ok_m = not re.search(r"\{[0-9a-f]{64}\}", sql)  # marcador interno de wpdb que rompe los «%» y los datos serializados
+        mal_c += not ok_m
+        print(f"  [{'ok' if ok_m else 'FALTA'}] bd_cadus_v1_sprint3.sql: sin marcadores de escape de WordPress en lugar de «%»")
         ok_u = "demo-admin" in sql and "insert into `wp_wflogins`" not in sql
         mal_c += not ok_u
         print(f"  [{'ok' if ok_u else 'FALTA'}] bd_cadus_v1_sprint3.sql: cuentas de demostración y sin registros de acceso de Wordfence")

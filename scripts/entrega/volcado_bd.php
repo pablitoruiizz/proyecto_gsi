@@ -47,7 +47,8 @@ foreach ($tablas as $tabla) {
         foreach ($filas as $fila) {
             $celdas = [];
             foreach ($fila as $i => $v) {
-                $celdas[] = $v === null ? 'NULL' : ($numericas[$i] ? $v : ($binarias[$i] ? ($v === '' ? "''" : '0x' . bin2hex($v)) : "'" . $wpdb->_real_escape($v) . "'"));
+                $celdas[] = $v === null ? 'NULL' : ($numericas[$i] ? $v : ($binarias[$i] ? ($v === '' ? "''" : '0x' . bin2hex($v)) : "'" . $wpdb->remove_placeholder_escape($wpdb->_real_escape($v)) . "'"));
+                // _real_escape() de WordPress cambia cada «%» por un marcador interno ({64 hex}); sin quitarlo, el volcado deja «%» ilegibles y rompe los datos serializados
             }
             $valores[] = '(' . implode(',', $celdas) . ')';
         }

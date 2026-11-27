@@ -73,10 +73,10 @@ foreach ($wpdb->get_col("SHOW TABLES LIKE '{$p}wf%'") as $t) {
         $wpdb->query("TRUNCATE TABLE `$t`");
     }
 }
-$wpdb->query("DELETE FROM {$p}wfconfig WHERE name IN ('apiKey','encKey','longEncKey','wfsbskip','wp_site_url','whitelistHash','activatingIP','lastEmailAddress')"
+$wpdb->query("DELETE FROM {$p}wfconfig WHERE name IN ('apiKey','encKey','longEncKey','wfsbskip','wp_site_url','whitelistHash','activatingIP','lastEmailAddress','lastAuditEvents','adminUserList','lastAdminLogin','detectProxyNonce','cbl_cookieVal','scanStageStatuses','adminNoticeQueue','wf_summaryItems','allScansScheduled','dashboardData','securityNewsPingCache','previousWflogsFileList','vulnerabilities_plugin','vulnerabilities_core','wordpressPluginVersions','wordpressThemeVersions','lastAttackDataSendTime')"
     . " OR val REGEXP '@|[0-9]+\\\\.[0-9]+\\\\.[0-9]+\\\\.[0-9]+' OR val LIKE '%Users%'");
 $wpdb->query("DELETE FROM {$p}wfls_settings WHERE name REGEXP 'secret|site-key|whitelisted|shared-'");
-foreach (['statistics_visitor', 'statistics_visitor_relationships', 'statistics_events'] as $t) {
+foreach (['statistics_visitor', 'statistics_visitor_relationships', 'statistics_events', 'statistics_pages', 'statistics_summary_totals', 'statistics_historical'] as $t) {
     $wpdb->query("TRUNCATE TABLE `{$p}$t`");
 }
 $wpdb->query("SET FOREIGN_KEY_CHECKS=1");
@@ -93,7 +93,7 @@ $leeme = "# Volcado de demostración de la base de datos del portal CADUS\n\n"
     . "## Qué se quitó\n"
     . "- Las cuentas reales del equipo y sus correos personales, contraseñas cifradas, sesiones y datos de perfil.\n"
     . "- Los registros de inicio de sesión, de actividad y de diagnóstico de Wordfence, y su clave de instalación.\n"
-    . "- Los visitantes de las estadísticas, las cachés temporales y las sales.\n"
+    . "- Los visitantes y las cifras de visitas de WP Statistics, el estado y los avisos internos de Wordfence, las cachés temporales y las sales.\n"
     . "- No hay tickets, solicitudes de mediación ni cuentas de prueba.\n\n"
     . "## Cuentas de demostración\n"
     . "| Usuario | Rol | Correo (ficticio) |\n|---|---|---|\n"
@@ -104,7 +104,7 @@ $leeme = "# Volcado de demostración de la base de datos del portal CADUS\n\n"
     . "## Cómo restaurarlo\n"
     . "1. Crear la base `bd_cadus` con cotejamiento `utf8mb4_unicode_ci` e importar el `.sql` (phpMyAdmin › Importar, o `mysql`).\n"
     . "2. Copiar WordPress y `wp-content` y crear `wp-config.php` con los datos de esa base y claves propias.\n"
-    . "3. Si la dirección web no es `http://localhost/proyecto_gsi/cms-wordpress`, cambiar `siteurl` y `home` en *Ajustes › Generales*.\n"
+    . "3. El volcado se generó con la dirección `http://localhost/proyecto_gsi/cms-wordpress` (`siteurl` y `home`), y esa dirección también está en el contenido y en la caché de Yoast. Lo más simple es restaurarlo en una instalación con esa misma dirección. Para otra dirección, fija `WP_HOME` y `WP_SITEURL` en `wp-config.php` antes del primer acceso y migra las direcciones del contenido con una herramienta que respete los datos serializados (por ejemplo, `wp search-replace` de WP-CLI); no basta con cambiar *Ajustes › Generales*.\n"
     . "4. Entrar con una de las cuentas anteriores y vaciar la caché de WP Fastest Cache.\n\n"
     . "Wordfence no tiene su clave de instalación: al abrirlo pedirá registrarse de nuevo (es opcional para evaluar el portal).\n";
 file_put_contents(__DIR__ . '/../../cms-wordpress/backup-db/LEEME-volcado-demo.md', $leeme);

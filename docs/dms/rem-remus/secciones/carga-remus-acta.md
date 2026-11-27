@@ -1,6 +1,6 @@
 # Hoja de carga para REMUS — DMS del CADUS · Acta
 
-> Archivo **generado** por [scripts/remus/build_rem.ps1](../../../scripts/remus/README.md) a partir de scripts/remus/dms_acta_data.json. No editar a mano: modificar el JSON y regenerar.
+> Archivo **generado** por [scripts/remus/build_rem.ps1](../../../../scripts/remus/README.md) a partir de scripts/remus/dms_acta_data.json. No editar a mano: modificar el JSON y regenerar.
 
 Contenido del proyecto [DMS-Acta.rem](DMS-Acta.rem) (REMUS), versión 1.1, 2026-11-12. Cada requisito lleva en el nombre su código de trazabilidad, que debe repetirse en el UML de análisis, en el de diseño y en las capturas de implementación.
 
